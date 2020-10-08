@@ -464,7 +464,7 @@
     },
     {
         "id":"brv_school_history_30",
-        "message":"Just imagine all those mighty churches and splendid palaces! It was a merry time, down under Mt. Galmor, the highest mountain in whole Dhayavar.",
+        "message":"Just imagine all those mighty churches and splendid palaces! It was a merry time, down under Mt. Galmore, the highest mountain in whole of Dhayavar.",
         "replies":[
             {
                 "text":"Sigh.",
@@ -538,7 +538,7 @@
     },
     {
         "id":"brv_school_history_46",
-        "message":"The cultists worshipped the blinding and cleansing light of Elythara. Clever and sneaky as they were, they have gained people's trust.",
+        "message":"The cultists worshipped the blinding and cleansing light of Elythara. Clever and sneaky as they were, they gained people's trust.",
         "replies":[
             {
                 "text":"N",
@@ -620,7 +620,7 @@
     },
     {
         "id":"brv_school_history_60",
-        "message":"However Elythara and her cultists failed to completely annihilate the old ways. Many true men managed to hide in remote places in the total darkness, unknown to the Elytharans. Also Elythara's power is diminished underground.",
+        "message":"However Elythara and her cultists failed to completely annihilate the old ways. Many true men managed to hide in remote places in the total darkness, unknown to the Elytharans. Also, Elythara's power is diminished underground.",
         "switchToNPC":"brv_teacher",
         "replies":[
             {
@@ -653,7 +653,7 @@
     },
     {
         "id":"brv_school_history_71",
-        "message":"The Elytharans built several towns and cities, dedicated to their goddess. Several aristocratic houses were formed by that time.",
+        "message":"The Elytharans built several towns and cities, dedicated to their goddess. Several aristocratic houses were formed at that time.",
         "replies":[
             {
                 "text":"N",
@@ -673,7 +673,7 @@
     },
     {
         "id":"brv_school_history_73",
-        "message":"The town of Loneford was founded and it soon became famous for its fertile fields and healthy vegetable which fed the northern parts of the Forgotten Kingdom.",
+        "message":"The town of Loneford was founded and it soon became famous for its fertile fields and healthy vegetables which fed the northern parts of the Forgotten Kingdom.",
         "replies":[
             {
                 "text":"N",
@@ -874,7 +874,7 @@
     },
     {
         "id":"brv_school_history_200",
-        "message":"And now we get to a completely different thing. Let's have some practice with fighting.",
+        "message":"And now we will do something completely different. Let's practice fighting, so that you learn how to defend yourselves.",
         "replies":[
             {
                 "text":"Finally. I thought her talking would never cease.",
@@ -4390,6 +4390,29 @@
                     {
                         "requireType":"random",
                         "requireID":"20"
+                    }
+                ]
+            },
+            {
+                "text":"I'm wondering, do you know anything about Lawellyn's death?",
+                "nextPhraseID":"guard_advent_asd_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":130
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":200,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":230,
+                        "negate":true
                     }
                 ]
             }

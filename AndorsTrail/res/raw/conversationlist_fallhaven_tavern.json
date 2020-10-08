@@ -46,6 +46,17 @@
                 ]
             },
             {
+                "text":"Umar sent me.",
+                "nextPhraseID":"bela_room_2",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"misc_nondisplay ",
+                        "value":20
+                    }
+                ]
+            },
+            {
                 "text":"No thanks.",
                 "nextPhraseID":"bela"
             }
@@ -53,7 +64,7 @@
     },
     {
         "id":"bela_room_2",
-        "message":"Thanks. Take the last room down at the end of the hall.",
+        "message":"OK. Take the last room down at the end of the hall.",
         "replies":[
             {
                 "text":"Thank you. There was something else I wanted to talk about.",

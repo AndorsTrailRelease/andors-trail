@@ -66,6 +66,8 @@ public final class Requirement {
 			case consumedBonemeals:
 				return value >= 0;
 			case hasActorCondition:
+			case factionScore:
+			case factionScoreEquals:
 				return requireID != null;
 			case inventoryKeep:
 			case inventoryRemove:
@@ -86,8 +88,6 @@ public final class Requirement {
 				return chance != null;
 			case timerElapsed:
 				return requireID != null && value >= 0;
-			case factionScore:
-			case factionScoreEquals:
 			default:
 				return false;
 		}

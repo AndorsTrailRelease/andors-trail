@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="15" height="15" tilewidth="32" tileheight="32" infinite="0" nextobjectid="14">
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="15" height="15" tilewidth="32" tileheight="32" infinite="0" nextobjectid="17">
  <tileset firstgid="1" name="map_bed_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
   <image source="../drawable/map_bed_1.png" width="512" height="256"/>
  </tileset>
@@ -200,7 +200,7 @@
    eJxjYCAfZAmTr7cKTW8SE/F6u3DYKwg046EQ+W6iBIDcf0kMt/wsPGGFTx8IrCIynFPEGRiuCxKnNhmHe3Hpd4bGjyQJ8XQNalYwCXrwAXYmBAYBV3HKzXw9QOkFGQAA8aoNWA==
   </data>
  </layer>
- <layer name="Walkable" width="15" height="15" visible="0">
+ <layer name="Walkable" width="15" height="15">
   <data encoding="base64" compression="zlib">
    eJzbKMbAsHEAMQzA2KTqQwbk6iNWPza1pNiNzY/oZpHrdlL1EhInJd7IiW966x3MGACNIIpf
   </data>
@@ -239,6 +239,11 @@
     <property name="place" value="trapexit"/>
    </properties>
   </object>
+  <object id="16" name="arulircave_trap101_chk" type="script" x="224" y="224" width="32" height="32">
+   <properties>
+    <property name="when" value="enter"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="Spawn" visible="0">
   <object id="6" name="arulir_2" type="spawn" x="64" y="64" width="160" height="224">
@@ -265,6 +270,15 @@
     <property name="requireNegation" value="true"/>
     <property name="requireType" value="questProgress"/>
     <property name="requireValue" value="10"/>
+   </properties>
+  </object>
+  <object id="14" name="arulircave_trap:101" type="key" x="192" y="320" width="96" height="32">
+   <properties>
+    <property name="phrase" value="arulircave_trap101"/>
+    <property name="requireId" value="arulircave_trap"/>
+    <property name="requireNegation" value="true"/>
+    <property name="requireType" value="questProgress"/>
+    <property name="requireValue" value="101"/>
    </properties>
   </object>
  </objectgroup>

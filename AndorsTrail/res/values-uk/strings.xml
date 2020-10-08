@@ -149,9 +149,9 @@
     <string name="about_button3">Ліцензія</string>
     <string name="dialog_newversion_title">Вітаємо</string>
     <string name="questlog_includecompleted_prompt">Оберіть завдання для відображення</string>
-    <string name="questlog_includecompleted_hidecompleted">Приховати виконані завдання</string>
-    <string name="questlog_includecompleted_includecompleted">Включаючи виконані завдання</string>
-    <string name="questlog_includecompleted_onlycompleted">Лише виконані завдання</string>
+    <string name="questlog_includecompleted_hidecompleted">Активні завдання</string>
+    <string name="questlog_includecompleted_includecompleted">Всі завдання</string>
+    <string name="questlog_includecompleted_onlycompleted">Виконані завдання</string>
     <string name="questlog_queststatus">Статус: %1$s</string>
     <string name="questlog_queststatus_inprogress">В процесі</string>
     <string name="questlog_queststatus_completed">Виконано</string>
@@ -164,7 +164,7 @@
     <string name="preferences_dialog_confirmattack_title">Підтвердження атаки</string>
     <string name="preferences_dialog_confirmattack">Вмикати діалогове вікно \'Ви хочете атакувати...\?\' при нападі на монстра.</string>
     <string name="preferences_dialog_monsterloot_title">Вікно здобичі</string>
-    <string name="preferences_dialog_monsterloot">Виберіть, як ви хочете показати результати бою (золото, досвід, предмети).</string>
+    <string name="preferences_dialog_monsterloot">Оберіть, як ви хочете показати результати бою (золото, досвід, предмети).</string>
     <string name="preferences_combat_category">Бій</string>
     <string name="preferences_combat_speed_title">Швидкість бою</string>
     <string name="preferences_combat_speed">Визначає швидкість атаки монстрів.</string>
@@ -199,10 +199,10 @@
     <string name="iteminfo_effect_decrease_max_hp">Знижує макс. ОЗ на %1$d</string>
     <string name="iteminfo_effect_increase_max_ap">Підвищує макс. ОД на +%1$d</string>
     <string name="iteminfo_effect_decrease_max_ap">Знижує макс. ОД на %1$d</string>
-    <string name="iteminfo_effect_increase_movecost">Штраф вартості руху +%1$d ОД</string>
+    <string name="iteminfo_effect_increase_movecost">Збільшення вартості руху +%1$d ОД</string>
     <string name="iteminfo_effect_decrease_movecost">Зменшує вартість руху на %1$d ОД</string>
-    <string name="preferences_display_scaling_factor_title">Коефіцієнт масштабування</string>
-    <string name="preferences_display_scaling_factor">Змушує ігрове поле відображати все збільшеним.</string>
+    <string name="preferences_display_scaling_factor_title">Масштабування</string>
+    <string name="preferences_display_scaling_factor">Робить на ігровому екрані показ всього збільшеним чи зменшеним.</string>
     <string name="preferences_display_scaling_factor_normal">Нормальний розмір</string>
     <string name="preferences_display_scaling_factor_50_percent_larger">Збільшено в 1.5x раз</string>
     <string name="preferences_display_scaling_factor_double">Збільшено в 2 рази</string>
@@ -210,7 +210,7 @@
     <string name="inventory_assign_slot1">Слот 1</string>
     <string name="inventory_assign_slot2">Слот 2</string>
     <string name="inventory_assign_slot3">Слот 3</string>
-    <string name="inventory_unassign">Скасувати призначення швидкого слота</string>
+    <string name="inventory_unassign">Скасувати призначення швидкого слоту</string>
     <string name="preferences_movement_dpad_position_title">Віртуальний джойстик</string>
     <string name="preferences_movement_dpad_position">Виводить на екран віртуальний джойстик для керування рухом.</string>
     <string name="preferences_movement_dpad_positions_disabled">Вимкнено</string>
@@ -349,7 +349,7 @@
     <string name="iteminfo_effect_decrease_attack_damage_minmax">Зменшує пошкодження від атаки на %1$d-%2$d</string>
     <string name="iteminfo_effect_increase_critical_skill">Збільшує навик критичного удару на %1$d</string>
     <string name="iteminfo_effect_decrease_critical_skill">Зменшує навик критичного удару на %1$d</string>
-    <string name="iteminfo_effect_critical_multiplier">Дає змогу наносити критичні удари з множником x%1$.1f</string>
+    <string name="iteminfo_effect_critical_multiplier">Вмикає критичні удари з множником x%1$.1f</string>
     <string name="iteminfo_effect_increase_block_chance">Збільшує шанс блоку на %1$d</string>
     <string name="iteminfo_effect_decrease_block_chance">Зменшує шанс блоку на %1$d</string>
     <string name="iteminfo_effect_increase_damage_resistance">Збільшує опір пошкодженням на %1$d</string>
@@ -364,7 +364,7 @@
     <string name="preferences_display_overwrite_savegame_entries_confirm_overwrite">Показувати тільки при перезаписі збереженої гри з гравцем з іншим ім\'ям</string>
     <string name="preferences_display_overwrite_savegame_entries_never_confirm">Ніколи не показувати діалогове вікно підтвердження</string>
     <string name="preferences_dialog_overwrite_savegame_title">Підтвердіть перезапис збереження</string>
-    <string name="preferences_dialog_overwrite_savegame">Пересвідчується, що ви насправді хочете перезаписати збережену гру.</string>
+    <string name="preferences_dialog_overwrite_savegame">Перепитує, чи ви насправді хочете перезаписати слот зі збереженою грою.</string>
     <string name="heroinfo_reequip_cost">Вартість перевдягання (ОД):</string>
     <string name="heroinfo_useitem_cost">Вартість використання предмету (ОД):</string>
     <string name="combat_result_monstermoved">%1$s рухається.</string>
@@ -393,7 +393,7 @@
     <string name="skill_shortdescription_weapon_prof_axe">Кращий у бою з сокирами</string>
     <string name="skill_shortdescription_weapon_prof_blunt">Кращий у бою зі зброєю ударно-роздрібнюючої дії</string>
     <string name="skill_shortdescription_weapon_prof_unarmed">Кращий у бою без зброї</string>
-    <string name="skill_shortdescription_armor_prof_shield">Покращує володіння щитами</string>
+    <string name="skill_shortdescription_armor_prof_shield">Покращує володіння щитами і зброї для парирування</string>
     <string name="skill_shortdescription_armor_prof_unarmored">Кращий у бою без обладунків</string>
     <string name="skill_shortdescription_armor_prof_light">Покращує володіння легким обладунком</string>
     <string name="skill_shortdescription_armor_prof_heavy">Покращує володіння важким обладунком</string>
@@ -407,9 +407,9 @@
     <string name="skill_longdescription_weapon_prof_1hsword">Кожний рівень навику збільшує шанс атаки при використанні рапір, довгих мечів і широких мечів на %1$d %% базового шансу атаки предмету, збільшує шанс блоку на %2$d %% базового шансу блоку предмету і збільшує навик критичного удару на %3$d %% базового критичного удару предмету.</string>
     <string name="skill_longdescription_weapon_prof_2hsword">Кожний рівень навику збільшує шанс атаки при використанні дворучних мечів на %1$d %% базового шансу атаки предмету, збільшує шанс блоку на %2$d %% базового шансу блоку предмету і збільшує навик критичного удару на %3$d %% базового критичного удару предмету.</string>
     <string name="skill_longdescription_weapon_prof_axe">Кожний рівень навику збільшує шанс атаки при використанні сокир і великих сокир на %1$d %% базового шансу атаки предмету, збільшує шанс блоку на %2$d %% базового шансу блоку предмету і збільшує навик критичного удару на %3$d %% базового критичного удару предмету.</string>
-    <string name="skill_longdescription_weapon_prof_blunt">Кожний рівень навику збільшує шанс атаки при використанні зброї ударно-роздрібнюючої дії на %1$d %% базового шансу атаки предмету, збільшує шанс блоку на %2$d %% базового шансу блоку предмету і збільшує навик критичного удару на %3$d %% базового критичного удару предмету. Це стосується дубин, дубин з металевим наконечником, булав, скиптерів, бойових молотів та гігантських молотів.</string>
+    <string name="skill_longdescription_weapon_prof_blunt">Кожний рівень навику збільшує шанс атаки при використанні зброї ударно-роздрібнюючої дії на %1$d %% базового шансу атаки предмету, збільшує шанс блоку на %2$d %% базового шансу блоку предмету і збільшує навик критичного удару на %3$d %% базового критичного удару предмету. Це стосується бойових палиць, кийків з металевим наконечником, булав, скіпетрів, бойових молотів та гігантських молотів.</string>
     <string name="skill_longdescription_weapon_prof_unarmed">При боротьбі без зброї і щита герой отримує %1$d до шансу атаки, %2$d до шансу нанесення пошкодження і %3$d до шансу блоку на кожний рівень навику.</string>
-    <string name="skill_longdescription_armor_prof_shield">Опір пошкодженням збільшується на %1$d на кожний рівень навику, якщо щит у руці.</string>
+    <string name="skill_longdescription_armor_prof_shield">Опір пошкодженням збільшується на %1$d на кожний рівень навику, якщо маєте щит або зброю для парирування.</string>
     <string name="dialog_recenter">Відцентрувати</string>
     <string name="dialog_more">Більше</string>
     <string name="dialog_monsterencounter_conditions">Впливи</string>
@@ -435,16 +435,16 @@
     <string name="inventory_selectitem">Оберіть предмет для призначення</string>
     <string name="combat_log_noentries">Поки немає записів.</string>
     <string name="preferences_high_quality_filters_title">Фільтри високої якості</string>
-    <string name="preferences_high_quality_filters">Вимкніть це, якщо виникли проблеми зі швидкодією на фільтрованих мапах (наприклад, темні печери). Увімкнення цієї опції змусить гру використовувати покращені фільтри кольорів замість суцільного накладання кольорів.</string>
-    <string name="about_contents1">Ласкаво просимо до Andor\'s Trail, рогалик-RPG для Android з відкритим початковим кодом.&lt;br /&gt; &lt;br /&gt; &lt;a href=http://andorstrail.com/&gt;Ігрові форуми на andorstrail.com для питань та обговорень геймплею.&lt;/a&gt;&lt;br /&gt; &lt;br /&gt; &lt;a href=http://andorstrail.com/wiki&gt;Вікі з інформацією про світ Andor\'s Trail.&lt;/a&gt;&lt;br /&gt; &lt;br /&gt; &lt;a href=https://github.com/AndorsTrailRelease/andors-trail/&gt; Початковий код проекту на github.com для розробників.&lt;/a&gt;&lt;br /&gt; &lt;br /&gt;Будь ласка, відвідуйте форуми та обговорюйте гру з іншими гравцями.&lt;br /&gt;</string>
-    <string name="about_contents3"/>
-    <string name="dialog_newversion_message">Дякуємо за завантаження Andor\'s Trail!
-\n
-\nБудь ласка, зверніть увагу, що розробка Andor\'s Trail ЩЕ ТРИВАЄ, що означає, що ще не всі мапи завершено.
-\nБудь ласка, відвідайте форуми проекту для обговорення гри з іншими гравцями або щоб допомогти зробити гру ще кращою (дивіться Про гру).
-\n
+    <string name="preferences_high_quality_filters">Вимкніть це, якщо виникли проблеми зі швидкодією на фільтрованих мапах (наприклад, темні печери). Увімкнення цієї опції дозволить грі використовувати покращені фільтри кольорів замість суцільного накладання кольорів.</string>
+    <string name="about_contents1">Ласкаво просимо до Andor\'s Trail, рогалик-RPG для Android з відкритим початковим кодом.&lt;br /&gt; &lt;br /&gt; &lt;a href=http://andorstrail.com/&gt;Ігрові форуми на andorstrail.com для питань та обговорень геймплею.&lt;/a&gt;&lt;br /&gt; &lt;br /&gt; &lt;a href=http://andorstrail.com/wiki&gt;Вікі з інформацією про світ Andor\'s Trail.&lt;/a&gt;&lt;br /&gt; &lt;br /&gt; &lt;a href=https://github.com/AndorsTrailRelease/andors-trail/&gt; Початковий код проекту на github.com для розробників.&lt;/a&gt;&lt;br /&gt; &lt;br /&gt;Будь ласка, відвідайте форуми, щоб обговорити гру з іншими гравцями.&lt;br /&gt;</string>
+    <string name="about_contents3">Ця програма є вільним програмним забезпеченням; ви можете розповсюджувати його та/або змінювати його відповідно до умов загальної публічної ліцензії GNU, опублікованих Фондом вільного програмного забезпечення; або версії 2 цієї ліцензії, або (за вашим бажанням) будь-якої пізнішої версії. &lt;br /&gt; &lt;br /&gt; Ця програма поширюється з надією, що вона стане корисною, але БЕЗ БУДЬ-ЯКИХ ГАРАНТІЙ; навіть не маючи на увазі гарантії ТОРГОВОЇ ПРИДАТНОСТІ або ПРИДАТНОСТІ ДЛЯ ПЕВНОЇ МЕТИ. Детальнішу інформацію див. у загальній публічній ліцензії GNU. &lt;br /&gt; &lt;br /&gt; Ви повинні були отримати копію загальної публічної ліцензії GNU разом із цією програмою; якщо ні, див. &lt;a href=http://www.gnu.org/licenses&gt;http://www.gnu.org/licenses&lt;/a&gt;&lt;br /&gt; &lt;br /&gt; Для вихідного коду та запитів про нові можливості, відвідайте сторінку проекту за адресою &lt;a href=https://github.com/AndorsTrailRelease/andors-trail/&gt;https://github.com/AndorsTrailRelease/andors-trail/&lt;/a&gt; &lt;br /&gt;</string>
+    <string name="dialog_newversion_message">Дякуємо за завантаження Andor\'s Trail! 
+\n 
+\nБудь ласка, зверніть увагу, що розробка Andor\'s Trail ЩЕ ТРИВАЄ, що означає, що ще не всі мапи завершено. 
+\nБудь ласка, відвідайте форуми проекту для обговорення гри з іншими гравцями або щоб допомогти зробити гру ще кращою (дивіться Про гру). 
+\n 
 \nДякуємо за ваші відгуки!</string>
-    <string name="preferences_movementmethods_straight">Прямо (оригінальний)</string>
+    <string name="preferences_movementmethods_straight">Прямо (початковий)</string>
     <string name="iteminfo_effect_chance_of">%1$s шанс з %2$s</string>
     <string name="preferences_movement_dpad_minimizeable_title">Мінімізувати джойстик</string>
     <string name="preferences_movement_dpad_minimizeable">Якщо віртуальний джойстик увімкнено, ця опція дозволяє його мінімізувати натисканням на його центр.</string>
@@ -464,22 +464,22 @@
     <string name="skill_longdescription_armor_prof_unarmored">При боротьбі без жодного обладунку на тілі додається %1$d до шансу блоку на кожний рівень навику. Предмети з тканини обладунками не вважаються.</string>
     <string name="skill_longdescription_armor_prof_light">Кожен рівень навику збільшує шанс блоку кожного із вдягнутих легких обладунків на %1$d %% від їхніх базових шансів блоку. До легких обладунків належать шкіряні, легкі металеві обладунки та обладунки схову.</string>
     <string name="skill_longdescription_armor_prof_heavy">Кожен рівень навику збільшує шанс блоку кожного із вдягнутих важких обладунків на %1$d %% від їхніх базових шансів блоку. Штраф на рух у важких обладунках зменшується на %2$d %% на кожен рівень навику, на швидкість атаки - на %3$d %% на кожен рівень навику. До важких обладунків належать металеві обладунки, кольчуги і лати.</string>
-    <string name="skill_longdescription_fightstyle_dualwield">Дає переваги під час бою двома предметами зброї одночасно.
+    <string name="skill_longdescription_fightstyle_dualwield">Дає переваги під час бою двома предметами зброї одночасно в обох руках. 
 \n
-\nБез цього навику може бути використано лише %1$d %% якостей зброї у лівій руці. Сюди входять шанс атаки, навик критичного удару, потенціал пошкодження і шанс блоку. Без цього навику швидкість атаки (вартість у ОД) визначається як сума швидкостей атаки обидвох предметів зброї.
+\nБез цього навику може бути використано лише %1$d %% якостей зброї у лівій руці. Сюди входять шанс атаки, навик критичного удару, потенціал пошкодження і шанс блоку. Без цього навику швидкість атаки (вартість у ОД) визначається як сума швидкостей атаки обидвох предметів зброї. 
 \n
-\nНа першому рівні цього навику може бути використано %2$d %% якостей зброї у лівій руці, а швидкість атаки становить суму швидкості атаки найшвидшого з двох предметів зброї і %3$d %% швидкості атаки найповільнішого з двох предметів зброї.
+\nНа першому рівні цього навику може бути використано %2$d %% якостей зброї у лівій руці, а швидкість атаки становить суму швидкості атаки найшвидшого з двох предметів зброї і %3$d %% швидкості атаки найповільнішого з двох предметів зброї. 
 \n
 \nНа другому рівні цього навику може бути використано %4$d %% якостей зброї у лівій руці, а швидкість атаки дорівнює найвищій зі швидкостей атак обох предметів зброї.</string>
     <string name="skill_longdescription_fightstyle_2hand">Дає переваги під час використання дворучної зброї: дворучних мечів, великих сокир або гігантських молотів.
 \n
 \nКожен рівень навику збільшує урон від пошкоджень дворучною зброєю на %1$d %% від базового.</string>
-    <string name="skill_longdescription_fightstyle_weapon_shield">Дає переваги під час бою зі зброєю у правій руці і щитом у лівій.
-\n
+    <string name="skill_longdescription_fightstyle_weapon_shield">Дає переваги під час бою зі зброєю у правій руці і щитом або відбивальною зброєю у лівій. 
+\n 
 \nКожен рівень навику збільшує шанс атаки зброї на %1$d %% від базового, а шанс блоку щитів - на %2$d %% від базового.</string>
     <string name="skill_longdescription_specialization_dualwield">Збільшує шанс атаки зброї в обох руках на додаткові %1$d %% від базового. Шанс блоку зброї в обох руках також збільшується на %2$d %% від базового.</string>
     <string name="skill_longdescription_specialization_2hand">Збільшує урон від пошкоджень дворучної зброї на додаткові %1$d %% від базового. Шанс атаки дворучною зброєю також збільшується на %2$d %% від базового.</string>
-    <string name="skill_longdescription_specialization_weapon_shield">"Збільшує шанс атаки і урон від пошкодження зброї. Шанс атаки збільшується на %1$d %% від базового, а урон від пошкодження збільшується на  %2$d %% від базового."</string>
+    <string name="skill_longdescription_specialization_weapon_shield">Збільшує шанс атаки і можливі пошкодження від зброї в головній руці. Шанс атаки збільшується на %1$d %% від базового, а можливі пошкодження збільшуються на %2$d %% від базового.</string>
     <string name="preferences_quickslots_placement">Розташування слотів швидкого доступу</string>
     <string name="preferences_quickslots_placement_summary">Де розташувати слоти швидкого доступу</string>
     <string name="preferences_quickslots_placements_horizontal_center_bottom">Посередині знизу</string>
@@ -532,9 +532,9 @@
     <string name="skill_category_speciality">Спеціальність</string>
     <string name="skill_category_proficiency">Вміння</string>
     <string name="skill_sort_unsorted">Не сортувати</string>
-    <string name="skill_sort_name">Назва</string>
-    <string name="skill_sort_points">Одиниці</string>
-    <string name="skill_sort_unlocked">Відкрито</string>
+    <string name="skill_sort_name">За назвою</string>
+    <string name="skill_sort_points">За рівнем</string>
+    <string name="skill_sort_unlocked">За доступністю</string>
     <string name="preferences_display_theme_title">Тема</string>
     <string name="preferences_display_theme">Оберіть тему інтерфейсу (потребує перезапуску)</string>
     <string name="preferences_display_theme_blue">Кобальт</string>
@@ -542,9 +542,52 @@
     <string name="preferences_display_theme_charcoal">Обсидіан</string>
     <string name="change_theme_requires_restart">Зміна теми інтерфейсу потребує перезапуску. Andor\'s Trail було закрито.</string>
     <string name="storage_permissions_mandatory">Доступ до пам’яті є обов\'язковим, щоб Andor\'s Trail обробляла збережені ігри та мапу світу. Закриття Andor\'s Trail.</string>
-    <string name="dialog_loading_failed_cheat">Стежка Андора не вдалося завантажити файл збереження гри. Цей файл збереження гри вже продовжено.</string>
+    <string name="dialog_loading_failed_cheat">Andor\'s Trail не вдалося завантажити файл збереження гри. Цей файл збереження гри вже продовжено.</string>
     <string name="dialog_game_over_title">Гру програно</string>
     <string name="dialog_game_over_text">Ви робите останній подих і помираєте.</string>
     <string name="rip_startscreen">(Спочинь з миром)</string>
     <string name="heroinfo_mode">Режим</string>
+    <string name="dialog_permission_information_title">Завантаження та збереження ігор</string>
+    <string name="startscreen_mode_1_life">Реалізм (1 життя, 1 збереження)</string>
+    <string name="startscreen_mode_3_lives">Екстремальний (3 життя, 1 збереження)</string>
+    <string name="startscreen_mode_10_lives">Дуже важкий (10 життів, 1 збереження)</string>
+    <string name="startscreen_mode_50_lives">Важкий (50 життів, 1 збереження)</string>
+    <string name="startscreen_mode_unlimited_lives">Середній (Безліміт життів, 1 збереження)</string>
+    <string name="startscreen_mode_unlimited_saves_and_lives">Стандартна (Бізліміт життів та збережень)</string>
+    <string name="startscreen_attention_message_slot_gets_delete_on_load">Завантаження цієї гри видаляє свій збережений слот. Вам доведеться зберегти знову, перш ніж перемкнутися на іншу гру.</string>
+    <string name="startscreen_attention_slot_gets_delete_on_load">Увага</string>
+    <string name="startscreen_error_loading_empty_slot">Не вдається завантажити з порожнього слоту.</string>
+    <string name="startscreen_error_loading_game">Помилка завантаження гри</string>
+    <string name="startscreen_load_game_confirm">Поточна гра не збережена, і ви втратите свого персонажа.</string>
+    <string name="startscreen_load_game">Завантаження гри</string>
+    <string name="startscreen_game_mode">Режим</string>
+    <string name="heroinfo_one_life">Реальність (1 життя)</string>
+    <string name="heroinfo_limited_lives">Обмежені життя (%1$d/%2$d залишилось)</string>
+    <string name="heroinfo_unlimited_lives">Безліміт життів, 1 збереження</string>
+    <string name="heroinfo_unlimited_lives_and_saves">Стандартна
+\n(Бізліміт життів та збережень)</string>
+    <string name="menu_save_switch_character_title">Перемикання персонажу</string>
+    <string name="skill_title_fightstyle_unarmed_unarmored">Бойовий стиль: Шлях ченця</string>
+    <string name="skill_longdescription_fightstyle_unarmed_unarmored">Під час бою, не маючи жодної броні, не використовуючи зброю чи щит, підвищуються шанс нападу на %1$d, шанс блоку на %2$d, стійкість пошкодженням на %3$d та збільшується максимальне пошкодження на %4$d за кожен рівень вміння. Навик також дає критичний множник 1 плюс 0.%5$d за рівень.
+\n
+\nПредмети з тканини не вважаються обладунками.</string>
+    <string name="skill_longdescription_weapon_prof_pole">Для кожного рівня навичок збільшується шанс нападу при використанні древкової зброї на %1$d %% від базового шансу атаки предмету, збільшується шанс блокування на %2$d %% від базового шансу базового блоку і підвищується критичний навик на %3$d %% базової критичної новику предмету.</string>
+    <string name="skill_shortdescription_weapon_prof_pole">Краще в битві з древковою зброєю</string>
+    <string name="skill_shortdescription_fightstyle_unarmed_unarmored">Краще в битві без озброєння та броні</string>
+    <string name="skill_title_weapon_prof_pole">Знання древкової зброї</string>
+    <string name="loadsave_empty_slot">%1$d.&lt;порожньо&gt;</string>
+    <string name="iteminfo_effect_set_damage_modifier">Модифікатор пошкодження: %1$d%%</string>
+    <string name="menu_save_switch_character">Збереження дозволяє перемкнутися на іншого персонажа та пізніше продовжити поточну гру. Ви хочете зберегти та вийти з поточної гри\?</string>
+    <string name="preferences_language_description">Виберіть мову. Англійська мова використовується, якщо системна мова недоступна або вміст не переведений. (Потрібен перезапуск)</string>
+    <string name="preferences_language">Мова</string>
+    <string name="preferences_display_scaling_factor_75_percent">75%</string>
+    <string name="dialog_permission_information">Andor\'s Trail записує збережені ігри в доступне для користувача сховище на вашому пристрої. Це дозволяє легко створити резервну копію збережених ігор або перенести їх на новий пристрій. Будь ласка, відвідайте наш форум для отримання додаткової інформації.
+\n
+\nAndor\'s Trail не використовує доступ до вашого пристрою ні для яких інших цілей та не має доступу до Інтернету. Andor\'s Trail - проєкт з відкритим кодом; джерело можна знайти на github.</string>
+    <string name="dialog_newversion_permission_information">"
+\n
+\nЗ метою збереження та завантаження ваших ігор (і лише для цієї мети) Andor\'s Trail запитає у вас дозволу на доступ до вашого сховища."</string>
+    <string name="preferences_language_default">Мова системи</string>
+    <string name="preferences_display_scaling_factor_50_percent">Половина</string>
+    <string name="about_interface">&lt;div&gt;&lt;b&gt;Налаштування гри&lt;/b&gt; можна знайти, натиснувши кнопку Меню пристрою.&lt;/div&gt; &lt;p&gt;________________&lt;/p&gt; &lt;h1&gt;Піктограми інтерфейсу&lt;/h1&gt; &lt;div&gt;&lt;b&gt;Скриня&lt;/b&gt;&lt;img alt=chest src=chest.png /&gt;&lt;/div&gt; &lt;p&gt;Слоти швидкого доступу [Довге натискання на мішечки всередині для призначення предметів для миттєвого використання]&lt;/p&gt; &lt;div&gt;&lt;b&gt;Герой&lt;/b&gt;&lt;img alt=hero src=char_hero.png /&gt;&lt;/div&gt; &lt;p&gt;Меню [Огляд, Квести, Навики і Інвентар *]&lt;/p&gt; &lt;p&gt;* (В меню Інвентаря натискання на предмет відобразить інформацію про нього, довге натискання - додаткові опції)&lt;/p&gt; &lt;div&gt;&lt;b&gt;Ворог&lt;/b&gt;&lt;img alt=monster src=monster.png /&gt;&lt;/div&gt; &lt;p&gt;Інформація [з\'являється під час бою]&lt;/p&gt; &lt;p&gt;________________&lt;/p&gt; &lt;h1&gt;Бій&lt;/h1&gt; &lt;p&gt;Кожна дія під час бою коштує ОК...&lt;/p&gt; &lt;div&gt;&lt;b&gt;Напад&lt;/b&gt; - [3 ОК] *&lt;/div&gt; &lt;img alt=attacking src=doubleattackexample.png /&gt; &lt;p&gt;* (Одягання спорядження, використання предметів може змінювати ОК і вартість використання)&lt;/p&gt; &lt;div&gt;&lt;b&gt;Використання предметів&lt;/b&gt; - [5 ОК]&lt;/div&gt; &lt;div&gt;&lt;b&gt;Втеча&lt;/b&gt; - [6 ОК]&lt;/div&gt; &lt;p&gt;________________&lt;/p&gt; &lt;h1&gt;Додаткові можливості в бою&lt;/h1&gt; &lt;div&gt;Під час бою виконайте довге натискання на клітинку поряд з Героєм...&lt;/div&gt; &lt;div&gt;&lt;b&gt;... щоб втекти&lt;/b&gt;&lt;/div&gt; &lt;p&gt;(обрана клітинка підсвічується, Кнопка Атаки змінюється на Рух)&lt;/p&gt; &lt;img alt=flee src=flee_example.png /&gt; &lt;p&gt;[активовано режим втечі, довге натискання на ворога поверне Героя до бою]&lt;/p&gt; &lt;div&gt;&lt;b&gt;... щоб змінити цілі&lt;/b&gt;&lt;/div&gt; &lt;p&gt;(червоне підсвічування цілі переміщується з одного ворога на іншого)&lt;/p&gt; &lt;p&gt;[ціль було змінено]&lt;/p&gt;</string>
 </resources>

@@ -240,7 +240,7 @@ public final class CombatController implements VisualEffectCompletedCallback {
 		return true;
 	}
 
-	private boolean playerHasApLeft() {
+	public boolean playerHasApLeft() {
 		final Player player = world.model.player;
 		if (player.hasAPs(player.getUseItemCost())) return true;
 		if (player.hasAPs(player.getAttackCost())) return true;

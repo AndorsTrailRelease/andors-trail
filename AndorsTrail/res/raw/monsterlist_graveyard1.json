@@ -125,7 +125,6 @@
             "max":19
         },
         "spawnGroup":"graveyard_corpse2",
-        "phraseID":"graveyard_corpse1",
         "droplistID":"gold200",
         "attackCost":3,
         "attackChance":170,
@@ -440,14 +439,52 @@
         "name":"Angry graveyard corpse",
         "iconID":"monsters_zombie2:0",
         "maxHP":90,
+        "maxAP":10,
         "moveCost":3,
         "monsterClass":"undead",
-        "movementAggressionType":"none",
         "attackDamage":{
             "min":6,
             "max":19
         },
         "spawnGroup":"graveyard_corpse3",
+        "phraseID":"graveyard_corpse1",
+        "droplistID":"gold200",
+        "attackCost":3,
+        "attackChance":170,
+        "criticalSkill":10,
+        "criticalMultiplier":2.0,
+        "blockChance":165,
+        "damageResistance":11,
+        "hitEffect":{
+            "increaseCurrentHP":{
+                "min":1,
+                "max":3
+            },
+            "conditionsTarget":[
+                {
+                    "condition":"putrefaction",
+                    "magnitude":2,
+                    "duration":3,
+                    "chance":"30"
+                }
+            ]
+        }
+    },
+    {
+        "id":"graveyard_corpse3",
+        "name":"Angry graveyard corpse",
+        "iconID":"monsters_zombie2:0",
+        "maxHP":90,
+        "maxAP":10,
+        "moveCost":3,
+        "monsterClass":"undead",
+        "attackDamage":{
+            "min":6,
+            "max":19
+        },
+        "spawnGroup":"graveyard_corpse3",
+        "phraseID":"graveyard_corpse1",
+        "droplistID":"gold200",
         "attackCost":3,
         "attackChance":170,
         "criticalSkill":10,

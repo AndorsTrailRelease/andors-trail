@@ -1072,14 +1072,31 @@
                     },
                     {
                         "requireType":"questProgress",
-                        "requireID":"graveyard_quest",
-                        "value":80,
+                        "requireID":"nondisplay_2",
+                        "value":240,
                         "negate":true
                     },
                     {
                         "requireType":"inventoryRemove",
                         "requireID":"graveyardtext",
                         "value":1
+                    }
+                ]
+            },
+            {
+                "text":"N",
+                "nextPhraseID":"graveyardday2a",
+                "requires":[
+                    {
+                        "requireType":"killedMonster",
+                        "requireID":"graveyardking",
+                        "value":1
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"nondisplay_2",
+                        "value":240,
+                        "negate":true
                     }
                 ]
             }
@@ -1391,6 +1408,11 @@
                 "rewardType":"removeSpawnArea",
                 "rewardID":"graveyard_corpse_boss_patrol",
                 "mapName":"graveyard1"
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"nondisplay_2",
+                "value":240
             }
         ]
     },
@@ -1746,7 +1768,7 @@
         "message":"What's a kid like you doing around here? It's a dangerous place to be.",
         "replies":[
             {
-                "text":"I'm looking for my Brother, Andor. He looks a bit like me.",
+                "text":"I'm looking for my brother, Andor. He looks a bit like me.",
                 "nextPhraseID":"cithurn_65"
             },
             {

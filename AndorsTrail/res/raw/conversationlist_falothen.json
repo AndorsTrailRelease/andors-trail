@@ -63,6 +63,16 @@
                 ]
             },
             {
+                "nextPhraseID":"falothen1_0",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"charwood1",
+                        "value":76
+                    }
+                ]
+            },
+            {
                 "nextPhraseID":"falothen1_1"
             }
         ]
@@ -109,7 +119,7 @@
     },
     {
         "id":"falothen1_5",
-        "message":"I can teach you about swords, either one-handed or two-handed ones. I know a bit about daggers, axes and blunt weapons. I also know a fair deal about fighting with your bare fists.",
+        "message":"I can teach you about swords, either one-handed or two-handed ones. I know a bit about daggers, axes, polearms, and blunt weapons. I also know a fair deal about fighting with your bare fists.",
         "replies":[
             {
                 "text":"N",
@@ -144,6 +154,10 @@
             {
                 "text":"Tell me more about blunt weapons.",
                 "nextPhraseID":"falothen1_7_b"
+            },
+            {
+                "text":"Tell me more about polearms.",
+                "nextPhraseID":"falothen1_7_pa"
             },
             {
                 "text":"I'll be right back.",
@@ -657,6 +671,10 @@
             {
                 "text":"Tell me more about blunt weapons.",
                 "nextPhraseID":"falothen1_2nd_b"
+            },
+            {
+                "text":"Tell me more about polearms.",
+                "nextPhraseID":"falothen1_2nd_pa"
             },
             {
                 "text":"I'll be right back.",

@@ -2066,5 +2066,39 @@
     {
         "id":"arulircave_trap10_30",
         "message":"Maybe the current will wash you ashore somewhere?"
+    },
+    {
+        "id":"arulircave_trap101",
+        "message":"The ground over there is very slippery. You don't want to fall into the water again."
+    },
+    {
+        "id":"arulircave_trap101_chk",
+        "replies":[
+            {
+                "nextPhraseID":"arulircave_trap101_chk_2",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"arulircave_trap",
+                        "value":10
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id":"arulircave_trap101_chk_2",
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"arulircave_trap",
+                "value":101
+            },
+            {
+                "rewardType":"removeQuestProgress",
+                "rewardID":"arulircave_trap",
+                "value":10
+            }
+        ]
     }
 ]

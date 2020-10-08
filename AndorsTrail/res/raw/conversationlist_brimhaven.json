@@ -1626,7 +1626,24 @@
     },
     {
         "id":"brv_tavern1_guest2",
-        "message":"I hate myself, because I'm drinking..."
+        "message":"I'm drinking because my wife left me and took my beagle with her.  Now how am I supposed to hunt?",
+        "replies":[
+            {
+                "text":"I'm so sorry to hear about your problems.  I love dogs too.",
+                "nextPhraseID":"X"
+            },
+            {
+                "text":"Hey, speaking of killing, I'm wondering if you know anything about Lawellyn's death?",
+                "nextPhraseID":"brv_tavern1_guest2_asd_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":130
+                    }
+                ]
+            }
+        ]
     },
     {
         "id":"brv_tavern1_landlord",
@@ -2678,7 +2695,21 @@
     },
     {
         "id":"brimhaven_church_guard",
-        "message":"Stop! You are not allowed to go any further."
+        "message":"Stop! You are not allowed to go any further.",
+        "replies":[
+            {
+                "text":"I'm on a mission.",
+                "nextPhraseID":"brimhaven_church_guard_1"
+            },
+            {
+                "text":"OK, I'll leave.",
+                "nextPhraseID":"X"
+            },
+            {
+                "text":"OK. I'll leave [lie].",
+                "nextPhraseID":"X"
+            }
+        ]
     },
     {
         "id":"arlish_0",
@@ -2717,6 +2748,87 @@
                         "requireType":"questProgress",
                         "requireID":"brv_nondisplay2",
                         "value":42
+                    }
+                ]
+            },
+            {
+                "text":"What can you tell me about Lawellyn's dagger?",
+                "nextPhraseID":"arlish_asd_0",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":110
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":115,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":120,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":200,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":230,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"I want to talk about the investigation.",
+                "nextPhraseID":"arlish_asd_100",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":130,
+                        "negate":false
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":200,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":230,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"I need to find a large empty bottle. Do you have one?",
+                "nextPhraseID":"arlish_bottle_1",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"cat_and_mouse",
+                        "value":20
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"cat_and_mouse",
+                        "value":30
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"cat_and_mouse",
+                        "value":40,
+                        "negate":true
                     }
                 ]
             }
@@ -2848,7 +2960,32 @@
     },
     {
         "id":"blackjack_gambler2",
-        "message":"I already made a fortune. Want to join us? Then take a seat in the empty chair and talk to the dealer."
+        "message":"I already made a fortune. Want to join us? Then take a seat in the empty chair and talk to the dealer.",
+        "replies":[
+            {
+                "text":"Excuse me sir, but you look like someone that may be able to help me.",
+                "nextPhraseID":"blackjack_gambler2_asd_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":130
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":200,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":230,
+                        "negate":true
+                    }
+                ]
+            }
+        ]
     },
     {
         "id":"blackjack_left_seat",
@@ -3138,7 +3275,7 @@
                 "nextPhraseID":"blackjack_bet_select"
             },
             {
-                "text":"I have enough.",
+                "text":"I have had enough.",
                 "nextPhraseID":"X"
             },
             {
@@ -3182,7 +3319,32 @@
     },
     {
         "id":"brv_tavern_west_guest",
-        "message":"Go away and let me eat."
+        "message":"Go away and let me eat.",
+        "replies":[
+            {
+                "text":"I'm wondering, do you know anything about Lawellyn's death?",
+                "nextPhraseID":"brv_tavern_west_guest_asd_inquiry_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":130
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":200,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":230,
+                        "negate":true
+                    }
+                ]
+            }
+        ]
     },
     {
         "id":"brv_laundry_worker_0",
@@ -3324,6 +3486,29 @@
             {
                 "text":"I have to go.",
                 "nextPhraseID":"X"
+            },
+            {
+                "text":"I'm wondering, do you know anything about Lawellyn's death?",
+                "nextPhraseID":"brv_asd_no_info_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":130
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":200,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":230,
+                        "negate":true
+                    }
+                ]
             }
         ]
     },
@@ -3354,7 +3539,7 @@
                     {
                         "requireType":"questProgress",
                         "requireID":"brv_nondisplay_multipurpose",
-                        "value":10
+                        "value":15
                     }
                 ]
             },
@@ -3372,6 +3557,22 @@
             {
                 "text":"I am looking for my brother, Andor. He looks a bit like me.",
                 "nextPhraseID":"brv_laundry_boss_0b"
+            },
+            {
+                "text":"Have you ever seen a glove like this? [Shows Venanra the glove.]",
+                "nextPhraseID":"brv_laundry_boss_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":170
+                    },
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"ogea_glove",
+                        "value":1
+                    }
+                ]
             }
         ]
     },
@@ -3393,6 +3594,11 @@
                 "rewardType":"questProgress",
                 "rewardID":"brv_nondisplay_multipurpose",
                 "value":10
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"brv_nondisplay_multipurpose",
+                "value":15
             }
         ]
     },
@@ -3686,7 +3892,7 @@
     },
     {
         "id":"brv_brothers_3",
-        "message":"HEH HEH yEa",
+        "message":"HEH HEH. Yeah!",
         "switchToNPC":"brv_attohead",
         "replies":[
             {
@@ -4456,13 +4662,23 @@
                 ]
             },
             {
+                "nextPhraseID":"brv_prison_guard_30",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":220
+                    }
+                ]
+            },
+            {
                 "nextPhraseID":"brv_prison_guard_10"
             }
         ]
     },
     {
         "id":"brv_prison_guard_20",
-        "message":"Are you looking for the captain? He has been gone for a while now, arresting the person that destroyed the dam."
+        "message":"Are you looking for the captain? She has been gone for a while now, arresting the person that destroyed the dam."
     },
     {
         "id":"brv_prison_guard_10",
@@ -4502,7 +4718,21 @@
     },
     {
         "id":"brv2_grave_9",
-        "message":"Here lies Connat, who spent his life complaining that he was dying. In the end, he was right."
+        "replies":[
+            {
+                "nextPhraseID":"brv2_grave_9_1",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":105
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"brv2_grave_9_0"
+            }
+        ]
     },
     {
         "id":"brv2_grave_10",
@@ -5002,7 +5232,32 @@
     },
     {
         "id":"brv_villager1",
-        "message":"Hello"
+        "message":"Hello",
+        "replies":[
+            {
+                "text":"I'm wondering, do you know anything about Lawellyn's death?",
+                "nextPhraseID":"brv_asd_no_info_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":130
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":200,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":230,
+                        "negate":true
+                    }
+                ]
+            }
+        ]
     },
     {
         "id":"brv_villager2",
@@ -5010,7 +5265,59 @@
     },
     {
         "id":"brv_villager3",
-        "message":"You are not from Brimhaven, are you? If you need a place to stay, visit the inn in the eastern part of the town. There are beds available for rent. But it is bit untidy there."
+        "message":"You are not from Brimhaven, are you? If you need a place to stay, visit the inn in the eastern part of the town. There are beds available for rent. But it is a bit untidy there.",
+        "replies":[
+            {
+                "text":"I suspect that you killed Lawellyn or that you were at the very least at the scene of the murder at the time of his death.",
+                "nextPhraseID":"brv_villager3_asd_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":180
+                    },
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"ogea_glove",
+                        "value":1
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":190,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":210,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"No need to pretend we've never met. I do believe you are innocent.",
+                "nextPhraseID":"X",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":190
+                    }
+                ]
+            },
+            {
+                "text":"Don't pretend we've never met. Soon you will be in jail.",
+                "nextPhraseID":"X",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":210
+                    }
+                ]
+            }
+        ]
     },
     {
         "id":"brv_villager4",
@@ -5380,7 +5687,7 @@
     },
     {
         "id":"tamarukh_10",
-        "message":"Sure. We had built this dam in Brimhaven to get more space for arable land, but someone must have sabotated it.",
+        "message":"Sure. We had built this dam in Brimhaven to get more space for arable land, but someone must have sabotaged it.",
         "replies":[
             {
                 "text":"Would you like to repair the dam again?",
@@ -5612,7 +5919,7 @@
     },
     {
         "id":"quiet_thief_2_3",
-        "message":"I think 1000gp would be fair. Is that acceptable?",
+        "message":"I think 1000 gold would be fair. Is that acceptable?",
         "replies":[
             {
                 "text":"No. That's too much for me.",
@@ -5668,7 +5975,7 @@
     },
     {
         "id":"quiet_thief_3_3",
-        "message":"I think 1500gp would be fair. Is that acceptable?",
+        "message":"I think 1500 gold would be fair. Is that acceptable?",
         "replies":[
             {
                 "text":"No, that's too much for me.",
@@ -5705,7 +6012,7 @@
     },
     {
         "id":"edrin_2_1",
-        "message":"I recognize this. I made it, many years ago. See this recess in the pommel? There used to be an unusual gem in that. It gave the dagger some special properties. If you can find the gem, I can repair it for you.",
+        "message":"I recognize this. I made it, many years ago, for a man called Lawellyn. Alas, I hear he is now dead. See this recess in the pommel? There used to be an unusual gem in that. It gave the dagger some special properties. If you can find the gem, I can repair it for you.",
         "replies":[
             {
                 "text":"I think I know where to find that. I'll go and get it.",
@@ -5730,7 +6037,7 @@
     },
     {
         "id":"edrin_3_1",
-        "message":"I recognize this. It was used in something I made, many years ago. It was set into the pommel of a dagger. It gave the dagger some special properties. If you can find the dagger, I can repair it for you.",
+        "message":"I recognize this. It was used in something I made, many years ago. It was set into the pommel of a dagger I made for a man called Lawellyn. Alas, I hear he is now dead. It gave the dagger some special properties. If you can find the dagger, I can repair it for you.",
         "replies":[
             {
                 "text":"I think I know where to find that. I'll be right back.",
@@ -5755,7 +6062,7 @@
     },
     {
         "id":"edrin_4_1",
-        "message":"I recognize these. I made the dagger, many years ago. See this recess in the pommel? The gem you have fits in that. It gave the dagger some special properties. If you wish, I can repair it for you.",
+        "message":"I recognize these. I made the dagger, many years ago, for a man called Lawellyn. Alas, I hear he is now dead. See this recess in the pommel? The gem you have fits in that. It gave the dagger some special properties. If you wish, I can repair it for you.",
         "replies":[
             {
                 "text":"How much will that cost?",
@@ -5967,7 +6274,7 @@
     },
     {
         "id":"edrin_4_2",
-        "message":"The best I can offer is 800gp. The repair is quite delicate, and if done incorrectly it will just be a dagger with a gem in the pommel, and no more.",
+        "message":"The best I can offer is 800 gold. The repair is quite delicate, and if done incorrectly it will just be a dagger with a gem in the pommel, and no more.",
         "replies":[
             {
                 "text":"That's expensive. I'll think about it.",
@@ -6068,7 +6375,7 @@
     },
     {
         "id":"edrin_7_1a",
-        "message":"Yes, it is done. Here is the repaired dagger.",
+        "message":"Yes, it is done. Here is the repaired dagger.  It's nice to see Lawellyn's dagger brought back to its original glory. There is some mystery about his death. I don't know anything about it though. Maybe someone else in town can tell you more.",
         "rewards":[
             {
                 "rewardType":"giveItem",
@@ -6084,11 +6391,11 @@
     },
     {
         "id":"edrin_7_1b",
-        "message":"Yes, it is done. Here is the repaired dagger.",
+        "message":"Yes, it is done. Here is the repaired dagger.  It's nice to see Lawellyn's dagger brought back to its original glory. There is some mystery about his death. I don't know anything about it though. Maybe someone else in town can tell you more.",
         "rewards":[
             {
                 "rewardType":"giveItem",
-                "rewardID":"strange_dagger",
+                "rewardID":"dagger_assassin",
                 "value":1
             },
             {
@@ -6115,7 +6422,7 @@
     },
     {
         "id":"edrin_5_1",
-        "message":"The best I can offer is 800gp. The repair is quite delicate, and if done incorrectly it will just be a dagger with a gem in the pommel, and no more.",
+        "message":"The best I can offer is 800 gold. The repair is quite delicate, and if done incorrectly it will just be a dagger with a gem in the pommel, and no more.",
         "replies":[
             {
                 "text":"That's expensive. I'll think about it.",
@@ -6150,7 +6457,7 @@
     },
     {
         "id":"edrin_6_1",
-        "message":"The best I can offer is 800gp. The repair is quite delicate, and if done incorrectly it will just be a dagger with a gem in the pommel, and no more.",
+        "message":"The best I can offer is 800 gold. The repair is quite delicate, and if done incorrectly it will just be a dagger with a gem in the pommel, and no more.",
         "replies":[
             {
                 "text":"That's expensive. I'll think about it.",
@@ -6289,7 +6596,7 @@
     },
     {
         "id":"brv_shop_owner_2",
-        "message":"Are you lookng for something in particular?",
+        "message":"Are you looking for something in particular?",
         "replies":[
             {
                 "text":"[You point to a very expensive looking necklace] How much is this?",
@@ -6500,7 +6807,7 @@
     },
     {
         "id":"mikhail_present_20",
-        "message":"Oh, you are such a good son.",
+        "message":"Oh, you are such a nice child.",
         "replies":[
             {
                 "text":"[Give him the cheap necklace]",
@@ -6580,7 +6887,7 @@
     },
     {
         "id":"mikhail_present_20_2",
-        "message":"Thank you my son for this wonderful necklace. Oh and it is in our family colors!",
+        "message":"Thank you my child for this wonderful necklace. Oh and it is in our family colors!",
         "replies":[
             {
                 "text":"N",
@@ -6748,7 +7055,7 @@
     },
     {
         "id":"mikhail_news_50",
-        "message":"Thank you my son. Keep on searching for Andor.",
+        "message":"Thank you my child. Keep on searching for Andor.",
         "replies":[
             {
                 "text":"N",
@@ -8041,7 +8348,7 @@
                 ]
             },
             {
-                "text":"Explain to me the rules, please.",
+                "text":"Please explain the rules to me.",
                 "nextPhraseID":"blackjack_rules"
             }
         ],
@@ -8103,7 +8410,7 @@
     },
     {
         "id":"thelry_1",
-        "message":"No, sorry, I haven't seen onyone like that.",
+        "message":"No, sorry, I haven't seen anyone like that.",
         "replies":[
             {
                 "text":"OK. Thanks. What do you have to sell?",

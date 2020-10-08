@@ -189,6 +189,48 @@
     },
     {
         "id":"loneford_tavern_patron",
-        "message":"This is no place for a kid like you. I think you better leave now."
+        "message":"This is no place for a kid like you. I think you had better leave now.",
+        "replies":[
+            {
+                "text":"I met a man named Forlin who recomended that I speak with you in regards to a possible murder investigation that I am conducting.",
+                "nextPhraseID":"kizzo_asd_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":140
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":150,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"I did as you suggested and found the scene of a murder and I found this glove.",
+                "nextPhraseID":"kizzo_asd_40",
+                "requires":[
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"ogea_glove",
+                        "value":1
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":190,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_dagger",
+                        "value":210,
+                        "negate":true
+                    }
+                ]
+            }
+        ]
     }
 ]

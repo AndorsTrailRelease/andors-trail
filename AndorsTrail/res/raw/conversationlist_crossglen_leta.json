@@ -67,7 +67,31 @@
                 ]
             },
             {
-                "nextPhraseID":"leta_oromir1"
+                "nextPhraseID":"leta_oromir1",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"leta",
+                        "value":105,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"leta",
+                        "value":100,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"leta_oromir_complete2_helped_oromir",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"leta",
+                        "value":105
+                    }
+                ]
             }
         ]
     },
@@ -81,12 +105,150 @@
             },
             {
                 "text":"Yes, I found him. He is hiding among some trees to the east.",
-                "nextPhraseID":"leta_oromir_complete",
+                "nextPhraseID":"leta_oromir1_trees",
                 "requires":[
                     {
                         "requireType":"questProgress",
                         "requireID":"leta",
                         "value":20
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"leta",
+                        "value":35,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"leta",
+                        "value":45,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"leta",
+                        "value":40,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"leta",
+                        "value":60,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"leta",
+                        "value":80,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"leta",
+                        "value":25,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"[Lie] I have no idea.",
+                "nextPhraseID":"leta_oromir1_trees_help",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"leta",
+                        "value":25
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"leta",
+                        "value":35,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"leta",
+                        "value":45,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"[Lie] I have no idea.",
+                "nextPhraseID":"leta_oromir1_behind_inn_help",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"leta",
+                        "value":35
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"leta",
+                        "value":45,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"[Lie] I have no idea.",
+                "nextPhraseID":"leta_oromir1_behind_haystack_help",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"leta",
+                        "value":45
+                    }
+                ]
+            },
+            {
+                "text":"He's found a new hiding spot.",
+                "nextPhraseID":"leta_oromir1_behind_inn_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"leta",
+                        "value":40
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"leta",
+                        "value":60,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"leta",
+                        "value":80,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"He's found another new hiding spot. Give him credit, he is great at avoiding work.",
+                "nextPhraseID":"leta_oromir1_behind_haystack_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"leta",
+                        "value":60
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"leta",
+                        "value":80,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"He's in your basement.",
+                "nextPhraseID":"leta_oromir1_basement_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"leta",
+                        "value":80
                     }
                 ]
             }
@@ -133,8 +295,20 @@
         "message":"I'm hiding here from my wife Leta. She is always getting angry at me for not helping out on the farm. Please don't tell her that I'm here.",
         "replies":[
             {
-                "text":"OK.",
+                "text":"[Lie] OK.",
                 "nextPhraseID":"X"
+            },
+            {
+                "text":"Your secret is safe with me.",
+                "nextPhraseID":"oromir_trees_help_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"leta",
+                        "value":100,
+                        "negate":true
+                    }
+                ]
             }
         ],
         "rewards":[

@@ -58,6 +58,9 @@ public final class ItemController {
 		player.inventory.setItemTypeInWearSlot(slot, type);
 		controllers.actorStatsController.addConditionsFromEquippedItem(player, type);
 		controllers.actorStatsController.recalculatePlayerStats(player);
+		if (world.model.uiSelections.isInCombat && !controllers.combatController.playerHasApLeft()) {
+			controllers.combatController.endPlayerTurn();
+		}
 	}
 
 	public void unequipSlot(ItemType type, Inventory.WearSlot slot) {
@@ -72,6 +75,9 @@ public final class ItemController {
 
 		unequipSlot(player, slot);
 		controllers.actorStatsController.recalculatePlayerStats(player);
+		if (world.model.uiSelections.isInCombat && !controllers.combatController.playerHasApLeft()) {
+			controllers.combatController.endPlayerTurn();
+		}
 	}
 
 	private void unequipSlot(Player player, Inventory.WearSlot slot) {
@@ -95,6 +101,9 @@ public final class ItemController {
 		controllers.actorStatsController.applyUseEffect(player, null, type.effects_use);
 		world.model.statistics.addItemUsage(type);
 
+		if (world.model.uiSelections.isInCombat && !controllers.combatController.playerHasApLeft()) {
+			controllers.combatController.endPlayerTurn();
+		}
 		//TODO: provide feedback that the item has been used.
 		//context.mainActivity.message(androidContext.getResources().getString(R.string.inventory_item_used, type.name));
 	}

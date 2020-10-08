@@ -1,27 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Andor\'s Trail</string>
-    <string name="app_description">Quest-driven fantasy RPG</string>
+    <string name="app_description">クエスト主体のファンタジーRPG</string>
     <string name="exit_to_menu">メニューに戻る</string>
     <string name="menu_settings">設定</string>
     <string name="menu_save">セーブ</string>
     <string name="menu_save_gamesaved">スロット %1$d にセーブされました</string>
-    <string name="menu_save_failed">セーブできません! SDカードはマウントされていて、書き込み可能ですか?</string>
+    <string name="menu_save_failed">セーブできません! SDカードはマウントされていますか\?</string>
     <string name="loadsave_title_save">セーブ</string>
     <string name="loadsave_title_load">ロード</string>
-    <string name="loadsave_selectslot">Select slot</string>
-    <string name="savegame_currenthero_displayinfo">level %1$d, %2$d exp, %3$d gold</string>
-    <string name="dialog_loading_message">Loading resources...</string>
+    <string name="loadsave_selectslot">スロット選択</string>
+    <string name="savegame_currenthero_displayinfo">レベル %1$d, %2$d exp, %3$d gold</string>
+    <string name="dialog_loading_message">読み込み中…</string>
     <string name="dialog_loading_failed_title">読み込みに失敗しました</string>
-    <string name="dialog_loading_failed_message">Andor\'s Trail はセーブ・ファイルを読み込めませんでした.\n\n:(\n\nこのファイルは壊れているか不完全です\n\n)</string>
-    <string name="dialog_loading_failed_incorrectversion">Andor\'s Trail はセーブ・ファイルを読み込めませんでした. このファイルは現在実行中のバージョンより新しいバージョンのセーブ・ファイルです.</string>
+    <string name="dialog_loading_failed_message">Andor\'s Trail はセーブ・ファイルを読み込めませんでした。
+\n
+\n:(
+\n
+\nこのファイルは壊れているか不完全です。</string>
+    <string name="dialog_loading_failed_incorrectversion">Andor\'s Trail はセーブ・ファイルを読み込めませんでした。このファイルは現在実行中のバージョンより新しいバージョンのセーブ・ファイルです。</string>
     <string name="dialog_close">閉じる</string>
     <string name="dialog_monsterencounter_title">遭遇</string>
     <string name="dialog_monsterencounter_message">攻撃しますか?\n敵の強さ: %1$s</string>
     <string name="dialog_monsterencounter_info">情報</string>
     <string name="status_hp">HP:</string>
     <string name="status_ap">AP:</string>
-    <string name="status_exp">Level:</string>
+    <string name="status_exp">Lv:</string>
     <string name="heroinfo_char">全般</string>
     <string name="heroinfo_inv">アイテム</string>
     <string name="heroinfo_skill">スキル</string>
@@ -30,7 +34,7 @@
     <string name="heroinfo_totalexperience">総経験値(exp)</string>
     <string name="heroinfo_wornequipment">装備</string>
     <string name="heroinfo_inventory">アイテム</string>
-    <string name="heroinfo_gold">Gold: %1$d</string>
+    <string name="heroinfo_gold">gold: %1$d</string>
     <string name="heroinfo_actionpoints">行動値 (AP):</string>
     <string name="heroinfo_quests">クエスト</string>
     <string name="combat_attack">攻撃 (%1$d AP)</string>
@@ -40,44 +44,44 @@
     <!-- <string name="combat_endcombat">End combat</string>-->
     <string name="combat_flee">逃走</string>
     <string name="combat_begin_flee">移動したい方向をクリックすることで、戦闘から逃げられます。</string>
-    <string name="combat_flee_failed">逃走失敗</string>
+    <string name="combat_flee_failed">逃走失敗!</string>
     <string name="combat_status_ap">AP: %1$d</string>
     <string name="combat_monsterhealth">HP:</string>
-    <string name="combat_monsteraction">%1$s の攻撃</string>
+    <string name="combat_monsteraction">%1$s の攻撃。</string>
     <!-- <string name="combat_cannotexitcombat">You cannot exit combat since there are adjacent monsters. You first have to move by long-clicking a place with no adjacent monster, before you may end the combat.</string> -->
-    <string name="combat_result_monstermiss">%1$s は攻撃を外した。</string>
-    <string name="combat_result_monsterhit">%1$s はあなたを攻撃し %2$d のダメージを与えた。</string>
+    <string name="combat_result_monstermiss">%1$s は攻撃を外した!</string>
+    <string name="combat_result_monsterhit">%1$s はあなたを攻撃し %2$d のダメージを与えた!</string>
     <string name="combat_result_monsterhitcritical">%1$s のクリティカルヒット! %2$d のダメージ!</string>
     <string name="combat_result_heromiss">あなたは攻撃を外した。</string>
-    <string name="combat_result_herohit">あなたは %1$s を攻撃し %2$d のダメージを与えた。</string>
+    <string name="combat_result_herohit">あなたは %1$s を攻撃し %2$d のダメージを与えた!</string>
     <string name="combat_result_herohitcritical">あなたの攻撃は %1$s にクリティカルヒット! %2$d のダメージ!</string>
-    <string name="combat_result_herokillsmonster">%1$s は死んだ。</string>
+    <string name="combat_result_herokillsmonster">%1$s は死んだ!</string>
     <string name="combat_not_enough_ap">APが不足しています。</string>
     <string name="combat_hero_dies">あなたは倒れたが、幸運にも生きていた。あなたは %1$d の経験値を失った。</string>
     <string name="inventory_info">情報</string>
     <string name="inventory_equip">装備</string>
     <string name="inventory_unequip">はずす</string>
     <string name="inventory_use">使う</string>
-    <string name="inventory_drop">落とす</string>
-    <string name="inventory_item_used">あなたは %1$s を使った。</string>
-    <string name="inventory_item_dropped">%1$s は地面に落ちた。</string>
-    <string name="inventory_item_equipped">あなたは %1$s を装備した。</string>
+    <string name="inventory_drop">捨てる</string>
+    <string name="inventory_item_used">%1$s を使った。</string>
+    <string name="inventory_item_dropped">%1$s を捨てた。</string>
+    <string name="inventory_item_equipped">%1$s を装備した。</string>
     <string name="dialog_loot_pickall">すべて拾う</string>
-    <string name="dialog_loot_foundgold">あなたは %1$d gold を見つけた。\n</string>
+    <string name="dialog_loot_foundgold">%1$d gold を獲得した。</string>
     <string name="dialog_loot_pickedupitem">あなたはアイテムを拾った。 </string>
-    <string name="dialog_loot_pickedupitems">あなたは %1$d 個のアイテムを拾った。 </string>
+    <string name="dialog_loot_pickedupitems">%1$d 個のアイテムを拾った。</string>
     <string name="dialog_groundloot_title">アイテム</string>
     <string name="dialog_groundloot_message">アイテムが落ちている。</string>
     <string name="dialog_monsterloot_title">勝利</string>
-    <string name="dialog_monsterloot_message">あなたは戦闘に勝った。\n</string>
-    <string name="dialog_monsterloot_gainedexp">あなたは %1$d の経験値を得た。\n</string>
+    <string name="dialog_monsterloot_message">あなたは戦闘に勝った。</string>
+    <string name="dialog_monsterloot_gainedexp">%1$d の経験値を獲得。</string>
     <string name="monster_difficulty_veryeasy">とても弱そう</string>
     <string name="monster_difficulty_easy">弱そう</string>
     <string name="monster_difficulty_normal">互角に見える</string>
     <string name="monster_difficulty_hard">強そう</string>
     <string name="monster_difficulty_veryhard">非常に強そう</string>
     <string name="monster_difficulty_impossible">勝利は不可能に思える</string>
-    <string name="actorinfo_class">Class:</string>
+    <string name="actorinfo_class">クラス:</string>
     <string name="actorinfo_difficulty">難易度:</string>
     <string name="actorinfo_health">体力:</string>
     <string name="actorinfo_attack">攻撃力:</string>
@@ -90,10 +94,10 @@
     <string name="traitsinfo_attack_damage">ダメージ:</string>
     <string name="traitsinfo_criticalhit_skill">クリティカルスキル:</string>
     <string name="traitsinfo_criticalhit_multiplier">クリティカル倍率:</string>
-    <string name="traitsinfo_defense_chance">回避率:</string>
+    <string name="traitsinfo_defense_chance">回避:</string>
     <string name="traitsinfo_defense_damageresist">ダメージ軽減:</string>
     <!-- <string name="key_required">A specific key is required to pass.</string> -->
-    <string name="iteminfo_category">カテゴリ: </string>
+    <string name="iteminfo_category">カテゴリー:</string>
     <string name="iteminfo_action_use">使う</string>
     <string name="iteminfo_action_equip">装備</string>
     <string name="iteminfo_action_unequip">はずす</string>
@@ -101,14 +105,14 @@
     <string name="iteminfo_action_equip_ap">装備 (%1$d AP)</string>
     <string name="iteminfo_action_unequip_ap">はずす (%1$d AP)</string>
     <string name="startscreen_continue">ゲームを再開する</string>
-    <string name="startscreen_newgame">New game</string>
-    <string name="startscreen_newgame_confirm">セーブしていないゲームとキャラクターは消去されます。本当に新しいゲームを開始してよいですか?</string>
-    <string name="startscreen_about">About/help</string>
-    <string name="startscreen_enterheroname">主人公の名前を入力してください</string>
-    <string name="startscreen_load">Load</string>
+    <string name="startscreen_newgame">新規</string>
+    <string name="startscreen_newgame_confirm">セーブしていないゲームとキャラクターは消去されます。本当に新しいゲームを開始して良いですか\?</string>
+    <string name="startscreen_about">ヘルプ</string>
+    <string name="startscreen_enterheroname">名前</string>
+    <string name="startscreen_load">ロード</string>
     <!-- <string name="conversation_title">%1$s says</string> -->
-    <string name="conversation_rewardexp"> [%1$d の経験値を得た]</string>
-    <string name="conversation_rewardgold"> [%1$d gold を得た]</string>
+    <string name="conversation_rewardexp">[%1$d の経験値を獲得]</string>
+    <string name="conversation_rewardgold">[%1$d gold を獲得]</string>
     <string name="conversation_lostgold"> [%1$d gold を失った]</string>
     <string name="conversation_rewarditem"> [アイテムを手に入れた]</string>
     <string name="conversation_rewarditems"> [%1$d 個のアイテムを手に入れた]</string>
@@ -122,67 +126,49 @@
     <string name="shop_yourgold">所持金: %1$d gold</string>
     <string name="shop_item_bought">%1$s を買った。</string>
     <string name="shop_item_sold">%1$s を売った。</string>
-    <string name="levelup_title">Level up</string>
-    <string name="levelup_description">Level %1$d に到達しました!</string>
-    <string name="levelup_buttontext">Level up</string>
+    <string name="levelup_title">レベルアップ</string>
+    <string name="levelup_description">レベル %1$d に到達しました!</string>
+    <string name="levelup_buttontext">レベルアップ</string>
     <string name="levelup_add_health">体力の上昇 (+%1$d HP)</string>
-    <string name="levelup_add_health_description">最大HPが %1$d だけ上昇します。</string>
-    <string name="levelup_add_attackchance">命中率の向上 (+%1$d)</string>
-    <string name="levelup_add_attackchance_description">基礎命中率が %1$d だけ上昇します。</string>
-    <string name="levelup_add_attackdamage">ダメージの強化 (+%1$d)</string>
-    <string name="levelup_add_attackdamage_description">基礎ダメージが %1$d だけ上昇します。</string>
-    <string name="levelup_add_blockchance">回避率の向上 (+%1$d)</string>
-    <string name="levelup_add_blockchance_description">基礎回避率が %1$d だけ上昇します。</string>
+    <string name="levelup_add_health_description">最大HP + %1$d。</string>
+    <string name="levelup_add_attackchance">命中アップ (+%1$d)</string>
+    <string name="levelup_add_attackchance_description">基礎命中 + %1$d。</string>
+    <string name="levelup_add_attackdamage">ダメージアップ (+%1$d)</string>
+    <string name="levelup_add_attackdamage_description">基礎ダメージ + %1$d。</string>
+    <string name="levelup_add_blockchance">回避アップ (+%1$d)</string>
+    <string name="levelup_add_blockchance_description">基礎回避 + %1$d。</string>
     <string name="dialog_rest_title">休憩</string>
     <string name="dialog_rest_confirm_message">ここで休みますか?</string>
     <string name="dialog_rest_message">あなたの体力は完全に回復した。</string>
     <string name="about_button1">ヘルプ</string>
     <string name="about_button2">製作者</string>
     <string name="about_button3">ライセンス</string>
-    <string name="about_contents1">
-		Andor\'s Trail, Androidで動くオープンソースのローグライクRPGへようこそ。&lt;br /&gt;
-		&lt;br /&gt;
-		フォーラムに来て、他のプレイヤーとAndor\'s Trailの話をしませんか？&lt;br /&gt;
-		&lt;a href="http://andorstrail.com/"&gt;andorstrail.com に、このゲームに関する質問と議論のためのフォーラム(英語)があります。&lt;/a&gt;&lt;br /&gt;
-		&lt;br /&gt;
-		&lt;a href="http://docs.andorstrail.com/"&gt;Game wiki for info about the Andor\'s Trail world, among other things.&lt;/a&gt;&lt;br /&gt;
-		&lt;br /&gt;
-		&lt;a href="http://code.google.com/p/andors-trail/"&gt;開発者のためのプロジェクト・ページは code.google.com にあります。&lt;/a&gt;&lt;br /&gt;
-		&lt;br /&gt;
-	</string>
+    <string name="about_contents1">AndroidのオープンソースのローグライクRPG、Andor\'s Trailへようこそ。&lt;br /&gt;他のプレイヤーとゲームについて話し合うには、フォーラムにアクセスしてください。&lt;br /&gt; &lt;br /&gt; &lt;a href=http://andorstrail.com/&gt;ゲームに関する質問やディスカッションについては、andorstrail.comにあるゲームフォーラム(英語)を参照してください。&lt;/a&gt;&lt;br /&gt; &lt;br /&gt; &lt;a href=http://docs.andorstrail.com/&gt;Andor\'s Trailの世界についての情報などをまとめるゲームwiki。&lt;/a&gt;&lt;br /&gt; &lt;br /&gt; &lt;a href=https://github.com/AndorsTrailRelease/andors-trail/&gt;github.comの開発者向けプロジェクトソースコード。&lt;/a&gt;&lt;br /&gt;</string>
     <!--
 		This is the GNU GPL v2 text, originally from
 			http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 		For translation of this text, you might be able to find a version in your language here:
 			http://www.gnu.org/licenses/old-licenses/gpl-2.0-translations.html
 	-->
-    <string name="about_contents3">
-		This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.&lt;br /&gt;
-		&lt;br /&gt;
-		This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.&lt;br /&gt;
-		&lt;br /&gt;
-		You should have received a copy of the GNU General Public License along with this program; if not, see &lt;a href="http://www.gnu.org/licenses"&gt;http://www.gnu.org/licenses&lt;/a&gt;&lt;br /&gt;
-		&lt;br /&gt;
-		For source code and feature requests, please visit the project page at &lt;a href="http://code.google.com/p/andors-trail/"&gt;http://code.google.com/p/andors-trail/&lt;/a&gt;&lt;br /&gt;
-	</string>
-    <string name="dialog_newversion_title">Welcome</string>
-    <string name="dialog_newversion_message">
-		Andor\'s Trailをダウンロードして下さりありがとうございます!\n\n
-		この Andor\'s Trail は、現在"製作中"であり、マップの全てが完成しているわけではありません。\n
-		フォーラムに参加して、他のプレイヤーと議論したり、より改善していく手助けをお願いします。("about"をご覧下さい)\n
-		\n
-		あらゆるフィードバックに感謝します。\n
-		==========================\n
-		Thank you for downloading Andor\'s Trail!\n\n
-		Please note that this version of Andor\'s Trail is a WORK IN PROGRESS, which means that all maps are not yet complete.\n
-		Please visit the project forums to discuss the game with other players or to help make the game even better (see "about").\n
-		\n
-		Thanks for all the feedback!
-	</string>
-    <string name="questlog_includecompleted_prompt">表示するクエスト:</string>
-    <string name="questlog_includecompleted_hidecompleted">完了したクエスト以外</string>
-    <string name="questlog_includecompleted_includecompleted">完了したクエストを含める</string>
-    <string name="questlog_includecompleted_onlycompleted">完了したクエストのみ</string>
+    <string name="about_contents3">このプログラムはフリーソフトウェアです。Free Software Foundationによって発行されたGNU一般公衆利用許諾契約書に基づいて、それを再配布したり、変更したりすることができます。ライセンスのバージョン2、またはそれ以降のバージョンのいずれか (任意) を選択してください。&lt;br /&gt; &lt;br /&gt;このプログラムは有用であることを期待して配布されていますが、いかなる保証もありません。商品性や特定の目的への適合性についての暗黙の保証もありません。詳細はGNU一般公衆利用許諾契約書を参照してください。&lt;br /&gt; &lt;br /&gt;このプログラムとともにGNU一般公衆利用許諾契約書のコピーを受け取っている必要があります。存在しない場合は、&lt;a href=http://www.gnu.org/licenses&gt;http://www.gnu.org/licenses&lt;/a&gt;を参照してください。&lt;br /&gt; &lt;br /&gt;ソースコードおよび機能のリクエストについては、&lt;a href=https://github.com/AndorsTrailRelease/andors-trail/&gt;https://github.com/AndorsTrailRelease/andors-trail/&lt;/a&gt;のプロジェクトのページを参照してください。&lt;br /&gt;</string>
+    <string name="dialog_newversion_title">ようこそ</string>
+    <string name="dialog_newversion_message">Andor\'s Trailをダウンロードして下さりありがとうございます!
+\n
+\n現在のAndor\'s Trailはまだ製作中であり、マップの全てが完成しているわけではありません。
+\n フォーラムに参加して、他のプレイヤーと議論したり、より改善していく手助けをお願いします。(概要をご覧下さい)
+\n 
+\n あらゆるフィードバックに感謝します。
+\n ==========================
+\n Thank you for downloading Andor\'s Trail!
+\n
+\n Please note that this version of Andor\'s Trail is a WORK IN PROGRESS, which means that all maps are not yet complete.
+\n Please visit the project forums to discuss the game with other players or to help make the game even better (see about).
+\n 
+\n Thanks for all the feedback!</string>
+    <string name="questlog_includecompleted_prompt">表示するクエスト</string>
+    <string name="questlog_includecompleted_hidecompleted">進行中クエスト</string>
+    <string name="questlog_includecompleted_includecompleted">全てのクエスト</string>
+    <string name="questlog_includecompleted_onlycompleted">完了したクエスト</string>
     <string name="questlog_queststatus">状況: %1$s</string>
     <string name="questlog_queststatus_inprogress">進行中</string>
     <string name="questlog_queststatus_completed">完了</string>
@@ -195,7 +181,7 @@
     <string name="preferences_dialog_confirmattack_title">攻撃の確認</string>
     <string name="preferences_dialog_confirmattack">モンスターに攻撃するとき、\'攻撃しますか?\'のダイアログボックスを表示します。</string>
     <string name="preferences_dialog_monsterloot_title">戦利品の表示</string>
-    <string name="preferences_dialog_monsterloot">戦闘の結果(gold, 経験値, アイテム)をどのように表示するか選択します。</string>
+    <string name="preferences_dialog_monsterloot">戦闘の結果(gold、経験値、アイテム)をどのように表示するか選択します。</string>
     <string name="preferences_combat_category">戦闘</string>
     <string name="preferences_combat_speed_title">戦闘スピード</string>
     <string name="preferences_combat_speed">モンスターの攻撃のスピードを決めます。</string>
@@ -208,8 +194,8 @@
     <string name="preferences_attackspeed_slow">遅い</string>
     <string name="preferences_movement_category">移動</string>
     <string name="preferences_movementmethod_title">移動方法</string>
-    <string name="preferences_movementmethod">移動と障害物の扱い</string>
-    <string name="preferences_movementmethods_straight">直進 (original)</string>
+    <string name="preferences_movementmethod">移動と障害物の扱い。</string>
+    <string name="preferences_movementmethods_straight">直進 (オリジナル)</string>
     <string name="preferences_movementmethods_avoid">障害物を回避する</string>
     <!-- =========================================== -->
     <!-- Added in v0.6.9 -->
@@ -235,21 +221,21 @@
     <string name="iteminfo_effect_increase_movecost">移動コスト増加 %1$d AP</string>
     <string name="iteminfo_effect_decrease_movecost">移動コスト減少 -%1$d AP</string>
     <string name="preferences_display_scaling_factor_title">拡大率</string>
-    <string name="preferences_display_scaling_factor">ゲームのあらゆる部分の表示を拡大します。</string>
+    <string name="preferences_display_scaling_factor">ゲームのあらゆる部分の表示を拡大もしくは縮小します。</string>
     <string name="preferences_display_scaling_factor_normal">通常</string>
     <string name="preferences_display_scaling_factor_50_percent_larger">1.5x</string>
     <string name="preferences_display_scaling_factor_double">2.0x</string>
-    <string name="inventory_assign">クイック・スロットに入れる</string>
-    <string name="inventory_assign_slot1">Slot 1</string>
-    <string name="inventory_assign_slot2">Slot 2</string>
-    <string name="inventory_assign_slot3">Slot 3</string>
-    <string name="inventory_unassign">クイック・スロットから出す</string>
+    <string name="inventory_assign">クイックスロットに入れる</string>
+    <string name="inventory_assign_slot1">スロット1</string>
+    <string name="inventory_assign_slot2">スロット2</string>
+    <string name="inventory_assign_slot3">スロット3</string>
+    <string name="inventory_unassign">クイックスロットからはずす</string>
     <!-- =========================================== -->
     <!-- Added in v0.6.10 -->
-    <string name="preferences_movement_dpad_position_title">Virtual d-pad</string>
-    <string name="preferences_movement_dpad_position">画面上に仮想的な方向パッドを設置します。</string>
-    <string name="preferences_movement_dpad_minimizeable_title">d-padを最小化する</string>
-    <string name="preferences_movement_dpad_minimizeable">Virtual d-pad が有効である時、d-pad の中心を押すことで最小化できるようにします。</string>
+    <string name="preferences_movement_dpad_position_title">バーチャル方向キー</string>
+    <string name="preferences_movement_dpad_position">画面上に方向キーを設置します。</string>
+    <string name="preferences_movement_dpad_minimizeable_title">方向キーを最小化する</string>
+    <string name="preferences_movement_dpad_minimizeable">バーチャル方向キーが有効である時、方向キーの中心を押すことで最小化できるようにします。</string>
     <string name="preferences_movement_dpad_positions_disabled">無効</string>
     <string name="preferences_movement_dpad_positions_lower_right">右下</string>
     <string name="preferences_movement_dpad_positions_lower_left">左下</string>
@@ -266,7 +252,7 @@
     <string name="bulkselection_totalcost_sell">合計: %1$d gold</string>
     <string name="bulkselection_select_all">全て</string>
     <string name="bulkselection_sell_confirmation_title">本当に?</string>
-    <string name="bulkselection_sell_confirmation">本当に %1$s を売りますか? このアイテムは %2$s であって、取り戻すことができないかもしれません。</string>
+    <string name="bulkselection_sell_confirmation">本当に %1$s を売りますか\? このアイテムは %2$s なので、取り戻すことができないかもしれません。</string>
     <!-- スキル名は翻訳する必要がないかもしれません（ユーザーがフォーラムで調べようとしたとき困るかも） -->
     <!-- Should skill titles be translated?（japanese users may stuck when trying to collect information from Forum） -->
     <string name="skill_title_weapon_chance">正確な攻撃</string>
@@ -290,10 +276,10 @@
     <string name="skill_title_resistance_mental">強い心</string>
     <string name="skill_title_resistance_physical_capacity">耐える体</string>
     <string name="skill_title_resistance_blood_disorder">純粋な血</string>
-    <string name="skill_shortdescription_weapon_chance">命中率を向上</string>
+    <string name="skill_shortdescription_weapon_chance">命中を向上</string>
     <string name="skill_shortdescription_weapon_dmg">ダメージを強化</string>
     <string name="skill_shortdescription_barter">店での有利な取引</string>
-    <string name="skill_shortdescription_dodge">回避率の向上</string>
+    <string name="skill_shortdescription_dodge">回避の向上</string>
     <string name="skill_shortdescription_barkskin">ダメージ軽減</string>
     <string name="skill_shortdescription_more_criticals">クリティカルスキルの向上</string>
     <string name="skill_shortdescription_better_criticals">クリティカル時ダメージの増加</string>
@@ -310,27 +296,27 @@
     <string name="skill_shortdescription_resistance_mental">精神に対する状態変化への抵抗力</string>
     <string name="skill_shortdescription_resistance_physical_capacity">身体能力に対する状態変化への抵抗力</string>
     <string name="skill_shortdescription_resistance_blood_disorder">血液異常への抵抗力</string>
-    <string name="skill_longdescription_weapon_chance">スキル1レベルにつき、命中率を %1$d 向上させます。</string>
+    <string name="skill_longdescription_weapon_chance">スキル1レベルにつき、命中を %1$d 向上させます。</string>
     <string name="skill_longdescription_weapon_dmg">スキル1レベルにつき、与えるダメージの最小値と最大値を %1$d 増加させます。</string>
-    <string name="skill_longdescription_barter">スキル1レベルごとに、店でアイテムを買うときに割高にされる比率や、売るときに割安にされる比率を %1$d%% ずつ有利にします。</string>
-    <string name="skill_longdescription_dodge">スキル1レベルにつき、回避率を %1$d 向上させます。</string>
+    <string name="skill_longdescription_barter">スキル1レベルごとに、店でアイテムを売り買いするときの比率を %1$d%% ずつ有利にします。</string>
+    <string name="skill_longdescription_dodge">スキル1レベルにつき、回避を %1$d 向上させます。</string>
     <string name="skill_longdescription_barkskin">スキル1レベルにつき、ダメージを %1$d ずつ軽減します。</string>
     <string name="skill_longdescription_more_criticals">スキル1レベルにつき、装備によるクリティカルスキルを %1$d%% 増加させます。</string>
     <string name="skill_longdescription_better_criticals">スキル1レベルにつき、装備によるクリティカル倍率を %1$d%% 増加させます。</string>
     <string name="skill_longdescription_speed">スキル1レベルにつき、行動値(AP)の最大値を %1$d ずつ増加させます。</string>
-    <string name="skill_longdescription_coinfinder">スキル1レベルにつき、モンスターがgoldを落とす確率を %1$d%%, モンスターが落とすgoldの量を %2$d%% 増加させます。(そのモンスターが落とすgoldの上限額は増加しません。)</string>
+    <string name="skill_longdescription_coinfinder">スキル1レベルにつき、モンスターがgoldを落とす確率を %1$d%%、モンスターが落とすgoldの量を %2$d%% 増加させます(そのモンスターが落とすgoldの上限額は増加しません)。</string>
     <string name="skill_longdescription_more_exp">スキル1レベルにつき、モンスターを倒すことで得る経験値を %1$d%% 増加させます。</string>
     <string name="skill_longdescription_cleave">敵を殺すたび、スキル1レベルにつき +%1$d ポイントの行動値(AP)が回復します。</string>
     <string name="skill_longdescription_eater">敵を殺すたび、スキル1レベルにつき +%1$d ポイントの体力(HP)が回復します。</string>
     <string name="skill_longdescription_fortitude">これ以降のレベルアップのたび、体力(HP)の最大値がスキル1レベルにつき %1$d ポイント増加します。過去のレベルアップにさかのぼって適用されることはなく、将来のレベルアップにのみ影響します。</string>
     <string name="skill_longdescription_evasion">スキル1レベルにつき、逃走に失敗する確率を %1$d%% 、隣接するモンスターから攻撃される確率を %2$d%% ずつ下げる。</string>
-    <string name="skill_longdescription_regeneration">毎ラウンド、スキル1レベルにつきHPを %1$d ずつ回復すます。</string>
+    <string name="skill_longdescription_regeneration">毎ラウンド、スキル1レベルにつきHPを %1$d ずつ回復します。</string>
     <string name="skill_longdescription_lower_exploss">スキル1レベルにつき、死亡時に失う経験値の量を %1$d%% 減少させます。(現在失う量に対する割合で、パーセンテージ・ポイントではありません。) %2$d レベルに達すると、死亡時に経験値を失わなくなります。</string>
     <string name="skill_longdescription_magicfinder">スキル1レベルにつき、特別なアイテムを発見する確率が %1$d%% づつ増加します。</string>
-    <string name="skill_longdescription_resistance_mental">スキル1レベルにつき、精神に対する状態変化にかかる確率を %1$d%% 低下させます。最大で %2$d%% の低下までです。これには、DazedやWeapon Feeblenessといった、モンスターの攻撃が引き起こす状態変化が含まれます。</string>
-    <string name="skill_longdescription_resistance_physical_capacity">スキル1レベルにつき、身体能力に対する状態変化にかかる確率を %1$d%% 低下させます。最大で %2$d%% の低下までです。これには、Fatigueといった、モンスターの攻撃が引き起こす状態変化が含まれます。</string>
-    <string name="skill_longdescription_resistance_blood_disorder">スキル1レベルにつき、血液異常にかかる確率を %1$d%% 低下させます。最大で %2$d%% の低下までです。これには、Poisonやbleeding woundsといった、モンスターの攻撃が引き起こす状態変化が含まれます。</string>
-    <string name="skillinfo_action_levelup">Level up</string>
+    <string name="skill_longdescription_resistance_mental">スキル1レベルにつき、精神に対する状態変化にかかる確率を %1$d%% 低下させます。最大で %2$d%% の低下までです。これには、めまい(Dazed)や武器弱体(Weapon Feebleness)といった、モンスターの攻撃が引き起こす状態変化が含まれます。</string>
+    <string name="skill_longdescription_resistance_physical_capacity">スキル1レベルにつき、身体能力に対する状態変化にかかる確率を %1$d%% 低下させます。最大で %2$d%% の低下までです。これには、疲労(Fatigue)といった、モンスターの攻撃が引き起こす状態変化が含まれます。</string>
+    <string name="skill_longdescription_resistance_blood_disorder">スキル1レベルにつき、血液異常にかかる確率を %1$d%% 低下させます。最大で %2$d%% の低下までです。これには、ポイズン(Poison)や出血(bleeding wounds)といった、モンスターの攻撃が引き起こす状態変化が含まれます。</string>
+    <string name="skillinfo_action_levelup">レベルアップ</string>
     <string name="skill_current_level">現在のレベル: %1$d</string>
     <string name="skill_current_level_with_maximum">現在のレベル: %1$d / %2$d</string>
     <string name="skill_prerequisite_other_skill">このスキルのレベルアップには、%1$d レベル以上の \'\'%2$s\'\' スキルが必要です。</string>
@@ -359,59 +345,277 @@
     <string name="preferences_optimized_drawing">グラフィックに乱れを生じる場合、無効にしてください。このオプションは、画面内で変化のあった部分だけを再描画するようにします。</string>
     <!-- =========================================== -->
     <!-- Added in v0.6.11 -->
-    <string name="skill_title_shadow_bless">シャドウの暗闇の祝福</string>
+    <string name="skill_title_shadow_bless">シャドウの闇の祝福</string>
     <string name="skill_shortdescription_shadow_bless">すべての種類の状態変化に対する抵抗力</string>
-    <string name="skill_longdescription_shadow_bless">スキル1レベルにつき、あらゆる状態変化にかかる確率を %1$d%% 低下させます。これには、Poison、DazedやFatigueといった、モンスターの攻撃が引き起こすあらゆる状態変化が含まれます。</string>
+    <string name="skill_longdescription_shadow_bless">スキル1レベルにつき、あらゆる状態変化にかかる確率を %1$d%% 低下させます。これには、ポイズン、めまい、疲労といった、モンスターの攻撃が引き起こすあらゆる状態変化が含まれます。</string>
     <string name="inventory_movetop">一番上へ</string>
     <string name="inventory_movebottom">一番下へ</string>
     <string name="actorinfo_immune_criticals">クリティカルヒット無効</string>
-    <string name="traitsinfo_criticalhit_effectivechance">実効クリティカル率:</string>
+    <string name="traitsinfo_criticalhit_effectivechance">クリティカル率:</string>
     <string name="skill_title_crit1">内部からの出血</string>
     <string name="skill_shortdescription_crit1">内出血攻撃の機会を得る</string>
-    <string name="skill_longdescription_crit1">クリティカルヒットを発生させるたび、その攻撃は %1$d%% の確率で対象に内出血を引き起こし、\'Internal bleeding\'の状態変化を対象に与えます。Internal bleedingは攻撃に関する戦闘能力を劇的に下げ、対象は有効な攻撃を当てることが難しくなります。</string>
+    <string name="skill_longdescription_crit1">クリティカルヒットを発生させるたび、その攻撃は %1$d%% の確率で対象に内出血を引き起こし、\'内出血(Internal bleeding)\'の状態変化を対象に与えます。内出血は攻撃に関する戦闘能力を劇的に下げ、対象は有効な攻撃を当てることが難しくなります。</string>
     <string name="skill_title_crit2">骨の粉砕</string>
     <string name="skill_shortdescription_crit2">骨折攻撃の機会を得る</string>
-    <string name="skill_longdescription_crit2">クリティカルヒットを発生させるたび、その攻撃は %1$d%% の確率で対象の骨を砕き、\'Fracture\'の状態変化を対象に与えます。Fractureは防御に関する戦闘能力を劇的に下げ、対象は次なる攻撃を防ぐことが難しくなります。</string>
+    <string name="skill_longdescription_crit2">クリティカルヒットを発生させるたび、その攻撃は %1$d%% の確率で対象の骨を砕き、\'破壊(Fracture)\'の状態変化を対象に与えます。破壊は防御に関する戦闘能力を劇的に下げ、対象は次なる攻撃を防ぐことが難しくなります。</string>
     <string name="skill_title_rejuvenation">復元</string>
     <string name="skill_shortdescription_rejuvenation">悪い効果を取り除く</string>
-    <string name="skill_longdescription_rejuvenation">1ラウンド(6秒)毎に、%1$d%% の確率で、現在受けている悪い効果の状態変化のうち1つを1段階だけ弱めます。Dazed、Fatigue、Poisonといった、身体能力・精神・血液異常のいずれの状態変化にも効果があります。</string>
+    <string name="skill_longdescription_rejuvenation">1ラウンド(6秒)毎に、%1$d%% の確率で、現在受けている悪い効果の状態変化のうち1つを1段階だけ弱めます。めまい(Dazed)、疲労(Fatigue)、ポイズン(Poison)といった、身体能力・精神・血液異常のいずれの状態変化にも効果があります。</string>
     <string name="skill_title_taunt">挑発</string>
     <string name="skill_shortdescription_taunt">攻撃を外した敵のAPを失わせる</string>
     <string name="skill_longdescription_taunt">敵の攻撃が外れたとき、%1$d%% の確率でその敵は行動値(AP)を %2$d 失います。あなたに対するあらゆる近接攻撃に効果があります。</string>
     <string name="skill_title_concussion">頭部への衝撃</string>
     <string name="skill_shortdescription_concussion">脳震盪攻撃の機会を得る</string>
-    <string name="skill_longdescription_concussion">あなたの命中率より %1$d 以上回避率が低い敵に攻撃するたび、その攻撃は %2$d%% の確率で対象に脳震盪(concussion)を起こします。concussionは攻撃に関する戦闘能力を劇的に下げ、対象は有効な攻撃を当てることが難しくなります。</string>
-    <string name="about_button4">About</string>
+    <string name="skill_longdescription_concussion">あなたの命中より %1$d 以上回避が低い敵に攻撃するたび、その攻撃は %2$d%% の確率で対象に脳震盪(concussion)を起こします。concussionは攻撃に関する戦闘能力を劇的に下げ、対象は有効な攻撃を当てることが難しくなります。</string>
+    <string name="about_button4">概要</string>
     <!-- =========================================== -->
     <!-- Added in v0.7.0 -->
     <string name="localize_resources_from_mo_filename">ja.mo</string>
-    <string name="combat_miss_animation_message">欠かす</string>
+    <string name="combat_miss_animation_message">ミス</string>
     <string name="preferences_display_loot_dialog_on_items">アイテムを見つけたときに戦利品]ダイアログボックスを表示</string>
-    <string name="preferences_display_loot_dialog_on_items_or_toast">Notif 項目ダイアログ ボックス。それ以外の場合</string>
-    <string name="preferences_display_loot_toast_on_items">アイテムを見つけるときにのみ、通知を表示します。</string>
+    <string name="preferences_display_loot_dialog_on_items_or_toast">アイテムのダイアログ、それ以外の場合は通知</string>
+    <string name="preferences_display_loot_toast_on_items">アイテムを見つけるときにのみ通知を表示</string>
     <string name="preferences_ui_category">インターフェイス</string>
-    <string name="preferences_ui_enable_animations_title">アニメーションを有効にします。</string>
+    <string name="preferences_ui_enable_animations_title">アニメーションを有効にします</string>
     <string name="preferences_ui_enable_animations">戦闘のバーなどの各種のインターフェイス要素のアニメーションを表示します。</string>
     <string name="menu_button_worldmap">地図</string>
     <string name="menu_button_worldmap_failed">地図を表示できません。</string>
     <string name="display_worldmap_not_available">この場所からは、地図を表示できません。</string>
     <string name="display_worldmap_title">地図</string>
-    <string name="inventory_equip_offhand">装備（ぶっきらぼう）</string>
+    <string name="inventory_equip_offhand">装備（オフハンド）</string>
     <string name="iteminfo_effect_weapon_attack_cost">攻撃コスト: %1$d AP</string>
-    <string name="iteminfo_effect_increase_attack_cost">%1$d AP 増加攻撃コスト</string>
-    <string name="iteminfo_effect_decrease_attack_cost">削減は、%1$d AP コストを攻撃します。</string>
-    <string name="iteminfo_effect_weapon_attack_chance">攻撃チャンス: %1$d</string>
-    <string name="iteminfo_effect_increase_attack_chance">%1$d 増加攻撃チャンス</string>
-    <string name="iteminfo_effect_decrease_attack_chance">%1$d 下げる攻撃チャンス</string>
+    <string name="iteminfo_effect_increase_attack_cost">%1$d APの攻撃コスト増加</string>
+    <string name="iteminfo_effect_decrease_attack_cost">%1$d AP の攻撃コスト低下</string>
+    <string name="iteminfo_effect_weapon_attack_chance">命中: %1$d</string>
+    <string name="iteminfo_effect_increase_attack_chance">%1$d命中を上げる</string>
+    <string name="iteminfo_effect_decrease_attack_chance">%1$d命中を下げる</string>
     <string name="iteminfo_effect_weapon_attack_damage">ダメージ: %1$d</string>
     <string name="iteminfo_effect_weapon_attack_damage_minmax">ダメージ: %1$d-%2$d</string>
-    <string name="iteminfo_effect_increase_attack_damage">増加が %1$d によって損害を攻撃します。</string>
-    <string name="iteminfo_effect_increase_attack_damage_minmax">%1$d-%2$d のによって攻撃ダメージを増加</string>
-    <string name="iteminfo_effect_decrease_attack_damage">削減は %1$d によって損傷を攻撃します。</string>
-    <string name="iteminfo_effect_decrease_attack_damage_minmax">削減は %1$d-%2$d によって損傷を攻撃します。</string>
-    <string name="iteminfo_effect_increase_critical_skill">%1$d クリティカルスキルを上げ</string>
-    <string name="iteminfo_effect_decrease_critical_skill">%1$d の重要なスキルを下げる</string>
-    <string name="iteminfo_effect_critical_multiplier">x%1$.1f の乗数でクリティカル ヒットを有効に</string>
-    <string name="iteminfo_effect_increase_block_chance">%1$d ブロック発動力をチャンス</string>
+    <string name="iteminfo_effect_increase_attack_damage">攻撃ダメージを%1$d上げる</string>
+    <string name="iteminfo_effect_increase_attack_damage_minmax">攻撃ダメージを%1$d-%2$d 上げる</string>
+    <string name="iteminfo_effect_decrease_attack_damage">攻撃ダメージを %1$d 下げる</string>
+    <string name="iteminfo_effect_decrease_attack_damage_minmax">攻撃ダメージを %1$d-%2$d 下げる</string>
+    <string name="iteminfo_effect_increase_critical_skill">%1$d クリティカルスキルを上げる</string>
+    <string name="iteminfo_effect_decrease_critical_skill">%1$d クリティカルスキルを下げる</string>
+    <string name="iteminfo_effect_critical_multiplier">x%1$.1f の倍率でクリティカルヒットを有効に</string>
+    <string name="iteminfo_effect_increase_block_chance">回避が %1$d 増加</string>
     <string name="heroinfo_experiencepoints">経験値(XP):</string>
+    <string name="preferences_dialog_overwrite_savegame_title">セーブの上書きを確認</string>
+    <string name="preferences_display_overwrite_savegame_entries_never_confirm">確認ダイアログボックスを表示しない</string>
+    <string name="preferences_display_overwrite_savegame_entries_confirm_overwrite">別のプレイヤー名を上書きする場合のみ表示する</string>
+    <string name="preferences_display_overwrite_savegame_entries_always_confirm">確認ダイアログボックスを常に表示する</string>
+    <string name="loadsave_save_overwrite_confirmation_all">本当にこのセーブを上書きしますか\?</string>
+    <string name="iteminfo_effect_decrease_reequip_cost">戦闘中にアイテムを装備する際のAPコストが%1$d AP低下</string>
+    <string name="iteminfo_effect_increase_reequip_cost">戦闘中にアイテムを装備する際のAPコストが%1$d AP増加</string>
+    <string name="iteminfo_effect_decrease_use_cost">戦闘中にアイテムを使用する際のAPコストが %1$d AP低下</string>
+    <string name="iteminfo_effect_increase_use_cost">戦闘中にアイテムを使用する際のAPコストが %1$d AP増加</string>
+    <string name="iteminfo_effect_decrease_damage_resistance">ダメージ軽減を %1$d 低下</string>
+    <string name="iteminfo_effect_increase_damage_resistance">ダメージ軽減を %1$d 上昇</string>
+    <string name="iteminfo_effect_decrease_block_chance">回避が%1$d 低下</string>
+    <string name="preferences_high_quality_filters">フィルタされたマップ（暗い洞窟など）でパフォーマンスの問題が発生する場合は、このオプションを無効にしてください。 このオプションを有効にすると、ゲームは単色のオーバーレイではなく、高度なカラーフィルタが使用されます。</string>
+    <string name="preferences_high_quality_filters_title">高品質フィルタ</string>
+    <string name="inventory_selectitem">割り当てるアイテムを選択する</string>
+    <string name="preferences_language_description">言語を選択します。システム言語が使用できない場合、またはコンテンツが翻訳されていない場合は、英語が使用されます。(再起動が必要)</string>
+    <string name="preferences_language">言語</string>
+    <string name="preferences_language_default">システム言語</string>
+    <string name="preferences_display_scaling_factor_75_percent">0.75x</string>
+    <string name="preferences_display_scaling_factor_50_percent">0.5x</string>
+    <string name="about_interface">&lt;div&gt;&lt;b&gt;ゲーム設定&lt;/b&gt;はデバイスのメニューボタンを押すと表示されます。&lt;/div&gt; &lt;p&gt;________________&lt;/p&gt; &lt;h1&gt;インターフェイスアイコン&lt;/h1&gt; &lt;div&gt;&lt;b&gt;チェスト&lt;/b&gt;&lt;img alt=chest src=chest.png /&gt;&lt;/div&gt; &lt;p&gt;クイックスロット[中のポーチを長押しして、すぐ使えるアイテムを割り当てます]&lt;/p&gt; &lt;div&gt;&lt;b&gt;主人公&lt;/b&gt;&lt;img alt=hero src=char_hero.png /&gt;&lt;/div&gt; &lt;p&gt;メニュー[概要、クエスト、スキル、インベントリ *]&lt;/p&gt; &lt;p&gt;* (インベントリでアイテムを押すと情報が表示され、長押しするとオプションが表示されます)&lt;/p&gt; &lt;div&gt;&lt;b&gt;敵&lt;/b&gt;&lt;img alt=monster src=monster.png /&gt;&lt;/div&gt; &lt;p&gt;情報[戦闘中に出現]&lt;/p&gt; &lt;p&gt;________________&lt;/p&gt; &lt;h1&gt;戦闘&lt;/h1&gt; &lt;p&gt;戦闘中の行動にはAPを消費する...&lt;/p&gt; &lt;div&gt;&lt;b&gt;攻撃&lt;/b&gt; - [3AP] *&lt;/div&gt; &lt;img alt=attacking src=doubleattackexample.png /&gt; &lt;p&gt;* (装備変更やアイテムの使用により、APや消費コストが変化する場合があります)&lt;/p&gt; &lt;div&gt;&lt;b&gt;アイテムの使用&lt;/b&gt; - [5AP]&lt;/div&gt; &lt;div&gt;&lt;b&gt;逃走&lt;/b&gt; - [6AP]&lt;/div&gt; &lt;p&gt;________________&lt;/p&gt; &lt;h1&gt;Advanced Combat&lt;/h1&gt; &lt;div&gt;戦闘中、主人公に隣接するタイルを長押しします&lt;/div&gt; &lt;div&gt;&lt;b&gt;逃走するには&lt;/b&gt;&lt;/div&gt; &lt;p&gt;(選択したタイルがハイライト表示されます - 攻撃ボタンは移動に変わります)&lt;/p&gt; &lt;img alt=flee src=flee_example.png /&gt; &lt;p&gt;[逃走モードが有効 - 敵を長押しして再び戦闘に戻る]&lt;/p&gt; &lt;div&gt;&lt;b&gt;ターゲットを変更するには&lt;/b&gt;&lt;/div&gt; &lt;p&gt;(赤色のターゲットハイライトは敵の間で移動します)&lt;/p&gt; &lt;p&gt;[ターゲットが変更されました]&lt;/p&gt;</string>
+    <string name="dialog_permission_information">Andor\'s Trailは、保存したゲームをデバイス上のユーザーアクセス可能なストレージに書き込みます。これにより、保存したゲームを簡単にバックアップしたり、新しいデバイスに転送したりできます。詳細については、フォーラムをご覧ください。
+\n
+\nAndor\'s Trailは、他の目的でデバイスへのアクセスを使用せず、インターネットにもアクセスしません。Andor\'s Trailはオープンソースです。ソースはgithubにあります。</string>
+    <string name="dialog_permission_information_title">ゲームのロードとセーブ</string>
+    <string name="dialog_newversion_permission_information">"
+\n
+\nゲームをセーブしてロードするために（この目的のみのため）Andor\'s Trailはストレージへのアクセス許可を求めます。"</string>
+    <string name="shop_item_sort">並び替え</string>
+    <string name="startscreen_mode_1_life">パーマデス(ライフ1、セーブ1)</string>
+    <string name="startscreen_mode_3_lives">エクストリーム(ライフ3、セーブ1)</string>
+    <string name="startscreen_mode_10_lives">ベリーハード (ライフ10、セーブ1)</string>
+    <string name="startscreen_mode_50_lives">ハード(ライフ50、セーブ1)</string>
+    <string name="startscreen_mode_unlimited_lives">ミディアム(ライフ制限なし、セーブ1)</string>
+    <string name="startscreen_mode_unlimited_saves_and_lives">スタンダード(ライフ、セーブ数の制限なし)</string>
+    <string name="startscreen_attention_message_slot_gets_delete_on_load">このゲームをロードするとセーブスロットが削除されます。別のゲームに切り替える前に、再度セーブをする必要があります。</string>
+    <string name="startscreen_attention_slot_gets_delete_on_load">注意</string>
+    <string name="startscreen_error_loading_empty_slot">空のスロットはロードできません。</string>
+    <string name="startscreen_error_loading_game">読み込みエラー</string>
+    <string name="startscreen_load_game_confirm">現在のゲームはセーブされていないため、キャラクターは失われます。</string>
+    <string name="startscreen_selectherosprite">外見</string>
+    <string name="heroinfo_inventory_categories">カテゴリー</string>
+    <string name="heroinfo_skill_categories">カテゴリー</string>
+    <string name="combat_condition_monster_immune">1$sは%2$sを無効にする。</string>
+    <string name="combat_condition_player_immune">あなたは%1$sを無効にする。</string>
+    <string name="combat_condition_monster_clear">%1$sは%2$sから回復した。</string>
+    <string name="combat_condition_monster_apply">%1$sは%2$sの影響を受けている。</string>
+    <string name="combat_condition_player_clear">あなたは %1$s から回復した。</string>
+    <string name="combat_condition_player_apply">あなたは%1$sの影響を受けている。</string>
+    <string name="combat_taunt_monster">%1$s を挑発!</string>
+    <string name="heroinfo_healthpoints">体力値(HP):</string>
+    <string name="heroinfo_inventory_sort">並び替え:</string>
+    <string name="heroinfo_skill_sort">並び替え</string>
+    <string name="dialog_monsterencounter_conditions">状態</string>
+    <string name="dialog_game_over_text">あなたは息を引き取りこの世から去ってゆく。</string>
+    <string name="dialog_game_over_title">ゲームオーバー</string>
+    <string name="dialog_recenter">現在地</string>
+    <string name="dialog_more">その他</string>
+    <string name="dialog_loading_failed_cheat">Andor\'s Trailはセーブ・ファイルをロードできませんでした。このセーブ・ファイルは既に使用中です。</string>
+    <string name="skill_longdescription_fightstyle_2hand">ツーハンドソードやグレートアックス、ジャイアントハンマーなど、両手を必要とする武器を使用する際に効果を発揮します。
+\n
+\nスキルレベルが上がるごとに、両手武器のダメージ性能が元の%1$d %%増加します。</string>
+    <string name="skill_longdescription_fightstyle_dualwield">メインハンドとオフハンドの2つの武器を同時に装備して戦う時に効果を発揮します。
+\n
+\nこのスキルがない場合、オフハンドで装備している武器はその性能の %1$d %% しか発揮できません。これには命中、クリティカルスキル、ダメージ性能、回避などが含まれます。このスキルがない場合、攻撃を行う際の攻撃コスト(APコスト)は、メイン武器の攻撃コストとオフハンドで使用する武器の攻撃コストの合計となります。
+\n
+\nスキルレベル1では、 オフハンドの武器性能の%2$d %%を発揮できます。攻撃コストは両方の武器の攻撃コストの高い側に、低い側の攻撃コストの%3$d %%を加えた値となります。
+\n
+\nスキルレベル2では、 オフハンドの武器性能の%4$d %%を発揮できます。攻撃コストは装備している2つの武器のうち攻撃コストの高い側と同じです。</string>
+    <string name="skill_title_specialization_weapon_shield">専門化: 武器と盾</string>
+    <string name="skill_title_specialization_2hand">専門化: 両手武器</string>
+    <string name="skill_title_specialization_dualwield">専門化: 二刀流</string>
+    <string name="skill_title_fightstyle_unarmed_unarmored">戦闘スタイル: モンクへの道</string>
+    <string name="skill_title_fightstyle_weapon_shield">戦闘スタイル: 武器と盾</string>
+    <string name="skill_title_fightstyle_2hand">戦闘スタイル: 両手武器</string>
+    <string name="skill_title_fightstyle_dualwield">戦闘スタイル: 二刀流</string>
+    <string name="conversation_reward_quest_updated">[クエスト更新: \"%1$s\"]</string>
+    <string name="conversation_reward_quest_finished">[クエスト完了: \"%1$s\"]</string>
+    <string name="combat_log_noentries">まだエントリーがありません。</string>
+    <string name="combat_log_title">戦闘ログ</string>
+    <string name="heroinfo_useitem_cost">アイテム使用コスト(AP):</string>
+    <string name="heroinfo_reequip_cost">再装備コスト(AP):</string>
+    <string name="preferences_dialog_overwrite_savegame">すでにセーブが含まれているスロットにセーブする際に上書きするかどうかを指定します。</string>
+    <string name="skill_longdescription_armor_prof_light">スキルレベルごとに、装備しているすべての軽装備の回避を元の回避の%1$d %%増やします。 軽装備には、レザー、軽金属、ハイドアーマーがあります。</string>
+    <string name="skill_longdescription_armor_prof_unarmored">防具を装備せずに戦っている時、スキルレベルごとに%1$dの回避を獲得します。 布製のアイテムは防具には含まれません。</string>
+    <string name="skill_longdescription_armor_prof_shield">盾やパリィ武器を装備している時、スキルレベルごとにダメージ軽減を%1$d増やします。</string>
+    <string name="skill_longdescription_weapon_prof_unarmed">武器と盾を持たずに戦っている時、スキルレベルごとに命中1$d、基礎ダメージ2$d、回避3$dを獲得します。</string>
+    <string name="skill_longdescription_weapon_prof_axe">スキルレベルごとに、アックスとグレートアックスを使用した時の命中をアイテムの基礎命中の%1$d %%、回避をアイテムの基礎回避の%2$d %%、クリティカルスキルをアイテムの基礎クリティカルスキルの%3$d %%それぞれ増やします。</string>
+    <string name="skill_longdescription_weapon_prof_blunt">スキルレベルごとに、鈍器を使用した時の命中をアイテムの基礎命中の%1$d %%、回避をアイテムの基礎回避の%2$d %%、クリティカルスキルをアイテムの基礎クリティカルスキルの%3$d %%それぞれ増やします。これには、クラブ、六尺棒、メイス、王笏、ウォーハンマー、ジャイアントハンマーが含まれます。</string>
+    <string name="skill_longdescription_weapon_prof_2hsword">スキルレベルごとに、両手剣を使用した時の命中をアイテムの基礎命中の%1$d %%、回避をアイテムの基礎回避の%2$d %%、クリティカルスキルをアイテムの基礎クリティカルスキルの%3$d %%それぞれ増やします。</string>
+    <string name="skill_longdescription_weapon_prof_1hsword">スキルレベルごとに、レイピア、ロングソード、ブロードソードを使用した時の命中をアイテムの基礎命中の%1$d %%、回避をアイテムの基礎回避の%2$d %%、クリティカルスキルをアイテムの基礎クリティカルスキルの%3$d %%それぞれ増やします。</string>
+    <string name="skill_longdescription_weapon_prof_dagger">スキルレベルごとに、ダガーとショートソードを使用した時の命中をアイテムの基礎命中の%1$d %%、回避をアイテムの基礎回避の%2$d %%、クリティカルスキルをアイテムの基礎クリティカルスキルの%3$d %%それぞれ増やします。</string>
+    <string name="skill_shortdescription_weapon_prof_pole">棒での戦いが得意</string>
+    <string name="skill_shortdescription_specialization_weapon_shield">武器と盾での戦いの達人</string>
+    <string name="skill_shortdescription_specialization_2hand">両手武器の達人</string>
+    <string name="skill_shortdescription_specialization_dualwield">二刀流の達人</string>
+    <string name="skill_shortdescription_fightstyle_unarmed_unarmored">無手/非装甲での戦いが得意</string>
+    <string name="skill_shortdescription_armor_prof_shield">盾とパリィ武器を使いこなす</string>
+    <string name="skill_shortdescription_fightstyle_weapon_shield">武器と盾での戦いが得意</string>
+    <string name="skill_shortdescription_fightstyle_2hand">両手武器を使いこなす</string>
+    <string name="skill_shortdescription_fightstyle_dualwield">2つの武器を同時に使う</string>
+    <string name="skill_shortdescription_armor_prof_heavy">重装甲を使いこなす</string>
+    <string name="skill_shortdescription_armor_prof_light">軽装甲を使いこなす</string>
+    <string name="skill_shortdescription_armor_prof_unarmored">非装甲での戦いが得意</string>
+    <string name="skill_shortdescription_weapon_prof_unarmed">無手での戦いが得意</string>
+    <string name="skill_shortdescription_weapon_prof_blunt">鈍器での戦いが得意</string>
+    <string name="skill_shortdescription_weapon_prof_axe">斧での戦いが得意</string>
+    <string name="skill_shortdescription_weapon_prof_2hsword">両手剣での戦いが得意</string>
+    <string name="skill_shortdescription_weapon_prof_1hsword">片手剣での戦いが得意</string>
+    <string name="skill_title_weapon_prof_pole">棒習熟</string>
+    <string name="combat_result_monstermoved">%1$s が移動。</string>
+    <string name="skill_title_armor_prof_unarmored">非装甲戦闘</string>
+    <string name="skill_shortdescription_weapon_prof_dagger">短剣での戦いが得意</string>
+    <string name="skill_title_armor_prof_heavy">重装甲習熟</string>
+    <string name="skill_title_armor_prof_light">軽装甲習熟</string>
+    <string name="skill_title_armor_prof_shield">盾習熟</string>
+    <string name="skill_title_weapon_prof_unarmed">無手戦闘</string>
+    <string name="skill_title_weapon_prof_blunt">鈍器習熟</string>
+    <string name="skill_title_weapon_prof_axe">斧習熟</string>
+    <string name="skill_title_weapon_prof_2hsword">両手剣習熟</string>
+    <string name="skill_title_weapon_prof_1hsword">片手剣習熟</string>
+    <string name="skill_title_weapon_prof_dagger">短剣習熟</string>
+    <string name="iteminfo_effect_set_damage_modifier">ダメージ修正: %1$d%%</string>
+    <string name="startscreen_load_game">ロード</string>
+    <string name="startscreen_game_mode">モード</string>
+    <string name="startscreen_newgame_start">始める</string>
+    <string name="heroinfo_gamestats_top_boss">最も強い討伐モンスター</string>
+    <string name="skill_longdescription_armor_prof_heavy">スキルレベルごとに、装備しているすべての重装備の回避を元の回避の%1$d %%増やします。 重装備はスキルレベルごとに移動のペナルティが%2$d %%減少し、攻撃速度のペナルティがスキルレベルごとに%3$d %%減少します。 重装備にはメタルアーマー、チェインメイル、プレートメイルがあります。</string>
+    <string name="skill_longdescription_fightstyle_unarmed_unarmored">防具を装備していない状態で、武器や盾を使用せずに戦っている時、命中%1$d、回避%2$d、ダメージ軽減%3$dを獲得し、スキルレベルごとに最大ダメージを%4$d増加します。 また、レベル毎にクリティカル倍率が1+0.5$dとなります。 
+\n
+\n布製のアイテムは防具には含まれません。</string>
+    <string name="menu_save_switch_character">セーブすることで、別のキャラクターに切り替えて、後で現在のゲームを続けることができます。 セーブして現在のゲームを終了しますか\?</string>
+    <string name="startscreen_non_release_version">これはAndor\'s Trailのプレリリース版です。 このバージョンで作成されたセーブは、リリース版とは互換性がない場合があります。</string>
+    <string name="startscreen_incompatible_savegames">これはAndor\'s Trailの開発版です。このバージョンで作成されたセーブは、リリースバージョンとは互換性がありません。</string>
+    <string name="loadsave_empty_slot">%1$d.&lt;empty&gt;</string>
+    <string name="loadsave_save_overwrite_confirmation_slot">(スロット %1$d)</string>
+    <string name="menu_save_switch_character_title">キャラクターの切り替え</string>
+    <string name="iteminfo_effect_works_when_killed_by_attacker">敵を殺したとき</string>
+    <string name="iteminfo_effect_works_when_hit_by_attacker">敵を攻撃したとき</string>
+    <string name="iteminfo_effect_works_on_attacker">敵に</string>
+    <string name="skill_category_immunity">抵抗力</string>
+    <string name="actorcondition_info_immunity">%1$s無効</string>
+    <string name="heroinfo_one_life">パーマデス (ライフ1)</string>
+    <string name="heroinfo_limited_lives">ライフ制限 (残り %1$d/%2$d)</string>
+    <string name="heroinfo_unlimited_lives">ライフ制限なし、セーブ数1</string>
+    <string name="heroinfo_unlimited_lives_and_saves">スタンダード
+\n(ライフ、セーブ数制限なし)</string>
+    <string name="heroinfo_mode">モード</string>
+    <string name="rip_startscreen">(死去)</string>
+    <string name="change_locale_requires_restart">ロケールの変更には再起動が必要です。Andor\'s Trailを終了しました。</string>
+    <string name="storage_permissions_mandatory">セーブしたゲームやワールドマップを処理するには、Andor\'s Trailにストレージへのアクセスが必須です。Andor\'s Trailを閉じる。</string>
+    <string name="change_theme_requires_restart">UIテーマの変更には再起動が必要です。 Andor\'s Trailを終了しました。</string>
+    <string name="preferences_display_theme_charcoal">オブシディアン</string>
+    <string name="preferences_display_theme_green">マラカイト</string>
+    <string name="preferences_display_theme_blue">コバルト</string>
+    <string name="preferences_display_theme">UIテーマを選択します。 (再起動が必要)</string>
+    <string name="preferences_display_theme_title">テーマ</string>
+    <string name="skill_sort_unlocked">アンロック順</string>
+    <string name="skill_sort_points">ポイント順</string>
+    <string name="skill_sort_name">名前順</string>
+    <string name="skill_sort_unsorted">未ソート</string>
+    <string name="skill_category_proficiency">習熟</string>
+    <string name="skill_category_speciality">専門化</string>
+    <string name="skill_category_utility">ユーティリティ</string>
+    <string name="skill_category_criticals">クリティカル</string>
+    <string name="skill_category_defense">ディフェンス</string>
+    <string name="skill_category_offense">オフェンス</string>
+    <string name="skill_category_all">全て</string>
+    <string name="shoplist_sort_type">タイプ順</string>
+    <string name="shoplist_sort_rarity">レアリティ順</string>
+    <string name="shoplist_sort_quantity">在庫数順</string>
+    <string name="shoplist_sort_price">価格順</string>
+    <string name="shoplist_sort_name">名前順</string>
+    <string name="shoplist_sort_custom">未ソート</string>
+    <string name="inventory_sort_type">タイプ順</string>
+    <string name="inventory_sort_rarity">レアリティ順</string>
+    <string name="inventory_sort_quantity">所持数順</string>
+    <string name="inventory_sort_name">名前順</string>
+    <string name="inventory_sort_price">価格順</string>
+    <string name="inventory_sort_custom">未ソート</string>
+    <string name="inventory_category_other">その他</string>
+    <string name="inventory_category_quest">クエストアイテム</string>
+    <string name="inventory_category_usable">消耗品</string>
+    <string name="inventory_category_armor">防具</string>
+    <string name="inventory_category_weapons">武器</string>
+    <string name="inventory_category_favorites">お気に入り</string>
+    <string name="inventory_category_all">全て</string>
+    <string name="preferences_ui_use_localized_resources">可能な場合は、インタフェイスとコンテンツの翻訳を使用します。(再起動が必要)</string>
+    <string name="preferences_ui_use_localized_resources_title">ローカライズされたリソースを使用する</string>
+    <string name="heroinfo_gamestats_name_and_qty">%1$s (%2$d)</string>
+    <string name="heroinfo_gamestats_fav_monsters">最もよく討伐しているモンスター</string>
+    <string name="heroinfo_gamestats_bonemeals">使った骨粉ポーション</string>
+    <string name="heroinfo_gamestats_num_used_items">使用アイテム</string>
+    <string name="heroinfo_gamestats_num_killed_monsters">討伐モンスター</string>
+    <string name="heroinfo_gamestats_fav_item">最もよく使われているアイテム</string>
+    <string name="heroinfo_gamestats_visited_maps">訪れた場所</string>
+    <string name="heroinfo_gamestats_spent_gold">店で使ったお金</string>
+    <string name="heroinfo_gamestats_deaths">戦闘不能回数</string>
+    <string name="heroinfo_gamestats_quests">完了したクエスト</string>
+    <string name="heroinfo_gamestats">ゲームの統計</string>
+    <string name="preferences_ui_show_quickslots_when_toolbox_is_visible">ツールボックスを開くとすぐにクイックスロットボタンが表示されるようにします</string>
+    <string name="preferences_ui_show_quickslots_when_toolbox_is_visible_title">ツールボックスを開いたときにクイックスロットを表示する</string>
+    <string name="preferences_quickslots_placements_vertical_bottom_right">右下、右の境界に沿って</string>
+    <string name="preferences_quickslots_placements_horizontal_bottom_right">右下、下の境界に沿って</string>
+    <string name="preferences_quickslots_placements_vertical_bottom_left">左下、左の境界に沿って</string>
+    <string name="preferences_quickslots_placements_horizontal_bottom_left">左下、下の境界に沿って</string>
+    <string name="preferences_quickslots_placements_vertical_center_right">右中央</string>
+    <string name="preferences_quickslots_placements_vertical_center_left">左中央</string>
+    <string name="preferences_quickslots_placements_horizontal_center_bottom">中央下</string>
+    <string name="preferences_quickslots_placement_summary">クイックスロットの配置場所</string>
+    <string name="preferences_quickslots_placement">クイックスロットの位置</string>
+    <string name="skill_longdescription_weapon_prof_pole">スキルレベルごとに、ポールウェポンを使用した時の命中をアイテムの基礎命中の%1$d %%、回避をアイテムの基礎回避の%2$d %%、クリティカルスキルをアイテムの基礎クリティカルスキルの%3$d %%それぞれ増やします。</string>
+    <string name="skill_longdescription_specialization_weapon_shield">メインハンドの武器の命中とダメージポテンシャルの両方が増加します。 命中は元の命中の%1$d %%、ダメージポテンシャルは元のダメージポテンシャルの%2$d %%増加します。</string>
+    <string name="skill_longdescription_specialization_2hand">武器スタイルスキル効果に加えて、両手武器のダメージポテンシャルが元のダメージポテンシャルの%1$d %%増加します。 両手武器の命中も元の命中の%2$d %%増加します。</string>
+    <string name="skill_longdescription_specialization_dualwield">武器スタイルのスキル効果に加えて、両方の装備武器の命中が元の命中の %1$d %%増加します。 両方の装備武器の回避も元の回避の%2$d %%増加します。</string>
+    <string name="skill_longdescription_fightstyle_weapon_shield">メインハンドに武器を装備し、オフハンドに盾やパリィ武器を装備して戦っている時に効果を発揮します。
+\n
+\nスキルレベルが上がるごとに、メインハンドに装備している武器の命中が元の命中の%1$d %%、盾やパリィ武器の回避が元の回避の%2$d %%増加します。</string>
 </resources>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.2" orientation="orthogonal" renderorder="right-down" width="7" height="8" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="3">
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="7" height="8" tilewidth="32" tileheight="32" infinite="0" nextobjectid="4">
  <tileset firstgid="1" name="map_bed_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
   <image source="../drawable/map_bed_1.png" width="512" height="256"/>
  </tileset>
@@ -180,27 +180,27 @@
  <tileset firstgid="7449" name="map_window_2" tilewidth="32" tileheight="32" tilecount="128" columns="16">
   <image source="../drawable/map_window_2.png" width="512" height="256"/>
  </tileset>
- <layer id="1" name="Ground" width="7" height="8">
+ <layer name="Ground" width="7" height="8">
   <data encoding="base64" compression="zlib">
    eJw7xsnAcAwP3iGFiWFyJ6QwMUzuMhZMSA5kNja5HVCzscmBxJ9yIvBlTlQ+ANniL64=
   </data>
  </layer>
- <layer id="2" name="Objects" width="7" height="8">
+ <layer name="Objects" width="7" height="8">
   <data encoding="base64" compression="zlib">
-   eJxjYMAPNPkZGJbKMDDkQml2JoScOJC9FShWy4+gYcCShYHBnAXBZ0QyM4gNIhfIBmELIsklAfkpQJzIBmG3syLknJDMA4HJaHxsAADYZQnp
+   eJxjYMAPNPkZGJbKMDDkQml2JoScOJC9FShWy4+gYcCShYHBnAXBZ0QyM4gNVU4QSS4JKJcCxIlsEHY7K0LOCUkPCExG42MDAJV1CTo=
   </data>
  </layer>
- <layer id="3" name="Above" width="7" height="8">
+ <layer name="Above" width="7" height="8">
   <data encoding="base64" compression="zlib">
-   eJxjYMAPDouh8nP5scuJM+HXhy4XwobgI7PR9aXgkSMGAAAwYgbK
+   eJxjYMAPDouh8nP5scuJM+HXhy4XwsbAEAjEQWwQNi59KXjkiAEAc1IHeQ==
   </data>
  </layer>
- <layer id="4" name="Walkable" width="7" height="8">
+ <layer name="Walkable" width="7" height="8">
   <data encoding="base64" compression="zlib">
-   eJzbKMbAsHEIYWSASx6ZDwDs+iht
+   eJzbKMbAsJGGGAZIlSNkHj4zkfkAkQMlUQ==
   </data>
  </layer>
- <objectgroup id="5" name="Mapevents">
+ <objectgroup name="Mapevents">
   <object id="1" name="entrance" type="mapchange" x="96" y="224" width="32" height="32">
    <properties>
     <property name="map" value="brimhaven2"/>
@@ -208,13 +208,19 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="6" name="Spawn">
+ <objectgroup name="Spawn">
   <object id="2" name="guard" type="spawn" x="32" y="192" width="160" height="32">
    <properties>
     <property name="spawngroup" value="brv_prison_guard"/>
    </properties>
   </object>
+  <object id="3" name="brv_prisoner" type="spawn" x="96" y="96" width="64" height="64">
+   <properties>
+    <property name="active" value="false"/>
+    <property name="spawngroup" value="brv_villager3"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup id="7" name="Keys"/>
- <objectgroup id="8" name="Replace"/>
+ <objectgroup name="Keys"/>
+ <objectgroup name="Replace"/>
 </map>

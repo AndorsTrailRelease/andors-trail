@@ -17,6 +17,7 @@ public final class InputController implements OnClickListener, OnLongClickListen
 	private int lastTouchPosition_dx = 0;
 	private int lastTouchPosition_dy = 0;
 	private long lastTouchEventTime = 0;
+	private boolean isDpadActive = false;
 
 	public InputController(ControllerContext controllers, WorldContext world) {
 		this.controllers = controllers;
@@ -49,6 +50,7 @@ public final class InputController implements OnClickListener, OnLongClickListen
 			return false;
 		}
 	}
+
 	public void onRelativeMovement(int dx, int dy) {
 		if (!allowInputInterval()) return;
 		if (world.model.uiSelections.isInCombat) {
@@ -89,6 +91,10 @@ public final class InputController implements OnClickListener, OnLongClickListen
 		return true;
 	}
 
+	public void setDpadActive(boolean isDpadActive) {
+		this.isDpadActive = isDpadActive;
+	}
+
 	public void onTouchCancel() {
 		controllers.movementController.stopMovement();
 	}
@@ -98,7 +104,7 @@ public final class InputController implements OnClickListener, OnLongClickListen
 		lastTouchPosition_dx = tile_x - world.model.player.position.x;
 		lastTouchPosition_dy = tile_y - world.model.player.position.y;
 
-		if (world.model.uiSelections.isInCombat) return false;
+		if (world.model.uiSelections.isInCombat || isDpadActive) return false;
 
 		controllers.movementController.startMovement(lastTouchPosition_dx, lastTouchPosition_dy, lastTouchPosition_tileCoords);
 		return true;

@@ -98,10 +98,12 @@ public final class VirtualDpadView extends ImageView implements OnClickListener 
 		int dpadPosition = preferences.dpadPosition;
 		if (dpadPosition == AndorsTrailPreferences.DPAD_POSITION_DISABLED) {
 			setVisibility(View.GONE);
+			this.inputController.setDpadActive(false);
 			return;
 		}
 
 		setVisibility(View.VISIBLE);
+		this.inputController.setDpadActive(!isMinimized);
 		isMinimizeable = preferences.dpadMinimizeable;
 
 		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
@@ -156,6 +158,7 @@ public final class VirtualDpadView extends ImageView implements OnClickListener 
 			setMaxWidth(one_third_width);
 			setMaxHeight(one_third_height);
 		}
+		this.inputController.setDpadActive(!isMinimized);
 		this.requestLayout();
 	}
 }
