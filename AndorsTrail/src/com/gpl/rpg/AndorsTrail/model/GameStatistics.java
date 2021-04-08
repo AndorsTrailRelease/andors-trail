@@ -22,7 +22,8 @@ import com.gpl.rpg.AndorsTrail.model.quest.Quest;
 
 public final class GameStatistics {
 	private int deaths = 0;
-	private final HashMap<String, Integer> killedMonsters = new HashMap<String, Integer>();
+	private final HashMap<String, Integer> killedMonstersByTypeID = new HashMap<String, Integer>();
+	private final HashMap<String, Integer> killedMonstersByName = new HashMap<String, Integer>();
 	private final HashMap<String, Integer> usedItems = new HashMap<String, Integer>();
 	private int spentGold = 0;
 	private boolean unlimitedSaves = true;
@@ -33,10 +34,14 @@ public final class GameStatistics {
 		this.startLives = startLives;
 	}
 
-	public void addMonsterKill(String monsterTypeID) {
-		if (!killedMonsters.containsKey(monsterTypeID)) killedMonsters.put(monsterTypeID, 1);
-		else killedMonsters.put(monsterTypeID, killedMonsters.get(monsterTypeID) + 1);
+	public void addMonsterKill(MonsterType monsterType) {
+		// Track monster kills by type ID, for savegame file
+		killedMonstersByTypeID.put(monsterType.id, killedMonstersByTypeID.getOrDefault((monsterType.id), 0) + 1);
+
+		// Also track by name, for statistics display (multiple IDs w/same name don't matter to player)
+		killedMonstersByName.put(monsterType.name, killedMonstersByName.getOrDefault(monsterType.name, 0) + 1);
 	}
+
 	public void addPlayerDeath(int lostExp) {
 		++deaths;
 	}
@@ -68,30 +73,34 @@ public final class GameStatistics {
 	public boolean isDead() { return !hasUnlimitedLives() && getLivesLeft() < 1; }
 
 	public int getNumberOfKillsForMonsterType(String monsterTypeID) {
-		Integer v = killedMonsters.get(monsterTypeID);
+		Integer v = killedMonstersByTypeID.get(monsterTypeID);
 		if (v == null) return 0;
 		return v;
 	}
 
+	/*public int getNumberOfKillsForMonsterName(String monsterName) {
+		Integer v = killedMonstersByName.get(monsterName);
+		if (v == null) return 0;
+		return v;
+	}
+*/
 	public String getTop5MostCommonlyKilledMonsters(WorldContext world, Resources res) {
-		if (killedMonsters.isEmpty()) return null;
-		List<Entry<String, Integer>> entries = new ArrayList<Entry<String, Integer>>(killedMonsters.entrySet());
+		if (killedMonstersByTypeID.isEmpty()) return null;
+		List<Entry<String, Integer>> entries = new ArrayList<Entry<String, Integer>>(killedMonstersByName.entrySet());
 		Collections.sort(entries, descendingValueComparator);
 		StringBuilder sb = new StringBuilder(100);
 		int i = 0;
 		for (Entry<String, Integer> e : entries) {
 			if (i++ >= 5) break;
-			MonsterType t = world.monsterTypes.getMonsterType(e.getKey());
-			if (t == null) continue;
-			sb.append(res.getString(R.string.heroinfo_gamestats_name_and_qty, t.name, e.getValue())).append('\n');
+			sb.append(res.getString(R.string.heroinfo_gamestats_name_and_qty, e.getKey(), e.getValue())).append('\n');
 		}
 		return sb.toString();
 	}
 
 	public String getMostPowerfulKilledMonster(WorldContext world) {
-		if (killedMonsters.isEmpty()) return null;
-		HashMap<String, Integer> expPerMonsterType = new HashMap<String, Integer>(killedMonsters.size());
-		for (String monsterTypeID : killedMonsters.keySet()) {
+		if (killedMonstersByTypeID.isEmpty()) return null;
+		HashMap<String, Integer> expPerMonsterType = new HashMap<String, Integer>(killedMonstersByTypeID.size());
+		for (String monsterTypeID : killedMonstersByTypeID.keySet()) {
 			MonsterType t = world.monsterTypes.getMonsterType(monsterTypeID);
 			expPerMonsterType.put(monsterTypeID, t != null ? t.exp : 0);
 		}
@@ -147,7 +156,7 @@ public final class GameStatistics {
 
 	public int getNumberOfKilledMonsters() {
 		int result = 0;
-		for (int v : killedMonsters.values()) result += v;
+		for (int v : killedMonstersByTypeID.values()) result += v;
 		return result;
 	}
 
@@ -172,8 +181,14 @@ public final class GameStatistics {
 				if (type == null) continue;
 				id = type.id;
 			}
-			this.killedMonsters.put(id, value);
+			this.killedMonstersByTypeID.put(id, value);
+
+			// Also track by name, for statistics display (multiple IDs w/same name don't matter to player)
+			MonsterType t = world.monsterTypes.getMonsterType(id);
+
+			if (t != null) 	killedMonstersByName.put(t.name, killedMonstersByName.getOrDefault(t.name, 0) + value);
 		}
+
 		if (fileversion <= 17) return;
 
 		final int numItems = src.readInt();
@@ -192,7 +207,7 @@ public final class GameStatistics {
 
 	public void writeToParcel(DataOutputStream dest) throws IOException {
 		dest.writeInt(deaths);
-		Set<Entry<String, Integer> > set = killedMonsters.entrySet();
+		Set<Entry<String, Integer> > set = killedMonstersByTypeID.entrySet();
 		dest.writeInt(set.size());
 		for (Entry<String, Integer> e : set) {
 			dest.writeUTF(e.getKey());
