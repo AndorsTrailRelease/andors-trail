@@ -67,6 +67,11 @@
                 </TableRow>
 
                 <include layout="@layout/traitsinfoview" />
+
+                <TableRow android:id="@+id/monsterinfo_killcount_row">
+                    <TextView style="@style/traitsinfo_label" android:text="Previous kills:" />
+                    <TextView android:id="@+id/monsterinfo_killcount" />
+                </TableRow>
             </TableLayout>
 
             <com.gpl.rpg.AndorsTrail.view.ItemEffectsView

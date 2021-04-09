@@ -31,6 +31,7 @@ public final class MonsterInfoActivity extends AndorsTrailBaseActivity {
 	private RangeBar hp;
 	private ViewGroup monsterinfo_container;
 	private TextView monsterinfo_max_ap;
+	private TextView monsterinfo_killcount;
 
 
 	@Override
@@ -48,6 +49,7 @@ public final class MonsterInfoActivity extends AndorsTrailBaseActivity {
 		monsterinfo_title = (TextView) findViewById(R.id.monsterinfo_title);
 		monsterinfo_difficulty = (TextView) findViewById(R.id.monsterinfo_difficulty);
 		monsterinfo_max_ap = (TextView) findViewById(R.id.monsterinfo_max_ap);
+		monsterinfo_killcount = (TextView) findViewById(R.id.monsterinfo_killcount);
 
 		Button b = (Button) findViewById(R.id.monsterinfo_close);
 		b.setOnClickListener(new OnClickListener() {
@@ -95,6 +97,7 @@ public final class MonsterInfoActivity extends AndorsTrailBaseActivity {
 				false);
 		hp.update(monster.getMaxHP(), monster.getCurrentHP());
 		monsterinfo_max_ap.setText(Integer.toString(monster.getMaxAP()));
+		monsterinfo_killcount.setText(Integer.toString(world.model.statistics.getNumberOfKillsForMonsterName(monster.getName()) ));
 	}
 
 	public static int getMonsterDifficultyResource(ControllerContext controllerContext, Monster monster) {

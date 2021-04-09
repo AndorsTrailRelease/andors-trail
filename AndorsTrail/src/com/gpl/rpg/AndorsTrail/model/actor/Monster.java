@@ -26,7 +26,7 @@ public final class Monster extends Actor {
 	private boolean forceAggressive = false;
 	private ItemContainer shopItems = null;
 
-	private final MonsterType monsterType;
+	public final MonsterType monsterType;
 	public final MonsterSpawnArea area;
 
 	public Monster(MonsterType monsterType, MonsterSpawnArea area) {
