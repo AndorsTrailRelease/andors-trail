@@ -7,9 +7,7 @@ import java.io.IOException;
 import com.gpl.rpg.AndorsTrail.context.ControllerContext;
 import com.gpl.rpg.AndorsTrail.context.WorldContext;
 import com.gpl.rpg.AndorsTrail.model.actor.Player;
-import com.gpl.rpg.AndorsTrail.model.map.LayeredTileMap;
 import com.gpl.rpg.AndorsTrail.model.map.PredefinedMap;
-import com.gpl.rpg.AndorsTrail.resource.tiles.TileCollection;
 
 public final class ModelContainer {
 

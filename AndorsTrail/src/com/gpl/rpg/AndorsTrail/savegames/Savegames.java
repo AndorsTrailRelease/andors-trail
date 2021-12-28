@@ -27,6 +27,7 @@ import com.gpl.rpg.AndorsTrail.R;
 import com.gpl.rpg.AndorsTrail.context.ControllerContext;
 import com.gpl.rpg.AndorsTrail.context.WorldContext;
 import com.gpl.rpg.AndorsTrail.controller.Constants;
+import com.gpl.rpg.AndorsTrail.controller.WorldMapController;
 import com.gpl.rpg.AndorsTrail.model.ModelContainer;
 import com.gpl.rpg.AndorsTrail.resource.tiles.TileManager;
 import com.gpl.rpg.AndorsTrail.util.AndroidStorage;
@@ -214,6 +215,7 @@ public final class Savegames {
 
 		world.maps.readFromParcel(src, world, controllers, header.fileversion);
 		world.model = new ModelContainer(src, world, controllers, header.fileversion);
+		WorldMapController.populateWorldMap(world, controllers.getResources());
 		src.close();
 		
 		if (header.fileversion < 45) {
