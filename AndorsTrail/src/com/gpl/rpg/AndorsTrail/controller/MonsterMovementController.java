@@ -114,6 +114,10 @@ public final class MonsterMovementController implements EvaluateWalkable {
 			}
 			if (searchForPath) {
 				if (findPathFor(m, playerPosition)) return;
+			} else if (m.getMovementAggressionType()==MonsterType.AggressionType.flee)
+			{
+				m.movementDestination.x =2* m.position.x-playerPosition.x;
+				m.movementDestination.y =2* m.position.y-playerPosition.y;
 			}
 //		}
 			

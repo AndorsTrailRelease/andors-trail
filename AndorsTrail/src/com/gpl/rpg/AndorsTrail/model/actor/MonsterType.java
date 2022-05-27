@@ -110,6 +110,7 @@ public final class MonsterType {
 		,helpOthers		// Will move to help if the player attacks some other monster in the same spawn.
 		,protectSpawn	// Will move to attack if the player stands inside the spawn.
 		,wholeMap		// Will move to attack even outside its spawn area
+		,flee           // Will try to flee from the player
 		;
 
 		public static AggressionType fromString(String s, AggressionType default_) {
