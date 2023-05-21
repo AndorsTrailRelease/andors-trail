@@ -1,216 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="2017.05.26" orientation="orthogonal" renderorder="right-down" width="21" height="29" tilewidth="32" tileheight="32" nextobjectid="7">
+<!DOCTYPE map SYSTEM "https://mapeditor.org/dtd/1.0/map.dtd">
+<map version="1.0" orientation="orthogonal" width="21" height="29" tilewidth="32" tileheight="32">
  <properties>
   <property name="outdoors" value="1"/>
  </properties>
- <tileset firstgid="1" name="map_bed_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_bed_1.png" width="512" height="256"/>
+ <tileset firstgid="1" name="map_6" tilewidth="32" tileheight="32">
+  <image source="../drawable/map_6.png"/>
  </tileset>
- <tileset firstgid="129" name="map_border_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_border_1.png" width="512" height="256"/>
+ <tileset firstgid="65" name="map_0" tilewidth="32" tileheight="32">
+  <image source="../drawable/map_0.png"/>
  </tileset>
- <tileset firstgid="257" name="map_bridge_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_bridge_1.png" width="512" height="256"/>
+ <tileset firstgid="129" name="map_4" tilewidth="32" tileheight="32">
+  <image source="../drawable/map_4.png"/>
  </tileset>
- <tileset firstgid="385" name="map_bridge_2" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_bridge_2.png" width="512" height="256"/>
+ <tileset firstgid="193" name="map_3" tilewidth="32" tileheight="32">
+  <image source="../drawable/map_3.png"/>
  </tileset>
- <tileset firstgid="513" name="map_broken_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_broken_1.png" width="512" height="256"/>
+ <tileset firstgid="257" name="map_21" tilewidth="32" tileheight="32">
+  <image source="../drawable/map_21.png"/>
  </tileset>
- <tileset firstgid="641" name="map_cavewall_1" tilewidth="32" tileheight="32" tilecount="108" columns="18">
-  <image source="../drawable/map_cavewall_1.png" width="576" height="192"/>
+ <tileset firstgid="321" name="map_17" tilewidth="32" tileheight="32">
+  <image source="../drawable/map_17.png"/>
  </tileset>
- <tileset firstgid="749" name="map_cavewall_2" tilewidth="32" tileheight="32" tilecount="108" columns="18">
-  <image source="../drawable/map_cavewall_2.png" width="576" height="192"/>
+ <tileset firstgid="385" name="map_27" tilewidth="32" tileheight="32">
+  <image source="../drawable/map_27.png"/>
  </tileset>
- <tileset firstgid="857" name="map_cavewall_3" tilewidth="32" tileheight="32" tilecount="108" columns="18">
-  <image source="../drawable/map_cavewall_3.png" width="576" height="192"/>
+ <tileset firstgid="449" name="map_7" tilewidth="32" tileheight="32">
+  <image source="../drawable/map_7.png"/>
  </tileset>
- <tileset firstgid="965" name="map_cavewall_4" tilewidth="32" tileheight="32" tilecount="108" columns="18">
-  <image source="../drawable/map_cavewall_4.png" width="576" height="192"/>
+ <tileset firstgid="513" name="map_1" tilewidth="32" tileheight="32">
+  <image source="../drawable/map_1.png"/>
  </tileset>
- <tileset firstgid="1073" name="map_chair_table_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_chair_table_1.png" width="512" height="256"/>
+ <tileset firstgid="577" name="map_5" tilewidth="32" tileheight="32">
+  <image source="../drawable/map_5.png"/>
  </tileset>
- <tileset firstgid="1201" name="map_chair_table_2" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_chair_table_2.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="1329" name="map_crate_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_crate_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="1457" name="map_cupboard_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_cupboard_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="1585" name="map_curtain_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_curtain_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="1713" name="map_entrance_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_entrance_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="1841" name="map_entrance_2" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_entrance_2.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="1969" name="map_fence_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_fence_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="2097" name="map_fence_2" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_fence_2.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="2225" name="map_fence_3" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_fence_3.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="2353" name="map_fence_4" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_fence_4.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="2481" name="map_ground_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_ground_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="2609" name="map_ground_2" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_ground_2.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="2737" name="map_ground_3" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_ground_3.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="2865" name="map_ground_4" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_ground_4.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="2993" name="map_ground_5" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_ground_5.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="3121" name="map_ground_6" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_ground_6.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="3249" name="map_ground_7" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_ground_7.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="3377" name="map_ground_8" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_ground_8.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="3505" name="map_house_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_house_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="3633" name="map_house_2" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_house_2.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="3761" name="map_indoor_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_indoor_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="3889" name="map_indoor_2" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_indoor_2.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="4017" name="map_kitchen_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_kitchen_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="4145" name="map_outdoor_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_outdoor_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="4273" name="map_pillar_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_pillar_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="4401" name="map_pillar_2" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_pillar_2.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="4529" name="map_plant_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_plant_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="4657" name="map_plant_2" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_plant_2.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="4785" name="map_rock_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_rock_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="4913" name="map_rock_2" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_rock_2.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="5041" name="map_roof_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_roof_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="5169" name="map_roof_2" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_roof_2.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="5297" name="map_roof_3" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_roof_3.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="5425" name="map_shop_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_shop_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="5553" name="map_sign_ladder_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_sign_ladder_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="5681" name="map_table_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_table_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="5809" name="map_trail_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_trail_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="5937" name="map_transition_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_transition_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="6065" name="map_transition_2" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_transition_2.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="6193" name="map_transition_3" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_transition_3.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="6321" name="map_transition_4" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_transition_4.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="6449" name="map_transition_5" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_transition_5.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="6577" name="map_tree_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_tree_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="6705" name="map_tree_2" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_tree_2.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="6833" name="map_wall_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_wall_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="6961" name="map_wall_2" tilewidth="32" tileheight="32" tilecount="120" columns="15">
-  <image source="../drawable/map_wall_2.png" width="480" height="256"/>
- </tileset>
- <tileset firstgid="7081" name="map_wall_3" tilewidth="32" tileheight="32" tilecount="120" columns="15">
-  <image source="../drawable/map_wall_3.png" width="480" height="256"/>
- </tileset>
- <tileset firstgid="7201" name="map_wall_4" tilewidth="32" tileheight="32" tilecount="120" columns="15">
-  <image source="../drawable/map_wall_4.png" width="480" height="256"/>
- </tileset>
- <tileset firstgid="7321" name="map_window_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_window_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="7449" name="map_window_2" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_window_2.png" width="512" height="256"/>
+ <tileset firstgid="641" name="map_2" tilewidth="32" tileheight="32">
+  <image source="../drawable/map_2.png"/>
  </tileset>
  <layer name="Ground" width="21" height="29">
   <data encoding="base64" compression="zlib">
-   eJzl1DEKwCAMBVBx8/7naCF4ANeu3qhkEDqZb8jH0g5/9BHyJVJSEjDXJKix2xzukWNNzUkwo+esDtNyvebMZZiefSI7jTb1H0X3/nezETrqBHP1hnzFXLWQ3t9gWh7DrI6OkDl3m4jXM24i3jCl2CbqPd+oeQOwNM4v
+   eJzl1DEKACEMBMCUeZ/4PUvxlYJYCFfpJmTxuCu2zBCyEBURBZM3QY3b5nJbsDnTCWb0nslhnlyvuXMZpueeyE2jzU7o/e9mJXRUCKb1h3zFtFpI728wTx7DTI6OkD1vm4hXDCbiLVMBE/WeM9McaSN3rQ==
   </data>
  </layer>
  <layer name="Objects" width="21" height="29">
   <data encoding="base64" compression="zlib">
-   eJyVlU1OwzAQha3cIJtIOTtcoWw4AAsW7SIS7YaqobCpVFGadlnBDj/kUcajGY95klXFqT+/+bFz7UP4iOMSBwnP1z7/XXYhrLqgit6t2xCemnkdaVJ4lwrmVxynODZNvg77SC75LzFvcf4tcQ+KTxn/Lu4ztmUm5z6KOK34PZ/QMcX9rOTt04if58zKKeKGNJ/cL3ivbZ4zjbtkc9In167Vc6blgJh3ou57JQe0L+aQs7PBxH7fXe7zvZ9zyCXrNMbxU6gVZPmEeJ1KHiG8XzTzOo0nfXoel4wJEY9i1M6T15+cidpqPU6amE/vHFk+rfi9noeI6fHIZ6k3JdPinVh/Uh1L8aPuuDsPje1Pk3eHboRPEj+PdJbIcy3Ti3vo59hKPU/MRZOfzUGJf8s8ej2/Sv1Uuusg5MLzKJnaN/LvrLb5/0se+Z7Sp/S7rqgNvYfujf6clL6qYaI3HxLT4kBjZS5vrObQPtX8JcW5ZXkknncPHwVTq/nQ/493Fkyrl2q+E3JfYv4C9TE5DA==
+   eJyVlUFqwzAQRWUdwXjThReBrAqF4lUP4BgCuUN7h5bkNOmiULzv2uscIPcJRBP0yWgy0qgfROxYev4zmpGHxrnXMKYwILofmvS38+HaO1V41od5v2w9NCq8qYL5EsY+XB9duq5vHrnwX2J+hTFF7p/iU8a/hOud4ZNz330aZy5+yyfpM8b94R/z9qxwkU/kTFMX4yZpPrlf4r35NGcat2MxSJ9ci1gHrpYDMEef8jZKDvBe+o9ytsow6X1PPvW5be455JL7tA7joMTOlfN5i4PlpeSRRM9nd1+n8aRPyyM9n9k9eIhR6yerPjlzcXqNQyPzafVRzmcufqvmHWNaPPgs1aZk5nhn0f/WeUf7Tmcn9WfOnybrDD0KnxDvR/QSPNcyrbjb+GvVPJizS3uzVeae2Bqr5odYo6WzjrRUeJRM7Rt522Mxv+SRv1P6lH77ir3Bc9J3vJf+RqWuaphUm5d4n+OQdhVnHIl6DHtO2sQ9/4nME5sLnnUO45spe5Or/Sdv5VNmrpZqvhPyvWBeAQ/dXTg=
   </data>
  </layer>
  <layer name="Above" width="21" height="29">
   <data encoding="base64" compression="zlib">
-   eJxjYEAFdyQZsIK3OMTxgbtk6BkIgOxOZP+T4v5OJvzmEiOODczGYi61Aa3iCRSW6GZjE8MFiPE7rvSKC6zFYSbMTaTGP8iNuMzEBojNR4T8Tm46RQe49JKT3wmZS810BvM/pe7EBoZKuUUsuCmIYOPy2x4K/UypflqAxzjKZFLKoIEG5LiTVnXGZhqE2WE8ZlIrTdEqrikxFzltAgAGByy5
+   eJxjYEAFrowMWIEbDnF8wJMMPQMBkN2J7H9S3J/OhN9cYsSxARcs5lIb0CqeQGGJbjY2MVyAGL/jSq+4wHIc4jA3kRr/IDfiMhMbIDYfEfI7uekUHeDSS05+J2QuNdMZzP+UuhMbGCrlFrFgDxIbl99UKbSDUv20AJuwiIH8T0oZNNCAHHfSqs6Ip4G5CXjMpFaaolVcU2IuctoEAFegEAw=
   </data>
  </layer>
  <layer name="Walkable" width="21" height="29" visible="0">
   <data encoding="base64" compression="zlib">
-   eJzV0kEKwCAMRFFP4f2vkBuWQrspY2KTH2iFrMTnxGhzDLvqXDa5upe3T7rRfZGnzmfNjpw7bsV7uqs3ybjqHuINVN4veN5M6L6r+Ujvb27nP1Iu4a38N15kU31XTDrjTk7yP3V4hEnmpOfjmYRHzlrZmToAWcdowA==
+   eJzV0kEKwCAMRFHx/sfIQUuh3ZQxsckPtEJW4nNitDmGXXUum1zdy9sn3ei+yFPns2ZHzh234j3d1ZtkXHUP8QYq7xc8byZ039V8pPc3t/MfKZfwVv4bL7KpvismnXEnJ/mfOjzCJHPS8/FMwiNnrexMHbdGLPA=
   </data>
  </layer>
  <objectgroup name="Mapevents">
-  <object id="1" name="north" type="mapchange" x="96" y="0" width="32" height="32">
+  <object name="north" type="mapchange" x="96" y="0" width="32" height="32">
    <properties>
     <property name="map" value="waterway11_east"/>
     <property name="place" value="south"/>
    </properties>
   </object>
-  <object id="2" name="south" type="mapchange" x="128" y="896" width="96" height="32">
+  <object name="south" type="mapchange" x="128" y="896" width="96" height="32">
    <properties>
     <property name="map" value="waytomountaincave1"/>
     <property name="place" value="north"/>
@@ -218,17 +72,17 @@
   </object>
  </objectgroup>
  <objectgroup name="Spawn">
-  <object id="3" name="irdegh_2" type="spawn" x="192" y="320" width="32" height="32">
+  <object name="irdegh_2" type="spawn" x="192" y="320" width="32" height="32">
    <properties>
     <property name="spawngroup" value="irdegh_2"/>
    </properties>
   </object>
-  <object id="4" name="irdegh_1" type="spawn" x="64" y="64" width="352" height="256">
+  <object name="irdegh_1" type="spawn" x="64" y="64" width="352" height="256">
    <properties>
     <property name="spawngroup" value="irdegh_1"/>
    </properties>
   </object>
-  <object id="5" name="irdegh_2_1" type="spawn" x="64" y="384" width="352" height="480">
+  <object name="irdegh_2_1" type="spawn" x="64" y="384" width="352" height="480">
    <properties>
     <property name="quantity" value="2"/>
     <property name="spawngroup" value="irdegh_2"/>
@@ -236,7 +90,7 @@
   </object>
  </objectgroup>
  <objectgroup name="Spawn2">
-  <object id="6" name="irdegh_spawn" type="spawn" x="32" y="64" width="384" height="800">
+  <object name="irdegh_spawn" type="spawn" x="32" y="64" width="384" height="800">
    <properties>
     <property name="quantity" value="8"/>
     <property name="spawngroup" value="irdegh_spawn"/>
