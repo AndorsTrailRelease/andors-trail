@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="5">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="25" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="43">
  <properties>
   <property name="outdoors" value="1"/>
  </properties>
@@ -183,49 +183,179 @@
  <tileset firstgid="7449" name="map_window_2" tilewidth="32" tileheight="32" tilecount="128" columns="16">
   <image source="../drawable/map_window_2.png" width="512" height="256"/>
  </tileset>
- <layer id="1" name="Ground" width="20" height="20">
+ <tileset firstgid="7577" name="map_guynmart" tilewidth="32" tileheight="32" tilecount="128" columns="16">
+  <image source="../drawable/map_guynmart.png" width="512" height="256"/>
+ </tileset>
+ <layer id="9" name="Base" width="25" height="15">
   <data encoding="base64" compression="zlib">
-   eJzVzLENACAIBEBa95+ELRxLaxPwgZfE4trTIaLbJGFe7I9x6YH1VD7rynzeFf1uV+RDLuRDH+SLXt6Xubq+7NXxVa7fvur14lumbDNm
+   eJzbyMnAsHEUk4SZeInHlNjxlYeBQQhkhjAmBol/46HcDmYgfgQ056AwJgaJM1LBHzA7XkgzMLxEwq+kqW/Hd6CZP5DwTxrYgQtTww5WIP7EgxuzUcEOWqfdkYDfCGLiwWYHAMeh/XQ=
   </data>
  </layer>
- <layer id="2" name="Objects" width="20" height="20">
+ <layer id="1" name="Ground" width="25" height="15">
   <data encoding="base64" compression="zlib">
-   eJytVMsKhDAM9BfWg7D//xnet/XmeT+gCP7AetsEGhxCakl0IOArw8zEtEzDsFN9qQ6qOyjUnx7k2mvlIBdzbLXEY0RbURy/WkeQC3mwf33FuZhncfZfcQk+xLm8z+s7XOPo17QZXKnqyA6/rdytzHs5tvxFgTsjeiRzwQz364V/0ZZVVgxv/lpbDz1+1IZ+MG/Lk84ioo2h/18959Q5azz7qeeAvtAPzmdu+BRt1p63Mtff6FzFK/ab2atnmAG/+wPX425I
+   eJyFVM1KAzEQHhSVrj+wqdiWKnrx5MWfJ9A+gfoE6msJ4hOIJ8/qdW/VFikIrVKrFES86aJOmhl2NpmtHwyZTGa/L5PJBgCgH8MIDzjOG4AF4+ZPODbR2rRux9aKM56v4voa5Y9A/qmI3dZARULxH5PxXmPsphaOzPOJuY+x2+tVnF/v4HxgQs2O2MswzvymiPfIb9F6X+QxupTzVQHYqP5v35WQo+3xvsd6fK6an28uOvORokYXa+2hJcQhz0Tq+mfqaxQhVepgJMo5SUiN9TLA2TJAYwL7OO18X2NAfLJ/++gfkB16d+Le5DVKyH1BvJMzmc8aqbyrgn/Pci452yUd25u3OF/H+dT4eq3Gr9DgvUt+tobXo6J+1KNQQ2JH4ZYaQ3GmEWrUNYvy81nay4cZr7GF8ROvjlf7hpT1e2jxrPTA4ghztxUd1rBcdwXfaijStzrHnvk1MOQ/JXFZCo3/4ZeCf1rGgndT7JffYE3Dr0l7J9n/A5qViHU=
   </data>
  </layer>
- <layer id="3" name="Above" width="20" height="20">
+ <layer id="2" name="Objects" width="25" height="15">
   <data encoding="base64" compression="zlib">
-   eJw7KclAVXCXyua9pbJ5IwHsHA0zuoPRMEeA4RYWw80/1AQAjoAGJw==
+   eJy7JsvAcI0E/EaSgeGtJGl6iMEHgWYeooG5wwFjA6N2DJwdyFiai/bxP1zsGMX0xQDIl06T
   </data>
  </layer>
- <layer id="4" name="Walkable" width="20" height="20" visible="0">
+ <layer id="3" name="Above" width="25" height="15">
   <data encoding="base64" compression="zlib">
-   eJzbKMbAsHGEYBCghhnIgFrmUGIePkANs5DFqeUuUs0jFlDLHGLMIweQkq7w8Uk1jxL3UQLw5UNSzMBlHqVgIMwjRZyabqOFeQBgK5kk
+   eJzFk0EOQDAQRe2sSUjcxLVxAnoCXdhzA9YW2kSTmvyvFRJvM834M53OjLZKIJ3nb8y5rbiVehk3iG9Oq0BMf+qlDeklSPsHo6lDg15KUE8tc4rzLp5/NvrFi0E96UhPLSu5YyN+NGuLAvWHUCXPxWAzZ2hyx1vq7Gpj2HPsZz39EkX2cCre5WUzv5vT0z2JmbnM+XRPYnK7nKj+0L99p0H1ovrZm3y/Ox94o1Du
+  </data>
+ </layer>
+ <layer id="10" name="Top" width="25" height="15">
+  <data encoding="base64" compression="zlib">
+   eJytlN0OgyAMhblTngB8Aufr7+U276QZzU5OgLW4Jieakvr1D/ccwjuF8Ix2xRIjlsozV23Vh6bnYucEQ+LX/PUtwFPpudhe3h9VlpqE4cmLa7TEehkL9XIU+0qfWg8ngznYN9ZhzOUXJ9Hc2Ie5ePex12f2WWoesS2M3p5yjcjUOfZm6dmhFnujObZm6d3TFpfvPt7dfzBE+F/h7ytjdoeQMcozwhxnOa3+qGQf7t470QV7b9DY
+  </data>
+ </layer>
+ <layer id="12" name="Top0" width="25" height="15" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJx7KcvA8JIA3ijJwLBJkrC6UUx+WMLER8N6FI8ETIt0PtB5h1Deprd7AC4UfCI=
+  </data>
+ </layer>
+ <layer id="4" name="Walkable" width="25" height="15" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJzNlMsNwCAMQztF9l8hG3JqBZLt2JxqCYmfnhMgdD2fus6G5m4bUgvvNBbEQ33m/0e558rGE++dY177uooR8dGexAMxUH4qD7bO8kjeq2Kz2J26cO/Y5Tt1oOTWnoop8br9SxTP8VIMl5mI1cmU7/QG9v4C0leDYA==
   </data>
  </layer>
  <objectgroup id="5" name="Mapevents">
-  <object id="1" name="east" type="mapchange" x="608" y="64" width="32" height="544">
+  <object id="1" name="east" type="mapchange" x="768" y="64" width="32" height="384">
    <properties>
-    <property name="map" value="fields2"/>
-    <property name="place" value="west"/>
+    <property name="map" value="swamp2"/>
+    <property name="place" value="west1"/>
    </properties>
   </object>
-  <object id="2" name="south" type="mapchange" x="96" y="608" width="544" height="32">
+  <object id="6" name="north" type="mapchange" x="32" y="0" width="224" height="32">
    <properties>
-    <property name="map" value="fields9"/>
+    <property name="map" value="guynmart_wood_13"/>
+    <property name="place" value="south"/>
+   </properties>
+  </object>
+  <object id="27" name="west" type="mapchange" x="0" y="32" width="32" height="416">
+   <properties>
+    <property name="map" value="swamp6"/>
+    <property name="place" value="east1"/>
+   </properties>
+  </object>
+  <object id="28" name="south" type="mapchange" x="32" y="448" width="736" height="32">
+   <properties>
+    <property name="map" value="swamp4"/>
     <property name="place" value="north"/>
    </properties>
   </object>
+  <object id="31" name="hut" type="mapchange" x="256" y="224" width="32" height="32">
+   <properties>
+    <property name="map" value="swamp_hut"/>
+    <property name="place" value="door"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup id="6" name="Spawn uniques" visible="0">
-  <object id="3" name="tinlyn_lostsheep3" type="spawn" x="64" y="64" width="512" height="512"/>
- </objectgroup>
- <objectgroup id="7" name="Spawn monsters" visible="0">
-  <object id="4" name="fieldcritter_2" type="spawn" x="96" y="96" width="480" height="480">
+ <objectgroup id="7" name="Spawn" visible="0">
+  <object id="4" name="fieldcritter_2" type="spawn" x="160" y="352" width="384" height="64">
    <properties>
     <property name="quantity" value="2"/>
    </properties>
   </object>
+  <object id="29" name="feygard_fogmonster9" type="spawn" x="256" y="288" width="32" height="32">
+   <properties>
+    <property name="quantity" value="1"/>
+    <property name="spawngroup" value="feygard_fogmonster9"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup id="8" name="Keys" visible="0"/>
+ <objectgroup id="8" name="Keys">
+  <object id="42" name="feygard_swamp_sign" type="key" x="224" y="320" width="32" height="32">
+   <properties>
+    <property name="phrase" value="feygard_swamp_sign"/>
+    <property name="requireId" value="base_nondisplay"/>
+    <property name="requireType" value="questProgress"/>
+    <property name="requireValue" value="2"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="11" name="Replace">
+  <object id="25" name="swamp5a" type="replace" x="0" y="96" width="128" height="256">
+   <properties>
+    <property name="Top" value="Top0"/>
+    <property name="requireId" value="feygard_fog"/>
+    <property name="requireType" value="questProgress"/>
+    <property name="requireValue" value="5"/>
+   </properties>
+  </object>
+  <object id="23" name="swamp4b" type="replace" x="128" y="192" width="160" height="160">
+   <properties>
+    <property name="Top" value="Top0"/>
+    <property name="requireId" value="feygard_fog"/>
+    <property name="requireType" value="questProgress"/>
+    <property name="requireValue" value="4"/>
+   </properties>
+  </object>
+  <object id="24" name="swamp4a" type="replace" x="0" y="352" width="288" height="128">
+   <properties>
+    <property name="Top" value="Top0"/>
+    <property name="requireId" value="feygard_fog"/>
+    <property name="requireType" value="questProgress"/>
+    <property name="requireValue" value="4"/>
+   </properties>
+  </object>
+  <object id="22" name="swamp3c" type="replace" x="288" y="192" width="160" height="288">
+   <properties>
+    <property name="Top" value="Top0"/>
+    <property name="requireId" value="feygard_fog"/>
+    <property name="requireType" value="questProgress"/>
+    <property name="requireValue" value="3"/>
+   </properties>
+  </object>
+  <object id="21" name="swamp3b" type="replace" x="448" y="256" width="192" height="224">
+   <properties>
+    <property name="Top" value="Top0"/>
+    <property name="requireId" value="feygard_fog"/>
+    <property name="requireType" value="questProgress"/>
+    <property name="requireValue" value="3"/>
+   </properties>
+  </object>
+  <object id="20" name="swamp3a" type="replace" x="640" y="288" width="160" height="192">
+   <properties>
+    <property name="Top" value="Top0"/>
+    <property name="requireId" value="feygard_fog"/>
+    <property name="requireType" value="questProgress"/>
+    <property name="requireValue" value="3"/>
+   </properties>
+  </object>
+  <object id="18" name="swamp2b" type="replace" x="448" y="0" width="192" height="256">
+   <properties>
+    <property name="Top" value="Top0"/>
+    <property name="requireId" value="feygard_fog"/>
+    <property name="requireType" value="questProgress"/>
+    <property name="requireValue" value="2"/>
+   </properties>
+  </object>
+  <object id="19" name="swamp2a" type="replace" x="640" y="-2" width="160" height="288">
+   <properties>
+    <property name="Top" value="Top0"/>
+    <property name="requireId" value="feygard_fog"/>
+    <property name="requireType" value="questProgress"/>
+    <property name="requireValue" value="2"/>
+   </properties>
+  </object>
+  <object id="16" name="swamp1b" type="replace" x="128" y="96" width="320" height="96">
+   <properties>
+    <property name="Top" value="Top0"/>
+    <property name="requireId" value="feygard_fog"/>
+    <property name="requireType" value="questProgress"/>
+    <property name="requireValue" value="1"/>
+   </properties>
+  </object>
+  <object id="17" name="swamp1a" type="replace" x="0" y="0" width="448" height="96">
+   <properties>
+    <property name="Top" value="Top0"/>
+    <property name="requireId" value="feygard_fog"/>
+    <property name="requireType" value="questProgress"/>
+    <property name="requireValue" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

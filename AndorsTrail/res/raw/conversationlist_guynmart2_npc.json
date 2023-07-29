@@ -78,12 +78,36 @@
             {
                 "text":"Oh? Is it the fog that is the problem?",
                 "nextPhraseID":"guynmart_roadguard_20"
+            },
+            {
+                "text":"Why?",
+                "nextPhraseID":"guynmart_roadguard_12",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"feygard_fog",
+                        "value":1
+                    }
+                ]
             }
         ]
     },
     {
         "id":"guynmart_roadguard_20",
-        "message":"Yes. Several men already got lost and never reappeared. There is no way through."
+        "message":"Yes. Several men already got lost and never reappeared. There is no way through.",
+        "replies":[
+            {
+                "text":"But ... which fog?",
+                "nextPhraseID":"guynmart_roadguard_30",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"feygard_fog",
+                        "value":1
+                    }
+                ]
+            }
+        ]
     },
     {
         "id":"guynmart_farmer_10",
