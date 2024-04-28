@@ -1,4 +1,4 @@
-﻿# Andor's Trail
+# Andor's Trail
 
 Andor's Trail is a single-player quest-driven roguelike fantasy dungeon crawler RPG with a powerful story.
 
@@ -19,13 +19,19 @@ A Win/Mac/Linux content creator/editor available [here](https://andorstrail.com/
 
 Latest version of APK available from:
 
+[github](https://github.com/AndorsTrailRelease/andors-trail/releases)
+
 [Google Play Store](https://play.google.com/store/apps/details?id=com.gpl.rpg.AndorsTrail)
 
 [F-Droid](https://f-droid.org/packages/com.gpl.rpg.AndorsTrail/)
 
-[Our Server](https://andorstrail.com/static/AndorsTrail_v0.7.8.apk)
+[Itch](https://andorstrailteam.itch.io/andors-trail)
+
+[Our Server](https://andorstrail.com/viewforum.php?f=5)
 
 ## Authors
+This is rather outdated, please look in the game (section About >> Authors)
+or [here](https://github.com/AndorsTrailRelease/andors-trail/blob/v0.8.10/AndorsTrail/res/values/authors.xml)
 
 ### Development team
 
@@ -49,7 +55,8 @@ Andor's Trail gameplay content is copyright by their respective authors and has 
 The graphics licenses and contributions can be found [here](/gfxcontrib.md).
 
 ## Wiki
-Here is our slightly out of date [Wiki](https://docs.andorstrail.com/).
+Here is our slightly out of date [Wiki](https://andorstrail.gitbook.io/docs/).
+
 ## Acknowledgments
 Additional shout-outs.
 
