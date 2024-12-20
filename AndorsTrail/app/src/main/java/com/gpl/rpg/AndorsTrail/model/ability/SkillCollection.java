@@ -187,12 +187,12 @@ public final class SkillCollection {
 		initializeSkill(new SkillInfo(SkillID.resistanceBlood, MAX_LEVEL_RESISTANCE, SkillInfo.LevelUpType.alwaysShown, SkillCategory.immunity, null, position++));
 		initializeSkill(new SkillInfo(SkillID.shadowBless, 1, SkillInfo.LevelUpType.onlyByQuests, SkillCategory.immunity, null, position++));
 		initializeSkill(new SkillInfo(SkillID.crit1, 1, SkillInfo.LevelUpType.alwaysShown, SkillCategory.criticals, new SkillLevelRequirement[] {
-			SkillLevelRequirement.requireOtherSkill(SkillID.moreCriticals, 3)
-			,SkillLevelRequirement.requireOtherSkill(SkillID.betterCriticals, 3)
+			SkillLevelRequirement.requireOtherSkill(SkillID.moreCriticals, 2)
+			,SkillLevelRequirement.requireOtherSkill(SkillID.betterCriticals, 2)
 		}, position++));
 		initializeSkill(new SkillInfo(SkillID.crit2, 1, SkillInfo.LevelUpType.alwaysShown, SkillCategory.criticals, new SkillLevelRequirement[] {
-			SkillLevelRequirement.requireOtherSkill(SkillID.moreCriticals, 6)
-			,SkillLevelRequirement.requireOtherSkill(SkillID.betterCriticals, 6)
+			SkillLevelRequirement.requireOtherSkill(SkillID.moreCriticals, 4)
+			,SkillLevelRequirement.requireOtherSkill(SkillID.betterCriticals, 4)
 			,SkillLevelRequirement.requireOtherSkill(SkillID.crit1, 1)
 		}, position++));
 		initializeSkill(new SkillInfo(SkillID.rejuvenation, 1, SkillInfo.LevelUpType.alwaysShown, SkillCategory.immunity, new SkillLevelRequirement[] {
