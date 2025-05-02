@@ -183,19 +183,25 @@ public final class HeroinfoActivity_Stats extends Fragment {
 		);
 
 		ArrayList<ItemTraits_OnUse> effects_hit = new ArrayList<ItemTraits_OnUse>();
+		ArrayList<ItemTraits_OnUse> effects_miss = new ArrayList<ItemTraits_OnUse>();
 		ArrayList<ItemTraits_OnUse> effects_kill = new ArrayList<ItemTraits_OnUse>();
 		ArrayList<ItemTraits_OnHitReceived> effects_hitReceived = new ArrayList<ItemTraits_OnHitReceived>();
+		ArrayList<ItemTraits_OnHitReceived> effects_missReceived = new ArrayList<ItemTraits_OnHitReceived>();
 		for (Inventory.WearSlot slot : Inventory.WearSlot.values()) {
 			ItemType type = player.inventory.getItemTypeInWearSlot(slot);
 			if (type == null) continue;
 			if (type.effects_hit != null) effects_hit.add(type.effects_hit);
+			if (type.effects_miss != null) effects_miss.add(type.effects_miss);
 			if (type.effects_kill != null) effects_kill.add(type.effects_kill);
 			if (type.effects_hitReceived != null) effects_hitReceived.add(type.effects_hitReceived);
+			if (type.effects_missReceived != null) effects_missReceived.add(type.effects_missReceived);
 		}
 		if (effects_hit.isEmpty()) effects_hit = null;
+		if (effects_miss.isEmpty()) effects_miss = null;
 		if (effects_kill.isEmpty()) effects_kill = null;
 		if (effects_hitReceived.isEmpty()) effects_hitReceived = null;
-		actorinfo_onhiteffects.update(null, null, effects_hit, effects_kill, effects_hitReceived, null, false);
+		if (effects_missReceived.isEmpty()) effects_missReceived = null;
+		actorinfo_onhiteffects.update(null, null, effects_hit, effects_miss, effects_kill, effects_hitReceived,effects_missReceived, null, false);
 
 
 		updateStatsTableRow(world.model.statistics.getNumberOfCompletedQuests(world), R.id.heroinfo_gamestats_quests, R.id.heroinfo_gamestats_quests_row);

@@ -12,19 +12,19 @@
 		android:layout_height="wrap_content"
 		/>
 
-		<com.gpl.rpg.AndorsTrail.view.AbilityModifierInfoView
-			android:id="@+id/itemeffect_onequip_abilitymodifierinfo"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginLeft="10sp"
-			/>
+	<com.gpl.rpg.AndorsTrail.view.AbilityModifierInfoView
+		android:id="@+id/itemeffect_onequip_abilitymodifierinfo"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="10sp"
+		/>
 
-		<com.gpl.rpg.AndorsTrail.view.ActorConditionEffectList
-			android:id="@+id/itemeffect_onequip_conditions"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginLeft="10sp"
-			/>
+	<com.gpl.rpg.AndorsTrail.view.ActorConditionEffectList
+		android:id="@+id/itemeffect_onequip_conditions"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="10sp"
+		/>
 
 	<TextView
 		android:text="@string/iteminfo_effect_works_when_used"
@@ -32,12 +32,12 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		/>
-		<com.gpl.rpg.AndorsTrail.view.ItemEffectsView_OnUse
-			android:id="@+id/itemeffect_onuse"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginLeft="10sp"
-			/>
+	<com.gpl.rpg.AndorsTrail.view.ItemEffectsView_OnUse
+		android:id="@+id/itemeffect_onuse"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="10sp"
+		/>
 
 	<TextView
 		android:text="@string/iteminfo_effect_works_when_hitting_target"
@@ -45,12 +45,25 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		/>
-		<com.gpl.rpg.AndorsTrail.view.ItemEffectsView_OnUse
-			android:id="@+id/itemeffect_onhit"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginLeft="10sp"
-			/>
+	<com.gpl.rpg.AndorsTrail.view.ItemEffectsView_OnUse
+		android:id="@+id/itemeffect_onhit"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="10sp"
+		/>
+
+	<TextView
+		android:text="@string/iteminfo_effect_works_when_missing_target"
+		android:id="@+id/itemeffect_onmiss_title"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		/>
+	<com.gpl.rpg.AndorsTrail.view.ItemEffectsView_OnUse
+		android:id="@+id/itemeffect_onmiss"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="10sp"
+		/>
 
 	<TextView
 		android:text="@string/iteminfo_effect_works_when_killing_target"
@@ -58,12 +71,12 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		/>
-		<com.gpl.rpg.AndorsTrail.view.ItemEffectsView_OnUse
-			android:id="@+id/itemeffect_onkill"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginLeft="10sp"
-			/>
+	<com.gpl.rpg.AndorsTrail.view.ItemEffectsView_OnUse
+		android:id="@+id/itemeffect_onkill"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="10sp"
+		/>
 
 	<TextView
 		android:text="@string/iteminfo_effect_works_when_hit_by_attacker"
@@ -71,23 +84,36 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		/>
-		<com.gpl.rpg.AndorsTrail.view.ItemEffectsView_OnHitReceived
-			android:id="@+id/itemeffect_onhitreceived"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginLeft="10sp"
-			/>
-	
+	<com.gpl.rpg.AndorsTrail.view.ItemEffectsView_OnHitReceived
+		android:id="@+id/itemeffect_onhitreceived"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="10sp"
+		/>
+
+	<TextView
+		android:text="@string/iteminfo_effect_works_when_missed_by_attacker"
+		android:id="@+id/itemeffect_onmissreceived_title"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		/>
+	<com.gpl.rpg.AndorsTrail.view.ItemEffectsView_OnHitReceived
+		android:id="@+id/itemeffect_onmissreceived"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="10sp"
+		/>
+
 	<TextView
 		android:text="@string/iteminfo_effect_works_when_killed_by_attacker"
 		android:id="@+id/itemeffect_ondeath_title"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		/>
-		<com.gpl.rpg.AndorsTrail.view.ItemEffectsView_OnDeath
-			android:id="@+id/itemeffect_ondeath"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginLeft="10sp"
-			/>	
+	<com.gpl.rpg.AndorsTrail.view.ItemEffectsView_OnDeath
+		android:id="@+id/itemeffect_ondeath"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="10sp"
+		/>
 </merge>

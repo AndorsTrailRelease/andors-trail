@@ -33,8 +33,10 @@ public final class ItemType {
 	public final ItemTraits_OnEquip effects_equip;
 	public final ItemTraits_OnUse effects_use;
 	public final ItemTraits_OnUse effects_hit;
+	public final ItemTraits_OnUse effects_miss;
 	public final ItemTraits_OnUse effects_kill;
 	public final ItemTraits_OnHitReceived effects_hitReceived;
+	public final ItemTraits_OnHitReceived effects_missReceived;
 
 	public ItemType(
 			String id
@@ -48,8 +50,10 @@ public final class ItemType {
 			, ItemTraits_OnEquip effects_equip
 			, ItemTraits_OnUse effects_use
 			, ItemTraits_OnUse effects_hit
+			, ItemTraits_OnUse effects_miss
 			, ItemTraits_OnUse effects_kill
 			, ItemTraits_OnHitReceived effects_hitReceived
+			, ItemTraits_OnHitReceived effects_missReceived
 	) {
 		this.id = id;
 		this.iconID = iconID;
@@ -63,8 +67,10 @@ public final class ItemType {
 		this.effects_equip = effects_equip;
 		this.effects_use = effects_use;
 		this.effects_hit = effects_hit;
+		this.effects_miss = effects_miss;
 		this.effects_kill = effects_kill;
 		this.effects_hitReceived = effects_hitReceived;
+		this.effects_missReceived = effects_missReceived;
 		this.hasPersonalizedName = name.contains(Constants.PLACEHOLDER_PLAYERNAME);
 	}
 

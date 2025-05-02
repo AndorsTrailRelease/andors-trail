@@ -167,8 +167,10 @@ public final class JsonFieldNames {
 		public static final String equipEffect = "equipEffect";
 		public static final String useEffect = "useEffect";
 		public static final String hitEffect = "hitEffect";
+		public static final String missEffect = "missEffect";
 		public static final String killEffect = "killEffect";
 		public static final String hitReceivedEffect = "hitReceivedEffect";
+		public static final String missReceivedEffect = "missReceivedEffect";
 	}
 
 

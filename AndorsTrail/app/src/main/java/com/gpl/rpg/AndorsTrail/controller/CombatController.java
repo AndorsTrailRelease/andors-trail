@@ -595,7 +595,10 @@ public final class CombatController implements VisualEffectCompletedCallback {
 
 	private AttackResult attack(final Actor attacker, final Actor target) {
 		int hitChance = getAttackHitChance(attacker, target);
-		if (!Constants.roll100(hitChance)) return AttackResult.MISS;
+		if (!Constants.roll100(hitChance)) {
+			applyAttackMissStatusEffects(attacker, target);
+			return AttackResult.MISS;
+		}
 
 		int damage = Constants.rollValue(attacker.getDamagePotential());
 		boolean isCriticalHit = false;
@@ -624,6 +627,21 @@ public final class CombatController implements VisualEffectCompletedCallback {
 		}
 		if (onHitReceivedEffects != null) {
 			for (ItemTraits_OnHitReceived e : onHitReceivedEffects) {
+				controllers.actorStatsController.applyHitReceivedEffect(target, attacker, e);
+			}
+		}
+	}
+
+	private void applyAttackMissStatusEffects(Actor attacker, Actor target) {
+		ItemTraits_OnUse[] onMissEffects = attacker.getOnMissEffects();
+		ItemTraits_OnHitReceived[] onMissReceivedEffects = target.getOnMissReceivedEffects();
+		if (onMissEffects != null) {
+			for (ItemTraits_OnUse e : onMissEffects) {
+				controllers.actorStatsController.applyUseEffect(attacker, target, e);
+			}
+		}
+		if (onMissReceivedEffects != null) {
+			for (ItemTraits_OnHitReceived e : onMissReceivedEffects) {
 				controllers.actorStatsController.applyHitReceivedEffect(target, attacker, e);
 			}
 		}

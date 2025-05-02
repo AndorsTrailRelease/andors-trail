@@ -90,8 +90,10 @@ public final class MonsterInfoActivity extends AndorsTrailBaseActivity {
 				null,
 				null,
 				monster.getOnHitEffectsAsList(),
+				monster.getOnMissEffectsAsList(),
 				null,
 				monster.getOnHitReceivedEffectsAsList(),
+				monster.getOnMissReceivedEffectsAsList(),
 				monster.getOnDeathEffects(),
 				false);
 		hp.update(monster.getMaxHP(), monster.getCurrentHP());

@@ -20,13 +20,17 @@ public final class ItemEffectsView extends LinearLayout {
 	private final ActorConditionEffectList itemeffect_onequip_conditions;
 	private final ItemEffectsView_OnUse itemeffect_onuse;
 	private final ItemEffectsView_OnUse itemeffect_onhit;
+	private final ItemEffectsView_OnUse itemeffect_onmiss;
 	private final ItemEffectsView_OnUse itemeffect_onkill;
 	private final ItemEffectsView_OnHitReceived itemeffect_onhitreceived;
+	private final ItemEffectsView_OnHitReceived itemeffect_onmissreceived;
 	private final ItemEffectsView_OnDeath itemeffect_ondeath;
 	private final TextView itemeffect_onuse_title;
 	private final TextView itemeffect_onhit_title;
+	private final TextView itemeffect_onmiss_title;
 	private final TextView itemeffect_onkill_title;
 	private final TextView itemeffect_onhitreceived_title;
+	private final TextView itemeffect_onmissreceived_title;
 	private final TextView itemeffect_ondeath_title;
 
 	public ItemEffectsView(Context context, AttributeSet attr) {
@@ -41,13 +45,17 @@ public final class ItemEffectsView extends LinearLayout {
 
 		itemeffect_onuse = (ItemEffectsView_OnUse) findViewById(R.id.itemeffect_onuse);
 		itemeffect_onhit = (ItemEffectsView_OnUse) findViewById(R.id.itemeffect_onhit);
+		itemeffect_onmiss = (ItemEffectsView_OnUse) findViewById(R.id.itemeffect_onmiss);
 		itemeffect_onkill = (ItemEffectsView_OnUse) findViewById(R.id.itemeffect_onkill);
 		itemeffect_onhitreceived = (ItemEffectsView_OnHitReceived) findViewById(R.id.itemeffect_onhitreceived);
+		itemeffect_onmissreceived = (ItemEffectsView_OnHitReceived) findViewById(R.id.itemeffect_onmissreceived);
 		itemeffect_ondeath = (ItemEffectsView_OnDeath) findViewById(R.id.itemeffect_ondeath);
 		itemeffect_onuse_title = (TextView) findViewById(R.id.itemeffect_onuse_title);
 		itemeffect_onhit_title = (TextView) findViewById(R.id.itemeffect_onhit_title);
+		itemeffect_onmiss_title = (TextView) findViewById(R.id.itemeffect_onmiss_title);
 		itemeffect_onkill_title = (TextView) findViewById(R.id.itemeffect_onkill_title);
 		itemeffect_onhitreceived_title = (TextView) findViewById(R.id.itemeffect_onhitreceived_title);
+		itemeffect_onmissreceived_title = (TextView) findViewById(R.id.itemeffect_onmissreceived_title);
 		itemeffect_ondeath_title = (TextView) findViewById(R.id.itemeffect_ondeath_title);
 	}
 
@@ -55,8 +63,10 @@ public final class ItemEffectsView extends LinearLayout {
 			ItemTraits_OnEquip effects_equip,
 			Collection<ItemTraits_OnUse> effects_use,
 			Collection<ItemTraits_OnUse> effects_hit,
+			Collection<ItemTraits_OnUse> effects_miss,
 			Collection<ItemTraits_OnUse> effects_kill,
 			Collection<ItemTraits_OnHitReceived> effects_hitreceived,
+			Collection<ItemTraits_OnHitReceived> effects_missreceived,
 			ItemTraits_OnUse effects_death,
 			boolean isWeapon
 			) {
@@ -90,6 +100,12 @@ public final class ItemEffectsView extends LinearLayout {
 		} else {
 			itemeffect_onhit_title.setVisibility(View.GONE);
 		}
+		itemeffect_onmiss.update(effects_miss);
+		if (effects_miss != null) {
+			itemeffect_onmiss_title.setVisibility(View.VISIBLE);
+		} else {
+			itemeffect_onmiss_title.setVisibility(View.GONE);
+		}
 
 		itemeffect_onkill.update(effects_kill);
 		if (effects_kill != null) {
@@ -103,6 +119,12 @@ public final class ItemEffectsView extends LinearLayout {
 			itemeffect_onhitreceived_title.setVisibility(View.VISIBLE);
 		} else {
 			itemeffect_onhitreceived_title.setVisibility(View.GONE);
+		}
+		itemeffect_onmissreceived.update(effects_missreceived);
+		if (effects_missreceived != null) {
+			itemeffect_onmissreceived_title.setVisibility(View.VISIBLE);
+		} else {
+			itemeffect_onmissreceived_title.setVisibility(View.GONE);
 		}
 
 		itemeffect_ondeath.update(effects_death);

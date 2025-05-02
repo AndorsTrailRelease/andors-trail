@@ -67,8 +67,10 @@ public final class ItemInfoActivity extends AndorsTrailBaseActivity {
 				itemType.effects_equip,
 				itemType.effects_use == null ? null : Collections.singletonList(itemType.effects_use),
 				itemType.effects_hit == null ? null : Collections.singletonList(itemType.effects_hit),
+				itemType.effects_miss == null ? null : Collections.singletonList(itemType.effects_miss),
 				itemType.effects_kill == null ? null : Collections.singletonList(itemType.effects_kill),
 				itemType.effects_hitReceived == null ? null : Collections.singletonList(itemType.effects_hitReceived),
+				itemType.effects_missReceived == null ? null : Collections.singletonList(itemType.effects_missReceived),
 				null,
 				itemType.isWeapon()
 			);
