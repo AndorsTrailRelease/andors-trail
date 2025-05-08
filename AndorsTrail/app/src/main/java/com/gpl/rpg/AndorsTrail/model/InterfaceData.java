@@ -51,4 +51,12 @@ public final class InterfaceData {
 		}
 		dest.writeUTF(selectedTabHeroInfo);
 	}
+
+	public void addToChecksum(ChecksumBuilder builder) {
+		builder.add(isMainActivityVisible);
+		builder.add(isInCombat);
+		builder.add(selectedPosition != null);
+		if (selectedPosition != null) selectedPosition.addToChecksum(builder);
+		builder.add(selectedTabHeroInfo);
+	}
 }

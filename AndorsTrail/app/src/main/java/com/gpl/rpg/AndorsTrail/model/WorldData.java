@@ -114,4 +114,13 @@ public final class WorldData {
 			dest.writeLong(e.getValue());
 		}
 	}
+
+	public void addToChecksum(ChecksumBuilder builder) {
+		builder.add(worldTime);
+		builder.add(timers.size());
+		for(Map.Entry<String, Long> e : timers.entrySet()) {
+			builder.add(e.getKey());
+			builder.add(e.getValue());
+		}
+	}
 }

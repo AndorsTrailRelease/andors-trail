@@ -49,4 +49,11 @@ public final class ModelContainer {
 		statistics.writeToParcel(dest);
 		worldData.writeToParcel(dest);
 	}
+	public void addToChecksum(ChecksumBuilder builder){
+		player.addToChecksum(builder);
+		builder.add(currentMaps.map.name);
+		uiSelections.addToChecksum(builder);
+		statistics.addToChecksum(builder);
+		worldData.addToChecksum(builder);
+    }
 }

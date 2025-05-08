@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import com.gpl.rpg.AndorsTrail.context.WorldContext;
+import com.gpl.rpg.AndorsTrail.model.ChecksumBuilder;
 import com.gpl.rpg.AndorsTrail.savegames.LegacySavegameFormatReaderForItemContainer;
 import com.gpl.rpg.AndorsTrail.util.Coord;
 
@@ -87,5 +88,13 @@ public final class Loot {
 		items.writeToParcel(dest);
 		position.writeToParcel(dest);
 		dest.writeBoolean(isVisible);
+	}
+
+	public void addToChecksum(ChecksumBuilder builder) {
+		builder.add(exp);
+		builder.add(gold);
+		items.addToChecksum(builder);
+		position.addToChecksum(builder);
+		builder.add(isVisible);
 	}
 }

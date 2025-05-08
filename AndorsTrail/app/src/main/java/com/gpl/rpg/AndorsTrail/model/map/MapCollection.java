@@ -11,6 +11,7 @@ import java.util.List;
 import com.gpl.rpg.AndorsTrail.AndorsTrailApplication;
 import com.gpl.rpg.AndorsTrail.context.ControllerContext;
 import com.gpl.rpg.AndorsTrail.context.WorldContext;
+import com.gpl.rpg.AndorsTrail.model.ChecksumBuilder;
 import com.gpl.rpg.AndorsTrail.savegames.LegacySavegameFormatReaderForMap;
 import com.gpl.rpg.AndorsTrail.util.L;
 
@@ -97,6 +98,18 @@ public final class MapCollection {
 		for(PredefinedMap map : mapsToExport) {
 			dest.writeUTF(map.name);
 			map.writeToParcel(dest, world);
+		}
+	}
+
+	public void addToChecksum(ChecksumBuilder checksumBuilder, WorldContext world) {
+		List<PredefinedMap> mapsToExport = new ArrayList<PredefinedMap>();
+		for(PredefinedMap map : getAllMaps()) {
+			if (shouldSaveMap(world, map)) mapsToExport.add(map);
+		}
+		checksumBuilder.add(mapsToExport.size());
+		for(PredefinedMap map : mapsToExport) {
+			checksumBuilder.add(map.name);
+			map.addToChecksum(checksumBuilder, world);
 		}
 	}
 }

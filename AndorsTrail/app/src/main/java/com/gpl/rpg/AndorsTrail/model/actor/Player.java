@@ -19,6 +19,7 @@ import com.gpl.rpg.AndorsTrail.AndorsTrailApplication;
 import com.gpl.rpg.AndorsTrail.context.ControllerContext;
 import com.gpl.rpg.AndorsTrail.context.WorldContext;
 import com.gpl.rpg.AndorsTrail.controller.Constants;
+import com.gpl.rpg.AndorsTrail.model.ChecksumBuilder;
 import com.gpl.rpg.AndorsTrail.model.ability.ActorCondition;
 import com.gpl.rpg.AndorsTrail.model.ability.SkillCollection;
 import com.gpl.rpg.AndorsTrail.model.item.DropListCollection;
@@ -474,6 +475,63 @@ public final class Player extends Actor {
 		}
 		dest.writeUTF(id);
 		dest.writeLong(savedVersion);
+	}
+	public void addToChecksum(ChecksumBuilder builder) {
+		//builder.add(baseTraits.iconID);// Do not add to checksum so that it can be changed without invalidating checksums
+		builder.add(baseTraits.maxAP);
+		builder.add(baseTraits.maxHP);
+		//builder.add(name);// Do not add to checksum so that it can be changed without invalidating checksums
+		builder.add(moveCost); // TODO: Should we really write this?
+		builder.add(baseTraits.attackCost);
+		builder.add(baseTraits.attackChance);
+		builder.add(baseTraits.criticalSkill);
+		builder.add(baseTraits.criticalMultiplier);
+		baseTraits.damagePotential.addToChecksum(builder);
+		builder.add(baseTraits.blockChance);
+		builder.add(baseTraits.damageResistance);
+		builder.add(baseTraits.moveCost);
+
+		ap.addToChecksum(builder);
+		health.addToChecksum(builder);
+		position.addToChecksum(builder);
+		builder.add(conditions.size());
+		for (ActorCondition c : conditions) {
+			c.addToChecksum(builder);
+		}
+		builder.add(immunities.size());
+		for (ActorCondition c : immunities) {
+			c.addToChecksum(builder);
+		}
+		lastPosition.addToChecksum(builder);
+		nextPosition.addToChecksum(builder);
+		builder.add(level);
+		builder.add(totalExperience);
+		inventory.addToChecksum(builder);
+		builder.add(baseTraits.useItemCost);
+		builder.add(baseTraits.reequipCost);
+		builder.add(skillLevels.size());
+		for (int i = 0; i < skillLevels.size(); ++i) {
+			builder.add(skillLevels.keyAt(i));
+			builder.add(skillLevels.valueAt(i));
+		}
+		builder.add(spawnMap);
+		builder.add(spawnPlace);
+		builder.add(questProgress.size());
+		for(Entry<String, LinkedHashSet<Integer> > e : questProgress.entrySet()) {
+			builder.add(e.getKey());
+			builder.add(e.getValue().size());
+			for(int progress : e.getValue()) {
+				builder.add(progress);
+			}
+		}
+		builder.add(availableSkillIncreases);
+		builder.add(alignments.size());
+		for(Entry<String, Integer> e : alignments.entrySet()) {
+			builder.add(e.getKey());
+			builder.add(e.getValue());
+		}
+		builder.add(id);
+		builder.add(savedVersion);
 	}
 }
 

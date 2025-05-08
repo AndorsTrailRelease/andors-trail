@@ -8,6 +8,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.gpl.rpg.AndorsTrail.context.WorldContext;
 import com.gpl.rpg.AndorsTrail.controller.Constants;
+import com.gpl.rpg.AndorsTrail.model.ChecksumBuilder;
 import com.gpl.rpg.AndorsTrail.model.actor.Monster;
 import com.gpl.rpg.AndorsTrail.model.actor.MonsterType;
 import com.gpl.rpg.AndorsTrail.util.Coord;
@@ -138,6 +139,14 @@ public final class MonsterSpawnArea {
 		dest.writeInt(monsters.size());
 		for (Monster m : monsters) {
 			m.writeToParcel(dest);
+		}
+	}
+
+	public void addToChecksum(ChecksumBuilder builder) {
+		builder.add(isSpawning);
+		builder.add(monsters.size());
+		for (Monster m : monsters) {
+			m.addToChecksum(builder);
 		}
 	}
 }

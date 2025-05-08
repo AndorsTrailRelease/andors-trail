@@ -12,6 +12,7 @@ import com.gpl.rpg.AndorsTrail.context.ControllerContext;
 import com.gpl.rpg.AndorsTrail.context.WorldContext;
 import com.gpl.rpg.AndorsTrail.controller.Constants;
 import com.gpl.rpg.AndorsTrail.controller.VisualEffectController.BloodSplatter;
+import com.gpl.rpg.AndorsTrail.model.ChecksumBuilder;
 import com.gpl.rpg.AndorsTrail.model.actor.Monster;
 import com.gpl.rpg.AndorsTrail.model.item.ItemType;
 import com.gpl.rpg.AndorsTrail.model.item.Loot;
@@ -397,5 +398,31 @@ public final class PredefinedMap {
 		}
 		dest.writeBoolean(visited);
 		dest.writeUTF(lastSeenLayoutHash);
+	}
+
+	public void addToChecksum(ChecksumBuilder builder, WorldContext world) {
+		if (shouldSaveMapData(world)) {
+			builder.add(true);
+			builder.add(spawnAreas.length);
+			for(MonsterSpawnArea a : spawnAreas) {
+				builder.add(a.areaID);
+				a.addToChecksum(builder);
+			}
+			builder.add(activeMapObjectGroups.size());
+			for(String s : activeMapObjectGroups) {
+				builder.add(s);
+			}
+			builder.add(groundBags.size());
+			for(Loot l : groundBags) {
+				l.addToChecksum(builder);
+			}
+			builder.add(currentColorFilter != null);
+			if (currentColorFilter != null) builder.add(currentColorFilter);
+			builder.add(lastVisitTime);
+		} else {
+			builder.add(false);
+		}
+		builder.add(visited);
+		builder.add(lastSeenLayoutHash);
 	}
 }

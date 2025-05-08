@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import com.gpl.rpg.AndorsTrail.context.WorldContext;
 import com.gpl.rpg.AndorsTrail.controller.Constants;
+import com.gpl.rpg.AndorsTrail.model.ChecksumBuilder;
 import com.gpl.rpg.AndorsTrail.model.ability.ActorCondition;
 import com.gpl.rpg.AndorsTrail.model.ability.SkillCollection;
 import com.gpl.rpg.AndorsTrail.model.item.DropList;
@@ -191,6 +192,45 @@ public final class Monster extends Actor {
 			shopItems.writeToParcel(dest);
 		} else {
 			dest.writeBoolean(false);
+		}
+	}
+
+	public void addToChecksum(ChecksumBuilder builder) {
+		builder.add(getMonsterTypeID());
+		if (attackCost == monsterType.attackCost
+				&& attackChance == monsterType.attackChance
+				&& criticalSkill == monsterType.criticalSkill
+				&& criticalMultiplier == monsterType.criticalMultiplier
+				&& damagePotential.equals(monsterType.damagePotential)
+				&& blockChance == monsterType.blockChance
+				&& damageResistance == monsterType.damageResistance
+		) {
+			builder.add(false);
+		} else {
+			builder.add(true);
+			builder.add(attackCost);
+			builder.add(attackChance);
+			builder.add(criticalSkill);
+			builder.add(criticalMultiplier);
+			damagePotential.addToChecksum(builder);
+			builder.add(blockChance);
+			builder.add(damageResistance);
+		}
+		ap.addToChecksum(builder);
+		health.addToChecksum(builder);
+		position.addToChecksum(builder);
+		builder.add(conditions.size());
+		for (ActorCondition c : conditions) {
+			c.addToChecksum(builder);
+		}
+		builder.add(moveCost);
+
+		builder.add(forceAggressive);
+		if (shopItems != null) {
+			builder.add(true);
+			shopItems.addToChecksum(builder);
+		} else {
+			builder.add(false);
 		}
 	}
 }

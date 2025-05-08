@@ -3,6 +3,7 @@ package com.gpl.rpg.AndorsTrail.model;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -22,6 +23,8 @@ import com.gpl.rpg.AndorsTrail.model.quest.Quest;
 import com.gpl.rpg.AndorsTrail.util.HashMapHelper;
 
 public final class GameStatistics {
+	private boolean isAlteredSavegame = false;
+	private byte[] checksum = new byte[ChecksumBuilder.CHECKSUM_LENGTH];
 	private int deaths = 0;
 	private final HashMap<String, Integer> killedMonstersByTypeID = new HashMap<String, Integer>();
 	private final HashMap<String, Integer> killedMonstersByName = new HashMap<String, Integer>();
@@ -67,6 +70,7 @@ public final class GameStatistics {
 	public boolean hasUnlimitedLives() { return startLives == -1; }
 
 	public int getStartLives() { return startLives; }
+	public boolean getIsAlteredSavegame() { return isAlteredSavegame; }
 
 	public int getLivesLeft() { return hasUnlimitedLives() ? -1 : startLives - deaths; }
 
@@ -158,6 +162,18 @@ public final class GameStatistics {
 		}
 	};
 
+	public void setChecksum(byte[] checksum) {
+		if (checksum.length != ChecksumBuilder.CHECKSUM_LENGTH) throw new IllegalArgumentException("Invalid checksum length.");
+		this.checksum = checksum;
+	}
+
+	public boolean compareChecksum(byte[] checksum) {
+		return this.checksum.length == checksum.length && MessageDigest.isEqual(this.checksum, checksum);
+	}
+
+	public void markAsAlteredSavegame() {
+		isAlteredSavegame = true;
+	}
 
 	// ====== PARCELABLE ===================================================================
 
@@ -194,6 +210,11 @@ public final class GameStatistics {
 
 		this.startLives = src.readInt();
 		this.unlimitedSaves = src.readBoolean();
+		if (fileversion < 81) return;
+		this.isAlteredSavegame = src.readBoolean();
+		final int checksumLength = src.readInt();
+		this.checksum = new byte[checksumLength];
+		if( src.read(checksum) != checksumLength) throw new IOException("Failed to read full checksum.");
 	}
 
 	public void writeToParcel(DataOutputStream dest) throws IOException {
@@ -213,5 +234,29 @@ public final class GameStatistics {
 		dest.writeInt(spentGold);
 		dest.writeInt(startLives);
 		dest.writeBoolean(unlimitedSaves);
+		dest.writeBoolean(isAlteredSavegame);
+		dest.writeInt(checksum.length);
+		dest.write(checksum);
+	}
+
+
+	public void addToChecksum(ChecksumBuilder builder) {
+		builder.add(deaths);
+		Set<Entry<String, Integer> > set = killedMonstersByTypeID.entrySet();
+		builder.add(set.size());
+		for (Entry<String, Integer> e : set) {
+			builder.add(e.getKey());
+			builder.add(e.getValue());
+		}
+		set = usedItems.entrySet();
+		builder.add(set.size());
+		for (Entry<String, Integer> e : set) {
+			builder.add(e.getKey());
+			builder.add(e.getValue());
+		}
+		builder.add(spentGold);
+		builder.add(startLives);
+		builder.add(unlimitedSaves);
+		builder.add(isAlteredSavegame);
 	}
 }

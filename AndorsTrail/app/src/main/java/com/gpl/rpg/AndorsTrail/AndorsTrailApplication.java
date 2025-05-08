@@ -32,7 +32,7 @@ public final class AndorsTrailApplication extends Application {
 	public static final boolean IS_RELEASE_VERSION = !CURRENT_VERSION_DISPLAY.matches(".*[a-d].*");
 	public static final boolean DEVELOPMENT_INCOMPATIBLE_SAVEGAMES = DEVELOPMENT_DEBUGRESOURCES || DEVELOPMENT_DEBUGBUTTONS || DEVELOPMENT_FASTSPEED || !IS_RELEASE_VERSION;
 	public static final int DEVELOPMENT_INCOMPATIBLE_SAVEGAME_VERSION = 999;
-	public static final int CURRENT_VERSION = DEVELOPMENT_INCOMPATIBLE_SAVEGAMES ? DEVELOPMENT_INCOMPATIBLE_SAVEGAME_VERSION : 80;
+	public static final int CURRENT_VERSION = DEVELOPMENT_INCOMPATIBLE_SAVEGAMES ? DEVELOPMENT_INCOMPATIBLE_SAVEGAME_VERSION : 81;
 
 	private final AndorsTrailPreferences preferences = new AndorsTrailPreferences();
 	private WorldContext world = new WorldContext();

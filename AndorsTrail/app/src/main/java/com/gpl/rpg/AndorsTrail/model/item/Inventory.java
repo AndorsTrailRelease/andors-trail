@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import com.gpl.rpg.AndorsTrail.context.WorldContext;
+import com.gpl.rpg.AndorsTrail.model.ChecksumBuilder;
 import com.gpl.rpg.AndorsTrail.savegames.LegacySavegameFormatReaderForItemContainer;
 
 public final class Inventory extends ItemContainer {
@@ -207,5 +208,22 @@ public final class Inventory extends ItemContainer {
 				dest.writeBoolean(false);
 			}
 		}
+	}
+	public void addToChecksum(ChecksumBuilder builder) {
+		super.addToChecksum(builder);
+		builder.add(gold);
+		builder.add(NUM_WORN_SLOTS);
+		for(int i = 0; i < NUM_WORN_SLOTS; ++i) {
+			if (wear[i] != null) {
+				builder.add(wear[i].id);
+			}
+		}
+		builder.add(NUM_QUICK_SLOTS);
+		for(int i = 0; i < NUM_QUICK_SLOTS; ++i) {
+			if (quickitem[i] != null) {
+				builder.add(quickitem[i].id);
+			}
+		}
+
 	}
 }

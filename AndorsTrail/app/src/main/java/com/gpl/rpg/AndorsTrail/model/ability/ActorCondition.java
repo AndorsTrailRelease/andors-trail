@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import com.gpl.rpg.AndorsTrail.context.WorldContext;
+import com.gpl.rpg.AndorsTrail.model.ChecksumBuilder;
 
 public final class ActorCondition {
 	public static final int MAGNITUDE_REMOVE_ALL = -99;
@@ -51,4 +52,11 @@ public final class ActorCondition {
 		dest.writeInt(magnitude);
 		dest.writeInt(duration);
 	}
+
+	public void addToChecksum(ChecksumBuilder builder) {
+		builder.add(conditionType.conditionTypeID);
+		builder.add(magnitude);
+		builder.add(duration);
+	}
+
 }

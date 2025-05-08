@@ -1,5 +1,7 @@
 package com.gpl.rpg.AndorsTrail.util;
 
+import com.gpl.rpg.AndorsTrail.model.ChecksumBuilder;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -98,5 +100,10 @@ public final class Range {
 	public void writeToParcel(DataOutputStream dest) throws IOException {
 		dest.writeInt(max);
 		dest.writeInt(current);
+	}
+
+	public void addToChecksum(ChecksumBuilder builder) {
+		builder.add(max);
+		builder.add(current);
 	}
 }
