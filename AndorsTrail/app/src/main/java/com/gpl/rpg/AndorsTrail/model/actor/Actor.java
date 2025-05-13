@@ -35,7 +35,9 @@ public class Actor {
 	public int blockChance;
 	public int damageResistance;
 	public ItemTraits_OnUse[] onHitEffects;
+	public ItemTraits_OnUse[] onMissEffects;
 	public ItemTraits_OnHitReceived[] onHitReceivedEffects;
+	public ItemTraits_OnHitReceived[] onMissReceivedEffects;
 	public ItemTraits_OnUse onDeathEffects;
 	public boolean hasVFXRunning = false;
 	public long vfxStartTime = 0;
@@ -69,8 +71,12 @@ public class Actor {
 	public int getDamageResistance() { return damageResistance; }
 	public ItemTraits_OnUse[] getOnHitEffects() { return onHitEffects; }
 	public List<ItemTraits_OnUse> getOnHitEffectsAsList() { return onHitEffects == null ? null : Arrays.asList(onHitEffects); }
+	public ItemTraits_OnUse[] getOnMissEffects() { return onMissEffects; }
+	public List<ItemTraits_OnUse> getOnMissEffectsAsList() { return onMissEffects == null ? null : Arrays.asList(onMissEffects); }
 	public ItemTraits_OnHitReceived[] getOnHitReceivedEffects() { return onHitReceivedEffects; }
 	public List<ItemTraits_OnHitReceived> getOnHitReceivedEffectsAsList() { return onHitReceivedEffects == null ? null : Arrays.asList(onHitReceivedEffects); }
+	public ItemTraits_OnHitReceived[] getOnMissReceivedEffects() { return onMissReceivedEffects; }
+	public List<ItemTraits_OnHitReceived> getOnMissReceivedEffectsAsList() { return onMissReceivedEffects == null ? null : Arrays.asList(onMissReceivedEffects); }
 	public ItemTraits_OnUse getOnDeathEffects() { return onDeathEffects; }
 	
 	public boolean hasCriticalSkillEffect() { return getCriticalSkill() != 0; }

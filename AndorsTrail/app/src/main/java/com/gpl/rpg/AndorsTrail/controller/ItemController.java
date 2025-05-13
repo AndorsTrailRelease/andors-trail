@@ -195,19 +195,27 @@ public final class ItemController {
 
 	public static void recalculateHitEffectsFromWornItems(Player player) {
 		ArrayList<ItemTraits_OnUse> effects_onHit = null;
+		ArrayList<ItemTraits_OnUse> effects_onMiss = null;
 		ArrayList<ItemTraits_OnHitReceived> effects_onHitReceived = null;
+		ArrayList<ItemTraits_OnHitReceived> effects_onMissReceived = null;
 		for (Inventory.WearSlot slot : Inventory.WearSlot.values()) {
 			ItemType type = player.inventory.getItemTypeInWearSlot(slot);
 			if (type == null) continue;
 			ItemTraits_OnUse eh = type.effects_hit;
 			ItemTraits_OnHitReceived ehr = type.effects_hitReceived;
-			if (eh == null && ehr == null) continue;
+			ItemTraits_OnUse em = type.effects_miss;
+			ItemTraits_OnHitReceived emr = type.effects_missReceived;
+			if (eh == null && ehr == null && em == null && emr == null) continue;
 
 			if (effects_onHit == null) effects_onHit = new ArrayList<ItemTraits_OnUse>();
 			if (eh != null) effects_onHit.add(eh);
+			if (effects_onMiss == null) effects_onMiss = new ArrayList<ItemTraits_OnUse>();
+			if (em != null) effects_onMiss.add(em);
 			
 			if (effects_onHitReceived == null) effects_onHitReceived = new ArrayList<ItemTraits_OnHitReceived>();
 			if (ehr != null) effects_onHitReceived.add(ehr);
+			if (effects_onMissReceived == null) effects_onMissReceived = new ArrayList<ItemTraits_OnHitReceived>();
+			if (emr != null) effects_onMissReceived.add(emr);
 		}
 
 		if (effects_onHit != null) {
@@ -217,6 +225,13 @@ public final class ItemController {
 		} else {
 			player.onHitEffects = null;
 		}
+		if (effects_onMiss != null) {
+			ItemTraits_OnUse[] effects_ = new ItemTraits_OnUse[effects_onMiss.size()];
+			effects_ = effects_onMiss.toArray(effects_);
+			player.onMissEffects = effects_;
+		} else {
+			player.onMissEffects = null;
+		}
 
 		if (effects_onHitReceived != null) {
 			ItemTraits_OnHitReceived[] effects_ = new ItemTraits_OnHitReceived[effects_onHitReceived.size()];
@@ -224,6 +239,13 @@ public final class ItemController {
 			player.onHitReceivedEffects = effects_;
 		} else {
 			player.onHitReceivedEffects = null;
+		}
+		if (effects_onMissReceived != null) {
+			ItemTraits_OnHitReceived[] effects_ = new ItemTraits_OnHitReceived[effects_onMissReceived.size()];
+			effects_ = effects_onMissReceived.toArray(effects_);
+			player.onMissReceivedEffects = effects_;
+		} else {
+			player.onMissReceivedEffects = null;
 		}
 	}
 
