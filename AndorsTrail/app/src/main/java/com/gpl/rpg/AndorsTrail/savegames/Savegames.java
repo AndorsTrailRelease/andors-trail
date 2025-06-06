@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.security.DigestException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -79,7 +80,7 @@ public final class Savegames {
 			}
 
 			return true;
-		} catch (IOException e) {
+		} catch (IOException | DigestException e) {
 			L.log("Error saving world: " + e.toString());
 			return false;
 		}
@@ -87,7 +88,7 @@ public final class Savegames {
 
 	private static void writeBackup(Context androidContext, byte[] savegame, String playerId) throws IOException {
 		File cheatDetectionFolder = AndroidStorage.getStorageDirectory(androidContext, Constants.CHEAT_DETECTION_FOLDER);
-        ensureDirExists(cheatDetectionFolder);
+		ensureDirExists(cheatDetectionFolder);
 		File backupFile = new File(cheatDetectionFolder, playerId + "X");
 		FileOutputStream fileOutputStream = new FileOutputStream(backupFile);
 		fileOutputStream.write(savegame);
@@ -108,15 +109,15 @@ public final class Savegames {
 			LoadSavegameResult result = loadWorld(androidContext.getResources(), world, controllers, androidContext, fos, fh);
 			fos.close();
 			if (result == LoadSavegameResult.success && slot != SLOT_QUICKSAVE && !world.model.statistics.hasUnlimitedSaves()) {
-                // save to the quicksave slot before deleting the file
-                if (!saveWorld(world, androidContext, SLOT_QUICKSAVE)) {
+				// save to the quicksave slot before deleting the file
+				if (!saveWorld(world, androidContext, SLOT_QUICKSAVE)) {
 					return LoadSavegameResult.unknownError;
 				}
 				getSlotFile(slot, androidContext).delete();
 				writeCheatCheck(androidContext, DENY_LOADING_BECAUSE_GAME_IS_CURRENTLY_PLAYED, fh.playerId);
 			}
 			return result;
-		} catch (IOException e) {
+		} catch (IOException | DigestException e) {
 			if (AndorsTrailApplication.DEVELOPMENT_DEBUGMESSAGES) {
 				L.log("Error loading world: " + e.toString());
 				StringWriter sw = new StringWriter();
@@ -128,33 +129,33 @@ public final class Savegames {
 		}
 	}
 
-    private static boolean triedToCheat(Context androidContext, FileHeader fh) throws IOException {
-        long savedVersionToCheck = 0;
-        File cheatDetectionFolder = AndroidStorage.getStorageDirectory(androidContext, Constants.CHEAT_DETECTION_FOLDER);
-        ensureDirExists(cheatDetectionFolder);
-        File cheatDetectionFile = new File(cheatDetectionFolder, fh.playerId);
-        if (cheatDetectionFile.exists()) {
-            FileInputStream fileInputStream = new FileInputStream(cheatDetectionFile);
-            DataInputStream dataInputStream = new DataInputStream(fileInputStream);
-            final CheatDetection cheatDetection = new CheatDetection(dataInputStream);
-            savedVersionToCheck = cheatDetection.savedVersion;
-            dataInputStream.close();
-            fileInputStream.close();
-        }
+	private static boolean triedToCheat(Context androidContext, FileHeader fh) throws IOException {
+		long savedVersionToCheck = 0;
+		File cheatDetectionFolder = AndroidStorage.getStorageDirectory(androidContext, Constants.CHEAT_DETECTION_FOLDER);
+		ensureDirExists(cheatDetectionFolder);
+		File cheatDetectionFile = new File(cheatDetectionFolder, fh.playerId);
+		if (cheatDetectionFile.exists()) {
+			FileInputStream fileInputStream = new FileInputStream(cheatDetectionFile);
+			DataInputStream dataInputStream = new DataInputStream(fileInputStream);
+			final CheatDetection cheatDetection = new CheatDetection(dataInputStream);
+			savedVersionToCheck = cheatDetection.savedVersion;
+			dataInputStream.close();
+			fileInputStream.close();
+		}
 
 		if (savedVersionToCheck == DENY_LOADING_BECAUSE_GAME_IS_CURRENTLY_PLAYED) {
 			return true;
 		}
 
-        if (androidContext.getFileStreamPath(fh.playerId).exists()) {
-            FileInputStream fileInputStream = androidContext.openFileInput(fh.playerId);
-            DataInputStream dataInputStream = new DataInputStream(fileInputStream);
-            final CheatDetection cheatDetection = new CheatDetection(dataInputStream);
-            if (cheatDetection.savedVersion == DENY_LOADING_BECAUSE_GAME_IS_CURRENTLY_PLAYED) {
-                savedVersionToCheck = DENY_LOADING_BECAUSE_GAME_IS_CURRENTLY_PLAYED;
-            } else if (cheatDetection.savedVersion > savedVersionToCheck) {
-                savedVersionToCheck = cheatDetection.savedVersion;
-            }
+		if (androidContext.getFileStreamPath(fh.playerId).exists()) {
+			FileInputStream fileInputStream = androidContext.openFileInput(fh.playerId);
+			DataInputStream dataInputStream = new DataInputStream(fileInputStream);
+			final CheatDetection cheatDetection = new CheatDetection(dataInputStream);
+			if (cheatDetection.savedVersion == DENY_LOADING_BECAUSE_GAME_IS_CURRENTLY_PLAYED) {
+				savedVersionToCheck = DENY_LOADING_BECAUSE_GAME_IS_CURRENTLY_PLAYED;
+			} else if (cheatDetection.savedVersion > savedVersionToCheck) {
+				savedVersionToCheck = cheatDetection.savedVersion;
+			}
 
 			if (AndorsTrailApplication.DEVELOPMENT_DEBUGMESSAGES) {
 				L.log("Internal cheatcheck file savedVersion: " + cheatDetection.savedVersion);
@@ -167,81 +168,96 @@ public final class Savegames {
 		return (savedVersionToCheck == DENY_LOADING_BECAUSE_GAME_IS_CURRENTLY_PLAYED || fh.savedVersion < savedVersionToCheck);
 	}
 
-    private static FileOutputStream getOutputFile(Context androidContext, int slot) throws IOException {
-        if (slot == SLOT_QUICKSAVE) {
-            return androidContext.openFileOutput(Constants.FILENAME_SAVEGAME_QUICKSAVE, Context.MODE_PRIVATE);
-        } else {
-            ensureSavegameDirectoryExists(androidContext);
-            return new FileOutputStream(getSlotFile(slot, androidContext));
-        }
-    }
+	private static FileOutputStream getOutputFile(Context androidContext, int slot) throws IOException {
+		if (slot == SLOT_QUICKSAVE) {
+			return androidContext.openFileOutput(Constants.FILENAME_SAVEGAME_QUICKSAVE, Context.MODE_PRIVATE);
+		} else {
+			ensureSavegameDirectoryExists(androidContext);
+			return new FileOutputStream(getSlotFile(slot, androidContext));
+		}
+	}
 
-    private static void ensureSavegameDirectoryExists(Context context) {
-        File dir = AndroidStorage.getStorageDirectory(context, Constants.FILENAME_SAVEGAME_DIRECTORY);
-        ensureDirExists(dir);
-    }
+	private static void ensureSavegameDirectoryExists(Context context) {
+		File dir = AndroidStorage.getStorageDirectory(context, Constants.FILENAME_SAVEGAME_DIRECTORY);
+		ensureDirExists(dir);
+	}
 
-    public static boolean ensureDirExists(File dir) {
-        if (!dir.exists()) {
-            boolean worked = dir.mkdir();
-            return worked;
-        }
-        return true;
-    }
+	public static boolean ensureDirExists(File dir) {
+		if (!dir.exists()) {
+			boolean worked = dir.mkdir();
+			return worked;
+		}
+		return true;
+	}
 
-    private static FileInputStream getInputFile(Context androidContext, int slot) throws IOException {
-        if (slot == SLOT_QUICKSAVE) {
-            return androidContext.openFileInput(Constants.FILENAME_SAVEGAME_QUICKSAVE);
-        } else {
-            return new FileInputStream(getSlotFile(slot, androidContext));
-        }
-    }
+	private static FileInputStream getInputFile(Context androidContext, int slot) throws IOException {
+		if (slot == SLOT_QUICKSAVE) {
+			return androidContext.openFileInput(Constants.FILENAME_SAVEGAME_QUICKSAVE);
+		} else {
+			return new FileInputStream(getSlotFile(slot, androidContext));
+		}
+	}
 
-    public static File getSlotFile(int slot, Context context) {
-        File root = AndroidStorage.getStorageDirectory(context, Constants.FILENAME_SAVEGAME_DIRECTORY);
-        return getSlotFile(slot, root);
-    }
+	public static File getSlotFile(int slot, Context context) {
+		File root = AndroidStorage.getStorageDirectory(context, Constants.FILENAME_SAVEGAME_DIRECTORY);
+		return getSlotFile(slot, root);
+	}
 
-    public static File getSlotFile(int slot, File directory) {
-        return new File(directory, getSlotFileName(slot));
-    }
+	public static File getSlotFile(int slot, File directory) {
+		return new File(directory, getSlotFileName(slot));
+	}
 
-    public static String getSlotFileName(int slot) {
-        return Constants.FILENAME_SAVEGAME_FILENAME_PREFIX + slot;
-    }
+	public static String getSlotFileName(int slot) {
+		return Constants.FILENAME_SAVEGAME_FILENAME_PREFIX + slot;
+	}
 
 
-	public static void saveWorld(WorldContext world, OutputStream outStream, String displayInfo) throws IOException {
+	public static void saveWorld(WorldContext world, OutputStream outStream, String displayInfo) throws IOException, DigestException {
 		DataOutputStream dest = new DataOutputStream(outStream);
 		FileHeader.writeToParcel(dest, world.model.player.getName(),
 				displayInfo, world.model.player.iconID,
 				world.model.statistics.isDead(),
 				world.model.statistics.hasUnlimitedSaves(),
 				world.model.player.id,
-				world.model.player.savedVersion);
+				world.model.player.savedVersion,
+				world.model.statistics.getIsAlteredSavegame());
+
+		byte[] checksum = world.getChecksum();
+		world.model.statistics.setChecksum(checksum);
+
 		world.maps.writeToParcel(dest, world);
 		world.model.writeToParcel(dest);
 		dest.close();
 	}
 
-    public static LoadSavegameResult loadWorld(Resources res, WorldContext world, ControllerContext controllers, Context androidContext, InputStream inState, FileHeader fh) throws IOException {
-        DataInputStream src = new DataInputStream(inState);
-        final FileHeader header = new FileHeader(src, fh.skipIcon);
-        if (header.fileversion > AndorsTrailApplication.CURRENT_VERSION)
-            return LoadSavegameResult.savegameIsFromAFutureVersion;
+	public static LoadSavegameResult loadWorld(Resources res, WorldContext world, ControllerContext controllers, Context androidContext, InputStream inState, FileHeader fh) throws IOException, DigestException {
+		DataInputStream src = new DataInputStream(inState);
+		final FileHeader header = new FileHeader(src, fh.skipIcon);
+		if (header.fileversion > AndorsTrailApplication.CURRENT_VERSION)
+			return LoadSavegameResult.savegameIsFromAFutureVersion;
 
 		world.maps.readFromParcel(src, world, controllers, header.fileversion);
 		world.model = new ModelContainer(src, world, controllers, header.fileversion);
-		WorldMapController.populateWorldMap(androidContext, world, controllers.getResources());
 		src.close();
-		
+		if (header.fileversion >= 81) {
+			checkChecksum(world);
+		}
+		WorldMapController.populateWorldMap(androidContext, world, controllers.getResources());
+
 		if (header.fileversion < 45) {
 			LegacySavegamesContentAdaptations.adaptToNewContentForVersion45(world, controllers, res);
 		}
-		
+
 		onWorldLoaded(res, world, controllers);
 
 		return LoadSavegameResult.success;
+	}
+
+	private static void checkChecksum(WorldContext world) throws DigestException {
+		byte[] checksum = world.getChecksum();
+		if (!world.model.statistics.compareChecksum(checksum)) {
+			world.model.statistics.markAsAlteredSavegame();
+		}
 	}
 
 	private static void onWorldLoaded(Resources res, WorldContext world, ControllerContext controllers) {
@@ -268,15 +284,15 @@ public final class Savegames {
 		}
 	}
 
-    private static void writeCheatCheck(Context androidContext, long savedVersion, String playerId) throws IOException {
-        File cheatDetectionFolder = AndroidStorage.getStorageDirectory(androidContext, Constants.CHEAT_DETECTION_FOLDER);
-        ensureDirExists(cheatDetectionFolder);
-        File cheatDetectionFile = new File(cheatDetectionFolder, playerId);
-        FileOutputStream fileOutputStream = new FileOutputStream(cheatDetectionFile);
-        DataOutputStream dataOutputStream = new DataOutputStream(fileOutputStream);
-        CheatDetection.writeToParcel(dataOutputStream, savedVersion);
-        dataOutputStream.close();
-        fileOutputStream.close();
+	private static void writeCheatCheck(Context androidContext, long savedVersion, String playerId) throws IOException {
+		File cheatDetectionFolder = AndroidStorage.getStorageDirectory(androidContext, Constants.CHEAT_DETECTION_FOLDER);
+		ensureDirExists(cheatDetectionFolder);
+		File cheatDetectionFile = new File(cheatDetectionFolder, playerId);
+		FileOutputStream fileOutputStream = new FileOutputStream(cheatDetectionFile);
+		DataOutputStream dataOutputStream = new DataOutputStream(fileOutputStream);
+		CheatDetection.writeToParcel(dataOutputStream, savedVersion);
+		dataOutputStream.close();
+		fileOutputStream.close();
 
 		fileOutputStream = androidContext.openFileOutput(playerId, Context.MODE_PRIVATE);
 		dataOutputStream = new DataOutputStream(fileOutputStream);
@@ -287,26 +303,26 @@ public final class Savegames {
 
 	private static final Pattern savegameFilenamePattern = Pattern.compile(Constants.FILENAME_SAVEGAME_FILENAME_PREFIX + "(\\d+)");
 
-    public static List<Integer> getUsedSavegameSlots(Context context) {
-        try {
-            final List<Integer> result = new ArrayList<Integer>();
-            AndroidStorage.getStorageDirectory(context, Constants.FILENAME_SAVEGAME_DIRECTORY).listFiles(new FilenameFilter() {
-                @Override
-                public boolean accept(File f, String filename) {
-                    Matcher m = savegameFilenamePattern.matcher(filename);
-                    if (m != null && m.matches()) {
-                        result.add(Integer.parseInt(m.group(1)));
-                        return true;
-                    }
-                    return false;
-                }
-            });
-            Collections.sort(result);
-            return result;
-        } catch (Exception e) {
-            return new ArrayList<Integer>();
-        }
-    }
+	public static List<Integer> getUsedSavegameSlots(Context context) {
+		try {
+			final List<Integer> result = new ArrayList<Integer>();
+			AndroidStorage.getStorageDirectory(context, Constants.FILENAME_SAVEGAME_DIRECTORY).listFiles(new FilenameFilter() {
+				@Override
+				public boolean accept(File f, String filename) {
+					Matcher m = savegameFilenamePattern.matcher(filename);
+					if (m != null && m.matches()) {
+						result.add(Integer.parseInt(m.group(1)));
+						return true;
+					}
+					return false;
+				}
+			});
+			Collections.sort(result);
+			return result;
+		} catch (Exception e) {
+			return new ArrayList<Integer>();
+		}
+	}
 
 	private static final class CheatDetection {
 		public final int fileversion;
@@ -326,16 +342,17 @@ public final class Savegames {
 	}
 
 
-    public static final class FileHeader {
-        public final int fileversion;
-        public final String playerName;
-        public final String displayInfo;
-        public final int iconID;
-        public boolean skipIcon = false;
-        public final boolean isDead;
-        public final boolean hasUnlimitedSaves;
-        public final String playerId;
-        public final long savedVersion;
+	public static final class FileHeader {
+		public final int fileversion;
+		public final String playerName;
+		public final String displayInfo;
+		public final int iconID;
+		public final boolean isAlteredSavegame;
+		public boolean skipIcon = false;
+		public final boolean isDead;
+		public final boolean hasUnlimitedSaves;
+		public final String playerId;
+		public final long savedVersion;
 
 		public String describe() {
 			return (fileversion == AndorsTrailApplication.DEVELOPMENT_INCOMPATIBLE_SAVEGAME_VERSION ? "(D) " : "") + playerName + ", " + displayInfo;
@@ -344,18 +361,18 @@ public final class Savegames {
 
 		// ====== PARCELABLE ===================================================================
 
-        public FileHeader(DataInputStream src, boolean skipIcon) throws IOException {
-            int fileversion = src.readInt();
-            if (fileversion == 11)
-                fileversion = 5; // Fileversion 5 had no version identifier, but the first byte was 11.
-            this.fileversion = fileversion;
-            if (fileversion >= 14) { // Before fileversion 14 (0.6.7), we had no file header.
-                this.playerName = src.readUTF();
-                this.displayInfo = src.readUTF();
-            } else {
-                this.playerName = null;
-                this.displayInfo = null;
-            }
+		public FileHeader(DataInputStream src, boolean skipIcon) throws IOException {
+			int fileversion = src.readInt();
+			if (fileversion == 11)
+				fileversion = 5; // Fileversion 5 had no version identifier, but the first byte was 11.
+			this.fileversion = fileversion;
+			if (fileversion >= 14) { // Before fileversion 14 (0.6.7), we had no file header.
+				this.playerName = src.readUTF();
+				this.displayInfo = src.readUTF();
+			} else {
+				this.playerName = null;
+				this.displayInfo = null;
+			}
 
 			if (fileversion >= 43) {
 				int id = src.readInt();
@@ -380,9 +397,14 @@ public final class Savegames {
 				this.playerId = "";
 				this.savedVersion = 0;
 			}
+			if(fileversion >= 81){
+				this.isAlteredSavegame = src.readBoolean();
+			}else{
+				this.isAlteredSavegame = false;
+			}
 		}
 
-		public static void writeToParcel(DataOutputStream dest, String playerName, String displayInfo, int iconID, boolean isDead, boolean hasUnlimitedSaves, String playerId, long savedVersion) throws IOException {
+		public static void writeToParcel(DataOutputStream dest, String playerName, String displayInfo, int iconID, boolean isDead, boolean hasUnlimitedSaves, String playerId, long savedVersion, boolean isAlteredSavegame) throws IOException {
 			dest.writeInt(AndorsTrailApplication.CURRENT_VERSION);
 			dest.writeUTF(playerName);
 			dest.writeUTF(displayInfo);
@@ -391,6 +413,7 @@ public final class Savegames {
 			dest.writeBoolean(hasUnlimitedSaves);
 			dest.writeUTF(playerId);
 			dest.writeLong(savedVersion);
+			dest.writeBoolean(isAlteredSavegame);
 		}
 	}
 }

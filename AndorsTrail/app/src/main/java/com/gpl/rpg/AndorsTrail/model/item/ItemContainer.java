@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import com.gpl.rpg.AndorsTrail.context.WorldContext;
+import com.gpl.rpg.AndorsTrail.model.ChecksumBuilder;
 import com.gpl.rpg.AndorsTrail.model.actor.Player;
 
 public class ItemContainer {
@@ -41,6 +42,10 @@ public class ItemContainer {
 		public void writeToParcel(DataOutputStream dest) throws IOException {
 			dest.writeUTF(itemType.id);
 			dest.writeInt(quantity);
+		}
+		public void addToChecksum(ChecksumBuilder builder) {
+			builder.add(itemType.id);
+			builder.add(quantity);
 		}
 	}
 
@@ -278,6 +283,12 @@ public class ItemContainer {
 		dest.writeInt(items.size());
 		for (ItemEntry e : items) {
 			e.writeToParcel(dest);
+		}
+	}
+	public void addToChecksum(ChecksumBuilder builder) {
+		builder.add(items.size());
+		for (ItemEntry e : items) {
+			e.addToChecksum(builder);
 		}
 	}
 }

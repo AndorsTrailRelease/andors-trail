@@ -1,5 +1,7 @@
 package com.gpl.rpg.AndorsTrail.util;
 
+import com.gpl.rpg.AndorsTrail.model.ChecksumBuilder;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -46,5 +48,10 @@ public final class Coord {
 	public void writeToParcel(DataOutputStream dest) throws IOException {
 		dest.writeInt(x);
 		dest.writeInt(y);
+	}
+
+	public void addToChecksum(ChecksumBuilder builder) {
+		builder.add(x);
+		builder.add(y);
 	}
 }

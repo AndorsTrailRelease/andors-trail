@@ -1,5 +1,6 @@
 package com.gpl.rpg.AndorsTrail.context;
 
+import com.gpl.rpg.AndorsTrail.model.ChecksumBuilder;
 import com.gpl.rpg.AndorsTrail.model.ModelContainer;
 import com.gpl.rpg.AndorsTrail.model.ability.ActorConditionTypeCollection;
 import com.gpl.rpg.AndorsTrail.model.ability.SkillCollection;
@@ -12,6 +13,8 @@ import com.gpl.rpg.AndorsTrail.model.quest.QuestCollection;
 import com.gpl.rpg.AndorsTrail.resource.ConversationLoader;
 import com.gpl.rpg.AndorsTrail.resource.VisualEffectCollection;
 import com.gpl.rpg.AndorsTrail.resource.tiles.TileManager;
+
+import java.security.DigestException;
 
 public final class WorldContext {
 	//Objectcollections
@@ -61,5 +64,12 @@ public final class WorldContext {
 	}
 	public void resetForNewGame() {
 		maps.resetForNewGame();
+	}
+
+	public byte[] getChecksum() throws DigestException {
+		ChecksumBuilder checksumBuilder = new ChecksumBuilder();
+		model.addToChecksum(checksumBuilder);
+		maps.addToChecksum(checksumBuilder, this);
+		return checksumBuilder.build();
 	}
 }
