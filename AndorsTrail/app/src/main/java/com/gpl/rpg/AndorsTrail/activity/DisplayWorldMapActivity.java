@@ -38,10 +38,7 @@ public final class DisplayWorldMapActivity extends AndorsTrailBaseActivity {
 		AndorsTrailApplication app = AndorsTrailApplication.getApplicationFromActivity(this);
 		if (!app.isInitialized()) { finish(); return; }
 		this.world = app.getWorld();
-
-		app.setWindowParameters(this);
-
-		setContentView(R.layout.displayworldmap);
+		initializeView(this, R.layout.displayworldmap, R.id.worldmap_root);
 
 		displayworldmap_webview = (WebView) findViewById(R.id.displayworldmap_webview);
 		displayworldmap_webview.setBackgroundColor(ThemeHelper.getThemeColor(this, R.attr.ui_theme_displayworldmap_bg_color));

@@ -16,7 +16,7 @@ import com.gpl.rpg.AndorsTrail.model.map.WorldMapSegment.WorldMapSegmentMap;
 import com.gpl.rpg.AndorsTrail.resource.TranslationLoader;
 import com.gpl.rpg.AndorsTrail.util.Coord;
 import com.gpl.rpg.AndorsTrail.util.L;
-import com.gpl.rpg.AndorsTrail.util.Pair;
+import android.util.Pair;
 import com.gpl.rpg.AndorsTrail.util.XmlResourceParserUtils;
 
 public final class WorldMapParser {

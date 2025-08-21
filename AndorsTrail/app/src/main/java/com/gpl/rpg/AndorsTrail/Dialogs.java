@@ -346,7 +346,6 @@ public final class Dialogs {
 		CustomDialogFactory.show(d);
 	}
 
-	@TargetApi(23)
 	private static boolean hasPermissions(final Activity activity) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 			if (activity.getApplicationContext().checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED

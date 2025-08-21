@@ -13,7 +13,7 @@ import com.gpl.rpg.AndorsTrail.resource.DynamicTileLoader;
 import com.gpl.rpg.AndorsTrail.resource.TranslationLoader;
 import com.gpl.rpg.AndorsTrail.resource.parsers.json.JsonCollectionParserFor;
 import com.gpl.rpg.AndorsTrail.resource.parsers.json.JsonFieldNames;
-import com.gpl.rpg.AndorsTrail.util.Pair;
+import android.util.Pair;
 
 public final class ItemTypeParser extends JsonCollectionParserFor<ItemType> {
 

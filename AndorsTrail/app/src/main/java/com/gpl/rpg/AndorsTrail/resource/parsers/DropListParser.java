@@ -11,7 +11,7 @@ import com.gpl.rpg.AndorsTrail.resource.parsers.json.JsonArrayParserFor;
 import com.gpl.rpg.AndorsTrail.resource.parsers.json.JsonCollectionParserFor;
 import com.gpl.rpg.AndorsTrail.resource.parsers.json.JsonFieldNames;
 import com.gpl.rpg.AndorsTrail.util.L;
-import com.gpl.rpg.AndorsTrail.util.Pair;
+import android.util.Pair;
 
 public final class DropListParser extends JsonCollectionParserFor<DropList> {
 

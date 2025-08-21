@@ -37,7 +37,7 @@ public final class LevelUpActivity extends AndorsTrailBaseActivity {
 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-		setContentView(R.layout.levelup);
+		initializeView(this, R.layout.levelup, R.id.levelup_root);
 
 		levelup_title = (TextView) findViewById(R.id.levelup_title);
 		levelup_description = (TextView) findViewById(R.id.levelup_description);

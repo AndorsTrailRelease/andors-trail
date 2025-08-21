@@ -13,17 +13,16 @@ public final class Preferences extends PreferenceActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setTheme(ThemeHelper.getBaseTheme());
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		super.onCreate(savedInstanceState);
 		AndorsTrailApplication app = AndorsTrailApplication.getApplicationFromActivity(this);
-		if (app.getPreferences().fullscreen) {
-			getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		} else {
-			getWindow().setFlags(0, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		}
+		app.setWindowParameters(this);
+		super.onCreate(savedInstanceState);
+		app.setFullscreenMode(this);
+
 
 		app.setLocale(this);
 		addPreferencesFromResource(R.xml.preferences);
+
+
 	}
 
 	@Override

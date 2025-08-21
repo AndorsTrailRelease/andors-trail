@@ -34,7 +34,7 @@ public final class MonsterEncounterActivity extends AndorsTrailBaseActivity {
 			return;
 		}
 
-		setContentView(R.layout.monsterencounter);
+		initializeView(this, R.layout.monsterencounter, R.id.monsterencounter_root);
 
 		CharSequence difficulty = getText(MonsterInfoActivity.getMonsterDifficultyResource(controllers, monster));
 

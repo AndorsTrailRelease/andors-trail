@@ -30,9 +30,7 @@ public final class ActorConditionInfoActivity extends AndorsTrailBaseActivity {
 
 		String conditionTypeID = getIntent().getData().getLastPathSegment();
 		ActorConditionType conditionType = world.actorConditionsTypes.getActorConditionType(conditionTypeID);
-
-		setContentView(R.layout.actorconditioninfo);
-
+		initializeView(this, R.layout.actorconditioninfo, R.id.actorconditioninfo_root);
 
 		TextView tv = (TextView) findViewById(R.id.actorconditioninfo_title);
 		tv.setText(conditionType.name);

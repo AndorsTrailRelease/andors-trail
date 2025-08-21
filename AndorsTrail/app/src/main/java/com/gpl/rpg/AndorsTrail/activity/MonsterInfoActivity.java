@@ -43,7 +43,7 @@ public final class MonsterInfoActivity extends AndorsTrailBaseActivity {
 		this.controllers = app.getControllerContext();
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-		setContentView(R.layout.monsterinfo);
+		initializeView(this, R.layout.monsterinfo, R.id.monsterinfo_root);
 
 		monsterinfo_title = (TextView) findViewById(R.id.monsterinfo_title);
 		monsterinfo_difficulty = (TextView) findViewById(R.id.monsterinfo_difficulty);
