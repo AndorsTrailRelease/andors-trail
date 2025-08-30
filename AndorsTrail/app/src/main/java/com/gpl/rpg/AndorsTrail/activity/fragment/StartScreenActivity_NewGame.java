@@ -3,6 +3,7 @@ package com.gpl.rpg.AndorsTrail.activity.fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,8 +40,7 @@ public class StartScreenActivity_NewGame extends Fragment {
 		}
 		
 		View root = inflater.inflate(R.layout.startscreen_newgame, container, false);
-		
-		
+
 		startscreen_enterheroname = (TextView) root.findViewById(R.id.startscreen_enterheroname);
 
 		new SpinnerEmulator(root, R.id.startscreen_mode_selector_button, R.array.startscreen_mode_selector, R.string.startscreen_game_mode) {

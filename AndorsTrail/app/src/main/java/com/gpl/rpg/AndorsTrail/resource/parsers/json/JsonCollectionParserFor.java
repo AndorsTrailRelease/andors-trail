@@ -11,7 +11,7 @@ import org.json.JSONException;
 
 import com.gpl.rpg.AndorsTrail.AndorsTrailApplication;
 import com.gpl.rpg.AndorsTrail.util.L;
-import com.gpl.rpg.AndorsTrail.util.Pair;
+import android.util.Pair;
 
 public abstract class JsonCollectionParserFor<T> extends JsonParserFor<Pair<String, T>> {
 	public HashSet<String> parseRows(String input, HashMap<String, T> dest) {

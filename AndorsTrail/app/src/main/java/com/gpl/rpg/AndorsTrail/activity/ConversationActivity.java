@@ -75,13 +75,11 @@ public final class ConversationActivity
 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-		setContentView(R.layout.conversation);
+		initializeView(this, R.layout.conversation, R.id.conversation_root);
 
-		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			setFinishOnTouchOutside(false);
-		}
+        setFinishOnTouchOutside(false);
 
-		replyGroup = new RadioGroup(this);
+        replyGroup = new RadioGroup(this);
 		replyGroup.setLayoutParams(new ListView.LayoutParams(ListView.LayoutParams.MATCH_PARENT, ListView.LayoutParams.WRAP_CONTENT));
 		statementList = (ListView) findViewById(R.id.conversation_statements);
 		statementList.addFooterView(replyGroup);

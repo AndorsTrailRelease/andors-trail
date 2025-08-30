@@ -59,7 +59,6 @@ public class StartScreenActivity_MainMenu extends Fragment {
         updatePreferences(false);
         super.onCreateView(inflater, container, savedInstanceState);
 
-
 		if (container != null) {
 			container.removeAllViews();
 		}
@@ -196,7 +195,6 @@ public class StartScreenActivity_MainMenu extends Fragment {
 
 	}
 
-	@TargetApi(29)
 	public void migrateDataOnDemand(final Activity activity) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
 			if (activity.getApplicationContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
@@ -232,7 +230,6 @@ public class StartScreenActivity_MainMenu extends Fragment {
 	private static final int READ_EXTERNAL_STORAGE_REQUEST=1;
 	private static final int WRITE_EXTERNAL_STORAGE_REQUEST=2;
 
-	@TargetApi(23)
 	public static void checkAndRequestPermissions(final Activity activity) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
 			if (activity.getApplicationContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {

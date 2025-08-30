@@ -13,7 +13,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -76,11 +75,8 @@ public class CustomDialogFactory {
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		dialog.setContentView(R.layout.custom_dialog_title_icon);
 		dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-		if (((AndorsTrailApplication)context.getApplicationContext()).getPreferences().fullscreen) {
-			dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		} else {
-			dialog.getWindow().setFlags(0, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		}
+		boolean fullscreen = ((AndorsTrailApplication) context.getApplicationContext()).getPreferences().fullscreen;
+		AndorsTrailApplication.setFullscreenMode(fullscreen, dialog.getWindow());
 
 		setTitle(dialog, title, icon);
 

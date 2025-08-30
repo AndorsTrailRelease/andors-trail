@@ -21,6 +21,8 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
 import android.view.KeyEvent;
@@ -49,9 +51,9 @@ public final class StartScreenActivity extends AndorsTrailBaseFragmentActivity i
 		final Resources res = getResources();
 		TileManager tileManager = app.getWorld().tileManager;
 		tileManager.setDensity(res);
-		app.setWindowParameters(this);
 
-		setContentView(R.layout.startscreen);
+		initializeView(this, R.layout.startscreen, R.id.startscreen_fragment_container);
+		app.setFullscreenMode(this);
 
 		if (findViewById(R.id.startscreen_fragment_container) != null) {
 			StartScreenActivity_MainMenu mainMenu = new StartScreenActivity_MainMenu();
@@ -67,9 +69,11 @@ public final class StartScreenActivity extends AndorsTrailBaseFragmentActivity i
 		
 		
 		tv = (TextView) findViewById(R.id.startscreen_version);
+		app.setUsablePadding(tv);
 		tv.setText('v' + AndorsTrailApplication.CURRENT_VERSION_DISPLAY);
 		
 		development_version = (TextView) findViewById(R.id.startscreen_dev_version);
+		app.setUsablePadding((View) development_version.getParent());
 		if (AndorsTrailApplication.DEVELOPMENT_INCOMPATIBLE_SAVEGAMES) {
 			development_version.setText(R.string.startscreen_incompatible_savegames);
 			development_version.setVisibility(View.VISIBLE);
@@ -96,6 +100,10 @@ public final class StartScreenActivity extends AndorsTrailBaseFragmentActivity i
 				}
 			});
 		}
+		View titleLogo = findViewById(R.id.title_logo);
+		if (titleLogo != null) {
+			app.setUsablePadding(titleLogo);
+		}
 		
 		if (development_version.getVisibility() == View.VISIBLE) {
 			development_version.setText(development_version.getText()
@@ -112,7 +120,7 @@ public final class StartScreenActivity extends AndorsTrailBaseFragmentActivity i
 	}
 
 	@Override
-	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, int[] grantResults) {
 		if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
 
 			final CustomDialog d = CustomDialogFactory.createDialog(this,
