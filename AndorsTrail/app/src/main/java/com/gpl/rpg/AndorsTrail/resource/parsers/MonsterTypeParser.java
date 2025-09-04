@@ -55,6 +55,8 @@ public final class MonsterTypeParser extends JsonCollectionParserFor<MonsterType
 
 		final int exp = getExpectedMonsterExperience(attackCost, attackChance, damagePotential, criticalSkill, criticalMultiplier, blockChance, damageResistance, hitEffect, maxHP, maxAP);
 
+		final int horizontalFlipChance = o.optInt(JsonFieldNames.Monster.horizontalFlipChance, 0);
+
 		return new Pair<String, MonsterType>(monsterTypeID, new MonsterType(
 				monsterTypeID
 				, translationLoader.translateMonsterTypeName(o.getString(JsonFieldNames.Monster.name))
@@ -68,6 +70,7 @@ public final class MonsterTypeParser extends JsonCollectionParserFor<MonsterType
 				, MonsterType.AggressionType.fromString(o.optString(JsonFieldNames.Monster.movementAggressionType, null), MonsterType.AggressionType.none)
 				, ResourceParserUtils.parseTilesetTileSize(tileLoader, o.optString(JsonFieldNames.Monster.iconID, null), size1x1)
 				, ResourceParserUtils.parseImageID(tileLoader, o.getString(JsonFieldNames.Monster.iconID))
+				, horizontalFlipChance
 				, maxAP
 				, maxHP
 				, o.optInt(JsonFieldNames.Monster.moveCost, 10)

@@ -105,6 +105,7 @@ public final class JsonFieldNames {
 	public static final class Monster {
 		public static final String monsterTypeID = "id";
 		public static final String iconID = "iconID";
+		public static final String horizontalFlipChance = "horizontalFlipChance";
 		public static final String name = "name";
 		public static final String spawnGroup = "spawnGroup";
 		public static final String monsterClass = "monsterClass";

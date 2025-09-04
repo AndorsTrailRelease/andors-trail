@@ -431,13 +431,13 @@ public final class MainView extends SurfaceView
 		for (MonsterSpawnArea a : currentMap.spawnAreas) {
 			for (Monster m : a.monsters) {
 				if (!m.hasVFXRunning) {
-					drawFromMapPosition(canvas, area, m.rectPosition, m.iconID);
+					drawFromMapPosition(canvas, area, m.rectPosition, m.iconID, m.isFlippedX);
 				} else if (area.intersects(m.rectPosition) || area.intersects(new CoordRect(m.lastPosition,m.rectPosition.size))) {
 					int vfxElapsedTime = (int) (System.currentTimeMillis() - m.vfxStartTime);
 					if (vfxElapsedTime > m.vfxDuration) vfxElapsedTime = m.vfxDuration;
 					int x = ((m.position.x - mapViewArea.topLeft.x) * tileSize * vfxElapsedTime + ((m.lastPosition.x - mapViewArea.topLeft.x) * tileSize * (m.vfxDuration - vfxElapsedTime))) / m.vfxDuration;
 					int y = ((m.position.y - mapViewArea.topLeft.y) * tileSize * vfxElapsedTime + ((m.lastPosition.y - mapViewArea.topLeft.y) * tileSize * (m.vfxDuration - vfxElapsedTime))) / m.vfxDuration;
-					tiles.drawTile(canvas, m.iconID, x, y, mPaint);
+					tiles.drawTile(canvas, m.iconID, x, y, mPaint, m.isFlippedX);
 				}
 			}
 		}
@@ -503,9 +503,17 @@ public final class MainView extends SurfaceView
 		if (!area.contains(p)) return;
 		_drawFromMapPosition(canvas, area, p.x, p.y, tile);
 	}
+	private void drawFromMapPosition(Canvas canvas, final CoordRect area, final Coord p, final int tile, final boolean isFlippedX) {
+		if (!area.contains(p)) return;
+		_drawFromMapPosition(canvas, area, p.x, p.y, tile, isFlippedX);
+	}
 	private void drawFromMapPosition(Canvas canvas, final CoordRect area, final CoordRect p, final int tile) {
 		if (!area.intersects(p)) return;
 		_drawFromMapPosition(canvas, area, p.topLeft.x, p.topLeft.y, tile);
+	}
+	private void drawFromMapPosition(Canvas canvas, final CoordRect area, final CoordRect p, final int tile, final boolean isFlippedX) {
+		if (!area.intersects(p)) return;
+		_drawFromMapPosition(canvas, area, p.topLeft.x, p.topLeft.y, tile, isFlippedX);
 	}
 	private void _drawFromMapPosition(Canvas canvas, final CoordRect area, int x, int y, final int tile) {
 		x -= mapViewArea.topLeft.x;
@@ -513,6 +521,14 @@ public final class MainView extends SurfaceView
 //		if (	   (x >= 0 && x < mapViewArea.size.width)
 //				&& (y >= 0 && y < mapViewArea.size.height)) {
 			tiles.drawTile(canvas, tile, x * tileSize, y * tileSize, mPaint);
+//		}
+	}
+	private void _drawFromMapPosition(Canvas canvas, final CoordRect area, int x, int y, final int tile, final boolean isFlippedX) {
+		x -= mapViewArea.topLeft.x;
+		y -= mapViewArea.topLeft.y;
+//		if (	   (x >= 0 && x < mapViewArea.size.width)
+//				&& (y >= 0 && y < mapViewArea.size.height)) {
+		tiles.drawTile(canvas, tile, x * tileSize, y * tileSize, mPaint, isFlippedX);
 //		}
 	}
 

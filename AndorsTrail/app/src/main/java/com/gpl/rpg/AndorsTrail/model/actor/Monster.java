@@ -30,11 +30,14 @@ public final class Monster extends Actor {
 	public final MonsterType monsterType;
 	public final MonsterSpawnArea area;
 
+	public final boolean isFlippedX;
+
 	public Monster(MonsterType monsterType, MonsterSpawnArea area) {
 		super(monsterType.tileSize, false, monsterType.isImmuneToCriticalHits());
 		this.monsterType = monsterType;
 		this.area = area;
 		this.iconID = monsterType.iconID;
+		this.isFlippedX = Constants.roll100(monsterType.horizontalFlipChance);
 		this.nextPosition = new CoordRect(new Coord(), monsterType.tileSize);
 		resetStatsToBaseTraits();
 		this.ap.setMax();
