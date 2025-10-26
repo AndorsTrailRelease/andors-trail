@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">El Sendero de Andor</string>
+    <string name="app_name">El sendero de Andor</string>
     <string name="app_description">RPG de fantasía basado en misiones</string>
     <string name="exit_to_menu">Salir al menú</string>
     <string name="menu_settings">Configuración</string>
     <string name="menu_save">Guardar</string>
     <string name="menu_save_gamesaved">La partida se ha guardado en la ranura %1$d</string>
-    <string name="menu_save_failed">Error al guardar partida. ¿La tarjeta SD está insertada y se puede escribir en ella\?</string>
+    <string name="menu_save_failed">¡Error al guardar partida! ¿La tarjeta SD está insertada y se puede escribir en ella?</string>
     <string name="loadsave_title_save">Guardar partida</string>
     <string name="loadsave_title_load">Cargar partida</string>
     <string name="loadsave_selectslot">Seleccionar ranura</string>
-    <string name="savegame_currenthero_displayinfo">Nivel %1$d, %2$d Exp, %3$d Oro</string>
+    <string name="savegame_currenthero_displayinfo">nivel %1$d, %2$d de exp., %3$d de oro</string>
     <string name="dialog_loading_message">Cargando recursos…</string>
     <string name="dialog_loading_failed_title">Error al cargar</string>
     <string name="dialog_loading_failed_message">La aplicación no pudo cargar el archivo de partida guardada.\n\n:(\n\nEl archivo puede estar dañado o incompleto.</string>
     <string name="dialog_loading_failed_incorrectversion">La aplicación no pudo cargar el archivo de partida guardada. Esta partida fue creada con una versión más reciente del juego.</string>
     <string name="dialog_close">Cerrar</string>
     <string name="dialog_monsterencounter_title">Enfrentamiento</string>
-    <string name="dialog_monsterencounter_message">¿Quieres atacar?\nDificultad %1$s</string>
+    <string name="dialog_monsterencounter_message">¿Quieres atacar?\nDificultad: %1$s</string>
     <string name="dialog_monsterencounter_info">Información</string>
     <string name="status_hp">PV:</string>
     <string name="status_ap">PA:</string>
-    <string name="status_exp">Nivel:</string>
+    <string name="status_exp">EXP:</string>
     <string name="heroinfo_char">Resumen</string>
     <string name="heroinfo_inv">Objetos</string>
     <string name="heroinfo_skill">Habilidades</string>
@@ -110,7 +110,7 @@
     <string name="conversation_rewarditem">[Obtuviste un objeto]</string>
     <string name="conversation_rewarditems">[Obtuviste %1$d objetos]</string>
     <string name="conversation_next">Siguiente</string>
-    <string name="conversation_leave">Salir</string>
+    <string name="conversation_leave">Marcharse</string>
     <string name="shop_buy">Comprar</string>
     <string name="shop_sell">Vender</string>
     <string name="shop_infoitem">Info</string>
@@ -186,12 +186,12 @@
     <string name="actorcondition_info_removes_all">Elimina todo el %1$s</string>
     <string name="iteminfo_effect_chance_of">%1$s posibilidad de %2$s</string>
     <string name="iteminfo_effect_duration">(%1$d rondas)</string>
-    <string name="iteminfo_effect_works_on_source">En fuente</string>
-    <string name="iteminfo_effect_works_on_target">En blanco</string>
-    <string name="iteminfo_effect_works_when_hitting_target">Al golpear al objetivo</string>
+    <string name="iteminfo_effect_works_on_source">En origen</string>
+    <string name="iteminfo_effect_works_on_target">En objetivo</string>
+    <string name="iteminfo_effect_works_when_hitting_target">Al acertar el objetivo</string>
     <string name="iteminfo_effect_works_when_killing_target">En cada muerte</string>
-    <string name="iteminfo_effect_works_when_used">Cuándo se use</string>
-    <string name="iteminfo_effect_works_when_equipped">Cuándo se equipe</string>
+    <string name="iteminfo_effect_works_when_used">Al usarse</string>
+    <string name="iteminfo_effect_works_when_equipped">Al equiparse</string>
     <string name="iteminfo_effect_decrease_current_hp">Drena %1$s PV</string>
     <string name="iteminfo_effect_increase_current_hp">Restaura %1$s PV</string>
     <string name="iteminfo_effect_decrease_current_ap">Drena %1$s PA</string>
@@ -579,8 +579,8 @@
     <string name="combat_taunt_monster">¡Tu provocas a %1$s!</string>
     <string name="combat_condition_player_clear">Estás libre de %1$s.</string>
     <string name="combat_condition_monster_clear">%1$s está libre de %2$s.</string>
-    <string name="iteminfo_effect_works_on_attacker">Sobre el atacante</string>
-    <string name="iteminfo_effect_works_when_hit_by_attacker">Cuando es golpeado por el atacante</string>
+    <string name="iteminfo_effect_works_on_attacker">En atacante</string>
+    <string name="iteminfo_effect_works_when_hit_by_attacker">Al ser acertado por un atacante</string>
     <string name="preferences_high_quality_filters_title">Filtros de calidad alta</string>
     <string name="preferences_quickslots_placements_vertical_center_left">A la izquierda centrado</string>
     <string name="preferences_quickslots_placements_vertical_center_right">A la derecha centrado</string>
@@ -589,7 +589,7 @@
     <string name="skill_category_proficiency">Dominio</string>
     <string name="dialog_game_over_title">Fin del juego</string>
     <string name="dialog_game_over_text">Tomas tu último aliento y mueres.</string>
-    <string name="rip_startscreen">(E.P.D)</string>
+    <string name="rip_startscreen">(Que en paz descanse)</string>
     <string name="heroinfo_mode">Modo</string>
     <string name="heroinfo_unlimited_lives_and_saves">Estandar
 \n(Guardados y vidas ilimitadas)</string>
@@ -602,7 +602,7 @@
     <string name="startscreen_error_loading_game">Hubo un error al cargar la partida</string>
     <string name="startscreen_error_loading_empty_slot">No se puede cargar desde una ranura vacía.</string>
     <string name="startscreen_attention_slot_gets_delete_on_load">Atención</string>
-    <string name="startscreen_attention_message_slot_gets_delete_on_load">Cargar este juego elimina su ranura de guardado. Tendrás que guardar de nuevo antes de cambiar a otro juego.</string>
+    <string name="startscreen_attention_message_slot_gets_delete_on_load">Cargar esta partida elimina su ranura de guardado. Tendrás que guardar de nuevo antes de cambiar a otra partida.</string>
     <string name="dialog_permission_information">El Sendero de Andor escribe las partidas guardadas en el almacenamiento del dispositivo (accesible por el usuario). Esto permite hacer fácilmente un respaldo de las partidas guardadas o transferirlas a otro dispositivo . Por favor, visita nuestros foros para más información.
 \n
 \nEl Sendero de Andor no accede al dispositivo para ningún otro propósito y no accede a Internet. El Sendero de Andor es código abierto (open source); las fuentes se pueden encontrar en github.</string>
@@ -626,12 +626,12 @@
     <string name="preferences_display_scaling_factor_50_percent">Mitad de tamaño</string>
     <string name="dialog_permission_information_title">Cargando y guardando partidas</string>
     <string name="dialog_newversion_permission_information">\n\nPara poder guardar y cargar tus partidas (y sólo para ese propósito) El Sendero de Andor te preguntará por el permiso para acceder al almacenamiento del móvil.</string>
-    <string name="startscreen_mode_unlimited_lives">Medio (vidas infinitas, guardar 1 partida)</string>
-    <string name="startscreen_mode_1_life">Muerte permanente (1 vida, guardar 1 partida)</string>
-    <string name="startscreen_mode_3_lives">Extremo (3 vidas, guardar 1 partida)</string>
-    <string name="startscreen_mode_10_lives">Muy duro (10 vidas, guardar 1 partida)</string>
-    <string name="startscreen_mode_50_lives">Duro (50 vidas, guardar 1 partida)</string>
-    <string name="startscreen_mode_unlimited_saves_and_lives">Normal (vidas infinitas y guardar partida ilimitado)</string>
+    <string name="startscreen_mode_unlimited_lives">Medio (vidas infinitas, 1 guardado de partida)</string>
+    <string name="startscreen_mode_1_life">Muerte permanente (1 vida, 1 guardado de partida)</string>
+    <string name="startscreen_mode_3_lives">Extremo (3 vidas, 1 guardado de partida partida)</string>
+    <string name="startscreen_mode_10_lives">Muy difícil (10 vidas, 1 guardado de partida)</string>
+    <string name="startscreen_mode_50_lives">Difícil (50 vidas, 1 guardado de partida)</string>
+    <string name="startscreen_mode_unlimited_saves_and_lives">Normal (vidas infinitas y guardado de partida ilimitado)</string>
     <string name="skill_shortdescription_spore_immunity">Inmunidad al envenenamiento por esporas</string>
     <string name="skill_title_spore_immunity">Resistencia al envenenamiento por esporas</string>
     <string name="preferences_movement_dpad_transparency_70_pct">70%</string>
@@ -687,4 +687,6 @@
     <string name="loadsave_exporting_savegames">Exportar partidas guardadas</string>
     <string name="loadsave_import_error_unknown">Se ha producido un error desconocido durante la importación.</string>
     <string name="loadsave_import_worldmap_info">Seleccione el archivo zip del mapa del mundo.</string>
+    <string name="iteminfo_effect_works_when_missing_target">Al fallar el ataque contra el objetivo</string>
+    <string name="iteminfo_effect_works_when_missed_by_attacker">Al fallar el ataque de un adversario</string>
 </resources>
