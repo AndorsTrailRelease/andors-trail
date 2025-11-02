@@ -355,59 +355,97 @@ public final class DebugInterface {
 						}
 					}
 				})
+				,new DebugButton("#1", new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap, "lake_shore_road_9", "north", 5, 0);
+			}
+		})
 
-				,new DebugButton("#1", new OnClickListener() { @Override public void onClick(View arg0) {
-			controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap,
-					"cabin_norcity_road1", "north", 5, 0); }})
+				,new DebugButton("#2", new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap, "undertell_3_lava_01", "west", 0, 0);
+			}
+		})
 
-				,new DebugButton("#2", new OnClickListener() { @Override public void onClick(View arg0) {
-			controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap,
-					"waytobrightport5", "west", 0, 0); }})
 
-				,new DebugButton("#3", new OnClickListener() { @Override public void onClick(View arg0) {
-			controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap,
-					"waytobrightport20", "east", 0, 0); }})
+				,new DebugButton("#3", new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap, "galmore_cavea", "up", 0, 0);
+			}
+		})
 
-				,new DebugButton("#4", new OnClickListener() { @Override public void onClick(View arg0) {
-			controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap,
-					"brightportwild19", "south", 11, 0); }})
+				,new DebugButton("#4", new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap, "galmore_35", "south", 11, 0);
+			}
+		})
 
-				,new DebugButton("#5", new OnClickListener() { @Override public void onClick(View arg0) {
-			controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap,
-					"brightportwild6", "west1", 0, 5); }})
+				,new DebugButton("#5", new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap, "way_to_sullengard_west_5", "east", 0, 5);
+			}
+		})
 
-				,new DebugButton("#6", new OnClickListener() { @Override public void onClick(View arg0) {
-			controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap,
-					"feygard_outside1", "south", 0, 0); }})
+				,new DebugButton("#6", new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap, "galmore_32", "south", 19, 0);
+			}
+		})
 
-				,new DebugButton("#7", new OnClickListener() { @Override public void onClick(View arg0) {
-			controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap,
-					"waytobrightport21", "east", 0, 7); }})
+				,new DebugButton("#7", new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap, "cabin_norcity_road1", "north", 5, 0);
+			}
+		})
 
-				,new DebugButton("#8", new OnClickListener() { @Override public void onClick(View arg0) {
-			controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap,
-					"wayto_feygard_duleian_2", "south", 5, 0); }})
+				,new DebugButton("#8", new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap, "wayto_feygard_duleian_2", "south", 0, 5);
+			}
+		})
 
-				,new DebugButton("#9", new OnClickListener() { @Override public void onClick(View arg0) {
-			controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap,
-					"galmore_58", "north", 0, 0); }})
+				,new DebugButton("#9", new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap, "galmore_58", "north", 0, 0);
+			}
+		})
 
-				,new DebugButton("#10", new OnClickListener() { @Override public void onClick(View arg0) {
-			controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap,
-					"moesforest_03", "north1", 0, 0); }})
+				,new DebugButton("#10", new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap, "moesforest_03", "north1", 0, 0);
+			}
+		})
 
-				,new DebugButton("#11", new OnClickListener() { @Override public void onClick(View arg0) {
-			controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap,
-					"galmore_17", "outside", 0, 0); }})
+				,new DebugButton("#11", new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap, "galmore_17", "outside", 0, 0);
+			}
+		})
 
-				,new DebugButton("#12", new OnClickListener() { @Override public void onClick(View arg0) {
-			controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap,
-					"galmore_48", "west", 0, 10); }})
+				,new DebugButton("#12", new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap, "galmore_48", "west", 0, 10);
+			}
+		})
 
-				,new DebugButton("#13", new OnClickListener() { @Override public void onClick(View arg0) {
-			controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap,
-					"feygard_outside1", "south", 6, 0); }})
-
+				,new DebugButton("#13", new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				controllerContext.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap, "feygard_outside1", "south", 6, 0);
+			}
+		})
 
 
 		}));
