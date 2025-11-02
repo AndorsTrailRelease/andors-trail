@@ -148,6 +148,12 @@
                         "requireID":"galmore_nondisplayed",
                         "value":1,
                         "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"familiar_shadow",
+                        "value":50,
+                        "negate":true
                     }
                 ]
             },
@@ -163,6 +169,12 @@
                     {
                         "requireType":"hasActorCondition",
                         "requireID":"pull_of_the_mark"
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"familiar_shadow",
+                        "value":50,
+                        "negate":true
                     }
                 ]
             },
@@ -172,6 +184,12 @@
                     {
                         "requireType":"hasActorCondition",
                         "requireID":"pull_of_the_mark"
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"familiar_shadow",
+                        "value":50,
+                        "negate":true
                     }
                 ]
             }
@@ -5308,6 +5326,24 @@
     {
         "id":"galmore_rg_bell_20",
         "message":"Kneeling down, you brush aside the thick grass to uncover what appears to be a small, rusted bell, almost entirely concealed by the earth. You dig carefully with your hands, pulling away stubborn roots and clumps of soil. The bell feels unexpectedly heavy in your grasp, as if it holds more than its physical weight, perhaps a story or purpose yet to be uncovered.",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"galmore_rg_bell_found_first",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"mg_restless_grave",
+                        "value":40,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"N",
+                "nextPhraseID":"galmore_rg_both_items_found"
+            }
+        ],
         "rewards":[
             {
                 "rewardType":"questProgress",
@@ -5355,6 +5391,24 @@
     {
         "id":"galmore_rg_musicbox_20",
         "message":"Kneeling down, you push aside loose dirt and grass with your fingers. Bit by bit, you uncover a weathered music box, its edges worn smooth by time. Though dirt clings to its surface, you can see delicate carvings etched into the wood. Gently lifting it from the ground, you feel an eerie chill, as if the box has been waiting here, forgotten but not entirely at rest.",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"galmore_rg_musicbox_found_first",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"mg_restless_grave",
+                        "value":30,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"N",
+                "nextPhraseID":"galmore_rg_both_items_found"
+            }
+        ],
         "rewards":[
             {
                 "rewardType":"questProgress",
@@ -9852,7 +9906,7 @@
     },
     {
         "id":"vaelric_restless_grave_found_clue_10",
-        "message":"Interesting, but not helpful. Go back to search for something useful and don't keep running back to me every time you find something so mundane."
+        "message":"Interesting, but not helpful. Go back and search for something useful. It makes sense if you search close by to where you found this other item. And don't keep running back to me every time you find something so mundane."
     },
     {
         "id":"galmore_47_graveyard_assign_hidden_step",

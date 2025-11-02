@@ -1,596 +1,2268 @@
 [
     {
-        "id":"faction_count_shadow", 
-		"replies":[ { "nextPhraseID":"faction_count_shadow_10" } ],
-        "rewards":[ { "rewardType":"alignmentSet", "rewardID":"factionCountShadow", "value":0 },
-					{ "rewardType":"alignmentSet", "rewardID":"factionCountThieves", "value":0 },
-					{ "rewardType":"alignmentSet", "rewardID":"scoreShadow", "value":0 },
-					{ "rewardType":"alignmentSet", "rewardID":"scoreFeygard", "value":0 },
-					{ "rewardType":"alignmentSet", "rewardID":"scoreThieves", "value":0 },
-					{ "rewardType":"alignmentSet", "rewardID":"scoreShadow2", "value":0 },
-					{ "rewardType":"alignmentSet", "rewardID":"scoreFeygard2", "value":0 },
-					{ "rewardType":"alignmentSet", "rewardID":"scoreThieves2", "value":0 },
-					{ "rewardType":"alignmentSet", "rewardID":"scoreShadowFeygard", "value":0 },
-					{ "rewardType":"removeQuestProgress", "rewardID":"scores", "value":11 },
-					{ "rewardType":"removeQuestProgress", "rewardID":"scores", "value":13 },
-					{ "rewardType":"questProgress",       "rewardID":"scores", "value":15 },
-					{ "rewardType":"removeQuestProgress", "rewardID":"scores", "value":17 },
-					{ "rewardType":"removeQuestProgress", "rewardID":"scores", "value":18 },
-					{ "rewardType":"removeQuestProgress", "rewardID":"scores", "value":21 },
-					{ "rewardType":"removeQuestProgress", "rewardID":"scores", "value":23 },
-					{ "rewardType":"questProgress",       "rewardID":"scores", "value":25 },
-					{ "rewardType":"removeQuestProgress", "rewardID":"scores", "value":27 },
-					{ "rewardType":"removeQuestProgress", "rewardID":"scores", "value":28 },
-					{ "rewardType":"removeQuestProgress", "rewardID":"scores", "value":31 },
-					{ "rewardType":"removeQuestProgress", "rewardID":"scores", "value":33 },
-					{ "rewardType":"questProgress",       "rewardID":"scores", "value":35 },
-					{ "rewardType":"removeQuestProgress", "rewardID":"scores", "value":37 },
-					{ "rewardType":"removeQuestProgress", "rewardID":"scores", "value":38 },
-					{ "rewardType":"removeQuestProgress", "rewardID":"scores", "value":101 },
-					{ "rewardType":"removeQuestProgress", "rewardID":"scores", "value":102 }]
+        "id":"faction_count_shadow",
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_10"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentSet",
+                "rewardID":"factionCountShadow",
+                "value":0
+            },
+            {
+                "rewardType":"alignmentSet",
+                "rewardID":"factionCountThieves",
+                "value":0
+            },
+            {
+                "rewardType":"alignmentSet",
+                "rewardID":"scoreShadow",
+                "value":0
+            },
+            {
+                "rewardType":"alignmentSet",
+                "rewardID":"scoreFeygard",
+                "value":0
+            },
+            {
+                "rewardType":"alignmentSet",
+                "rewardID":"scoreThieves",
+                "value":0
+            },
+            {
+                "rewardType":"alignmentSet",
+                "rewardID":"scoreShadow2",
+                "value":0
+            },
+            {
+                "rewardType":"alignmentSet",
+                "rewardID":"scoreFeygard2",
+                "value":0
+            },
+            {
+                "rewardType":"alignmentSet",
+                "rewardID":"scoreThieves2",
+                "value":0
+            },
+            {
+                "rewardType":"alignmentSet",
+                "rewardID":"scoreShadowFeygard",
+                "value":0
+            },
+            {
+                "rewardType":"removeQuestProgress",
+                "rewardID":"scores",
+                "value":11
+            },
+            {
+                "rewardType":"removeQuestProgress",
+                "rewardID":"scores",
+                "value":13
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"scores",
+                "value":15
+            },
+            {
+                "rewardType":"removeQuestProgress",
+                "rewardID":"scores",
+                "value":17
+            },
+            {
+                "rewardType":"removeQuestProgress",
+                "rewardID":"scores",
+                "value":18
+            },
+            {
+                "rewardType":"removeQuestProgress",
+                "rewardID":"scores",
+                "value":21
+            },
+            {
+                "rewardType":"removeQuestProgress",
+                "rewardID":"scores",
+                "value":23
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"scores",
+                "value":25
+            },
+            {
+                "rewardType":"removeQuestProgress",
+                "rewardID":"scores",
+                "value":27
+            },
+            {
+                "rewardType":"removeQuestProgress",
+                "rewardID":"scores",
+                "value":28
+            },
+            {
+                "rewardType":"removeQuestProgress",
+                "rewardID":"scores",
+                "value":31
+            },
+            {
+                "rewardType":"removeQuestProgress",
+                "rewardID":"scores",
+                "value":33
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"scores",
+                "value":35
+            },
+            {
+                "rewardType":"removeQuestProgress",
+                "rewardID":"scores",
+                "value":37
+            },
+            {
+                "rewardType":"removeQuestProgress",
+                "rewardID":"scores",
+                "value":38
+            },
+            {
+                "rewardType":"removeQuestProgress",
+                "rewardID":"scores",
+                "value":101
+            },
+            {
+                "rewardType":"removeQuestProgress",
+                "rewardID":"scores",
+                "value":102
+            }
+        ]
     },
-
-
     {
         "id":"faction_count_shadow_10",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_10a", "requires":[ { "requireType":"questProgress", "requireID":"vacor", "value":61 } ] },
-					{ "nextPhraseID":"faction_count_shadow_10a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":10 } ] },
-					{ "nextPhraseID":"faction_count_shadow_20" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_10a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"vacor",
+                        "value":61
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_10a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":10
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_20"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_10a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_20" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"factionCountShadow", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow2", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow", "value":4 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_shadow", "value":10 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_20"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"factionCountShadow",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow2",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow",
+                "value":4
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_shadow",
+                "value":10
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_20",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_20a", "requires":[ { "requireType":"questProgress", "requireID":"vacor", "value":60 } ] },
-					{ "nextPhraseID":"faction_count_shadow_20a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":20 } ] },
-					{ "nextPhraseID":"faction_count_shadow_30" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_20a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"vacor",
+                        "value":60
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_20a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":20
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_30"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_20a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_30" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"factionCountShadow", "value":-4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow2", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow", "value":-4 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_shadow", "value":20 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_30"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"factionCountShadow",
+                "value":-4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow2",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow",
+                "value":-4
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_shadow",
+                "value":20
+            }
+        ]
     },
-
-
     {
         "id":"faction_count_shadow_30",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_30a", "requires":[ { "requireType":"questProgress", "requireID":"kaverin", "value":21 } ] },
-					{ "nextPhraseID":"faction_count_shadow_30a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":30 } ] },
-					{ "nextPhraseID":"faction_count_shadow_32" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_30a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"kaverin",
+                        "value":21
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_30a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":30
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_32"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_30a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_32" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"factionCountShadow", "value":-4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow2", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow", "value":0 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_shadow", "value":30 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_32"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"factionCountShadow",
+                "value":-4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow2",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow",
+                "value":0
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_shadow",
+                "value":30
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_32",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_32a", "requires":[ { "requireType":"questProgress", "requireID":"kaverin", "value":40 } ] },
-					{ "nextPhraseID":"faction_count_shadow_32a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":32 } ] },
-					{ "nextPhraseID":"faction_count_shadow_34" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_32a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"kaverin",
+                        "value":40
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_32a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":32
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_34"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_32a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_40" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"scoreShadow2", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow", "value":4 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_shadow", "value":32 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_40"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow2",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow",
+                "value":4
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_shadow",
+                "value":32
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_34",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_34a", "requires":[ { "requireType":"questProgress", "requireID":"kaverin", "value":40 } ] },
-					{ "nextPhraseID":"faction_count_shadow_34a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":34 } ] },
-					{ "nextPhraseID":"faction_count_shadow_40" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_34a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"kaverin",
+                        "value":40
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_34a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":34
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_40"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_34a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_40" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"scoreShadow2", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow", "value":-4 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_shadow", "value":34 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_40"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow2",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow",
+                "value":-4
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_shadow",
+                "value":34
+            }
+        ]
     },
-	
     {
         "id":"faction_count_shadow_40",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_40a", "requires":[ { "requireType":"questProgress", "requireID":"feygard_shipment", "value":82 } ] },
-					{ "nextPhraseID":"faction_count_shadow_40a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":40 } ] },
-					{ "nextPhraseID":"faction_count_shadow_42" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_40a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"feygard_shipment",
+                        "value":82
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_40a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":40
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_42"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_40a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_42" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"factionCountShadow", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow2", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreFeygard2", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadowFeygard", "value":4 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_shadow", "value":40 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_42"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"factionCountShadow",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow2",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreFeygard2",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadowFeygard",
+                "value":4
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_shadow",
+                "value":40
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_42",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_42a", "requires":[ { "requireType":"questProgress", "requireID":"feygard_shipment", "value":80 } ] },
-					{ "nextPhraseID":"faction_count_shadow_42a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":42 } ] },
-					{ "nextPhraseID":"faction_count_shadow_50" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_42a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"feygard_shipment",
+                        "value":80
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_42a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":42
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_50"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_42a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_50" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"factionCountShadow", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow2", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreFeygard2", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreFeygard", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadowFeygard", "value":-4 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_shadow", "value":42 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_50"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"factionCountShadow",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow2",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreFeygard2",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreFeygard",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadowFeygard",
+                "value":-4
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_shadow",
+                "value":42
+            }
+        ]
     },
-
     {
         "id":"faction_count_shadow_50",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_50a", "requires":[ { "requireType":"questProgress", "requireID":"thieves_hidden", "value":80 } ] },
-					{ "nextPhraseID":"faction_count_shadow_50a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":50 } ] },
-					{ "nextPhraseID":"faction_count_shadow_60" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_50a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"thieves_hidden",
+                        "value":80
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_50a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":50
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_60"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_50a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_60" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"factionCountShadow", "value":1 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreThieves2", "value":1 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreThieves", "value":-1 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_shadow", "value":50 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_60"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"factionCountShadow",
+                "value":1
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreThieves2",
+                "value":1
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreThieves",
+                "value":-1
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_shadow",
+                "value":50
+            }
+        ]
     },
-	
     {
         "id":"faction_count_shadow_60",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_60a", "requires":[ { "requireType":"questProgress", "requireID":"stoutford_castle", "value":50 } ] },
-					{ "nextPhraseID":"faction_count_shadow_60a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":60 } ] },
-					{ "nextPhraseID":"faction_count_shadow_70" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_60a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"stoutford_castle",
+                        "value":50
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_60a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":60
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_70"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_60a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_70" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"factionCountShadow", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow2", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreFeygard2", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow", "value":4 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_shadow", "value":60 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_70"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"factionCountShadow",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow2",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreFeygard2",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow",
+                "value":4
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_shadow",
+                "value":60
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_70",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_70a", "requires":[ { "requireType":"questProgress", "requireID":"stoutford_castle", "value":60 } ] },
-					{ "nextPhraseID":"faction_count_shadow_70a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":70 } ] },
-					{ "nextPhraseID":"faction_count_shadow_80" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_70a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"stoutford_castle",
+                        "value":60
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_70a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":70
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_80"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_70a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_80" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"factionCountShadow", "value":-4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow2", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreFeygard2", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreFeygard", "value":4 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_shadow", "value":70 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_80"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"factionCountShadow",
+                "value":-4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow2",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreFeygard2",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreFeygard",
+                "value":4
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_shadow",
+                "value":70
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_80",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_80a", "requires":[ { "requireType":"questProgress", "requireID":"stoutford_castle", "value":70 } ] },
-					{ "nextPhraseID":"faction_count_shadow_80a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":80 } ] },
-					{ "nextPhraseID":"faction_count_shadow_90" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_80a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"stoutford_castle",
+                        "value":70
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_80a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":80
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_90"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_80a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_90" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"factionCountShadow", "value":-4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow2", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreFeygard2", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreFeygard", "value":4 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_shadow", "value":80 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_90"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"factionCountShadow",
+                "value":-4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow2",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreFeygard2",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreFeygard",
+                "value":4
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_shadow",
+                "value":80
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_90",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_90a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":90 } ] },
-					{ "nextPhraseID":"faction_count_shadow_100" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_90a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":90
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_100"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_90a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_100" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"factionCountShadow", "value":0 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_100"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"factionCountShadow",
+                "value":0
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_100",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_100a", "requires":[ { "requireType":"questProgress", "requireID":"kaverin", "value":100 } ] },
-					{ "nextPhraseID":"faction_count_shadow_100a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":100 } ] },
-					{ "nextPhraseID":"faction_count_shadow_110" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_100a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"kaverin",
+                        "value":100
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_100a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":100
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_110"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_100a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_110" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"factionCountShadow", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow2", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreFeygard2", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow", "value":4 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_shadow", "value":100 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_110"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"factionCountShadow",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow2",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreFeygard2",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow",
+                "value":4
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_shadow",
+                "value":100
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_110",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_110a", "requires":[ { "requireType":"questProgress", "requireID":"Thieves03", "value":32 } ] },
-					{ "nextPhraseID":"faction_count_shadow_110a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":110 } ] },
-					{ "nextPhraseID":"faction_count_shadow_120" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_110a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"Thieves03",
+                        "value":32
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_110a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":110
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_120"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_110a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_120" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"factionCountShadow", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow2", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreFeygard2", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow", "value":4 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_shadow", "value":110 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_120"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"factionCountShadow",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow2",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreFeygard2",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow",
+                "value":4
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_shadow",
+                "value":110
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_120",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_120a", "requires":[ { "requireType":"questProgress", "requireID":"darkprotector", "value":70 } ] },
-					{ "nextPhraseID":"faction_count_shadow_120a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":120 } ] },
-					{ "nextPhraseID":"faction_count_shadow_130" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_120a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"darkprotector",
+                        "value":70
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_120a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":120
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_130"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_120a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_130" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"factionCountShadow", "value":-4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow2", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreFeygard2", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreFeygard", "value":4 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_shadow", "value":120 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_130"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"factionCountShadow",
+                "value":-4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow2",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreFeygard2",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreFeygard",
+                "value":4
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_shadow",
+                "value":120
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_130",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_130a", "requires":[ { "requireType":"questProgress", "requireID":"darkprotector", "value":40 } ] },
-					{ "nextPhraseID":"faction_count_shadow_130a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":130 } ] },
-					{ "nextPhraseID":"faction_count_shadow_140" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_130a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"darkprotector",
+                        "value":40
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_130a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":130
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_140"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_130a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_140" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"factionCountShadow", "value":5 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow2", "value":5 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreFeygard2", "value":5 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow", "value":5 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_shadow", "value":130 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_140"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"factionCountShadow",
+                "value":5
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow2",
+                "value":5
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreFeygard2",
+                "value":5
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow",
+                "value":5
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_shadow",
+                "value":130
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_140",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_140a", "requires":[ { "requireType":"questProgress", "requireID":"darkprotector", "value":41 } ] },
-					{ "nextPhraseID":"faction_count_shadow_140a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":140 } ] },
-					{ "nextPhraseID":"faction_count_shadow_150" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_140a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"darkprotector",
+                        "value":41
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_140a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":140
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_150"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_140a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_150" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"factionCountShadow", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow2", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreFeygard2", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow", "value":4 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_shadow", "value":140 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_150"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"factionCountShadow",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow2",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreFeygard2",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow",
+                "value":4
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_shadow",
+                "value":140
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_150",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_150a", "requires":[ { "requireType":"questProgress", "requireID":"xulviir", "value":30 } ] },
-					{ "nextPhraseID":"faction_count_shadow_150a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":150 } ] },
-					{ "nextPhraseID":"faction_count_shadow_160" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_150a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"xulviir",
+                        "value":30
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_150a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":150
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_160"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_150a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_160" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"factionCountShadow", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow2", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreFeygard2", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow", "value":4 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_shadow", "value":150 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_160"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"factionCountShadow",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow2",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreFeygard2",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow",
+                "value":4
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_shadow",
+                "value":150
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_160",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_160a", "requires":[ { "requireType":"questProgress", "requireID":"xulviir", "value":20 } ] },
-					{ "nextPhraseID":"faction_count_shadow_160a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":160 } ] },
-					{ "nextPhraseID":"faction_count_shadow_170" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_160a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"xulviir",
+                        "value":20
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_160a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":160
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_170"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_160a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_170" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"factionCountShadow", "value":-4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow2", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreFeygard2", "value":4 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreFeygard", "value":4 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_shadow", "value":160 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_170"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"factionCountShadow",
+                "value":-4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow2",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreFeygard2",
+                "value":4
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreFeygard",
+                "value":4
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_shadow",
+                "value":160
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_170",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_170a", "requires":[ { "requireType":"questProgress", "requireID":"rogorn", "value":50 } ] },
-					{ "nextPhraseID":"faction_count_shadow_170a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":170 } ] },
-					{ "nextPhraseID":"faction_count_shadow_180" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_170a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"rogorn",
+                        "value":50
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_170a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":170
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_180"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_170a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_180" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"factionCountShadow", "value":-3 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow2", "value":3 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreFeygard2", "value":3 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreFeygard", "value":3 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_shadow", "value":170 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_180"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"factionCountShadow",
+                "value":-3
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow2",
+                "value":3
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreFeygard2",
+                "value":3
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreFeygard",
+                "value":3
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_shadow",
+                "value":170
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_180",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_180a", "requires":[ { "requireType":"questProgress", "requireID":"rogorn", "value":55 } ] },
-					{ "nextPhraseID":"faction_count_shadow_180a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":180 } ] },
-					{ "nextPhraseID":"faction_count_shadow_190" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_180a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"rogorn",
+                        "value":55
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_180a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":180
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_190"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_180a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_190" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"factionCountShadow", "value":3 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow2", "value":3 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreFeygard2", "value":3 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow", "value":3 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_shadow", "value":180 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_190"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"factionCountShadow",
+                "value":3
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow2",
+                "value":3
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreFeygard2",
+                "value":3
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow",
+                "value":3
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_shadow",
+                "value":180
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_190",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_190a", "requires":[ { "requireType":"questProgress", "requireID":"loneford", "value":55 } ] },
-					{ "nextPhraseID":"faction_count_shadow_190a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":190 } ] },
-					{ "nextPhraseID":"faction_count_shadow_200" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_190a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"loneford",
+                        "value":55
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_190a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":190
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_200"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_190a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_200" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"factionCountShadow", "value":-1 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow2", "value":1 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreFeygard2", "value":1 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreFeygard", "value":1 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_shadow", "value":190 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_200"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"factionCountShadow",
+                "value":-1
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow2",
+                "value":1
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreFeygard2",
+                "value":1
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreFeygard",
+                "value":1
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_shadow",
+                "value":190
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_200",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_200a", "requires":[ { "requireType":"questProgress", "requireID":"loneford", "value":60 } ] },
-					{ "nextPhraseID":"faction_count_shadow_200a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":200 } ] },
-					{ "nextPhraseID":"faction_count_shadow_210" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_200a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"loneford",
+                        "value":60
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_200a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":200
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_210"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_200a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_210" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"factionCountShadow", "value":1 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow2", "value":3 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreFeygard2", "value":3 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreShadow", "value":3 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_shadow", "value":200 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_210"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"factionCountShadow",
+                "value":1
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow2",
+                "value":3
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreFeygard2",
+                "value":3
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreShadow",
+                "value":3
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_shadow",
+                "value":200
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_210",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_210a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":210 } ] },
-					{ "nextPhraseID":"faction_count_shadow_220" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_210a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":210
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_220"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_210a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_220" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"factionCountShadow", "value":0 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_220"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"factionCountShadow",
+                "value":0
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_220",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_220a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":220 } ] },
-					{ "nextPhraseID":"faction_count_shadow_230" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_220a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":220
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_230"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_220a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_230" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"factionCountShadow", "value":0 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_230"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"factionCountShadow",
+                "value":0
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_230",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_230a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":230 } ] },
-					{ "nextPhraseID":"faction_count_shadow_240" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_230a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":230
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_240"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_230a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_240" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"factionCountShadow", "value":0 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_240"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"factionCountShadow",
+                "value":0
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_240",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_240a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":240 } ] },
-					{ "nextPhraseID":"faction_count_shadow_250" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_240a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":240
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_250"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_240a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_250" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"factionCountShadow", "value":0 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_250"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"factionCountShadow",
+                "value":0
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_250",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_250a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":250 } ] },
-					{ "nextPhraseID":"faction_count_shadow_260" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_250a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":250
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_260"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_250a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_260" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"factionCountShadow", "value":0 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_260"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"factionCountShadow",
+                "value":0
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_260",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_260a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":260 } ] },
-					{ "nextPhraseID":"faction_count_shadow_270" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_260a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":260
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_270"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_260a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_270" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"factionCountShadow", "value":0 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_270"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"factionCountShadow",
+                "value":0
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_270",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_270a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":270 } ] },
-					{ "nextPhraseID":"faction_count_shadow_280" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_270a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":270
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_280"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_270a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_280" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"factionCountShadow", "value":0 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_280"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"factionCountShadow",
+                "value":0
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_280",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_280a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":280 } ] },
-					{ "nextPhraseID":"faction_count_shadow_290" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_280a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":280
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_290"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_280a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_290" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"factionCountShadow", "value":0 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_290"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"factionCountShadow",
+                "value":0
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_290",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_290a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_shadow", "value":290 } ] },
-					{ "nextPhraseID":"faction_count_shadow_300" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_290a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_shadow",
+                        "value":290
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_shadow_300"
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_290a",
-        "replies":[ { "nextPhraseID":"faction_count_shadow_300" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"factionCountShadow", "value":0 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_shadow_300"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"factionCountShadow",
+                "value":0
+            }
+        ]
     },
     {
         "id":"faction_count_shadow_300",
-        "replies":[ { "nextPhraseID":"faction_count_thieves" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_thieves"
+            }
+        ]
     },
-	
-	
-	
-	
-	
     {
         "id":"faction_count_thieves",
-        "replies":[ { "nextPhraseID":"faction_count_thieves_10" } ],
-        "rewards":[ { "rewardType":"alignmentSet", "rewardID":"faction_count_thieves", "value":0 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_thieves_10"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentSet",
+                "rewardID":"faction_count_thieves",
+                "value":0
+            }
+        ]
     },
     {
         "id":"faction_count_thieves_10",
-        "replies":[ { "nextPhraseID":"faction_count_thieves_10a", "requires":[ { "requireType":"questProgress", "requireID":"wanted_men", "value":65 } ] },
-					{ "nextPhraseID":"faction_count_thieves_10a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_thieves", "value":10 } ] },
-					{ "nextPhraseID":"faction_count_thieves_20" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_thieves_10a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"wanted_men",
+                        "value":65
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_thieves_10a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_thieves",
+                        "value":10
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_thieves_20"
+            }
+        ]
     },
     {
         "id":"faction_count_thieves_10a",
-        "replies":[ { "nextPhraseID":"faction_count_thieves_20" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"faction_count_thieves", "value":-8 },
-					{ "rewardType":"alignmentChange", "rewardID":"factionCountThieves", "value":-8 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreThieves2", "value":0 },
-					{ "rewardType":"alignmentChange", "rewardID":"scoreThieves", "value":-8 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_thieves", "value":10 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_thieves_20"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"faction_count_thieves",
+                "value":-8
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"factionCountThieves",
+                "value":-8
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreThieves2",
+                "value":0
+            },
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"scoreThieves",
+                "value":-8
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_thieves",
+                "value":10
+            }
+        ]
     },
     {
         "id":"faction_count_thieves_20",
-        "replies":[ { "nextPhraseID":"faction_count_thieves_20a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_thieves", "value":20 } ] },
-					{ "nextPhraseID":"faction_count_thieves_30" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_thieves_20a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_thieves",
+                        "value":20
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_thieves_30"
+            }
+        ]
     },
     {
         "id":"faction_count_thieves_20a",
-        "replies":[ { "nextPhraseID":"faction_count_thieves_30" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"faction_count_thieves", "value":0 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_thieves", "value":20 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_thieves_30"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"faction_count_thieves",
+                "value":0
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_thieves",
+                "value":20
+            }
+        ]
     },
     {
         "id":"faction_count_thieves_30",
-        "replies":[ { "nextPhraseID":"faction_count_thieves_30a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_thieves", "value":30 } ] },
-					{ "nextPhraseID":"faction_count_thieves_40" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_thieves_30a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_thieves",
+                        "value":30
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_thieves_40"
+            }
+        ]
     },
     {
         "id":"faction_count_thieves_30a",
-        "replies":[ { "nextPhraseID":"faction_count_thieves_40" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"faction_count_thieves", "value":0 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_thieves", "value":30 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_thieves_40"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"faction_count_thieves",
+                "value":0
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_thieves",
+                "value":30
+            }
+        ]
     },
     {
         "id":"faction_count_thieves_40",
-        "replies":[ { "nextPhraseID":"faction_count_thieves_40a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_thieves", "value":40 } ] },
-					{ "nextPhraseID":"faction_count_thieves_50" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_thieves_40a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_thieves",
+                        "value":40
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_thieves_50"
+            }
+        ]
     },
     {
         "id":"faction_count_thieves_40a",
-        "replies":[ { "nextPhraseID":"faction_count_thieves_50" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"faction_count_thieves", "value":0 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_thieves", "value":40 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_thieves_50"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"faction_count_thieves",
+                "value":0
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_thieves",
+                "value":40
+            }
+        ]
     },
     {
         "id":"faction_count_thieves_50",
-        "replies":[ { "nextPhraseID":"faction_count_thieves_50a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_thieves", "value":50 } ] },
-					{ "nextPhraseID":"faction_count_thieves_60" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_thieves_50a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_thieves",
+                        "value":50
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_thieves_60"
+            }
+        ]
     },
     {
         "id":"faction_count_thieves_50a",
-        "replies":[ { "nextPhraseID":"faction_count_thieves_60" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"faction_count_thieves", "value":0 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_thieves", "value":50 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_thieves_60"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"faction_count_thieves",
+                "value":0
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_thieves",
+                "value":50
+            }
+        ]
     },
     {
         "id":"faction_count_thieves_60",
-        "replies":[ { "nextPhraseID":"faction_count_thieves_60a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_thieves", "value":60 } ] },
-					{ "nextPhraseID":"faction_count_thieves_70" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_thieves_60a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_thieves",
+                        "value":60
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_thieves_70"
+            }
+        ]
     },
     {
         "id":"faction_count_thieves_60a",
-        "replies":[ { "nextPhraseID":"faction_count_thieves_70" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"faction_count_thieves", "value":0 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_thieves", "value":60 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_thieves_70"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"faction_count_thieves",
+                "value":0
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_thieves",
+                "value":60
+            }
+        ]
     },
     {
         "id":"faction_count_thieves_70",
-        "replies":[ { "nextPhraseID":"faction_count_thieves_70a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_thieves", "value":70 } ] },
-					{ "nextPhraseID":"faction_count_thieves_80" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_thieves_70a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_thieves",
+                        "value":70
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_thieves_80"
+            }
+        ]
     },
     {
         "id":"faction_count_thieves_70a",
-        "replies":[ { "nextPhraseID":"faction_count_thieves_80" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"faction_count_thieves", "value":0 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_thieves", "value":70 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_thieves_80"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"faction_count_thieves",
+                "value":0
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_thieves",
+                "value":70
+            }
+        ]
     },
     {
         "id":"faction_count_thieves_80",
-        "replies":[ { "nextPhraseID":"faction_count_thieves_80a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_thieves", "value":80 } ] },
-					{ "nextPhraseID":"faction_count_thieves_90" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_thieves_80a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_thieves",
+                        "value":80
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_thieves_90"
+            }
+        ]
     },
     {
         "id":"faction_count_thieves_80a",
-        "replies":[ { "nextPhraseID":"faction_count_thieves_90" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"faction_count_thieves", "value":0 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_thieves", "value":80 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_thieves_90"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"faction_count_thieves",
+                "value":0
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_thieves",
+                "value":80
+            }
+        ]
     },
     {
         "id":"faction_count_thieves_90",
-        "replies":[ { "nextPhraseID":"faction_count_thieves_90a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_thieves", "value":90 } ] },
-					{ "nextPhraseID":"faction_count_thieves_100" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_thieves_90a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_thieves",
+                        "value":90
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_thieves_100"
+            }
+        ]
     },
     {
         "id":"faction_count_thieves_90a",
-        "replies":[ { "nextPhraseID":"faction_count_thieves_100" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"faction_count_thieves", "value":0 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_thieves", "value":90 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_thieves_100"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"faction_count_thieves",
+                "value":0
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_thieves",
+                "value":90
+            }
+        ]
     },
     {
         "id":"faction_count_thieves_100",
-        "replies":[ { "nextPhraseID":"faction_count_thieves_100a", "requires":[ { "requireType":"questProgress", "requireID":"faction_count_thieves", "value":100 } ] },
-					{ "nextPhraseID":"faction_count_thieves_110" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_thieves_100a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"faction_count_thieves",
+                        "value":100
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"faction_count_thieves_110"
+            }
+        ]
     },
     {
         "id":"faction_count_thieves_100a",
-        "replies":[ { "nextPhraseID":"faction_count_thieves_110" } ],
-        "rewards":[ { "rewardType":"alignmentChange", "rewardID":"faction_count_thieves", "value":0 },
-					{ "rewardType":"questProgress", "rewardID":"faction_count_thieves", "value":100 } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_count_thieves_110"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"alignmentChange",
+                "rewardID":"faction_count_thieves",
+                "value":0
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"faction_count_thieves",
+                "value":100
+            }
+        ]
     },
     {
         "id":"faction_count_thieves_110",
-        "replies":[ { "nextPhraseID":"faction_scores" } ]
+        "replies":[
+            {
+                "nextPhraseID":"faction_scores"
+            }
+        ]
+    },
+    {
+        "id":"faction_scores"
     },
     {
         "id":"faction_scores"
