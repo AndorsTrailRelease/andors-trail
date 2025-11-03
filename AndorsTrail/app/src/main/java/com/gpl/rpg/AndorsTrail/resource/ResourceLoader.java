@@ -263,6 +263,7 @@ public final class ResourceLoader {
 		final Size sz7x4 = new Size(7, 4);
 		final Size sz8x3 = new Size(8, 3);
 		final Size sz8x4 = new Size(8, 4);
+		final Size sz10x2 = new Size(10, 2);
 		final Size sz16x8 = new Size(16, 8);
 		final Size sz16x10 = new Size(16, 10);
 		final Size sz20x12 = new Size(20, 12);
@@ -387,6 +388,7 @@ public final class ResourceLoader {
 		loader.prepareTileset(R.drawable.monsters_phoenix01, "monsters_phoenix01", sz16x8, sz1x1, mTileSize);
 		loader.prepareTileset(R.drawable.monsters_cats, "monsters_cats", new Size(10, 2), sz1x1, mTileSize);
 		loader.prepareTileset(R.drawable.monsters_1x2, "monsters_1x2", new Size(10, 5), sz1x2, mTileSize);
+		loader.prepareTileset(R.drawable.monsters_antison, "monsters_antison", sz10x2, sz1x1, mTileSize);
 		/*INSERT_NPCS_TILESETS_HERE*/
 		
 		loader.prepareTileset(R.drawable.map_bed_1, "map_bed_1", sz16x10, sz1x1, mTileSize);
