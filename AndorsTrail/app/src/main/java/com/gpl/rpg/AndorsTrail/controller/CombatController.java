@@ -510,7 +510,30 @@ public final class CombatController implements VisualEffectCompletedCallback {
 		if (!isFirstRound) controllers.gameRoundController.onNewPlayerRound();
 		world.model.uiSelections.isPlayersCombatTurn = true;
 		combatTurnListeners.onNewPlayerTurn();
+
+        while (shouldPlayerAutoAttack()) {
+            executePlayerAttack();
+        }
 	}
+
+    private boolean shouldPlayerAutoAttack(){
+        final Player player = world.model.player;
+        if (controllers.preferences.attackspeed_milliseconds != -1) return false;
+        if (!world.model.uiSelections.isInCombat) return false;
+        if (!world.model.uiSelections.isPlayersCombatTurn) return false;
+        if (!player.hasAPs(player.getAttackCost())) return false;
+
+        float totalDamage = 0;
+        for (MonsterSpawnArea a : world.model.currentMaps.map.spawnAreas) {
+            for (Monster m : a.monsters) {
+                if (!m.isAgressive(player)) continue;
+                if (!m.rectPosition.isAdjacentTo(player.position)) continue;
+                if (getAttackHitChance(m, player) == 0) continue;
+                totalDamage += getMaxDamagePerTurn(m, player);
+            }
+        }
+        return totalDamage <= player.getCurrentHP();
+    }
 
 	private static boolean hasCriticalAttack(Actor attacker, Actor target) {
 		if (!attacker.hasCriticalAttacks()) return false;
@@ -544,6 +567,14 @@ public final class CombatController implements VisualEffectCompletedCallback {
 	private static float getAverageDamagePerTurn(Actor attacker, Actor target) {
 		return getAverageDamagePerHit(attacker, target) * attacker.getAttacksPerTurn();
 	}
+
+    public static float getMaxDamagePerHit(final Actor attacker, final Actor target) {
+        float criticalMultiplier = hasCriticalAttack(attacker, target) ? attacker.getCriticalMultiplier() : 1;
+        return (attacker.getDamagePotential().max * criticalMultiplier) - target.getDamageResistance();
+    }
+    private static float getMaxDamagePerTurn(Actor attacker, Actor target) {
+        return getMaxDamagePerHit(attacker, target) * attacker.getAttacksPerTurn();
+    }
 	private static int getTurnsToKillTarget(Actor attacker, Actor target) {
 		if (hasCriticalAttack(attacker, target)) {
 			if (attacker.getDamagePotential().max * attacker.getCriticalMultiplier() <= target.getDamageResistance()) return 999;
