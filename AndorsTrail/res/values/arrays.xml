@@ -88,19 +88,36 @@
 	</string-array>
 
 	<string-array name="preferences_attackspeed">
-        <item>@string/preferences_attackspeed_instant_auto_attack</item>
         <item>@string/preferences_attackspeed_instant</item>
 		<item>@string/preferences_attackspeed_fast</item>
 		<item>@string/preferences_attackspeed_normal</item>
 		<item>@string/preferences_attackspeed_slow</item>
 	</string-array>
 	<string-array name="preferences_attackspeed_values">
-        <item>-1</item>
         <item>0</item>
 		<item>400</item>
 		<item>1000</item>
 		<item>1500</item>
 	</string-array>
+
+    <string-array name="preferences_auto_attack_threshold">
+        <item>@string/preferences_auto_attack_threshold_safe</item>
+        <item>@string/preferences_auto_attack_threshold_none</item>
+        <item>@string/preferences_auto_attack_threshold_90_percent_health_left</item>
+        <item>@string/preferences_auto_attack_threshold_80_percent_health_left</item>
+        <item>@string/preferences_auto_attack_threshold_70_percent_health_left</item>
+        <item>@string/preferences_auto_attack_threshold_60_percent_health_left</item>
+        <item>@string/preferences_auto_attack_threshold_50_percent_health_left</item>
+    </string-array>
+    <string-array name="preferences_auto_attack_threshold_values">
+        <item>-2</item>
+        <item>-1</item>
+        <item>90</item>
+        <item>80</item>
+        <item>70</item>
+        <item>60</item>
+        <item>50</item>
+    </string-array>
 
 	<string-array name="preferences_movementmethods">
 		<item>@string/preferences_movementmethods_straight</item>

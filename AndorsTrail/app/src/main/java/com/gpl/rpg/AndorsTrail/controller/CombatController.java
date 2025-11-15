@@ -517,22 +517,32 @@ public final class CombatController implements VisualEffectCompletedCallback {
 	}
 
     private boolean shouldPlayerAutoAttack(){
-        final Player player = world.model.player;
-        if (controllers.preferences.attackspeed_milliseconds != -1) return false;
+        if (controllers.preferences.attackspeed_milliseconds != 0) return false;
+        if (controllers.preferences.autoAttackThreshold == -1) return false;
         if (!world.model.uiSelections.isInCombat) return false;
         if (!world.model.uiSelections.isPlayersCombatTurn) return false;
-        if (!player.hasAPs(player.getAttackCost())) return false;
 
-        float totalDamage = 0;
-        for (MonsterSpawnArea a : world.model.currentMaps.map.spawnAreas) {
-            for (Monster m : a.monsters) {
-                if (!m.isAgressive(player)) continue;
-                if (!m.rectPosition.isAdjacentTo(player.position)) continue;
-                if (getAttackHitChance(m, player) == 0) continue;
-                totalDamage += getMaxDamagePerTurn(m, player);
-            }
+        final Player player = world.model.player;
+        if (!player.hasAPs(player.getAttackCost())) {
+            endPlayerTurn();
+            return false;
         }
-        return totalDamage <= player.getCurrentHP();
+
+        if (controllers.preferences.autoAttackThreshold == -2) {
+            float totalDamage = 0;
+            for (MonsterSpawnArea a : world.model.currentMaps.map.spawnAreas) {
+                for (Monster m : a.monsters) {
+                    if (!m.isAgressive(player)) continue;
+                    if (!m.rectPosition.isAdjacentTo(player.position)) continue;
+                    if (getAttackHitChance(m, player) == 0) continue;
+                    totalDamage += getMaxDamagePerTurn(m, player);
+                }
+            }
+            return totalDamage < player.getCurrentHP();
+        } else if (controllers.preferences.autoAttackThreshold > 0 && controllers.preferences.autoAttackThreshold < 100)
+            return player.getCurrentHP() > (player.getMaxHP() * controllers.preferences.autoAttackThreshold * .01);
+         else
+            return false;
     }
 
 	private static boolean hasCriticalAttack(Actor attacker, Actor target) {
