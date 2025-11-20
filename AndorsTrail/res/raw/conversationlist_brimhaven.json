@@ -10308,7 +10308,14 @@
             },
             {
                 "text":"Wanderer's Vitality",
-                "nextPhraseID":"brv_fortune_back_62"
+                "nextPhraseID":"brv_fortune_back_62",
+                "requires":[
+                    {
+                      "requireType":"skillIncrease",
+                      "requireID":"fortitude",
+                      "value":1
+                    }
+                ]
             },
             {
                 "text":"Mountainroot gold nugget",
