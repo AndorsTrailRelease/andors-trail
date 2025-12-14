@@ -1,485 +1,313 @@
 [
     {
-        "id": "debugshop",
-        "message": "Welcome adventurer!",
-        "replies": [
-            {
-                "text": "Trade items very very long text",
-                "nextPhraseID": "S"
-            },
-            {
-                "text": "Bye",
-                "nextPhraseID": "X"
-            },
-            {
-                "text": "Fight",
-                "nextPhraseID": "F"
-            }
-        ]
+        "id": "dbg_teleport",
+        "message": "Where do you want to travel?",
+        "replies": [{ "text": "Project Undertell", 	"nextPhraseID": "dbg_teleport_prj_undertell" },
+					{ "text": "Project Brightport",	"nextPhraseID": "dbg_teleport_prj_brightport2" },
+					{ "text": "More Projects",		"nextPhraseID": "dbg_teleport_prj" },
+					{ "text": "Crossglen", 			"nextPhraseID": "dbg_teleport_crossglen" },
+					{ "text": "Fallhaven", 			"nextPhraseID": "dbg_teleport_fallhaven" },
+					{ "text": "Vilegard", 			"nextPhraseID": "dbg_teleport_vilegard" },
+					{ "text": "Crossroads", 		"nextPhraseID": "dbg_teleport_crossroads" },
+					{ "text": "Loneford", 			"nextPhraseID": "dbg_teleport_loneford" },
+					{ "text": "BWM", 				"nextPhraseID": "dbg_teleport_bwm" },
+					{ "text": "Prim", 				"nextPhraseID": "dbg_teleport_prim" },
+					{ "text": "Remgard", 			"nextPhraseID": "dbg_teleport_remgard" },
+					{ "text": "Charwood", 			"nextPhraseID": "dbg_teleport_charwood" },
+					{ "text": "Lodar", 				"nextPhraseID": "dbg_teleport_lodar" },
+					{ "text": "Stoutford", 			"nextPhraseID": "dbg_teleport_stoutford" },
+					{ "text": "Feygard", 			"nextPhraseID": "dbg_teleport_feygard" },
+					{ "text": "Nor City", 			"nextPhraseID": "dbg_teleport_norcity" },
+					{ "text": "More locations",		"nextPhraseID": "dbg_teleport_loc" },
+					{ "text": "Bye", "nextPhraseID": "X" }]
     },
     {
-        "id": "debugquest",
-        "message": "Debug quest start\nTest.",
-        "rewards": [
-            {
-                "rewardType": "questProgress",
-                "rewardID": "debugquest",
-                "value": 10
-            }
-        ],
-        "replies": [
-            {
-                "text": "Iron sword*2",
-                "nextPhraseID": "debugquest2",
-                "requires": [
-                    {
-                        "requireType": "inventoryRemove",
-                        "requireID": "dagger0",
-                        "value": 1
-                    }
-                ]
-            },
-            {
-                "text": "Progress+=10",
-                "nextPhraseID": "debugquest4"
-            },
-            {
-                "text": "Progress=100",
-                "nextPhraseID": "debugquest1",
-                "requires": [
-                    {
-                        "requireType": "questProgress",
-                        "requireID": "debugquest",
-                        "value": "100"
-                    }
-                ]
-            }
-        ]
+        "id": "dbg_teleport_loc",
+        "message": "Other locations",
+        "replies": [{ "text": "Brightport", 		"nextPhraseID": "dbg_teleport_brightport" },
+					{ "text": "Guynmart", 			"nextPhraseID": "dbg_teleport_guynmart" },
+					{ "text": "Brimhaven", 			"nextPhraseID": "dbg_teleport_brimhaven" },
+					{ "text": "Arulir Mountain", 	"nextPhraseID": "dbg_teleport_arulir" },
+					{ "text": "Wood settlement", 	"nextPhraseID": "dbg_teleport_woodsettlement" },
+					{ "text": "Sullengard", 		"nextPhraseID": "dbg_teleport_sullengard" },
+					{ "text": "Mt. Galmore", 		"nextPhraseID": "dbg_teleport_galmore" },
+					{ "text": "Deebo's Apple Orchard", "nextPhraseID": "dbg_teleport_applefarm" },
+					{ "text": "Witch house", 		"nextPhraseID": "dbg_teleport_witchhouse" },
+					{ "text": "Lake Laeroth - Manor", "nextPhraseID": "dbg_teleport_laerot1" },
+					{ "text": "Lake Laeroth - Not Pony Island", "nextPhraseID": "dbg_teleport_laerot2" },
+					{ "text": "Wexlow Village", 	"nextPhraseID": "dbg_teleport_wexlow" },
+					{ "text": "Back", 				"nextPhraseID": "dbg_teleport" }]
     },
     {
-        "id": "debugquest1",
-        "message": "Yes, you have already completed this quest.",
-        "rewards": [
-            {
-                "rewardType": "dropList",
-                "rewardID": "debuglist1"
-            }
-        ],
-        "replies": [
-            {
-                "text": "Next",
-                "nextPhraseID": "debugquest3"
-            }
-        ]
+        "id":"dbg_teleport_crossglen", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"hall", "mapName":"crossglen" }]
     },
     {
-        "id": "debugquest2",
-        "message": "Thank you for the items.",
-        "rewards": [
-            {
-                "rewardType": "questProgress",
-                "rewardID": "debugquest",
-                "value": 100
-            }
-        ],
-        "replies": [
-            {
-                "text": "Next",
-                "nextPhraseID": "debugquest3"
-            }
-        ]
+        "id":"dbg_teleport_fallhaven", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"clothes", "mapName":"fallhaven_ne" }]
     },
     {
-        "id": "debugquest3",
-        "message": "Quest is now completed.",
-        "replies": [
-            {
-                "text": "Bye",
-                "nextPhraseID": "X"
-            }
-        ]
+        "id":"dbg_teleport_vilegard", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"tavern", "mapName":"vilegard_s" }]
     },
     {
-        "id": "debugquest4",
-        "message": "More info. Quest progress should now be updated to 20.",
-        "rewards": [
-            {
-                "rewardType": "questProgress",
-                "rewardID": "debugquest",
-                "value": 20
-            }
-        ],
-        "replies": [
-            {
-                "text": "Back",
-                "nextPhraseID": "debugquest"
-            }
-        ]
+        "id":"dbg_teleport_crossroads", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"middle", "mapName":"crossroads" }]
     },
     {
-        "id": "debugsign",
-        "message": "This should be a signpost."
+        "id":"dbg_teleport_loneford", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"south", "mapName":"loneford9" }]
     },
     {
-        "id": "debugrequireskey",
-        "message": "This tile requires a quest progress."
-    },
-   {
-    "id": "debugrequires10gold",
-    "replies": [
-      {
-        "text": "Too bad.",
-        "nextPhraseID": "X"
-      },
-      {
-        "text": "Well, gimme 10 gold then !",
-        "nextPhraseID": "debugrequires10gold_1"
-      }
-    ],
-    "message": "This tile costs 10 gold !"
-  },
-  {
-    "id": "debugrequires10gold_1",
-    "replies": [
-      {
-        "requires": [
-          {
-            "requireType": "spentGold",
-            "requireID": "gold",
-            "value": 100
-          }
-        ],
-        "nextPhraseID": "debugrequires10gold_3"
-      },
-      {
-        "nextPhraseID": "debugrequires10gold_2"
-      }
-    ]
-  },
-  {
-    "id": "debugrequires10gold_2",
-    "rewards": [
-            {
-                "rewardType": "dropList",
-                "rewardID": "debugrequires10gold_droplist"
-            }
-    ],
-    "replies": [
-      {
-        "text": "When I come to debugmap, I always feel like a star.",
-        "nextPhraseID": "X"
-      }
-    ],
-    "message": "OK. But only because it's you M. Coder."
-  },
-  {
-    "id": "debugrequires10gold_3",
-    "replies": [
-      {
-        "text": "Damn.",
-        "nextPhraseID": "X"
-      }
-    ],
-    "message": "Sorry. You already spent 100 gold..."
-  },
-  {
-        "message":"Hmm... beer...",
-        "id":"signbeer"
+        "id":"dbg_teleport_prim", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"south", "mapName":"blackwater_mountain29" }]
     },
     {
-        "message":"Do you want beer?",
-        "id":"npc3_0",
-        "replies":[
-            {
-                "nextPhraseID":"npc3_1",
-                "text":"Beer!"
-            },
-           	{
-                "nextPhraseID":"npc3_3",
-                "text":"No filter!"
-            },
-            {
-                "nextPhraseID":"npc3_5",
-                "text":"Black 20%!"
-            },
-            {
-                "nextPhraseID":"npc3_6",
-                "text":"Black 40%!"
-            },
-            {
-                "nextPhraseID":"npc3_7",
-                "text":"Black 60%!"
-            },
-            {
-                "nextPhraseID":"npc3_2",
-                "text":"Black 80%!"
-            },
-            {
-                "nextPhraseID":"npc3_4",
-                "text":"Red ligths!"
-            },
-            {
-                "nextPhraseID":"npc3_9",
-                "text":"Green ligths!"
-            },
-            {
-                "nextPhraseID":"npc3_10",
-                "text":"Blue ligths!"
-            },
-            {
-                "nextPhraseID":"npc3_11",
-                "text":"Black & White!"
-            },
-            {
-                "nextPhraseID":"npc3_8",
-                "text":"Invert!"
-            }
-        ]
+        "id":"dbg_teleport_bwm", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"south", "mapName":"blackwater_mountain43" }]
     },
     {
-        "message":"Bees & beer !",
-        "id":"npc3_1",
-        "rewards":[
-            {
-                "rewardID":"debug_insect_inactive",
-                "mapName":"debugmap",
-                "rewardType":"spawnAll"
-            },
-            {
-                "rewardID":"Inactive",
-                "mapName":"debugmap",
-                "rewardType":"activateMapObjectGroup"
-            },
-            {
-                "rewardID":"Active",
-                "mapName":"debugmap",
-                "rewardType":"deactivateMapObjectGroup"
-            }
-        ]
+        "id":"dbg_teleport_remgard", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"east", "mapName":"remgard0" }]
     },
     {
-        "message":"No beer for you !",
-        "id":"signnobeer"
+        "id":"dbg_teleport_charwood", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"minerhouse4", "mapName":"waytolostmine2" }]
     },
     {
-    	"id":"npc3_2",
-    	"message":"OK.",
-    	"rewards":[
-        	{
-            	"rewardType":"changeMapFilter",
-            	"rewardID":"black80",
-            	"mapName":"debugmap"
-        	}
-    	]
-	},
-    {
-    	"id":"npc3_3",
-    	"message":"OK.",
-    	"rewards":[
-        	{
-            	"rewardType":"changeMapFilter",
-            	"rewardID":"none",
-            	"mapName":"debugmap"
-        	}
-    	]
-	},
-    {
-    	"id":"npc3_4",
-    	"message":"OK.",
-    	"rewards":[
-        	{
-            	"rewardType":"changeMapFilter",
-            	"rewardID":"redtint",
-            	"mapName":"debugmap"
-        	}
-    	]
-	},
-    {
-    	"id":"npc3_5",
-    	"message":"OK.",
-    	"rewards":[
-        	{
-            	"rewardType":"changeMapFilter",
-            	"rewardID":"black20",
-            	"mapName":"debugmap"
-        	}
-    	]
-	},
-    {
-    	"id":"npc3_6",
-    	"message":"OK.",
-    	"rewards":[
-        	{
-            	"rewardType":"changeMapFilter",
-            	"rewardID":"black40",
-            	"mapName":"debugmap"
-        	}
-    	]
-	},
-    {
-    	"id":"npc3_7",
-    	"message":"OK.",
-    	"rewards":[
-        	{
-            	"rewardType":"changeMapFilter",
-            	"rewardID":"black60",
-            	"mapName":"debugmap"
-        	}
-    	]
-	},
-    {
-    	"id":"npc3_8",
-    	"message":"OK.",
-    	"rewards":[
-        	{
-            	"rewardType":"changeMapFilter",
-            	"rewardID":"invert",
-            	"mapName":"debugmap"
-        	}
-    	]
-	},
-    {
-    	"id":"npc3_9",
-    	"message":"OK.",
-    	"rewards":[
-        	{
-            	"rewardType":"changeMapFilter",
-            	"rewardID":"greentint",
-            	"mapName":"debugmap"
-        	}
-    	]
-	},
-    {
-    	"id":"npc3_10",
-    	"message":"OK.",
-    	"rewards":[
-        	{
-            	"rewardType":"changeMapFilter",
-            	"rewardID":"bluetint",
-            	"mapName":"debugmap"
-        	}
-    	]
-	},
-    {
-    	"id":"npc3_11",
-    	"message":"OK.",
-    	"rewards":[
-        	{
-            	"rewardType":"changeMapFilter",
-            	"rewardID":"bw",
-            	"mapName":"debugmap"
-        	}
-    	]
-	},
-    {
-        "id":"chaotic_rewarder_0",
-        "message":"What do you want?",
-        "replies":[
-            {
-                "text":"Apply condition",
-                "nextPhraseID":"chaotic_rewarder_1"
-            },
-            {
-                "text":"Clear condition",
-                "nextPhraseID":"chaotic_rewarder_2"
-            },
-            {
-                "text":"Give 5 rounds of immunity",
-                "nextPhraseID":"chaotic_rewarder_3"
-            },
-            {
-                "text":"Infinite immunity",
-                "nextPhraseID":"chaotic_rewarder_4"
-            },
-            {
-                "text":"Apply condition forever",
-                "nextPhraseID":"chaotic_rewarder_5"
-            }
-        ]
+        "id":"dbg_teleport_lodar", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"lodarhouse", "mapName":"lodarhouse0" }]
     },
     {
-        "id":"chaotic_rewarder_1",
-        "message":"Applied.",
-        "replies":[
-            {
-                "text":"N",
-                "nextPhraseID":"chaotic_rewarder_0"
-            }
-        ],
-        "rewards":[
-            {
-                "rewardType":"actorCondition",
-                "rewardID":"chaotic_grip",
-                "value":5
-            }
-        ]
+        "id":"dbg_teleport_stoutford", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"south2", "mapName":"wild20" }]
     },
     {
-        "id":"chaotic_rewarder_2",
-        "message":"Cleared.",
-        "replies":[
-            {
-                "text":"N",
-                "nextPhraseID":"chaotic_rewarder_0"
-            }
-        ],
-        "rewards":[
-            {
-                "rewardType":"actorCondition",
-                "rewardID":"chaotic_grip",
-                "value":-99
-            }
-        ]
+        "id":"dbg_teleport_guynmart", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"farmhouse", "mapName":"guynmart_wood_1" }]
     },
     {
-        "id":"chaotic_rewarder_3",
-        "message":"5 rounds immune!",
-        "replies":[
-            {
-                "text":"N",
-                "nextPhraseID":"chaotic_rewarder_0"
-            }
-        ],
-        "rewards":[
-            {
-                "rewardType":"actorConditionImmunity",
-                "rewardID":"chaotic_grip",
-                "value":5
-            }
-        ]
+        "id":"dbg_teleport_brimhaven", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"south2", "mapName":"brimhaven4" }]
     },
     {
-        "id":"chaotic_rewarder_4",
-        "message":"Immune forever !",
-        "replies":[
-            {
-                "text":"N",
-                "nextPhraseID":"chaotic_rewarder_0"
-            }
-        ],
-        "rewards":[
-            {
-                "rewardType":"actorConditionImmunity",
-                "rewardID":"chaotic_grip",
-                "value":999
-            }
-        ]
+        "id":"dbg_teleport_brightport", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"east", "mapName":"brightport1" }]
     },
     {
-        "id":"chaotic_rewarder_5",
-        "message":"Punished forever !",
-        "replies":[
-            {
-                "text":"N",
-                "nextPhraseID":"chaotic_rewarder_0"
-            }
-        ],
-        "rewards":[
-            {
-                "rewardType":"actorCondition",
-                "rewardID":"chaotic_grip",
-                "value":999
-            }
-        ]
+        "id":"dbg_teleport_arulir", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"north", "mapName":"mountainlake5" }]
+    },
+    {
+        "id":"dbg_teleport_woodsettlement", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"woodhouse2", "east":"woodsettlement0" }]
+    },
+    {
+        "id":"dbg_teleport_sullengard", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"south", "mapName":"sullengard2" }]
+    },
+    {
+        "id":"dbg_teleport_galmore", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"south", "mapName":"galmore_19" }]
+    },
+    {
+        "id":"dbg_teleport_applefarm", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"house", "mapName":"sullengard_apple_farm_east" }]
+    },
+    {
+        "id":"dbg_teleport_witchhouse", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"north", "mapName":"lake_shore_road_0" }]
+    },
+    {
+        "id":"dbg_teleport_laerot1", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"south2", "mapName":"laerothisland2" }]
+    },
+    {
+        "id":"dbg_teleport_laerot2", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"cave", "mapName":"island3" }]
+    },
+    {
+        "id":"dbg_teleport_wexlow", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"north", "mapName":"wexlow_village" }]
+    },
+    {
+        "id":"dbg_teleport_feygard", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"south", "mapName":"wayto_feygard_duleian_2" }]
+    },
+    {
+        "id":"dbg_teleport_norcity", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"north", "mapName":"cabin_norcity_road4" }]
+    },
+    {
+        "id": "dbg_teleport_prj_undertell",
+        "message": "***  undertell  ***",
+        "replies": [{ "text": "Entry to mine", 		"nextPhraseID": "dbg_teleport_prj_undertell_entry" },
+					{ "text": "Heartstone area", 	"nextPhraseID": "dbg_teleport_prj_undertell_heartstone" },
+					{ "text": "Floor 1", 			"nextPhraseID": "dbg_teleport_prj_undertell_floor1" },
+					{ "text": "Anoa", 				"nextPhraseID": "dbg_teleport_prj_undertell_anoa" },
+					{ "text": "Island hopping", 	"nextPhraseID": "dbg_teleport_prj_undertell_island_hopping" },
+					{ "text": "Back", 				"nextPhraseID": "dbg_teleport" }]
+    },
+    {
+        "id":"dbg_teleport_prj_undertell_entry", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"railhouse_door2", "mapName":"galmore_58" }]
+    },
+    {
+        "id":"dbg_teleport_prj_undertell_heartstone", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"east", "mapName":"undertell_3_lava_00" }]
+    },
+    {
+        "id":"dbg_teleport_prj_undertell_floor1", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"west", "mapName":"undertell_12" }]
+    },
+    {
+        "id":"dbg_teleport_prj_undertell_anoa", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"east", "mapName":"undertell_3_02" }]
+    },
+    {
+        "id":"dbg_teleport_prj_undertell_island_hopping", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"island0", "mapName":"undertell_5" }]
+    },
+    {
+        "id": "dbg_teleport_prj_brightport2",
+        "message": "***  brightport2  ***",
+        "replies": [{ "text": "Duleian road to Brightport", "nextPhraseID": "dbg_teleport_prj_brightport2_start_from_south" },
+					{ "text": "Poisoned lands towards Brightport", "nextPhraseID": "dbg_teleport_prj_brightport2_start_from_north" },
+					{ "text": "West of Brightport", "nextPhraseID": "dbg_teleport_prj_brightport2_west_of_brightport" },
+					{ "text": "Statue", "nextPhraseID": "dbg_teleport_prj_brightport2_statue" },
+					{ "text": "Statue west", "nextPhraseID": "dbg_teleport_prj_brightport2_statue_w" },
+					{ "text": "Statue north", "nextPhraseID": "dbg_teleport_prj_brightport2_statue_n" },
+					{ "text": "Statue east", "nextPhraseID": "dbg_teleport_prj_brightport2_statue_e" },
+					{ "text": "Statue to charwood", "nextPhraseID": "dbg_teleport_prj_brightport2_statue_chr" },
+					{ "text": "Lizard cave", "nextPhraseID": "dbg_teleport_prj_brightport2_lizards" },
+					{ "text": "Hills towards underground castle", "nextPhraseID": "dbg_teleport_prj_brightport2_waytocastle" },
+					{ "text": "Back", 				"nextPhraseID": "dbg_teleport" }]
+    },
+    {
+        "id":"dbg_teleport_prj_brightport2_start_from_south", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"north", "mapName":"cabin_norcity_road1" }]
+    },
+    {
+        "id":"dbg_teleport_prj_brightport2_start_from_north", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"north2", "mapName":"korhald_cave_outdoor1" }]
+    },
+    {
+        "id":"dbg_teleport_prj_brightport2_west_of_brightport", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"east", "mapName":"waytobrightport20" }]
+    },
+    {
+        "id":"dbg_teleport_prj_brightport2_statue", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"west", "mapName":"brightportwild9" }]
+    },
+    {
+        "id":"dbg_teleport_prj_brightport2_statue_w", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"south", "mapName":"waytobrightport10" }]
+    },
+    {
+        "id":"dbg_teleport_prj_brightport2_statue_n", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"south", "mapName":"brightportwild19" }]
+    },
+    {
+        "id":"dbg_teleport_prj_brightport2_statue_e", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"west", "mapName":"brightportwild10" }]
+    },
+    {
+        "id":"dbg_teleport_prj_brightport2_statue_chr", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"west", "mapName":"waytobrightport0" }]
+    },
+    {
+        "id":"dbg_teleport_prj_brightport2_lizards", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"cave", "mapName":"brightportwild17" }]
+    },
+    {
+        "id":"dbg_teleport_prj_brightport2_waytocastle", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"east1", "mapName":"brightportwild4" }]
+    },
+    {
+        "id": "dbg_teleport_prj",
+        "message": "Other projects",
+        "replies": [{ "text": "Project Way to Feygard", 	"nextPhraseID": "dbg_teleport_prj_feygard_3" },
+					{ "text": "Project Way to Nor City", 	"nextPhraseID": "dbg_teleport_prj_nor_city" },
+					{ "text": "Back", 				"nextPhraseID": "dbg_teleport" }]
+    },
+    {
+        "id": "dbg_teleport_prj_feygard_3",
+        "message": "***  feygard_3  ***",
+        "replies": [{ "text": "Feygard walls", 		"nextPhraseID": "dbg_teleport_prj_feygard_walls" },
+					{ "text": "Back", 				"nextPhraseID": "dbg_teleport" }]
+    },
+    {
+        "id":"dbg_teleport_prj_feygard_walls", 
+		"rewards":[{ "rewardType":"mapchange", "rewardID":"south", "mapName":"feygard_outside1" }]
+    },
+    {
+        "id": "dbg_teleport_prj_nor_city",
+        "message": "***  norcity  ***",
+        "replies": [{ "text": "Back", 				"nextPhraseID": "dbg_teleport" }]
+    },
+    {
+        "id": "dbg_shop",
+        "message": "What do you need?",
+        "replies": [{ "text": "Gold",				"nextPhraseID": "dbg_shop_gold" },
+					{ "text": "Potions", 			"nextPhraseID": "dbg_shop_pot", "requires":[{ "requireType":"inventoryRemove", "requireID":"health_major2", "value":-1000 }] },
+					{ "text": "Project undertell", 		"nextPhraseID": "dbg_shop_prj_undertell" },
+					{ "text": "Project brightport2",	"nextPhraseID": "dbg_shop_prj_brightport2" },
+					{ "text": "Project feygard_3",		"nextPhraseID": "dbg_shop_prj_feygard_3" },
+					{ "text": "Project nor_city",		"nextPhraseID": "dbg_shop_prj_nor_city" },
+					{ "text": "Project moeston",		"nextPhraseID": "dbg_shop_prj_moeston" },
+					{ "text": "Project z_biasZebra",		"nextPhraseID": "dbg_shop_prj_z_biasZebra" },
+					{ "text": "Bye", "nextPhraseID": "X" }]
+    },
+    {
+        "id": "dbg_shop_prj_undertell",
+        "message": "***  undertell  ***",
+        "replies": [{ "text": "Back", "nextPhraseID": "dbg_shop" }]
+    },
+    {
+        "id": "dbg_shop_prj_brightport2",
+        "message": "***  brightport2  ***",
+        "replies": [{ "text": "20 lizardman bones",		"nextPhraseID": "dbg_shop_prj_brightport2", 
+														"requires":[{ "requireType":"inventoryRemove", "requireID":"brightport_bone", "value":-20 }] },
+					{ "text": "Back", "nextPhraseID": "dbg_shop" }]
+    },
+    {
+        "id": "dbg_shop_prj_feygard_3",
+        "message": "***  feygard_3  ***",
+        "replies": [{ "text": "Back", "nextPhraseID": "dbg_shop" }]
+    },
+    {
+        "id": "dbg_shop_prj_nor_city",
+        "message": "***  nor_city  ***",
+        "replies": [{ "text": "Back", "nextPhraseID": "dbg_shop" }]
+    },
+    {
+        "id": "dbg_shop_prj_moeston",
+        "message": "***  moeston  ***",
+        "replies": [{ "text": "Back", "nextPhraseID": "dbg_shop" }]
+    },
+    {
+        "id": "dbg_shop_prj_z_biasZebra",
+        "message": "***  z_biasZebra  ***",
+        "replies": [{ "text": "Back", "nextPhraseID": "dbg_shop" }]
+    },
+    {
+        "id": "dbg_shop_gold",
+        "message": "How much gold?",
+        "replies": [{ "text": "100000",		"nextPhraseID": "dbg_shop_gold", "requires":[{ "requireType":"inventoryRemove", "requireID":"gold", "value":-100000 }] },
+					{ "text": "10000",		"nextPhraseID": "dbg_shop_gold", "requires":[{ "requireType":"inventoryRemove", "requireID":"gold", "value":-10000 }] },
+					{ "text": "1000",		"nextPhraseID": "dbg_shop_gold", "requires":[{ "requireType":"inventoryRemove", "requireID":"gold", "value":-1000 }] },
+					{ "text": "-10",		"nextPhraseID": "dbg_shop_gold", "requires":[{ "requireType":"inventoryRemove", "requireID":"gold", "value":10 }] },
+					{ "text": "-100",		"nextPhraseID": "dbg_shop_gold", "requires":[{ "requireType":"inventoryRemove", "requireID":"gold", "value":100 }] },
+					{ "text": "-1000",		"nextPhraseID": "dbg_shop_gold", "requires":[{ "requireType":"inventoryRemove", "requireID":"gold", "value":1000 }] },
+					{ "text": "-10000",		"nextPhraseID": "dbg_shop_gold", "requires":[{ "requireType":"inventoryRemove", "requireID":"gold", "value":10000 }] },
+					{ "text": "-100000",	"nextPhraseID": "dbg_shop_gold", "requires":[{ "requireType":"inventoryRemove", "requireID":"gold", "value":100000 }] },
+					{ "text": "Back", 		"nextPhraseID": "dbg_shop" }]
+    },
+    {
+        "id": "dbg_shop_pot",
+        "message": "Let's get a drink ...",
+        "replies": [{ "text": "Major potion of health",		"nextPhraseID": "dbg_shop_pot", 
+															"requires":[{ "requireType":"inventoryRemove", "requireID":"health_major2", "value":-1000 }] },
+					{ "text": "Back", 		"nextPhraseID": "dbg_shop" }]
     }
 ]
