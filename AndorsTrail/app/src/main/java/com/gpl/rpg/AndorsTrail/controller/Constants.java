@@ -48,6 +48,7 @@ public final class Constants {
 	public static final String FILENAME_WORLDMAP_HTMLFILE_SUFFIX = ".html";
 	public static final String FILENAME_SAVEGAME_FILENAME_PREFIX = "savegame";
 	public static final String PLACEHOLDER_PLAYERNAME = "$playername";
+	public static final String PLACEHOLDER_AKKU = "$akku";
 	public static final String CHEAT_DETECTION_FOLDER = "dEAGyGE3YojqXjI3x4x7";
 	public static final String PASSIVE_ACHIEVEMENT_CHECK_PHRASE = "passive_achievement_check";
 

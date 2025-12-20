@@ -9,6 +9,12 @@ public final class ScriptEffect {
 		, actorConditionImmunity
 		, alignmentChange
 		, alignmentSet
+		, alignmentToAkku
+		, alignmentFromAkku
+		, alignmentAdd
+		, alignmentSub
+		, alignmentMult
+		, alignmentDiv
 		, giveItem
 		, createTimer
 		, spawnAll
