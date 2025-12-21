@@ -9,8 +9,8 @@ public final class ScriptEffect {
 		, actorConditionImmunity
 		, alignmentChange
 		, alignmentSet
-		, alignmentToAkku
-		, alignmentFromAkku
+		, alignmentToReg1
+		, alignmentFromReg1
 		, alignmentAdd
 		, alignmentSub
 		, alignmentMult
