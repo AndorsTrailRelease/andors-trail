@@ -827,7 +827,11 @@ A **dialogue** ***can*** have the following fields defined:
 
 
 - A **reward** ***must*** have the following fields defined:
-  - "rewardType" with one of the following values: "**questProgress**", "**removeQuestProgress**", "**dropList**", "**skillIncrease**", "**actorCondition**", "**actorConditionImmunity**", "**alignmentChange**", "**alignmentSet**", "**giveItem**", "**createTimer**", "**spawnAll**", "**removeSpawnArea**", "**deactivateSpawnArea**", "**activateMapObjectGroup**", "**deactivateMapObjectGroup**", "**changeMapFilter**", "**mapchange**". Explanation for all rewards type, and associated constraints on the other fields of a reply definition is below.
+  - "rewardType" with one of the following values: "**questProgress**", "**removeQuestProgress**", "**dropList**", "**skillIncrease**", 
+    "**actorCondition**", "**actorConditionImmunity**", "**alignmentChange**", "**alignmentSet**", "**alignmentToReg1**", "**alignmentFromReg1**",
+    "**alignmentAdd**", "**alignmentSub**", "**alignmentMult**", "**alignmentDiv**", "**giveItem**", "**createTimer**", "**spawnAll**", 
+    "**removeSpawnArea**", "**deactivateSpawnArea**", "**activateMapObjectGroup**", "**deactivateMapObjectGroup**", "**changeMapFilter**",
+    "**mapchange**". Explanation for all rewards type, and associated constraints on the other fields of a reply definition is below.
 
   - "rewardID" with a textual value generally matching the ID of a game object. As it depends on the "**rewardType**" selected, see below for details.
 
