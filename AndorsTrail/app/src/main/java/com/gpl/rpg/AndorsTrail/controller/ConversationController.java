@@ -215,38 +215,38 @@ public final class ConversationController {
 
 	private void toAkkuAlignmentReward(Player player, String faction) {
 		Integer i = player.getAlignment(faction);
-		player.setAlignment("Akku", i);
+		player.setAlignment(PLACEHOLDER_AKKU, i);
 	}
 
 	private void fromAkkuAlignmentReward(Player player, String faction) {
-		Integer i = player.getAlignment("Akku");
+		Integer i = player.getAlignment(PLACEHOLDER_AKKU);
 		player.setAlignment(faction, i);
 		MovementController.refreshMonsterAggressiveness(world.model.currentMaps.map, world.model.player);
 	}
 
 	private void addAlignmentReward(Player player, String faction) {
 		Integer i = player.getAlignment(faction);
-		player.addAlignment("Akku", i);
+		player.addAlignment(PLACEHOLDER_AKKU, i);
 	}
 
 	private void subAlignmentReward(Player player, String faction) {
 		Integer i = -1 * player.getAlignment(faction);
-		player.addAlignment("Akku", i);
+		player.addAlignment(PLACEHOLDER_AKKU, i);
 	}
 
 	private void divAlignmentReward(Player player, String faction, int delta ) {
 		Integer m, i1, i2;
 		if (delta == 0) { m = 1; } else { m = delta; }
 		i1 = player.getAlignment(faction) * m;
-		i2 = player.getAlignment("Akku");
-		player.setAlignment("Akku", i1 % i2 );
+		i2 = player.getAlignment(PLACEHOLDER_AKKU);
+		player.setAlignment(PLACEHOLDER_AKKU, i1 / i2 );
 	}
 
 	private void multAlignmentReward(Player player, String faction, int delta ) {
 		Integer m, i;
-		if (delta == 0) { m = player.getAlignment("Akku"); } else { m = delta; }
+		if (delta == 0) { m = player.getAlignment(PLACEHOLDER_AKKU); } else { m = delta; }
 		i = player.getAlignment(faction) * m;
-		player.setAlignment("Akku", i );
+		player.setAlignment(PLACEHOLDER_AKKU, i );
 	}
 
 	private void addQuestProgressReward(Player player, String questID, int questProgress, ScriptEffectResult result) {
@@ -427,7 +427,7 @@ public final class ConversationController {
 	private static String getDisplayMessage(Reply reply, Player player) { return replacePlayerName(reply.text, player); }
 	private static String replacePlayerName(String s, Player player) {
 		return s.replace(Constants.PLACEHOLDER_PLAYERNAME, player.getName())
-				.replace(Constants.PLACEHOLDER_AKKU, String.valueOf(player.getAlignment("akku")));
+				.replace(Constants.PLACEHOLDER_AKKU, String.valueOf(player.getAlignment(PLACEHOLDER_AKKU)));
 	}
 
 	public static final class ConversationStatemachine {
