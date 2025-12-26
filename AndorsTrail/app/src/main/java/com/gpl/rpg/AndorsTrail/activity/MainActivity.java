@@ -139,7 +139,7 @@ public final class MainActivity
 			if (resultCode == Activity.RESULT_OK) {
 				controllers.combatController.enterCombat(CombatController.BeginTurnAs.player);
 			} else {
-				controllers.combatController.exitCombat(false);
+				controllers.combatController.exitCombat(false, true);
 			}
 			break;
 		case INTENTREQUEST_CONVERSATION:

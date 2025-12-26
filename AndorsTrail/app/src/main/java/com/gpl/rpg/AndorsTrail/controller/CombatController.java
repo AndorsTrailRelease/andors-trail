@@ -57,6 +57,9 @@ public final class CombatController implements VisualEffectCompletedCallback {
 		else continueTurn();
 	}
 	public void exitCombat(boolean pickupLootBags) {
+		exitCombat(pickupLootBags, false);
+	}
+	public void exitCombat(boolean pickupLootBags, boolean canceledCombat) {
 		setCombatSelection(null, null);
 		world.model.uiSelections.isInCombat = false;
 		if (pickupLootBags) {
@@ -66,7 +69,7 @@ public final class CombatController implements VisualEffectCompletedCallback {
 		controllers.actorStatsController.setActorMaxAP(world.model.player);
 		world.model.uiSelections.selectedPosition = null;
 		world.model.uiSelections.selectedMonster = null;
-		if (world.model.player.isDead()) {
+		if (world.model.player.isDead() || canceledCombat) {
 			controllers.gameRoundController.resetRoundTimers();
 		} else {
 			endOfCombatRound();
