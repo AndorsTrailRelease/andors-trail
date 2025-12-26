@@ -10,7 +10,11 @@ public final class ScriptEffect {
 		, alignmentChange
 		, alignmentSet
 		, alignmentToReg1
+		, alignmentToReg2
+		, alignmentToReg3
 		, alignmentFromReg1
+		, alignmentFromReg2
+		, alignmentFromReg3
 		, alignmentAdd
 		, alignmentSub
 		, alignmentMult

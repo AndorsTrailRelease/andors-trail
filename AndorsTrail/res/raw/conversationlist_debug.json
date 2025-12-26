@@ -224,5 +224,47 @@
         "replies": [{ "text": "Major potion of health",		"nextPhraseID": "dbg_shop_pot", 
 															"requires":[{ "requireType":"inventoryRemove", "requireID":"health_major2", "value":-1000 }] },
 					{ "text": "Back", 		"nextPhraseID": "dbg_shop" }]
-    }
+    },
+    {
+        "id": "dbg_scores",
+        "message":"Current scores:\n\n  Shadow: $reg1 / $reg3 = $reg2%",
+        "replies":[	{ "text": "12: Absolute Shadow hater", "nextPhraseID": "dbg_scores_10", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":12 }] },
+					{ "text": "13: Shadow hater", "nextPhraseID": "dbg_scores_10", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":13 }] },
+					{ "text": "15: Balanced Shadow feelings", "nextPhraseID": "dbg_scores_10", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":15 }] },
+					{ "text": "17: Shadow fan", "nextPhraseID": "dbg_scores_10", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":17 }] },
+					{ "text": "18: Absolute Shadow fan", "nextPhraseID": "dbg_scores_10", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":18 }] },
+					{ "text": "10: (Shadow score fixed)", "nextPhraseID": "dbg_scores_10", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":10 }] }],
+		"rewards":[	{ "rewardType":"alignmentToReg1", "rewardID":"fsc_shd"  },
+					{ "rewardType":"alignmentToReg2", "rewardID":"fsc_shd2" },
+					{ "rewardType":"alignmentToReg3", "rewardID":"fsc_shd9" }]
+    },
+    {
+        "id": "dbg_scores_10",
+        "message":"  Feygard: $reg1 / $reg3 = $reg2%",
+        "replies":[	{ "text": "22: Absolute Feygard hater", "nextPhraseID": "dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":22 }] },
+					{ "text": "23: Feygard hater", "nextPhraseID": "dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":23 }] },
+					{ "text": "25: Balanced Feygard feelings", "nextPhraseID": "dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":25 }] },
+					{ "text": "27: Feygard fan", "nextPhraseID": "dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":27 }] },
+					{ "text": "28: Absolute Feygard fan", "nextPhraseID": "dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":28 }] },
+					{ "text": "20: (Feygard score fixed)", "nextPhraseID": "dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":20 }] }],
+		"rewards":[	{ "rewardType":"alignmentToReg1", "rewardID":"fsc_fey"  },
+					{ "rewardType":"alignmentToReg2", "rewardID":"fsc_fey2" },
+					{ "rewardType":"alignmentToReg3", "rewardID":"fsc_fey9" }]
+    },
+    {
+        "id": "dbg_scores_20",
+        "message":"  Thieves: $reg1 / $reg3 = $reg2%",
+        "replies":[	{ "text": "32: Absolute Thieves Guild hater", "nextPhraseID": "dbg_scores_30", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":32 }] },
+					{ "text": "33: Thieves Guild hater", "nextPhraseID": "dbg_scores_30", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":33 }] },
+					{ "text": "35: Balanced Thieves Guild feelings", "nextPhraseID": "dbg_scores_30", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":35 }] },
+					{ "text": "37: Thieves Guild fan", "nextPhraseID": "dbg_scores_30", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":37 }] },
+					{ "text": "38: Absolute Thieves Guild fan", "nextPhraseID": "dbg_scores_30", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":38 }] },
+					{ "text": "30: (Thieves Guild score fixed)", "nextPhraseID": "dbg_scores_30", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":30 }] }],
+		"rewards":[	{ "rewardType":"alignmentToReg1", "rewardID":"fsc_thv"  },
+					{ "rewardType":"alignmentToReg2", "rewardID":"fsc_thv2" },
+					{ "rewardType":"alignmentToReg3", "rewardID":"fsc_thv9" }]
+    },
+    {
+        "id": "dbg_scores_30" 
+	}
 ]

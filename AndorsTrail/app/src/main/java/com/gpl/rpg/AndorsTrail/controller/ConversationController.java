@@ -101,10 +101,16 @@ public final class ConversationController {
 				setAlignmentReward(player, effect.effectID, effect.value);
 				break;
 			case alignmentToReg1:
-				toAkkuAlignmentReward(player, effect.effectID);
+				toAkkuAlignmentReward(player, effect.effectID, Constants.FACTION_SCORE_CALC_REGISTER1_NAME);
+				break;
+			case alignmentToReg2:
+				toAkkuAlignmentReward(player, effect.effectID, Constants.FACTION_SCORE_CALC_REGISTER2_NAME);
+				break;
+			case alignmentToReg3:
+				toAkkuAlignmentReward(player, effect.effectID, Constants.FACTION_SCORE_CALC_REGISTER3_NAME);
 				break;
 			case alignmentFromReg1:
-				fromAkkuAlignmentReward(player, effect.effectID);
+				fromAkkuAlignmentReward(player, effect.effectID, Constants.FACTION_SCORE_CALC_REGISTER1_NAME);
 				break;
 			case alignmentAdd:
 				addAlignmentReward(player, effect.effectID);
@@ -213,45 +219,45 @@ public final class ConversationController {
 		MovementController.refreshMonsterAggressiveness(world.model.currentMaps.map, world.model.player);
 	}
 
-	private void toAkkuAlignmentReward(Player player, String faction) {
+	private void toAkkuAlignmentReward(Player player, String faction, String reg) {
 		Integer i = player.getAlignment(faction);
-		player.setAlignment("akku", i);
+		player.setAlignment(reg, i);
 	}
 
-	private void fromAkkuAlignmentReward(Player player, String faction) {
-		Integer i = player.getAlignment(Constants.FACTION_SCORE_CALC_REGISTER_NAME);
+	private void fromAkkuAlignmentReward(Player player, String faction, String reg) {
+		Integer i = player.getAlignment(reg);
 		player.setAlignment(faction, i);
 		MovementController.refreshMonsterAggressiveness(world.model.currentMaps.map, world.model.player);
 	}
 
 	private void addAlignmentReward(Player player, String faction) {
 		Integer i = player.getAlignment(faction);
-		player.addAlignment(Constants.FACTION_SCORE_CALC_REGISTER_NAME, i);
+		player.addAlignment(Constants.FACTION_SCORE_CALC_REGISTER1_NAME, i);
 	}
 
 	private void subAlignmentReward(Player player, String faction) {
 		Integer i = -1 * player.getAlignment(faction);
-		player.addAlignment(Constants.FACTION_SCORE_CALC_REGISTER_NAME, i);
+		player.addAlignment(Constants.FACTION_SCORE_CALC_REGISTER1_NAME, i);
 	}
 
 	/// @param multiplier multiplies the faction alignment before dividing. Use 100 for percentages.
 	private void divAlignmentReward(Player player, String faction, int multiplier ) {
 		Integer i1, i2;
 		if (multiplier == 0) { multiplier = 1; }
-		i1 = player.getAlignment(Constants.FACTION_SCORE_CALC_REGISTER_NAME);
-		i2 = player.getAlignment(faction) * multiplier;
+		i1 = player.getAlignment(Constants.FACTION_SCORE_CALC_REGISTER1_NAME) * multiplier;
+		i2 = player.getAlignment(faction);
 		if (i2 != 0)
 		{
-			player.setAlignment(Constants.FACTION_SCORE_CALC_REGISTER_NAME, i1 / i2 );
+			player.setAlignment(Constants.FACTION_SCORE_CALC_REGISTER1_NAME, i1 / i2 );
 		}
 	}
 
-	/// @param multiplier the factor to multiply by. If 0, uses the faction score from the {@link Constants.FACTION_SCORE_CALC_REGISTER_NAME} as multiplier.
+	/// @param multiplier the factor to multiply by. If 0, uses the faction score from the {@link Constants.FACTION_SCORE_CALC_REGISTER1_NAME} as multiplier.
 	private void multAlignmentReward(Player player, String faction, int multiplier ) {
 		Integer  i;
-		if (multiplier == 0) { multiplier = player.getAlignment(Constants.FACTION_SCORE_CALC_REGISTER_NAME); }
+		if (multiplier == 0) { multiplier = player.getAlignment(Constants.FACTION_SCORE_CALC_REGISTER1_NAME); }
 		i = player.getAlignment(faction) * multiplier;
-		player.setAlignment(Constants.FACTION_SCORE_CALC_REGISTER_NAME, i );
+		player.setAlignment(Constants.FACTION_SCORE_CALC_REGISTER1_NAME, i );
 	}
 
 	private void addQuestProgressReward(Player player, String questID, int questProgress, ScriptEffectResult result) {
@@ -432,7 +438,9 @@ public final class ConversationController {
 	private static String getDisplayMessage(Reply reply, Player player) { return replacePlayerName(reply.text, player); }
 	private static String replacePlayerName(String s, Player player) {
 		return s.replace(Constants.PLACEHOLDER_PLAYERNAME, player.getName())
-				.replace(Constants.PLACEHOLDER_REG1, String.valueOf(player.getAlignment(Constants.FACTION_SCORE_CALC_REGISTER_NAME)));
+				.replace(Constants.PLACEHOLDER_REG1, String.valueOf(player.getAlignment(Constants.FACTION_SCORE_CALC_REGISTER1_NAME)))
+				.replace(Constants.PLACEHOLDER_REG2, String.valueOf(player.getAlignment(Constants.FACTION_SCORE_CALC_REGISTER2_NAME)))
+				.replace(Constants.PLACEHOLDER_REG3, String.valueOf(player.getAlignment(Constants.FACTION_SCORE_CALC_REGISTER3_NAME)));
 	}
 
 	public static final class ConversationStatemachine {
