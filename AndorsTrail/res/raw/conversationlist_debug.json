@@ -153,8 +153,9 @@
     {
         "id": "dbg_shop",
         "message": "What do you need?",
-        "replies": [{ "text": "Gold",				"nextPhraseID": "dbg_shop_gold" },
-					{ "text": "Potions", 			"nextPhraseID": "dbg_shop_pot", "requires":[{ "requireType":"inventoryRemove", "requireID":"health_major2", "value":-1000 }] },
+        "replies": [{ "text": "Gold",					"nextPhraseID": "dbg_shop_gold" },
+					{ "text": "Potions", 				"nextPhraseID": "dbg_shop_pot" },
+					{ "text": "Animal parts", 			"nextPhraseID": "dbg_shop_animalparts" },
 					{ "text": "Project undertell", 		"nextPhraseID": "dbg_shop_prj_undertell" },
 					{ "text": "Project brightport2",	"nextPhraseID": "dbg_shop_prj_brightport2" },
 					{ "text": "Project feygard_3",		"nextPhraseID": "dbg_shop_prj_feygard_3" },
@@ -213,6 +214,15 @@
         "message": "Let's get a drink ...",
         "replies": [{ "text": "Major potion of health",		"nextPhraseID": "dbg_shop_pot", 
 															"requires":[{ "requireType":"inventoryRemove", "requireID":"health_major2", "value":-1000 }] },
+					{ "text": "Back", 		"nextPhraseID": "dbg_shop" }]
+    },
+    {
+        "id": "dbg_shop_animalparts",
+        "message": "Let's find some animal parts",
+        "replies": [{ "text": "5 normal bones",				"nextPhraseID": "dbg_shop_animalparts", 
+															"requires":[{ "requireType":"inventoryRemove", "requireID":"bone", "value":-5 }] },
+					{ "text": "5 insect wings",				"nextPhraseID": "dbg_shop_animalparts", 
+															"requires":[{ "requireType":"inventoryRemove", "requireID":"insectwing", "value":-5 }] },
 					{ "text": "Back", 		"nextPhraseID": "dbg_shop" }]
     },
     {
