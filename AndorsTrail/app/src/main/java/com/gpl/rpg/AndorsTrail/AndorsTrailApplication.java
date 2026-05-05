@@ -18,6 +18,7 @@ import android.content.res.Resources;
 import android.graphics.Insets;
 import android.os.Build;
 import android.os.Environment;
+import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.view.Window;
@@ -184,6 +185,43 @@ public final class AndorsTrailApplication extends Application {
 			}
 
 		}
+
+		// If we're in dev mode, add focus listener to each activity
+		if (BuildConfig.DEBUG) {
+			registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
+				@Override
+				public void onActivityStarted(final Activity activity) {
+					// Attach a listener to the view tree of every activity that starts
+					activity.getWindow().getDecorView().getViewTreeObserver().addOnGlobalFocusChangeListener(new android.view.ViewTreeObserver.OnGlobalFocusChangeListener() {
+						@Override
+						public void onGlobalFocusChanged(View oldFocus, View newFocus) {
+							if (newFocus != null) {
+								String idName = "no-id";
+								try {
+									// Attempt to get the human-readable XML ID
+									idName = activity.getResources().getResourceEntryName(newFocus.getId());
+								} catch (Exception ignored) {
+									// Some system views or root containers don't have IDs
+								}
+								Log.d("GlobalFocus", "Activity: " + activity.getClass().getSimpleName()
+										+ " | Focused: " + newFocus.getClass().getSimpleName() + " [ID: " + idName + "]");
+							} else {
+								Log.d("GlobalFocus", "Activity: " + activity.getClass().getSimpleName() + " | Focus lost");
+							}
+						}
+					});
+				}
+
+				// Required boilerplate for the interface (these can remain empty)
+				@Override public void onActivityCreated(android.app.Activity activity, android.os.Bundle savedInstanceState) {}
+				@Override public void onActivityResumed(android.app.Activity activity) {}
+				@Override public void onActivityPaused(android.app.Activity activity) {}
+				@Override public void onActivityStopped(android.app.Activity activity) {}
+				@Override public void onActivitySaveInstanceState(android.app.Activity activity, android.os.Bundle outState) {}
+				@Override public void onActivityDestroyed(android.app.Activity activity) {}
+			});
+		}
+
 	}
 
 	/* Checks if external storage is available for read and write */
