@@ -37,7 +37,6 @@ public final class ToolboxView extends LinearLayout implements OnClickListener {
 	private ImageButton toggleToolboxVisibility;
 	private View focusReturnView;
 	private QuickitemView quickitemView;
-	private boolean hideQuickslotsWhenToolboxIsClosed = false;
 	private static final int quickSlotIcon = R.drawable.ui_icon_equipment;
 	private final Drawable quickSlotIconsLockedDrawable;
 	private final Resources res;
@@ -75,7 +74,6 @@ public final class ToolboxView extends LinearLayout implements OnClickListener {
 				res.getDrawable(quickSlotIcon)
 				,new BitmapDrawable(res, world.tileManager.preloadedTiles.getBitmap(TileManager.iconID_moveselect))
 		});
-		hideQuickslotsWhenToolboxIsClosed = preferences.showQuickslotsWhenToolboxIsVisible;
 	}
 
 	public void registerToolboxViews(ImageButton toggleVisibility, QuickitemView quickitemView) {
@@ -110,16 +108,15 @@ public final class ToolboxView extends LinearLayout implements OnClickListener {
 	}
 
 	private void toggleQuickslotItemView() {
+		// Toggle the visibility of the quickitem view and save the new state to prefs
+		preferences.setQuickslotsVisible(!preferences.quickslotsVisible);
+		// Toolbox is currently open, so if prefs say to, force the quickbuttons visible even if toggle is off.
 		if (preferences.showQuickslotsWhenToolboxIsVisible) {
-			hideQuickslotsWhenToolboxIsClosed = !hideQuickslotsWhenToolboxIsClosed;
-			updateToggleQuickSlotItemsIcon();
+			quickitemView.setVisibility(View.VISIBLE);
 		} else {
-			if (quickitemView.getVisibility() == View.VISIBLE) {
-				quickitemView.setVisibility(View.GONE);
-			} else {
-				quickitemView.setVisibility(View.VISIBLE);
-			}
+			quickitemView.updateVisibility();
 		}
+		this.updateToggleQuickSlotItemsIcon();
 	}
 
 	private void toggleVisibility() {
@@ -138,11 +135,8 @@ public final class ToolboxView extends LinearLayout implements OnClickListener {
 			setVisibility(View.GONE);
 		}
 
-		if (preferences.showQuickslotsWhenToolboxIsVisible) {
-			if (hideQuickslotsWhenToolboxIsClosed) {
-				quickitemView.setVisibility(View.GONE);
-			}
-		}
+		quickitemView.updateVisibility();
+
 		setToolboxIcon(false);
 
 		// Set the focus back to the main view
@@ -160,14 +154,16 @@ public final class ToolboxView extends LinearLayout implements OnClickListener {
 		if (isVisible()) return;
 
 		setVisibility(View.VISIBLE);
-		if (preferences.enableUiAnimations) {
-			startAnimation(showAnimation);
-		}
-
 		if (preferences.showQuickslotsWhenToolboxIsVisible) {
 			quickitemView.setVisibility(View.VISIBLE);
 		}
+
+		this.updateToggleQuickSlotItemsIcon();
 		setToolboxIcon(true);
+
+		if (preferences.enableUiAnimations) {
+			startAnimation(showAnimation);
+		}
 
 		// Set the focus to the toolbox visibility toggle button.
 		// TODO: maybe set this to the previously focused button in the toolbox instead of always the toggle button?
@@ -211,11 +207,13 @@ public final class ToolboxView extends LinearLayout implements OnClickListener {
 	}
 
 	private void updateToggleQuickSlotItemsIcon() {
-		if (preferences.showQuickslotsWhenToolboxIsVisible && !hideQuickslotsWhenToolboxIsClosed) {
+		if (preferences.quickslotsVisible) {
+			// Use the "glowing" icon to indicate quickslots are "locked on"
 			world.tileManager.setImageViewTile(toolbox_quickitems, quickSlotIconsLockedDrawable);
-			return;
+		} else {
+			// Normal icon for quickslots in normally-hidden mode
+			world.tileManager.setImageViewTile(toolbox_quickitems, getResources().getDrawable(quickSlotIcon));
 		}
-		world.tileManager.setImageViewTile(toolbox_quickitems, getResources().getDrawable(quickSlotIcon));
 	}
 
 	// Getters for toolbar buttons
