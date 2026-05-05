@@ -388,7 +388,7 @@ public final class MainActivity
 			message(getString(R.string.combat_result_herohit, monsterName, attackResult.damage));
 		}
 		if (attackResult.targetDied) {
-			message(getString(R.string.combat_result_herokillsmonster, monsterName, attackResult.damage));
+			message(getString(R.string.combat_result_herokillsmonster, monsterName));
 		}
 	}
 
