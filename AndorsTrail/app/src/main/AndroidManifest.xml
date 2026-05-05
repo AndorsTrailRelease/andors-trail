@@ -19,11 +19,16 @@
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+	<uses-feature android:name="android.software.leanback" android:required="false"/>
+	<uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
+	<uses-feature android:name="android.hardware.gamepad" android:required="false" />
 
 	<application 
 		android:name="com.gpl.rpg.AndorsTrail.AndorsTrailApplication"
 		android:label="@string/app_name" 
 		android:icon="@drawable/${icon_name}"
+		android:isGame="true"
+		android:banner="@drawable/tv_banner"
 		android:description="@string/app_description"
         android:allowBackup="true"
         android:theme="@style/AndorsTrailTheme_Blue"
@@ -39,6 +44,7 @@
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
+				<category android:name="android.intent.category.LEANBACK_LAUNCHER" />
 			</intent-filter>
 		</activity>
    		<activity 

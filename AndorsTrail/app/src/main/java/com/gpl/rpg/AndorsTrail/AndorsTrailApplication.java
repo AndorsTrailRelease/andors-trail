@@ -12,6 +12,7 @@ import com.gpl.rpg.AndorsTrail.util.AndroidStorage;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Insets;
@@ -222,4 +223,20 @@ public final class AndorsTrailApplication extends Application {
 			});
 		}
 	}
+
+	// Returns true if we're on an Android TV platform (assume no touchscreen, landscape, etc.)
+	private Boolean is_atv = null;
+	public boolean isAndroidTV() {
+		Context context = getApplicationContext();
+		if (is_atv == null) {
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+				is_atv = context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_LEANBACK);
+			} else {
+				is_atv = false;
+			}
+		}
+		return is_atv;
+	}
+
+
 }
