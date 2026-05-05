@@ -60,6 +60,7 @@ public final class AndorsTrailPreferences {
 	public int quickslotsPosition = QUICKSLOTS_POSITION_HORIZONTAL_CENTER_BOTTOM;
 	public boolean showQuickslotsWhenToolboxIsVisible = false;
 	public String language = "default";
+	public boolean exportToDownloads = false;
 
 	public int selectedTheme = 0;
 
@@ -87,6 +88,7 @@ public final class AndorsTrailPreferences {
 			dest.selectedTheme = Integer.parseInt(prefs.getString("selectedTheme", Integer.toString(0)));
 			// This might be implemented as a skill in the future.
 			//dest.movementAggressiveness = Integer.parseInt(prefs.getString("movementaggressiveness", Integer.toString(MOVEMENTAGGRESSIVENESS_NORMAL)));
+			dest.exportToDownloads = prefs.getBoolean("export_to_downloads", false);
 		} catch (Exception e) {
 			dest.confirmRest = true;
 			dest.confirmAttack = true;
@@ -107,6 +109,7 @@ public final class AndorsTrailPreferences {
 			dest.showQuickslotsWhenToolboxIsVisible = false;
 			dest.language = "default";
 			dest.selectedTheme = 0;
+			dest.exportToDownloads = false;
 		}
 	}
 }

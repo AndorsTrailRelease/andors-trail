@@ -58,6 +58,11 @@
 			android:defaultValue="0"
 			android:entries="@array/preferences_display_overwrite_savegame_entries"
 			android:entryValues="@array/preferences_display_overwrite_savegame_values" />
+		<CheckBoxPreference
+			android:title="@string/preferences_export_to_downloads_title"
+			android:defaultValue="false"
+			android:summary="@string/preferences_export_to_downloads_summary"
+			android:key="export_to_downloads" />
 	</PreferenceCategory>
 	<PreferenceCategory
 		android:title="@string/preferences_combat_category">
