@@ -8,7 +8,8 @@
         android:id="@+id/combatview_fixedarea"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:focusable="false" >
 
         <LinearLayout
             android:id="@+id/combatview_actionbar"
@@ -122,13 +123,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/combatview_fixedarea"
-        android:gravity="right" >
+        android:gravity="right"
+        android:focusable="false" >
 
         <RelativeLayout
             android:id="@+id/combatview_activeconditions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right" />
+            android:gravity="right"
+            android:focusable="false"/>
     </RelativeLayout>
 
 </merge>

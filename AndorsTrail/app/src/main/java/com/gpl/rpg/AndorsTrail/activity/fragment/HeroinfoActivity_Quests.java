@@ -79,9 +79,9 @@ public final class HeroinfoActivity_Quests extends Fragment {
 		questlog_contents_adapter = new SimpleExpandableListAdapter(
 				ctx
 				, groupList
-				, android.R.layout.simple_expandable_list_item_2
+				, R.layout.questlogname
 				, new String[] { mn_questName, mn_questStatus }
-				, new int[] { android.R.id.text1, android.R.id.text2 }
+				, new int[] { R.id.questlog_questname, R.id.questlog_queststatus }
 				, childList
 				, R.layout.questlogentry
 				, new String[] { mn_logText }

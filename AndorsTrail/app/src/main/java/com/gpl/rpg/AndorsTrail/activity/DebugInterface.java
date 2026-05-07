@@ -50,6 +50,7 @@ public final class DebugInterface {
 					@Override
 					public void onClick(View arg0) {
 						hidden = !hidden;
+						buttons[0].b.requestFocus();
 						for (int i = 1; i < buttons.length; i++) {
 							buttons[i].b.setVisibility(hidden ? View.GONE : View.VISIBLE);
 						}
@@ -66,12 +67,16 @@ public final class DebugInterface {
 				})
 				,new DebugButton("teleport", new OnClickListener() {
 			public void onClick(View arg0) {
+				// Move focus to status icon is it doesn't go to mainview and close the toolbox when we reset the buttons
+				// Causes a visual glitch, but who cares for a debug panel?
+				mainActivity.findViewById(R.id.main_statusview).requestFocus();
 				for (int i = 0; i < buttons.length; i++) {
 					buttons[i].b.setVisibility(View.GONE);
 				}
 				for (DebugButton tpButton : tpButtons) {
 					tpButton.b.setVisibility(View.VISIBLE);
 				}
+				arg0.post(() -> tpButtons.get(0).b.requestFocus());
 			}
 		})
 				,new DebugButton("dmg", new OnClickListener() {
@@ -165,12 +170,14 @@ public final class DebugInterface {
 				new DebugButton("teleport", new OnClickListener() {
 					@Override
 					public void onClick(View arg0) {
+						mainActivity.findViewById(R.id.main_statusview).requestFocus();
 						for (DebugButton tpButton : tpButtons2) {
 							tpButton.b.setVisibility(View.VISIBLE);
 						}
 						for (DebugButton tpButton : tpButtons) {
 							tpButton.b.setVisibility(View.GONE);
 						}
+						arg0.post(() -> tpButtons2.get(0).b.requestFocus());
 					}
 				})
 				,new DebugButton("cg", new OnClickListener() {
@@ -252,12 +259,14 @@ public final class DebugInterface {
 				new DebugButton("teleport", new OnClickListener() {
 					@Override
 					public void onClick(View arg0) {
+						mainActivity.findViewById(R.id.main_statusview).requestFocus();
 						for (DebugButton tpButton : tpButtons3) {
 							tpButton.b.setVisibility(View.VISIBLE);
 						}
 						for (DebugButton tpButton : tpButtons2) {
 							tpButton.b.setVisibility(View.GONE);
 						}
+						arg0.post(() -> tpButtons3.get(0).b.requestFocus());
 					}
 				})
 				,new DebugButton("brv", new OnClickListener() {
@@ -341,6 +350,7 @@ public final class DebugInterface {
 				new DebugButton("teleport", new OnClickListener() {
 					@Override
 					public void onClick(View arg0) {
+						mainActivity.findViewById(R.id.main_statusview).requestFocus();
 						for (int i = 0; i < buttons.length; i++) {
 							buttons[i].b.setVisibility(View.VISIBLE);
 						}
@@ -353,6 +363,7 @@ public final class DebugInterface {
 						for (DebugButton tpButton : tpButtons3) {
 							tpButton.b.setVisibility(View.GONE);
 						}
+						arg0.post(() -> buttons[1].b.requestFocus());
 					}
 				})
 				,new DebugButton("#1", new OnClickListener() {

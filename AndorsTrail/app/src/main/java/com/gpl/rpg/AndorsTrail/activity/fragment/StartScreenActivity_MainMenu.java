@@ -156,6 +156,26 @@ public class StartScreenActivity_MainMenu extends Fragment {
 		return root;
 	}
 
+	// Request a sensible default button to be focused, so that the user can just hit "enter" to continue.
+	private void focusDefaultButton() {
+		View target = hasExistingGame ? startscreen_continue : startscreen_newgame;
+		if (target != null) {
+			target.post(() -> {
+				if (target.isShown() && target.isEnabled()) {
+					target.requestFocus();
+				}
+			});
+		}
+	}
+
+	@Override
+	public void onHiddenChanged(boolean hidden) {
+		super.onHiddenChanged(hidden);
+		if (!hidden) {
+			focusDefaultButton();
+		}
+	}
+
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -192,6 +212,8 @@ public class StartScreenActivity_MainMenu extends Fragment {
 				}
 			});
 		}
+
+		focusDefaultButton();
 
 	}
 

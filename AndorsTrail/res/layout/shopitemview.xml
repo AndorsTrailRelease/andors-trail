@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/shopitem_row_root"
+	style="@style/AndorsTrail_Style_ShopItemRow"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:nextFocusLeft="@id/shopitem_shopbutton"
+	android:nextFocusRight="@id/shopitem_infobutton"
 	>
 	<ImageView
 		android:id="@+id/shopitem_image"
@@ -12,33 +16,39 @@
 		android:layout_alignParentLeft="true"
 		android:layout_centerVertical="true"
 		/>
-	<Button
-		android:id="@+id/shopitem_shopbutton"
-		android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:minHeight="0dp"
-		android:layout_alignParentRight="true"
-		android:layout_centerVertical="true"
-		android:text="@string/shop_buy"
-		android:textSize="@dimen/smalltext"
-		/>
-
-	<Button
-	    android:id="@+id/shopitem_infobutton"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:minHeight="0dp"
-	    android:layout_centerVertical="true"
-	    android:layout_toLeftOf="@id/shopitem_shopbutton"
-	    android:text="@string/shop_infoitem"
-	    android:textSize="@dimen/smalltext" />
 
 	<TextView
 		android:id="@+id/shopitem_text"
+		style="@style/AndorsTrail_Style_ShopItemText"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_toRightOf="@id/shopitem_image"
 		android:layout_toLeftOf="@id/shopitem_infobutton"
 		android:layout_centerVertical="true"
 		/>
+
+	<Button
+		android:id="@+id/shopitem_infobutton"
+		style="@style/AndorsTrail_Style_ShopItemButton"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_centerVertical="true"
+		android:layout_toLeftOf="@id/shopitem_shopbutton"
+		android:nextFocusLeft="@id/shopitem_row_root"
+		android:nextFocusRight="@id/shopitem_shopbutton"
+		android:text="@string/shop_infoitem"
+		/>
+
+	<Button
+		android:id="@+id/shopitem_shopbutton"
+		style="@style/AndorsTrail_Style_ShopItemButton"
+		android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+		android:layout_alignParentRight="true"
+		android:layout_centerVertical="true"
+		android:nextFocusLeft="@id/shopitem_infobutton"
+		android:nextFocusRight="@id/shopitem_row_root"
+		android:text="@string/shop_buy"
+		/>
+
 </RelativeLayout>

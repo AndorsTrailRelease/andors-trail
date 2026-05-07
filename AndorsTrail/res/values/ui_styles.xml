@@ -4,11 +4,13 @@
     <style name="AndorsTrail_Style_ListView" parent="android:style/Widget.ListView">
         <item name="android:background">?attr/ui_theme_stdframe_bitmap</item>
         <item name="android:divider">?attr/ui_theme_listseparator_drawable</item>
+        <item name="android:listSelector">?attr/ui_theme_listselector_drawable</item>
     </style>
 
     <style name="AndorsTrail_Style_ListView_Frameless" parent="android:style/Widget.ListView">
         <item name="android:background">@android:color/transparent</item>
         <item name="android:divider">?attr/ui_theme_listseparator_drawable</item>
+        <item name="android:listSelector">?attr/ui_theme_listselector_drawable</item>
     </style>
 
     <style name="AndorsTrail_Style_TextButton_Base" parent="android:style/Widget.Button">
@@ -59,10 +61,11 @@
     <style name="AndorsTrail_Style_ExpandableListView" parent="android:style/Widget.ExpandableListView">
         <item name="android:textColor">?attr/ui_theme_textbutton_textcolor_color</item>
         <item name="android:textAppearanceLarge">@style/AndorsTrail_Style_TextAppearance_ListItemTitle</item>
-        <item name="android:textAppearanceSmall">@style/AndorsTrail_Style_TextAppearance.ListItemSubtitle</item>
+        <item name="android:textAppearanceSmall">@style/AndorsTrail_Style_TextAppearance_ListItemSubtitle</item>
         <item name="android:groupIndicator">?attr/ui_theme_groupindicator_drawable</item>
         <item name="android:divider">?attr/ui_theme_listseparator_drawable</item>
         <item name="android:childDivider">?attr/ui_theme_listseparator_drawable</item>
+        <item name="android:listSelector">?attr/ui_theme_listselector_drawable</item>
     </style>
 
     <style name="AndorsTrail_Style_PreferencesListHeader_Base">
@@ -86,7 +89,7 @@
         <item name="android:textSize">22sp</item>
     </style>
 
-    <style name="AndorsTrail_Style_TextAppearance.ListItemSubtitle" parent="android:style/TextAppearance.Small">
+    <style name="AndorsTrail_Style_TextAppearance_ListItemSubtitle" parent="android:style/TextAppearance.Small">
         <item name="android:textColor">?attr/ui_theme_textbutton_textcolor_color</item>
         <item name="android:textSize">14sp</item>
     </style>
@@ -109,6 +112,7 @@
 
     <style name="textView" parent="android:Widget.TextView">
         <item name="android:textColor">?attr/ui_theme_textbutton_textcolor_color</item>
+        <item name="android:background">?attr/ui_theme_textbutton_background_color</item>
     </style>
 
     <style name="autoScrollingText" parent="android:Widget.TextView">
@@ -122,12 +126,14 @@
         <item name="android:drawablePadding">@dimen/dialog_iconpadding_right</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">?attr/ui_theme_textbutton_textcolor_color</item>
+        <item name="android:background">?attr/ui_theme_textbutton_background_color</item>
     </style>
 
     <style name="textWithIconInList" parent="android:Widget.TextView">
         <item name="android:drawablePadding">@dimen/dialog_iconpadding_right</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">?attr/ui_theme_textbutton_textcolor_color</item>
+        <item name="android:background">?attr/ui_theme_textbutton_background_color</item>
     </style>
 
     <style name="contextMenuText" parent="android:Widget.TextView">
@@ -185,6 +191,22 @@
 
     <style name="traitsinfo_2linevalue" parent="android:Widget.TextView">
         <item name="android:layout_marginLeft">30sp</item>
+    </style>
+
+    <style name="AndorsTrail_Style_ShopItemRow">
+        <item name="android:background">?attr/ui_theme_listselector_drawable</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">false</item>
+        <item name="android:descendantFocusability">beforeDescendants</item>
+    </style>
+
+    <style name="AndorsTrail_Style_ShopItemText" parent="android:Widget.TextView">
+        <item name="android:textColor">?attr/ui_theme_textbutton_textcolor_color</item>
+    </style>
+
+    <style name="AndorsTrail_Style_ShopItemButton" parent="@style/AndorsTrail_Style_TextButton">
+        <item name="android:minHeight">0dp</item>
+        <item name="android:textSize">@dimen/smalltext</item>
     </style>
 
 </resources>

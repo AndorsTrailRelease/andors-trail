@@ -59,6 +59,7 @@ public final class ConversationActivity
 
 	private StatementContainerAdapter listAdapter;
 	private Button nextButton;
+	private Button leaveButton;
 	private ListView statementList;
 	private RadioGroup replyGroup;
 	private OnCheckedChangeListener radioButtonListener;
@@ -79,7 +80,7 @@ public final class ConversationActivity
 
         setFinishOnTouchOutside(false);
 
-        replyGroup = new RadioGroup(this);
+	    replyGroup = new RadioGroup(this);
 		replyGroup.setLayoutParams(new ListView.LayoutParams(ListView.LayoutParams.MATCH_PARENT, ListView.LayoutParams.WRAP_CONTENT));
 		statementList = (ListView) findViewById(R.id.conversation_statements);
 		statementList.addFooterView(replyGroup);
@@ -87,7 +88,7 @@ public final class ConversationActivity
 		statementList.setAdapter(listAdapter);
 
 		nextButton = (Button) findViewById(R.id.conversation_next);
-		Button leaveButton = (Button) findViewById(R.id.conversation_leave);
+		leaveButton = (Button) findViewById(R.id.conversation_leave);
 		leaveButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -99,6 +100,7 @@ public final class ConversationActivity
 			@Override
 			public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
 				nextButton.setEnabled(true);
+				nextButton.requestFocus();
 			}
 		};
 		nextButton.setOnClickListener(new OnClickListener() {
@@ -136,7 +138,45 @@ public final class ConversationActivity
 	@Override
 	protected void onResume() {
 		super.onResume();
-		nextButton.requestFocus();
+		updateConversationFocus();
+	}
+
+	private void updateConversationFocus() {
+		final View root = findViewById(R.id.conversation_root);
+		if (root == null) return;
+		root.post(new Runnable() {
+			@Override
+			public void run() {
+				int replyCount = getReplyCount();
+				if (replyCount > 0) {
+					// CHANGELOG: When the conversation has only one reply available, it will be auto-selected so "Next" will continue.
+					if(replyCount == 1) {
+						setSelectedReplyIndex(0);
+						nextButton.requestFocus();
+					} else {
+						// Make sure NO button has focus if there are multiple options - player must choose one explicitly.
+						root.requestFocus();
+					}
+				} else if (nextButton.isEnabled()) {
+					nextButton.requestFocus();
+				} else {
+					leaveButton.requestFocus();
+				}
+			}
+		});
+	}
+
+	private int getReplyCount() {
+		int replyCount = 0;
+		for (int i = 0; i < replyGroup.getChildCount(); ++i) {
+			View v = replyGroup.getChildAt(i);
+			if (v == null) continue;
+			if (!(v instanceof RadioButton)) {
+				continue;
+			}
+			replyCount++;
+		}
+		return replyCount;
 	}
 
 	private int getSelectedReplyIndex() {
@@ -198,10 +238,14 @@ public final class ConversationActivity
 			++selectedReplyIndex;
 			setSelectedReplyIndex(selectedReplyIndex);
 			return true;
+		case KeyEvent.KEYCODE_DPAD_RIGHT:
+			leaveButton.requestFocus();
+			return true;
 		case KeyEvent.KEYCODE_SPACE:
 		case KeyEvent.KEYCODE_ENTER:
 		case KeyEvent.KEYCODE_DPAD_CENTER:
-			if (nextButton.isEnabled()) nextButton.performClick();
+			if (leaveButton.hasFocus()) leaveButton.performClick();
+			else if (nextButton.isEnabled()) nextButton.performClick();
 			return true;
 		case KeyEvent.KEYCODE_1: setSelectedReplyIndex(0); return true;
 		case KeyEvent.KEYCODE_2: setSelectedReplyIndex(1); return true;
@@ -264,6 +308,8 @@ public final class ConversationActivity
 			addConversationStatement(player, rb.getText().toString(), getSpanColor(R.attr.ui_theme_dialogue_light_color), false);
 			conversationState.playerSelectedReply(getResources(), r);
 		}
+		// Called after all state machine callbacks have fired, so replyGroup is fully populated.
+		updateConversationFocus(); // Sets focus profile for the NEW conversation state.
 	}
 
 	private void addConversationStatement(Actor actor, String text, int textColor, boolean isReward) {

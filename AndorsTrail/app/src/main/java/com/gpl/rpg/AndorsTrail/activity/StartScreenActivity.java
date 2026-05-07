@@ -13,6 +13,7 @@ import com.gpl.rpg.AndorsTrail.view.CloudsAnimatorView;
 import com.gpl.rpg.AndorsTrail.view.CustomDialogFactory;
 import com.gpl.rpg.AndorsTrail.view.CustomDialogFactory.CustomDialog;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -92,13 +93,8 @@ public final class StartScreenActivity extends AndorsTrailBaseFragmentActivity i
 		
 		View background = findViewById(R.id.title_bg);
 		if (background != null) {
-			background.setOnClickListener(new View.OnClickListener() {
-			
-				@Override
-				public void onClick(View v) {
-					toggleUiVisibility();
-				}
-			});
+			background.setOnClickListener(v -> toggleUiVisibility());
+			background.post(background::requestFocus);
 		}
 		View titleLogo = findViewById(R.id.title_logo);
 		if (titleLogo != null) {
@@ -115,7 +111,7 @@ public final class StartScreenActivity extends AndorsTrailBaseFragmentActivity i
 		}
 
 		toggleUiVisibility();
-		
+
 		app.getWorldSetup().startResourceLoader(res);
 	}
 
@@ -246,18 +242,36 @@ public final class StartScreenActivity extends AndorsTrailBaseFragmentActivity i
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 	}
-	
+
+	// We need dispatchKeyEvent instead of onKeyDown to make sure we catch any key events to make
+	// the UI visible again, even if the current fragment has a focused button that would consume the key event otherwise.
+	@SuppressLint("RestrictedApi")
 	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
+	public boolean dispatchKeyEvent(KeyEvent event) {
+		int keyCode = event.getKeyCode();
+		int keyAction = event.getAction();
+		int keyRepeatCount = event.getRepeatCount();
+
+		// Hand back button presses to fragments if there are any in the back stack, otherwise handle them here
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-				backPressed();
-				return true;
-			} else {
-				return super.onKeyDown(keyCode, event);
+			if (keyAction == KeyEvent.ACTION_DOWN && keyRepeatCount == 0) {
+				if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+					backPressed();
+					return true;
+				} else {
+					return super.dispatchKeyEvent(event);
+				}
 			}
 		}
-		return super.onKeyDown(keyCode, event);
+
+		// If the UI is not visible, any key press should make it visible again.
+		if (!ui_visible) {
+			toggleUiVisibility();
+			return true;
+		}
+
+		// If the UI is visible, let the fragments handle the key event as normal
+		return super.dispatchKeyEvent(event);
 	}
 
 	private void backPressed() {
@@ -266,9 +280,7 @@ public final class StartScreenActivity extends AndorsTrailBaseFragmentActivity i
 			currentFragment = getSupportFragmentManager().findFragmentById(R.id.startscreen_fragment_container);
 		}
 	}
-	
-	
-	
+
 	public void onNewGameRequested() {
 		if (findViewById(R.id.startscreen_fragment_container) != null) {
 			StartScreenActivity_NewGame newGameFragment = new StartScreenActivity_NewGame();

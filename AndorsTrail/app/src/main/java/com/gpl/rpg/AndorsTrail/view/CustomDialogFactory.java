@@ -6,6 +6,7 @@ import android.content.DialogInterface.OnCancelListener;
 import android.graphics.Rect;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.MotionEvent;
 import android.view.View;
@@ -215,6 +216,19 @@ public class CustomDialogFactory {
 		dialog.findViewById(R.id.dialog_template_button).setVisibility(View.GONE);
 		dialog.findViewById(R.id.dialog_template_button_vertical).setVisibility(View.GONE);
 		dialog.show();
+
+		// Make sure one of the buttons has focus
+		ViewGroup buttonContainer = getButtonContainer(dialog);
+		if (buttonContainer.getChildCount() > 0) {
+			// Set focus to the first button with text
+			for (int i = 0; i < buttonContainer.getChildCount(); i++) {
+				Button b = (Button) buttonContainer.getChildAt(i);
+				if(b.getText().length() > 0) {
+					b.post(b::requestFocus);
+					break;
+				}
+			}
+		}
 
 	}
 

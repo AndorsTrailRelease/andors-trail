@@ -1,6 +1,5 @@
 package com.gpl.rpg.AndorsTrail.activity;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
@@ -19,6 +17,7 @@ import android.widget.TextView;
 import com.gpl.rpg.AndorsTrail.AndorsTrailApplication;
 import com.gpl.rpg.AndorsTrail.R;
 import com.gpl.rpg.AndorsTrail.context.WorldContext;
+import com.gpl.rpg.AndorsTrail.controller.InputController;
 import com.gpl.rpg.AndorsTrail.controller.ItemController;
 import com.gpl.rpg.AndorsTrail.model.item.ItemType;
 import com.gpl.rpg.AndorsTrail.util.ThemeHelper;
@@ -50,6 +49,7 @@ public final class BulkSelectionInterface extends AndorsTrailBaseActivity implem
 	private EditText bulkselection_amount_taken;					// the amount we're going to take from the totalAmount
 	private SeekBar bulkselection_slider;
 	private Button okButton;
+	private Button cancelButton;
 
 	private final Handler timedEventHandler = new Handler();		// variables to count up or down on long presses on the buttons
 	private int countValue;
@@ -88,7 +88,7 @@ public final class BulkSelectionInterface extends AndorsTrailBaseActivity implem
 		totalAvailableAmount = params.getInt("totalAvailableAmount");
 		interfaceType = BulkInterfaceType.valueOf(params.getString("interfaceType"));
 
-		int intialSelection = 1;
+		int initialSelection = 1;
 		initializeView(this, R.layout.bulkselection, R.id.bulkselection_root);
 
 		// initialize UI variables
@@ -97,8 +97,8 @@ public final class BulkSelectionInterface extends AndorsTrailBaseActivity implem
 		TextView bulkselection_amount_available = (TextView) findViewById(R.id.bulkselection_amount_available);
 		bulkselection_slider = (SeekBar)findViewById(R.id.bulkselection_slider);
 		bulkselection_summary_totalgold = (TextView)findViewById(R.id.bulkselection_summary_totalgold);
-		okButton = (Button)findViewById(R.id.bulkselection_finalize_button);
-		Button cancelButton = (Button)findViewById(R.id.bulkselection_cancel_button);
+		okButton = findViewById(R.id.bulkselection_finalize_button);
+		cancelButton = findViewById(R.id.bulkselection_cancel_button);
 		final Button decrementButton = (Button)findViewById(R.id.bulkselection_decrement_button);
 		final Button incrementButton = (Button)findViewById(R.id.bulkselection_increment_button);
 		final Button selectAllButton = (Button)findViewById(R.id.bulkselection_select_all_button);
@@ -136,118 +136,108 @@ public final class BulkSelectionInterface extends AndorsTrailBaseActivity implem
 			bulkselection_slider.setVisibility(View.GONE);
 		}
 
-		updateControls(intialSelection);
+		updateControls(initialSelection);
 
-		OnTouchListener incrementDecrementListener = new OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				switch (event.getAction()) {
+		View.OnTouchListener incrementDecrementListener = (View v, MotionEvent event) -> {
+			switch (event.getAction()) {
 				case MotionEvent.ACTION_DOWN:
-					countTime = 0;
-					if (v == decrementButton) countValue = -1;
-					if (v == incrementButton) countValue = +1;
-					incrementValueAndRepeat(BUTTON_REPEAT_FIRST_TIME);
+					startIncrementDecrement(v);
 					break;
 				case MotionEvent.ACTION_UP:
 				case MotionEvent.ACTION_CANCEL:
 				case MotionEvent.ACTION_OUTSIDE:
-					timedEventHandler.removeCallbacks(countEvent);
+					stopIncrementDecrement();
 					break;
 			}
 			return false;
+		};
+
+		// Key listener for dpad center / enter — mirrors the touch listener's hold-to-repeat logic.
+		View.OnKeyListener incrementDecrementKeyListener = (v, keyCode, event) -> {
+			if(InputController.isMappedKey(keyCode, InputController.KEY_SELECT)) {
+				switch (event.getAction()) {
+					case KeyEvent.ACTION_DOWN:
+						if (event.getRepeatCount() == 0) { // only start counting on the first down
+							startIncrementDecrement(v);
+						}
+						return true;
+					case KeyEvent.ACTION_UP:
+						stopIncrementDecrement();
+						return true;
+				}
+				return true;
 			}
+			return false;
 		};
 
 		// setup decrement button
 		decrementButton.setOnTouchListener(incrementDecrementListener);
+		decrementButton.setOnKeyListener(incrementDecrementKeyListener);
 
 		// setup increment button
 		incrementButton.setOnTouchListener(incrementDecrementListener);
+		incrementButton.setOnKeyListener(incrementDecrementKeyListener);
 
 		// setup EditText listeners
-		bulkselection_amount_taken.setOnKeyListener(new View.OnKeyListener() {
-			@Override
-			public boolean onKey(View v, int keyCode, KeyEvent event) {
-				if(keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_ENTER){
-					updateControls(getTextboxAmount());
-				}
-				return false;
+		bulkselection_amount_taken.setOnKeyListener((v, keyCode, event) -> {
+			if(keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_ENTER){
+				updateControls(getTextboxAmount());
 			}
+			return false;
 		});
 
 		bulkselection_amount_taken.addTextChangedListener(this);
 
-		// setup slider event listeners
-		bulkselection_slider.setOnTouchListener(new View.OnTouchListener() {
+		// setup slider listener - this supports both touch and dpad input
+		bulkselection_slider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				updateControls(bulkselection_slider.getProgress() + 1);
-				return false;
+			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+				// +1 because slider max is totalAvailableAmount - 1
+				updateControls(progress + 1);
 			}
+
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) { }
+
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) { }
 		});
 
 		// setup OK button
-		okButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-	 		public void onClick(View v) {
-				if (requiresConfirmation()) {
-					final String displayType = ItemInfoActivity.getDisplayTypeString(res, itemType).toLowerCase();
-					final String message = res.getString(R.string.bulkselection_sell_confirmation, itemType.getName(world.model.player), displayType);
+		okButton.setOnClickListener(v -> {
+			if (requiresConfirmation()) {
+				final String displayType = ItemInfoActivity.getDisplayTypeString(res, itemType).toLowerCase();
+				final String message = res.getString(R.string.bulkselection_sell_confirmation, itemType.getName(world.model.player), displayType);
 
-//					new AlertDialog.Builder(v.getContext())
-//						.setIcon(android.R.drawable.ic_dialog_info)
-//						.setTitle(R.string.bulkselection_sell_confirmation_title)
-//						.setMessage(message)
-//						.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-//							@Override
-//							public void onClick(DialogInterface dialog, int which) {
-//								itemsResult(intent);
-//							}
-//									})
-//						.setNegativeButton(android.R.string.no, null)
-//						.show();
-					final CustomDialog d = CustomDialogFactory.createDialog(v.getContext(),
-							v.getContext().getResources().getString(R.string.bulkselection_sell_confirmation_title),
-							v.getContext().getResources().getDrawable(android.R.drawable.ic_dialog_info),
-							message,
-							null,
-							true);
-					CustomDialogFactory.addButton(d, android.R.string.yes,  new View.OnClickListener() {
-							@Override
-							public void onClick(View v) {
-								itemsResult(intent);
-							}
-					});
-					CustomDialogFactory.addDismissButton(d, android.R.string.no);
-					CustomDialogFactory.show(d);
-					
-				} else {
-					itemsResult(intent);
-				}
-	 		}
+				final CustomDialog d = CustomDialogFactory.createDialog(v.getContext(),
+						v.getContext().getResources().getString(R.string.bulkselection_sell_confirmation_title),
+						v.getContext().getResources().getDrawable(android.R.drawable.ic_dialog_info),
+						message,
+						null,
+						true);
+				CustomDialogFactory.addButton(d, android.R.string.yes, btn -> itemsResult(intent));
+				CustomDialogFactory.addDismissButton(d, android.R.string.no);
+				CustomDialogFactory.show(d);
 
-			private boolean requiresConfirmation() {
-				if (interfaceType != BulkInterfaceType.sell) return false;
-				if (itemType.isOrdinaryItem()) return false;
-				return true;
+			} else {
+				itemsResult(intent);
 			}
 	 	});
 
 		// setup cancel button
-		cancelButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				setResult(RESULT_CANCELED);
-				finish();
-			}
+		cancelButton.setOnClickListener(v -> {
+			setResult(RESULT_CANCELED);
+			finish();
 		});
 
-		selectAllButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				updateControls(totalAvailableAmount);
-			}
-		});
+		selectAllButton.setOnClickListener(v -> updateControls(totalAvailableAmount));
+
+		// Set focus to Buy button if it is enabled, otherwise to the Cancel button.
+		if (okButton.isEnabled()) {
+			okButton.post(() -> okButton.requestFocus());
+		} else {
+			cancelButton.post(() -> cancelButton.requestFocus());
+		}
 	}
 
 	private void itemsResult(Intent intent){
@@ -264,6 +254,17 @@ public final class BulkSelectionInterface extends AndorsTrailBaseActivity implem
 		updateControls(newAmount);
 		if (newAmount <= 1 || newAmount >= totalAvailableAmount) return; // Do not repeat if we have reached the end of the scale.
 		timedEventHandler.postDelayed(countEvent, repeatAfterInterval);
+	}
+
+	private void startIncrementDecrement(View v) {
+		countTime = 0;
+		if (v == findViewById(R.id.bulkselection_decrement_button)) countValue = -1;
+		if (v == findViewById(R.id.bulkselection_increment_button)) countValue = +1;
+		incrementValueAndRepeat(BUTTON_REPEAT_FIRST_TIME);
+	}
+
+	private void stopIncrementDecrement() {
+		timedEventHandler.removeCallbacks(countEvent);
 	}
 
 	private boolean canSelectFinalizeButton() {
@@ -321,5 +322,11 @@ public final class BulkSelectionInterface extends AndorsTrailBaseActivity implem
 		if (bulkselection_amount_taken.getText().toString().equals("")) return;
 		int newAmount = getTextboxAmount();
 		updateControls(newAmount);
+	}
+
+	private boolean requiresConfirmation() {
+		if (interfaceType != BulkInterfaceType.sell) return false;
+		if (itemType.isOrdinaryItem()) return false;
+		return true;
 	}
 }

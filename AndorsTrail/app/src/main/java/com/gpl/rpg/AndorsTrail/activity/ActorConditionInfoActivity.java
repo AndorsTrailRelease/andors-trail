@@ -41,12 +41,8 @@ public final class ActorConditionInfoActivity extends AndorsTrailBaseActivity {
 		else descriptionTv.setVisibility(View.GONE);
 
 		Button b = (Button) findViewById(R.id.actorconditioninfo_close);
-		b.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				ActorConditionInfoActivity.this.finish();
-			}
-		});
+		b.setOnClickListener((v) -> ActorConditionInfoActivity.this.finish());
+		b.requestFocus();
 
 		update(conditionType);
 	}
