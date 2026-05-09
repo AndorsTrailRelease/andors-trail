@@ -28,10 +28,11 @@
                 android:text="@android:string/unknownName" />
 
             <TableLayout
+                android:id="@+id/heroinfo_basics_table"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/ui_theme_stdframe_bitmap" >
-                <TableRow>
+                <TableRow android:id="@+id/heroinfo_basics_mode_row">
 
                     <TextView
                         style="@style/traitsinfo_label"
@@ -44,7 +45,7 @@
                         android:text="@android:string/unknownName" />
 
                 </TableRow>
-                <TableRow>
+                <TableRow android:id="@+id/heroinfo_basics_level_row">
 
                     <TextView
                         style="@style/traitsinfo_label"
@@ -55,7 +56,7 @@
                         android:text="@android:string/unknownName" />
                 </TableRow>
 
-                <TableRow>
+                <TableRow android:id="@+id/heroinfo_basics_experience_row">
 
                     <TextView
                         style="@style/traitsinfo_label"
@@ -68,6 +69,7 @@
             </TableLayout>
 
             <LinearLayout
+                android:id="@+id/heroinfo_bars_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/ui_theme_stdframe_bitmap"
@@ -92,6 +94,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/heroinfo_stats_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/ui_theme_stdframe_bitmap"
@@ -115,16 +118,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" >
 
-<!--                     <TableRow>
-
-                        <TextView
-                            style="@style/traitsinfo_label"
-                            android:text="@string/heroinfo_actionpoints" />
-
-                        <TextView android:id="@+id/heroinfo_ap" />
-                    </TableRow> -->
-
-                    <TableRow>
+                    <TableRow android:id="@+id/heroinfo_reequip_cost_row">
 
                         <TextView
                             style="@style/traitsinfo_label"
@@ -133,7 +127,7 @@
                         <TextView android:id="@+id/heroinfo_reequip_cost" />
                     </TableRow>
 
-                    <TableRow>
+                    <TableRow android:id="@+id/heroinfo_useitem_cost_row">
 
                         <TextView
                             style="@style/traitsinfo_label"

@@ -42,7 +42,7 @@ public final class ActorConditionInfoActivity extends AndorsTrailBaseActivity {
 
 		Button b = (Button) findViewById(R.id.actorconditioninfo_close);
 		b.setOnClickListener((v) -> ActorConditionInfoActivity.this.finish());
-		b.requestFocus();
+		b.post(b::requestFocus);
 
 		update(conditionType);
 	}
