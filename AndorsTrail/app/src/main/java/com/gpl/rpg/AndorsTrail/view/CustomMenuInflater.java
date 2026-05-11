@@ -118,7 +118,7 @@ public class CustomMenuInflater {
 	}
 
 	private static void focusFirstMenuItem(ViewGroup root) {
-		if (root.getChildCount() != 1 || root.getChildAt(0) instanceof ViewGroup) return;
+		if ((root.getChildCount() != 1) || !(root.getChildAt(0) instanceof ViewGroup)) return;
 
 		// The menu layout is a wrapper with a single child, which is the actual container of the menu items.
 		ViewGroup group = (ViewGroup) root.getChildAt(0);
@@ -256,6 +256,7 @@ public class CustomMenuInflater {
 		}
 
 		@Override
+		// This doesn't actually do anything???
 		public void removeItem(int id) {
 			MenuItem found = null;
 			for (MenuItem item : items) {
