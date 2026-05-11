@@ -10,7 +10,10 @@
         <item name="android:expandableListViewStyle">@style/AndorsTrail_Style_ExpandableListView</item>
         <item name="android:listSeparatorTextViewStyle">@style/AndorsTrail_Style_PreferencesListHeader</item>
         <item name="android:scrollViewStyle">@style/AndorsTrail_Style_ScrollView</item>
+        <item name="android:seekBarStyle">@style/AndorsTrail_Style_SeekBar</item>
         <item name="buttonQuickslotsButtonStyle">@style/AndorsTrail_Style_TextButton_Quickslots</item>
+        <!-- suppress android default focus highlight.  Still Need a solution for API <= 25 tho -->
+        <item name="android:defaultFocusHighlightEnabled">false</item>
         <!-- XML drawables -->
         <item name="android:selectableItemBackground">@drawable/ui_blue_listselector</item>
         <item name="ui_theme_buttonbar_bg_drawable">@drawable/ui_blue_buttonbar_bg</item>
@@ -101,11 +104,13 @@
         <item name="android:expandableListViewStyle">@style/AndorsTrail_Style_ExpandableListView</item>
         <item name="android:listSeparatorTextViewStyle">@style/AndorsTrail_Style_PreferencesListHeader</item>
         <item name="android:scrollViewStyle">@style/AndorsTrail_Style_ScrollView</item>
+        <item name="android:seekBarStyle">@style/AndorsTrail_Style_SeekBar</item>
         <item name="buttonQuickslotsButtonStyle">@style/AndorsTrail_Style_TextButton_Quickslots</item>
         <item name="android:textColorPrimary">@color/ui_blue_textbutton_textcolor</item>
+        <item name="ui_theme_textbutton_background_color">@color/ui_blue_textbutton_background</item>
         <item name="android:textColorSecondary">@color/ui_blue_palette_text_gray_darker</item>
         <item name="android:selectableItemBackground">@drawable/ui_blue_listselector</item>
-
+        <item name="android:defaultFocusHighlightEnabled">false</item>
         <!-- XML drawables -->
         <item name="ui_theme_buttonbar_bg_drawable">@drawable/ui_blue_buttonbar_bg</item>
         <item name="ui_theme_buttonbar_drawable">@drawable/ui_blue_buttonbar</item>
@@ -331,6 +336,7 @@
         <item name="ui_theme_stdframe_bg_color">@color/ui_green_palette_green_dark</item>
         <item name="ui_theme_buttonbar_bg_color">@color/ui_green_palette_green_mid</item>
 		<item name="ui_theme_displayworldmap_bg_color">@color/ui_green_palette_green_dark</item>
+        <item name="ui_theme_textbutton_background_color">@color/ui_green_textbutton_background</item>
 		<item name="ui_theme_focus_border_color">@color/ui_green_palette_green_light</item>
     </style>
     <style name="AndorsTrailTheme_Green.NoBackground" parent="AndorsTrailTheme_Green">
@@ -469,6 +475,7 @@
         <item name="ui_theme_stdframe_bg_color">@color/ui_charcoal_palette_charcoal_dark</item>
         <item name="ui_theme_buttonbar_bg_color">@color/ui_charcoal_palette_charcoal_mid</item>
 		<item name="ui_theme_displayworldmap_bg_color">@color/ui_charcoal_palette_charcoal_dark</item>
+        <item name="ui_theme_textbutton_background_color">@color/ui_charcoal_textbutton_background</item>
         <item name="ui_theme_focus_border_color">@color/ui_charcoal_palette_charcoal_light</item>
     </style>
     <style name="AndorsTrailTheme_Charcoal.NoBackground" parent="AndorsTrailTheme_Charcoal">

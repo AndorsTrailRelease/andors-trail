@@ -138,6 +138,7 @@
 
     <style name="contextMenuText" parent="android:Widget.TextView">
         <item name="android:textColor">?attr/ui_theme_textbutton_textcolor_color</item>
+        <item name="android:background">?attr/ui_theme_textbutton_background_color</item>
         <item name="android:textSize">@dimen/titletext</item>
     </style>
 
@@ -210,7 +211,9 @@
     </style>
 
     <style name="AndorsTrail_Style_ScrollView" parent="@android:style/Widget.ScrollView">
-        <item name="android:defaultFocusHighlightEnabled">false</item>
+    </style>
+
+    <style name="AndorsTrail_Style_SeekBar" parent="@android:style/Widget.SeekBar">
     </style>
 
 </resources>

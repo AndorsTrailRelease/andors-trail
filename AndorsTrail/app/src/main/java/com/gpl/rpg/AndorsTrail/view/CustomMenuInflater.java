@@ -39,19 +39,21 @@ public class CustomMenuInflater {
 	
 	public static Dialog getMenuDialog(Activity activity, Menu menu, Drawable icon, String title, Object data, MenuItemSelectedListener listener ) {
 		final CustomDialog dialog = CustomDialogFactory.createDialog(activity, title, icon, null, null, false);
-		View v = getMenuView(activity, menu, icon, title, data, dialog, listener);
-		v.setLayoutParams(getItemLayoutParams());
-		CustomDialogFactory.setContent(dialog, v);
-		v.setOnClickListener(new OnClickListener() {
+		ViewGroup vg = getMenuView(activity, menu, icon, title, data, dialog, listener);
+		vg.setLayoutParams(getItemLayoutParams());
+		CustomDialogFactory.setContent(dialog, vg);
+		vg.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				dialog.dismiss();
 			}
 		});
+
+		vg.post(() -> focusFirstMenuItem(vg));
 		return dialog;
 	}
 
-	public static View getMenuView(Activity activity, Menu menu, Drawable icon, String title, Object data, Dialog dialog, MenuItemSelectedListener listener ) {
+	public static ViewGroup getMenuView(Activity activity, Menu menu, Drawable icon, String title, Object data, Dialog dialog, MenuItemSelectedListener listener ) {
 		ViewGroup scroll = (ViewGroup) activity.getLayoutInflater().inflate(R.layout.custom_menu_layout, null);
 		ViewGroup vg = (ViewGroup) scroll.findViewById(R.id.custom_menu_items_wrapper);
 		MenuItem item;
@@ -113,6 +115,22 @@ public class CustomMenuInflater {
 	
 	private static LayoutParams getItemLayoutParams() {
 		return new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+	}
+
+	private static void focusFirstMenuItem(ViewGroup root) {
+		if (root.getChildCount() != 1 || root.getChildAt(0) instanceof ViewGroup) return;
+
+		// The menu layout is a wrapper with a single child, which is the actual container of the menu items.
+		ViewGroup group = (ViewGroup) root.getChildAt(0);
+
+		for (int i = 0; i < group.getChildCount(); i++) {
+			View child = group.getChildAt(i);
+
+			if (child.isFocusable() && child.isShown() && child.isEnabled()) {
+				child.requestFocus();
+				return;
+			}
+		}
 	}
 
 	public static Menu newMenuInstance(Context context) {

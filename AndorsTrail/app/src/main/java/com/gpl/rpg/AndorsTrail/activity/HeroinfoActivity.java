@@ -36,7 +36,7 @@ public final class HeroinfoActivity extends AndorsTrailBaseFragmentActivity {
 
 		String t = world.model.uiSelections.selectedTabHeroInfo;
 		if (t != null && !t.isEmpty()) {
-			tabHost.setCurrentTabByTag(t);
+			tabHost.post(() -> tabHost.setCurrentTabByTag(t));
 		}
 		updateIconForPlayer();
 	}
