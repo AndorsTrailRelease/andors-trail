@@ -83,6 +83,7 @@ public final class SkillInfoActivity extends AndorsTrailBaseActivity {
 				SkillInfoActivity.this.finish();
 			}
 		});
+		b.post(b::requestFocus);
 
 		b = (Button) findViewById(R.id.skillinfoinfo_action);
 		b.setOnClickListener(new OnClickListener() {
