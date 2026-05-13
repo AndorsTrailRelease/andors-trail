@@ -90,7 +90,6 @@ public final class DisplayWorldMapActivity extends AndorsTrailBaseActivity {
 				case KeyEvent.KEYCODE_BUTTON_R1:
 					displayworldmap_webview.zoomIn();
 					return true;
-				case KeyEvent.KEYCODE_DPAD_CENTER:
 				case KeyEvent.KEYCODE_BUTTON_A:
 					recenter();
 					return true;

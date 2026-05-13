@@ -62,13 +62,43 @@ public abstract class AndorsTrailBaseFragmentActivity extends FragmentActivity {
         ((TextView)  v.findViewById(R.id.tabindicator_text)).setText(getString(textResId));
         ((ImageView) v.findViewById(R.id.tabindicator_icon)).setImageDrawable(getResources().getDrawable(iconResId));
 
-        // Select this tab as soon as its indicator receives d-pad / keyboard focus.
-        v.setOnFocusChangeListener((view, hasFocus) -> {
-            if (hasFocus && !getSupportFragmentManager().isStateSaved()) { // Don't change tab during activity shutdown
-                tabHost.setCurrentTabByTag(tag);
-            }
-        });
+        // Select this tab as soon as its indicator receives d-pad / keyboard focus and manage
+        // focus on the other tabs so that up-navigation from the content will be forced to this tab.
+        v.setOnFocusChangeListener(this::onFocusChangeListener);
 
         tabHost.addTab(tabHost.newTabSpec(tag).setIndicator(v), fragmentClass, null);
+    }
+
+    private void onFocusChangeListener(View view, boolean hasFocus) {
+        int thisTabIndex = tabHost.getTabWidget().indexOfChild(view);
+
+        if (getSupportFragmentManager().isStateSaved()) return; // Don't change focus during activity shutdown
+
+        if (hasFocus) {
+            // We got focus, so just enable focus on all tabs and select this one.
+            for (int i = 0; i < tabHost.getTabWidget().getChildCount(); i++) {
+                tabHost.getTabWidget().getChildAt(i).setFocusable(true);
+            }
+
+            tabHost.setCurrentTab(thisTabIndex);
+
+        } else {
+            // Lost focus - if it went to another tab header, don't do anything (the focus event
+            // for that tab will make all tabs focusable so they can be selected), but if
+            // the focus went to content below, we want to disable focus on all other tabs so that
+            // up-navigation from the content will be forced to this tab.
+            boolean anyTabHasFocus = false;
+            for (int i = 0; i < tabHost.getTabWidget().getChildCount(); i++) {
+                if (tabHost.getTabWidget().getChildAt(i).hasFocus()) {
+                    anyTabHasFocus = true;
+                    break;
+                }
+            }
+            if (!anyTabHasFocus) {
+                for (int i = 0; i < tabHost.getTabWidget().getChildCount(); i++) {
+                    tabHost.getTabWidget().getChildAt(i).setFocusable(i == thisTabIndex);
+                }
+            }
+        }
     }
 }
