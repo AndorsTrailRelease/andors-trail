@@ -243,35 +243,32 @@ public final class StartScreenActivity extends AndorsTrailBaseFragmentActivity i
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
-	// We need dispatchKeyEvent instead of onKeyDown to make sure we catch any key events to make
-	// the UI visible again, even if the current fragment has a focused button that would consume the key event otherwise.
-	@SuppressLint("RestrictedApi")
 	@Override
-	public boolean dispatchKeyEvent(KeyEvent event) {
-		int keyCode = event.getKeyCode();
-		int keyAction = event.getAction();
-		int keyRepeatCount = event.getRepeatCount();
-
-		// Hand back button presses to fragments if there are any in the back stack, otherwise handle them here
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			if (keyAction == KeyEvent.ACTION_DOWN && keyRepeatCount == 0) {
-				if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-					backPressed();
-					return true;
-				} else {
-					return super.dispatchKeyEvent(event);
-				}
+			if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+				backPressed();
+				return true;
+			} else {
+				return super.onKeyDown(keyCode, event);
 			}
 		}
 
-		// If the UI is not visible, any key press should make it visible again.
-		if (!ui_visible) {
+		if (ui_visible) {
+			// If the focus is on the background, or it's not focused on anything, poke the
+			// current fragment so it grabs focus on its default button.  This happens when
+			// the user taps the background to make the UI visible, which leave it in touch
+			// mode so the default button doesn't get focused automatically.
+			if(getCurrentFocus() == null || getCurrentFocus().getId() == R.id.title_bg) {
+				currentFragment.onHiddenChanged(false);
+			}
+		} else {
 			toggleUiVisibility();
 			return true;
 		}
 
 		// If the UI is visible, let the fragments handle the key event as normal
-		return super.dispatchKeyEvent(event);
+		return super.onKeyDown(keyCode, event);
 	}
 
 	private void backPressed() {
