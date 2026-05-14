@@ -88,6 +88,8 @@
         <item name="android:textColorSecondary">@color/ui_blue_palette_text_gray_darker</item>
         <!-- Focus state colors for keyboard navigation -->
         <item name="ui_theme_focus_border_color">@color/ui_blue_palette_blue_light</item>
+        <!-- suppress android default focus highlight.  Needed for API 26+ -->
+        <item name="android:defaultFocusHighlightEnabled">false</item>
     </style>
 
 	<style name="AndorsTrailDialogTheme_Base" parent="android:Theme.Dialog">
@@ -179,6 +181,8 @@
 		<item name="ui_theme_dialogue_light_color">@color/ui_blue_palette_text_gray_light</item>
         <!-- Focus state colors for keyboard navigation -->
         <item name="ui_theme_focus_border_color">@color/ui_blue_palette_blue_light</item>
+        <!-- suppress android default focus highlight.  Needed for API 26+ -->
+        <item name="android:defaultFocusHighlightEnabled">false</item>
     </style>
     
 	
