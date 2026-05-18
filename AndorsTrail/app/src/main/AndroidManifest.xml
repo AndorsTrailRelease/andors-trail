@@ -2,7 +2,6 @@
 
 <manifest 
 	xmlns:android="http://schemas.android.com/apk/res/android" 
-	package="com.gpl.rpg.AndorsTrail"
 	android:versionCode="83"
 	android:versionName="0.8.16"
 	android:installLocation="auto"
@@ -15,14 +14,14 @@
 		android:xlargeScreens="true"
 		android:anyDensity="true"
 		/>
-	
+
+	<!-- Storage access permissions - keep for Android 12 and below -->
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-
 	<application 
 		android:name="com.gpl.rpg.AndorsTrail.AndorsTrailApplication"
-		android:label="@string/app_name" 
+		android:label="@string/app_name"
 		android:icon="@drawable/${icon_name}"
 		android:description="@string/app_description"
         android:allowBackup="true"
@@ -43,7 +42,6 @@
 		</activity>
    		<activity 
 			android:name="com.gpl.rpg.AndorsTrail.activity.MainActivity"
-			android:label="@string/app_name" 
 			android:theme="@style/AndorsTrailTheme_Blue.NoBackground"
 			/>
 		<activity android:name="com.gpl.rpg.AndorsTrail.activity.HeroinfoActivity" />
