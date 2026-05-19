@@ -1,7 +1,10 @@
 package com.gpl.rpg.AndorsTrail.controller;
 
 import android.content.res.Resources;
-import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import com.gpl.rpg.AndorsTrail.AndorsTrailPreferences;
 import com.gpl.rpg.AndorsTrail.context.ControllerContext;
@@ -27,6 +30,9 @@ public final class MovementController implements TimedMessageTask.Callback {
 	private final WorldContext world;
 	//TODO restore final modifier before release
 	private TimedMessageTask movementHandler;
+	private static final ExecutorService executor = Executors.newSingleThreadExecutor();
+	private static final Handler mainHandler = new Handler(Looper.getMainLooper());
+
 	public final PlayerMovementListeners playerMovementListeners = new PlayerMovementListeners();
 
 	public MovementController(ControllerContext controllers, WorldContext world) {
@@ -42,28 +48,17 @@ public final class MovementController implements TimedMessageTask.Callback {
 	}
 
 	public void placePlayerAsyncAt(final MapObject.MapObjectType objectType, final String mapName, final String placeName, final int offset_x, final int offset_y) {
-
-		AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
-			@Override
-			protected Void doInBackground(Void... arg0) {
-				stopMovement();
-
-				placePlayerAt(controllers.getResources(), objectType, mapName, placeName, offset_x, offset_y);
-
-				return null;
-			}
-
-			@Override
-			protected void onPostExecute(Void result) {
-				super.onPostExecute(result);
-				stopMovement();
-				playerMovementListeners.onPlayerEnteredNewMap(world.model.currentMaps.map, world.model.player.position);
-				controllers.gameRoundController.resume();
-			}
-
-		};
 		controllers.gameRoundController.pause();
-		task.execute();
+		// This should run pretty quickly, so we won't worry about canceling if activity closes
+		executor.execute(() -> {
+            stopMovement();
+            placePlayerAt(controllers.getResources(), objectType, mapName, placeName, offset_x, offset_y);
+            mainHandler.post(() -> {
+                stopMovement();
+                playerMovementListeners.onPlayerEnteredNewMap(world.model.currentMaps.map, world.model.player.position);
+                controllers.gameRoundController.resume();
+            });
+        });
 	}
 
 	public void placePlayerAt(final Resources res, MapObject.MapObjectType objectType, String mapName, String placeName, int offset_x, int offset_y) {
