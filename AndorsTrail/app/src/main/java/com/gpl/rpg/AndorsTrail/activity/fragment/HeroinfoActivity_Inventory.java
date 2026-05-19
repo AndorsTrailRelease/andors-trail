@@ -333,12 +333,10 @@ public final class HeroinfoActivity_Inventory extends Fragment implements Custom
 	@Override
 	public void onMenuItemSelected(MenuItem item, Object data) {
 		ItemType itemType = (ItemType) data;
-		switch (item.getItemId()) {
-		case R.id.inv_menu_info:
+		int id = item.getItemId();
+		if (id == R.id.inv_menu_info) {
 			showInventoryItemInfo(itemType);
-			//context.mapController.itemInfo(this, getSelectedItemType(info));
-			break;
-		case R.id.inv_menu_drop:
+		} else if (id == R.id.inv_menu_drop) {
 			String itemTypeID = itemType.id;
 			int quantity = player.inventory.getItemQuantity(itemTypeID);
 			if (quantity > 1) {
@@ -347,41 +345,28 @@ public final class HeroinfoActivity_Inventory extends Fragment implements Custom
 			} else {
 				dropItem(itemTypeID, quantity);
 			}
-			break;
-		case R.id.inv_menu_equip:
+		} else if (id == R.id.inv_menu_equip) {
 			controllers.itemController.equipItem(itemType, itemType.category.inventorySlot);
-			break;
-		case R.id.inv_menu_equip_offhand:
+		} else if (id == R.id.inv_menu_equip_offhand) {
 			if (itemType.category.inventorySlot == Inventory.WearSlot.weapon) {
 				controllers.itemController.equipItem(itemType, Inventory.WearSlot.shield);
 			} else if (itemType.category.inventorySlot == Inventory.WearSlot.leftring) {
 				controllers.itemController.equipItem(itemType, Inventory.WearSlot.rightring);
 			}
-			break;
-		/*case R.id.inv_menu_unequip:
-			context.mapController.unequipItem(this, getSelectedItemType(info));
-			break;*/
-		case R.id.inv_menu_use:
+		} else if (id == R.id.inv_menu_use) {
 			controllers.itemController.useItem(itemType);
-			break;
-		case R.id.inv_menu_assign:
+		} else if (id == R.id.inv_menu_assign) {
 			//lastSelectedItem = itemType;
-			break;
-		case R.id.inv_assign_slot1:
+		} else if (id == R.id.inv_assign_slot1) {
 			controllers.itemController.setQuickItem(itemType, 0);
-			break;
-		case R.id.inv_assign_slot2:
+		} else if (id == R.id.inv_assign_slot2) {
 			controllers.itemController.setQuickItem(itemType, 1);
-			break;
-		case R.id.inv_assign_slot3:
+		} else if (id == R.id.inv_assign_slot3) {
 			controllers.itemController.setQuickItem(itemType, 2);
-			break;
-		case R.id.inv_menu_movetop:
+		} else if (id == R.id.inv_menu_movetop) {
 			player.inventory.sortToTop(itemType.id);
-			break;
-		case R.id.inv_menu_movebottom:
+		} else if (id == R.id.inv_menu_movebottom) {
 			player.inventory.sortToBottom(itemType.id);
-			break;
 		}
 		update();
 	}
