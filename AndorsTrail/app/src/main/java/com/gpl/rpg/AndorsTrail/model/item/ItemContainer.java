@@ -47,6 +47,9 @@ public class ItemContainer {
 			builder.add(itemType.id);
 			builder.add(quantity);
 		}
+
+		public int getQuantity() { return quantity; }
+
 	}
 
 	public void addItem(ItemType itemType, int quantity) {

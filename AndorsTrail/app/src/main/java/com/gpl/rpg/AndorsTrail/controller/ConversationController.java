@@ -1,9 +1,9 @@
 package com.gpl.rpg.AndorsTrail.controller;
 
-import static com.gpl.rpg.AndorsTrail.controller.CombatController.BeginTurnAs.player;
 import static com.gpl.rpg.AndorsTrail.controller.SkillController.canLevelupSkillWithQuest;
 
 import java.util.ArrayList;
+import com.gpl.rpg.AndorsTrail.util.Format;
 
 import android.content.res.Resources;
 
@@ -18,7 +18,6 @@ import com.gpl.rpg.AndorsTrail.model.ability.SkillCollection;
 import com.gpl.rpg.AndorsTrail.model.ability.SkillInfo;
 import com.gpl.rpg.AndorsTrail.model.actor.Actor;
 import com.gpl.rpg.AndorsTrail.model.actor.Monster;
-import com.gpl.rpg.AndorsTrail.model.actor.MonsterType;
 import com.gpl.rpg.AndorsTrail.model.actor.Player;
 import com.gpl.rpg.AndorsTrail.model.conversation.ConversationCollection;
 import com.gpl.rpg.AndorsTrail.model.conversation.Phrase;
@@ -463,13 +462,23 @@ public final class ConversationController {
 		}
 	}
 
-	private static String getDisplayMessage(Phrase phrase, Player player) { return replacePlayerName(phrase.message, player); }
-	private static String getDisplayMessage(Reply reply, Player player) { return replacePlayerName(reply.text, player); }
+	private static String getDisplayMessage(Phrase phrase, Player player) {
+		String message = replacePlayerName(phrase.message, player);
+		return Format.localizeLongDigitSequences(message);
+	}
+	private static String getDisplayMessage(Reply reply, Player player) {
+		String message = replacePlayerName(reply.text, player);
+		return Format.localizeLongDigitSequences(message);
+	}
 	private static String replacePlayerName(String s, Player player) {
+		String reg1 = Format.localizeInt(player.getAlignment(Constants.FACTION_SCORE_CALC_REGISTER1_NAME));
+		String reg2 = Format.localizeInt(player.getAlignment(Constants.FACTION_SCORE_CALC_REGISTER2_NAME));
+		String reg3 = Format.localizeInt(player.getAlignment(Constants.FACTION_SCORE_CALC_REGISTER3_NAME));
+
 		return s.replace(Constants.PLACEHOLDER_PLAYERNAME, player.getName())
-				.replace(Constants.PLACEHOLDER_REG1, String.valueOf(player.getAlignment(Constants.FACTION_SCORE_CALC_REGISTER1_NAME)))
-				.replace(Constants.PLACEHOLDER_REG2, String.valueOf(player.getAlignment(Constants.FACTION_SCORE_CALC_REGISTER2_NAME)))
-				.replace(Constants.PLACEHOLDER_REG3, String.valueOf(player.getAlignment(Constants.FACTION_SCORE_CALC_REGISTER3_NAME)));
+				.replace(Constants.PLACEHOLDER_REG1, reg1)
+				.replace(Constants.PLACEHOLDER_REG2, reg2)
+				.replace(Constants.PLACEHOLDER_REG3, reg3);
 	}
 
 	public static final class ConversationStatemachine {

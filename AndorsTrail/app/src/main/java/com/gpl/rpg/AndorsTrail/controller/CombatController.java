@@ -2,6 +2,7 @@ package com.gpl.rpg.AndorsTrail.controller;
 
 import java.util.ArrayList;
 
+import com.gpl.rpg.AndorsTrail.util.Format;
 import android.os.Handler;
 import android.os.Message;
 
@@ -95,12 +96,14 @@ public final class CombatController implements VisualEffectCompletedCallback {
 			} else {
 				itemMessage.append(controllers.getResources().getString(R.string.combat_log_item_plural, itemCount));
 			}
+
+			// This is clunky and does not support i18n well.  Should use CLDR ListFormatter when we have a minimum API level of 24, but for now this will do.
 			boolean firstItem = true;
 			for (ItemContainer.ItemEntry entry : combinedLoot.items.items) {
 				if (!firstItem) {
-					itemMessage.append(";");
+					itemMessage.append(controllers.getResources().getString(R.string.combat_log_item_list_seperator));
 				}
-				itemMessage.append(" " + entry.itemType.getName(world.model.player) + " (" + entry.quantity + ")");
+				itemMessage.append(controllers.getResources().getString(R.string.combat_log_item_name_qty, entry.itemType.getName(world.model.player), entry.quantity));
 				firstItem = false;
 			}
 			world.model.combatLog.append(itemMessage.toString());
@@ -477,10 +480,13 @@ public final class CombatController implements VisualEffectCompletedCallback {
 			callback.onVisualEffectCompleted(callbackValue);
 			return;
 		}
+
+		String displayValue = attack.damage == 0 ? null : Format.localizeInt(attack.damage);
+
 		controllers.effectController.startEffect(
 				position
 				, VisualEffectCollection.VisualEffectID.redSplash
-				, (attack.damage == 0) ? null : String.valueOf(attack.damage)
+				, displayValue
 				, callback
 				, callbackValue);
 	}

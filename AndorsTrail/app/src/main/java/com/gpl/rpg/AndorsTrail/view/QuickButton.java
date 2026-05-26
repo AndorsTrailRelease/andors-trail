@@ -66,7 +66,7 @@ public final class QuickButton extends Button {
 				currentItemID = type.id;
 			}
 			setGrayScale(empty);
-			setText(Integer.toString(quantity));
+			setText(getResources().getString(R.string.general_integer_value, quantity));
 		}
 	}
 

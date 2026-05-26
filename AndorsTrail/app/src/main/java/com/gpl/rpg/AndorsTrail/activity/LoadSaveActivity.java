@@ -180,7 +180,7 @@ public final class LoadSaveActivity extends AndorsTrailBaseActivity implements O
             b.setLayoutParams(params);
             b.setTag(slot);
             b.setOnClickListener(this);
-            b.setText(slot + ". " + header.describe());
+            b.setText(getString(R.string.loadsave_used_slot, slot, header.describe()));
             tileManager.setImageViewTileForPlayer(getResources(), b, header.iconID);
             parent.addView(b, params);
         }
@@ -679,10 +679,10 @@ public final class LoadSaveActivity extends AndorsTrailBaseActivity implements O
 
             StringBuilder messageSb = new StringBuilder();
             String existingFileDescription = getString(R.string.loadsave_import_existing_description,
-                                                       Integer.toString(slot),
+                                                       slot,
                                                        existingFileHeader.describe());
             String importedFileDescription = getString(R.string.loadsave_import_imported_description,
-                                                       Integer.toString(slot),
+                                                       slot,
                                                        importedFileHeader.describe());
             messageSb.append(getString(R.string.loadsave_import_file_exists_question,
                                        existingFileDescription,

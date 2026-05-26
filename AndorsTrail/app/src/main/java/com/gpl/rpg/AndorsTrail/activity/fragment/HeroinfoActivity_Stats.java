@@ -155,15 +155,15 @@ public final class HeroinfoActivity_Stats extends Fragment {
 		}
 
 		heroinfo_mode.setText(mode);
-		heroinfo_level.setText(Integer.toString(player.getLevel()));
-		heroinfo_totalexperience.setText(Integer.toString(player.getTotalExperience()));
+		heroinfo_level.setText(res.getString(R.string.general_integer_value, player.getLevel()));
+		heroinfo_totalexperience.setText(res.getString(R.string.general_integer_value, player.getTotalExperience()));
 //		heroinfo_ap.update(player.getMaxAP() + "/" + player.getCurrentAP());
-		heroinfo_reequip_cost.setText(Integer.toString(player.getReequipCost()));
-		heroinfo_useitem_cost.setText(Integer.toString(player.getUseItemCost()));
-		basetraitsinfo_max_hp.setText(Integer.toString(player.baseTraits.maxHP));
-		basetraitsinfo_max_ap.setText(Integer.toString(player.baseTraits.maxAP));
-		heroinfo_base_reequip_cost.setText(Integer.toString(player.baseTraits.reequipCost));
-		heroinfo_base_useitem_cost.setText(Integer.toString(player.baseTraits.useItemCost));
+		heroinfo_reequip_cost.setText(res.getString(R.string.general_ap_value, player.getReequipCost()));
+		heroinfo_useitem_cost.setText(res.getString(R.string.general_ap_value, player.getUseItemCost()));
+		basetraitsinfo_max_hp.setText(res.getString(R.string.general_hp_value, player.baseTraits.maxHP));
+		basetraitsinfo_max_ap.setText(res.getString(R.string.general_ap_value, player.baseTraits.maxAP));
+		heroinfo_base_reequip_cost.setText(res.getString(R.string.general_ap_value, player.baseTraits.reequipCost));
+		heroinfo_base_useitem_cost.setText(res.getString(R.string.general_ap_value, player.baseTraits.useItemCost));
 		rangebar_hp.update(player.getMaxHP(), player.getCurrentHP());
 		rangebar_exp.update(player.getMaxLevelExperience(), player.getCurrentLevelExperience());
 		rangebar_ap.update(player.getMaxAP(), player.getCurrentAP());
@@ -217,7 +217,7 @@ public final class HeroinfoActivity_Stats extends Fragment {
 	}
 
 	private void updateStatsTableRow(int value, int textView, int tableRow) {
-		String s = (value > 0) ? Integer.toString(value) : null;
+		String s = (value > 0) ? getResources().getString(R.string.general_integer_value, value) : null;
 		updateStatsTableRow(s, textView, tableRow, 0);
 	}
 

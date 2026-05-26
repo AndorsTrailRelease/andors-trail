@@ -26,6 +26,7 @@ import com.gpl.rpg.AndorsTrail.controller.listeners.ActorStatsListener;
 import com.gpl.rpg.AndorsTrail.controller.listeners.CombatSelectionListener;
 import com.gpl.rpg.AndorsTrail.controller.listeners.CombatTurnListener;
 import com.gpl.rpg.AndorsTrail.model.ability.ActorCondition;
+import com.gpl.rpg.AndorsTrail.model.ability.ActorConditionType;
 import com.gpl.rpg.AndorsTrail.model.actor.Actor;
 import com.gpl.rpg.AndorsTrail.model.actor.Monster;
 import com.gpl.rpg.AndorsTrail.model.actor.Player;
@@ -211,9 +212,11 @@ public final class CombatView extends RelativeLayout implements CombatSelectionL
 			hideConditionsButton();
 			return;
 		}
-		if (currentMonster.conditions.size()+currentMonster.immunities.size() > 0) {
-			if (currentMonster.conditions.size() > 0) world.tileManager.setImageViewTile(getContext(), monsterConditionsButton, currentMonster.conditions.get(0).conditionType, false, Integer.toString(currentMonster.conditions.size()+currentMonster.immunities.size()), null);
-			else world.tileManager.setImageViewTile(getContext(), monsterConditionsButton, currentMonster.immunities.get(0).conditionType, true, Integer.toString(currentMonster.conditions.size()+currentMonster.immunities.size()), null);
+		int condCount = currentMonster.conditions.size() + currentMonster.immunities.size();
+		if(condCount > 0) {
+			// If there are both conditions and immunities, prefer showing the condition type on the button.   If there are only immunities, show the immunity type instead.
+			ActorConditionType condType = currentMonster.conditions.isEmpty() ? currentMonster.immunities.get(0).conditionType : currentMonster.conditions.get(0).conditionType;
+			world.tileManager.setImageViewTile(getContext(), monsterConditionsButton, condType, !currentMonster.immunities.isEmpty(), res.getString(R.string.monstercondition_icon_count, condCount), null);
 			showConditionsButton();
 			if (conditionsBarToggled) showConditionsBar();
 		} else {

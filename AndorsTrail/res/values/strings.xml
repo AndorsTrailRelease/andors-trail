@@ -514,8 +514,8 @@
 	<string name="loadsave_import_option_keep_existing">Keep existing save</string>
 	<string name="loadsave_import_option_keep_imported">Keep imported save</string>
 	<string name="loadsave_import_option_add_as_new">Add as new Save</string>
-	<string name="loadsave_import_existing_description">Existing save: Slot: %1$s:\n\t%2$s</string>
-	<string name="loadsave_import_imported_description">Imported save: Slot: %1$s:\n\t%2$s</string>
+	<string name="loadsave_import_existing_description">Existing save in slot %1$,d:\n\t%2$s</string>
+	<string name="loadsave_import_imported_description">Importing save to slot %1$,d:\n\t%2$s</string>
 	<string name="loadsave_import_worldmap">Import worldmap</string>
 	<string name="loadsave_import_worldmap_info">Please select the Worldmap zip file.</string>
 	<string name="loadsave_importing_worldmap">Importing worldmap</string>
@@ -812,5 +812,32 @@ Items made of cloth are not considered as being armor." </string>
 	<!-- unreleased / proposed -->
 
 	<string name="monsterinfo_killcount">Previous kills</string>
+
+	<string name="rangebar_current_max" translatable="false">%1$,d / %2$,d</string>
+
+	<string name="general_ap_value">%1$,d AP</string>
+	<string name="general_hp_value">%1$,d HP</string>
+	<string name="general_hp_minmax_value">%1$,d-%2$,d HP</string>
+	<string name="general_integer_value" translatable="false">%1$,d</string>
+
+	<!-- String val because localization done in code since use of % of sign varies by locale -->
+	<string name="general_percentage_value" translatable="false">%1$s</string>
+
+	<!-- Used for critical hit multipliers (or anything else that uses a multiplier as unit) -->
+	<string name="general_multiplier_value" translatable="false">×%1$.1f</string>
+
+	<!-- Translators: the 'pts' should be a short abbreviation of the word 'points' in your language (as in Skill Points). -->
+	<string name="general_points_value">%1$,d pts</string>
+
+	<string name="actorcondition_icon_magnitude" translatable="false">×%1$,d</string>
+	<string name="actorcondition_icon_duration" translatable="false">%1$,d</string>
+	<string name="actorcondition_icon_duration_infinite" translatable="false">∞</string>
+
+	<string name="monstercondition_icon_count" translatable="false">%1$,d</string>
+
+	<string name="loadsave_used_slot">%1$,d. %2$s</string>
+
+	<string name="combat_log_item_name_qty" translatable="false"> %1$s (%2$,d)</string>
+	<string name="combat_log_item_list_seperator">;</string>
 
 </resources>
