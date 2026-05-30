@@ -18,6 +18,12 @@ public final class Format {
         return NumberFormat.getIntegerInstance(Locale.getDefault()).format(value);
     }
 
+    public static String localizeIntNoSep(int value) {
+        NumberFormat nf = NumberFormat.getIntegerInstance(Locale.getDefault());
+        nf.setGroupingUsed(false);
+        return nf.format(value);
+    }
+
     public static String localizePercentCeil(double floatval) {
         NumberFormat pf = NumberFormat.getPercentInstance(Locale.getDefault());
         pf.setMinimumFractionDigits(0);
