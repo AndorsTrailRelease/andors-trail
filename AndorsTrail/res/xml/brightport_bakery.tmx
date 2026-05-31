@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="25" height="12" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="16">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="25" height="12" tilewidth="32" tileheight="32" infinite="0" nextlayerid="13" nextobjectid="27">
+ <properties>
+  <property name="colorfilter" value="none"/>
+ </properties>
  <tileset firstgid="1" name="map_bed_1" tilewidth="32" tileheight="32" tilecount="160" columns="16">
   <image source="../drawable/map_bed_1.png" width="512" height="320"/>
  </tileset>
@@ -183,6 +186,9 @@
  <tileset firstgid="7609" name="map_brightport" tilewidth="32" tileheight="32" tilecount="112" columns="16">
   <image source="../drawable/map_brightport.png" width="512" height="224"/>
  </tileset>
+ <tileset firstgid="7721" name="map_painting_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
+  <image source="../drawable/map_painting_1.png" width="512" height="256"/>
+ </tileset>
  <layer id="1" name="Base" width="25" height="12">
   <data encoding="base64" compression="zlib">
    eJxjYBgFIxnoceHnDxU7hgsgFFbUCDt62EErAABPGQIx
@@ -195,7 +201,7 @@
  </layer>
  <layer id="3" name="Objects" width="25" height="12">
   <data encoding="base64" compression="zlib">
-   eJxjYCAfuAsj2JZMCLaLMKZaQgCkv5EfwpaRZWCoZ0OwQSCeDcJ2Q1LzlQ/TbnS3YZP7w8rAoAPULww0U4QNwgaJ5UPZ/4Ds/1A1yADkL5CdILv5ge4Q4Ee4o54N4dYLQJoHyP8oxsCgDKRVoGyQGEjuCJDNB2TzQ8VBQFoMNTyR7cbFpgQ8YWFgmAK08xmQPsGPyl/Kj1C3ESi2iQDeLIbwBwyA/MICDMMtQHE2VogYOn8oAGzphxYAOfyJ4ZMDkMP/ET8qfyU/ZvyksyAwMjgIVHMIig9jiXtaAgDtUjom
+   eJxjYCAfuAsj2JZMCLaLMKZaQgCkv5EfwpaRZWCoZ0OwQSCeDcJ2Q1LzlQ/TbnS3YZP7w8rAoAPULww0U4QNwgaJ5UPZ/4Ds/1A1yADkL5CdILsd5RgYnOQQ7qhnQ7j1ApDmAfI/ijEwKANpFSgbJAaSOwJk8wHZ/FBxEJAWQw1PZLtxsSkBT1gYGKYA7XwGpE/wo/KX8iPUbQSKbSKAN4sh/AEDIL+wAMNwC1CcjRUihs4fCgBb+qEFQA5/YvjkAOTwf8SPyl/Jjxk/6SwIjAwOAtUcguLDWOKelgAArz46qA==
   </data>
  </layer>
  <layer id="4" name="Above" width="25" height="12">
@@ -208,14 +214,14 @@
    eJxjYBg84LHY4LeDGP3DxY5PMDVyEOqMLEJuvyyGcrLsoBSM2jG47KA1AADQuQ6Y
   </data>
  </layer>
- <layer id="11" name="oven" width="25" height="12">
+ <layer id="11" name="Oven" width="25" height="12" visible="0">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUDAZwkm2gXTD4AQDwxgDQ
   </data>
  </layer>
- <layer id="6" name="Walkable" width="25" height="12">
+ <layer id="6" name="Walkable" width="25" height="12" visible="0">
   <data encoding="base64" compression="zlib">
-   eJy7KMbAcHEU0wSDADY2uhoYINVscgAh92BzP7p+bGYSsgObHKWAWuYMpB3EhhUlcU9u2qWmeaTYiU8NAI2qn7g=
+   eJy7KMbAcHEU0wSDADY2uhoYINVscgAh92BzP7p+bGYSsgObHKWAWuYMpB3EhhUlcU9KnBNjBy3zCyHzAdzVntE=
   </data>
  </layer>
  <objectgroup id="7" name="Mapevents">
@@ -237,8 +243,40 @@
     <property name="place" value="west"/>
    </properties>
   </object>
+  <object id="23" name="brightport_behindcounter" type="script" x="640" y="128" width="32" height="32">
+   <properties>
+    <property name="when" value="step"/>
+   </properties>
+  </object>
+  <object id="24" name="brightport_behindcounter0" type="script" x="672" y="96" width="32" height="96">
+   <properties>
+    <property name="when" value="enter"/>
+   </properties>
+  </object>
+  <object id="25" name="brightport_behindcounter0" type="script" x="320" y="128" width="32" height="64">
+   <properties>
+    <property name="when" value="enter"/>
+   </properties>
+  </object>
+  <object id="26" name="brightport_behindcounter" type="script" x="352" y="128" width="32" height="32">
+   <properties>
+    <property name="when" value="step"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="8" name="Spawn">
+  <object id="13" name="burhczyd14" type="spawn" x="32" y="288" width="32" height="32">
+   <properties>
+    <property name="active" value="false"/>
+    <property name="quantity" value="1"/>
+   </properties>
+  </object>
+  <object id="14" name="burhczyd14e" type="spawn" x="32" y="288" width="32" height="32">
+   <properties>
+    <property name="active" value="false"/>
+    <property name="quantity" value="1"/>
+   </properties>
+  </object>
   <object id="4" name="brightportbakery" type="spawn" x="160" y="192" width="32" height="32">
    <properties>
     <property name="spawngroup" value="brightportbakery"/>
@@ -254,12 +292,12 @@
     <property name="spawngroup" value="brightportbakery1"/>
    </properties>
   </object>
-  <object id="7" name="brightportbakery3" type="spawn" x="352" y="128" width="160" height="32">
+  <object id="7" name="brightportbakery3" type="spawn" x="384" y="128" width="96" height="32">
    <properties>
     <property name="spawngroup" value="brightportbakery3"/>
    </properties>
   </object>
-  <object id="8" name="brightportbakery2" type="spawn" x="512" y="128" width="160" height="32">
+  <object id="8" name="brightportbakery2" type="spawn" x="512" y="128" width="128" height="32">
    <properties>
     <property name="spawngroup" value="brightportbakery2"/>
    </properties>
@@ -275,32 +313,20 @@
     <property name="spawngroup" value="brightport_newcommander"/>
    </properties>
   </object>
-  <object id="14" name="burhczyd14" type="spawn" x="32" y="288" width="32" height="32">
-   <properties>
-    <property name="active" value="false"/>
-    <property name="quantity" value="1"/>
-   </properties>
-  </object>
-  <object id="15" name="burhczyd14e" type="spawn" x="32" y="288" width="32" height="32">
-   <properties>
-    <property name="active" value="false"/>
-    <property name="quantity" value="1"/>
-   </properties>
-  </object>
  </objectgroup>
  <objectgroup id="9" name="Keys">
-  <object id="11" name="Object" type="key" x="384" y="160" width="96" height="32">
+  <object id="19" name="counter2" type="key" x="384" y="160" width="96" height="32">
    <properties>
-    <property name="phrase" value="brightport_bakery3"/>
+    <property name="phrase" value="brightport_bakery3_selector"/>
     <property name="requireId" value="andor"/>
     <property name="requireNegation" value="true"/>
     <property name="requireType" value="questProgress"/>
     <property name="requireValue" value="1"/>
    </properties>
   </object>
-  <object id="12" name="Objects" type="key" x="512" y="160" width="128" height="32">
+  <object id="20" name="counter" type="key" x="512" y="160" width="128" height="32">
    <properties>
-    <property name="phrase" value="brightport_bakery"/>
+    <property name="phrase" value="brightport_bakery_selector"/>
     <property name="requireId" value="andor"/>
     <property name="requireNegation" value="true"/>
     <property name="requireType" value="questProgress"/>
@@ -308,8 +334,8 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="10" name="Replace">
-  <object id="13" name="oven" type="replace" x="64" y="288" width="32" height="32">
+ <objectgroup id="12" name="Replace">
+  <object id="15" name="oven" type="replace" x="64" y="288" width="32" height="32">
    <properties>
     <property name="Above" value="oven"/>
     <property name="requireId" value="quest_burhczyd_nd"/>

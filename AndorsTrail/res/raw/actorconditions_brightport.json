@@ -1,0 +1,115 @@
+[
+    {
+        "id":"brightport_worm",
+        "iconID":"actorconditions_japozero:52",
+        "name":"Brainworm infection",
+        "category":"blood",
+        "roundEffect":{
+            "visualEffectID":"redSplash",
+            "increaseCurrentHP":{
+                "min":-1,
+                "max":-2
+            }
+        },
+        "abilityEffect":{
+            "increaseAttackChance":-15,
+            "increaseMaxHP":0,
+            "increaseBlockChance":-10
+        }
+    },
+    {
+        "id":"brightport_diadem",
+        "iconID":"actorconditions_1:89",
+        "name":"Incompatible biology",
+        "description":"A magical item attempts to draw it's full power, but it was tailored for a different creature.",
+        "category":"spiritual",
+        "abilityEffect":{
+            "increaseAttackChance":-5,
+            "increaseMoveCost":1,
+            "increaseUseItemCost":1,
+            "increaseAttackCost":0,
+            "increaseCriticalSkill":-5,
+            "increaseBlockChance":-5,
+            "increaseDamageResistance":-2
+        }
+    },
+    {
+        "id":"brightport_poison",
+        "iconID":"actorconditions_1:58",
+        "name":"Poisonous vapors",
+        "description":"Emitted by the creatures adapted to the poisoned environment.",
+        "category":"blood",
+        "roundEffect":{
+            "increaseCurrentHP":{
+                "min":-2,
+                "max":0
+            }
+        },
+        "fullRoundEffect":{
+            "increaseCurrentHP":{
+                "min":-2,
+                "max":0
+            }
+        }
+    },
+    {
+        "id":"brightportflame",
+        "iconID":"actorconditions_1:5",
+        "name":"Searing burn",
+        "category":"physical",
+        "isStacking":1,
+        "roundEffect":{
+            "visualEffectID":"redSplash",
+            "increaseCurrentHP":{
+                "min":-5,
+                "max":0
+            }
+        },
+        "abilityEffect":{
+            "increaseAttackChance":-10,
+            "increaseDamageResistance":-3
+        }
+    },
+    {
+        "id":"brightport_scimitar",
+        "iconID":"actorconditions_1:43",
+        "name":"Soft metal",
+        "description":"The material of your weapon bends easily, weakening your defense for a short time, but its flexibility allows for strikes targeting subtle gaps in your enemy's guard, before it reforms back to its original shape by some unknown means.",
+        "category":"physical",
+        "isStacking":1,
+        "abilityEffect":{
+            "increaseAttackChance":10,
+            "increaseBlockChance":-15,
+            "increaseDamageResistance":0
+        }
+    },
+    {
+        "id":"brightport_trollregen",
+        "iconID":"actorconditions_1:35",
+        "name":"Troll regeneration",
+        "category":"blood",
+        "isPositive":1,
+        "roundEffect":{
+            "increaseCurrentHP":{
+                "min":3,
+                "max":5
+            }
+        }
+    },
+    {
+        "id":"brightport_shadow",
+        "iconID":"actorconditions_1:89",
+        "name":"Umbral step",
+        "description":"A master rogue glides through the shadows as if dancing.",
+        "category":"physical",
+        "isPositive":1,
+        "abilityEffect":{
+            "increaseAttackChance":11,
+            "increaseAttackDamage":{
+                "min":3,
+                "max":3
+            },
+            "increaseBlockChance":-6
+        }
+    }
+]
