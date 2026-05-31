@@ -144,6 +144,7 @@ public final class MapController {
 		controllers.actorStatsController.recalculatePlayerStats(player);
 		controllers.actorStatsController.setActorMaxAP(player);
 		controllers.actorStatsController.setActorMaxHealth(player);
+		player.mapIconID = player.baseTraits.iconID;
 		for (PredefinedMap m : world.maps.getAllMaps()) {
 			m.resetTemporaryData();
 		}

@@ -38,6 +38,7 @@ public final class Player extends Actor {
 	public final Coord nextPosition;
 
 	// TODO: Should be privates
+	public int mapIconID;
 	public int level;
 	public final PlayerBaseTraits baseTraits = new PlayerBaseTraits();
 	public final Range levelExperience; // ranges from 0 to the delta-amount of exp required for next level
@@ -240,6 +241,10 @@ public final class Player extends Actor {
 		this.name = name;
 	}
 
+	public void replaceIcon(int iconId) {
+		this.mapIconID = iconId;
+	}
+
 	public int getReequipCost() { return reequipCost; }
 	public int getUseItemCost() { return useItemCost; }
 	public int getAvailableSkillIncreases() { return availableSkillIncreases; }
@@ -297,6 +302,11 @@ public final class Player extends Actor {
 		if (fileversion <= 33) LegacySavegameFormatReaderForPlayer.readCombatTraitsPreV034(src, fileversion);
 
 		this.baseTraits.iconID = src.readInt();
+		if (fileversion <= 82) {
+			this.mapIconID = this.baseTraits.iconID;
+		} else {
+			this.mapIconID = src.readInt();
+		}
 		if (fileversion <= 33) /*this.tileSize = */new Size(src, fileversion);
 		this.baseTraits.maxAP = src.readInt();
 		this.baseTraits.maxHP = src.readInt();
@@ -421,6 +431,7 @@ public final class Player extends Actor {
 
 	public void writeToParcel(DataOutputStream dest) throws IOException {
 		dest.writeInt(baseTraits.iconID);
+		dest.writeInt(mapIconID);
 		dest.writeInt(baseTraits.maxAP);
 		dest.writeInt(baseTraits.maxHP);
 		dest.writeUTF(name);
@@ -478,6 +489,7 @@ public final class Player extends Actor {
 	}
 	public void addToChecksum(ChecksumBuilder builder) {
 		//builder.add(baseTraits.iconID);// Do not add to checksum so that it can be changed without invalidating checksums
+		//builder.add(baseTraits.mapIconID);// Do not add to checksum so that it can be changed without invalidating checksums
 		builder.add(baseTraits.maxAP);
 		builder.add(baseTraits.maxHP);
 		//builder.add(name);// Do not add to checksum so that it can be changed without invalidating checksums

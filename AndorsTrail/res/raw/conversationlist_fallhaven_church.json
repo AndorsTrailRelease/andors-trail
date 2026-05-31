@@ -70,6 +70,16 @@
                 ]
             },
             {
+                "nextPhraseID":"thoronir_trade_bonemeal_a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"bonemeal",
+                        "value":110
+                    }
+                ]
+            },
+            {
                 "nextPhraseID":"thoronir_tharal_1"
             }
         ]
@@ -138,7 +148,7 @@
         "replies":[
             {
                 "text":"N",
-                "nextPhraseID":"thoronir_tharal_4"
+                "nextPhraseID":"thoronir_tharal_3a"
             }
         ]
     },
@@ -158,6 +168,18 @@
                         "requireType":"inventoryRemove",
                         "requireID":"bone",
                         "value":5
+                    }
+                ]
+            },
+            {
+                "text":"I've changed my mind. If Lord Geomyr forbids bonemeal potions, we should abide by that.",
+                "nextPhraseID":"thoronir_tharal_4b",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"bonemeal",
+                        "value":40,
+                        "negate":true
                     }
                 ]
             }
@@ -258,6 +280,125 @@
             {
                 "text":"Whatever, let's get this over with.",
                 "nextPhraseID":"F"
+            }
+        ]
+    },
+    {
+        "id":"thoronir_tharal_3a",
+        "replies":[
+            {
+                "nextPhraseID":"thoronir_tharal_4a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"bonemeal",
+                        "value":50
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"thoronir_tharal_4"
+            }
+        ]
+    },
+    {
+        "id":"thoronir_tharal_4a",
+        "message":"Well, do you think you could find me 5 skeletal bones that I can use for ... church matters?",
+        "replies":[
+            {
+                "text":"Sure, I might be able to do that.",
+                "nextPhraseID":"thoronir_tharal_5a"
+            },
+            {
+                "text":"I have those bones for you.",
+                "nextPhraseID":"thoronir_tharal_complete_a",
+                "requires":[
+                    {
+                        "requireType":"inventoryRemove",
+                        "requireID":"bone",
+                        "value":5
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id":"thoronir_tharal_4b",
+        "message":"That's very sincere of you. Perhaps you could still get me the bones. I need them also for church business, and I've recently run out of them.",
+        "replies":[
+            {
+                "text":"Sure, I might be able to do that.",
+                "nextPhraseID":"thoronir_tharal_5a"
+            },
+            {
+                "text":"I have those bones for you.",
+                "nextPhraseID":"thoronir_tharal_complete_a",
+                "requires":[
+                    {
+                        "requireType":"inventoryRemove",
+                        "requireID":"bone",
+                        "value":5
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id":"thoronir_tharal_5a",
+        "message":"Thank you, please come back soon. I heard there were some undead near an old abandoned house just north of Fallhaven. Maybe you can check for bones there?",
+        "replies":[
+            {
+                "text":"OK, I'll go check there.",
+                "nextPhraseID":"thoronir_default"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"bonemeal",
+                "value":50
+            }
+        ]
+    },
+    {
+        "id":"thoronir_tharal_complete_a",
+        "message":"Thank you, these bones will do fine. Now I can start creating some ... things.",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"thoronir_complete_2a"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"bonemeal",
+                "value":110
+            }
+        ]
+    },
+    {
+        "id":"thoronir_complete_2a",
+        "message":"Give me some time to ... prepare. Come back in a little while."
+    },
+    {
+        "id":"thoronir_trade_bonemeal_a",
+        "message":"Yes, the bo ... I mean, yes, I have some of these potions ready. For the small sum of 200 gold pieces, I can show them to you. Perhaps you'd like to buy some of them then. Just don't let anybody see them.",
+        "replies":[
+            {
+                "text":"Here are 200 gold. Now let me see the potions.",
+                "nextPhraseID":"S",
+                "requires":[
+                    {
+                        "requireType":"inventoryRemove",
+                        "requireID":"gold",
+                        "value":200
+                    }
+                ]
+            },
+            {
+                "text":"There was something else I wanted to talk about.",
+                "nextPhraseID":"thoronir_default"
             }
         ]
     }

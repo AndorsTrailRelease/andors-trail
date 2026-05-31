@@ -420,13 +420,13 @@ public final class MainView extends SurfaceView
 		}
 
 		if (!model.player.hasVFXRunning) {
-			drawFromMapPosition(canvas, area, playerPosition, model.player.iconID);
+			drawFromMapPosition(canvas, area, playerPosition, model.player.mapIconID);
 		} else if (area.contains(playerPosition)) {
 			int vfxElapsedTime = (int) (System.currentTimeMillis() - model.player.vfxStartTime);
 			if (vfxElapsedTime > model.player.vfxDuration) vfxElapsedTime = model.player.vfxDuration;
 			int x = ((model.player.position.x - mapViewArea.topLeft.x) * tileSize * vfxElapsedTime + ((model.player.lastPosition.x - mapViewArea.topLeft.x) * tileSize * (model.player.vfxDuration - vfxElapsedTime))) / model.player.vfxDuration;
 			int y = ((model.player.position.y - mapViewArea.topLeft.y) * tileSize * vfxElapsedTime + ((model.player.lastPosition.y - mapViewArea.topLeft.y) * tileSize * (model.player.vfxDuration - vfxElapsedTime))) / model.player.vfxDuration;
-			tiles.drawTile(canvas, model.player.iconID, x, y, mPaint);
+			tiles.drawTile(canvas, model.player.mapIconID, x, y, mPaint);
 		}
 		for (MonsterSpawnArea a : currentMap.spawnAreas) {
 			for (Monster m : a.monsters) {

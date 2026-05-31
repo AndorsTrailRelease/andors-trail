@@ -13,6 +13,8 @@ android {
     buildTypes {
         release {
             manifestPlaceholders icon_name: 'icon', fileproviderPath: 'AndorsTrail'
+            applicationIdSuffix ''
+            versionNameSuffix = ""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }

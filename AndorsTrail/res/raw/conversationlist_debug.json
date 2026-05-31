@@ -1,485 +1,291 @@
 [
-    {
-        "id": "debugshop",
-        "message": "Welcome adventurer!",
-        "replies": [
-            {
-                "text": "Trade items very very long text",
-                "nextPhraseID": "S"
-            },
-            {
-                "text": "Bye",
-                "nextPhraseID": "X"
-            },
-            {
-                "text": "Fight",
-                "nextPhraseID": "F"
-            }
-        ]
-    },
-    {
-        "id": "debugquest",
-        "message": "Debug quest start\nTest.",
-        "rewards": [
-            {
-                "rewardType": "questProgress",
-                "rewardID": "debugquest",
-                "value": 10
-            }
-        ],
-        "replies": [
-            {
-                "text": "Iron sword*2",
-                "nextPhraseID": "debugquest2",
-                "requires": [
-                    {
-                        "requireType": "inventoryRemove",
-                        "requireID": "dagger0",
-                        "value": 1
-                    }
-                ]
-            },
-            {
-                "text": "Progress+=10",
-                "nextPhraseID": "debugquest4"
-            },
-            {
-                "text": "Progress=100",
-                "nextPhraseID": "debugquest1",
-                "requires": [
-                    {
-                        "requireType": "questProgress",
-                        "requireID": "debugquest",
-                        "value": "100"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "id": "debugquest1",
-        "message": "Yes, you have already completed this quest.",
-        "rewards": [
-            {
-                "rewardType": "dropList",
-                "rewardID": "debuglist1"
-            }
-        ],
-        "replies": [
-            {
-                "text": "Next",
-                "nextPhraseID": "debugquest3"
-            }
-        ]
-    },
-    {
-        "id": "debugquest2",
-        "message": "Thank you for the items.",
-        "rewards": [
-            {
-                "rewardType": "questProgress",
-                "rewardID": "debugquest",
-                "value": 100
-            }
-        ],
-        "replies": [
-            {
-                "text": "Next",
-                "nextPhraseID": "debugquest3"
-            }
-        ]
-    },
-    {
-        "id": "debugquest3",
-        "message": "Quest is now completed.",
-        "replies": [
-            {
-                "text": "Bye",
-                "nextPhraseID": "X"
-            }
-        ]
-    },
-    {
-        "id": "debugquest4",
-        "message": "More info. Quest progress should now be updated to 20.",
-        "rewards": [
-            {
-                "rewardType": "questProgress",
-                "rewardID": "debugquest",
-                "value": 20
-            }
-        ],
-        "replies": [
-            {
-                "text": "Back",
-                "nextPhraseID": "debugquest"
-            }
-        ]
-    },
-    {
-        "id": "debugsign",
-        "message": "This should be a signpost."
-    },
-    {
-        "id": "debugrequireskey",
-        "message": "This tile requires a quest progress."
-    },
-   {
-    "id": "debugrequires10gold",
-    "replies": [
-      {
-        "text": "Too bad.",
-        "nextPhraseID": "X"
-      },
-      {
-        "text": "Well, gimme 10 gold then !",
-        "nextPhraseID": "debugrequires10gold_1"
-      }
-    ],
-    "message": "This tile costs 10 gold !"
+  {
+    "id": "dbg",
+    "message": "What do you want?",
+    "replies": [{ "text": "Project specific",	"nextPhraseID": "dbg_prj" },
+      { "text": "Teleport",		    "nextPhraseID": "dbg_teleport" },
+      { "text": "Items", 				"nextPhraseID": "dbg_shop" },
+      { "text": "Faction scores", 	"nextPhraseID": "dbg_scores" }]
   },
   {
-    "id": "debugrequires10gold_1",
-    "replies": [
-      {
-        "requires": [
-          {
-            "requireType": "spentGold",
-            "requireID": "gold",
-            "value": 100
-          }
-        ],
-        "nextPhraseID": "debugrequires10gold_3"
-      },
-      {
-        "nextPhraseID": "debugrequires10gold_2"
-      }
+    "id": "dbg_teleport",
+    "message": "Where do you want to travel?",
+    "replies": [{ "text": "Projects (obsolete)",	"nextPhraseID": "dbg_teleport_prj" },
+      { "text": "Burhczyd taverns",       "nextPhraseID": "dbg_teleport_burhczyd" },
+      { "text": "Other places",			"nextPhraseID": "dbg_teleport_other" },
+      { "text": "Brightport", 			"nextPhraseID": "dbg_teleport_brightport" },
+      { "text": "Brimhaven", 				"nextPhraseID": "dbg_teleport_brimhaven" },
+      { "text": "BWM settlement",			"nextPhraseID": "dbg_teleport_bwm" },
+      { "text": "Crossglen", 				"nextPhraseID": "dbg_teleport_crossglen" },
+      { "text": "Fallhaven", 				"nextPhraseID": "dbg_teleport_fallhaven" },
+      { "text": "Feygard", 				"nextPhraseID": "dbg_teleport_feygard" },
+      { "text": "Loneford", 				"nextPhraseID": "dbg_teleport_loneford" },
+      { "text": "Nor City", 				"nextPhraseID": "dbg_teleport_norcity" },
+      { "text": "Prim", 					"nextPhraseID": "dbg_teleport_prim" },
+      { "text": "Remgard", 				"nextPhraseID": "dbg_teleport_remgard" },
+      { "text": "Stoutford", 				"nextPhraseID": "dbg_teleport_stoutford" },
+      { "text": "Sullengard", 			"nextPhraseID": "dbg_teleport_sullengard" },
+      { "text": "Vilegard", 				"nextPhraseID": "dbg_teleport_vilegard" },
+      { "text": "Wexlow Village", 		"nextPhraseID": "dbg_teleport_wexlow" },
+      { "text": "Wood settlement", 		"nextPhraseID": "dbg_teleport_woodsettlement" },
+      { "text": "Back", 					"nextPhraseID": "dbg" }]
+  },
+  {
+    "id": "dbg_teleport_other",
+    "message": "Where do you want to travel?",
+    "replies": [{ "text": "Arulir Mountain", 		"nextPhraseID": "dbg_teleport_arulir" },
+      { "text": "Charwood", 				"nextPhraseID": "dbg_teleport_charwood" },
+      { "text": "Crossroads", 			"nextPhraseID": "dbg_teleport_crossroads" },
+      { "text": "Deebo's Apple Orchard", 	"nextPhraseID": "dbg_teleport_applefarm" },
+      { "text": "Guynmart", 				"nextPhraseID": "dbg_teleport_guynmart" },
+      { "text": "Lake Laeroth - Manor", 	"nextPhraseID": "dbg_teleport_laerot1" },
+      { "text": "Lake Laeroth - Not Pony Island", "nextPhraseID": "dbg_teleport_laerot2" },
+      { "text": "Lodar", 					"nextPhraseID": "dbg_teleport_lodar" },
+      { "text": "Mt. Galmore", 			"nextPhraseID": "dbg_teleport_galmore" },
+      { "text": "Witch house", 			"nextPhraseID": "dbg_teleport_witchhouse" },
+      { "text": "Back", 					"nextPhraseID": "dbg_teleport" }]
+  },
+  { "id":"dbg_teleport_crossglen",  		"rewards":[{ "rewardType":"mapchange", "rewardID":"hall", 		"mapName":"crossglen" }] },
+  { "id":"dbg_teleport_fallhaven",  		"rewards":[{ "rewardType":"mapchange", "rewardID":"clothes", 	"mapName":"fallhaven_ne" }] },
+  { "id":"dbg_teleport_vilegard",  		"rewards":[{ "rewardType":"mapchange", "rewardID":"tavern", 	"mapName":"vilegard_s" }] },
+  { "id":"dbg_teleport_crossroads",  		"rewards":[{ "rewardType":"mapchange", "rewardID":"middle", 	"mapName":"crossroads" }] },
+  { "id":"dbg_teleport_loneford",  		"rewards":[{ "rewardType":"mapchange", "rewardID":"south", 		"mapName":"loneford9" }] },
+  { "id":"dbg_teleport_prim",  			"rewards":[{ "rewardType":"mapchange", "rewardID":"south", 		"mapName":"blackwater_mountain29" }] },
+  { "id":"dbg_teleport_bwm",  			"rewards":[{ "rewardType":"mapchange", "rewardID":"south", 		"mapName":"blackwater_mountain43" }] },
+  { "id":"dbg_teleport_remgard",  		"rewards":[{ "rewardType":"mapchange", "rewardID":"east", 		"mapName":"remgard0" }] },
+  { "id":"dbg_teleport_charwood",  		"rewards":[{ "rewardType":"mapchange", "rewardID":"minerhouse4", "mapName":"waytolostmine2" }] },
+  { "id":"dbg_teleport_lodar",  			"rewards":[{ "rewardType":"mapchange", "rewardID":"lodarhouse", "mapName":"lodarhouse0" }] },
+  { "id":"dbg_teleport_stoutford",  		"rewards":[{ "rewardType":"mapchange", "rewardID":"south2", 	"mapName":"wild20" }] },
+  { "id":"dbg_teleport_guynmart",  		"rewards":[{ "rewardType":"mapchange", "rewardID":"farmhouse", 	"mapName":"guynmart_wood_1" }] },
+  { "id":"dbg_teleport_brimhaven",  		"rewards":[{ "rewardType":"mapchange", "rewardID":"south2", 	"mapName":"brimhaven4" }] },
+  { "id":"dbg_teleport_brightport",  		"rewards":[{ "rewardType":"mapchange", "rewardID":"east", 		"mapName":"brightport1" }] },
+  { "id":"dbg_teleport_arulir",  			"rewards":[{ "rewardType":"mapchange", "rewardID":"north",	 	"mapName":"mountainlake5" }] },
+  { "id":"dbg_teleport_woodsettlement",  	"rewards":[{ "rewardType":"mapchange", "rewardID":"woodhouse2", "mapName":"woodsettlement0" }] },
+  { "id":"dbg_teleport_sullengard",  		"rewards":[{ "rewardType":"mapchange", "rewardID":"south", 		"mapName":"sullengard2" }] },
+  { "id":"dbg_teleport_galmore",  		"rewards":[{ "rewardType":"mapchange", "rewardID":"south", 		"mapName":"galmore_19" }] },
+  { "id":"dbg_teleport_applefarm",  		"rewards":[{ "rewardType":"mapchange", "rewardID":"house", 		"mapName":"sullengard_apple_farm_east" }] },
+  { "id":"dbg_teleport_witchhouse",  		"rewards":[{ "rewardType":"mapchange", "rewardID":"north", 		"mapName":"lake_shore_road_0" }] },
+  { "id":"dbg_teleport_laerot1",  		"rewards":[{ "rewardType":"mapchange", "rewardID":"south2", 	"mapName":"laerothisland2" }] },
+  { "id":"dbg_teleport_laerot2",  		"rewards":[{ "rewardType":"mapchange", "rewardID":"cave", 		"mapName":"island3" }] },
+  { "id":"dbg_teleport_wexlow",  			"rewards":[{ "rewardType":"mapchange", "rewardID":"north", 		"mapName":"wexlow_village" }] },
+  { "id":"dbg_teleport_feygard",  		"rewards":[{ "rewardType":"mapchange", "rewardID":"south", 		"mapName":"wayto_feygard_duleian_2" }] },
+  { "id":"dbg_teleport_norcity",  		"rewards":[{ "rewardType":"mapchange", "rewardID":"north", 		"mapName":"cabin_norcity_road4" }] },
+  {
+    "id": "dbg_teleport_burhczyd",
+    "message": "***  The voyage of Burhczyd  ***",
+    "replies": [{ "text": " 1: Crossglen", 				"nextPhraseID": "dbg_teleport_burhczyd_1" },
+      { "text": " 2: Fallhaven", 				"nextPhraseID": "dbg_teleport_burhczyd_2" },
+      { "text": " 3: Loneford", 				"nextPhraseID": "dbg_teleport_burhczyd_3" },
+      { "text": " 4: Vilegard", 				"nextPhraseID": "dbg_teleport_burhczyd_4" },
+      { "text": " 5: Stoutford", 				"nextPhraseID": "dbg_teleport_burhczyd_5" },
+      { "text": " 6: BWM",	 				"nextPhraseID": "dbg_teleport_burhczyd_6" },
+      { "text": " 7: Remgard", 				"nextPhraseID": "dbg_teleport_burhczyd_7" },
+      { "text": " 8: Wood settlement",		"nextPhraseID": "dbg_teleport_burhczyd_8" },
+      { "text": " 9: Prim", 					"nextPhraseID": "dbg_teleport_burhczyd_9" },
+      { "text": "10: Brimhaven", 				"nextPhraseID": "dbg_teleport_burhczyd_10" },
+      { "text": "11: Sullengard", 			"nextPhraseID": "dbg_teleport_burhczyd_11" },
+      { "text": "12: Cross road",				"nextPhraseID": "dbg_teleport_burhczyd_12" },
+      { "text": "13: Foaming Flask", 			"nextPhraseID": "dbg_teleport_burhczyd_13" },
+      { "text": "14: Brightport", 			"nextPhraseID": "dbg_teleport_burhczyd_14" },
+      { "text": "Back", 						"nextPhraseID": "dbg_teleport" }]
+  },
+  {
+    "id": "dbg_teleport_burhczyd_stash",
+    "message": "***  The voyage of Burhczyd  ***",
+    "replies": [{ "text": "15: -", 				"nextPhraseID": "dbg_teleport_burhczyd_15" },
+      { "text": "16: -", 				"nextPhraseID": "dbg_teleport_burhczyd_16" },
+      { "text": "17: -", 				"nextPhraseID": "dbg_teleport_burhczyd_17" },
+      { "text": "18: -", 				"nextPhraseID": "dbg_teleport_burhczyd_18" },
+      { "text": "19: -", 				"nextPhraseID": "dbg_teleport_burhczyd_19" },
+      { "text": "20: -", 				"nextPhraseID": "dbg_teleport_burhczyd_20" },
+      { "text": "21: -", 				"nextPhraseID": "dbg_teleport_burhczyd_21" },
+      { "text": "22: -", 				"nextPhraseID": "dbg_teleport_burhczyd_22" },
+      { "text": "Back", 						"nextPhraseID": "dbg_teleport" }]
+  },
+  { "id":"dbg_teleport_burhczyd_1",	"rewards":[{ "rewardType":"mapchange", "rewardID":"hall", 			"mapName":"crossglen" }] },
+  { "id":"dbg_teleport_burhczyd_2",	"rewards":[{ "rewardType":"mapchange", "rewardID":"tavern", 		"mapName":"fallhaven_nw" }] },
+  { "id":"dbg_teleport_burhczyd_3",	"rewards":[{ "rewardType":"mapchange", "rewardID":"lonefordhouse4", "mapName":"loneford2" }] },
+  { "id":"dbg_teleport_burhczyd_4",	"rewards":[{ "rewardType":"mapchange", "rewardID":"tavern", 		"mapName":"vilegard_s" }] },
+  { "id":"dbg_teleport_burhczyd_5",	"rewards":[{ "rewardType":"mapchange", "rewardID":"tavern", 		"mapName":"stoutford_se" }] },
+  { "id":"dbg_teleport_burhczyd_6",	"rewards":[{ "rewardType":"mapchange", "rewardID":"south", 			"mapName":"blackwater_mountain38" }] },
+  { "id":"dbg_teleport_burhczyd_7",	"rewards":[{ "rewardType":"mapchange", "rewardID":"remgard_tavern", "mapName":"remgard1" }] },
+  { "id":"dbg_teleport_burhczyd_8",	"rewards":[{ "rewardType":"mapchange", "rewardID":"woodhouse2", 	"mapName":"woodsettlement0" }] },
+  { "id":"dbg_teleport_burhczyd_9",	"rewards":[{ "rewardType":"mapchange", "rewardID":"house2", 		"mapName":"blackwater_mountain11" }] },
+  { "id":"dbg_teleport_burhczyd_10",	"rewards":[{ "rewardType":"mapchange", "rewardID":"tavern", 		"mapName":"brimhaven3" }] },
+  { "id":"dbg_teleport_burhczyd_11",	"rewards":[{ "rewardType":"mapchange", "rewardID":"sullengard_tavern_outside", "mapName":"sullengard2" }] },
+  { "id":"dbg_teleport_burhczyd_12",	"rewards":[{ "rewardType":"mapchange", "rewardID":"middle", 		"mapName":"crossroads" }] },
+  { "id":"dbg_teleport_burhczyd_13",	"rewards":[{ "rewardType":"mapchange", "rewardID":"foaming_flask", 	"mapName":"road1" }] },
+  { "id":"dbg_teleport_burhczyd_14",	"rewards":[{ "rewardType":"mapchange", "rewardID":"bakery", 		"mapName":"brightport5" }] },
+  { "id":"dbg_teleport_burhczyd_15",	"rewards":[{ "rewardType":"mapchange", "rewardID":"hall", "mapName":"crossglen" }] },
+  { "id":"dbg_teleport_burhczyd_16",	"rewards":[{ "rewardType":"mapchange", "rewardID":"hall", "mapName":"crossglen" }] },
+  { "id":"dbg_teleport_burhczyd_17",	"rewards":[{ "rewardType":"mapchange", "rewardID":"hall", "mapName":"crossglen" }] },
+  { "id":"dbg_teleport_burhczyd_18",	"rewards":[{ "rewardType":"mapchange", "rewardID":"hall", "mapName":"crossglen" }] },
+  { "id":"dbg_teleport_burhczyd_19",	"rewards":[{ "rewardType":"mapchange", "rewardID":"hall", "mapName":"crossglen" }] },
+  { "id":"dbg_teleport_burhczyd_20",	"rewards":[{ "rewardType":"mapchange", "rewardID":"hall", "mapName":"crossglen" }] },
+  { "id":"dbg_teleport_burhczyd_21",	"rewards":[{ "rewardType":"mapchange", "rewardID":"hall", "mapName":"crossglen" }] },
+  { "id":"dbg_teleport_burhczyd_22",	"rewards":[{ "rewardType":"mapchange", "rewardID":"hall", "mapName":"crossglen" }] },
+  {
+    "id": "dbg_shop",
+    "message": "What do you need?",
+    "replies": [{ "text": "Gold",				"nextPhraseID": "dbg_shop_gold" },
+      { "text": "Potions", 			"nextPhraseID": "dbg_shop_pot" },
+      { "text": "Animal parts", 		"nextPhraseID": "dbg_shop_animalparts" },
+      { "text": "Back", 				"nextPhraseID": "dbg" }]
+  },
+  {
+    "id": "dbg_shop_gold",
+    "message": "How much gold?",
+    "replies": [{ "text": "100000",		"nextPhraseID": "dbg_shop_gold", "requires":[{ "requireType":"inventoryRemove", "requireID":"gold", "value":-100000 }] },
+      { "text": "10000",		"nextPhraseID": "dbg_shop_gold", "requires":[{ "requireType":"inventoryRemove", "requireID":"gold", "value":-10000 }] },
+      { "text": "1000",		"nextPhraseID": "dbg_shop_gold", "requires":[{ "requireType":"inventoryRemove", "requireID":"gold", "value":-1000 }] },
+      { "text": "-10",		"nextPhraseID": "dbg_shop_gold", "requires":[{ "requireType":"inventoryRemove", "requireID":"gold", "value":10 }] },
+      { "text": "-100",		"nextPhraseID": "dbg_shop_gold", "requires":[{ "requireType":"inventoryRemove", "requireID":"gold", "value":100 }] },
+      { "text": "-1000",		"nextPhraseID": "dbg_shop_gold", "requires":[{ "requireType":"inventoryRemove", "requireID":"gold", "value":1000 }] },
+      { "text": "-10000",		"nextPhraseID": "dbg_shop_gold", "requires":[{ "requireType":"inventoryRemove", "requireID":"gold", "value":10000 }] },
+      { "text": "-100000",	"nextPhraseID": "dbg_shop_gold", "requires":[{ "requireType":"inventoryRemove", "requireID":"gold", "value":100000 }] },
+      { "text": "Back", 		"nextPhraseID": "dbg_shop" }]
+  },
+  {
+    "id": "dbg_shop_pot",
+    "message": "Let's get a drink ...",
+    "replies": [{ "text": "Major potion of health",		"nextPhraseID": "dbg_shop_pot",
+      "requires":[{ "requireType":"inventoryRemove", "requireID":"health_major2", "value":-1000 }] },
+      { "text": "Back", 		"nextPhraseID": "dbg_shop" }]
+  },
+  {
+    "id": "dbg_shop_animalparts",
+    "message": "Let's find some animal parts",
+    "replies": [{ "text": "5 normal bones",				"nextPhraseID": "dbg_shop_animalparts",
+      "requires":[{ "requireType":"inventoryRemove", "requireID":"bone", "value":-5 }] },
+      { "text": "5 insect wings",				"nextPhraseID": "dbg_shop_animalparts",
+        "requires":[{ "requireType":"inventoryRemove", "requireID":"insectwing", "value":-5 }] },
+      { "text": "Back", 		"nextPhraseID": "dbg_shop" }]
+  },
+  {
+    "id": "dbg_scores",
+    "message":"Current scores of $playername:\n\n  Shadow: $reg1 / $reg3 = $reg2%",
+    "replies":[	{ "text": "12: Absolute Shadow hater", "nextPhraseID": "dbg_scores_10", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":12 }] },
+      { "text": "13: Shadow hater", "nextPhraseID": "dbg_scores_10", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":13 }] },
+      { "text": "15: Balanced Shadow feelings", "nextPhraseID": "dbg_scores_10", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":15 }] },
+      { "text": "17: Shadow fan", "nextPhraseID": "dbg_scores_10", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":17 }] },
+      { "text": "18: Absolute Shadow fan", "nextPhraseID": "dbg_scores_10", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":18 }] },
+      { "text": "10: (Shadow score fixed)", "nextPhraseID": "dbg_scores_10", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":10 }] },
+      { "text": "Details ...", "nextPhraseID": "dbg_scores_details" }],
+    "rewards":[	{ "rewardType":"alignmentToReg1", "rewardID":"fsc_shd"  },
+      { "rewardType":"alignmentToReg2", "rewardID":"fsc_shd2" },
+      { "rewardType":"alignmentToReg3", "rewardID":"fsc_shd9" }]
+  },
+  {
+    "id": "dbg_scores_details",
+    "message":" Details about your Shadow scores:",
+    "replies":[	{ "text": "OK, next", "nextPhraseID": "dbg_scores_10" }
+    , { "text":"1/1 andor:914  (Search for Andor - I visited my new residence on the top of Mt. Galmore. There I would help the people of Dhayavar as a hero and protect them from villains. Or would I become a villain myself? We'll see.)", "nextPhraseID":"dbg_scores_10", "requires":[{ "requireType":"questProgress", "requireID":"andor", "value":914 }] } , { "text":"0/4 vacor:60  (Missing pieces - I have killed Unzel and told Vacor about the deed.)", "nextPhraseID":"dbg_scores_10", "requires":[{ "requireType":"questProgress", "requireID":"vacor", "value":60 }] } , { "text":"4/4 vacor:61  (Missing pieces - I have killed Vacor and told Unzel about the deed.)", "nextPhraseID":"dbg_scores_10", "requires":[{ "requireType":"questProgress", "requireID":"vacor", "value":61 }] } , { "text":"4/4 bonemeal:100  (Disallowed substance - I have brought the bones to Thoronir. He is now able to supply me with bonemeal potions.)", "nextPhraseID":"dbg_scores_10", "requires":[{ "requireType":"questProgress", "requireID":"bonemeal", "value":100 }] } , { "text":"0/4 bonemeal:110  (Disallowed substance - I have brought the bones to Thoronir. Of course he wouldn't produce any bonemeal potion from them though, since Lord Geomyr has banned their use.)", "nextPhraseID":"dbg_scores_10", "requires":[{ "requireType":"questProgress", "requireID":"bonemeal", "value":110 }] } , { "text":"0/3 guynmart:210  (Roses - Lovis prepared a surprise for me east of the castle.)", "nextPhraseID":"dbg_scores_10", "requires":[{ "requireType":"questProgress", "requireID":"guynmart", "value":210 }] } , { "text":"3/3 guynmart:211  (Roses - Then I took my leave of Unkorh.)", "nextPhraseID":"dbg_scores_10", "requires":[{ "requireType":"questProgress", "requireID":"guynmart", "value":211 }] } , { "text":"0/4 kaverin:21  (Old friends? - I have declined to help Kaverin.)", "nextPhraseID":"dbg_scores_10", "requires":[{ "requireType":"questProgress", "requireID":"kaverin", "value":21 }] } , { "text":"4/4 kaverin:100  (Old friends? - I have found Vacor's old hideout.)", "nextPhraseID":"dbg_scores_10", "requires":[{ "requireType":"questProgress", "requireID":"kaverin", "value":100 }] } , { "text":"0/4 feygard_shipment:80  (Feygard errands - Gandoren thanked me for helping him deliver the shipment.)", "nextPhraseID":"dbg_scores_10", "requires":[{ "requireType":"questProgress", "requireID":"feygard_shipment", "value":80 }] } , { "text":"4/4 feygard_shipment:82  (Feygard errands - I have reported back to Ailshara.)", "nextPhraseID":"dbg_scores_10", "requires":[{ "requireType":"questProgress", "requireID":"feygard_shipment", "value":82 }] } , { "text":"5/5 darkprotector:40  (The dark protector - For helping with both the lich and the helmet, Ulirfendor has given me the dark blessing of the Shadow.)", "nextPhraseID":"dbg_scores_10", "requires":[{ "requireType":"questProgress", "requireID":"darkprotector", "value":40 }] } , { "text":"4/4 darkprotector:41  (The dark protector - For helping with both the lich and the helmet, Ulirfendor wanted to give me the dark blessing of the Shadow, but I declined.)", "nextPhraseID":"dbg_scores_10", "requires":[{ "requireType":"questProgress", "requireID":"darkprotector", "value":41 }] } , { "text":"0/3 rogorn:50  (The path is clear to me - Minarra thanked me for dealing with the thieves, and told me that my services to Feygard will be appreciated.)", "nextPhraseID":"dbg_scores_10", "requires":[{ "requireType":"questProgress", "requireID":"rogorn", "value":50 }] } , { "text":"3/3 rogorn:55  (The path is clear to me - After telling Minarra that she must have mistaken the men for someone else, she seemed a bit suspicious, but thanked me for helping her look into the matter.)", "nextPhraseID":"dbg_scores_10", "requires":[{ "requireType":"questProgress", "requireID":"rogorn", "value":55 }] } , { "text":"0/1 loneford:55  (Flows through the veins - Kuldan thanked me for solving the mystery of the illness in Loneford. They will start bringing in water with help from Feygard instead of drinking from the well from now on. Kuldan also told me to visit the castle steward in Feygard if I want to help further.)", "nextPhraseID":"dbg_scores_10", "requires":[{ "requireType":"questProgress", "requireID":"loneford", "value":55 }] } , { "text":"1/1 loneford:60  (Flows through the veins - I have promised to keep Buceth's story a secret. If Andor was indeed here, he must have had a good reason for doing what he did. Buceth also told me to visit the chapel custodian in Nor City if I want to learn more about the Shadow.)", "nextPhraseID":"dbg_scores_10", "requires":[{ "requireType":"questProgress", "requireID":"loneford", "value":60 }] } , { "text":"0/2 darkness_in_daylight:280  ( - )", "nextPhraseID":"dbg_scores_10", "requires":[{ "requireType":"questProgress", "requireID":"darkness_in_daylight", "value":280 }] } , { "text":"2/2 shadows:260  ( - )", "nextPhraseID":"dbg_scores_10", "requires":[{ "requireType":"questProgress", "requireID":"shadows", "value":260 }] } , { "text":"9/9  1000+ Bonemeal potions consumed.", "nextPhraseID":"dbg_scores_10", "requires":[{ "requireType":"consumedBonemeals", "requireID":"x", "value":1000 }] } , { "text":"7/7  100+ Bonemeal potions consumed.", "nextPhraseID":"dbg_scores_10", "requires":[{ "requireType":"consumedBonemeals", "requireID":"x", "value":100 }] } , { "text":"5/5  10+ Bonemeal potions consumed.", "nextPhraseID":"dbg_scores_10", "requires":[{ "requireType":"consumedBonemeals", "requireID":"x", "value":10 }] } , { "text":"3/5  1+ Bonemeal potions consumed.", "nextPhraseID":"dbg_scores_10", "requires":[{ "requireType":"consumedBonemeals", "requireID":"x", "value":1 }] } , { "text":"0/5  No Bonemeal potions consumed.", "nextPhraseID":"dbg_scores_10", "requires":[{ "requireType":"consumedBonemeals", "requireID":"x", "value":1, "negate":true }] }
     ]
   },
   {
-    "id": "debugrequires10gold_2",
-    "rewards": [
-            {
-                "rewardType": "dropList",
-                "rewardID": "debugrequires10gold_droplist"
-            }
-    ],
-    "replies": [
-      {
-        "text": "When I come to debugmap, I always feel like a star.",
-        "nextPhraseID": "X"
-      }
-    ],
-    "message": "OK. But only because it's you M. Coder."
+    "id": "dbg_scores_10",
+    "message":"  Feygard: $reg1 / $reg3 = $reg2%",
+    "replies":[	{ "text": "22: Absolute Feygard hater", "nextPhraseID": "dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":22 }] },
+      { "text": "23: Feygard hater", "nextPhraseID": "dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":23 }] },
+      { "text": "25: Balanced Feygard feelings", "nextPhraseID": "dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":25 }] },
+      { "text": "27: Feygard fan", "nextPhraseID": "dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":27 }] },
+      { "text": "28: Absolute Feygard fan", "nextPhraseID": "dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":28 }] },
+      { "text": "20: (Feygard score fixed)", "nextPhraseID": "dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":20 }] },
+      { "text": "Details ...", "nextPhraseID": "dbg_scores_10_details" }],
+    "rewards":[	{ "rewardType":"alignmentToReg1", "rewardID":"fsc_fey"  },
+      { "rewardType":"alignmentToReg2", "rewardID":"fsc_fey2" },
+      { "rewardType":"alignmentToReg3", "rewardID":"fsc_fey9" }]
   },
   {
-    "id": "debugrequires10gold_3",
-    "replies": [
-      {
-        "text": "Damn.",
-        "nextPhraseID": "X"
-      }
-    ],
-    "message": "Sorry. You already spent 100 gold..."
+    "id": "dbg_scores_10_details",
+    "message":" Details about your Feygard scores:",
+    "replies":[	{ "text": "OK, next", "nextPhraseID": "dbg_scores_20" }
+    , { "text":"0/1 andor:914  (Search for Andor - I visited my new residence on the top of Mt. Galmore. There I would help the people of Dhayavar as a hero and protect them from villains. Or would I become a villain myself? We'll see.)", "nextPhraseID":"dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"andor", "value":914 }] } , { "text":"0/4 bonemeal:100  (Disallowed substance - I have brought the bones to Thoronir. He is now able to supply me with bonemeal potions.)", "nextPhraseID":"dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"bonemeal", "value":100 }] } , { "text":"4/4 bonemeal:110  (Disallowed substance - I have brought the bones to Thoronir. Of course he wouldn't produce any bonemeal potion from them though, since Lord Geomyr has banned their use.)", "nextPhraseID":"dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"bonemeal", "value":110 }] } , { "text":"3/3 guynmart:210  (Roses - Lovis prepared a surprise for me east of the castle.)", "nextPhraseID":"dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"guynmart", "value":210 }] } , { "text":"0/3 guynmart:211  (Roses - Then I took my leave of Unkorh.)", "nextPhraseID":"dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"guynmart", "value":211 }] } , { "text":"4/4 feygard_shipment:80  (Feygard errands - Gandoren thanked me for helping him deliver the shipment.)", "nextPhraseID":"dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"feygard_shipment", "value":80 }] } , { "text":"0/4 feygard_shipment:82  (Feygard errands - I have reported back to Ailshara.)", "nextPhraseID":"dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"feygard_shipment", "value":82 }] } , { "text":"0/4 darkprotector:40  (The dark protector - For helping with both the lich and the helmet, Ulirfendor has given me the dark blessing of the Shadow.)", "nextPhraseID":"dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"darkprotector", "value":40 }] } , { "text":"0/4 darkprotector:41  (The dark protector - For helping with both the lich and the helmet, Ulirfendor wanted to give me the dark blessing of the Shadow, but I declined.)", "nextPhraseID":"dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"darkprotector", "value":41 }] } , { "text":"3/3 rogorn:50  (The path is clear to me - Minarra thanked me for dealing with the thieves, and told me that my services to Feygard will be appreciated.)", "nextPhraseID":"dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"rogorn", "value":50 }] } , { "text":"0/3 rogorn:55  (The path is clear to me - After telling Minarra that she must have mistaken the men for someone else, she seemed a bit suspicious, but thanked me for helping her look into the matter.)", "nextPhraseID":"dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"rogorn", "value":55 }] } , { "text":"4/4 loneford:55  (Flows through the veins - Kuldan thanked me for solving the mystery of the illness in Loneford. They will start bringing in water with help from Feygard instead of drinking from the well from now on. Kuldan also told me to visit the castle steward in Feygard if I want to help further.)", "nextPhraseID":"dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"loneford", "value":55 }] } , { "text":"0/4 loneford:60  (Flows through the veins - I have promised to keep Buceth's story a secret. If Andor was indeed here, he must have had a good reason for doing what he did. Buceth also told me to visit the chapel custodian in Nor City if I want to learn more about the Shadow.)", "nextPhraseID":"dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"loneford", "value":60 }] } , { "text":"0/4 farrik:70  (Night visit - Farrik rewarded me for helping the Thieves' Guild.)", "nextPhraseID":"dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"farrik", "value":70 }] } , { "text":"4/4 farrik:90  (Night visit - The guard captain thanked me for helping him plan to catch the thieves. He said he will also tell other guards that I helped him.)", "nextPhraseID":"dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"farrik", "value":90 }] } , { "text":"1/1 jolnor:20  (Spies in the foam - I have convinced the guard outside the Foaming Flask tavern to leave after his shift ends.)", "nextPhraseID":"dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"jolnor", "value":20 }] } , { "text":"0/1 jolnor:21  (Spies in the foam - I have started a fight with the guard outside the Foaming Flask tavern. I should bring his Feygard royal guard ring to Jolnor once he is dead to show Jolnor that he has disappeared.)", "nextPhraseID":"dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"jolnor", "value":21 }] } , { "text":"4/4 beer_bootlegging:90  (Beer Bootlegging - I informed the guard captain at the Foaming flask tavern all about the beer bootlegging operation.)", "nextPhraseID":"dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"beer_bootlegging", "value":90 }] } , { "text":"5/5 beer_bootlegging:100  (Beer Bootlegging - I informed the guard captain at the Foaming flask tavern that the beer was being distributed by the Thieves guild.)", "nextPhraseID":"dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"beer_bootlegging", "value":100 }] } , { "text":"4/4 beer_bootlegging:110  (Beer Bootlegging - I informed the guard captain at the Foaming flask tavern that Sullengard was responsible for brewing the beer.)", "nextPhraseID":"dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"beer_bootlegging", "value":110 }] } , { "text":"0/4 beer_bootlegging:120  (Beer Bootlegging - I lied to the guard captain at the Foaming flask tavern and told him nothing about the beer bootlegging operation.)", "nextPhraseID":"dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"beer_bootlegging", "value":120 }] } , { "text":"2/2 darkness_in_daylight:280  ( - )", "nextPhraseID":"dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"darkness_in_daylight", "value":280 }] } , { "text":"0/2 shadows:260  ( - )", "nextPhraseID":"dbg_scores_20", "requires":[{ "requireType":"questProgress", "requireID":"shadows", "value":260 }] } , { "text":"0/9  1000+ Bonemeal potions consumed.", "nextPhraseID":"dbg_scores_10", "requires":[{ "requireType":"consumedBonemeals", "requireID":"x", "value":1000 }] } , { "text":"0/7  100+ Bonemeal potions consumed.", "nextPhraseID":"dbg_scores_10", "requires":[{ "requireType":"consumedBonemeals", "requireID":"x", "value":100 }] } , { "text":"0/5  10+ Bonemeal potions consumed.", "nextPhraseID":"dbg_scores_10", "requires":[{ "requireType":"consumedBonemeals", "requireID":"x", "value":10 }] } , { "text":"0/3  1+ Bonemeal potions consumed.", "nextPhraseID":"dbg_scores_10", "requires":[{ "requireType":"consumedBonemeals", "requireID":"x", "value":1 }] } , { "text":"5/5  No Bonemeal potions consumed.", "nextPhraseID":"dbg_scores_10", "requires":[{ "requireType":"consumedBonemeals", "requireID":"x", "value":1, "negate":true }] }
+    ]
   },
   {
-        "message":"Hmm... beer...",
-        "id":"signbeer"
-    },
-    {
-        "message":"Do you want beer?",
-        "id":"npc3_0",
-        "replies":[
-            {
-                "nextPhraseID":"npc3_1",
-                "text":"Beer!"
-            },
-           	{
-                "nextPhraseID":"npc3_3",
-                "text":"No filter!"
-            },
-            {
-                "nextPhraseID":"npc3_5",
-                "text":"Black 20%!"
-            },
-            {
-                "nextPhraseID":"npc3_6",
-                "text":"Black 40%!"
-            },
-            {
-                "nextPhraseID":"npc3_7",
-                "text":"Black 60%!"
-            },
-            {
-                "nextPhraseID":"npc3_2",
-                "text":"Black 80%!"
-            },
-            {
-                "nextPhraseID":"npc3_4",
-                "text":"Red ligths!"
-            },
-            {
-                "nextPhraseID":"npc3_9",
-                "text":"Green ligths!"
-            },
-            {
-                "nextPhraseID":"npc3_10",
-                "text":"Blue ligths!"
-            },
-            {
-                "nextPhraseID":"npc3_11",
-                "text":"Black & White!"
-            },
-            {
-                "nextPhraseID":"npc3_8",
-                "text":"Invert!"
-            }
-        ]
-    },
-    {
-        "message":"Bees & beer !",
-        "id":"npc3_1",
-        "rewards":[
-            {
-                "rewardID":"debug_insect_inactive",
-                "mapName":"debugmap",
-                "rewardType":"spawnAll"
-            },
-            {
-                "rewardID":"Inactive",
-                "mapName":"debugmap",
-                "rewardType":"activateMapObjectGroup"
-            },
-            {
-                "rewardID":"Active",
-                "mapName":"debugmap",
-                "rewardType":"deactivateMapObjectGroup"
-            }
-        ]
-    },
-    {
-        "message":"No beer for you !",
-        "id":"signnobeer"
-    },
-    {
-    	"id":"npc3_2",
-    	"message":"OK.",
-    	"rewards":[
-        	{
-            	"rewardType":"changeMapFilter",
-            	"rewardID":"black80",
-            	"mapName":"debugmap"
-        	}
-    	]
-	},
-    {
-    	"id":"npc3_3",
-    	"message":"OK.",
-    	"rewards":[
-        	{
-            	"rewardType":"changeMapFilter",
-            	"rewardID":"none",
-            	"mapName":"debugmap"
-        	}
-    	]
-	},
-    {
-    	"id":"npc3_4",
-    	"message":"OK.",
-    	"rewards":[
-        	{
-            	"rewardType":"changeMapFilter",
-            	"rewardID":"redtint",
-            	"mapName":"debugmap"
-        	}
-    	]
-	},
-    {
-    	"id":"npc3_5",
-    	"message":"OK.",
-    	"rewards":[
-        	{
-            	"rewardType":"changeMapFilter",
-            	"rewardID":"black20",
-            	"mapName":"debugmap"
-        	}
-    	]
-	},
-    {
-    	"id":"npc3_6",
-    	"message":"OK.",
-    	"rewards":[
-        	{
-            	"rewardType":"changeMapFilter",
-            	"rewardID":"black40",
-            	"mapName":"debugmap"
-        	}
-    	]
-	},
-    {
-    	"id":"npc3_7",
-    	"message":"OK.",
-    	"rewards":[
-        	{
-            	"rewardType":"changeMapFilter",
-            	"rewardID":"black60",
-            	"mapName":"debugmap"
-        	}
-    	]
-	},
-    {
-    	"id":"npc3_8",
-    	"message":"OK.",
-    	"rewards":[
-        	{
-            	"rewardType":"changeMapFilter",
-            	"rewardID":"invert",
-            	"mapName":"debugmap"
-        	}
-    	]
-	},
-    {
-    	"id":"npc3_9",
-    	"message":"OK.",
-    	"rewards":[
-        	{
-            	"rewardType":"changeMapFilter",
-            	"rewardID":"greentint",
-            	"mapName":"debugmap"
-        	}
-    	]
-	},
-    {
-    	"id":"npc3_10",
-    	"message":"OK.",
-    	"rewards":[
-        	{
-            	"rewardType":"changeMapFilter",
-            	"rewardID":"bluetint",
-            	"mapName":"debugmap"
-        	}
-    	]
-	},
-    {
-    	"id":"npc3_11",
-    	"message":"OK.",
-    	"rewards":[
-        	{
-            	"rewardType":"changeMapFilter",
-            	"rewardID":"bw",
-            	"mapName":"debugmap"
-        	}
-    	]
-	},
-    {
-        "id":"chaotic_rewarder_0",
-        "message":"What do you want?",
-        "replies":[
-            {
-                "text":"Apply condition",
-                "nextPhraseID":"chaotic_rewarder_1"
-            },
-            {
-                "text":"Clear condition",
-                "nextPhraseID":"chaotic_rewarder_2"
-            },
-            {
-                "text":"Give 5 rounds of immunity",
-                "nextPhraseID":"chaotic_rewarder_3"
-            },
-            {
-                "text":"Infinite immunity",
-                "nextPhraseID":"chaotic_rewarder_4"
-            },
-            {
-                "text":"Apply condition forever",
-                "nextPhraseID":"chaotic_rewarder_5"
-            }
-        ]
-    },
-    {
-        "id":"chaotic_rewarder_1",
-        "message":"Applied.",
-        "replies":[
-            {
-                "text":"N",
-                "nextPhraseID":"chaotic_rewarder_0"
-            }
-        ],
-        "rewards":[
-            {
-                "rewardType":"actorCondition",
-                "rewardID":"chaotic_grip",
-                "value":5
-            }
-        ]
-    },
-    {
-        "id":"chaotic_rewarder_2",
-        "message":"Cleared.",
-        "replies":[
-            {
-                "text":"N",
-                "nextPhraseID":"chaotic_rewarder_0"
-            }
-        ],
-        "rewards":[
-            {
-                "rewardType":"actorCondition",
-                "rewardID":"chaotic_grip",
-                "value":-99
-            }
-        ]
-    },
-    {
-        "id":"chaotic_rewarder_3",
-        "message":"5 rounds immune!",
-        "replies":[
-            {
-                "text":"N",
-                "nextPhraseID":"chaotic_rewarder_0"
-            }
-        ],
-        "rewards":[
-            {
-                "rewardType":"actorConditionImmunity",
-                "rewardID":"chaotic_grip",
-                "value":5
-            }
-        ]
-    },
-    {
-        "id":"chaotic_rewarder_4",
-        "message":"Immune forever !",
-        "replies":[
-            {
-                "text":"N",
-                "nextPhraseID":"chaotic_rewarder_0"
-            }
-        ],
-        "rewards":[
-            {
-                "rewardType":"actorConditionImmunity",
-                "rewardID":"chaotic_grip",
-                "value":999
-            }
-        ]
-    },
-    {
-        "id":"chaotic_rewarder_5",
-        "message":"Punished forever !",
-        "replies":[
-            {
-                "text":"N",
-                "nextPhraseID":"chaotic_rewarder_0"
-            }
-        ],
-        "rewards":[
-            {
-                "rewardType":"actorCondition",
-                "rewardID":"chaotic_grip",
-                "value":999
-            }
-        ]
-    }
+    "id": "dbg_scores_20",
+    "message":"  Thieves: $reg1 / $reg3 = $reg2%",
+    "replies":[	{ "text": "32: Absolute Thieves Guild hater", "nextPhraseID": "dbg_scores_30", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":32 }] },
+      { "text": "33: Thieves Guild hater", "nextPhraseID": "dbg_scores_30", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":33 }] },
+      { "text": "35: Balanced Thieves Guild feelings", "nextPhraseID": "dbg_scores_30", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":35 }] },
+      { "text": "37: Thieves Guild fan", "nextPhraseID": "dbg_scores_30", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":37 }] },
+      { "text": "38: Absolute Thieves Guild fan", "nextPhraseID": "dbg_scores_30", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":38 }] },
+      { "text": "30: (Thieves Guild score fixed)", "nextPhraseID": "dbg_scores_30", "requires":[{ "requireType":"questProgress", "requireID":"scores", "value":30 }] },
+      { "text": "Details ...", "nextPhraseID": "dbg_scores_20_details" }],
+    "rewards":[	{ "rewardType":"alignmentToReg1", "rewardID":"fsc_thv"  },
+      { "rewardType":"alignmentToReg2", "rewardID":"fsc_thv2" },
+      { "rewardType":"alignmentToReg3", "rewardID":"fsc_thv9" }]
+  },
+  {
+    "id": "dbg_scores_20_details",
+    "message":" Details about your Thieves Guild scores:",
+    "replies":[	{ "text": "OK, next", "nextPhraseID": "dbg_scores_30" }
+    , { "text":"1/1 thieves_hidden:80  (thieves_hidden - Talked about thieves to Thoronir)", "nextPhraseID":"dbg_scores_30", "requires":[{ "requireType":"questProgress", "requireID":"thieves_hidden", "value":80 }] } , { "text":"4/4 Thieves03:32  (Thieves03 - Thieves03_32)", "nextPhraseID":"dbg_scores_30", "requires":[{ "requireType":"questProgress", "requireID":"Thieves03", "value":32 }] } , { "text":"0/8 wanted_men:65  (Wanted men - I have given the fake Aidem key to Troublemaker as a replacement for the real vault key.)", "nextPhraseID":"dbg_scores_30", "requires":[{ "requireType":"questProgress", "requireID":"wanted_men", "value":65 }] } , { "text":"3/3 wanted_men:80  (Wanted men - I informed Troublemaker that Defy and his men are now dead.)", "nextPhraseID":"dbg_scores_30", "requires":[{ "requireType":"questProgress", "requireID":"wanted_men", "value":80 }] } , { "text":"5/5 Thieves02:75  (Immaculate kidnapping - I completed this task successfully. Umar told me they have sent couriers to Feygard, and the ransom is almost guaranteed. He paid me for my work.)", "nextPhraseID":"dbg_scores_30", "requires":[{ "requireType":"questProgress", "requireID":"Thieves02", "value":75 }] } , { "text":"0/5 Thieves02:76  (Immaculate kidnapping - Umar took the necklace as compensation for my errors. Everything is fine again.)", "nextPhraseID":"dbg_scores_30", "requires":[{ "requireType":"questProgress", "requireID":"Thieves02", "value":76 }] } , { "text":"0/1 Thieves01:51  (Thief apprentice - Unfortunately, I was not able to save Fanamor's life. However, I did get her journal.)", "nextPhraseID":"dbg_scores_30", "requires":[{ "requireType":"questProgress", "requireID":"Thieves01", "value":51 }] } , { "text":"1/1 Thieves01:55  (Thief apprentice - Fanamor is alive and will find her own way to return.)", "nextPhraseID":"dbg_scores_30", "requires":[{ "requireType":"questProgress", "requireID":"Thieves01", "value":55 }] } , { "text":"4/4 farrik:70  (Night visit - Farrik rewarded me for helping the Thieves' Guild.)", "nextPhraseID":"dbg_scores_30", "requires":[{ "requireType":"questProgress", "requireID":"farrik", "value":70 }] } , { "text":"0/4 farrik:90  (Night visit - The guard captain thanked me for helping him plan to catch the thieves. He said he will also tell other guards that I helped him.)", "nextPhraseID":"dbg_scores_30", "requires":[{ "requireType":"questProgress", "requireID":"farrik", "value":90 }] } , { "text":"0/4 beer_bootlegging:90  (Beer Bootlegging - I informed the guard captain at the Foaming flask tavern all about the beer bootlegging operation.)", "nextPhraseID":"dbg_scores_30", "requires":[{ "requireType":"questProgress", "requireID":"beer_bootlegging", "value":90 }] } , { "text":"0/5 beer_bootlegging:100  (Beer Bootlegging - I informed the guard captain at the Foaming flask tavern that the beer was being distributed by the Thieves guild.)", "nextPhraseID":"dbg_scores_30", "requires":[{ "requireType":"questProgress", "requireID":"beer_bootlegging", "value":100 }] } , { "text":"0/4 beer_bootlegging:110  (Beer Bootlegging - I informed the guard captain at the Foaming flask tavern that Sullengard was responsible for brewing the beer.)", "nextPhraseID":"dbg_scores_30", "requires":[{ "requireType":"questProgress", "requireID":"beer_bootlegging", "value":110 }] } , { "text":"5/5 beer_bootlegging:120  (Beer Bootlegging - I lied to the guard captain at the Foaming flask tavern and told him nothing about the beer bootlegging operation.)", "nextPhraseID":"dbg_scores_30", "requires":[{ "requireType":"questProgress", "requireID":"beer_bootlegging", "value":120 }] }
+    ]
+  },
+  {
+    "id": "dbg_scores_30",
+    "message": "* End of scores *",
+    "replies": [{ "text": "Back", "nextPhraseID": "dbg" }]
+  },
+
+
+
+  {
+    "id": "dbg_prj_brightport2",
+    "message": "***  brightport2  ***",
+    "replies": [{ "text": "Duleian road to Brightport", 		"nextPhraseID": "dbg_prj_brightport2_teleport_start_from_south" },
+      { "text": "Poisoned lands towards Brightport", 	"nextPhraseID": "dbg_prj_brightport2_teleport_start_from_north" },
+      { "text": "West of Brightport", 				"nextPhraseID": "dbg_prj_brightport2_teleport_west_of_brightport" },
+      { "text": "Statue", 							"nextPhraseID": "dbg_prj_brightport2_teleport_statue" },
+      { "text": "Statue west", 						"nextPhraseID": "dbg_prj_brightport2_teleport_statue_w" },
+      { "text": "Statue north", 						"nextPhraseID": "dbg_prj_brightport2_teleport_statue_n" },
+      { "text": "Statue east", 						"nextPhraseID": "dbg_prj_brightport2_teleport_statue_e" },
+      { "text": "Statue to charwood", 				"nextPhraseID": "dbg_prj_brightport2_teleport_statue_chr" },
+      { "text": "Lizard cave", 						"nextPhraseID": "dbg_prj_brightport2_teleport_lizards" },
+      { "text": "Hills towards underground castle", 	"nextPhraseID": "dbg_prj_brightport2_teleport_waytocastle" },
+      { "text": "Get 20 lizardman bones",				"nextPhraseID": "dbg_prj_brightport2", "requires":[{ "requireType":"inventoryRemove", "requireID":"brightport_bone", "value":-20 }] },
+      { "text": "Back", 								"nextPhraseID": "dbg_prj" }]
+  },
+  {
+    "id":"dbg_prj_brightport2_teleport_start_from_south",
+    "rewards":[{ "rewardType":"mapchange", "rewardID":"north", "mapName":"cabin_norcity_road1" }]
+  },
+  {
+    "id":"dbg_prj_brightport2_teleport_start_from_north",
+    "rewards":[{ "rewardType":"mapchange", "rewardID":"north2", "mapName":"korhald_cave_outdoor1" }]
+  },
+  {
+    "id":"dbg_prj_brightport2_teleport_west_of_brightport",
+    "rewards":[{ "rewardType":"mapchange", "rewardID":"east", "mapName":"waytobrightport20" }]
+  },
+  {
+    "id":"dbg_prj_brightport2_teleport_statue",
+    "rewards":[{ "rewardType":"mapchange", "rewardID":"west", "mapName":"brightportwild9" }]
+  },
+  {
+    "id":"dbg_prj_brightport2_teleport_statue_w",
+    "rewards":[{ "rewardType":"mapchange", "rewardID":"south", "mapName":"waytobrightport10" }]
+  },
+  {
+    "id":"dbg_prj_brightport2_teleport_statue_n",
+    "rewards":[{ "rewardType":"mapchange", "rewardID":"south", "mapName":"brightportwild19" }]
+  },
+  {
+    "id":"dbg_prj_brightport2_teleport_statue_e",
+    "rewards":[{ "rewardType":"mapchange", "rewardID":"west", "mapName":"brightportwild10" }]
+  },
+  {
+    "id":"dbg_prj_brightport2_teleport_statue_chr",
+    "rewards":[{ "rewardType":"mapchange", "rewardID":"west", "mapName":"waytobrightport0" }]
+  },
+  {
+    "id":"dbg_prj_brightport2_teleport_lizards",
+    "rewards":[{ "rewardType":"mapchange", "rewardID":"cave", "mapName":"brightportwild17" }]
+  },
+  {
+    "id":"dbg_prj_brightport2_teleport_waytocastle",
+    "rewards":[{ "rewardType":"mapchange", "rewardID":"east1", "mapName":"brightportwild4" }]
+  }
 ]

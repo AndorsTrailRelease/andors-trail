@@ -26,7 +26,7 @@ public final class ConversationListParser extends JsonCollectionParserFor<Phrase
 			String requireID = o.getString(JsonFieldNames.ReplyRequires.requireID);
 			return new Requirement(
 					type
-					,type == Requirement.RequirementType.random ? null : requireID
+					,(type == Requirement.RequirementType.random || type == Requirement.RequirementType.consumedBonemeals) ? null : requireID
 					,o.optInt(JsonFieldNames.ReplyRequires.value, 0)
 					,o.optBoolean(JsonFieldNames.ReplyRequires.negate, false)
 					,type == Requirement.RequirementType.random ? ResourceParserUtils.parseChance(requireID) : null

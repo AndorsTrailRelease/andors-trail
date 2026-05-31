@@ -40,7 +40,7 @@ public final class AndorsTrailApplication extends Application {
 	public static final boolean DEVELOPMENT_FORCE_CONTINUEGAME = false;
     public static final boolean DEVELOPMENT_DEBUGBUTTONS = IS_DEV_VERSION;
 	public static final boolean DEVELOPMENT_FASTSPEED = false;
-	public static final boolean DEVELOPMENT_VALIDATEDATA = IS_BETA_VERSION;
+	public static final boolean DEVELOPMENT_VALIDATEDATA = ( IS_BETA_VERSION || IS_DEV_VERSION );
 	public static final boolean DEVELOPMENT_DEBUGMESSAGES = IS_DEV_VERSION;
 	public static final boolean DEVELOPMENT_INCOMPATIBLE_SAVEGAMES = DEVELOPMENT_DEBUGRESOURCES || DEVELOPMENT_DEBUGBUTTONS || DEVELOPMENT_FASTSPEED || !IS_RELEASE_VERSION;
 	public static final int DEVELOPMENT_INCOMPATIBLE_SAVEGAME_VERSION = 999;

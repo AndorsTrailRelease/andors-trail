@@ -9,6 +9,16 @@ public final class ScriptEffect {
 		, actorConditionImmunity
 		, alignmentChange
 		, alignmentSet
+		, alignmentToReg1
+		, alignmentToReg2
+		, alignmentToReg3
+		, alignmentFromReg1
+		, alignmentFromReg2
+		, alignmentFromReg3
+		, alignmentAdd
+		, alignmentSub
+		, alignmentMult
+		, alignmentDiv
 		, giveItem
 		, createTimer
 		, spawnAll
@@ -19,6 +29,7 @@ public final class ScriptEffect {
 		, removeQuestProgress
 		, changeMapFilter
 		, mapchange
+		, changeIcon
 	}
 
 	public final ScriptEffectType type;

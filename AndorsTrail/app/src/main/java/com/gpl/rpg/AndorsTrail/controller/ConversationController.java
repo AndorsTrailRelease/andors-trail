@@ -1,5 +1,6 @@
 package com.gpl.rpg.AndorsTrail.controller;
 
+import static com.gpl.rpg.AndorsTrail.controller.CombatController.BeginTurnAs.player;
 import static com.gpl.rpg.AndorsTrail.controller.SkillController.canLevelupSkillWithQuest;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import com.gpl.rpg.AndorsTrail.model.ability.SkillCollection;
 import com.gpl.rpg.AndorsTrail.model.ability.SkillInfo;
 import com.gpl.rpg.AndorsTrail.model.actor.Actor;
 import com.gpl.rpg.AndorsTrail.model.actor.Monster;
+import com.gpl.rpg.AndorsTrail.model.actor.MonsterType;
 import com.gpl.rpg.AndorsTrail.model.actor.Player;
 import com.gpl.rpg.AndorsTrail.model.conversation.ConversationCollection;
 import com.gpl.rpg.AndorsTrail.model.conversation.Phrase;
@@ -31,6 +33,7 @@ import com.gpl.rpg.AndorsTrail.model.quest.QuestLogEntry;
 import com.gpl.rpg.AndorsTrail.model.quest.QuestProgress;
 import com.gpl.rpg.AndorsTrail.model.script.Requirement;
 import com.gpl.rpg.AndorsTrail.model.script.ScriptEffect;
+import com.gpl.rpg.AndorsTrail.resource.tiles.TileManager;
 import com.gpl.rpg.AndorsTrail.util.ConstRange;
 import com.gpl.rpg.AndorsTrail.util.L;
 
@@ -100,6 +103,30 @@ public final class ConversationController {
 			case alignmentSet:
 				setAlignmentReward(player, effect.effectID, effect.value);
 				break;
+			case alignmentToReg1:
+				toAkkuAlignmentReward(player, effect.effectID, Constants.FACTION_SCORE_CALC_REGISTER1_NAME);
+				break;
+			case alignmentToReg2:
+				toAkkuAlignmentReward(player, effect.effectID, Constants.FACTION_SCORE_CALC_REGISTER2_NAME);
+				break;
+			case alignmentToReg3:
+				toAkkuAlignmentReward(player, effect.effectID, Constants.FACTION_SCORE_CALC_REGISTER3_NAME);
+				break;
+			case alignmentFromReg1:
+				fromAkkuAlignmentReward(player, effect.effectID, Constants.FACTION_SCORE_CALC_REGISTER1_NAME);
+				break;
+			case alignmentAdd:
+				addAlignmentReward(player, effect.effectID);
+				break;
+			case alignmentSub:
+				subAlignmentReward(player, effect.effectID);
+				break;
+			case alignmentDiv:
+				divAlignmentReward(player, effect.effectID, effect.value);
+				break;
+			case alignmentMult:
+				multAlignmentReward(player, effect.effectID, effect.value);
+				break;
 			case giveItem:
 				addItemReward(effect.effectID, effect.value, result);
 				break;
@@ -129,6 +156,9 @@ public final class ConversationController {
 				break;
 			case mapchange:
 				mapchange(effect.mapName, effect.effectID);
+				break;
+			case changeIcon:
+				changeIcon(res, player, effect.effectID, effect.value );
 				break;
 		}
 	}
@@ -185,6 +215,29 @@ public final class ConversationController {
 		controllers.movementController.placePlayerAsyncAt(MapObject.MapObjectType.newmap, mapName, place, 0, 0);
 	}
 
+	private void changeIcon(Resources res, Player player, String hero, int heroNr ) {
+		switch (heroNr) {
+			case 0:
+				player.replaceIcon(TileManager.CHAR_HERO_0);
+				break;
+			case 1:
+				player.replaceIcon(TileManager.CHAR_HERO_1);
+				break;
+			case 2:
+				player.replaceIcon(TileManager.CHAR_HERO_2);
+				break;
+			case 10:
+				player.replaceIcon(TileManager.CHAR_HERO_SHIP);
+				break;
+			case 11:
+				player.replaceIcon(TileManager.CHAR_HERO_SHEEP);
+				break;
+			case 999:
+				player.replaceIcon(player.iconID);
+				break;
+		}
+	}
+
 	private void addAlignmentReward(Player player, String faction, int delta) {
 		player.addAlignment(faction, delta);
 		MovementController.refreshMonsterAggressiveness(world.model.currentMaps.map, world.model.player);
@@ -193,6 +246,47 @@ public final class ConversationController {
 	private void setAlignmentReward(Player player, String faction, int delta) {
 		player.setAlignment(faction, delta);
 		MovementController.refreshMonsterAggressiveness(world.model.currentMaps.map, world.model.player);
+	}
+
+	private void toAkkuAlignmentReward(Player player, String faction, String reg) {
+		Integer i = player.getAlignment(faction);
+		player.setAlignment(reg, i);
+	}
+
+	private void fromAkkuAlignmentReward(Player player, String faction, String reg) {
+		Integer i = player.getAlignment(reg);
+		player.setAlignment(faction, i);
+		MovementController.refreshMonsterAggressiveness(world.model.currentMaps.map, world.model.player);
+	}
+
+	private void addAlignmentReward(Player player, String faction) {
+		Integer i = player.getAlignment(faction);
+		player.addAlignment(Constants.FACTION_SCORE_CALC_REGISTER1_NAME, i);
+	}
+
+	private void subAlignmentReward(Player player, String faction) {
+		Integer i = -1 * player.getAlignment(faction);
+		player.addAlignment(Constants.FACTION_SCORE_CALC_REGISTER1_NAME, i);
+	}
+
+	/// @param multiplier multiplies the faction alignment before dividing. Use 100 for percentages.
+	private void divAlignmentReward(Player player, String faction, int multiplier ) {
+		Integer i1, i2;
+		if (multiplier == 0) { multiplier = 1; }
+		i1 = player.getAlignment(Constants.FACTION_SCORE_CALC_REGISTER1_NAME) * multiplier;
+		i2 = player.getAlignment(faction);
+		if (i2 != 0)
+		{
+			player.setAlignment(Constants.FACTION_SCORE_CALC_REGISTER1_NAME, i1 / i2 );
+		}
+	}
+
+	/// @param multiplier the factor to multiply by. If 0, uses the faction score from the {@link Constants.FACTION_SCORE_CALC_REGISTER1_NAME} as multiplier.
+	private void multAlignmentReward(Player player, String faction, int multiplier ) {
+		Integer  i;
+		if (multiplier == 0) { multiplier = player.getAlignment(Constants.FACTION_SCORE_CALC_REGISTER1_NAME); }
+		i = player.getAlignment(faction) * multiplier;
+		player.setAlignment(Constants.FACTION_SCORE_CALC_REGISTER1_NAME, i );
 	}
 
 	private void addQuestProgressReward(Player player, String questID, int questProgress, ScriptEffectResult result) {
@@ -372,7 +466,10 @@ public final class ConversationController {
 	private static String getDisplayMessage(Phrase phrase, Player player) { return replacePlayerName(phrase.message, player); }
 	private static String getDisplayMessage(Reply reply, Player player) { return replacePlayerName(reply.text, player); }
 	private static String replacePlayerName(String s, Player player) {
-		return s.replace(Constants.PLACEHOLDER_PLAYERNAME, player.getName());
+		return s.replace(Constants.PLACEHOLDER_PLAYERNAME, player.getName())
+				.replace(Constants.PLACEHOLDER_REG1, String.valueOf(player.getAlignment(Constants.FACTION_SCORE_CALC_REGISTER1_NAME)))
+				.replace(Constants.PLACEHOLDER_REG2, String.valueOf(player.getAlignment(Constants.FACTION_SCORE_CALC_REGISTER2_NAME)))
+				.replace(Constants.PLACEHOLDER_REG3, String.valueOf(player.getAlignment(Constants.FACTION_SCORE_CALC_REGISTER3_NAME)));
 	}
 
 	public static final class ConversationStatemachine {
@@ -420,6 +517,7 @@ public final class ConversationController {
 			this.currentPhraseID = phraseID;
 			this.currentPhrase = world.conversationLoader.loadPhrase(phraseID, conversationCollection, res);
 			if (AndorsTrailApplication.DEVELOPMENT_DEBUGMESSAGES) {
+				L.log("Phrase_trace: " + phraseID);
 				if (currentPhrase == null) currentPhrase = new Phrase("(phrase \"" + phraseID + "\" not implemented yet)", null, null, null);
 			}
 			if (this.currentPhrase.switchToNPC != null) {
