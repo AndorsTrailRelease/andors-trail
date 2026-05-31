@@ -17,20 +17,20 @@ android {
         release {
             manifestPlaceholders icon_name: 'icon', fileproviderPath: 'AndorsTrail'
             applicationIdSuffix = ''
-            versionNameSuffix = ""
+            versionNameSuffix = ''
             minifyEnabled = false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.txt'
         }
         debug {
             manifestPlaceholders icon_name: 'icon_beta', fileproviderPath: 'AndorsTrail.beta2'
             applicationIdSuffix = '.beta2'
-            versionNameSuffix = "dev"
+            versionNameSuffix = 'dev'
 			signingConfig = signingConfigs.debug
         }
         beta {
             manifestPlaceholders icon_name: 'icon_beta', fileproviderPath: 'AndorsTrail.beta2'
             applicationIdSuffix = '.beta2'
-            versionNameSuffix = "beta"
+            versionNameSuffix = 'beta'
             signingConfig = signingConfigs.debug
         }
     }
