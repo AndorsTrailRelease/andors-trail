@@ -4,6 +4,7 @@ import static com.gpl.rpg.AndorsTrail.controller.SkillController.canLevelupSkill
 
 import java.util.ArrayList;
 import com.gpl.rpg.AndorsTrail.util.Format;
+import com.gpl.rpg.AndorsTrail.util.NumTagResolver;
 
 import android.content.res.Resources;
 
@@ -464,11 +465,15 @@ public final class ConversationController {
 
 	private static String getDisplayMessage(Phrase phrase, Player player) {
 		String message = replacePlayerName(phrase.message, player);
-		return Format.localizeLongDigitSequences(message);
+		// First resolve any explicit <num>...</num> tags (these carry the original
+		// ASCII digits and may include an optional fmt attribute).
+		message = NumTagResolver.resolveNumTags(message);
+		return message;
 	}
 	private static String getDisplayMessage(Reply reply, Player player) {
 		String message = replacePlayerName(reply.text, player);
-		return Format.localizeLongDigitSequences(message);
+		message = NumTagResolver.resolveNumTags(message);
+		return message;
 	}
 	private static String replacePlayerName(String s, Player player) {
 		String reg1 = Format.localizeInt(player.getAlignment(Constants.FACTION_SCORE_CALC_REGISTER1_NAME));
