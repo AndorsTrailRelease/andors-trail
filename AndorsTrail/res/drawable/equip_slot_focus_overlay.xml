@@ -9,7 +9,12 @@
                     <corners android:radius="2dp" />
                     <stroke
                         android:width="4dp"
-                        android:color="?attr/ui_theme_focus_border_color" />
+                        android:color="@color/ui_blue_palette_highlight_gray_mid" />
+                        <!-- This should reference a theme-based color android:color="?attr/ui_theme_focus_border_color",
+                         but very old android (4.4, API 19) doesn't support attr references for themeable colors in
+                         drawables, so we use a generic "@color/ui_blue_palette_highlight_gray_mid" instead.
+                         It's not worth using a special version-dependant resource just for this, but
+                         TODO: If/when minSdk is bumped to 21 or later (Android 5.0) this can be restored -->
                 </shape>
             </item>
             <!-- Then draw a semi-transparent overlay to brighten the background, including border  -->
@@ -28,4 +33,3 @@
         </shape>
     </item>
 </selector>
-
