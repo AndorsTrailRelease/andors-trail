@@ -1,211 +1,131 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="13" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="35">
- <tileset firstgid="1" name="map_bed_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_bed_1.png" width="512" height="256"/>
+<!DOCTYPE map SYSTEM "https://mapeditor.org/dtd/1.0/map.dtd">
+<map version="1.0" orientation="orthogonal" width="30" height="13" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="map_0" tilewidth="32" tileheight="32">
+  <image source="../drawable/map_0.png"/>
  </tileset>
- <tileset firstgid="129" name="map_border_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_border_1.png" width="512" height="256"/>
+ <tileset firstgid="65" name="map_29" tilewidth="32" tileheight="32">
+  <image source="../drawable/map_29.png"/>
  </tileset>
- <tileset firstgid="257" name="map_bridge_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_bridge_1.png" width="512" height="256"/>
+ <tileset firstgid="129" name="map_1" tilewidth="32" tileheight="32">
+  <image source="../drawable/map_1.png"/>
  </tileset>
- <tileset firstgid="385" name="map_broken_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_broken_1.png" width="512" height="256"/>
+ <tileset firstgid="193" name="map_7" tilewidth="32" tileheight="32">
+  <image source="../drawable/map_7.png"/>
  </tileset>
- <tileset firstgid="513" name="map_cavewall_1" tilewidth="32" tileheight="32" tilecount="108" columns="18">
-  <image source="../drawable/map_cavewall_1.png" width="576" height="192"/>
+ <tileset firstgid="257" name="map_8" tilewidth="32" tileheight="32">
+  <image source="../drawable/map_8.png"/>
  </tileset>
- <tileset firstgid="621" name="map_cavewall_2" tilewidth="32" tileheight="32" tilecount="108" columns="18">
-  <image source="../drawable/map_cavewall_2.png" width="576" height="192"/>
+ <tileset firstgid="321" name="map_4" tilewidth="32" tileheight="32">
+  <image source="../drawable/map_4.png"/>
  </tileset>
- <tileset firstgid="729" name="map_cavewall_3" tilewidth="32" tileheight="32" tilecount="108" columns="18">
-  <image source="../drawable/map_cavewall_3.png" width="576" height="192"/>
+ <tileset firstgid="385" name="map_20" tilewidth="32" tileheight="32">
+  <image source="../drawable/map_20.png"/>
  </tileset>
- <tileset firstgid="837" name="map_chair_table_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_chair_table_1.png" width="512" height="256"/>
+ <tileset firstgid="449" name="map_5" tilewidth="32" tileheight="32">
+  <image source="../drawable/map_5.png"/>
  </tileset>
- <tileset firstgid="965" name="map_crate_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_crate_1.png" width="512" height="256"/>
+ <tileset firstgid="513" name="map_6" tilewidth="32" tileheight="32">
+  <image source="../drawable/map_6.png"/>
  </tileset>
- <tileset firstgid="1093" name="map_cupboard_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_cupboard_1.png" width="512" height="256"/>
+ <tileset firstgid="577" name="map_13" tilewidth="32" tileheight="32">
+  <image source="../drawable/map_13.png"/>
  </tileset>
- <tileset firstgid="1221" name="map_curtain_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_curtain_1.png" width="512" height="256"/>
+ <tileset firstgid="641" name="map_15" tilewidth="32" tileheight="32">
+  <image source="../drawable/map_15.png"/>
  </tileset>
- <tileset firstgid="1349" name="map_entrance_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_entrance_1.png" width="512" height="256"/>
+ <tileset firstgid="705" name="map_14" tilewidth="32" tileheight="32">
+  <image source="../drawable/map_14.png"/>
  </tileset>
- <tileset firstgid="1477" name="map_fence_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_fence_1.png" width="512" height="256"/>
+ <tileset firstgid="769" name="map_16" tilewidth="32" tileheight="32">
+  <image source="../drawable/map_16.png"/>
  </tileset>
- <tileset firstgid="1605" name="map_fence_2" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_fence_2.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="1733" name="map_ground_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_ground_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="1861" name="map_ground_2" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_ground_2.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="1989" name="map_ground_3" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_ground_3.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="2117" name="map_ground_4" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_ground_4.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="2245" name="map_ground_5" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_ground_5.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="2373" name="map_ground_6" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_ground_6.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="2501" name="map_ground_7" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_ground_7.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="2629" name="map_ground_8" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_ground_8.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="2757" name="map_indoor_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_indoor_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="2885" name="map_kitchen_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_kitchen_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="3013" name="map_outdoor_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_outdoor_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="3141" name="map_pillar_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_pillar_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="3269" name="map_plant_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_plant_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="3397" name="map_rock_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_rock_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="3525" name="map_roof_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_roof_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="3653" name="map_roof_2" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_roof_2.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="3781" name="map_shop_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_shop_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="3909" name="map_sign_ladder_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_sign_ladder_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="4037" name="map_table_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_table_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="4165" name="map_trail_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_trail_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="4293" name="map_tree_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_tree_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="4421" name="map_wall_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_wall_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="4549" name="map_wall_2" tilewidth="32" tileheight="32" tilecount="120" columns="15">
-  <image source="../drawable/map_wall_2.png" width="480" height="256"/>
- </tileset>
- <tileset firstgid="4669" name="map_wall_3" tilewidth="32" tileheight="32" tilecount="120" columns="15">
-  <image source="../drawable/map_wall_3.png" width="480" height="256"/>
- </tileset>
- <tileset firstgid="4789" name="map_window_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_window_1.png" width="512" height="256"/>
- </tileset>
- <tileset firstgid="4917" name="map_window_2" tilewidth="32" tileheight="32" tilecount="128" columns="16">
-  <image source="../drawable/map_window_2.png" width="512" height="256"/>
- </tileset>
- <layer id="1" name="Ground" width="30" height="13">
+ <layer name="Ground" width="30" height="13">
   <data encoding="base64" compression="zlib">
-   eJzTZ2JgOMOGiXWB4g5IWI8Cvh4OPjZ7DYDiQUiYEr49EDsi8XWh9upjsRukLwUJU8IPBOJgJD7MXkcc9lKTjx6H+lC3DIS92OScmKjLJ9beECbq8tHtxZWeaYnxpefhbC8srF8wY6qRYYJgPShNitkyOLAeEgb5GdledHk9JtzlmwwWN+HSi45B9v4A2ruAHzUccGFsbtfDIYYNAwCJldhi
+   eJzdktsJgDAMRbuBghqr0ziGk/rtLkV0DCNUCCFXlFYEPw7lpo8T2nrn3GhQMrWAEjKBbHkXphWk5ILpRC6j1wNvI0jJFdOLfHo74M2Z9Rv62MsXXmtuzZzverfMWXvRf36Tq//8Z+9517OxJkQojk/ODgASeOXV8xLUm6yhvZrDOzGDugeE1TuBmsUOVgp90w==
   </data>
  </layer>
- <layer id="2" name="Objects" width="30" height="13">
+ <layer name="Objects" width="30" height="13">
   <data encoding="base64" compression="zlib">
-   eJxjYBg4EC4AoTsZUcW38uLXt5MM+e1YxGYyYooNFoAeJo/xuFUdSmszMTDoMKGK4QPYzEQPk09Y1MDcZo7FTGQxmFuoDfhYMN2CCxCSJwbMgZqBHKbY0g4sPSPLp6GFATl8bOFMb6CORhML5EhMA+jqzdFoGACFdSssDqDpQRqLXbJQsYdUzOsge0EYm324ALJamJtI0Q8D0+hUZgEATowVNA==
+   eJxjYBg4oAClNdHElzLi15fERLr8YSxibfiNGVCAHib38YTJdCitA1SjxIgqhg9gMxM9TI5hUQNz2wwsZiKLKRGIR3LBcqS4RA8ndEBInhjwF0ojhym2tKOARf4fmhpy+NjCmd5gOhpNLGAhMQ2gq5+BRsOAAhD7QtXWQ+kmLOYJQOWECZQZpACQvSCMzT5cAFmtAB73EgJLyNBDDgAAIlAZUQ==
   </data>
  </layer>
- <layer id="3" name="Above" width="30" height="13">
+ <layer name="Above" width="30" height="13">
   <data encoding="base64" compression="zlib">
-   eJxjYGBgCBdgIAj0mAirIRXI4jAT5p5ORlQ+DKQD+e2MmOqJ5cPMwGXvdCR7u4iwZw4Od6bhsYMU95LjP2QA8isxbqG2vbjkh6u9uNIzethTyscGsKVnegBiyg5aAFhYpwqg0vQAoLAmxj5c6YFcEE6kvdQAAPIeGVw=
+   eJxjYGBgUGAgDMSIUEMqEGDELq4ApTXR+DDQDMQ2WNQTy4eZgcteFSS+FRHm/sUh34HHDnxilPLRQTORbqG2vbjkh6u9uNIzethTyscGsKVnegCFAbIXFtZzGFBpeoBmIu3DlR7IBQpE2ksNAABwmQ9S
   </data>
  </layer>
- <layer id="8" name="Top" width="30" height="13">
+ <layer name="Top" width="30" height="13">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2BkgKcsDAzPWSA0OXxywVeg/u8sEJoc/igYBfQGAO+JFqk=
+   eJxjYBgFo2BkABVmBgZbZghNDp9cIATUb8MMocnhj4JRQG8AABNVA90=
   </data>
  </layer>
- <layer id="4" name="Walkable" width="30" height="13">
+ <layer name="Walkable" width="30" height="13">
   <data encoding="base64" compression="zlib">
-   eJy1k8ENACAIAx2Bpdh/Jd+SYkELSR8QyiWgbguG2ylUU4hxpzTFZbMQ9zeP3Ox+U1xUn+RmkTFV3Ntstg/U1807XHVU31Xm63IYN+6J9VS4yn8e2a9+la+rDapBR7k=
+   eJy1k8EOACAIQvv9/ro7w5BCNw468TlXe/HYIFZLSHGnNMVVsxj3N0cu22GSy+qT3CoqZop7m63uwfrc3OGmo/uuKp/LUVy8k+rpcJP/HNmv/pTP1QEeenOZ
   </data>
  </layer>
- <objectgroup id="5" name="Mapevents" visible="0">
-  <object id="1" name="north" type="mapchange" x="32" y="0" width="160" height="32">
+ <objectgroup name="Mapevents" visible="0">
+  <object name="north" type="mapchange" x="32" y="0" width="160" height="32">
    <properties>
     <property name="map" value="laerothprison3"/>
     <property name="place" value="south"/>
    </properties>
   </object>
-  <object id="2" name="down" type="mapchange" x="128" y="384" width="32" height="32">
+  <object name="down" type="mapchange" x="128" y="384" width="32" height="32">
    <properties>
     <property name="map" value="laerothprison5"/>
     <property name="place" value="up"/>
    </properties>
   </object>
-  <object id="14" name="lae_prison_end" type="script" x="64" y="288" width="128" height="32"/>
-  <object id="25" name="lae_prison_container" type="container" x="736" y="160" width="32" height="32"/>
+  <object name="lae_prison_end" type="script" x="64" y="288" width="128" height="32"/>
+  <object name="lae_prison_container" type="container" x="736" y="160" width="32" height="32"/>
  </objectgroup>
- <objectgroup id="6" name="Spawn" visible="0">
-  <object id="3" name="prisoner1" type="spawn" x="768" y="64" width="32" height="32">
+ <objectgroup name="Spawn" visible="0">
+  <object name="prisoner1" type="spawn" x="768" y="64" width="32" height="32">
    <properties>
     <property name="spawngroup" value="lae_prisoner1"/>
    </properties>
   </object>
-  <object id="4" name="prisoner2" type="spawn" x="576" y="96" width="160" height="288">
+  <object name="prisoner2" type="spawn" x="576" y="96" width="160" height="288">
    <properties>
     <property name="spawngroup" value="lae_prisoner2"/>
    </properties>
   </object>
-  <object id="5" name="prisoner3" type="spawn" x="192" y="96" width="160" height="256">
+  <object name="prisoner3" type="spawn" x="192" y="96" width="160" height="256">
    <properties>
     <property name="spawngroup" value="lae_prisoner2"/>
    </properties>
   </object>
-  <object id="6" name="prisoner4" type="spawn" x="448" y="96" width="160" height="288">
+  <object name="prisoner4" type="spawn" x="448" y="96" width="160" height="288">
    <properties>
     <property name="spawngroup" value="lae_prisoner3"/>
    </properties>
   </object>
-  <object id="7" name="prisoner5" type="spawn" x="320" y="96" width="160" height="288">
+  <object name="prisoner5" type="spawn" x="320" y="96" width="160" height="288">
    <properties>
     <property name="spawngroup" value="lae_prisoner4"/>
    </properties>
   </object>
-  <object id="8" name="prisoner6i" type="spawn" x="480" y="96" width="224" height="128">
+  <object name="prisoner6i" type="spawn" x="480" y="96" width="224" height="128">
    <properties>
     <property name="quantity" value="2"/>
     <property name="spawngroup" value="lae_prisoner2i"/>
    </properties>
   </object>
-  <object id="9" name="prisoner7i" type="spawn" x="480" y="96" width="224" height="128">
+  <object name="prisoner7i" type="spawn" x="480" y="96" width="224" height="128">
    <properties>
     <property name="quantity" value="2"/>
     <property name="spawngroup" value="lae_prisoner3i"/>
    </properties>
   </object>
-  <object id="10" name="prisoner8i" type="spawn" x="224" y="96" width="96" height="128">
+  <object name="prisoner8i" type="spawn" x="224" y="96" width="96" height="128">
    <properties>
     <property name="quantity" value="2"/>
     <property name="spawngroup" value="lae_prisoner2i"/>
    </properties>
   </object>
-  <object id="12" name="lae_demon4b_safe" type="spawn" x="64" y="64" width="128" height="256">
+  <object name="lae_demon4b_safe" type="spawn" x="64" y="64" width="128" height="256">
    <properties>
     <property name="active" value="false"/>
     <property name="ignoreAreas" value="true"/>
@@ -213,7 +133,7 @@
     <property name="spawngroup" value="lae_demon4b_safe"/>
    </properties>
   </object>
-  <object id="13" name="lae_demon4_safe" type="spawn" x="160" y="224" width="768" height="128">
+  <object name="lae_demon4_safe" type="spawn" x="160" y="224" width="768" height="128">
    <properties>
     <property name="active" value="false"/>
     <property name="ignoreAreas" value="true"/>
@@ -221,59 +141,59 @@
     <property name="spawngroup" value="lae_demon4_safe"/>
    </properties>
   </object>
-  <object id="29" name="prisoner2i" type="spawn" x="608" y="96" width="96" height="96">
+  <object name="prisoner2i" type="spawn" x="608" y="96" width="96" height="96">
    <properties>
     <property name="active" value="false"/>
     <property name="spawngroup" value="lae_prisoner2i"/>
    </properties>
   </object>
-  <object id="30" name="prisoner3i" type="spawn" x="224" y="96" width="96" height="96">
+  <object name="prisoner3i" type="spawn" x="224" y="96" width="96" height="96">
    <properties>
     <property name="active" value="false"/>
     <property name="spawngroup" value="lae_prisoner2i"/>
    </properties>
   </object>
-  <object id="31" name="prisoner4i" type="spawn" x="480" y="96" width="96" height="96">
+  <object name="prisoner4i" type="spawn" x="480" y="96" width="96" height="96">
    <properties>
     <property name="active" value="false"/>
     <property name="spawngroup" value="lae_prisoner3i"/>
    </properties>
   </object>
-  <object id="32" name="prisoner5i" type="spawn" x="352" y="96" width="96" height="96">
+  <object name="prisoner5i" type="spawn" x="352" y="96" width="96" height="96">
    <properties>
     <property name="active" value="false"/>
     <property name="spawngroup" value="lae_prisoner4i"/>
    </properties>
   </object>
-  <object id="28" name="prisoner6a" type="spawn" x="768" y="160" width="160" height="96">
+  <object name="prisoner6a" type="spawn" x="768" y="160" width="160" height="96">
    <properties>
     <property name="active" value="false"/>
     <property name="quantity" value="2"/>
     <property name="spawngroup" value="lae_prisoner2a"/>
    </properties>
   </object>
-  <object id="26" name="prisoner7a" type="spawn" x="160" y="256" width="736" height="64">
+  <object name="prisoner7a" type="spawn" x="160" y="256" width="736" height="64">
    <properties>
     <property name="active" value="false"/>
     <property name="quantity" value="2"/>
     <property name="spawngroup" value="lae_prisoner3a"/>
    </properties>
   </object>
-  <object id="27" name="prisoner8a" type="spawn" x="160" y="256" width="736" height="64">
+  <object name="prisoner8a" type="spawn" x="160" y="256" width="736" height="64">
    <properties>
     <property name="active" value="false"/>
     <property name="quantity" value="2"/>
     <property name="spawngroup" value="lae_prisoner2a"/>
    </properties>
   </object>
-  <object id="34" name="lae_prisoner" type="spawn" x="320" y="0" width="32" height="32">
+  <object name="lae_prisoner" type="spawn" x="320" y="0" width="32" height="32">
    <properties>
     <property name="spawngroup" value="lae_prisoner"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="7" name="Keys" visible="0">
-  <object id="11" name="lae_prison_key" type="key" x="128" y="384" width="32" height="32">
+ <objectgroup name="Keys" visible="0">
+  <object name="lae_prison_key" type="key" x="128" y="384" width="32" height="32">
    <properties>
     <property name="phrase" value="lae_prison1a"/>
     <property name="requireId" value="lae_torturer"/>
@@ -281,7 +201,7 @@
     <property name="requireValue" value="5"/>
    </properties>
   </object>
-  <object id="16" name="lae_dummy_key" type="key" x="64" y="224" width="864" height="160">
+  <object name="lae_dummy_key" type="key" x="64" y="224" width="864" height="160">
    <properties>
     <property name="phrase" value="dummy_key"/>
     <property name="requireId" value="andor"/>
@@ -289,7 +209,7 @@
     <property name="requireValue" value="1"/>
    </properties>
   </object>
-  <object id="17" name="lae_prison_cell1" type="key" x="256" y="224" width="32" height="32">
+  <object name="lae_prison_cell1" type="key" x="256" y="224" width="32" height="32">
    <properties>
     <property name="phrase" value="lae_prison_cell1"/>
     <property name="requireId" value="laeroth_nondisplay"/>
@@ -297,7 +217,7 @@
     <property name="requireValue" value="31"/>
    </properties>
   </object>
-  <object id="18" name="lae_prison_cell2" type="key" x="384" y="224" width="32" height="32">
+  <object name="lae_prison_cell2" type="key" x="384" y="224" width="32" height="32">
    <properties>
     <property name="phrase" value="lae_prison_cell2"/>
     <property name="requireId" value="laeroth_nondisplay"/>
@@ -305,7 +225,7 @@
     <property name="requireValue" value="32"/>
    </properties>
   </object>
-  <object id="19" name="lae_prison_cell3" type="key" x="512" y="224" width="32" height="32">
+  <object name="lae_prison_cell3" type="key" x="512" y="224" width="32" height="32">
    <properties>
     <property name="phrase" value="lae_prison_cell3"/>
     <property name="requireId" value="laeroth_nondisplay"/>
@@ -313,7 +233,7 @@
     <property name="requireValue" value="33"/>
    </properties>
   </object>
-  <object id="20" name="lae_prison_cell4" type="key" x="640" y="224" width="32" height="32">
+  <object name="lae_prison_cell4" type="key" x="640" y="224" width="32" height="32">
    <properties>
     <property name="phrase" value="lae_prison_cell4"/>
     <property name="requireId" value="laeroth_nondisplay"/>
@@ -322,8 +242,8 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="9" name="Replace" visible="0">
-  <object id="21" name="lae_prison_cell1" type="replace" x="256" y="192" width="32" height="64">
+ <objectgroup name="Replace" visible="0">
+  <object name="lae_prison_cell1" type="replace" x="256" y="192" width="32" height="64">
    <properties>
     <property name="Top" value="Above"/>
     <property name="requireId" value="laeroth_nondisplay"/>
@@ -331,7 +251,7 @@
     <property name="requireValue" value="31"/>
    </properties>
   </object>
-  <object id="22" name="lae_prison_cell2" type="replace" x="384" y="192" width="32" height="64">
+  <object name="lae_prison_cell2" type="replace" x="384" y="192" width="32" height="64">
    <properties>
     <property name="Top" value="Above"/>
     <property name="requireId" value="laeroth_nondisplay"/>
@@ -339,7 +259,7 @@
     <property name="requireValue" value="32"/>
    </properties>
   </object>
-  <object id="23" name="lae_prison_cell3" type="replace" x="512" y="192" width="32" height="64">
+  <object name="lae_prison_cell3" type="replace" x="512" y="192" width="32" height="64">
    <properties>
     <property name="Top" value="Above"/>
     <property name="requireId" value="laeroth_nondisplay"/>
@@ -347,7 +267,7 @@
     <property name="requireValue" value="33"/>
    </properties>
   </object>
-  <object id="24" name="lae_prison_cell4" type="replace" x="640" y="192" width="32" height="64">
+  <object name="lae_prison_cell4" type="replace" x="640" y="192" width="32" height="64">
    <properties>
     <property name="Top" value="Above"/>
     <property name="requireId" value="laeroth_nondisplay"/>
