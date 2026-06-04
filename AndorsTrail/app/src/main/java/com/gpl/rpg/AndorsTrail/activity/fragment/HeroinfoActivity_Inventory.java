@@ -19,6 +19,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gpl.rpg.AndorsTrail.AndorsTrailApplication;
@@ -166,16 +167,16 @@ public final class HeroinfoActivity_Inventory extends Fragment implements Custom
 
 	private void setWearSlot(final View v, final Inventory.WearSlot inventorySlot, int viewId, int resourceId) {
 		final ImageView imageView = (ImageView) v.findViewById(viewId);
+		final RelativeLayout layout = (RelativeLayout) imageView.getParent();
 		wornItemImage[inventorySlot.ordinal()] = imageView;
 		defaultWornItemImageResourceIDs[inventorySlot.ordinal()] = resourceId;
-		imageView.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (player.inventory.isEmptySlot(inventorySlot)) return;
-				imageView.setClickable(false); // Will be enabled again on update()
-				showEquippedItemInfo(player.inventory.getItemTypeInWearSlot(inventorySlot), inventorySlot);
-			}
+		// Both the image and the layout will trigger the same click listener.  Layout needed for dpad support, and it's a larger target for touch as well.
+		imageView.setOnClickListener((View view) -> {
+			if (player.inventory.isEmptySlot(inventorySlot)) return;
+			imageView.setClickable(false); // Will be enabled again on update()
+			showEquippedItemInfo(player.inventory.getItemTypeInWearSlot(inventorySlot), inventorySlot);
 		});
+		layout.setOnClickListener((View view) -> imageView.performClick());
 	}
 
 	@Override
@@ -261,12 +262,16 @@ public final class HeroinfoActivity_Inventory extends Fragment implements Custom
 	}
 
 	private void updateWornImage(ImageView imageView, int resourceIDEmptyImage, ItemType type) {
+		RelativeLayout layout = (RelativeLayout) imageView.getParent();
 		if (type != null) {
 			world.tileManager.setImageViewTile(getResources(), imageView, type, wornTiles);
+			imageView.setClickable(true);
+			layout.setFocusable(true);
 		} else {
 			imageView.setImageResource(resourceIDEmptyImage);
+			imageView.setClickable(false);
+			layout.setFocusable(false);
 		}
-		imageView.setClickable(true);
 	}
 
 	private void updateItemList() {

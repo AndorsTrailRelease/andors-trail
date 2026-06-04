@@ -6,6 +6,7 @@ import android.content.DialogInterface.OnCancelListener;
 import android.graphics.Rect;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.MotionEvent;
 import android.view.View;

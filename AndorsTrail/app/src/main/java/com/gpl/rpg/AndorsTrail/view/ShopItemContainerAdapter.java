@@ -3,7 +3,6 @@ package com.gpl.rpg.AndorsTrail.view;
 import android.content.Context;
 import android.content.res.Resources;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -47,30 +46,35 @@ public final class ShopItemContainerAdapter extends ArrayAdapter<ItemEntry> {
 			result = View.inflate(getContext(), R.layout.shopitemview, null);
 		}
 
+		// Set the icon
 		tileManager.setImageViewTile(r, (ImageView) result.findViewById(R.id.shopitem_image), itemType, tileCollection);
-		((TextView) result.findViewById(R.id.shopitem_text)).setText(ItemController.describeItemForListView(item, player));
-		Button b = (Button) result.findViewById(R.id.shopitem_shopbutton);
+		TextView item_text = result.findViewById(R.id.shopitem_text);
+		Button shop_button = result.findViewById(R.id.shopitem_shopbutton);
+
+		item_text.setText(ItemController.describeItemForListView(item, player));
+
+		// Set the button text and enabled state and conditional text
+		boolean enabled = true;
 		if (isSelling) {
-			b.setText(r.getString(R.string.shop_sellitem, ItemController.getSellingPrice(player, itemType)));
-			b.setEnabled(ItemController.maySellItem(player, itemType));
+			enabled = ItemController.maySellItem(player, itemType);
+			shop_button.setText(r.getString(R.string.shop_sellitem, ItemController.getSellingPrice(player, itemType)));
 		} else {
 			int price = ItemController.getBuyingPrice(player, itemType);
-			b.setText(r.getString(R.string.shop_buyitem, price));
-			b.setEnabled(price > 0 && ItemController.canAfford(player, price));
+			enabled = price > 0 && ItemController.canAfford(player, price);
+			shop_button.setText(r.getString(R.string.shop_buyitem, price));
 		}
-		b.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				clickListener.onItemActionClicked(position, itemType);
-			}
-		});
-		b = (Button) result.findViewById(R.id.shopitem_infobutton);
-		b.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				clickListener.onItemInfoClicked(position, itemType);
-			}
-		});
+		shop_button.setEnabled(enabled);
+		item_text.setEnabled(enabled);
+
+		// Set up listeners
+		shop_button.setOnClickListener(view -> clickListener.onItemActionClicked(position, itemType));
+
+		result.findViewById(R.id.shopitem_infobutton).setOnClickListener(view -> clickListener.onItemInfoClicked(position, itemType));
+
+		// Handlers for the row itself, so that it isn't necessary to hit the button exactly.
+		result.setOnClickListener(view -> clickListener.onItemInfoClicked(position, itemType));
+		if(enabled) result.setOnLongClickListener(view -> { clickListener.onItemActionClicked(position, itemType); return true; });
+
 		return result;
 	}
 

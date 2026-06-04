@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -61,6 +62,7 @@ public abstract class ShopActivityFragment extends Fragment implements OnContain
 		shop_gc = (TextView) v.findViewById(R.id.shop_gc);
 
 		ListView shoplist = (ListView) v.findViewById(R.id.shop_list);
+		shoplist.setItemsCanFocus(true);
 
 		shopInventory = npc.getShopItems(player);
 
@@ -70,6 +72,7 @@ public abstract class ShopActivityFragment extends Fragment implements OnContain
 		final boolean isSelling = isSellingInterface();
 		listAdapter = new ShopItemContainerAdapter(getActivity(), tiles, world.tileManager, player, isSelling ? player.inventory : shopInventory, this, isSelling);
 		shoplist.setAdapter(listAdapter);
+		setupSelectionFocusBehavior(shoplist);
 
 		//Initiating drop-down list for category filters
 		shoplist_sort = (Button) v.findViewById(R.id.shoplist_sort_filters);
@@ -87,7 +90,6 @@ public abstract class ShopActivityFragment extends Fragment implements OnContain
 				return world.model.uiSelections.selectedShopSort;
 			}
 		};
-		
 
 		return v;
 	}
@@ -96,6 +98,26 @@ public abstract class ShopActivityFragment extends Fragment implements OnContain
 		listAdapter.reloadShownSort(world.model.uiSelections.selectedShopSort, itemContainer, player);
 		listAdapter.notifyDataSetChanged();
 	}
+
+	// Set up listview so that the focus follows the selection. This is needed to make sure that
+	// the correct item is focused when using a gamepad or keyboard to navigate the list.
+	private void setupSelectionFocusBehavior(ListView shoplist) {
+	shoplist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+		@Override
+		public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+			if (view != null) {
+				view.post(() -> {
+					if (shoplist.hasFocus()) {
+						view.requestFocus();
+					}
+				});
+			}
+		}
+
+		@Override
+		public void onNothingSelected(AdapterView<?> parent) { }
+	});
+}
 
 	@Override
 	public void onStart() {
