@@ -1,4 +1,7 @@
-apply plugin: 'com.android.application'
+
+plugins {
+    id 'com.android.application'
+}
 
 android {
 
@@ -6,33 +9,38 @@ android {
 
     defaultConfig {
         applicationId "com.gpl.rpg.AndorsTrail"
-        minSdkVersion 14
+        minSdkVersion 19
         targetSdkVersion 35
     }
 
     buildTypes {
         release {
             manifestPlaceholders icon_name: 'icon', fileproviderPath: 'AndorsTrail'
-            applicationIdSuffix ''
-            versionNameSuffix = ""
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            applicationIdSuffix = ''
+            versionNameSuffix = ''
+            minifyEnabled = false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.txt'
         }
         debug {
             manifestPlaceholders icon_name: 'icon_beta', fileproviderPath: 'AndorsTrail.beta2'
-            applicationIdSuffix 'beta2'
-            versionNameSuffix = "dev"
-			signingConfig signingConfigs.debug
+            applicationIdSuffix = '.beta2'
+            versionNameSuffix = 'dev'
+			signingConfig = signingConfigs.debug
         }
         beta {
             manifestPlaceholders icon_name: 'icon_beta', fileproviderPath: 'AndorsTrail.beta2'
-            applicationIdSuffix 'beta2'
-            versionNameSuffix = "beta"
-            signingConfig signingConfigs.debug
+            applicationIdSuffix = '.beta2'
+            versionNameSuffix = 'beta'
+            signingConfig = signingConfigs.debug
         }
     }
-    namespace 'com.gpl.rpg.AndorsTrail'
-    
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+    namespace = 'com.gpl.rpg.AndorsTrail'
+
     sourceSets {
         main {
             res.srcDirs = ['build/gen-res', 'src/main/res']
@@ -46,26 +54,26 @@ dependencies {
 }
 
 task copyRes(type: Copy) {
-    description "Copies the res folder to the modules res folder (& renames .tmx to .xml)"
+    description = "Copies the res folder to the modules res folder (& renames .tmx to .xml)"
     from "${rootDir}/res"
     into "${projectDir}/build/gen-res"
     rename "(.*)\\.tmx", "\$1.xml"
 }
 
 task copyResValuesIn(type: Copy) {
-    description "Exception Indonesian language code (Old IN was renamed to now ID)"
+    description = "Exception Indonesian language code (Old IN was renamed to now ID)"
     from "${rootDir}/res/values-id/"
     into "${projectDir}/build/gen-res/values-in/"
 }
 
 task copyTranslation(type: Copy) {
-    description("Copies the translation files to the modules translations folder")
+    description = "Copies the translation files to the modules translations folder"
     from "${rootDir}/assets/translation"
     into "${projectDir}/build/gen-assets/translation"
 }
 
 task cleanup(type: Delete) {
-    description("Deletes the assets/translation and the res folder from the modules folder")
+    description = "Deletes the assets/translation and the res folder from the modules folder"
     delete "${projectDir}/build/gen-res", "${projectDir}/build/gen-assets/translation"
 }
 
@@ -79,15 +87,26 @@ afterEvaluate {
     mapDebugSourceSetPaths.dependsOn project.tasks.copyRes
     mergeDebugResources.dependsOn project.tasks.copyRes
     extractDeepLinksDebug.dependsOn project.tasks.copyRes
+    processDebugNavigationResources.dependsOn project.tasks.copyRes
     mergeReleaseResources.dependsOn project.tasks.copyRes
     extractDeepLinksRelease.dependsOn project.tasks.copyRes
+    processReleaseNavigationResources.dependsOn project.tasks.copyRes
+    generateBetaResources.dependsOn project.tasks.copyRes
+    mapBetaSourceSetPaths.dependsOn project.tasks.copyRes
+    mergeBetaResources.dependsOn project.tasks.copyRes
+    extractDeepLinksBeta.dependsOn project.tasks.copyRes
+    processBetaNavigationResources.dependsOn project.tasks.copyRes
 
     generateDebugResources.dependsOn project.tasks.copyTranslation
     mapDebugSourceSetPaths.dependsOn project.tasks.copyTranslation
     mergeDebugAssets.dependsOn project.tasks.copyTranslation
     mergeReleaseAssets.dependsOn project.tasks.copyTranslation
+    generateBetaResources.dependsOn project.tasks.copyTranslation
+    mapBetaSourceSetPaths.dependsOn project.tasks.copyTranslation
+    mergeBetaAssets.dependsOn project.tasks.copyTranslation
     extractDeepLinksDebug.dependsOn project.tasks.copyTranslation
     extractDeepLinksRelease.dependsOn project.tasks.copyTranslation
+    extractDeepLinksBeta.dependsOn project.tasks.copyTranslation
 
     clean.dependsOn project.tasks.cleanup
 }
