@@ -22,14 +22,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.txt'
         }
         debug {
-            manifestPlaceholders icon_name: 'icon_beta', fileproviderPath: 'AndorsTrailbeta2'
-            applicationIdSuffix = 'beta2'
+            manifestPlaceholders icon_name: 'icon_beta', fileproviderPath: 'AndorsTrail.beta2'
+            applicationIdSuffix = '.beta2'
             versionNameSuffix = 'dev'
 			signingConfig = signingConfigs.debug
         }
         beta {
-            manifestPlaceholders icon_name: 'icon_beta', fileproviderPath: 'AndorsTrailbeta2'
-            applicationIdSuffix = 'beta2'
+            manifestPlaceholders icon_name: 'icon_beta', fileproviderPath: 'AndorsTrail.beta2'
+            applicationIdSuffix = '.beta2'
             versionNameSuffix = 'beta'
             signingConfig = signingConfigs.debug
         }
