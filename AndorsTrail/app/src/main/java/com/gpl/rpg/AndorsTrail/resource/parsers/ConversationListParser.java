@@ -53,6 +53,7 @@ public final class ConversationListParser extends JsonCollectionParserFor<Phrase
 					,o.getString(JsonFieldNames.PhraseReward.rewardID)
 					,o.optInt(JsonFieldNames.PhraseReward.value, 0)
 					,o.optString(JsonFieldNames.PhraseReward.mapName, null)
+					,requirementParser.parseArray(o.optJSONArray(JsonFieldNames.Reply.requires))
 			);
 		}
 	};
