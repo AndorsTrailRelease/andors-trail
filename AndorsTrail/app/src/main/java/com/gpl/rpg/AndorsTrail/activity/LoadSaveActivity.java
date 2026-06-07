@@ -377,7 +377,7 @@ public final class LoadSaveActivity extends AndorsTrailBaseActivity implements O
 
         // Check if the target folder already has files with the same name as the savegame files,
         boolean hasExistingFiles = false;
-        if(getExportMode() == ExportAPI.EXPORT_API_STORAGE_ACCESS_FRAMEWORK && target == null) {
+        if(getExportMode() == ExportAPI.EXPORT_API_STORAGE_ACCESS_FRAMEWORK ) {
             for (File file : files) {
                 String fileName = file.getName();
 
