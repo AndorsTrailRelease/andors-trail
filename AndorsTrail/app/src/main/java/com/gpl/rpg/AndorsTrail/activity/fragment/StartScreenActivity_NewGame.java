@@ -85,18 +85,13 @@ public class StartScreenActivity_NewGame extends Fragment {
 					ToggleButton tb = ((ToggleButton)group.getChildAt(i));
 					tb.setChecked(tb.getId() == checkedId);
 				}
-				switch (checkedId) {
-				case R.id.newgame_sprite0:
-					selectedIconID = TileManager.CHAR_HERO_0;
-					break;
-				case R.id.newgame_sprite1:
-					selectedIconID = TileManager.CHAR_HERO_1;
-					break;
-				case R.id.newgame_sprite2:
-					selectedIconID = TileManager.CHAR_HERO_2;
-					break;
-				}
-
+                if (checkedId == R.id.newgame_sprite0) {
+                    selectedIconID = TileManager.CHAR_HERO_0;
+                } else if (checkedId == R.id.newgame_sprite1) {
+                    selectedIconID = TileManager.CHAR_HERO_1;
+                } else if (checkedId == R.id.newgame_sprite2) {
+                    selectedIconID = TileManager.CHAR_HERO_2;
+                }
 				startscreen_enterheroname.setNextFocusUpId(checkedId);
 			}
 		});
