@@ -69,26 +69,27 @@ public final class ConversationController {
 	}
 
 	private ScriptEffectResult applyScriptEffectsForPhrase(Resources res, final Player player, final Phrase phrase) {
-		boolean req_false;
 		if (phrase.scriptEffects == null || phrase.scriptEffects.length == 0) return null;
 
 		final ScriptEffectResult result = new ScriptEffectResult();
 		for (ScriptEffect effect : phrase.scriptEffects) {
-			req_false = false;
+			boolean req_false = false;
 			if (effect.hasRequirements()) {
 				for (Requirement requirement : effect.requires) {
-					if (!canFulfillRequirement(world, requirement)) req_false = true;
+					if (!canFulfillRequirement(world, requirement)) {
+						req_false = true;
+						break;
+					}
 				}
 			}
 			if (!req_false) {
 				applyScriptEffect(res, player, effect, result);
-
-				if (result.isEmpty()) return null;
-
-				player.inventory.add(result.loot);
-				controllers.actorStatsController.addExperience(result.loot.exp);
 			}
 		}
+		if (result.isEmpty()) return null;
+
+		player.inventory.add(result.loot);
+		controllers.actorStatsController.addExperience(result.loot.exp);
 		return result;
 	}
 
