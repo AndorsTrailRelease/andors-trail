@@ -4,7 +4,6 @@ import java.lang.ref.WeakReference;
 import java.util.Collection;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -71,7 +70,6 @@ public final class MainActivity
 
 	private ControllerContext controllers;
 	private WorldContext world;
-
 	private MainView mainview;
 	private StatusView statusview;
 	private CombatView combatview;
@@ -91,7 +89,6 @@ public final class MainActivity
 
 		AndorsTrailApplication app = AndorsTrailApplication.getApplicationFromActivity(this);
 		if (!app.isInitialized()) { finish(); return; }
-		AndorsTrailPreferences preferences = app.getPreferences();
 		this.world = app.getWorld();
 		this.controllers = app.getControllerContext();
 
@@ -132,8 +129,9 @@ public final class MainActivity
 		createLongClickListener();
 		quickitemview.registerForContextMenu(this);
 
-		dpad.updateVisibility(preferences);
-		quickitemview.setPosition(preferences);
+		dpad.updateVisibility(controllers.preferences);
+		quickitemview.updateVisibility();
+		quickitemview.setPosition();
 
 		// Define which views are in front of each other.
 		dpad.bringToFront();
