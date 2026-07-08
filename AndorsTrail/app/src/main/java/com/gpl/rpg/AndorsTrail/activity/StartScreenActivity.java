@@ -254,15 +254,6 @@ public final class StartScreenActivity extends AndorsTrailBaseFragmentActivity i
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-				backPressed();
-				return true;
-			} else {
-				return super.onKeyDown(keyCode, event);
-			}
-		}
-
 		if (ui_visible) {
 			// If the focus is on the background, or it's not focused on anything, poke the
 			// current fragment so it grabs focus on its default button.  This happens when
