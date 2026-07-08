@@ -125,6 +125,9 @@ public final class ConversationController {
 			case alignmentToReg3:
 				toAkkuAlignmentReward(player, effect.effectID, Constants.FACTION_SCORE_CALC_REGISTER3_NAME);
 				break;
+			case setNextPhraseID:
+				world.model.worldData.nextPhraseID = effect.effectID;
+				break;
 			case alignmentFromReg1:
 				fromAkkuAlignmentReward(player, effect.effectID, Constants.FACTION_SCORE_CALC_REGISTER1_NAME);
 				break;
@@ -546,6 +549,9 @@ public final class ConversationController {
 				.replace(Constants.PLACEHOLDER_REG2, String.valueOf(player.getAlignment(Constants.FACTION_SCORE_CALC_REGISTER2_NAME)))
 				.replace(Constants.PLACEHOLDER_REG3, String.valueOf(player.getAlignment(Constants.FACTION_SCORE_CALC_REGISTER3_NAME)));
 	}
+	private static String getNextPhraseID(WorldContext world, Reply reply) {
+		return reply.nextPhrase.replace(Constants.PLACEHOLDER_NEXTPHRASEID, String.valueOf(world.model.worldData.nextPhraseID));
+	}
 
 	public static final class ConversationStatemachine {
 		private final ConversationCollection conversationCollection = new ConversationCollection();
@@ -570,7 +576,7 @@ public final class ConversationController {
 
 		public void playerSelectedReply(final Resources res, Reply r) {
 			applyReplyEffect(world, r, controllers);
-			proceedToPhrase(res, r.nextPhrase, true, true);
+			proceedToPhrase(res, getNextPhraseID(world, r), true, true);
 		}
 
 		public void playerSelectedNextStep(final Resources res) {
@@ -634,7 +640,7 @@ public final class ConversationController {
 				for (Reply r : currentPhrase.replies) {
 					if (!canSelectReply(world, r)) continue;
 					applyReplyEffect(world, r, controllers);
-					return r.nextPhrase;
+					return getNextPhraseID(world, r);
 				}
 			} else if (displayPhraseMessage) {
 				String message = getDisplayMessage(currentPhrase, player);
