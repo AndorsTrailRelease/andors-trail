@@ -220,26 +220,6 @@ public final class MainActivity
 		super.onBackPressed();
 	}
 
-
-	// Global key handling for toolbox since we don't have focus on MainView when it's open.
-	@Override
-	public boolean dispatchKeyEvent(KeyEvent event) {
-		Log.d("MainActivity", "dispatchKeyEvent: " + event);
-		if(getToolboxView().isVisible()) {
-			if (event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {
-				if (InputController.isMappedKey(event.getKeyCode(), InputController.KEY_TOOLBOX)) {
-					getToolboxView().hideToolbox();
-					return true;
-				} else if (InputController.isMappedKey(event.getKeyCode(), InputController.KEY_BACK)) {
-					// Simulate a system back button press
-					onBackPressed();
-					return true;
-				}
-			}
-		}
-		return super.dispatchKeyEvent(event);
-	}
-
 	private void unsubscribeFromModel() {
 		activeConditions.unsubscribe();
 		combatview.unsubscribe();

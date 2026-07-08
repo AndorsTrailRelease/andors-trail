@@ -244,6 +244,15 @@ public final class StartScreenActivity extends AndorsTrailBaseFragmentActivity i
 	}
 
 	@Override
+	public void onBackPressed() {
+		if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+			backPressed();
+		} else {
+			super.onBackPressed();
+		}
+	}
+
+	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			if (getSupportFragmentManager().getBackStackEntryCount() > 0) {

@@ -1,7 +1,10 @@
 package com.gpl.rpg.AndorsTrail.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -100,5 +103,19 @@ public abstract class AndorsTrailBaseFragmentActivity extends FragmentActivity {
                 }
             }
         }
+    }
+
+    // Global key handling for Back action (Adds Escape and B as back keys)
+    @SuppressLint("RestrictedAPI")
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if (ActivityKeyHandler.handleBackMappedKey(this, event)) return true;
+        return super.dispatchKeyEvent(event);
+    }
+
+    @Override
+    public boolean dispatchGenericMotionEvent(MotionEvent event) {
+        if (ActivityKeyHandler.handleBackMappedMouseButton(this, event)) return true;
+        return super.dispatchGenericMotionEvent(event);
     }
 }
