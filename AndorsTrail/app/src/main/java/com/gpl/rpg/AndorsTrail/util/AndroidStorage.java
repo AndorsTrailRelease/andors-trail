@@ -510,23 +510,29 @@ public final class AndroidStorage {
 
                     ContentValues values = new ContentValues();
                     values.put(MediaStore.Downloads.DISPLAY_NAME, file.getName());
-                    values.put(MediaStore.Downloads.MIME_TYPE, Constants.NO_FILE_EXTENSION_MIME_TYPE);
+                    values.put(MediaStore.Downloads.MIME_TYPE, "application/octet-stream");
                     values.put(MediaStore.Downloads.RELATIVE_PATH, relPath);
                     values.put(MediaStore.Downloads.IS_PENDING, 1);
 
                     Uri itemUri = resolver.insert(collection, values);
                     if (itemUri == null) throw new IOException("MediaStore insert failed for " + file.getName());
 
-                    try (OutputStream out = resolver.openOutputStream(itemUri);
-                         FileInputStream in = new FileInputStream(file)) {
-                        copyStream(in, out);
+                    try {
+                        try (OutputStream out = resolver.openOutputStream(itemUri);
+                             FileInputStream in = new FileInputStream(file)) {
+                            if (out == null) throw new IOException("MediaStore openOutputStream returned null for " + itemUri);
+                            copyStream(in, out);
+                        }
+
+                        values.clear();
+                        values.put(MediaStore.Downloads.IS_PENDING, 0);
+                        resolver.update(itemUri, values, null, null);
+                    } catch (Exception e) {
+                        resolver.delete(itemUri, null, null);
+                        throw e;
                     }
 
-                    values.clear();
-                    values.put(MediaStore.Downloads.IS_PENDING, 0);
-                    resolver.update(itemUri, values, null, null);
-
-                    workerCallback.onProgress((float) i / files.length);
+                    workerCallback.onProgress((float) (i + 1) / files.length);
                 }
                 workerCallback.onComplete(true);
             } catch (NullPointerException e) {
