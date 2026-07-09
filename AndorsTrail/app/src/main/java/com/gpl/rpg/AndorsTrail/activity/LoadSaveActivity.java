@@ -380,8 +380,8 @@ public final class LoadSaveActivity extends AndorsTrailBaseActivity implements O
         boolean hasExistingFiles = false;
         if(getExportMode() == ExportAPI.EXPORT_API_STORAGE_ACCESS_FRAMEWORK ) {
             for (File file : files) {
+                if (!file.isFile()) continue;
                 String fileName = file.getName();
-
                 DocumentFile existingFile = target.findFile(fileName);
                 if (existingFile != null) {
                     hasExistingFiles = true;
@@ -391,6 +391,7 @@ public final class LoadSaveActivity extends AndorsTrailBaseActivity implements O
         } else { // Mediastore mode
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 for (File file : files) {
+                    if (!file.isFile()) continue;
                     String fileName = file.getName();
                     if (AndroidStorage.mediaStoreFileExists(context, Constants.FILENAME_SAVEGAME_DIRECTORY, fileName)) {
                         hasExistingFiles = true;

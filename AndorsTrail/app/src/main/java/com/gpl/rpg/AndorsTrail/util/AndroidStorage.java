@@ -580,7 +580,7 @@ public final class AndroidStorage {
                         File file = files[i];
                         if (file == null) continue;
                         try (FileInputStream fis = new FileInputStream(file)) {
-                            workerCallback.onProgress((float) i / files.length);
+                            workerCallback.onProgress((float) (i + 1) / files.length);
                             zipOut.putNextEntry(new ZipEntry(file.getName()));
                             copyStream(fis, zipOut);
                             zipOut.closeEntry();
