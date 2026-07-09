@@ -95,14 +95,14 @@ public final class AndorsTrailPreferences {
 			dest.displayLoot = DISPLAYLOOT_DIALOG_ALWAYS;
 			dest.fullscreen = true;
 			dest.attackspeed_milliseconds = 1000;
-			dest.movementMethod = MOVEMENTMETHOD_STRAIGHT;
+			dest.movementMethod = MOVEMENTMETHOD_DIRECTIONAL;
 			dest.movementAggressiveness = MOVEMENTAGGRESSIVENESS_NORMAL;
 			dest.scalingFactor = 1.0f;
 			dest.dpadPosition = DPAD_POSITION_DISABLED;
 			dest.dpadTransparency = DPAD_TRANSPARENCY_50_PERCENT;
 			dest.dpadMinimizeable = true;
 			dest.optimizedDrawing = false;
-			dest.highQualityFilters = true;
+			dest.highQualityFilters = false;
 			dest.enableUiAnimations = true;
 			dest.displayOverwriteSavegame = CONFIRM_OVERWRITE_SAVEGAME_ALWAYS;
 			dest.quickslotsPosition = QUICKSLOTS_POSITION_HORIZONTAL_CENTER_BOTTOM;

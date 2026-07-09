@@ -361,12 +361,11 @@ public final class LoadSaveActivity extends AndorsTrailBaseActivity implements O
 
         DocumentFile target = null;
         if(getExportMode() == ExportAPI.EXPORT_API_STORAGE_ACCESS_FRAMEWORK) {
-            if (data != null) {
-                Uri uri = data.getData();
-                if (uri == null) return;
-                target = DocumentFile.fromTreeUri(context, uri);
-                if (target == null) return;
-            }
+            if (data == null) return;
+            Uri uri = data.getData();
+            if (uri == null) return;
+            target = DocumentFile.fromTreeUri(context, uri);
+            if (target == null) return;
         }
 
         File[] files = storageDir.listFiles();
@@ -375,7 +374,9 @@ public final class LoadSaveActivity extends AndorsTrailBaseActivity implements O
             return;
         }
 
-        // Check if the target folder already has files with the same name as the savegame files,
+        // Check if the target folder already has files with the same name as the savegame files.
+        // We deliberately DON'T check for existence of the worldmap.zip file, since it will always
+        // be updated anyway.
         boolean hasExistingFiles = false;
         if(getExportMode() == ExportAPI.EXPORT_API_STORAGE_ACCESS_FRAMEWORK ) {
             for (File file : files) {

@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.CancellationException;
 import java.util.function.Consumer;
 import java.util.zip.ZipEntry;
@@ -704,7 +705,7 @@ public final class AndroidStorage {
             String packageName = activityInfo.packageName;
             String activityName = activityInfo.name;
             if (packageName == null || activityName == null) continue;
-            if (!(packageName + "/" + activityName).toLowerCase().contains("stub")) {
+            if (!(packageName + "/" + activityName).toLowerCase(Locale.ROOT).contains("stub")) {
                 return true;
             }
         }
