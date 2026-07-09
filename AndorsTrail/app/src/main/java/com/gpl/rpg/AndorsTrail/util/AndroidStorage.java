@@ -599,17 +599,26 @@ public final class AndroidStorage {
                 Uri itemUri = resolver.insert(collection, values);
                 if (itemUri == null) throw new IOException("MediaStore insert failed for " + displayName);
 
-                try (OutputStream out = resolver.openOutputStream(itemUri);
-                     FileInputStream in = new FileInputStream(zip)) {
-                    copyStream(in, out);
+                try {
+                    try (OutputStream out = resolver.openOutputStream(itemUri);
+                         FileInputStream in = new FileInputStream(zip)) {
+                        if (out == null) throw new IOException("MediaStore openOutputStream returned null for " + itemUri);
+                        copyStream(in, out);
+                    }
+
+                    values.clear();
+                    values.put(MediaStore.Downloads.IS_PENDING, 0);
+                    resolver.update(itemUri, values, null, null);
+
+                    workerCallback.onComplete(true);
+                } catch (Exception e) {
+                    resolver.delete(itemUri, null, null);
+                    throw e;
+                } finally {
+                    // Best-effort cleanup of the temp file
+                    //noinspection ResultOfMethodCallIgnored
+                    zip.delete();
                 }
-
-                values.clear();
-                values.put(MediaStore.Downloads.IS_PENDING, 0);
-                resolver.update(itemUri, values, null, null);
-
-                zip.delete();
-                workerCallback.onComplete(true);
             } catch (NullPointerException e) {
                 if (worker.isCancelled()) {
                     workerCallback.onFailure(new CancellationException("Cancelled"));
