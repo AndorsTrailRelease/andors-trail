@@ -28,7 +28,7 @@
 			android:key="optimized_drawing" />
 		<CheckBoxPreference
 			android:title="@string/preferences_high_quality_filters_title"
-			android:defaultValue="true"
+			android:defaultValue="false"
 			android:summary="@string/preferences_high_quality_filters"
 			android:key="high_quality_filters" />
 	</PreferenceCategory>
@@ -80,7 +80,7 @@
 			android:title="@string/preferences_movementmethod_title"
 			android:summary="@string/preferences_movementmethod"
 			android:key="movementmethod"
-			android:defaultValue="0"
+			android:defaultValue="1"
 			android:entries="@array/preferences_movementmethods"
 			android:entryValues="@array/preferences_movementmethod_values" />
 		<com.gpl.rpg.AndorsTrail.view.CustomListPreference
