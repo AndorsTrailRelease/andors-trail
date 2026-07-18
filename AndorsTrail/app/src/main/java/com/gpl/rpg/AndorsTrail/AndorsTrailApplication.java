@@ -46,10 +46,11 @@ public final class AndorsTrailApplication extends Application {
 	public static final int DEVELOPMENT_INCOMPATIBLE_SAVEGAME_VERSION = 999;
 	public static final int CURRENT_VERSION = DEVELOPMENT_INCOMPATIBLE_SAVEGAMES ? DEVELOPMENT_INCOMPATIBLE_SAVEGAME_VERSION : BuildConfig.VERSION_CODE;
 
-	private final AndorsTrailPreferences preferences = new AndorsTrailPreferences();
-	private WorldContext world = new WorldContext();
-	private ControllerContext controllers = new ControllerContext(this, world);
-	private WorldSetup setup = new WorldSetup(world, controllers, this);
+	private AndorsTrailPreferences preferences;
+	private WorldContext world;
+	private ControllerContext controllers;
+	private WorldSetup setup;
+
 	public WorldContext getWorld() { return world; }
 	public WorldSetup getWorldSetup() { return setup; }
 	public AndorsTrailPreferences getPreferences() { return preferences; }
@@ -160,6 +161,12 @@ public final class AndorsTrailApplication extends Application {
 	
 	public void onCreate() {
 		super.onCreate();
+
+		// These should be initialized here, not in the constructor, to make sure that the application context is available for them.
+		preferences = new AndorsTrailPreferences(this);
+		world = new WorldContext();
+		controllers = new ControllerContext(this, world);
+		setup = new WorldSetup(world, controllers, this);
 
 		if ( DEVELOPMENT_DEBUGMESSAGES && isExternalStorageWritable() ) {
 			File appDirectory = AndroidStorage.getStorageDirectory(getApplicationContext(), Constants.FILENAME_SAVEGAME_DIRECTORY);

@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 public final class AndorsTrailPreferences {
+	private final SharedPreferences prefs;
+
 	public static final int DISPLAYLOOT_DIALOG_ALWAYS = 0;
 	public static final int DISPLAYLOOT_DIALOG_FOR_ITEMS = 3;
 	public static final int DISPLAYLOOT_DIALOG_FOR_ITEMS_ELSE_TOAST = 4;
@@ -60,14 +62,20 @@ public final class AndorsTrailPreferences {
 	public int quickslotsPosition = QUICKSLOTS_POSITION_HORIZONTAL_CENTER_BOTTOM;
 	public boolean showQuickslotsWhenToolboxIsVisible = false;
 	public String language = "default";
+	public boolean quickslotsVisible = false;
+	public boolean debugVisible = true;
 	public boolean exportToDownloads = false;
 
 	public int selectedTheme = 0;
 
-	public void read(final Context androidContext) {
+	public AndorsTrailPreferences(Context context) {
+		// Use application context to avoid leaks
+		prefs = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+	}
+
+	public void read() {
 		AndorsTrailPreferences dest = this;
 		try {
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(androidContext);
 			dest.confirmRest = prefs.getBoolean("confirm_rest", true);
 			dest.confirmAttack = prefs.getBoolean("confirm_attack", true);
 			dest.displayLoot = Integer.parseInt(prefs.getString("display_lootdialog", Integer.toString(DISPLAYLOOT_DIALOG_ALWAYS)));
@@ -88,6 +96,10 @@ public final class AndorsTrailPreferences {
 			dest.selectedTheme = Integer.parseInt(prefs.getString("selectedTheme", Integer.toString(0)));
 			// This might be implemented as a skill in the future.
 			//dest.movementAggressiveness = Integer.parseInt(prefs.getString("movementaggressiveness", Integer.toString(MOVEMENTAGGRESSIVENESS_NORMAL)));
+
+			// These are set via the toolbox, not the prefs manager
+			dest.quickslotsVisible = prefs.getBoolean("quickslots_visible", false);
+			dest.debugVisible = prefs.getBoolean("debug_visible", true);
 			dest.exportToDownloads = prefs.getBoolean("export_to_downloads", false);
 		} catch (Exception e) {
 			dest.confirmRest = true;
@@ -109,7 +121,21 @@ public final class AndorsTrailPreferences {
 			dest.showQuickslotsWhenToolboxIsVisible = false;
 			dest.language = "default";
 			dest.selectedTheme = 0;
+			dest.quickslotsVisible = false;
+			dest.debugVisible = true;
 			dest.exportToDownloads = false;
 		}
+	}
+
+	// New Setters for specific preference values that can be updated during runtime, outsidde of the
+	// settings activity. These setters will update the value in the preferences and also update the field in this class.
+	public void setQuickslotsVisible(boolean visible) {
+		this.quickslotsVisible = visible;
+		prefs.edit().putBoolean("quickslots_visible", visible).apply();
+	}
+
+	public void setDebugVisible(boolean visible) {
+		this.debugVisible = visible;
+		prefs.edit().putBoolean("debug_visible", visible).apply();
 	}
 }

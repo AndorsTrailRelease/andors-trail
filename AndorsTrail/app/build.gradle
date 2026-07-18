@@ -3,6 +3,22 @@ plugins {
     id 'com.android.application'
 }
 
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def hasKeystoreProperties = keystorePropertiesFile.exists()
+
+if (hasKeystoreProperties) {
+    keystorePropertiesFile.withInputStream { stream ->
+        keystoreProperties.load(stream)
+    }
+}
+
+if (keystorePropertiesFile.exists()) {
+    keystorePropertiesFile.withInputStream { stream ->
+        keystoreProperties.load(stream)
+    }
+}
+
 android {
 
     compileSdkVersion 35
@@ -11,6 +27,17 @@ android {
         applicationId "com.gpl.rpg.AndorsTrail"
         minSdkVersion 19
         targetSdkVersion 35
+    }
+
+    signingConfigs {
+        if (hasKeystoreProperties) {
+            betaKey {
+                storeFile file(keystoreProperties["betaStoreFile"])
+                storePassword keystoreProperties["betaStorePassword"]
+                keyAlias keystoreProperties["betaKeyAlias"]
+                keyPassword keystoreProperties["betaKeyPassword"]
+            }
+        }
     }
 
     buildTypes {
@@ -25,13 +52,17 @@ android {
             manifestPlaceholders icon_name: 'icon_beta', fileproviderPath: 'AndorsTrail.beta2'
             applicationIdSuffix = '.beta2'
             versionNameSuffix = 'dev'
-			signingConfig = signingConfigs.debug
+            if (hasKeystoreProperties) {
+                signingConfig signingConfigs.betaKey
+            }
         }
         beta {
             manifestPlaceholders icon_name: 'icon_beta', fileproviderPath: 'AndorsTrail.beta2'
             applicationIdSuffix = '.beta2'
             versionNameSuffix = 'beta'
-            signingConfig = signingConfigs.debug
+            if (hasKeystoreProperties) {
+                signingConfig signingConfigs.betaKey
+            }
         }
     }
 

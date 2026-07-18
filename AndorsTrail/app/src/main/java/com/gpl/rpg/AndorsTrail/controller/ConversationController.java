@@ -69,26 +69,27 @@ public final class ConversationController {
 	}
 
 	private ScriptEffectResult applyScriptEffectsForPhrase(Resources res, final Player player, final Phrase phrase) {
-		boolean req_false;
 		if (phrase.scriptEffects == null || phrase.scriptEffects.length == 0) return null;
 
 		final ScriptEffectResult result = new ScriptEffectResult();
 		for (ScriptEffect effect : phrase.scriptEffects) {
-			req_false = false;
+			boolean req_false = false;
 			if (effect.hasRequirements()) {
 				for (Requirement requirement : effect.requires) {
-					if (!canFulfillRequirement(world, requirement)) req_false = true;
+					if (!canFulfillRequirement(world, requirement)) {
+						req_false = true;
+						break;
+					}
 				}
 			}
 			if (!req_false) {
 				applyScriptEffect(res, player, effect, result);
-
-				if (result.isEmpty()) return null;
-
-				player.inventory.add(result.loot);
-				controllers.actorStatsController.addExperience(result.loot.exp);
 			}
 		}
+		if (result.isEmpty()) return null;
+
+		player.inventory.add(result.loot);
+		controllers.actorStatsController.addExperience(result.loot.exp);
 		return result;
 	}
 
@@ -123,6 +124,9 @@ public final class ConversationController {
 				break;
 			case alignmentToReg3:
 				toAkkuAlignmentReward(player, effect.effectID, Constants.FACTION_SCORE_CALC_REGISTER3_NAME);
+				break;
+			case setNextPhraseID:
+				world.model.worldData.nextPhraseID = effect.effectID;
 				break;
 			case alignmentFromReg1:
 				fromAkkuAlignmentReward(player, effect.effectID, Constants.FACTION_SCORE_CALC_REGISTER1_NAME);
@@ -545,6 +549,9 @@ public final class ConversationController {
 				.replace(Constants.PLACEHOLDER_REG2, String.valueOf(player.getAlignment(Constants.FACTION_SCORE_CALC_REGISTER2_NAME)))
 				.replace(Constants.PLACEHOLDER_REG3, String.valueOf(player.getAlignment(Constants.FACTION_SCORE_CALC_REGISTER3_NAME)));
 	}
+	private static String getNextPhraseID(WorldContext world, Reply reply) {
+		return reply.nextPhrase.replace(Constants.PLACEHOLDER_NEXTPHRASEID, String.valueOf(world.model.worldData.nextPhraseID));
+	}
 
 	public static final class ConversationStatemachine {
 		private final ConversationCollection conversationCollection = new ConversationCollection();
@@ -569,7 +576,7 @@ public final class ConversationController {
 
 		public void playerSelectedReply(final Resources res, Reply r) {
 			applyReplyEffect(world, r, controllers);
-			proceedToPhrase(res, r.nextPhrase, true, true);
+			proceedToPhrase(res, getNextPhraseID(world, r), true, true);
 		}
 
 		public void playerSelectedNextStep(final Resources res) {
@@ -633,7 +640,7 @@ public final class ConversationController {
 				for (Reply r : currentPhrase.replies) {
 					if (!canSelectReply(world, r)) continue;
 					applyReplyEffect(world, r, controllers);
-					return r.nextPhrase;
+					return getNextPhraseID(world, r);
 				}
 			} else if (displayPhraseMessage) {
 				String message = getDisplayMessage(currentPhrase, player);

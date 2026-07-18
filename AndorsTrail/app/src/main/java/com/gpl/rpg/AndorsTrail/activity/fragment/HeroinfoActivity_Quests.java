@@ -140,7 +140,8 @@ public final class HeroinfoActivity_Quests extends Fragment {
 
 			Map<String, Object> item = new HashMap<String, Object>();
 			item.put(mn_questName, q.name);
-			item.put(mn_questStatus, getString(R.string.questlog_queststatus, getString(statusResId)));
+			//item.put(mn_questStatus, getString(R.string.questlog_queststatus, getString(statusResId)));
+			if(isCompleted) item.put(mn_questStatus, getString(R.string.questlog_queststatus_checkmark));
 			groupList.add(item);
 
 			List<Map<String, ?>> logItemList = new ArrayList<Map<String, ?>>();
