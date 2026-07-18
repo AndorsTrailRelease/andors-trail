@@ -6,9 +6,7 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 
 import com.gpl.rpg.AndorsTrail.AndorsTrailApplication;
-import com.gpl.rpg.AndorsTrail.BuildConfig;
 import com.gpl.rpg.AndorsTrail.R;
-import com.gpl.rpg.AndorsTrail.util.L;
 import com.gpl.rpg.AndorsTrail.util.ThemeHelper;
 
 public final class Preferences extends PreferenceActivity {

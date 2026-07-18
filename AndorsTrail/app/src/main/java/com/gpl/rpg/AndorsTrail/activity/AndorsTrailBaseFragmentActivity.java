@@ -106,7 +106,7 @@ public abstract class AndorsTrailBaseFragmentActivity extends FragmentActivity {
     }
 
     // Global key handling for Back action (Adds Escape and B as back keys)
-    @SuppressLint("RestrictedAPI")
+    @SuppressLint("RestrictedApi")
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         if (ActivityKeyHandler.handleBackMappedKey(this, event)) return true;
