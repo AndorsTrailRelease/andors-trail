@@ -7,7 +7,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -206,6 +205,20 @@ public final class MainActivity
 			controllers.gameRoundController.resume();
 			updateStatus();
 		}
+	}
+
+	// Close toolbox by toolbox toggle button.  Needed here since MainView loses focus when toolbox opens.
+	@Override
+	public boolean dispatchKeyEvent(KeyEvent event) {
+		if(getToolboxView().isVisible()) {
+			if (event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {
+				if (InputController.isMappedKey(event.getKeyCode(), InputController.KEY_TOOLBOX)) {
+					toolboxview.hideToolbox();
+					return true;
+				}
+			}
+		}
+		return super.dispatchKeyEvent(event);
 	}
 
 	// CHANGELOG: Back now closes the toolbox if it's open.  Another Back will be needed to return to start screen.

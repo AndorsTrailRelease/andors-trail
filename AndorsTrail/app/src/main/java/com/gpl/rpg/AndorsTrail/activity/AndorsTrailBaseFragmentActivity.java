@@ -105,7 +105,12 @@ public abstract class AndorsTrailBaseFragmentActivity extends FragmentActivity {
         }
     }
 
-    // Global key handling for Back action (Adds Escape and B as back keys)
+    /**
+     * Handles the activity's key events, including alternate keys mapped to Back.
+     *
+     * @param event the key event to dispatch
+     * @return {@code true} when the event was handled, otherwise the superclass result
+     */
     @SuppressLint("RestrictedApi")
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
@@ -113,6 +118,12 @@ public abstract class AndorsTrailBaseFragmentActivity extends FragmentActivity {
         return super.dispatchKeyEvent(event);
     }
 
+    /**
+     * Handles generic motion events, including mouse buttons mapped to Back.
+     *
+     * @param event the motion event to dispatch
+     * @return {@code true} when the event was handled, otherwise the superclass result
+     */
     @Override
     public boolean dispatchGenericMotionEvent(MotionEvent event) {
         if (ActivityKeyHandler.handleBackMappedMouseButton(this, event)) return true;
