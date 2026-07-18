@@ -57,7 +57,7 @@ public final class LoadSaveActivity extends AndorsTrailBaseActivity implements O
     private ModelContainer model;
     private TileManager tileManager;
     private AndorsTrailPreferences preferences;
-    private enum ExportAPI {
+    public enum ExportAPI {
         EXPORT_API_STORAGE_ACCESS_FRAMEWORK,
         EXPORT_API_MEDIASTORE,
     }

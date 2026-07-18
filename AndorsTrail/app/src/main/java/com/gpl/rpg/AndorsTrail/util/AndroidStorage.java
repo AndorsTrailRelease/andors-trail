@@ -636,7 +636,10 @@ public final class AndroidStorage {
     }
 
     private static String ensureZipDisplayName(String zipFileName) {
-        if (zipFileName == null || zipFileName.endsWith(".zip")) {
+        if (zipFileName == null) {
+            throw new IllegalArgumentException("zipFileName must not be null");
+        }
+        if (zipFileName.toLowerCase(Locale.ROOT).endsWith(".zip")) {
             return zipFileName;
         }
         return zipFileName + ".zip";
