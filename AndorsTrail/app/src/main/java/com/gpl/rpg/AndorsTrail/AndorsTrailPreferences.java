@@ -49,14 +49,14 @@ public final class AndorsTrailPreferences {
 	public int displayLoot = DISPLAYLOOT_DIALOG_ALWAYS;
 	public boolean fullscreen = true;
 	public int attackspeed_milliseconds = 1000;
-	public int movementMethod = MOVEMENTMETHOD_STRAIGHT;
+	public int movementMethod = MOVEMENTMETHOD_DIRECTIONAL;
 	public int movementAggressiveness = MOVEMENTAGGRESSIVENESS_NORMAL;
 	public float scalingFactor = 1.0f;
 	public int dpadPosition;
 	public int dpadTransparency;
 	public boolean dpadMinimizeable = true;
 	public boolean optimizedDrawing = false;
-	public boolean highQualityFilters = true;
+	public boolean highQualityFilters = false;
 	public boolean enableUiAnimations = true;
 	public int displayOverwriteSavegame = CONFIRM_OVERWRITE_SAVEGAME_ALWAYS;
 	public int quickslotsPosition = QUICKSLOTS_POSITION_HORIZONTAL_CENTER_BOTTOM;
@@ -64,6 +64,7 @@ public final class AndorsTrailPreferences {
 	public String language = "default";
 	public boolean quickslotsVisible = false;
 	public boolean debugVisible = true;
+	public boolean exportToDownloads = false;
 
 	public int selectedTheme = 0;
 
@@ -80,7 +81,7 @@ public final class AndorsTrailPreferences {
 			dest.displayLoot = Integer.parseInt(prefs.getString("display_lootdialog", Integer.toString(DISPLAYLOOT_DIALOG_ALWAYS)));
 			dest.fullscreen = prefs.getBoolean("fullscreen", true);
 			dest.attackspeed_milliseconds = Integer.parseInt(prefs.getString("attackspeed", "1000"));
-			dest.movementMethod = Integer.parseInt(prefs.getString("movementmethod", Integer.toString(MOVEMENTMETHOD_STRAIGHT)));
+			dest.movementMethod = Integer.parseInt(prefs.getString("movementmethod", Integer.toString(MOVEMENTMETHOD_DIRECTIONAL)));
 			dest.scalingFactor = Float.parseFloat(prefs.getString("scaling_factor", "1.0f"));
 			dest.dpadPosition = Integer.parseInt(prefs.getString("dpadposition", Integer.toString(DPAD_POSITION_DISABLED)));
 			dest.dpadTransparency = Integer.parseInt(prefs.getString("dpadtransparency", Integer.toString(DPAD_TRANSPARENCY_50_PERCENT)));
@@ -99,20 +100,21 @@ public final class AndorsTrailPreferences {
 			// These are set via the toolbox, not the prefs manager
 			dest.quickslotsVisible = prefs.getBoolean("quickslots_visible", false);
 			dest.debugVisible = prefs.getBoolean("debug_visible", true);
+			dest.exportToDownloads = prefs.getBoolean("export_to_downloads", false);
 		} catch (Exception e) {
 			dest.confirmRest = true;
 			dest.confirmAttack = true;
 			dest.displayLoot = DISPLAYLOOT_DIALOG_ALWAYS;
 			dest.fullscreen = true;
 			dest.attackspeed_milliseconds = 1000;
-			dest.movementMethod = MOVEMENTMETHOD_STRAIGHT;
+			dest.movementMethod = MOVEMENTMETHOD_DIRECTIONAL;
 			dest.movementAggressiveness = MOVEMENTAGGRESSIVENESS_NORMAL;
 			dest.scalingFactor = 1.0f;
 			dest.dpadPosition = DPAD_POSITION_DISABLED;
 			dest.dpadTransparency = DPAD_TRANSPARENCY_50_PERCENT;
 			dest.dpadMinimizeable = true;
 			dest.optimizedDrawing = false;
-			dest.highQualityFilters = true;
+			dest.highQualityFilters = false;
 			dest.enableUiAnimations = true;
 			dest.displayOverwriteSavegame = CONFIRM_OVERWRITE_SAVEGAME_ALWAYS;
 			dest.quickslotsPosition = QUICKSLOTS_POSITION_HORIZONTAL_CENTER_BOTTOM;
@@ -121,6 +123,7 @@ public final class AndorsTrailPreferences {
 			dest.selectedTheme = 0;
 			dest.quickslotsVisible = false;
 			dest.debugVisible = true;
+			dest.exportToDownloads = false;
 		}
 	}
 

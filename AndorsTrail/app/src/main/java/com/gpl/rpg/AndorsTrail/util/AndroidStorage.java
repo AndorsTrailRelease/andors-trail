@@ -10,8 +10,15 @@ import androidx.annotation.RequiresApi;
 import androidx.core.content.FileProvider;
 import androidx.documentfile.provider.DocumentFile;
 
+import android.content.ContentUris;
+import android.content.ContentValues;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.database.Cursor;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.MediaStore;
 
 import com.gpl.rpg.AndorsTrail.R;
 import com.gpl.rpg.AndorsTrail.controller.Constants;
@@ -25,6 +32,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.CancellationException;
 import java.util.function.Consumer;
 import java.util.zip.ZipEntry;
@@ -467,6 +476,243 @@ public final class AndroidStorage {
                                                                                    false);
         CustomDialogFactory.addCancelButton(dialog, android.R.string.no);
         return dialog;
+    }
+
+    // Copies files into a public subfolder of the Downloads directory using MediaStore (API 29+).
+    // Files inserted this way are visible to file managers and persist after app uninstall.
+    // Existing files with the same name in the same subfolder are replaced.
+    @RequiresApi(api = Build.VERSION_CODES.Q)
+    public static void copyFilesToMediaStoreDownloadsAsync(File[] files,
+                                                           Context context,
+                                                           String subfolder,
+                                                           String loadingMessage,
+                                                           Consumer<Boolean> callback) {
+        BackgroundWorker<Boolean> worker = new BackgroundWorker<>();
+        CustomDialogFactory.CustomDialog progressDialog = getLoadingDialog(context, loadingMessage);
+        progressDialog.setOnCancelListener(dialog -> worker.cancel());
+        ContentResolver resolver = context.getContentResolver();
+        Handler handler = Handler.createAsync(Looper.getMainLooper());
+        String relPath = Environment.DIRECTORY_DOWNLOADS + "/" + subfolder + "/";
+        Uri collection = MediaStore.Downloads.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY);
+
+        worker.setTask(workerCallback -> {
+            try {
+                workerCallback.onInitialize();
+                for (int i = 0; i < files.length; i++) {
+                    if (worker.isCancelled()) {
+                        workerCallback.onFailure(new CancellationException("Cancelled"));
+                        return;
+                    }
+                    File file = files[i];
+                    if (file == null || !file.isFile()) continue;
+
+                    // Delete any existing entry with the same name to allow overwrite
+                    deleteMediaStoreEntry(resolver, collection, relPath, file.getName());
+
+                    ContentValues values = new ContentValues();
+                    values.put(MediaStore.Downloads.DISPLAY_NAME, file.getName());
+                    values.put(MediaStore.Downloads.MIME_TYPE, "application/octet-stream");
+                    values.put(MediaStore.Downloads.RELATIVE_PATH, relPath);
+                    values.put(MediaStore.Downloads.IS_PENDING, 1);
+
+                    Uri itemUri = resolver.insert(collection, values);
+                    if (itemUri == null) throw new IOException("MediaStore insert failed for " + file.getName());
+
+                    try {
+                        try (OutputStream out = resolver.openOutputStream(itemUri);
+                             FileInputStream in = new FileInputStream(file)) {
+                            if (out == null) throw new IOException("MediaStore openOutputStream returned null for " + itemUri);
+                            copyStream(in, out);
+                        }
+
+                        values.clear();
+                        values.put(MediaStore.Downloads.IS_PENDING, 0);
+                        resolver.update(itemUri, values, null, null);
+                    } catch (Exception e) {
+                        resolver.delete(itemUri, null, null);
+                        throw e;
+                    }
+
+                    workerCallback.onProgress((float) (i + 1) / files.length);
+                }
+                workerCallback.onComplete(true);
+            } catch (NullPointerException e) {
+                if (worker.isCancelled()) {
+                    workerCallback.onFailure(new CancellationException("Cancelled"));
+                } else {
+                    workerCallback.onFailure(e);
+                }
+            } catch (Exception e) {
+                workerCallback.onFailure(e);
+            }
+        });
+
+        worker.setCallback(getDefaultBackgroundWorkerCallback(handler, progressDialog, callback));
+        worker.run();
+    }
+
+    // Creates a zip of the given files and inserts it into a public subfolder of Downloads (API 29+).
+    @RequiresApi(api = Build.VERSION_CODES.Q)
+    public static void createZipInMediaStoreDownloadsAsync(File[] files,
+                                                           Context context,
+                                                           String subfolder,
+                                                           String zipFileName,
+                                                           String loadingMessage,
+                                                           Consumer<Boolean> callback) {
+        BackgroundWorker<Boolean> worker = new BackgroundWorker<>();
+        CustomDialogFactory.CustomDialog progressDialog = getLoadingDialog(context, loadingMessage);
+        progressDialog.setOnCancelListener(dialog -> worker.cancel());
+        ContentResolver resolver = context.getContentResolver();
+        Handler handler = Handler.createAsync(Looper.getMainLooper());
+        String relPath = Environment.DIRECTORY_DOWNLOADS + "/" + subfolder + "/";
+        Uri collection = MediaStore.Downloads.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY);
+        String displayName = ensureZipDisplayName(zipFileName);
+
+        worker.setTask(workerCallback -> {
+            try {
+                workerCallback.onInitialize();
+
+                // Build zip into a temp file
+                File zip = File.createTempFile("temp_worldmap", ".zip");
+                try (FileOutputStream fos = new FileOutputStream(zip);
+                     ZipOutputStream zipOut = new ZipOutputStream(fos)) {
+                    for (int i = 0; files != null && i < files.length; i++) {
+                        File file = files[i];
+                        if (file == null) continue;
+                        try (FileInputStream fis = new FileInputStream(file)) {
+                            workerCallback.onProgress((float) (i + 1) / files.length);
+                            zipOut.putNextEntry(new ZipEntry(file.getName()));
+                            copyStream(fis, zipOut);
+                            zipOut.closeEntry();
+                        }
+                    }
+                }
+
+                // Insert zip into MediaStore Downloads
+                deleteMediaStoreEntry(resolver, collection, relPath, displayName);
+
+                ContentValues values = new ContentValues();
+                values.put(MediaStore.Downloads.DISPLAY_NAME, displayName);
+                values.put(MediaStore.Downloads.MIME_TYPE, "application/zip");
+                values.put(MediaStore.Downloads.RELATIVE_PATH, relPath);
+                values.put(MediaStore.Downloads.IS_PENDING, 1);
+
+                Uri itemUri = resolver.insert(collection, values);
+                if (itemUri == null) throw new IOException("MediaStore insert failed for " + displayName);
+
+                try {
+                    try (OutputStream out = resolver.openOutputStream(itemUri);
+                         FileInputStream in = new FileInputStream(zip)) {
+                        if (out == null) throw new IOException("MediaStore openOutputStream returned null for " + itemUri);
+                        copyStream(in, out);
+                    }
+
+                    values.clear();
+                    values.put(MediaStore.Downloads.IS_PENDING, 0);
+                    resolver.update(itemUri, values, null, null);
+
+                    workerCallback.onComplete(true);
+                } catch (Exception e) {
+                    resolver.delete(itemUri, null, null);
+                    throw e;
+                } finally {
+                    // Best-effort cleanup of the temp file
+                    //noinspection ResultOfMethodCallIgnored
+                    zip.delete();
+                }
+            } catch (NullPointerException e) {
+                if (worker.isCancelled()) {
+                    workerCallback.onFailure(new CancellationException("Cancelled"));
+                } else {
+                    workerCallback.onFailure(e);
+                }
+            } catch (Exception e) {
+                workerCallback.onFailure(e);
+            }
+        });
+
+        worker.setCallback(getDefaultBackgroundWorkerCallback(handler, progressDialog, callback));
+        worker.run();
+    }
+
+    private static String ensureZipDisplayName(String zipFileName) {
+        if (zipFileName == null) {
+            throw new IllegalArgumentException("zipFileName must not be null");
+        }
+        if (zipFileName.toLowerCase(Locale.ROOT).endsWith(".zip")) {
+            return zipFileName;
+        }
+        return zipFileName + ".zip";
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.Q)
+    private static void deleteMediaStoreEntry(ContentResolver resolver, Uri collection,
+                                              String relPath, String fileName) {
+        String selection = MediaStore.Downloads.DISPLAY_NAME + "=? AND "
+                           + MediaStore.Downloads.RELATIVE_PATH + "=?";
+        try (Cursor cursor = resolver.query(collection,
+                                            new String[]{MediaStore.Downloads._ID},
+                                            selection,
+                                            new String[]{fileName, relPath},
+                                            null)) {
+            if (cursor != null) {
+                while (cursor.moveToNext()) {
+                    long id = cursor.getLong(0);
+                    resolver.delete(ContentUris.withAppendedId(collection, id), null, null);
+                }
+            }
+        }
+    }
+
+    /**
+     * Checks if a file exists in the MediaStore Downloads collection with the given relative path and file name.
+     * @param context Context for accessing ContentResolver
+     * @param subfolder Subfolder within the Downloads directory
+     * @param fileName File name to check
+     * @return true if file exists, false otherwise
+     */
+    @RequiresApi(api = Build.VERSION_CODES.Q)
+    public static boolean mediaStoreFileExists(Context context, String subfolder, String fileName) {
+        ContentResolver resolver = context.getContentResolver();
+        Uri collection = MediaStore.Downloads.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY);
+        String relPath = Environment.DIRECTORY_DOWNLOADS + "/" + subfolder + "/";
+        String selection = MediaStore.Downloads.DISPLAY_NAME + "=? AND " + MediaStore.Downloads.RELATIVE_PATH + "=?";
+
+        try (Cursor cursor = resolver.query(
+                collection,
+                new String[]{MediaStore.Downloads._ID},
+                selection,
+                new String[]{fileName, relPath},
+                null)) {
+            return cursor != null && cursor.moveToFirst();
+        }
+    }
+
+    // Check to see if the device supports OPEN_DOCUMENT_TREE intents.  Some devices (e.g., Chromecast/Android TV)
+    // claim to support it, but then have a stub activity that does nothing, so we also check for that case.
+    public static boolean isOpenDocumentTreeIntentAvailable(Context context) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            return false;
+        }
+
+        Intent intent = getNewOpenDirectoryIntent();
+        PackageManager packageManager = context.getPackageManager();
+        List<ResolveInfo> handlers = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+        if (handlers.isEmpty()) {
+            return false;
+        }
+
+        for (ResolveInfo handler : handlers) {
+            ActivityInfo activityInfo = handler.activityInfo;
+            if (activityInfo == null) continue;
+            String packageName = activityInfo.packageName;
+            String activityName = activityInfo.name;
+            if (packageName == null || activityName == null) continue;
+            if (!(packageName + "/" + activityName).toLowerCase(Locale.ROOT).contains("stub")) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
