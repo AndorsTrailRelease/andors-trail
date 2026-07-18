@@ -171,7 +171,7 @@ public final class StartScreenActivity extends AndorsTrailBaseFragmentActivity i
 	private void initPreferences() {
 		AndorsTrailApplication app = AndorsTrailApplication.getApplicationFromActivity(this);
 		AndorsTrailPreferences preferences = app.getPreferences();
-		preferences.read(this);
+		preferences.read();
 		ThemeHelper.changeTheme(preferences.selectedTheme);
 	}
 	
