@@ -78,34 +78,34 @@ public class StartScreenActivity_NewGame extends Fragment {
 
 		final RadioGroup group = (RadioGroup) root.findViewById(R.id.newgame_spritegroup);
 		group.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			
+
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
 				for (int i = 0; i < group.getChildCount(); i++) {
 					ToggleButton tb = ((ToggleButton)group.getChildAt(i));
 					tb.setChecked(tb.getId() == checkedId);
 				}
-				   if (checkedId == R.id.newgame_sprite0) {
-					   selectedIconID = TileManager.CHAR_HERO_0;
-				   } else if (checkedId == R.id.newgame_sprite1) {
-					   selectedIconID = TileManager.CHAR_HERO_1;
-				   } else if (checkedId == R.id.newgame_sprite2) {
-					   selectedIconID = TileManager.CHAR_HERO_2;
-				   }
+                if (checkedId == R.id.newgame_sprite0) {
+                    selectedIconID = TileManager.CHAR_HERO_0;
+                } else if (checkedId == R.id.newgame_sprite1) {
+                    selectedIconID = TileManager.CHAR_HERO_1;
+                } else if (checkedId == R.id.newgame_sprite2) {
+                    selectedIconID = TileManager.CHAR_HERO_2;
+                }
+				startscreen_enterheroname.setNextFocusUpId(checkedId);
 			}
 		});
-		
-		OnClickListener l = new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				group.check(v.getId());
-			}
-		};
-		
+
 		for (int i = 0; i < group.getChildCount(); i++) {
 			ToggleButton tb = ((ToggleButton)group.getChildAt(i));
-			tb.setOnClickListener(l);
+
+			tb.setOnClickListener((v) -> group.check(v.getId()));
+
+			tb.setOnFocusChangeListener((v, hasFocus)  -> {
+				if (hasFocus) {
+					group.check(v.getId());
+				}
+			});
 		}
 		
 		Button b = (Button) root.findViewById(R.id.startscreen_newgame_start);
@@ -126,7 +126,32 @@ public class StartScreenActivity_NewGame extends Fragment {
 		
 		return root;
 	}
-	
+
+	public void focusDefaultButton() {
+		View target = startscreen_enterheroname;
+		if (target != null) {
+			target.post(() -> {
+				if (target.isShown() && target.isEnabled()) {
+					target.requestFocus();
+				}
+			});
+		}
+	}
+
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		focusDefaultButton();
+	}
+
+	@Override
+	public void onHiddenChanged(boolean hidden) {
+		super.onHiddenChanged(hidden);
+		if (!hidden) {
+			focusDefaultButton();
+		}
+	}
+
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);

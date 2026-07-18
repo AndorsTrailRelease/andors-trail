@@ -16,6 +16,7 @@ import com.gpl.rpg.AndorsTrail.util.ThemeHelper;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -79,6 +80,23 @@ public final class DisplayWorldMapActivity extends AndorsTrailBaseActivity {
 		update();
 	}
 
+	@Override
+	public boolean dispatchKeyEvent(KeyEvent event) {
+		if (event.getAction() == KeyEvent.ACTION_DOWN) {
+			switch (event.getKeyCode()) {
+				case KeyEvent.KEYCODE_BUTTON_L1:
+					displayworldmap_webview.zoomOut();
+					return true;
+				case KeyEvent.KEYCODE_BUTTON_R1:
+					displayworldmap_webview.zoomIn();
+					return true;
+				case KeyEvent.KEYCODE_BUTTON_A:
+					recenter();
+					return true;
+			}
+		}
+		return super.dispatchKeyEvent(event);
+	}
 	WorldMapSegmentMap map;
 	Coord offsetWorldmapTo;
 	@SuppressLint("NewApi")

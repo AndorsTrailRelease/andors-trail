@@ -1,8 +1,10 @@
 package com.gpl.rpg.AndorsTrail.controller;
 
+import static com.gpl.rpg.AndorsTrail.controller.CombatController.BeginTurnAs.player;
 import static com.gpl.rpg.AndorsTrail.controller.SkillController.canLevelupSkillWithQuest;
 
 import java.util.ArrayList;
+import java.util.List;
 import com.gpl.rpg.AndorsTrail.util.Format;
 import com.gpl.rpg.AndorsTrail.util.NumTagResolver;
 
@@ -19,10 +21,14 @@ import com.gpl.rpg.AndorsTrail.model.ability.SkillCollection;
 import com.gpl.rpg.AndorsTrail.model.ability.SkillInfo;
 import com.gpl.rpg.AndorsTrail.model.actor.Actor;
 import com.gpl.rpg.AndorsTrail.model.actor.Monster;
+import com.gpl.rpg.AndorsTrail.model.actor.MonsterType;
 import com.gpl.rpg.AndorsTrail.model.actor.Player;
 import com.gpl.rpg.AndorsTrail.model.conversation.ConversationCollection;
 import com.gpl.rpg.AndorsTrail.model.conversation.Phrase;
 import com.gpl.rpg.AndorsTrail.model.conversation.Reply;
+import com.gpl.rpg.AndorsTrail.model.item.ItemFilter;
+import com.gpl.rpg.AndorsTrail.model.item.ItemFilterCollection;
+import com.gpl.rpg.AndorsTrail.model.item.ItemType;
 import com.gpl.rpg.AndorsTrail.model.item.ItemTypeCollection;
 import com.gpl.rpg.AndorsTrail.model.item.Loot;
 import com.gpl.rpg.AndorsTrail.model.map.LayeredTileMap;
@@ -69,14 +75,23 @@ public final class ConversationController {
 
 		final ScriptEffectResult result = new ScriptEffectResult();
 		for (ScriptEffect effect : phrase.scriptEffects) {
-			applyScriptEffect(res, player, effect, result);
+			boolean req_false = false;
+			if (effect.hasRequirements()) {
+				for (Requirement requirement : effect.requires) {
+					if (!canFulfillRequirement(world, requirement)) {
+						req_false = true;
+						break;
+					}
+				}
+			}
+			if (!req_false) {
+				applyScriptEffect(res, player, effect, result);
+			}
 		}
-
 		if (result.isEmpty()) return null;
 
 		player.inventory.add(result.loot);
 		controllers.actorStatsController.addExperience(result.loot.exp);
-
 		return result;
 	}
 
@@ -111,6 +126,9 @@ public final class ConversationController {
 				break;
 			case alignmentToReg3:
 				toAkkuAlignmentReward(player, effect.effectID, Constants.FACTION_SCORE_CALC_REGISTER3_NAME);
+				break;
+			case setNextPhraseID:
+				world.model.worldData.nextPhraseID = effect.effectID;
 				break;
 			case alignmentFromReg1:
 				fromAkkuAlignmentReward(player, effect.effectID, Constants.FACTION_SCORE_CALC_REGISTER1_NAME);
@@ -312,7 +330,12 @@ public final class ConversationController {
 	}
 
 	private void addItemReward(String itemTypeID, int quantity, ScriptEffectResult result) {
-		result.loot.add(world.itemTypes.getItemType(itemTypeID), quantity);
+		if (ItemTypeCollection.isItemFilter(itemTypeID)) {
+			ItemFilter filter = world.itemFilters.getItemFilter(itemTypeID);
+			result.loot.add(filter.getRandomItem(), quantity);
+		} else {
+			result.loot.add(world.itemTypes.getItemType(itemTypeID), quantity);
+		}
 	}
 
 	private void addSkillReward(Player player, SkillCollection.SkillID skillID, ScriptEffectResult result) {
@@ -378,12 +401,36 @@ public final class ConversationController {
 				break;
 			case wear:
 			case wearRemove:
-				result =  player.inventory.isWearing(requirement.requireID, requirement.value);
+				if (ItemTypeCollection.isItemFilter(requirement.requireID)) {
+					ItemFilter filter = world.itemFilters.getItemFilter(requirement.requireID);
+					result = false;
+					if (filter != null) {
+						for (ItemType item : filter.getItemTypes()) {
+							if (player.inventory.isWearing(item.id, requirement.value)) {
+								result = true;
+								break;
+							}
+						}
+					}
+				} else {
+					result =  player.inventory.isWearing(requirement.requireID, requirement.value);
+				}
 				break;
 			case inventoryKeep:
 			case inventoryRemove:
 				if (ItemTypeCollection.isGoldItemType(requirement.requireID)) {
-					result =  player.inventory.gold >= requirement.value;
+					result = player.inventory.gold >= requirement.value;
+				} else if (ItemTypeCollection.isItemFilter(requirement.requireID)) {
+					ItemFilter filter = world.itemFilters.getItemFilter(requirement.requireID);
+					result = false;
+					if (filter != null) {
+						for (ItemType item : filter.getItemTypes()) {
+							if (player.inventory.hasItem(item.id, requirement.value)) {
+								result = true;
+								break;
+							}
+						}
+					}
 				} else {
 					result =  player.inventory.hasItem(requirement.requireID, requirement.value);
 				}
@@ -398,7 +445,18 @@ public final class ConversationController {
 				result =  world.model.worldData.hasTimerElapsed(requirement.requireID, requirement.value);
 				break;
 			case usedItem:
-				result =  stats.getNumberOfTimesItemHasBeenUsed(requirement.requireID) >= requirement.value;
+				if (ItemTypeCollection.isItemFilter(requirement.requireID)) {
+					ItemFilter filter = world.itemFilters.getItemFilter(requirement.requireID);
+					result = false;
+					if (filter != null) {
+						for (ItemType item : filter.getItemTypes()) {
+							result = stats.getNumberOfTimesItemHasBeenUsed(item.id) >= requirement.value;
+							if (result) break;
+						}
+					}
+				} else {
+					result =  stats.getNumberOfTimesItemHasBeenUsed(requirement.requireID) >= requirement.value;
+				}
 				break;
 			case spentGold:
 				result =  stats.getSpentGold() >= requirement.value;
@@ -453,13 +511,35 @@ public final class ConversationController {
 				if (ItemTypeCollection.isGoldItemType(requirement.requireID)) {
 					p.inventory.gold -= requirement.value;
 					world.model.statistics.addGoldSpent(requirement.value);
+				} else if (ItemTypeCollection.isItemFilter(requirement.requireID)) {
+					ItemFilter filter = world.itemFilters.getItemFilter(requirement.requireID);
+					if (filter != null) {
+						for (ItemType item : filter.getItemTypes()) {
+							if (p.inventory.hasItem(item.id, requirement.value)) {
+								p.inventory.removeItem(item.id, requirement.value);
+								break;
+							}
+						}
+					}
 				} else {
 					p.inventory.removeItem(requirement.requireID, requirement.value);
 				}
 				break;
             case wearRemove:
-                controllers.itemController.removeEquippedItem(requirement.requireID, requirement.value);
-                break;
+				if (ItemTypeCollection.isItemFilter(requirement.requireID)) {
+					ItemFilter filter = world.itemFilters.getItemFilter(requirement.requireID);
+					if (filter != null) {
+						for (ItemType item : filter.getItemTypes()) {
+							if (p.inventory.isWearing(item.id, requirement.value)) {
+								controllers.itemController.removeEquippedItem(item.id, requirement.value);
+								break;
+							}
+						}
+					}
+				} else {
+					controllers.itemController.removeEquippedItem(requirement.requireID, requirement.value);
+                	break;
+				}
 		}
 	}
 
@@ -485,6 +565,9 @@ public final class ConversationController {
 				.replace(Constants.PLACEHOLDER_REG2, reg2)
 				.replace(Constants.PLACEHOLDER_REG3, reg3);
 	}
+	private static String getNextPhraseID(WorldContext world, Reply reply) {
+		return reply.nextPhrase.replace(Constants.PLACEHOLDER_NEXTPHRASEID, String.valueOf(world.model.worldData.nextPhraseID));
+	}
 
 	public static final class ConversationStatemachine {
 		private final ConversationCollection conversationCollection = new ConversationCollection();
@@ -509,7 +592,7 @@ public final class ConversationController {
 
 		public void playerSelectedReply(final Resources res, Reply r) {
 			applyReplyEffect(world, r, controllers);
-			proceedToPhrase(res, r.nextPhrase, true, true);
+			proceedToPhrase(res, getNextPhraseID(world, r), true, true);
 		}
 
 		public void playerSelectedNextStep(final Resources res) {
@@ -573,7 +656,7 @@ public final class ConversationController {
 				for (Reply r : currentPhrase.replies) {
 					if (!canSelectReply(world, r)) continue;
 					applyReplyEffect(world, r, controllers);
-					return r.nextPhrase;
+					return getNextPhraseID(world, r);
 				}
 			} else if (displayPhraseMessage) {
 				String message = getDisplayMessage(currentPhrase, player);
@@ -586,7 +669,9 @@ public final class ConversationController {
 			}
 
 			for (Reply r : currentPhrase.replies) {
-				if (!canSelectReply(world, r)) continue;
+				if (!canSelectReply(world, r)) {
+					continue;
+				}
 				listener.onConversationHasReply(r, getDisplayMessage(r, player));
 			}
 			return null;

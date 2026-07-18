@@ -2,8 +2,8 @@ package com.gpl.rpg.AndorsTrail.activity;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
-import android.view.Window;
-import android.view.WindowManager;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 
 import com.gpl.rpg.AndorsTrail.AndorsTrailApplication;
 import com.gpl.rpg.AndorsTrail.R;
@@ -31,5 +31,16 @@ public final class Preferences extends PreferenceActivity {
 		AndorsTrailApplication app = AndorsTrailApplication.getApplicationFromActivity(this);
 		app.setLocale(this);
 	}
-}
 
+	@Override
+	public boolean dispatchKeyEvent(KeyEvent event) {
+		if (ActivityKeyHandler.handleBackMappedKey(this, event)) return true;
+		return super.dispatchKeyEvent(event);
+	}
+
+	@Override
+	public boolean dispatchGenericMotionEvent(MotionEvent event) {
+		if (ActivityKeyHandler.handleBackMappedMouseButton(this, event)) return true;
+		return super.dispatchGenericMotionEvent(event);
+	}
+}

@@ -62,6 +62,8 @@ public final class MonsterInfoActivity extends AndorsTrailBaseActivity {
 		hp = (RangeBar) findViewById(R.id.monsterinfo_healthbar);
 		hp.init(R.drawable.ui_progress_health, R.string.status_hp);
 		monsterinfo_container = (ViewGroup) findViewById(R.id.monsterinfo_container);
+
+		b.post(b::requestFocus);
 	}
 
 	@Override

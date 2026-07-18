@@ -28,7 +28,7 @@
 			android:key="optimized_drawing" />
 		<CheckBoxPreference
 			android:title="@string/preferences_high_quality_filters_title"
-			android:defaultValue="true"
+			android:defaultValue="false"
 			android:summary="@string/preferences_high_quality_filters"
 			android:key="high_quality_filters" />
 	</PreferenceCategory>
@@ -58,6 +58,11 @@
 			android:defaultValue="0"
 			android:entries="@array/preferences_display_overwrite_savegame_entries"
 			android:entryValues="@array/preferences_display_overwrite_savegame_values" />
+		<CheckBoxPreference
+			android:title="@string/preferences_export_to_downloads_title"
+			android:defaultValue="false"
+			android:summary="@string/preferences_export_to_downloads_summary"
+			android:key="export_to_downloads" />
 	</PreferenceCategory>
 	<PreferenceCategory
 		android:title="@string/preferences_combat_category">
@@ -75,7 +80,7 @@
 			android:title="@string/preferences_movementmethod_title"
 			android:summary="@string/preferences_movementmethod"
 			android:key="movementmethod"
-			android:defaultValue="0"
+			android:defaultValue="1"
 			android:entries="@array/preferences_movementmethods"
 			android:entryValues="@array/preferences_movementmethod_values" />
 		<com.gpl.rpg.AndorsTrail.view.CustomListPreference

@@ -1437,6 +1437,46 @@
                 "nextPhraseID":"deebo_orchard_deebo_horse_talk_10"
             },
             {
+                "text":"Can I get a new batch of apples for the bakery?",
+                "nextPhraseID":"brightport_deebo_selector",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brightport_nondisplay",
+                        "value":205
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brightport_bakery",
+                        "value":50,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brightport_bakery",
+                        "value":40,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"Hello. Eatloni from Brightport sent me to ask about the apples. ",
+                "nextPhraseID":"brightport_deebo",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brightport_bakery",
+                        "value":25
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brightport_nondisplay",
+                        "value":205,
+                        "negate":true
+                    }
+                ]
+            },
+            {
                 "text":"I will let you get back to your business. Have a great time enjoying the nice weather.",
                 "nextPhraseID":"X"
             },

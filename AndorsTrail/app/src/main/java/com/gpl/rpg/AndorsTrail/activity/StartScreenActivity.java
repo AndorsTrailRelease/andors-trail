@@ -13,6 +13,7 @@ import com.gpl.rpg.AndorsTrail.view.CloudsAnimatorView;
 import com.gpl.rpg.AndorsTrail.view.CustomDialogFactory;
 import com.gpl.rpg.AndorsTrail.view.CustomDialogFactory.CustomDialog;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -92,13 +93,8 @@ public final class StartScreenActivity extends AndorsTrailBaseFragmentActivity i
 		
 		View background = findViewById(R.id.title_bg);
 		if (background != null) {
-			background.setOnClickListener(new View.OnClickListener() {
-			
-				@Override
-				public void onClick(View v) {
-					toggleUiVisibility();
-				}
-			});
+			background.setOnClickListener(v -> toggleUiVisibility());
+			background.post(background::requestFocus);
 		}
 		View titleLogo = findViewById(R.id.title_logo);
 		if (titleLogo != null) {
@@ -115,7 +111,7 @@ public final class StartScreenActivity extends AndorsTrailBaseFragmentActivity i
 		}
 
 		toggleUiVisibility();
-		
+
 		app.getWorldSetup().startResourceLoader(res);
 	}
 
@@ -175,7 +171,7 @@ public final class StartScreenActivity extends AndorsTrailBaseFragmentActivity i
 	private void initPreferences() {
 		AndorsTrailApplication app = AndorsTrailApplication.getApplicationFromActivity(this);
 		AndorsTrailPreferences preferences = app.getPreferences();
-		preferences.read(this);
+		preferences.read();
 		ThemeHelper.changeTheme(preferences.selectedTheme);
 	}
 	
@@ -246,17 +242,32 @@ public final class StartScreenActivity extends AndorsTrailBaseFragmentActivity i
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 	}
-	
+
+	@Override
+	public void onBackPressed() {
+		if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+			backPressed();
+		} else {
+			super.onBackPressed();
+		}
+	}
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-				backPressed();
-				return true;
-			} else {
-				return super.onKeyDown(keyCode, event);
+		if (ui_visible) {
+			// If the focus is on the background, or it's not focused on anything, poke the
+			// current fragment so it grabs focus on its default button.  This happens when
+			// the user taps the background to make the UI visible, which leave it in touch
+			// mode so the default button doesn't get focused automatically.
+			if(getCurrentFocus() == null || getCurrentFocus().getId() == R.id.title_bg) {
+				currentFragment.onHiddenChanged(false);
 			}
+		} else {
+			toggleUiVisibility();
+			return true;
 		}
+
+		// If the UI is visible, let the fragments handle the key event as normal
 		return super.onKeyDown(keyCode, event);
 	}
 
@@ -266,9 +277,7 @@ public final class StartScreenActivity extends AndorsTrailBaseFragmentActivity i
 			currentFragment = getSupportFragmentManager().findFragmentById(R.id.startscreen_fragment_container);
 		}
 	}
-	
-	
-	
+
 	public void onNewGameRequested() {
 		if (findViewById(R.id.startscreen_fragment_container) != null) {
 			StartScreenActivity_NewGame newGameFragment = new StartScreenActivity_NewGame();

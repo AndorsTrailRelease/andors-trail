@@ -30,22 +30,30 @@ public final class ScriptEffect {
 		, changeMapFilter
 		, mapchange
 		, changeIcon
+		, setNextPhraseID
 	}
 
 	public final ScriptEffectType type;
 	public final String effectID;
 	public final int value;
 	public final String mapName;
+	public final Requirement[] requires;
+
+	public boolean hasRequirements() {
+		return requires != null;
+	}
 
 	public ScriptEffect(
 			ScriptEffectType type
 			, String effectID
 			, int value
 			, String mapName
+			, Requirement[] requires
 	) {
 		this.type = type;
 		this.effectID = effectID;
 		this.value = value;
 		this.mapName = mapName;
+		this.requires = requires;
 	}
 }

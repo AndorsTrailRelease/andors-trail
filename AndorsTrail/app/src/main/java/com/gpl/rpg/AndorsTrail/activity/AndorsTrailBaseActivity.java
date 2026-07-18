@@ -2,6 +2,8 @@ package com.gpl.rpg.AndorsTrail.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.IdRes;
@@ -31,5 +33,17 @@ public abstract class AndorsTrailBaseActivity extends Activity {
         app.setUsablePadding(root);
         app.setFullscreenMode(activity);
     }
-}
 
+    // Global key handling for Back action (Adds Escape, Controller B button, and Back button as Back keys)
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if (ActivityKeyHandler.handleBackMappedKey(this, event)) return true;
+        return super.dispatchKeyEvent(event);
+    }
+
+    @Override
+    public boolean dispatchGenericMotionEvent(MotionEvent event) {
+        if (ActivityKeyHandler.handleBackMappedMouseButton(this, event)) return true;
+        return super.dispatchGenericMotionEvent(event);
+    }
+}

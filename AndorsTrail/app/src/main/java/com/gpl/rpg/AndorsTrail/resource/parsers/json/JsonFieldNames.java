@@ -174,5 +174,8 @@ public final class JsonFieldNames {
 		public static final String missReceivedEffect = "missReceivedEffect";
 	}
 
-
+	public static final class ItemFilter {
+		public static final String itemFilterID = "id";
+		public static final String include = "include";
+	}
 }

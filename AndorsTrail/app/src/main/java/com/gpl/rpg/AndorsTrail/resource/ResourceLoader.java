@@ -18,6 +18,7 @@ import com.gpl.rpg.AndorsTrail.resource.parsers.ActorConditionsTypeParser;
 import com.gpl.rpg.AndorsTrail.resource.parsers.ConversationListParser;
 import com.gpl.rpg.AndorsTrail.resource.parsers.DropListParser;
 import com.gpl.rpg.AndorsTrail.resource.parsers.ItemCategoryParser;
+import com.gpl.rpg.AndorsTrail.resource.parsers.ItemFilterParser;
 import com.gpl.rpg.AndorsTrail.resource.parsers.ItemTypeParser;
 import com.gpl.rpg.AndorsTrail.resource.parsers.MonsterTypeParser;
 import com.gpl.rpg.AndorsTrail.resource.parsers.QuestParser;
@@ -30,6 +31,7 @@ public final class ResourceLoader {
 	private static final int itemCategoriesResourceId = AndorsTrailApplication.DEVELOPMENT_DEBUGRESOURCES ? R.array.loadresource_itemcategories_debug : R.array.loadresource_itemcategories;
 	private static final int actorConditionsResourceId = AndorsTrailApplication.DEVELOPMENT_DEBUGRESOURCES ? R.array.loadresource_actorconditions_debug : R.array.loadresource_actorconditions;
 	private static final int itemsResourceId = AndorsTrailApplication.DEVELOPMENT_DEBUGRESOURCES ? R.array.loadresource_items_debug : R.array.loadresource_items;
+	private static final int itemFiltersResourceId = AndorsTrailApplication.DEVELOPMENT_DEBUGRESOURCES ? R.array.loadresource_itemfilters_debug : R.array.loadresource_itemfilters;
 	private static final int droplistsResourceId = AndorsTrailApplication.DEVELOPMENT_DEBUGRESOURCES ? R.array.loadresource_droplists_debug : R.array.loadresource_droplists;
 	private static final int questsResourceId = AndorsTrailApplication.DEVELOPMENT_DEBUGRESOURCES ? R.array.loadresource_quests_debug : R.array.loadresource_quests;
 	private static final int conversationsListsResourceId = AndorsTrailApplication.DEVELOPMENT_DEBUGRESOURCES ? R.array.loadresource_conversationlists_debug : R.array.loadresource_conversationlists;
@@ -145,10 +147,20 @@ public final class ResourceLoader {
 		itemsToLoad.recycle();
 		if (AndorsTrailApplication.DEVELOPMENT_DEBUGMESSAGES) timingCheckpoint("ItemTypeParser");
 
+		// ========================================================================
+		// Load item filters
+		final ItemFilterParser itemFilterParser = new ItemFilterParser(world.itemTypes);
+		final TypedArray itemFiltersToLoad = r.obtainTypedArray(itemFiltersResourceId);
+		for (int i = 0; i < itemFiltersToLoad.length(); ++i) {
+			String s = readStringFromRaw(r, itemFiltersToLoad, i);
+			world.itemFilters.initialize(itemFilterParser, s);
+		}
+		itemFiltersToLoad.recycle();
+		if (AndorsTrailApplication.DEVELOPMENT_DEBUGMESSAGES) timingCheckpoint("ItemFilterParser");
 
 		// ========================================================================
 		// Load droplists
-		final DropListParser dropListParser = new DropListParser(world.itemTypes);
+		final DropListParser dropListParser = new DropListParser(world.itemTypes, world.itemFilters);
 		final TypedArray droplistsToLoad = r.obtainTypedArray(droplistsResourceId);
 		for (int i = 0; i < droplistsToLoad.length(); ++i) {
 			world.dropLists.initialize(dropListParser, readStringFromRaw(r, droplistsToLoad, i));

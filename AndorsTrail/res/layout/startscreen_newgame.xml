@@ -13,6 +13,7 @@
         android:background="?attr/ui_theme_stdframe_bitmap"
         android:gravity="bottom|start"
         android:clickable="true"
+        android:focusable="false"
         android:orientation="vertical" >
 
         <TextView
@@ -35,7 +36,9 @@
                 android:checked="true"
                 android:drawableTop="@drawable/char_hero_large"
                 android:text=""
-                android:textSize="0dp" />
+                android:textSize="0dp"
+                android:nextFocusDown="@id/startscreen_enterheroname"
+            />
 
             <ToggleButton
                 android:id="@+id/newgame_sprite1"
@@ -44,7 +47,9 @@
                 android:layout_weight="1"
                 android:drawableTop="@drawable/char_hero_maksiu_girl_01_large"
                 android:text=""
-                android:textSize="0dp" />
+                android:textSize="0dp"
+                android:nextFocusDown="@id/startscreen_enterheroname"
+            />
 
             <ToggleButton
                 android:id="@+id/newgame_sprite2"
@@ -53,7 +58,9 @@
                 android:layout_weight="1"
                 android:drawableTop="@drawable/char_hero_maksiu_boy_01_large"
                 android:text=""
-                android:textSize="0dp" />
+                android:textSize="0dp"
+                android:nextFocusDown="@id/startscreen_enterheroname"
+            />
         </RadioGroup>
     </LinearLayout>
 
@@ -64,6 +71,7 @@
         android:layout_marginRight="2dp"
         android:background="?attr/ui_theme_stdframe_bitmap"
         android:clickable="true"
+        android:focusable="false"
         android:gravity="bottom|start"
         android:orientation="vertical" >
 
@@ -87,6 +95,7 @@
         android:layout_marginRight="2dp"
         android:background="?attr/ui_theme_stdframe_bitmap"
         android:clickable="true"
+        android:focusable="false"
         android:gravity="bottom|start"
         android:orientation="vertical" >
 
@@ -121,6 +130,7 @@
         android:layout_marginRight="2dp"
         android:background="?attr/ui_theme_stdframe_bitmap"
         android:clickable="true"
+        android:focusable="false"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
 

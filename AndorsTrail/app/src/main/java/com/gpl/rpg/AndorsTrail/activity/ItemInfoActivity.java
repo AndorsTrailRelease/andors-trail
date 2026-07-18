@@ -127,6 +127,15 @@ public final class ItemInfoActivity extends AndorsTrailBaseActivity {
 			final String diplayType = getDisplayTypeString(getResources(), itemType);
 			tv.setText(diplayType);
 		}
+
+		// Set focus: Action button -> More button -> Close button.
+		if (buttonEnabled && buttonText != null && !buttonText.isEmpty()) {
+			findViewById(R.id.iteminfo_action).post(() -> findViewById(R.id.iteminfo_action).requestFocus());
+		//} else if (moreButtonEnabled) {  // Maybe don't focus on more?
+		//	findViewById(R.id.iteminfo_more).post(() -> findViewById(R.id.iteminfo_more).requestFocus());
+		} else {
+			findViewById(R.id.iteminfo_close).post(() -> findViewById(R.id.iteminfo_close).requestFocus());
+		}
 	}
 
 	public static String getDisplayTypeString(Resources res, ItemType itemType) {
