@@ -27,13 +27,22 @@ public final class L {
 
 	public static void error(String s) {
 		if (AndorsTrailApplication.DEVELOPMENT_DEBUGMESSAGES) {
-			Log.e(TAG, s);
+			try {
+				Log.e(TAG, s);
+			} catch (RuntimeException e) {
+				System.err.println(TAG + " ERROR: " + s);
+			}
 		}
 	}
 
 	public static void error(String s, Throwable t) {
 		if (AndorsTrailApplication.DEVELOPMENT_DEBUGMESSAGES) {
-			Log.e(TAG, s, t);
+			try {
+				Log.e(TAG, s, t);
+			} catch (RuntimeException e) {
+				System.err.println(TAG + " ERROR: " + s);
+				t.printStackTrace(System.err);
+			}
 		}
 	}
 

@@ -12,6 +12,35 @@ import com.gpl.rpg.AndorsTrail.util.TimedMessageTask;
 
 public final class GameRoundController implements TimedMessageTask.Callback {
 
+	/**
+	 * Minimal timer abstraction used to swap in a fake timer from unit tests.
+	 */
+	interface RoundTimer {
+		void start();
+		void stop();
+	}
+
+	/**
+	 * Production timer implementation backed by {@link TimedMessageTask}.
+	 */
+	private static final class TimedRoundTimer implements RoundTimer {
+		private final TimedMessageTask task;
+
+		private TimedRoundTimer(TimedMessageTask task) {
+			this.task = task;
+		}
+
+		@Override
+		public void start() {
+			task.start();
+		}
+
+		@Override
+		public void stop() {
+			task.stop();
+		}
+	}
+
 	public enum PauseReason {
 		ACTIVITY_HIDDEN,
 		BLOCKING_DIALOG,
@@ -21,14 +50,28 @@ public final class GameRoundController implements TimedMessageTask.Callback {
 
 	private final ControllerContext controllers;
 	private final WorldContext world;
-	private final TimedMessageTask roundTimer;
+	private final RoundTimer roundTimer;
 	private final EnumSet<PauseReason> activePauses = EnumSet.noneOf(PauseReason.class);
 	public final GameRoundListeners gameRoundListeners = new GameRoundListeners();
 
+	/**
+	 * Creates the controller with the normal timed-task based round timer.
+	 */
 	public GameRoundController(ControllerContext controllers, WorldContext world) {
 		this.controllers = controllers;
 		this.world = world;
-		this.roundTimer = new TimedMessageTask(this, Constants.TICK_DELAY, true);
+		this.roundTimer = new TimedRoundTimer(new TimedMessageTask(this, Constants.TICK_DELAY, true));
+		activePauses.add(PauseReason.ACTIVITY_HIDDEN);
+		updateTimerState();
+	}
+
+	/**
+	 * Test-only constructor that allows the round timer implementation to be replaced.
+	 */
+	GameRoundController(ControllerContext controllers, WorldContext world, RoundTimer roundTimer) {
+		this.controllers = controllers;
+		this.world = world;
+		this.roundTimer = roundTimer;
 		activePauses.add(PauseReason.ACTIVITY_HIDDEN);
 		updateTimerState();
 	}
@@ -83,8 +126,8 @@ public final class GameRoundController implements TimedMessageTask.Callback {
 
 	/**
 	 * Clears the supplied pause reason.
-	 * Unmatched releases are logged and ignored so the timer cannot be
-	 * restarted by accident.
+	 * Unmatched releases fail fast in development builds and are otherwise
+	 * logged and ignored so the timer cannot be restarted by accident.
 	 */
 	public void releasePause(PauseReason reason) {
 		if (AndorsTrailApplication.DEVELOPMENT_DEBUGMESSAGES) {
