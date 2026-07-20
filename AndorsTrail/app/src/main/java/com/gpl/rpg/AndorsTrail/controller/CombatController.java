@@ -48,6 +48,17 @@ public final class CombatController implements VisualEffectCompletedCallback {
 		player, monsters, continueLastTurn
 	}
 
+	/**
+	 * Restores combat turn handling when the main activity becomes visible
+	 * again while combat is still active.
+	 */
+	public void resumeCombatIfNeeded() {
+		if (!world.model.uiSelections.isMainActivityVisible) return;
+		if (!world.model.uiSelections.isInCombat) return;
+		setCombatSelection(world.model.uiSelections.selectedMonster, world.model.uiSelections.selectedPosition);
+		enterCombat(BeginTurnAs.continueLastTurn);
+	}
+
 	public void enterCombat(BeginTurnAs whoseTurn) {
 		world.model.uiSelections.isInCombat = true;
 		resetCombatState();
@@ -76,9 +87,8 @@ public final class CombatController implements VisualEffectCompletedCallback {
 		}
 		if (pickupLootBags && totalExpThisFight > 0) {
 			controllers.itemController.lootMonsterBags(killedMonsterBags, totalExpThisFight);
-		} else {
-			controllers.gameRoundController.resume();
 		}
+		controllers.gameRoundController.onCombatStateChanged();
 		resetCombatState();
 	}
 

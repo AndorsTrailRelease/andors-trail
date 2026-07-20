@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import com.gpl.rpg.AndorsTrail.AndorsTrailPreferences;
 import com.gpl.rpg.AndorsTrail.context.ControllerContext;
 import com.gpl.rpg.AndorsTrail.context.WorldContext;
+import com.gpl.rpg.AndorsTrail.controller.GameRoundController.PauseReason;
 import com.gpl.rpg.AndorsTrail.controller.listeners.PlayerMovementListeners;
 import com.gpl.rpg.AndorsTrail.model.MapBundle;
 import com.gpl.rpg.AndorsTrail.model.ModelContainer;
@@ -58,11 +59,11 @@ public final class MovementController implements TimedMessageTask.Callback {
 				super.onPostExecute(result);
 				stopMovement();
 				playerMovementListeners.onPlayerEnteredNewMap(world.model.currentMaps.map, world.model.player.position);
-				controllers.gameRoundController.resume();
+				controllers.gameRoundController.releasePause(PauseReason.MAP_TRANSITION);
 			}
 
 		};
-		controllers.gameRoundController.pause();
+		controllers.gameRoundController.acquirePause(PauseReason.MAP_TRANSITION);
 		task.execute();
 	}
 

@@ -27,6 +27,7 @@ import com.gpl.rpg.AndorsTrail.context.WorldContext;
 import com.gpl.rpg.AndorsTrail.controller.AttackResult;
 import com.gpl.rpg.AndorsTrail.controller.CombatController;
 import com.gpl.rpg.AndorsTrail.controller.Constants;
+import com.gpl.rpg.AndorsTrail.controller.GameRoundController.PauseReason;
 import com.gpl.rpg.AndorsTrail.controller.InputController;
 import com.gpl.rpg.AndorsTrail.controller.listeners.CombatActionListener;
 import com.gpl.rpg.AndorsTrail.controller.listeners.CombatTurnListener;
@@ -145,6 +146,7 @@ public final class MainActivity
 		super.onActivityResult(requestCode, resultCode, data);
 		switch (requestCode) {
 		case INTENTREQUEST_MONSTERENCOUNTER:
+			controllers.gameRoundController.releasePause(PauseReason.BLOCKING_ACTIVITY);
 			if (resultCode == Activity.RESULT_OK) {
 				controllers.combatController.enterCombat(CombatController.BeginTurnAs.player);
 			} else {
@@ -152,9 +154,11 @@ public final class MainActivity
 			}
 			break;
 		case INTENTREQUEST_CONVERSATION:
+			controllers.gameRoundController.releasePause(PauseReason.BLOCKING_ACTIVITY);
 			controllers.mapController.applyCurrentMapReplacements(getResources(), true);
 			break;
 		case INTENTREQUEST_SAVEGAME:
+			controllers.gameRoundController.releasePause(PauseReason.BLOCKING_ACTIVITY);
 			if (resultCode != Activity.RESULT_OK) break;
 			final int slot = data.getIntExtra("slot", 1);
 			if (save(slot)) {
@@ -189,7 +193,7 @@ public final class MainActivity
 	@Override
 	protected void onPause() {
 		super.onPause();
-		controllers.gameRoundController.pause();
+		controllers.gameRoundController.onMainActivityPaused();
 		controllers.movementController.stopMovement();
 
 		save(Savegames.SLOT_QUICKSAVE);
@@ -202,7 +206,7 @@ public final class MainActivity
 
 		if (world.model.statistics.isDead()) this.finish();
 		else {
-			controllers.gameRoundController.resume();
+			controllers.gameRoundController.onMainActivityResumed();
 			updateStatus();
 		}
 	}
