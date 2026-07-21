@@ -45,11 +45,18 @@ public final class MovementController implements TimedMessageTask.Callback {
 	public void placePlayerAsyncAt(final MapObject.MapObjectType objectType, final String mapName, final String placeName, final int offset_x, final int offset_y) {
 
 		AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+			private boolean mapLoadFailed = false;  // (1) flag to carry failure to onPostExecute
+
 			@Override
 			protected Void doInBackground(Void... arg0) {
 				stopMovement();
 
-				placePlayerAt(controllers.getResources(), objectType, mapName, placeName, offset_x, offset_y);
+				try {
+					placePlayerAt(controllers.getResources(), objectType, mapName, placeName, offset_x, offset_y);
+				} catch (RuntimeException e) {
+					L.error("Map transition failed: " + e.getMessage());  // (2) log it
+					mapLoadFailed = true;                                  // (3) signal failure
+				}
 
 				return null;
 			}
@@ -58,11 +65,16 @@ public final class MovementController implements TimedMessageTask.Callback {
 			protected void onPostExecute(Void result) {
 				super.onPostExecute(result);
 				stopMovement();
-				playerMovementListeners.onPlayerEnteredNewMap(world.model.currentMaps.map, world.model.player.position);
+				// (4) always release the pause — timer can never get stuck
 				controllers.gameRoundController.releasePause(PauseReason.MAP_TRANSITION);
+				if (!mapLoadFailed) {
+					playerMovementListeners.onPlayerEnteredNewMap(
+							world.model.currentMaps.map, world.model.player.position);
+				}
 			}
 
 		};
+
 		controllers.gameRoundController.acquirePause(PauseReason.MAP_TRANSITION);
 		task.execute();
 	}
