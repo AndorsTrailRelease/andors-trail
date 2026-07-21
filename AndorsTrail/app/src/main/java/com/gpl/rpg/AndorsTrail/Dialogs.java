@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
@@ -73,7 +71,12 @@ public final class Dialogs {
 	 */
 	private static void startBlockingActivityForResult(Activity currentActivity, ControllerContext context, Intent intent, int requestCode) {
 		context.gameRoundController.acquirePause(PauseReason.BLOCKING_ACTIVITY);
-		currentActivity.startActivityForResult(intent, requestCode);
+		try {
+			currentActivity.startActivityForResult(intent, requestCode);
+		} catch (RuntimeException e) {
+			context.gameRoundController.releasePause(PauseReason.BLOCKING_ACTIVITY);
+			throw e;
+		}
 	}
 
 	public static void showMapScriptMessage(final MainActivity currentActivity, final ControllerContext context, String phraseID) {

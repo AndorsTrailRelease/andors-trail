@@ -103,6 +103,24 @@ public final class GameRoundControllerTest {
 		assertEquals(2, timer.startCount);
 	}
 
+	@Test
+	public void blockingDialogClearsMainActivityVisibilityUntilReleased() {
+		WorldContext world = createLoadedWorld();
+		FakeRoundTimer timer = new FakeRoundTimer();
+		GameRoundController controller = createController(world, timer);
+		controller.releasePause(GameRoundController.PauseReason.ACTIVITY_HIDDEN);
+
+		controller.acquirePause(GameRoundController.PauseReason.BLOCKING_DIALOG);
+
+		assertFalse(world.model.uiSelections.isMainActivityVisible);
+		assertFalse(timer.running);
+
+		controller.releasePause(GameRoundController.PauseReason.BLOCKING_DIALOG);
+
+		assertTrue(world.model.uiSelections.isMainActivityVisible);
+		assertTrue(timer.running);
+	}
+
 	@Test(expected = AssertionError.class)
 	public void duplicateAcquireFailsFastInDebugBuilds() {
 		WorldContext world = createLoadedWorld();

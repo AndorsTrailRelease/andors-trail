@@ -201,7 +201,7 @@ public final class GameRoundController implements TimedMessageTask.Callback {
 			roundTimer.stop();
 			return;
 		}
-		world.model.uiSelections.isMainActivityVisible = !isPausedFor(PauseReason.ACTIVITY_HIDDEN);
+		world.model.uiSelections.isMainActivityVisible = !hasPauseReasons();
 		if (hasPauseReasons() || world.model.uiSelections.isInCombat) {
 			roundTimer.stop();
 		} else {
