@@ -1,0 +1,36 @@
+name: Android CI
+
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v5
+
+      - name: Build and test
+        run: cd AndorsTrail && ./gradlew testDebugUnitTest assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v5
+        with:
+          name: android-debug-apk
+          path: AndorsTrail/app/build/outputs/apk/debug/*.apk
