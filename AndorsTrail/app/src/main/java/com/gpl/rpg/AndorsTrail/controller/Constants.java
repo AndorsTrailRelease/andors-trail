@@ -41,6 +41,7 @@ public final class Constants {
 	public static final long MAP_UNVISITED_RESPAWN_DURATION_MS = 3 * 60 * 1000; // 3 min in milliseconds
 
 	public static final String PREFERENCE_MODEL_LASTRUNVERSION = "lastversion";
+	public static final String PREFERENCE_MODEL_ANDROIDTV_NOTICE = "androidtvnotice";
 	public static final String FILENAME_SAVEGAME_QUICKSAVE = "savegame";
 	public static final String FILENAME_SAVEGAME_DIRECTORY = "andors-trail";
 	public static final String FILENAME_WORLDMAP_DIRECTORY = "worldmap";

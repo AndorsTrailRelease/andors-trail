@@ -358,6 +358,18 @@ public final class Dialogs {
 		CustomDialogFactory.show(d);
 	}
 
+	public static void showAndroidTVNotice(final Activity currentActivity) {
+		final CustomDialog d = CustomDialogFactory.createDialog(currentActivity,
+				currentActivity.getResources().getString(R.string.dialog_androidtv_title),
+				currentActivity.getResources().getDrawable(android.R.drawable.ic_dialog_info),
+				currentActivity.getResources().getString(R.string.dialog_androidtv_message),
+				null,
+				true);
+
+		CustomDialogFactory.addDismissButton(d, android.R.string.ok);
+		CustomDialogFactory.show(d);
+	}
+
 	private static boolean hasPermissions(final Activity activity) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 			if (activity.getApplicationContext().checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
