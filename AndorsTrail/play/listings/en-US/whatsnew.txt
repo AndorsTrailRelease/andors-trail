@@ -1,7 +1,117 @@
 I put both (release notes + forum announcement) into this source, so it will be easier to maintain them parallel:
 
 APK 86 (0.8.17 "Technical improvements")  
+Release notes
+=============
+* Controller support
+* Android TV support
+* Numerous UI improvements
+* Internal engine improvements
+* Two new complete translations (Catalan and Tamil)
 
+
+
+Forum announcement  //2026-04-19
+==================
+Hello, fellow adventurers! 
+
+This release doesn't contain new quests or areas. Instead, we've focused on improving the technical foundation of Andor's Trail. 
+It may not sound as exciting as a new content update, but it's an important step before the next content release. 
+
+[list]Controller support[/list]
+[list]Android TV support[/list]
+[list]Numerous UI improvements[/list]
+[list]Internal engine improvements[/list]
+[list]Two new complete translations (Catalan and Tamil)
+Thanks for the translators for their work to make Andor's Trail available for more people![/list]
+
+
+We are happy to welcome a new developer to the team: [b]Guru Meditation No.42[/b] has contributed a huge number of improvements to both the game and the ATCS editor. With the amount of work he's done, it feels as though he's been part of the team for years already!
+
+
+Here is is the link on our server: [url]https://andorstrail.com/static/AndorsTrail_v0.8.17.apk[/url]
+Google Play, F-droid, Github and Itch will follow soon.
+
+
+Here are the changes in detail:
+[spoiler]
+-	The settings in the preference menu are handled differently. If you don't see any changes then it is right.
+	Your chosen settings of the current beta should stay unchanged.
+
+-	Controller support
+	If you already play Android games with a controller, then please try Andor's Trail with it: Moving, fighting, using the various menu screens.
+
+-	Android TV support, dpad (TV remote)
+	The game should be playable on Android devices 
+	-	with the touch screen (like before)
+	-	with a controller, in the maps as well as in the various menus
+	-	with the TV remote control for Android TVs
+	
+	To install the beta on Android TV you must side-load it or use ADB. The release version will be easier, it is planned to be available on GooglePlay.
+
+
+-	UI changes (user interface)
+	These little details affect everyone: 
+	-	If there is just 1 answer in a Dialogue offered, then it is pre-selected.
+	-	If the toolbox is open, pressing Back will close it. Subsequent Back press will return to Start screen as before.
+	-	Themes have been updated to include missing selection/highlight colors that were never specified. 
+		Buttons and fields that previously showed the old android-default bright orange while pressed now show a theme-appropriate lighter highlight color for feedback.
+	-	The quest log listview has the same layout as other lists now. 
+		Text size is slightly larger than before (22 vs 20dp).
+		It shows a checkmark to indicate completed quest in quest log
+	-	Radio buttons now show correct state while pressed/selected (e.g., in Preferences or the quest log). 
+		Previously these always showed as true/checked while being held down.
+	-	Name text of unavailable store items now appears in disabled/gray color.
+	-	Tapping the name of a store item will bring up the Info activity for the item; there is no need to tap on the "Info" button specifically. 
+		Long-pressing the store item will jump immediately to the "Buy/Sell" activity. 
+		If desired, the store display could now be cleaned up by removing one or both buttons and replacing the price (currently part of the Buy/Sell button) with a simple text column.
+	-	In status view, item effect links now appear in lighter text, same as existing active actor effect links.
+	-	Quick-slots stay open, even after game restart
+	
+
+-	ui-focus-fixes
+
+	-	add focus handling in combatview, debug, mainview, monsterinfo
+	-	adjust layout for worn inventory display so that items can show focus with dpad
+	-	set button focus for info activities
+	-	Ensure dialogue button has focus, auto-close empty loot dialogue
+	-	Add styling and logic to highlight text (name) of available items in store
+	-	Make shop items navigable with dpad and add listeners so buttons aren't needed for item info or initiate buy/sell.
+	-	Move tab setup and focus routine from HeroInfoActivity to base class and also use it in ShopActivity.
+	-	Add styling for preferences activity and fix radio button display states when list item is selected/clicked
+	-	custom layout for questlog to allow focus styling
+	-	add themed background styling to list items
+	-	add focused drawable for tab headers
+	-	initial fixes to heroinfo navigation
+	-	enhance focus handling in conversation activity
+
+
+The following enhancements can't be tried out yet, because there is no content that uses these already in this version.
+Nevertheless please try the following to check if the game still works as usual.
+
+-	PR#100 item filters (done by Raphi)
+	The game can now check more easily for groups of items, like any meat.
+	This is just a shortcut for developers, but there were many changes necessary for it. You can't check the _new_ function yet, but please check if _normal_ handling with items like
+	-	check if item is in inventory
+	-	check if item is worn (once, twice)
+	-	give item(s)
+	-	drop item(s)
+	-	pick up item(s)
+	still works normally.
+		
+-	Rewards can now be given depending on a requirement.
+	This can't be tried out yet, nevertheless please check if rewards (like getting items or quest log entries in a dialogue) are given as usual.
+
+
+This is just for internal tests:
+-	gradle-update
+[/spoiler]
+
+
+
+
+Forum announcement - beta
+=========================
 This beta doesn't contain new quests or areas. Instead, we've focused on improving the technical foundation of Andor's Trail. 
 It may not sound as exciting as a new content update, but it's an important step before the next content release. 
 We'd really appreciate your help testing it so we can make sure everything still works as expected on as many devices as possible.
