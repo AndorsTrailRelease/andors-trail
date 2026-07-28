@@ -68,6 +68,13 @@
 			android:defaultValue="1000"
 			android:entries="@array/preferences_attackspeed"
 			android:entryValues="@array/preferences_attackspeed_values" />
+        <com.gpl.rpg.AndorsTrail.view.CustomListPreference
+            android:title="@string/preferences_combat_auto_attack_threshold_title"
+            android:summary="@string/preferences_combat_auto_attack_threshold"
+            android:key="autoattackthreshold"
+            android:defaultValue="-1"
+            android:entries="@array/preferences_auto_attack_threshold"
+            android:entryValues="@array/preferences_auto_attack_threshold_values" />
 	</PreferenceCategory>
 	<PreferenceCategory
 		android:title="@string/preferences_movement_category">
