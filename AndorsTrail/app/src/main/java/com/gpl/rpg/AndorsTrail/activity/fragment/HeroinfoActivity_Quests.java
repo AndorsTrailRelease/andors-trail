@@ -79,9 +79,9 @@ public final class HeroinfoActivity_Quests extends Fragment {
 		questlog_contents_adapter = new SimpleExpandableListAdapter(
 				ctx
 				, groupList
-				, android.R.layout.simple_expandable_list_item_2
+				, R.layout.questlogname
 				, new String[] { mn_questName, mn_questStatus }
-				, new int[] { android.R.id.text1, android.R.id.text2 }
+				, new int[] { R.id.questlog_questname, R.id.questlog_queststatus }
 				, childList
 				, R.layout.questlogentry
 				, new String[] { mn_logText }
@@ -140,7 +140,8 @@ public final class HeroinfoActivity_Quests extends Fragment {
 
 			Map<String, Object> item = new HashMap<String, Object>();
 			item.put(mn_questName, q.name);
-			item.put(mn_questStatus, getString(R.string.questlog_queststatus, getString(statusResId)));
+			//item.put(mn_questStatus, getString(R.string.questlog_queststatus, getString(statusResId)));
+			if(isCompleted) item.put(mn_questStatus, getString(R.string.questlog_queststatus_checkmark));
 			groupList.add(item);
 
 			List<Map<String, ?>> logItemList = new ArrayList<Map<String, ?>>();

@@ -215,6 +215,7 @@ public final class Dialogs {
 				if (((ItemContainerAdapter) parent.getAdapter()).isEmpty()) {
 					ViewGroup vg = (ViewGroup) d.findViewById(R.id.dialog_content_container);
 					vg.setVisibility(View.GONE);
+					d.dismiss();  // Dismiss the dialog if there are no more items to pick up.
 				}
 				ItemType type = world.itemTypes.getItemType(itemTypeID);
 				world.model.player.inventory.addItem(type);

@@ -45,13 +45,10 @@ public final class DebugInterface {
 		List<DebugButton> buttonList = new ArrayList<DebugButton>();
 		buttonList.addAll(Arrays.asList(new DebugButton[] {
 				new DebugButton("dbg", new OnClickListener() {
-					boolean hidden = false;
 					@Override
 					public void onClick(View arg0) {
-						hidden = !hidden;
-						for (int i = 1; i < buttons.length; i++) {
-							buttons[i].b.setVisibility(hidden ? View.GONE : View.VISIBLE);
-						}
+						controllerContext.preferences.setDebugVisible(!controllerContext.preferences.debugVisible);
+						updateVisibility();
 					}
 				})
 				,new DebugButton("teleport", new OnClickListener() {
@@ -157,8 +154,14 @@ public final class DebugInterface {
 
 		buttons = buttonList.toArray(new DebugButton[buttonList.size()]);
 		addDebugButtons(buttons);
+		updateVisibility();
 	}
 
+	private void updateVisibility() {
+		for (int i = 1; i < buttons.length; i++) {
+			buttons[i].b.setVisibility(controllerContext.preferences.debugVisible ? View.VISIBLE : View.GONE);
+		}
+	}
 	private void showToast(Context context, String msg, int duration) {
 		Toast.makeText(context, msg, duration).show();
 	}

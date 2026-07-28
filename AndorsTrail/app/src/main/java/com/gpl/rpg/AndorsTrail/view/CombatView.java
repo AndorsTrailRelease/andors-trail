@@ -18,6 +18,7 @@ import com.gpl.rpg.AndorsTrail.AndorsTrailApplication;
 import com.gpl.rpg.AndorsTrail.AndorsTrailPreferences;
 import com.gpl.rpg.AndorsTrail.Dialogs;
 import com.gpl.rpg.AndorsTrail.R;
+import com.gpl.rpg.AndorsTrail.activity.MainActivity;
 import com.gpl.rpg.AndorsTrail.context.ControllerContext;
 import com.gpl.rpg.AndorsTrail.context.WorldContext;
 import com.gpl.rpg.AndorsTrail.controller.CombatController;
@@ -34,6 +35,8 @@ import com.gpl.rpg.AndorsTrail.util.Coord;
 public final class CombatView extends RelativeLayout implements CombatSelectionListener, CombatTurnListener, ActorStatsListener, ActorConditionListener {
 	private final RangeBar playerAPBar;
 	private final Button attackMoveButton;
+	private final Button endTurnButton;
+	private final Button fleeButton;
 	private final ImageButton monsterInfo;
 	private final RangeBar monsterHealth;
 	private final ImageButton monsterConditionsButton;
@@ -73,33 +76,31 @@ public final class CombatView extends RelativeLayout implements CombatSelectionL
 		findViewById(R.id.combatview_fixedarea).setClickable(true);
 
 		final CombatController c = controllers.combatController;
-		attackMoveButton = (Button) findViewById(R.id.combatview_moveattack);
+		attackMoveButton = findViewById(R.id.combatview_moveattack);
 		//Enable marquee if text is too long.
 		attackMoveButton.setSelected(true);
-		attackMoveButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				c.executeMoveAttack(0, 0);
-			}
+		attackMoveButton.setOnClickListener((View v) -> {
+			c.executeMoveAttack(0, 0);
+			MainView mv = ((MainActivity) getContext()).getMainView();
+			mv.post(mv::requestFocus);
 		});
 
-		Button endTurnButton = (Button) findViewById(R.id.combatview_endturn);
+		endTurnButton = findViewById(R.id.combatview_endturn);
 		//Enable marquee if text is too long.
 		endTurnButton.setSelected(true);
-		endTurnButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				c.endPlayerTurn();
-			}
+		endTurnButton.setOnClickListener((View v) -> {
+			c.endPlayerTurn();
+			((MainActivity) getContext()).getMainView().post(this::requestFocus);
 		});
-		Button fleeButton = (Button) findViewById(R.id.combatview_flee);
+
+		fleeButton = findViewById(R.id.combatview_flee);
 		//Enable marquee if text is too long.
 		fleeButton.setSelected(true);
-		fleeButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				c.startFlee();
-			}
+		fleeButton.setOnClickListener((View v) -> {
+			c.startFlee();
+			// After fleeing, set the focus back to the main view so the player can choose a direction.
+			MainView mv = ((MainActivity) getContext()).getMainView();
+			mv.post(mv::requestFocus);
 		});
 
 		playerAPBar = (RangeBar) findViewById(R.id.combatview_status);

@@ -58,15 +58,15 @@ public final class SkillController {
 		}*/
 	}
 
-	public static int getDropChanceRollBias(DropItem item, Player player) {
+	public static int getDropChanceRollBias(DropItem item, ItemType itemType, Player player) {
 		if (player == null) return 0;
-		if(item.itemType == null && AndorsTrailApplication.DEVELOPMENT_DEBUGMESSAGES){
+		if(item.itemTypeID == null && AndorsTrailApplication.DEVELOPMENT_DEBUGMESSAGES){
 			L.log("Item type missing: " + item + " " + player.id);
 		}
 
-		if (ItemTypeCollection.isGoldItemType(item.itemType.id)) {
+		if (ItemTypeCollection.isGoldItemType(item.itemTypeID)) {
 			return getRollBias(item, player, SkillID.coinfinder, SkillCollection.PER_SKILLPOINT_INCREASE_COINFINDER_CHANCE_PERCENT);
-		} else if (!item.itemType.isOrdinaryItem()) {
+		} else if (!itemType.isOrdinaryItem()) {
 			return getRollBias(item, player, SkillID.magicfinder, SkillCollection.PER_SKILLPOINT_INCREASE_MAGICFINDER_CHANCE_PERCENT);
 		} else {
 			return 0;
@@ -75,7 +75,7 @@ public final class SkillController {
 
 	public static int getDropQuantityRollBias(DropItem item, Player player) {
 		if (player == null) return 0;
-		if (!ItemTypeCollection.isGoldItemType(item.itemType.id)) return 0;
+		if (!ItemTypeCollection.isGoldItemType(item.itemTypeID)) return 0;
 
 		return getRollBias(item.quantity, player, SkillID.coinfinder, SkillCollection.PER_SKILLPOINT_INCREASE_COINFINDER_QUANTITY_PERCENT);
 	}

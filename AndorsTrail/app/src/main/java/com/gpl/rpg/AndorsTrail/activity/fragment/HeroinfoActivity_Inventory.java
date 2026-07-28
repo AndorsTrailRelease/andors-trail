@@ -19,6 +19,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gpl.rpg.AndorsTrail.AndorsTrailApplication;
@@ -166,16 +167,16 @@ public final class HeroinfoActivity_Inventory extends Fragment implements Custom
 
 	private void setWearSlot(final View v, final Inventory.WearSlot inventorySlot, int viewId, int resourceId) {
 		final ImageView imageView = (ImageView) v.findViewById(viewId);
+		final RelativeLayout layout = (RelativeLayout) imageView.getParent();
 		wornItemImage[inventorySlot.ordinal()] = imageView;
 		defaultWornItemImageResourceIDs[inventorySlot.ordinal()] = resourceId;
-		imageView.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (player.inventory.isEmptySlot(inventorySlot)) return;
-				imageView.setClickable(false); // Will be enabled again on update()
-				showEquippedItemInfo(player.inventory.getItemTypeInWearSlot(inventorySlot), inventorySlot);
-			}
+		// Both the image and the layout will trigger the same click listener.  Layout needed for dpad support, and it's a larger target for touch as well.
+		imageView.setOnClickListener((View view) -> {
+			if (player.inventory.isEmptySlot(inventorySlot)) return;
+			imageView.setClickable(false); // Will be enabled again on update()
+			showEquippedItemInfo(player.inventory.getItemTypeInWearSlot(inventorySlot), inventorySlot);
 		});
+		layout.setOnClickListener((View view) -> imageView.performClick());
 	}
 
 	@Override
@@ -261,12 +262,16 @@ public final class HeroinfoActivity_Inventory extends Fragment implements Custom
 	}
 
 	private void updateWornImage(ImageView imageView, int resourceIDEmptyImage, ItemType type) {
+		RelativeLayout layout = (RelativeLayout) imageView.getParent();
 		if (type != null) {
 			world.tileManager.setImageViewTile(getResources(), imageView, type, wornTiles);
+			imageView.setClickable(true);
+			layout.setFocusable(true);
 		} else {
 			imageView.setImageResource(resourceIDEmptyImage);
+			imageView.setClickable(false);
+			layout.setFocusable(false);
 		}
-		imageView.setClickable(true);
 	}
 
 	private void updateItemList() {
@@ -333,12 +338,10 @@ public final class HeroinfoActivity_Inventory extends Fragment implements Custom
 	@Override
 	public void onMenuItemSelected(MenuItem item, Object data) {
 		ItemType itemType = (ItemType) data;
-		switch (item.getItemId()) {
-		case R.id.inv_menu_info:
+		int id = item.getItemId();
+		if (id == R.id.inv_menu_info) {
 			showInventoryItemInfo(itemType);
-			//context.mapController.itemInfo(this, getSelectedItemType(info));
-			break;
-		case R.id.inv_menu_drop:
+		} else if (id == R.id.inv_menu_drop) {
 			String itemTypeID = itemType.id;
 			int quantity = player.inventory.getItemQuantity(itemTypeID);
 			if (quantity > 1) {
@@ -347,41 +350,28 @@ public final class HeroinfoActivity_Inventory extends Fragment implements Custom
 			} else {
 				dropItem(itemTypeID, quantity);
 			}
-			break;
-		case R.id.inv_menu_equip:
+		} else if (id == R.id.inv_menu_equip) {
 			controllers.itemController.equipItem(itemType, itemType.category.inventorySlot);
-			break;
-		case R.id.inv_menu_equip_offhand:
+		} else if (id == R.id.inv_menu_equip_offhand) {
 			if (itemType.category.inventorySlot == Inventory.WearSlot.weapon) {
 				controllers.itemController.equipItem(itemType, Inventory.WearSlot.shield);
 			} else if (itemType.category.inventorySlot == Inventory.WearSlot.leftring) {
 				controllers.itemController.equipItem(itemType, Inventory.WearSlot.rightring);
 			}
-			break;
-		/*case R.id.inv_menu_unequip:
-			context.mapController.unequipItem(this, getSelectedItemType(info));
-			break;*/
-		case R.id.inv_menu_use:
+		} else if (id == R.id.inv_menu_use) {
 			controllers.itemController.useItem(itemType);
-			break;
-		case R.id.inv_menu_assign:
+		} else if (id == R.id.inv_menu_assign) {
 			//lastSelectedItem = itemType;
-			break;
-		case R.id.inv_assign_slot1:
+		} else if (id == R.id.inv_assign_slot1) {
 			controllers.itemController.setQuickItem(itemType, 0);
-			break;
-		case R.id.inv_assign_slot2:
+		} else if (id == R.id.inv_assign_slot2) {
 			controllers.itemController.setQuickItem(itemType, 1);
-			break;
-		case R.id.inv_assign_slot3:
+		} else if (id == R.id.inv_assign_slot3) {
 			controllers.itemController.setQuickItem(itemType, 2);
-			break;
-		case R.id.inv_menu_movetop:
+		} else if (id == R.id.inv_menu_movetop) {
 			player.inventory.sortToTop(itemType.id);
-			break;
-		case R.id.inv_menu_movebottom:
+		} else if (id == R.id.inv_menu_movebottom) {
 			player.inventory.sortToBottom(itemType.id);
-			break;
 		}
 		update();
 	}

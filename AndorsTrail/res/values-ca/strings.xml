@@ -49,11 +49,11 @@
     <string name="combat_monsterhealth">PS:</string>
     <string name="combat_monsteraction">%1$s ataca.</string>
     <string name="combat_result_monstermiss">%1$s falla!</string>
-    <string name="combat_result_monsterhit">%1$s encerta i us fa %2$d PS de mal!</string>
-    <string name="combat_result_monsterhitcritical">%1$s aconsegueix un cop crític de %2$d PS!</string>
+    <string name="combat_result_monsterhit">%1$s encerta i us fa %2$d punts de mal!</string>
+    <string name="combat_result_monsterhitcritical">%1$s aconsegueix un cop crític de %2$d punts de vida!</string>
     <string name="combat_result_heromiss">Heu fallat l\'atac.</string>
-    <string name="combat_result_herohit">Encerteu %1$s i feu %2$d PS de mal!</string>
-    <string name="combat_result_herohitcritical">Li feu un cop crític a %1$s i li feu %2$d PS de mal!</string>
+    <string name="combat_result_herohit">Encerteu %1$s i feu %2$d punts de vida!</string>
+    <string name="combat_result_herohitcritical">Li feu un cop crític a %1$s i li feu %2$d punts de vida!</string>
     <string name="combat_result_herokillsmonster">%1$s mor!</string>
     <string name="combat_not_enough_ap">No us queden PA per a aquesta ronda.</string>
     <string name="combat_hero_dies">Caieu inconscient, però afortunadament desperteu viu, atordit i fatigat. Heu perdut %1$d d\'experiència.</string>
@@ -142,7 +142,54 @@
     <string name="about_button2">Autors</string>
     <string name="about_button3">Llicència</string>
     <string name="about_contents1">Us donem la benvinguda a l\'Andor\'s Trail («El Camí d\'Andor»), un joc de rol tipus RPG «rogue» de codi obert.&lt;br /&gt; &lt;br /&gt; &lt;a href=http://andorstrail.com/&gt;Fòrums del joc per a fer preguntes i parlar del joc a andorstrail.com.&lt;/a&gt;&lt;br /&gt; &lt;br /&gt; &lt;a href=http://andorstrail.com/wiki&gt;Viqui del joc amb informació sobre el món d\'El Camí d\'Andor, entre d\'altres coses.&lt;/a&gt;&lt;br /&gt; &lt;br /&gt; &lt;a href=https://github.com/AndorsTrailRelease/andors-trail/&gt;Codi font del projecte a github.com per a desenvolupadors.&lt;/a&gt;&lt;br /&gt; &lt;br /&gt; Visiteu els fòrums per a parlar del joc amb altres jugadors.&lt;br /&gt;</string>
-    <string name="about_interface">&lt;div&gt;Si premeu el botó de menú del vostre dispositiu, es mostraran les &lt;b&gt;opcions del joc&lt;/b&gt;.&lt;/div&gt; &lt;p&gt;________________&lt;/p&gt; &lt;h1&gt;Icones de la interfície&lt;/h1&gt; &lt;div&gt;&lt;b&gt;El cofre&lt;/b&gt;&lt;img alt=chest src=chest.png /&gt;&lt;/div&gt; &lt;p&gt;Ranures ràpides [Toc llarg als compartiments de dintre per a assignar-hi objectes per al seu ús instantani]&lt;/p&gt; &lt;div&gt;&lt;b&gt;L\'heroi&lt;/b&gt;&lt;img alt=hero src=char_hero.png /&gt;&lt;/div&gt; &lt;p&gt;Menú [Resum, Missions, Habilitats i Inventari *]&lt;/p&gt; &lt;p&gt;* (A l\'inventari, toqueu un objecte per a obtenir-ne informació o feu toc llarg per a veure més opcions)&lt;/p&gt; &lt;div&gt;&lt;b&gt;L\'enemic&lt;/b&gt;&lt;img alt=monster src=monster.png /&gt;&lt;/div&gt; &lt;p&gt;Informació [Apareix durant el combat]&lt;/p&gt; &lt;p&gt;________________&lt;/p&gt; &lt;h1&gt;Combat&lt;/h1&gt; &lt;p&gt;Les accions que es fan durant la batalla costen PA...&lt;/p&gt; &lt;div&gt;&lt;b&gt;Atacar&lt;/b&gt; - [3PA] *&lt;/div&gt; &lt;img alt=attacking src=doubleattackexample.png /&gt; &lt;p&gt;* (L\'equipament o l\'ús d\'alguns objectes poden alterar el cost dels PA)&lt;/p&gt; &lt;div&gt;&lt;b&gt;Fer servir objectes&lt;/b&gt; - [5PA]&lt;/div&gt; &lt;div&gt;&lt;b&gt;Fugir&lt;/b&gt; - [6PA]&lt;/div&gt; &lt;p&gt;________________&lt;/p&gt; &lt;h1&gt;Combat Avançat&lt;/h1&gt; &lt;div&gt;Durant el combat, feu un toc llarg en una casella adjacent a l\'heroi...&lt;/div&gt; &lt;div&gt;&lt;b&gt;Per a fugir&lt;/b&gt;&lt;/div&gt; &lt;p&gt;(la casella escollida es marca - i el botó d\'«Ataca» canvia a «Moure\'s»)&lt;/p&gt; &lt;img alt=flee src=flee_example.png /&gt; &lt;p&gt;[mode de fugida activat ‒ Feu un toc llarg a l\'enemic per a tornar a entrar al mode de combat]&lt;/p&gt; &lt;div&gt;&lt;b&gt;Per a canviar d\'objectiu&lt;/b&gt;&lt;/div&gt; &lt;p&gt;(la marca vermella que indica l\'objectiu canvia entre els enemics)&lt;/p&gt; &lt;p&gt;[l\'objectiu ha canviat]&lt;/p&gt;</string>
+    <string name="about_interface"><![CDATA[
+
+Podeu trobar la <div><b>Configuració del joc</b> prement el botó de menú del dispositiu.</div>
+
+<p>________________</p>
+<h1>Icones d\'interfície</h1>
+
+<div><b>El cofre</b><img alt="chest" src="chest.png" /></div>
+<p>Ranges ràpides [Premeu llargament les bosses de l\'interior per assignar objectes per a ús instantani]</p>
+
+<div><b>L\'heroi</b><img alt="hero" src="char_hero.png" /></div>
+<p>Menú [Visió general, missions, habilitats i Inventari *]</p>
+<p>* (Mentre estigueu a l\'inventari, "premeu" un objecte per obtenir informació i "premeu llargament" per obtenir més opcions)</p>
+
+<div><b>L\'enemic</b><img alt="monster" src="monster.png" /></div>
+<p>Informació [Apareix durant el combat]</p>
+
+
+
+<p>________________</p>
+<h1>Combat</h1>
+
+<p>Les accions realitzades durant la batalla costen PA...</p>
+
+<div><b>Atacar</b> - [3PA] *</div>
+<img alt="attacking" src="doubleattackexample.png" />
+<p>* (Equipar equip i utilitzar objectes pot alterar el cost de PA i ús)</p>
+
+<div><b>Ús d\'objectes</b> - [5PA]</div>
+<div><b>Fugir</b> - [6AP]</div>
+
+
+
+<p>________________</p>
+<h1>Combat avançat</h1>
+
+<div>Durant el combat, premeu llargament una casella adjacent a l\'heroi...</div>
+
+<div><b>Per fugir</b></div>
+<p>(la casella escollida està ressaltada - El botó d\'atac canvia a Moure)</p>
+<img alt="flee" src="flee_example.png" />
+<p>[mode de fugida activat - Premeu llargament l\'enemic per tornar a entrar en combat]</p>
+
+<div><b>Per canviar d\'objectius</b></div>
+<p>(el ressaltat vermell de l\'objectiu canvia entre els enemics)</p>
+<p>[l\'objectiu s\'ha canviat]</p>
+
+]]></string>
     <string name="dialog_newversion_title">Us donem la benvinguda!</string>
     <string name="dialog_newversion_message">Gràcies per descarregar l\'Andor\'s Trail!
 \n
@@ -378,7 +425,7 @@
     <string name="iteminfo_effect_works_on_attacker">A l\'atacant</string>
     <string name="actorcondition_info_immunity">Immune a %1$s</string>
     <string name="iteminfo_effect_works_when_killed_by_attacker">Quan el mata l\'atacant</string>
-    <string name="skill_longdescription_armor_prof_heavy">Per cada nivell d\'habilitat, incrementa la probabilitat de bloqueig de cada peça d\'armadura pesada equipada un %1$d %% respecte la probabilitat de bloqueig base. La penalització de moviment de les armadures pesants es redueix un %2$d %% per cada nivell d\'habilitat i les penalitzacions de velocitat d\'atac un %3$d %% per nivell d\'habilitat. Les armadures pesades inclouen armadures fetes de metall, plaques i cota de malla.</string>
+    <string name="skill_longdescription_armor_prof_heavy">Per cada nivell d\'habilitat, augmenta la probabilitat de bloqueig que es porti cada peça d\'armadura pesada en un %1$d %% de les seves probabilitats de bloqueig originals. Les peces d\'armadura pesada tenen les seves penalitzacions de moviment reduïdes en un %2$d %% per nivell d\'habilitat, les seves penalitzacions de velocitat d\'atac reduïdes en un %3$d %% per nivell d\'habilitat i les seves penalitzacions de cost d\'ús d\'objectes reduïdes en un %4$d %% per nivell d\'habilitat. Les armadures pesades inclouen armadures metàl·liques, cota de malla i cota de malla de plaques.</string>
     <string name="skill_longdescription_armor_prof_light">Per cada nivell d\'habilitat, incrementa la probabilitat de bloqueig de cada peça d\'armadura lleugera equipada un %1$d %% respecte la probabilitat de bloqueig base. Les armadures lleugeres inclouen armadures fetes de pell, metall lleuger i cuir.</string>
     <string name="skill_longdescription_armor_prof_unarmored">Quan es lluita sense armadura, s\'obtenen %1$d punts de probabilitat de bloqueig per cada nivell d\'habilitat. Els objectes fets de tela no es consideren armadures.</string>
     <string name="preferences_dialog_overwrite_savegame">Es mostrarà un quadre de diàleg quan es desi una partida que sobreescrigui en una ranura que ja es faci servir.</string>
@@ -470,9 +517,7 @@
     <string name="dialog_loading_failed_cheat">L\'Andor\'s Trail no ha pogut carregar la partida desada. Aquesta partida ja s\'ha continuat.</string>
     <string name="dialog_game_over_text">Solteu el vostre últim alè i moriu.</string>
     <string name="dialog_permission_information_title">Càrrega i desada de les partides</string>
-    <string name="dialog_newversion_permission_information">"
-\n
-\nL\'Andor\'s Trail us demanarà permís d\'accés a l\'emmagatzematge. Aquest permís es farà servir només amb el propòsit de desar i carregar les vostres partides."</string>
+    <string name="dialog_newversion_permission_information">\n\nL\'Andor\'s Trail us demanarà permís d\'accés a l\'emmagatzematge. Aquest permís es farà servir només amb el propòsit de desar i carregar les vostres partides.</string>
     <string name="startscreen_mode_1_life">Mort permanent (1 vida i 1 desada)</string>
     <string name="startscreen_mode_3_lives">Extrema (3 vides i 1 desada)</string>
     <string name="startscreen_mode_10_lives">Molt difícil (10 vides i 1 desada)</string>
@@ -645,4 +690,6 @@
     <string name="loadsave_import_worldmap_wrong_file">Esteu segur que heu triat un mapa del món\? Trieu el fitxer «worldmap.zip» que s\'ha exportat al lloc de destí de l\'exportació.</string>
     <string name="loadsave_import_save_error_unknown">‒obsolet‒</string>
     <string name="loadsave_import_worldmap_wrong_directory">‒obsolet‒</string>
+    <string name="iteminfo_effect_works_when_missing_target">Quan es perdi l\'objectiu</string>
+    <string name="iteminfo_effect_works_when_missed_by_attacker">Quan l\'atacant falli</string>
 </resources>

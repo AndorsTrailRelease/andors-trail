@@ -4,6 +4,7 @@ import static com.gpl.rpg.AndorsTrail.controller.CombatController.BeginTurnAs.pl
 import static com.gpl.rpg.AndorsTrail.controller.SkillController.canLevelupSkillWithQuest;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.content.res.Resources;
 
@@ -23,6 +24,9 @@ import com.gpl.rpg.AndorsTrail.model.actor.Player;
 import com.gpl.rpg.AndorsTrail.model.conversation.ConversationCollection;
 import com.gpl.rpg.AndorsTrail.model.conversation.Phrase;
 import com.gpl.rpg.AndorsTrail.model.conversation.Reply;
+import com.gpl.rpg.AndorsTrail.model.item.ItemFilter;
+import com.gpl.rpg.AndorsTrail.model.item.ItemFilterCollection;
+import com.gpl.rpg.AndorsTrail.model.item.ItemType;
 import com.gpl.rpg.AndorsTrail.model.item.ItemTypeCollection;
 import com.gpl.rpg.AndorsTrail.model.item.Loot;
 import com.gpl.rpg.AndorsTrail.model.map.LayeredTileMap;
@@ -69,14 +73,23 @@ public final class ConversationController {
 
 		final ScriptEffectResult result = new ScriptEffectResult();
 		for (ScriptEffect effect : phrase.scriptEffects) {
-			applyScriptEffect(res, player, effect, result);
+			boolean req_false = false;
+			if (effect.hasRequirements()) {
+				for (Requirement requirement : effect.requires) {
+					if (!canFulfillRequirement(world, requirement)) {
+						req_false = true;
+						break;
+					}
+				}
+			}
+			if (!req_false) {
+				applyScriptEffect(res, player, effect, result);
+			}
 		}
-
 		if (result.isEmpty()) return null;
 
 		player.inventory.add(result.loot);
 		controllers.actorStatsController.addExperience(result.loot.exp);
-
 		return result;
 	}
 
@@ -312,7 +325,12 @@ public final class ConversationController {
 	}
 
 	private void addItemReward(String itemTypeID, int quantity, ScriptEffectResult result) {
-		result.loot.add(world.itemTypes.getItemType(itemTypeID), quantity);
+		if (ItemTypeCollection.isItemFilter(itemTypeID)) {
+			ItemFilter filter = world.itemFilters.getItemFilter(itemTypeID);
+			result.loot.add(filter.getRandomItem(), quantity);
+		} else {
+			result.loot.add(world.itemTypes.getItemType(itemTypeID), quantity);
+		}
 	}
 
 	private void addSkillReward(Player player, SkillCollection.SkillID skillID, ScriptEffectResult result) {
@@ -378,12 +396,36 @@ public final class ConversationController {
 				break;
 			case wear:
 			case wearRemove:
-				result =  player.inventory.isWearing(requirement.requireID, requirement.value);
+				if (ItemTypeCollection.isItemFilter(requirement.requireID)) {
+					ItemFilter filter = world.itemFilters.getItemFilter(requirement.requireID);
+					result = false;
+					if (filter != null) {
+						for (ItemType item : filter.getItemTypes()) {
+							if (player.inventory.isWearing(item.id, requirement.value)) {
+								result = true;
+								break;
+							}
+						}
+					}
+				} else {
+					result =  player.inventory.isWearing(requirement.requireID, requirement.value);
+				}
 				break;
 			case inventoryKeep:
 			case inventoryRemove:
 				if (ItemTypeCollection.isGoldItemType(requirement.requireID)) {
-					result =  player.inventory.gold >= requirement.value;
+					result = player.inventory.gold >= requirement.value;
+				} else if (ItemTypeCollection.isItemFilter(requirement.requireID)) {
+					ItemFilter filter = world.itemFilters.getItemFilter(requirement.requireID);
+					result = false;
+					if (filter != null) {
+						for (ItemType item : filter.getItemTypes()) {
+							if (player.inventory.hasItem(item.id, requirement.value)) {
+								result = true;
+								break;
+							}
+						}
+					}
 				} else {
 					result =  player.inventory.hasItem(requirement.requireID, requirement.value);
 				}
@@ -398,7 +440,18 @@ public final class ConversationController {
 				result =  world.model.worldData.hasTimerElapsed(requirement.requireID, requirement.value);
 				break;
 			case usedItem:
-				result =  stats.getNumberOfTimesItemHasBeenUsed(requirement.requireID) >= requirement.value;
+				if (ItemTypeCollection.isItemFilter(requirement.requireID)) {
+					ItemFilter filter = world.itemFilters.getItemFilter(requirement.requireID);
+					result = false;
+					if (filter != null) {
+						for (ItemType item : filter.getItemTypes()) {
+							result = stats.getNumberOfTimesItemHasBeenUsed(item.id) >= requirement.value;
+							if (result) break;
+						}
+					}
+				} else {
+					result =  stats.getNumberOfTimesItemHasBeenUsed(requirement.requireID) >= requirement.value;
+				}
 				break;
 			case spentGold:
 				result =  stats.getSpentGold() >= requirement.value;
@@ -453,13 +506,35 @@ public final class ConversationController {
 				if (ItemTypeCollection.isGoldItemType(requirement.requireID)) {
 					p.inventory.gold -= requirement.value;
 					world.model.statistics.addGoldSpent(requirement.value);
+				} else if (ItemTypeCollection.isItemFilter(requirement.requireID)) {
+					ItemFilter filter = world.itemFilters.getItemFilter(requirement.requireID);
+					if (filter != null) {
+						for (ItemType item : filter.getItemTypes()) {
+							if (p.inventory.hasItem(item.id, requirement.value)) {
+								p.inventory.removeItem(item.id, requirement.value);
+								break;
+							}
+						}
+					}
 				} else {
 					p.inventory.removeItem(requirement.requireID, requirement.value);
 				}
 				break;
             case wearRemove:
-                controllers.itemController.removeEquippedItem(requirement.requireID, requirement.value);
-                break;
+				if (ItemTypeCollection.isItemFilter(requirement.requireID)) {
+					ItemFilter filter = world.itemFilters.getItemFilter(requirement.requireID);
+					if (filter != null) {
+						for (ItemType item : filter.getItemTypes()) {
+							if (p.inventory.isWearing(item.id, requirement.value)) {
+								controllers.itemController.removeEquippedItem(item.id, requirement.value);
+								break;
+							}
+						}
+					}
+				} else {
+					controllers.itemController.removeEquippedItem(requirement.requireID, requirement.value);
+                	break;
+				}
 		}
 	}
 
@@ -572,7 +647,9 @@ public final class ConversationController {
 			}
 
 			for (Reply r : currentPhrase.replies) {
-				if (!canSelectReply(world, r)) continue;
+				if (!canSelectReply(world, r)) {
+					continue;
+				}
 				listener.onConversationHasReply(r, getDisplayMessage(r, player));
 			}
 			return null;
