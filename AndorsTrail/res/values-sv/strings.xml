@@ -5,7 +5,7 @@
     <string name="menu_settings">Alternativ</string>
     <string name="menu_save">Spara</string>
     <string name="menu_save_gamesaved">Spelet sparades på plats %1$d</string>
-    <string name="menu_save_failed">Spelet misslyckades att sparas! Är SD-kortet monterat och skrivbart?</string>
+    <string name="menu_save_failed">Misslyckades att spara spelet! Är SD-kortet monterat och skrivbart?</string>
     <string name="loadsave_title_save">Spara spelet</string>
     <string name="loadsave_title_load">Ladda ett sparat spel</string>
     <string name="loadsave_selectslot">Välj en plats</string>
@@ -268,7 +268,7 @@
     <string name="startscreen_newgame_start">Starta spel</string>
     <string name="iteminfo_action_use_ap">Använd (%1$d AP)</string>
     <string name="heroinfo_limited_lives">Begränsade liv (%1$d/%2$d kvar)</string>
-    <string name="combat_log_item_plural">Du hittade %1$d objekt:</string>
+    <string name="combat_log_item_plural">Du hittade %1$d föremål:</string>
     <string name="combat_log_item_single">Du hittade ett objekt:</string>
     <string name="combat_condition_player_immune">Du är nu immuniserad mot %1$s.</string>
     <string name="combat_condition_player_apply">Du blev påverkad av %1$s.</string>
@@ -542,7 +542,7 @@
     <string name="skill_longdescription_regeneration">Få + %1$d hälsopoäng (HP) vid varje runda per färdighetsnivå när inga monster är direkt intill.</string>
     <string name="skill_longdescription_fortitude">På varje efterföljande nivå kommer maximala hälsopoäng (HP) att höjas med %1$d per färdighetsnivå. Detta tillämpas inte retroaktivt, endast efterföljande nivåer kommer att påverkas.</string>
     <string name="skill_longdescription_more_exp">Ökar mängden exp som ges genom att besegra monster med %1$d %% för varje färdighetsnivå.</string>
-    <string name="skillinfo_action_levelup">Gå upp en nivå</string>
+    <string name="skillinfo_action_levelup">Höj nivån</string>
     <string name="loadsave_save_to_new_slot">Skapa ny Sparfilsplats</string>
     <string name="loadsave_save_overwrite_confirmation_title">Överskriv Sparfil?</string>
     <string name="loadsave_save_overwrite_confirmation">Denna Sparfil innehåller ett annat spelarnamn (%1$s) än ditt nuvarande spelarnamn (%2$s). Är du säker på att du vill överskriva detta spel?</string>
@@ -560,7 +560,7 @@
 \n
 \nObjekt gjorda av tyg anses inte vara rustning.</string>
     <string name="skill_longdescription_better_criticals">Ökar alla befintliga kritiska faktorer som ges av utrustning med %1$d %% för varje färdighetsnivå.</string>
-    <string name="skill_longdescription_speed">Ökar maximal handlingspoängen (AP) med %1$d för varje färdighetsnivå.</string>
+    <string name="skill_longdescription_speed">Ökar dina maximala handlingspoäng (AP) med %1$d för varje färdighetsnivå.</string>
     <string name="skill_longdescription_coinfinder">Ökar chansen att hitta guldmynt från monster med %1$d%%, och ökar mängden guldmynt med %2$d%% för varje färdighetsnivå (upp till det maximala belopp som monstret tappar).</string>
     <string name="skill_longdescription_eater">Ger + %1$d hälsopoäng (HP) på varje död per färdighetsnivå.</string>
     <string name="skill_longdescription_cleave">Ger + %1$d handlingspoäng (AP) för varje död per färdighetsnivå.</string>
@@ -658,4 +658,18 @@
 
 	<string name="skill_shortdescription_fightstyle_unarmed_unarmored">Bättre på att slåss obeväpnad/utan rustning</string>
     <string name="skill_shortdescription_specialization_2hand">Expert på tvåhandsvapen</string>
+    <string name="inventory_sort_rarity">Sällsynthet</string>
+    <string name="inventory_sort_custom">Osorterat</string>
+    <string name="inventory_category_potion">Drycker</string>
+    <string name="skill_shortdescription_weapon_prof_pole">Bättre på att strida med stångvapen</string>
+    <string name="skill_longdescription_weapon_prof_dagger">För varje nivå av färdigheten ökas attackchansen vid användning av dolkar och kortsvärd med %1$d %% av vapnets grundattackchans, ökas pareringschansen med %2$d %% av vapnets grundpareringschans och ökas förmågan till kritiska träffar med %3$d %% av vapnets grundförmåga till kritiska träffar.</string>
+    <string name="skill_longdescription_weapon_prof_1hsword">För varje nivå av färdigheten ökas attackchansen vid användning av värjor, långsvärd och bredsvärd med %1$d %% av vapnets grundattackchans, ökas pareringschansen med %2$d %% av vapnets grundpareringschans och ökas förmågan till kritiska träffar med %3$d %% av vapnets grundförmåga till kritiska träffar.</string>
+    <string name="skill_longdescription_weapon_prof_2hsword">För varje nivå av färdigheten ökas attackchansen vid användning av tvåhandssvärd med %1$d %% av vapnets grundattackchans, ökas pareringschansen med %2$d %% av vapnets grundpareringschans och ökas förmågan till kritiska träffar med %3$d %% av vapnets grundförmåga till kritiska träffar.</string>
+    <string name="skill_longdescription_weapon_prof_unarmed">När du strider utan vapen och sköld ökar din attackchans med %1$d, din skadepotential med %2$d och din pareringschans med %3$d per färdighetsnivå.</string>
+    <string name="skill_shortdescription_specialization_dualwield">Expert på strid med två vapen</string>
+    <string name="skill_longdescription_armor_prof_unarmored">När du strider utan någon form av rustning på dig ökar din pareringschans med %1$d per färdighetsnivå. Föremål av tyg räknas inte som rustning.</string>
+    <string name="heroinfo_gamestats_fav_monsters">Monster som dödats oftast</string>
+    <string name="heroinfo_gamestats_top_boss">Mäktigast monster som dödats</string>
+    <string name="heroinfo_gamestats_fav_item">Föremål som används oftast</string>
+    <string name="skill_longdescription_weapon_prof_pole">För varje nivå av färdigheten ökas attackchansen vid användning av stångvapen med %1$d %% av vapnets grundattackchans, ökas pareringschansen med %2$d %% av vapnets grundpareringschans och ökas förmågan till kritiska träffar med %3$d %% av vapnets grundförmåga till kritiska träffar.</string>
 </resources>
