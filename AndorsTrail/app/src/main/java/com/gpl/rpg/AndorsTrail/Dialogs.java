@@ -19,7 +19,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.gpl.rpg.AndorsTrail.activity.ActorConditionInfoActivity;
@@ -359,14 +361,34 @@ public final class Dialogs {
 	}
 
 	public static void showAndroidTVNotice(final Activity currentActivity) {
+		final AndorsTrailApplication app = AndorsTrailApplication.getApplicationFromActivity(currentActivity);
+		final AndorsTrailPreferences preferences = app.getPreferences();
+		final SessionState sessionState = app.getSessionState();
+		if (!preferences.showAndroidTVNotice || sessionState.hasShownAndroidTVNotice()) {
+			return;
+		}
+
+		final CheckBox disableNotice = new CheckBox(currentActivity);
+		disableNotice.setText(R.string.dialog_dont_show_again_message);
+
+		LinearLayout content = new LinearLayout(currentActivity);
+		content.setOrientation(LinearLayout.VERTICAL);
+		content.addView(disableNotice);
+
 		final CustomDialog d = CustomDialogFactory.createDialog(currentActivity,
 				currentActivity.getResources().getString(R.string.dialog_androidtv_title),
 				currentActivity.getResources().getDrawable(android.R.drawable.ic_dialog_info),
 				currentActivity.getResources().getString(R.string.dialog_androidtv_message),
-				null,
+				content,
 				true);
 
 		CustomDialogFactory.addDismissButton(d, android.R.string.ok);
+		CustomDialogFactory.setDismissListener(d, dialog -> {
+			if (disableNotice.isChecked()) {
+				preferences.setShowAndroidTVNotice(false);
+			}
+		});
+		sessionState.markAndroidTVNoticeShown();
 		CustomDialogFactory.show(d);
 	}
 
