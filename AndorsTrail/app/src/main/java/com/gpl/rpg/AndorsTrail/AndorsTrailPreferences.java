@@ -62,11 +62,13 @@ public final class AndorsTrailPreferences {
 	public int quickslotsPosition = QUICKSLOTS_POSITION_HORIZONTAL_CENTER_BOTTOM;
 	public boolean showQuickslotsWhenToolboxIsVisible = false;
 	public String language = "default";
+	public boolean exportToDownloads = false;
+	public int selectedTheme = 0;
+
+	// Hidden prefs set/cleared by code
+	public boolean showAndroidTVNotice = true;
 	public boolean quickslotsVisible = false;
 	public boolean debugVisible = true;
-	public boolean exportToDownloads = false;
-
-	public int selectedTheme = 0;
 
 	public AndorsTrailPreferences(Context context) {
 		// Use application context to avoid leaks
@@ -96,11 +98,12 @@ public final class AndorsTrailPreferences {
 			dest.selectedTheme = Integer.parseInt(prefs.getString("selectedTheme", Integer.toString(0)));
 			// This might be implemented as a skill in the future.
 			//dest.movementAggressiveness = Integer.parseInt(prefs.getString("movementaggressiveness", Integer.toString(MOVEMENTAGGRESSIVENESS_NORMAL)));
+			dest.exportToDownloads = prefs.getBoolean("export_to_downloads", false);
 
 			// These are set via the toolbox, not the prefs manager
 			dest.quickslotsVisible = prefs.getBoolean("quickslots_visible", false);
 			dest.debugVisible = prefs.getBoolean("debug_visible", true);
-			dest.exportToDownloads = prefs.getBoolean("export_to_downloads", false);
+			dest.showAndroidTVNotice = prefs.getBoolean("show_android_tv_notice", true);
 		} catch (Exception e) {
 			dest.confirmRest = true;
 			dest.confirmAttack = true;
@@ -124,6 +127,7 @@ public final class AndorsTrailPreferences {
 			dest.quickslotsVisible = false;
 			dest.debugVisible = true;
 			dest.exportToDownloads = false;
+			dest.showAndroidTVNotice = true;
 		}
 	}
 
@@ -137,5 +141,10 @@ public final class AndorsTrailPreferences {
 	public void setDebugVisible(boolean visible) {
 		this.debugVisible = visible;
 		prefs.edit().putBoolean("debug_visible", visible).apply();
+	}
+
+	public void setShowAndroidTVNotice(boolean visible) {
+		this.showAndroidTVNotice = visible;
+		prefs.edit().putBoolean("show_android_tv_notice", visible).apply();
 	}
 }
