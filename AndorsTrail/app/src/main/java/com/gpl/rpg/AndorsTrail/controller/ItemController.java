@@ -125,7 +125,6 @@ public final class ItemController {
 			controllers.mapController.worldEventListeners.onPlayerPickedUpMonsterLoot(killedMonsterBags, totalExpThisFight);
 			pickupAll(killedMonsterBags);
 			removeLootBagIfEmpty(killedMonsterBags);
-			controllers.gameRoundController.resume();
 		} else {
 			controllers.mapController.worldEventListeners.onPlayerFoundMonsterLoot(killedMonsterBags, totalExpThisFight);
 			consumeNonItemLoot(killedMonsterBags);
