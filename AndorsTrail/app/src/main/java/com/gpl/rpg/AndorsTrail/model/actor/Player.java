@@ -56,8 +56,9 @@ public final class Player extends Actor {
 	private final HashMap<String, Integer> alignments = new HashMap<String, Integer>();
 	public String id = UUID.randomUUID().toString();
 	public long savedVersion = 1; // the version get's increased for cheat detection everytime a player with limited saves is saved
-
-
+	// Fixup for a bad quest ID
+	private static final String LEGACY_MISC_NONDISPLAY_QUEST_ID = "misc_nondisplay ";
+	private static final String FIXED_MISC_NONDISPLAY_QUEST_ID = "misc_nondisplay";
 
 	// Unequipped stats
 	public static final class PlayerBaseTraits {
@@ -374,7 +375,10 @@ public final class Player extends Actor {
 			LinkedHashMap<String, LinkedHashSet<Integer> > questProgress = new LinkedHashMap<String, LinkedHashSet<Integer> >();
 			final int numQuests = src.readInt();
 			for(int i = 0; i < numQuests; ++i) {
-				final String questID = src.readUTF();
+				final String savedQuestID = src.readUTF();
+				final String questID = LEGACY_MISC_NONDISPLAY_QUEST_ID.equals(savedQuestID)
+						? FIXED_MISC_NONDISPLAY_QUEST_ID
+						: savedQuestID;
 				questProgress.put(questID, new LinkedHashSet<Integer>());
 				final int numProgress = src.readInt();
 
@@ -546,4 +550,3 @@ public final class Player extends Actor {
 		builder.add(savedVersion);
 	}
 }
-

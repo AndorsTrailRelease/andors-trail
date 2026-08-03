@@ -3,6 +3,7 @@ package com.gpl.rpg.AndorsTrail;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import android.app.Activity;
 import android.content.Context;
@@ -60,8 +61,8 @@ public final class Dialogs {
 		CustomDialogFactory.setDismissListener(d, new OnDismissListener() {
 			@Override
 			public void onDismiss(DialogInterface arg0) {
-				if (onDismiss != null) onDismiss.onDismiss(arg0);
 				context.gameRoundController.releasePause(PauseReason.BLOCKING_DIALOG);
+				if (onDismiss != null) onDismiss.onDismiss(arg0);
 			}
 		});
 		CustomDialogFactory.show(d);
@@ -299,17 +300,17 @@ public final class Dialogs {
 				currentActivity.getResources().getString(R.string.dialog_rest_confirm_message), 
 				null, 
 				true);
+		final AtomicBoolean confirmed = new AtomicBoolean(false);
 
-		CustomDialogFactory.addButton(d, android.R.string.yes, new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				controllerContext.mapController.rest(area);
-			}
-		});
+		CustomDialogFactory.addButton(d, android.R.string.yes, v -> confirmed.set(true));
 
 		CustomDialogFactory.addDismissButton(d, android.R.string.no);
 
-		showDialogAndPause(d, controllerContext);
+		showDialogAndPause(d, controllerContext, arg0 -> {
+			if (confirmed.get()) {
+				controllerContext.mapController.rest(area);
+			}
+		});
 	}
 	public static void showRested(final Activity currentActivity, final ControllerContext controllerContext) {
 		//		Dialog d = new AlertDialog.Builder(new ContextThemeWrapper(currentActivity, R.style.AndorsTrailStyle))

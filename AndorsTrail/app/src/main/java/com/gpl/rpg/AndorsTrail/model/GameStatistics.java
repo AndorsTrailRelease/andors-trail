@@ -123,6 +123,7 @@ public final class GameStatistics {
 		Integer v;
 		if ((v = usedItems.get("bonemeal_potion")) != null) result += v;
 		if ((v = usedItems.get("pot_bm_lodar")) != null) result += v;
+		if ((v = usedItems.get("pot_bm_kazaul")) != null) result += v;
 		return result;
 	}
 
