@@ -819,14 +819,20 @@ Items made of cloth are not considered as being armor." </string>
 	<string name="preferences_export_to_downloads_title">Export directly to Downloads</string>
 	<string name="preferences_export_to_downloads_summary">If enabled, a different method will be used to export savegames directly to the system Downloads folder. This may be required on some devices.</string>
 
+	<!-- Generates the text over the HP and AP rangebars on the UI -->
 	<string name="rangebar_current_max" translatable="false">%1$,d / %2$,d</string>
 
+	<!-- Strings for simple AP and HP values in the UI -->
 	<string name="general_ap_value">%1$,d AP</string>
 	<string name="general_hp_value">%1$,d HP</string>
+
+	<!-- Used for displaying a range of HP values -->
 	<string name="general_hp_minmax_value">%1$,d-%2$,d HP</string>
+
+	<!-- General integer value that will get i18n translated -->
 	<string name="general_integer_value" translatable="false">%1$,d</string>
 
-	<!-- String val because localization done in code since use of % of sign varies by locale -->
+	<!-- String val because localization done in code since use of % of sign varies by locale and these templates can't handle that -->
 	<string name="general_percentage_value" translatable="false">%1$s</string>
 
 	<!-- Used for critical hit multipliers (or anything else that uses a multiplier as unit) -->
@@ -835,6 +841,7 @@ Items made of cloth are not considered as being armor." </string>
 	<!-- Translators: the 'pts' should be a short abbreviation of the word 'points' in your language (as in Skill Points). -->
 	<string name="general_points_value">%1$,d pts</string>
 
+	<!-- Strings for displaying actor conditions on the game playfield icons -->
 	<string name="actorcondition_icon_magnitude" translatable="false">×%1$,d</string>
 	<string name="actorcondition_icon_duration" translatable="false">%1$,d</string>
 	<string name="actorcondition_icon_duration_infinite" translatable="false">∞</string>
