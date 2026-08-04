@@ -1,12 +1,11 @@
 package com.gpl.rpg.AndorsTrail.controller;
 
-import static com.gpl.rpg.AndorsTrail.controller.CombatController.BeginTurnAs.player;
 import static com.gpl.rpg.AndorsTrail.controller.SkillController.canLevelupSkillWithQuest;
 
 import java.util.ArrayList;
-import java.util.List;
+
 import com.gpl.rpg.AndorsTrail.util.Format;
-import com.gpl.rpg.AndorsTrail.util.NumTagResolver;
+import com.gpl.rpg.AndorsTrail.util.LocalizedNumberFormatter;
 
 import android.content.res.Resources;
 
@@ -21,13 +20,11 @@ import com.gpl.rpg.AndorsTrail.model.ability.SkillCollection;
 import com.gpl.rpg.AndorsTrail.model.ability.SkillInfo;
 import com.gpl.rpg.AndorsTrail.model.actor.Actor;
 import com.gpl.rpg.AndorsTrail.model.actor.Monster;
-import com.gpl.rpg.AndorsTrail.model.actor.MonsterType;
 import com.gpl.rpg.AndorsTrail.model.actor.Player;
 import com.gpl.rpg.AndorsTrail.model.conversation.ConversationCollection;
 import com.gpl.rpg.AndorsTrail.model.conversation.Phrase;
 import com.gpl.rpg.AndorsTrail.model.conversation.Reply;
 import com.gpl.rpg.AndorsTrail.model.item.ItemFilter;
-import com.gpl.rpg.AndorsTrail.model.item.ItemFilterCollection;
 import com.gpl.rpg.AndorsTrail.model.item.ItemType;
 import com.gpl.rpg.AndorsTrail.model.item.ItemTypeCollection;
 import com.gpl.rpg.AndorsTrail.model.item.Loot;
@@ -545,14 +542,12 @@ public final class ConversationController {
 
 	private static String getDisplayMessage(Phrase phrase, Player player) {
 		String message = replacePlayerName(phrase.message, player);
-		// First resolve any explicit <num>...</num> tags (these carry the original
-		// ASCII digits and may include an optional fmt attribute).
-		message = NumTagResolver.resolveNumTags(message);
+		message = LocalizedNumberFormatter.parseString(message, java.util.Locale.getDefault());
 		return message;
 	}
 	private static String getDisplayMessage(Reply reply, Player player) {
 		String message = replacePlayerName(reply.text, player);
-		message = NumTagResolver.resolveNumTags(message);
+		message = LocalizedNumberFormatter.parseString(message, java.util.Locale.getDefault());
 		return message;
 	}
 	private static String replacePlayerName(String s, Player player) {
