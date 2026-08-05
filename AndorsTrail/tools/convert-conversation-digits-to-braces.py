@@ -2,7 +2,8 @@
 """Wrap bare numbers in conversation text with curly braces.
 
 This updates `message` and `text` fields in `conversationlist_*.json` files so
-numeric literals become brace-wrapped placeholders like `{10}` or `{12.5}`.
+numeric literals with 4+ integer digits become brace-wrapped placeholders like
+`{1000}` or `{1234.5}`.
 Existing brace-wrapped numbers are left unchanged.
 """
 
@@ -12,37 +13,29 @@ import argparse
 import difflib
 import json
 import os
-import re
 from pathlib import Path
 from typing import Any, Iterable
 
-
-NUMBER_TOKEN_RE = re.compile(
-    r"(\{?\s*-?(?:\d+(?:\.\d+)?|\.\d+)\s*\}|(?<![.\w])-?(?:\d+(?:\.\d+)?|\.\d+)(?![.\w]))"
+from brace_number_common import (
+    brace_numbers,
+    default_exclude_ids_config_path,
+    is_excluded_id,
+    load_exclude_ids_file,
+    normalize_exclude_ids,
 )
 TARGET_KEYS = {"message", "text"}
 
 
-def brace_numbers(text: str) -> tuple[str, int]:
-    replacements = 0
-
-    def repl(match: re.Match[str]) -> str:
-        nonlocal replacements
-        token = match.group(1)
-        if token.startswith("{"):
-            return token
-        replacements += 1
-        return "{" + token + "}"
-
-    return NUMBER_TOKEN_RE.sub(repl, text), replacements
-
-
-def transform_value(value: Any, key: str | None = None) -> tuple[Any, int]:
+def transform_value(value: Any, key: str | None = None, exclude_ids: set[str] | None = None) -> tuple[Any, int]:
     if isinstance(value, dict):
+        source_id = value.get("id") if isinstance(value.get("id"), str) else None
+        if source_id and exclude_ids and is_excluded_id(source_id, exclude_ids):
+            return value, 0
+
         changed = 0
         result = {}
         for key, child in value.items():
-            new_child, child_changes = transform_value(child, key)
+            new_child, child_changes = transform_value(child, key, exclude_ids)
             result[key] = new_child
             changed += child_changes
         return result, changed
@@ -51,7 +44,7 @@ def transform_value(value: Any, key: str | None = None) -> tuple[Any, int]:
         changed = 0
         result = []
         for item in value:
-            new_item, child_changes = transform_value(item, key)
+            new_item, child_changes = transform_value(item, key, exclude_ids)
             result.append(new_item)
             changed += child_changes
         return result, changed
@@ -132,7 +125,19 @@ def main() -> int:
         action="store_true",
         help="Print each changed line before and after.",
     )
+    parser.add_argument(
+        "--exclude-id",
+        action="append",
+        default=[],
+        help="Source IDs to leave unchanged. Can be repeated.",
+    )
+    parser.add_argument(
+        "--exclude-config",
+        default=str(default_exclude_ids_config_path()),
+        help="Path to a text file with one excluded ID per line.",
+    )
     args = parser.parse_args()
+    exclude_ids = normalize_exclude_ids(args.exclude_id) | load_exclude_ids_file(args.exclude_config)
 
     files = discover_files(Path(p) for p in args.paths)
     total_changes = 0
@@ -140,7 +145,7 @@ def main() -> int:
     for path in files:
         original = path.read_text(encoding="utf-8")
         data = json.loads(original)
-        transformed, changes = transform_value(data)
+        transformed, changes = transform_value(data, exclude_ids=exclude_ids)
         if changes == 0:
             continue
 
@@ -154,6 +159,9 @@ def main() -> int:
 
     if total_changes == 0:
         print("No changes.")
+    else:
+        print(f"{total_changes} total replacement(s)")
+
     return 0
 
 
