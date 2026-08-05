@@ -50,11 +50,13 @@ public final class AndorsTrailApplication extends Application {
 	private WorldContext world;
 	private ControllerContext controllers;
 	private WorldSetup setup;
+	private final SessionState sessionState = new SessionState();
 
 	public WorldContext getWorld() { return world; }
 	public WorldSetup getWorldSetup() { return setup; }
 	public AndorsTrailPreferences getPreferences() { return preferences; }
 	public ControllerContext getControllerContext() { return controllers; }
+	public SessionState getSessionState() { return sessionState; }
 
 	public static AndorsTrailApplication getApplicationFromActivity(Activity activity) {
 		return ((AndorsTrailApplication) activity.getApplication());
