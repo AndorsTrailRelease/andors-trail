@@ -145,10 +145,10 @@ def main() -> int:
             continue
 
         updated = json.dumps(transformed, ensure_ascii=False, indent=4, separators=(",", ":")) + "\n"
+        if args.show_changes:
+            print_changed_lines(path, original, updated)
         if not args.dry_run:
             path.write_text(updated, encoding="utf-8")
-            if args.show_changes:
-                print_changed_lines(path, original, updated)
         print(f"{path}: {changes} replacement(s)")
         total_changes += changes
 
