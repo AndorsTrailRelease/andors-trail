@@ -111,7 +111,7 @@ public final class CombatController implements VisualEffectCompletedCallback {
 			boolean firstItem = true;
 			for (ItemContainer.ItemEntry entry : combinedLoot.items.items) {
 				if (!firstItem) {
-					itemMessage.append(controllers.getResources().getString(R.string.combat_log_item_list_seperator));
+					itemMessage.append(controllers.getResources().getString(R.string.combat_log_item_list_separator));
 				}
 				itemMessage.append(controllers.getResources().getString(R.string.combat_log_item_name_qty, entry.itemType.getName(world.model.player), entry.quantity));
 				firstItem = false;
