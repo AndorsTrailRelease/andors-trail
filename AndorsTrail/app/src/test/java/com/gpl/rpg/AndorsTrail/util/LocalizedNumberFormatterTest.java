@@ -3,6 +3,7 @@ package com.gpl.rpg.AndorsTrail.util;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
+import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 
 import org.junit.Test;
@@ -42,5 +43,21 @@ public final class LocalizedNumberFormatterTest {
     @Test
     public void returnsNullForNullInput() {
         assertNull(LocalizedNumberFormatter.parseString(null, Locale.US));
+    }
+
+    @Test
+    public void localizesDigitShapesForNonLatinLocales() {
+        Locale arabic = Locale.forLanguageTag("ar");
+        char zeroDigit = DecimalFormatSymbols.getInstance(arabic).getZeroDigit();
+
+        assertEquals(
+                new String(new char[] {
+                        zeroDigit,
+                        (char) (zeroDigit + 1),
+                        (char) (zeroDigit + 2),
+                        (char) (zeroDigit + 3),
+                        (char) (zeroDigit + 4)
+                }),
+                LocalizedNumberFormatter.localizeDigits("01234", arabic));
     }
 }
