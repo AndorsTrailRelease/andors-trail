@@ -88,7 +88,7 @@ public final class TraitsInfoView {
 		} else {
 			row.setVisibility(View.VISIBLE);
 			tv = (TextView) group.findViewById(R.id.traitsinfo_criticalhit_skill);
-			tv.setText(res.getString(R.string.general_points_value, criticalSkill));
+			tv.setText(res.getString(R.string.general_integer_value, criticalSkill));
 		}
 
 		row = (TableRow) group.findViewById(R.id.traitsinfo_criticalhit_multiplier_row);
