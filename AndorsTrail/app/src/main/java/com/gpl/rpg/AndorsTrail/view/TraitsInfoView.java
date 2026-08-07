@@ -65,7 +65,7 @@ public final class TraitsInfoView {
 
 		row = (TableRow) group.findViewById(R.id.traitsinfo_attack_chance_row);
 		tv = (TextView) group.findViewById(R.id.traitsinfo_attack_chance);
-		tv.setText(res.getString(R.string.general_percentage_value, Format.localizePercentFromIntPercent(attackChance)));
+		tv.setText(res.getString(R.string.general_integer_value, attackChance));
 
 
 		row = (TableRow) group.findViewById(R.id.traitsinfo_attack_damage_row);
@@ -115,7 +115,7 @@ public final class TraitsInfoView {
 		} else {
 			row.setVisibility(View.VISIBLE);
 			tv = (TextView) group.findViewById(R.id.traitsinfo_block_chance);
-			tv.setText(res.getString(R.string.general_percentage_value, Format.localizePercentFromIntPercent(blockChance)));
+			tv.setText(res.getString(R.string.general_integer_value, blockChance));
 		}
 
 		row = (TableRow) group.findViewById(R.id.traitsinfo_damageresist_row);
