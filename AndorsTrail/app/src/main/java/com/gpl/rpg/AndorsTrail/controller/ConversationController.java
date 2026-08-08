@@ -636,13 +636,21 @@ public final class ConversationController {
 				}
 			}
 
-			if (currentPhrase.message == null) {
-				for (Reply r : currentPhrase.replies) {
-					if (!canSelectReply(world, r)) continue;
+			for (Reply r : currentPhrase.replies) {
+				if (!canSelectReply(world, r)) continue;
+				if (currentPhrase.message == null) {
 					applyReplyEffect(world, r, controllers);
 					return getNextPhraseID(world, r);
 				}
-			} else if (displayPhraseMessage) {
+				if (r.text.equals(ConversationCollection.REPLY_CONCAT)) {
+					Phrase phrase = conversationCollection.getPhrase(r.nextPhrase);
+					if (phrase != null) phrase.message = currentPhrase.message + "\n" + phrase.message;
+					applyReplyEffect(world, r, controllers);
+					return r.nextPhrase;
+				}
+			}
+
+			if (displayPhraseMessage) {
 				String message = getDisplayMessage(currentPhrase, player);
 				listener.onTextPhraseReached(message, npc, phraseID);
 			}
