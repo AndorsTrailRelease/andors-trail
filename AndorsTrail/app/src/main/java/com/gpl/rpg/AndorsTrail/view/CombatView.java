@@ -215,9 +215,11 @@ public final class CombatView extends RelativeLayout implements CombatSelectionL
 		}
 		int condCount = currentMonster.conditions.size() + currentMonster.immunities.size();
 		if(condCount > 0) {
-			// If there are both conditions and immunities, prefer showing the condition type on the button.   If there are only immunities, show the immunity type instead.
-			ActorConditionType condType = currentMonster.conditions.isEmpty() ? currentMonster.immunities.get(0).conditionType : currentMonster.conditions.get(0).conditionType;
-			world.tileManager.setImageViewTile(getContext(), monsterConditionsButton, condType, !currentMonster.immunities.isEmpty(), res.getString(R.string.monstercondition_icon_count, condCount), null);
+			// If there are both conditions and immunities, prefer showing the condition type on the button.
+			// Only treat the icon as an immunity when the displayed type actually comes from immunities.
+			boolean showingImmunity = currentMonster.conditions.isEmpty();
+			ActorConditionType condType = showingImmunity ? currentMonster.immunities.get(0).conditionType : currentMonster.conditions.get(0).conditionType;
+			world.tileManager.setImageViewTile(getContext(), monsterConditionsButton, condType, showingImmunity, res.getString(R.string.monstercondition_icon_count, condCount), null);
 			showConditionsButton();
 			if (conditionsBarToggled) showConditionsBar();
 		} else {
