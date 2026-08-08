@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import android.Manifest;
 import android.app.Activity;
@@ -786,27 +787,32 @@ public final class LoadSaveActivity extends AndorsTrailBaseActivity implements O
                                                                    true,
                                                                    false,
                                                                    true);
+            final AtomicBoolean proceed = new AtomicBoolean(false);
 
             CustomDialogFactory.addButton(dialog, R.string.loadsave_import_option_keep_existing, v -> {
-                //do nothing
-                GoToNextConflictOrFinish(resolver, appSavegameFolder, newFiles, dialogs);
+                proceed.set(true);
             });
 
             CustomDialogFactory.addButton(dialog, R.string.loadsave_import_option_keep_imported, v -> {
                 newFiles.add(alreadyExistingFile);
-                GoToNextConflictOrFinish(resolver, appSavegameFolder, newFiles, dialogs);
+                proceed.set(true);
             });
 
             CustomDialogFactory.addButton(dialog, R.string.loadsave_import_option_add_as_new, v -> {
                 newFiles.add(null);//add a null element as marker to know later if the next file
                 // should be imported as new or overwrite the existing one
                 newFiles.add(alreadyExistingFile);
-                GoToNextConflictOrFinish(resolver, appSavegameFolder, newFiles, dialogs);
+                proceed.set(true);
             });
 
             CustomDialogFactory.addCancelButton(dialog, android.R.string.cancel);
             CustomDialogFactory.setCancelListener(dialog, v -> {
                 completeLoadSaveActivity(SLOT_NUMBER_IMPORT_SAVEGAMES, false);
+            });
+            CustomDialogFactory.setDismissListener(dialog, dialogInterface -> {
+                if (proceed.get()) {
+                    GoToNextConflictOrFinish(resolver, appSavegameFolder, newFiles, dialogs);
+                }
             });
 
             dialogs.add(dialog);

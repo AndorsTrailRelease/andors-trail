@@ -2,6 +2,7 @@ package com.gpl.rpg.AndorsTrail.activity;
 
 import com.gpl.rpg.AndorsTrail.AndorsTrailApplication;
 import com.gpl.rpg.AndorsTrail.AndorsTrailPreferences;
+import com.gpl.rpg.AndorsTrail.Dialogs;
 import com.gpl.rpg.AndorsTrail.R;
 import com.gpl.rpg.AndorsTrail.activity.fragment.StartScreenActivity_MainMenu;
 import com.gpl.rpg.AndorsTrail.activity.fragment.StartScreenActivity_MainMenu.OnNewGameRequestedListener;
@@ -110,7 +111,11 @@ public final class StartScreenActivity extends AndorsTrailBaseFragmentActivity i
 					);
 		}
 
-		toggleUiVisibility();
+
+		// Hide the UI for non-Android TV devices - the first tap anywhere will make it visible
+		if (!app.isAndroidTV()) {
+			toggleUiVisibility();
+		}
 
 		app.getWorldSetup().startResourceLoader(res);
 	}

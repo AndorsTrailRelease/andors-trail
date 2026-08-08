@@ -3,6 +3,7 @@ package com.gpl.rpg.AndorsTrail;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import android.app.Activity;
 import android.content.Context;
@@ -19,7 +20,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.gpl.rpg.AndorsTrail.activity.ActorConditionInfoActivity;
@@ -58,8 +61,8 @@ public final class Dialogs {
 		CustomDialogFactory.setDismissListener(d, new OnDismissListener() {
 			@Override
 			public void onDismiss(DialogInterface arg0) {
-				if (onDismiss != null) onDismiss.onDismiss(arg0);
 				context.gameRoundController.releasePause(PauseReason.BLOCKING_DIALOG);
+				if (onDismiss != null) onDismiss.onDismiss(arg0);
 			}
 		});
 		CustomDialogFactory.show(d);
@@ -297,17 +300,17 @@ public final class Dialogs {
 				currentActivity.getResources().getString(R.string.dialog_rest_confirm_message), 
 				null, 
 				true);
+		final AtomicBoolean confirmed = new AtomicBoolean(false);
 
-		CustomDialogFactory.addButton(d, android.R.string.yes, new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				controllerContext.mapController.rest(area);
-			}
-		});
+		CustomDialogFactory.addButton(d, android.R.string.yes, v -> confirmed.set(true));
 
 		CustomDialogFactory.addDismissButton(d, android.R.string.no);
 
-		showDialogAndPause(d, controllerContext);
+		showDialogAndPause(d, controllerContext, arg0 -> {
+			if (confirmed.get()) {
+				controllerContext.mapController.rest(area);
+			}
+		});
 	}
 	public static void showRested(final Activity currentActivity, final ControllerContext controllerContext) {
 		//		Dialog d = new AlertDialog.Builder(new ContextThemeWrapper(currentActivity, R.style.AndorsTrailStyle))
@@ -355,6 +358,38 @@ public final class Dialogs {
 				if (onDismiss != null) onDismiss.onDismiss(arg0);
 			}
 		});
+		CustomDialogFactory.show(d);
+	}
+
+	public static void showAndroidTVNotice(final Activity currentActivity) {
+		final AndorsTrailApplication app = AndorsTrailApplication.getApplicationFromActivity(currentActivity);
+		final AndorsTrailPreferences preferences = app.getPreferences();
+		final SessionState sessionState = app.getSessionState();
+		if (!preferences.showAndroidTVNotice || sessionState.hasShownAndroidTVNotice()) {
+			return;
+		}
+
+		final CheckBox disableNotice = new CheckBox(currentActivity);
+		disableNotice.setText(R.string.dialog_dont_show_again_message);
+
+		LinearLayout content = new LinearLayout(currentActivity);
+		content.setOrientation(LinearLayout.VERTICAL);
+		content.addView(disableNotice);
+
+		final CustomDialog d = CustomDialogFactory.createDialog(currentActivity,
+				currentActivity.getResources().getString(R.string.dialog_androidtv_title),
+				currentActivity.getResources().getDrawable(android.R.drawable.ic_dialog_info),
+				currentActivity.getResources().getString(R.string.dialog_androidtv_message),
+				content,
+				true);
+
+		CustomDialogFactory.addDismissButton(d, android.R.string.ok);
+		CustomDialogFactory.setDismissListener(d, dialog -> {
+			if (disableNotice.isChecked()) {
+				preferences.setShowAndroidTVNotice(false);
+			}
+		});
+		sessionState.markAndroidTVNoticeShown();
 		CustomDialogFactory.show(d);
 	}
 
