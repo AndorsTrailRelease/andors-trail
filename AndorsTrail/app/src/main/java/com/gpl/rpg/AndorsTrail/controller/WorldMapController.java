@@ -256,6 +256,7 @@ public final class WorldMapController {
 			if (AndorsTrailApplication.DEVELOPMENT_DEBUGMESSAGES) namedAreasAsHtml.append('\n');
 		}
 
+		// Number-to-string conversion not localized since these are only used for layout calculations in the HTML/CSS, and not shown to the user.
 		return res.getString(R.string.worldmap_template)
 				.replace("{{maps}}", mapsAsHtml.toString())
 				.replace("{{areas}}", namedAreasAsHtml.toString())

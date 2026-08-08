@@ -24,6 +24,8 @@ import com.gpl.rpg.AndorsTrail.util.Size;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.gpl.rpg.AndorsTrail.util.Format;
+
 public final class VisualEffectController {
 	private static final long EFFECT_UPDATE_INTERVAL = 25;
 	private final ControllerContext controllers;
@@ -91,7 +93,8 @@ public final class VisualEffectController {
 	}
 	public void startEnqueuedEffect(Coord position) {
 		if (enqueuedEffectID == null) return;
-		startEffect(position, enqueuedEffectID, (enqueuedEffectValue == 0) ? null : String.valueOf(enqueuedEffectValue), null, 0);
+		String displayValue = (enqueuedEffectValue == 0) ? null : Format.localizeInt(enqueuedEffectValue);
+		startEffect(position, enqueuedEffectID, displayValue, null, 0);
 		enqueuedEffectID = null;
 		enqueuedEffectValue = 0;
 	}

@@ -3,6 +3,8 @@ package com.gpl.rpg.AndorsTrail.controller;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import com.gpl.rpg.AndorsTrail.util.Format;
+
 import com.gpl.rpg.AndorsTrail.AndorsTrailPreferences;
 import com.gpl.rpg.AndorsTrail.R;
 import com.gpl.rpg.AndorsTrail.context.ControllerContext;
@@ -331,7 +333,7 @@ public final class ItemController {
 		StringBuilder sb = new StringBuilder(item.itemType.getName(player));
 		if (item.quantity > 1) {
 			sb.append(" (");
-			sb.append(item.quantity);
+			sb.append(Format.localizeInt(item.quantity));
 			sb.append(')');
 		}
 		if (item.itemType.effects_equip != null) {
@@ -358,6 +360,9 @@ public final class ItemController {
 	}
 
 	public static void describeAttackEffect(int attackChance, int minDamage, int maxDamage, int criticalSkill, float criticalMultiplier, StringBuilder sb) {
+		// TODO: This is static context, so we can't access resources.  Should refactor to use non-static context
+		//  	and get the localized strings from resources instead of hardcoding them here.
+		// 		or require that the caller pass in a Resources object to get the localized strings from there.
 		boolean addSpace = false;
 		if (attackChance != 0) {
 			sb.append(attackChance);
@@ -380,8 +385,8 @@ public final class ItemController {
 			sb.append(criticalSkill);
 		}
 		if (criticalMultiplier != 0 && criticalMultiplier != 1) {
-			sb.append('x');
-			sb.append(criticalMultiplier);
+			sb.append('\u00D7'); // Unicode multiplication sign: ×
+			sb.append(Format.localizeFloat(criticalMultiplier, 1));
 		}
 	}
 
