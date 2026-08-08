@@ -1,5 +1,7 @@
 package com.gpl.rpg.AndorsTrail.util;
 
+import androidx.annotation.NonNull;
+
 import com.gpl.rpg.AndorsTrail.model.ChecksumBuilder;
 
 import java.io.DataInputStream;
@@ -72,10 +74,11 @@ public final class Range {
 		this.current += r.current;
 	}
 
-	public String toString() { return current + "/" + max; }
+	@NonNull
+	public String toString() { return Format.localizeInt(current) + "/" + Format.localizeInt(max); }
 	public String toMinMaxString() {
-		if (isMax()) return Integer.toString(max);
-		else return current + "-" + max;
+		if (isMax()) return Format.localizeInt(max);
+		else return Format.localizeInt(current) + "-" + Format.localizeInt(max);
 	}
 	public boolean isMax() { return current >= max;	}
 	public void setMax() { current = max; }
