@@ -2,13 +2,12 @@ package com.gpl.rpg.AndorsTrail.activity.fragment;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,7 +28,9 @@ import com.gpl.rpg.AndorsTrail.R;
 import com.gpl.rpg.AndorsTrail.WorldSetup;
 import com.gpl.rpg.AndorsTrail.activity.AboutActivity;
 import com.gpl.rpg.AndorsTrail.activity.LoadingActivity;
+import com.gpl.rpg.AndorsTrail.activity.MainActivity;
 import com.gpl.rpg.AndorsTrail.activity.Preferences;
+import com.gpl.rpg.AndorsTrail.activity.StartScreenActivity;
 import com.gpl.rpg.AndorsTrail.controller.Constants;
 import com.gpl.rpg.AndorsTrail.resource.tiles.TileManager;
 import com.gpl.rpg.AndorsTrail.savegames.Savegames;
@@ -39,6 +40,8 @@ import com.gpl.rpg.AndorsTrail.util.L;
 import com.gpl.rpg.AndorsTrail.util.ThemeHelper;
 import com.gpl.rpg.AndorsTrail.view.CustomDialogFactory;
 import com.gpl.rpg.AndorsTrail.view.CustomDialogFactory.CustomDialog;
+
+import java.util.Objects;
 
 public class StartScreenActivity_MainMenu extends Fragment {
 
@@ -156,6 +159,26 @@ public class StartScreenActivity_MainMenu extends Fragment {
 		return root;
 	}
 
+	// Request a sensible default button to be focused, so that the user can just hit "enter" to continue.
+	private void focusDefaultButton() {
+		View target = hasExistingGame ? startscreen_continue : startscreen_newgame;
+		if (target != null) {
+			target.post(() -> {
+				if (target.isShown() && target.isEnabled()) {
+					target.requestFocus();
+				}
+			});
+		}
+	}
+
+	@Override
+	public void onHiddenChanged(boolean hidden) {
+		super.onHiddenChanged(hidden);
+		if (!hidden) {
+			focusDefaultButton();
+		}
+	}
+
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -182,6 +205,11 @@ public class StartScreenActivity_MainMenu extends Fragment {
 		hasExistingGame = (playerName != null);
 		setButtonState(playerName, displayInfo, iconID, isDead);
 
+		Activity activity = getActivity();
+		if (activity != null && ((AndorsTrailApplication) activity.getApplication()).isAndroidTV()) {
+			Dialogs.showAndroidTVNotice(activity);
+		}
+
 		if (isNewVersion()) {
 			Dialogs.showNewVersion(getActivity(), new DialogInterface.OnDismissListener() {
 				@Override
@@ -192,6 +220,8 @@ public class StartScreenActivity_MainMenu extends Fragment {
 				}
 			});
 		}
+
+		focusDefaultButton();
 
 	}
 
@@ -370,7 +400,7 @@ public class StartScreenActivity_MainMenu extends Fragment {
 	private void updatePreferences(boolean alreadyStartedLoadingResources) {
         AndorsTrailApplication app = AndorsTrailApplication.getApplicationFromActivity(getActivity());
         AndorsTrailPreferences preferences = app.getPreferences();
-        preferences.read(getActivity());
+		preferences.read();
         if (app.setLocale(getActivity())) {
             if (alreadyStartedLoadingResources) {
                 // Changing the locale after having loaded the game requires resources to

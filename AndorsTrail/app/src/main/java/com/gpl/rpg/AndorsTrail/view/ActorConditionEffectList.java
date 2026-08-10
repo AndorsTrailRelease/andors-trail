@@ -7,6 +7,7 @@ import android.content.res.Resources;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.AttributeSet;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -37,7 +38,8 @@ public final class ActorConditionEffectList extends LinearLayout {
 			String msg;
 			final ActorConditionType conditionType = e.conditionType;
 			msg = describeEffect(res, e);
-			TextView tv = new TextView(context);
+			Context themed = new ContextThemeWrapper(context, R.style.textView);
+			TextView tv = new TextView(themed);
 			tv.setLayoutParams(layoutParams);
 
 			SpannableString content = new SpannableString(msg);

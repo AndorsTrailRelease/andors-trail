@@ -1194,7 +1194,7 @@
                 ]
             },
             {
-                "text":"Inside the  Korhald tomb, I found a locked chest. Do you know where I can find its key?",
+                "text":"Inside the Korhald tomb, I found a locked chest. Do you know where I can find its key?",
                 "nextPhraseID":"odd_coin_collector_ask_about_locked_chest",
                 "requires":[
                     {
@@ -1255,6 +1255,23 @@
                         "requireType":"inventoryKeep",
                         "requireID":"mysterious_coin",
                         "value":3
+                    }
+                ]
+            },
+            {
+                "text":"I visited your daughter Florencia in Brightport. She wishes you would come home more often.",
+                "nextPhraseID":"brightport_forenza",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brightport_nondisplay",
+                        "value":254
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brightport_nondisplay",
+                        "value":255,
+                        "negate":true
                     }
                 ]
             },

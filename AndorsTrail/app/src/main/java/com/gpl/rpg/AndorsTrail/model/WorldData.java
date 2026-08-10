@@ -11,6 +11,7 @@ import java.util.Calendar;
 public final class WorldData {
 	private long worldTime = 0; // Measured in number of game rounds
 	private final HashMap<String, Long> timers = new HashMap<String, Long>();
+	public String nextPhraseID;
 
 	public WorldData() {}
 

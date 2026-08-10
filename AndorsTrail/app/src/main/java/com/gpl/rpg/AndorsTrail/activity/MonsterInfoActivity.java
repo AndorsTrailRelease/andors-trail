@@ -62,6 +62,8 @@ public final class MonsterInfoActivity extends AndorsTrailBaseActivity {
 		hp = (RangeBar) findViewById(R.id.monsterinfo_healthbar);
 		hp.init(R.drawable.ui_progress_health, R.string.status_hp);
 		monsterinfo_container = (ViewGroup) findViewById(R.id.monsterinfo_container);
+
+		b.post(b::requestFocus);
 	}
 
 	@Override
@@ -97,8 +99,8 @@ public final class MonsterInfoActivity extends AndorsTrailBaseActivity {
 				monster.getOnDeathEffects(),
 				false);
 		hp.update(monster.getMaxHP(), monster.getCurrentHP());
-		monsterinfo_max_ap.setText(Integer.toString(monster.getMaxAP()));
-		monsterinfo_killcount.setText(Integer.toString(world.model.statistics.getNumberOfKillsForMonsterName(monster.getName()) ));
+		monsterinfo_max_ap.setText(getString(R.string.general_ap_value, monster.getMaxAP()));
+		monsterinfo_killcount.setText(getString(R.string.general_integer_value, world.model.statistics.getNumberOfKillsForMonsterName(monster.getName())));
 	}
 
 	public static int getMonsterDifficultyResource(ControllerContext controllerContext, Monster monster) {

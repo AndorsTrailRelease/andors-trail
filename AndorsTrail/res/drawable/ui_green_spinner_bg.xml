@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android" 
     android:constantSize="true">
-    
+
+    <item
+        android:drawable="@drawable/ui_green_spinner_enabled_pressed"
+        android:state_focused="true"
+        android:state_enabled="true"
+        />
+
     <item
         android:drawable="@drawable/ui_green_spinner_enabled_unpressed"
         android:state_pressed="false"

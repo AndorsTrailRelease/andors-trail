@@ -3,10 +3,9 @@ package com.gpl.rpg.AndorsTrail;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.concurrent.atomic.AtomicBoolean;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
@@ -21,7 +20,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.gpl.rpg.AndorsTrail.activity.ActorConditionInfoActivity;
@@ -37,6 +38,7 @@ import com.gpl.rpg.AndorsTrail.activity.SkillInfoActivity;
 import com.gpl.rpg.AndorsTrail.activity.fragment.StartScreenActivity_MainMenu;
 import com.gpl.rpg.AndorsTrail.context.ControllerContext;
 import com.gpl.rpg.AndorsTrail.context.WorldContext;
+import com.gpl.rpg.AndorsTrail.controller.GameRoundController.PauseReason;
 import com.gpl.rpg.AndorsTrail.model.ability.ActorConditionType;
 import com.gpl.rpg.AndorsTrail.model.ability.SkillCollection;
 import com.gpl.rpg.AndorsTrail.model.actor.Monster;
@@ -55,15 +57,29 @@ public final class Dialogs {
 		showDialogAndPause(d, context, null);
 	}
 	private static void showDialogAndPause(CustomDialog d, final ControllerContext context, final OnDismissListener onDismiss) {
-		context.gameRoundController.pause();
+		context.gameRoundController.acquirePause(PauseReason.BLOCKING_DIALOG);
 		CustomDialogFactory.setDismissListener(d, new OnDismissListener() {
 			@Override
 			public void onDismiss(DialogInterface arg0) {
+				context.gameRoundController.releasePause(PauseReason.BLOCKING_DIALOG);
 				if (onDismiss != null) onDismiss.onDismiss(arg0);
-				context.gameRoundController.resume();
 			}
 		});
 		CustomDialogFactory.show(d);
+	}
+
+	/**
+	 * Starts a blocking activity and keeps the round timer paused until the
+	 * caller releases the matching UI hold from its activity result callback.
+	 */
+	private static void startBlockingActivityForResult(Activity currentActivity, ControllerContext context, Intent intent, int requestCode) {
+		context.gameRoundController.acquirePause(PauseReason.BLOCKING_ACTIVITY);
+		try {
+			currentActivity.startActivityForResult(intent, requestCode);
+		} catch (RuntimeException e) {
+			context.gameRoundController.releasePause(PauseReason.BLOCKING_ACTIVITY);
+			throw e;
+		}
 	}
 
 	public static void showMapScriptMessage(final MainActivity currentActivity, final ControllerContext context, String phraseID) {
@@ -75,12 +91,11 @@ public final class Dialogs {
 	}
 
 	private static void showConversation(final MainActivity currentActivity, final ControllerContext context, final String phraseID, final Monster npc, boolean applyScriptEffectsForFirstPhrase) {
-		context.gameRoundController.pause();
 		Intent intent = new Intent(currentActivity, ConversationActivity.class);
 		intent.setData(Uri.parse("content://com.gpl.rpg.AndorsTrail/conversation/" + phraseID));
 		intent.putExtra("applyScriptEffectsForFirstPhrase", applyScriptEffectsForFirstPhrase);
 		addMonsterIdentifiers(intent, npc);
-		currentActivity.startActivityForResult(intent, MainActivity.INTENTREQUEST_CONVERSATION);
+		startBlockingActivityForResult(currentActivity, context, intent, MainActivity.INTENTREQUEST_CONVERSATION);
 	}
 
 	public static void addMonsterIdentifiers(Intent intent, Monster monster) {
@@ -106,11 +121,10 @@ public final class Dialogs {
 	}
 
 	public static void showMonsterEncounter(final MainActivity currentActivity, final ControllerContext context, final Monster monster) {
-		context.gameRoundController.pause();
 		Intent intent = new Intent(currentActivity, MonsterEncounterActivity.class);
 		intent.setData(Uri.parse("content://com.gpl.rpg.AndorsTrail/monsterencounter"));
 		addMonsterIdentifiers(intent, monster);
-		currentActivity.startActivityForResult(intent, MainActivity.INTENTREQUEST_MONSTERENCOUNTER);
+		startBlockingActivityForResult(currentActivity, context, intent, MainActivity.INTENTREQUEST_MONSTERENCOUNTER);
 	}
 
 	public static void showMonsterInfo(final Context context, final Monster monster) {
@@ -215,6 +229,7 @@ public final class Dialogs {
 				if (((ItemContainerAdapter) parent.getAdapter()).isEmpty()) {
 					ViewGroup vg = (ViewGroup) d.findViewById(R.id.dialog_content_container);
 					vg.setVisibility(View.GONE);
+					d.dismiss();  // Dismiss the dialog if there are no more items to pick up.
 				}
 				ItemType type = world.itemTypes.getItemType(itemTypeID);
 				world.model.player.inventory.addItem(type);
@@ -285,17 +300,17 @@ public final class Dialogs {
 				currentActivity.getResources().getString(R.string.dialog_rest_confirm_message), 
 				null, 
 				true);
+		final AtomicBoolean confirmed = new AtomicBoolean(false);
 
-		CustomDialogFactory.addButton(d, android.R.string.yes, new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				controllerContext.mapController.rest(area);
-			}
-		});
+		CustomDialogFactory.addButton(d, android.R.string.yes, v -> confirmed.set(true));
 
 		CustomDialogFactory.addDismissButton(d, android.R.string.no);
 
-		showDialogAndPause(d, controllerContext);
+		showDialogAndPause(d, controllerContext, arg0 -> {
+			if (confirmed.get()) {
+				controllerContext.mapController.rest(area);
+			}
+		});
 	}
 	public static void showRested(final Activity currentActivity, final ControllerContext controllerContext) {
 		//		Dialog d = new AlertDialog.Builder(new ContextThemeWrapper(currentActivity, R.style.AndorsTrailStyle))
@@ -346,6 +361,38 @@ public final class Dialogs {
 		CustomDialogFactory.show(d);
 	}
 
+	public static void showAndroidTVNotice(final Activity currentActivity) {
+		final AndorsTrailApplication app = AndorsTrailApplication.getApplicationFromActivity(currentActivity);
+		final AndorsTrailPreferences preferences = app.getPreferences();
+		final SessionState sessionState = app.getSessionState();
+		if (!preferences.showAndroidTVNotice || sessionState.hasShownAndroidTVNotice()) {
+			return;
+		}
+
+		final CheckBox disableNotice = new CheckBox(currentActivity);
+		disableNotice.setText(R.string.dialog_dont_show_again_message);
+
+		LinearLayout content = new LinearLayout(currentActivity);
+		content.setOrientation(LinearLayout.VERTICAL);
+		content.addView(disableNotice);
+
+		final CustomDialog d = CustomDialogFactory.createDialog(currentActivity,
+				currentActivity.getResources().getString(R.string.dialog_androidtv_title),
+				currentActivity.getResources().getDrawable(android.R.drawable.ic_dialog_info),
+				currentActivity.getResources().getString(R.string.dialog_androidtv_message),
+				content,
+				true);
+
+		CustomDialogFactory.addDismissButton(d, android.R.string.ok);
+		CustomDialogFactory.setDismissListener(d, dialog -> {
+			if (disableNotice.isChecked()) {
+				preferences.setShowAndroidTVNotice(false);
+			}
+		});
+		sessionState.markAndroidTVNoticeShown();
+		CustomDialogFactory.show(d);
+	}
+
 	private static boolean hasPermissions(final Activity activity) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 			if (activity.getApplicationContext().checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
@@ -372,20 +419,18 @@ public final class Dialogs {
 			CustomDialogFactory.addButton(d, android.R.string.ok, new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					controllerContext.gameRoundController.pause();
 					Intent intent = new Intent(mainActivity, LoadSaveActivity.class);
 					intent.setData(Uri.parse("content://com.gpl.rpg.AndorsTrail/save"));
-					mainActivity.startActivityForResult(intent, MainActivity.INTENTREQUEST_SAVEGAME);
+					startBlockingActivityForResult(mainActivity, controllerContext, intent, MainActivity.INTENTREQUEST_SAVEGAME);
 				}
 			});
 			CustomDialogFactory.addDismissButton(d, android.R.string.cancel);
 			CustomDialogFactory.show(d);
 			return false;
 		} else {
-			controllerContext.gameRoundController.pause();
 			Intent intent = new Intent(mainActivity, LoadSaveActivity.class);
 			intent.setData(Uri.parse("content://com.gpl.rpg.AndorsTrail/save"));
-			mainActivity.startActivityForResult(intent, MainActivity.INTENTREQUEST_SAVEGAME);
+			startBlockingActivityForResult(mainActivity, controllerContext, intent, MainActivity.INTENTREQUEST_SAVEGAME);
 			return true;
 		}
 	}

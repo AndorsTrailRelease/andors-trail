@@ -90,6 +90,16 @@ public final class QuickitemView extends LinearLayout implements OnClickListener
 		super.setVisibility(visibility);
 	}
 
+	// Update visibility based on the saved state in preferences.
+	// To force a mode WITHOUT saving the state, call setVisibility() directly instead of this method.
+	public void updateVisibility() {
+		if(controllers.preferences.quickslotsVisible) {
+			setVisibility(View.VISIBLE);
+		} else {
+			setVisibility(View.GONE);
+		}
+	}
+
 	public void refreshQuickitems() {
 		loadItemTypeImages();
 
@@ -127,10 +137,10 @@ public final class QuickitemView extends LinearLayout implements OnClickListener
 			mainActivity.registerForLongClick(item);
 	}
 
-	public void setPosition(AndorsTrailPreferences preferences) {
+	public void setPosition() {
 		int positionRelativeTo = R.id.main_mainview;
 		RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		switch (preferences.quickslotsPosition) {
+		switch (controllers.preferences.quickslotsPosition) {
 			case AndorsTrailPreferences.QUICKSLOTS_POSITION_HORIZONTAL_BOTTOM_LEFT:
 			case AndorsTrailPreferences.QUICKSLOTS_POSITION_VERTICAL_BOTTOM_LEFT:
 				params.addRule(RelativeLayout.ALIGN_LEFT, positionRelativeTo);

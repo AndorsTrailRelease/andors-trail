@@ -12,11 +12,13 @@ import com.gpl.rpg.AndorsTrail.util.AndroidStorage;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Insets;
 import android.os.Build;
 import android.os.Environment;
+import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.view.Window;
@@ -44,14 +46,17 @@ public final class AndorsTrailApplication extends Application {
 	public static final int DEVELOPMENT_INCOMPATIBLE_SAVEGAME_VERSION = 999;
 	public static final int CURRENT_VERSION = DEVELOPMENT_INCOMPATIBLE_SAVEGAMES ? DEVELOPMENT_INCOMPATIBLE_SAVEGAME_VERSION : BuildConfig.VERSION_CODE;
 
-	private final AndorsTrailPreferences preferences = new AndorsTrailPreferences();
-	private WorldContext world = new WorldContext();
-	private ControllerContext controllers = new ControllerContext(this, world);
-	private WorldSetup setup = new WorldSetup(world, controllers, this);
+	private AndorsTrailPreferences preferences;
+	private WorldContext world;
+	private ControllerContext controllers;
+	private WorldSetup setup;
+	private final SessionState sessionState = new SessionState();
+
 	public WorldContext getWorld() { return world; }
 	public WorldSetup getWorldSetup() { return setup; }
 	public AndorsTrailPreferences getPreferences() { return preferences; }
 	public ControllerContext getControllerContext() { return controllers; }
+	public SessionState getSessionState() { return sessionState; }
 
 	public static AndorsTrailApplication getApplicationFromActivity(Activity activity) {
 		return ((AndorsTrailApplication) activity.getApplication());
@@ -159,6 +164,12 @@ public final class AndorsTrailApplication extends Application {
 	public void onCreate() {
 		super.onCreate();
 
+		// These should be initialized here, not in the constructor, to make sure that the application context is available for them.
+		preferences = new AndorsTrailPreferences(this);
+		world = new WorldContext();
+		controllers = new ControllerContext(this, world);
+		setup = new WorldSetup(world, controllers, this);
+
 		if ( DEVELOPMENT_DEBUGMESSAGES && isExternalStorageWritable() ) {
 			File appDirectory = AndroidStorage.getStorageDirectory(getApplicationContext(), Constants.FILENAME_SAVEGAME_DIRECTORY);
 			File logDirectory = new File( appDirectory, "log" );
@@ -183,6 +194,43 @@ public final class AndorsTrailApplication extends Application {
 			}
 
 		}
+
+		// If we're in dev mode, add focus listener to each activity
+		if (BuildConfig.DEBUG) {
+			registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
+				@Override
+				public void onActivityStarted(final Activity activity) {
+					// Attach a listener to the view tree of every activity that starts
+					activity.getWindow().getDecorView().getViewTreeObserver().addOnGlobalFocusChangeListener(new android.view.ViewTreeObserver.OnGlobalFocusChangeListener() {
+						@Override
+						public void onGlobalFocusChanged(View oldFocus, View newFocus) {
+							if (newFocus != null) {
+								String idName = "no-id";
+								try {
+									// Attempt to get the human-readable XML ID
+									idName = activity.getResources().getResourceEntryName(newFocus.getId());
+								} catch (Exception ignored) {
+									// Some system views or root containers don't have IDs
+								}
+								Log.d("GlobalFocus", "Activity: " + activity.getClass().getSimpleName()
+										+ " | Focused: " + newFocus.getClass().getSimpleName() + " [ID: " + idName + "]");
+							} else {
+								Log.d("GlobalFocus", "Activity: " + activity.getClass().getSimpleName() + " | Focus lost");
+							}
+						}
+					});
+				}
+
+				// Required boilerplate for the interface (these can remain empty)
+				@Override public void onActivityCreated(android.app.Activity activity, android.os.Bundle savedInstanceState) {}
+				@Override public void onActivityResumed(android.app.Activity activity) {}
+				@Override public void onActivityPaused(android.app.Activity activity) {}
+				@Override public void onActivityStopped(android.app.Activity activity) {}
+				@Override public void onActivitySaveInstanceState(android.app.Activity activity, android.os.Bundle outState) {}
+				@Override public void onActivityDestroyed(android.app.Activity activity) {}
+			});
+		}
+
 	}
 
 	/* Checks if external storage is available for read and write */
@@ -222,4 +270,20 @@ public final class AndorsTrailApplication extends Application {
 			});
 		}
 	}
+
+	// Returns true if we're on an Android TV platform (assume no touchscreen, landscape, etc.)
+	private Boolean is_atv = null;
+	public boolean isAndroidTV() {
+		Context context = getApplicationContext();
+		if (is_atv == null) {
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+				is_atv = context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_LEANBACK);
+			} else {
+				is_atv = false;
+			}
+		}
+		return is_atv;
+	}
+
+
 }

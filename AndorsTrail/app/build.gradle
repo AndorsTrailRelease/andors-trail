@@ -1,32 +1,68 @@
-apply plugin: 'com.android.application'
+
+plugins {
+    id 'com.android.application'
+}
+
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def hasKeystoreProperties = keystorePropertiesFile.exists()
+
+if (hasKeystoreProperties) {
+    keystorePropertiesFile.withInputStream { stream ->
+        keystoreProperties.load(stream)
+    }
+}
+
+if (keystorePropertiesFile.exists()) {
+    keystorePropertiesFile.withInputStream { stream ->
+        keystoreProperties.load(stream)
+    }
+}
 
 android {
 
-    compileSdkVersion 35
+    compileSdkVersion 36
 
     defaultConfig {
         applicationId "com.gpl.rpg.AndorsTrail"
-        minSdkVersion 14
-        targetSdkVersion 35
+        minSdkVersion 17
+        targetSdkVersion 36
+    }
+
+    signingConfigs {
+        if (hasKeystoreProperties) {
+            betaKey {
+                storeFile file(keystoreProperties["betaStoreFile"])
+                storePassword keystoreProperties["betaStorePassword"]
+                keyAlias keystoreProperties["betaKeyAlias"]
+                keyPassword keystoreProperties["betaKeyPassword"]
+            }
+        }
     }
 
     buildTypes {
         release {
             manifestPlaceholders icon_name: 'icon', fileproviderPath: 'AndorsTrail'
+            applicationIdSuffix = ''
+            versionNameSuffix = ''
             minifyEnabled = false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.txt'
         }
         debug {
             manifestPlaceholders icon_name: 'icon_beta', fileproviderPath: 'AndorsTrail.beta2'
             applicationIdSuffix = '.beta2'
-            versionNameSuffix = "dev"
-			signingConfig = signingConfigs.debug
+            versionNameSuffix = 'dev'
+            if (hasKeystoreProperties) {
+                signingConfig signingConfigs.betaKey
+            }
         }
         beta {
             manifestPlaceholders icon_name: 'icon_beta', fileproviderPath: 'AndorsTrail.beta2'
             applicationIdSuffix = '.beta2'
-            versionNameSuffix = "beta"
-            signingConfig = signingConfigs.debug
+            versionNameSuffix = 'beta'
+            if (hasKeystoreProperties) {
+                signingConfig signingConfigs.betaKey
+            }
         }
     }
 
@@ -49,6 +85,7 @@ android {
 
 dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation 'junit:junit:4.13.2'
 }
 
 task copyRes(type: Copy) {

@@ -4,10 +4,10 @@ import java.lang.ref.WeakReference;
 import java.util.Collection;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
@@ -27,6 +27,8 @@ import com.gpl.rpg.AndorsTrail.context.WorldContext;
 import com.gpl.rpg.AndorsTrail.controller.AttackResult;
 import com.gpl.rpg.AndorsTrail.controller.CombatController;
 import com.gpl.rpg.AndorsTrail.controller.Constants;
+import com.gpl.rpg.AndorsTrail.controller.GameRoundController.PauseReason;
+import com.gpl.rpg.AndorsTrail.controller.InputController;
 import com.gpl.rpg.AndorsTrail.controller.listeners.CombatActionListener;
 import com.gpl.rpg.AndorsTrail.controller.listeners.CombatTurnListener;
 import com.gpl.rpg.AndorsTrail.controller.listeners.PlayerMovementListener;
@@ -68,7 +70,6 @@ public final class MainActivity
 
 	private ControllerContext controllers;
 	private WorldContext world;
-
 	private MainView mainview;
 	private StatusView statusview;
 	private CombatView combatview;
@@ -88,7 +89,6 @@ public final class MainActivity
 
 		AndorsTrailApplication app = AndorsTrailApplication.getApplicationFromActivity(this);
 		if (!app.isInitialized()) { finish(); return; }
-		AndorsTrailPreferences preferences = app.getPreferences();
 		this.world = app.getWorld();
 		this.controllers = app.getControllerContext();
 
@@ -103,6 +103,15 @@ public final class MainActivity
 		VirtualDpadView dpad = (VirtualDpadView) findViewById(R.id.main_virtual_dpad);
 		toolboxview = (ToolboxView) findViewById(R.id.main_toolboxview);
 		statusview.registerToolboxViews(toolboxview, quickitemview);
+		toolboxview.setFocusReturnView(mainview);
+
+		// Hide toolbox when mainview gets focus, generally because some other activity closed and
+		// returned control to the playfield.  TODO: Check for touch mode compatibility
+		mainview.setOnFocusChangeListener((v, hasFocus) -> {
+			if (hasFocus) {
+				toolboxview.hideToolbox();
+			}
+		});
 
 		statusText = (TextView) findViewById(R.id.statusview_statustext);
 		statusText.setOnClickListener(new OnClickListener() {
@@ -120,8 +129,9 @@ public final class MainActivity
 		createLongClickListener();
 		quickitemview.registerForContextMenu(this);
 
-		dpad.updateVisibility(preferences);
-		quickitemview.setPosition(preferences);
+		dpad.updateVisibility(controllers.preferences);
+		quickitemview.updateVisibility();
+		quickitemview.setPosition();
 
 		// Define which views are in front of each other.
 		dpad.bringToFront();
@@ -136,6 +146,7 @@ public final class MainActivity
 		super.onActivityResult(requestCode, resultCode, data);
 		switch (requestCode) {
 		case INTENTREQUEST_MONSTERENCOUNTER:
+			controllers.gameRoundController.releasePause(PauseReason.BLOCKING_ACTIVITY);
 			if (resultCode == Activity.RESULT_OK) {
 				controllers.combatController.enterCombat(CombatController.BeginTurnAs.player);
 			} else {
@@ -143,9 +154,11 @@ public final class MainActivity
 			}
 			break;
 		case INTENTREQUEST_CONVERSATION:
+			controllers.gameRoundController.releasePause(PauseReason.BLOCKING_ACTIVITY);
 			controllers.mapController.applyCurrentMapReplacements(getResources(), true);
 			break;
 		case INTENTREQUEST_SAVEGAME:
+			controllers.gameRoundController.releasePause(PauseReason.BLOCKING_ACTIVITY);
 			if (resultCode != Activity.RESULT_OK) break;
 			final int slot = data.getIntExtra("slot", 1);
 			if (save(slot)) {
@@ -180,7 +193,7 @@ public final class MainActivity
 	@Override
 	protected void onPause() {
 		super.onPause();
-		controllers.gameRoundController.pause();
+		controllers.gameRoundController.onMainActivityPaused();
 		controllers.movementController.stopMovement();
 
 		save(Savegames.SLOT_QUICKSAVE);
@@ -193,9 +206,33 @@ public final class MainActivity
 
 		if (world.model.statistics.isDead()) this.finish();
 		else {
-			controllers.gameRoundController.resume();
+			controllers.gameRoundController.onMainActivityResumed();
 			updateStatus();
 		}
+	}
+
+	// Close toolbox by toolbox toggle button.  Needed here since MainView loses focus when toolbox opens.
+	@Override
+	public boolean dispatchKeyEvent(KeyEvent event) {
+		if(getToolboxView().isVisible()) {
+			if (event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {
+				if (InputController.isMappedKey(event.getKeyCode(), InputController.KEY_TOOLBOX)) {
+					toolboxview.hideToolbox();
+					return true;
+				}
+			}
+		}
+		return super.dispatchKeyEvent(event);
+	}
+
+	// CHANGELOG: Back now closes the toolbox if it's open.  Another Back will be needed to return to start screen.
+	@Override
+	public void onBackPressed() {
+		if (toolboxview.isVisible()) {
+			toolboxview.hideToolbox();
+			return;
+		}
+		super.onBackPressed();
 	}
 
 	private void unsubscribeFromModel() {
@@ -346,7 +383,7 @@ public final class MainActivity
 			message(getString(R.string.combat_result_herohit, monsterName, attackResult.damage));
 		}
 		if (attackResult.targetDied) {
-			message(getString(R.string.combat_result_herokillsmonster, monsterName, attackResult.damage));
+			message(getString(R.string.combat_result_herokillsmonster, monsterName));
 		}
 	}
 
@@ -543,5 +580,12 @@ public final class MainActivity
 			message(getString(R.string.combat_condition_monster_apply, target.getName(), msg));
 		}
 	}
+
+	// Getters for the views so that controllers can access them without having to know about the view hierarchy.
+	public StatusView getStatusView() { return statusview; }
+	public MainView getMainView() { return mainview; }
+	public CombatView getCombatView() { return combatview; }
+	public QuickitemView getQuickitemView() { return quickitemview; }
+	public ToolboxView getToolboxView() { return toolboxview; }
 
 }

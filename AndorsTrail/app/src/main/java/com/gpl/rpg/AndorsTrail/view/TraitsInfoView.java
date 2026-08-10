@@ -1,5 +1,6 @@
 package com.gpl.rpg.AndorsTrail.view;
 
+import android.content.res.Resources;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TableLayout;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 
 import com.gpl.rpg.AndorsTrail.R;
 import com.gpl.rpg.AndorsTrail.model.actor.Actor;
+import com.gpl.rpg.AndorsTrail.util.Format;
 import com.gpl.rpg.AndorsTrail.util.Range;
 
 public final class TraitsInfoView {
@@ -53,23 +55,29 @@ public final class TraitsInfoView {
 		) {
 		TableRow row;
 		TextView tv;
+		Resources res = group.getResources();
 
 		tv = (TextView) group.findViewById(R.id.traitsinfo_move_cost);
-		tv.setText(Integer.toString(moveCost));
+		tv.setText(res.getString(R.string.general_ap_value, moveCost));
 
 		tv = (TextView) group.findViewById(R.id.traitsinfo_attack_cost);
-		tv.setText(Integer.toString(attackCost));
+		tv.setText(res.getString(R.string.general_ap_value, attackCost));
 
 		row = (TableRow) group.findViewById(R.id.traitsinfo_attack_chance_row);
 		tv = (TextView) group.findViewById(R.id.traitsinfo_attack_chance);
-		tv.setText(Integer.toString(attackChance));
+		tv.setText(res.getString(R.string.general_integer_value, attackChance));
 
 
 		row = (TableRow) group.findViewById(R.id.traitsinfo_attack_damage_row);
 		if (damagePotential != null && damagePotential.max != 0) {
 			row.setVisibility(View.VISIBLE);
 			tv = (TextView) group.findViewById(R.id.traitsinfo_attack_damage);
-			tv.setText(damagePotential.toMinMaxString());
+			if (damagePotential.isMax()) {
+				tv.setText(res.getString(R.string.general_hp_value, damagePotential.max));
+			} else {
+				tv.setText(res.getString(R.string.general_hp_minmax_value, damagePotential.current, damagePotential.max));
+			}
+
 		} else {
 			row.setVisibility(View.GONE);
 		}
@@ -80,14 +88,14 @@ public final class TraitsInfoView {
 		} else {
 			row.setVisibility(View.VISIBLE);
 			tv = (TextView) group.findViewById(R.id.traitsinfo_criticalhit_skill);
-			tv.setText(Integer.toString(criticalSkill));
+			tv.setText(res.getString(R.string.general_integer_value, criticalSkill));
 		}
 
 		row = (TableRow) group.findViewById(R.id.traitsinfo_criticalhit_multiplier_row);
 		if (criticalMultiplier != 0 && criticalMultiplier != 1) {
 			row.setVisibility(View.VISIBLE);
 			tv = (TextView) group.findViewById(R.id.traitsinfo_criticalhit_multiplier);
-			tv.setText(Float.toString(criticalMultiplier));
+			tv.setText(res.getString(R.string.general_multiplier_value, criticalMultiplier));
 		} else {
 			row.setVisibility(View.GONE);
 		}
@@ -96,7 +104,7 @@ public final class TraitsInfoView {
 		if (criticalSkill != 0 && criticalMultiplier != 0 && criticalMultiplier != 1) {
 			row.setVisibility(View.VISIBLE);
 			tv = (TextView) group.findViewById(R.id.traitsinfo_criticalhit_effectivechance);
-			tv.setText(Integer.toString(Actor.getEffectiveCriticalChance(criticalSkill)) + '%');
+			tv.setText(res.getString(R.string.general_percentage_value, Format.localizePercentFromIntPercent(Actor.getEffectiveCriticalChance(criticalSkill))));
 		} else {
 			row.setVisibility(View.GONE);
 		}
@@ -107,7 +115,7 @@ public final class TraitsInfoView {
 		} else {
 			row.setVisibility(View.VISIBLE);
 			tv = (TextView) group.findViewById(R.id.traitsinfo_block_chance);
-			tv.setText(Integer.toString(blockChance));
+			tv.setText(res.getString(R.string.general_integer_value, blockChance));
 		}
 
 		row = (TableRow) group.findViewById(R.id.traitsinfo_damageresist_row);
@@ -116,7 +124,7 @@ public final class TraitsInfoView {
 		} else {
 			row.setVisibility(View.VISIBLE);
 			tv = (TextView) group.findViewById(R.id.traitsinfo_damageresist);
-			tv.setText(Integer.toString(damageResistance));
+			tv.setText(res.getString(R.string.general_hp_value, damageResistance));
 		}
 
 		row = (TableRow) group.findViewById(R.id.traitsinfo_is_immune_to_critical_hits_row);

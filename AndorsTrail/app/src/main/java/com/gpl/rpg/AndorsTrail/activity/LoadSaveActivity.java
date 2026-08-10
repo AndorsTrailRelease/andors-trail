@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import android.Manifest;
 import android.app.Activity;
@@ -20,6 +21,8 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+
 import androidx.annotation.RequiresApi;
 import androidx.documentfile.provider.DocumentFile;
 import android.view.View;
@@ -55,6 +58,11 @@ public final class LoadSaveActivity extends AndorsTrailBaseActivity implements O
     private ModelContainer model;
     private TileManager tileManager;
     private AndorsTrailPreferences preferences;
+    public enum ExportAPI {
+        EXPORT_API_STORAGE_ACCESS_FRAMEWORK,
+        EXPORT_API_MEDIASTORE,
+    }
+    private boolean isOpenDocumentTreeIntentAvailable;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,6 +77,8 @@ public final class LoadSaveActivity extends AndorsTrailBaseActivity implements O
 
         String loadsave = getIntent().getData().getLastPathSegment();
         isLoading = (loadsave.equalsIgnoreCase("load"));
+
+        isOpenDocumentTreeIntentAvailable = AndroidStorage.isOpenDocumentTreeIntentAvailable(this);
 
         initializeView(this, R.layout.loadsave, R.id.loadsave_root);
 
@@ -154,6 +164,14 @@ public final class LoadSaveActivity extends AndorsTrailBaseActivity implements O
         }
     }
 
+    public ExportAPI getExportMode() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            if(preferences.exportToDownloads) return ExportAPI.EXPORT_API_MEDIASTORE;
+            if(!isOpenDocumentTreeIntentAvailable) return ExportAPI.EXPORT_API_MEDIASTORE;
+        }
+
+        return ExportAPI.EXPORT_API_STORAGE_ACCESS_FRAMEWORK;
+    }
     private void addSavegameSlotButtons(ViewGroup parent,
                                         LayoutParams params,
                                         List<Integer> usedSavegameSlots) {
@@ -180,7 +198,7 @@ public final class LoadSaveActivity extends AndorsTrailBaseActivity implements O
             b.setLayoutParams(params);
             b.setTag(slot);
             b.setOnClickListener(this);
-            b.setText(slot + ". " + header.describe());
+            b.setText(getString(R.string.loadsave_used_slot, slot, header.describe()));
             tileManager.setImageViewTileForPlayer(getResources(), b, header.iconID);
             parent.addView(b, params);
         }
@@ -335,17 +353,20 @@ public final class LoadSaveActivity extends AndorsTrailBaseActivity implements O
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     private void exportSaveGames(Intent data) {
-        Uri uri = data.getData();
-
         Context context = getApplicationContext();
         ContentResolver resolver = AndorsTrailApplication.getApplicationFromActivity(this)
-                                                         .getContentResolver();
+                .getContentResolver();
 
         File storageDir = AndroidStorage.getStorageDirectory(context,
-                                                             Constants.FILENAME_SAVEGAME_DIRECTORY);
-        DocumentFile target = DocumentFile.fromTreeUri(context, uri);
-        if (target == null) {
-            return;
+                Constants.FILENAME_SAVEGAME_DIRECTORY);
+
+        DocumentFile target = null;
+        if(getExportMode() == ExportAPI.EXPORT_API_STORAGE_ACCESS_FRAMEWORK) {
+            if (data == null) return;
+            Uri uri = data.getData();
+            if (uri == null) return;
+            target = DocumentFile.fromTreeUri(context, uri);
+            if (target == null) return;
         }
 
         File[] files = storageDir.listFiles();
@@ -354,14 +375,30 @@ public final class LoadSaveActivity extends AndorsTrailBaseActivity implements O
             return;
         }
 
+        // Check if the target folder already has files with the same name as the savegame files.
+        // We deliberately DON'T check for existence of the worldmap.zip file, since it will always
+        // be updated anyway.
         boolean hasExistingFiles = false;
-        for (File file : files) {
-            String fileName = file.getName();
-
-            DocumentFile existingFile = target.findFile(fileName);
-            if (existingFile != null) {
-                hasExistingFiles = true;
-                break;
+        if(getExportMode() == ExportAPI.EXPORT_API_STORAGE_ACCESS_FRAMEWORK ) {
+            for (File file : files) {
+                if (!file.isFile()) continue;
+                String fileName = file.getName();
+                DocumentFile existingFile = target.findFile(fileName);
+                if (existingFile != null) {
+                    hasExistingFiles = true;
+                    break;
+                }
+            }
+        } else { // Mediastore mode
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                for (File file : files) {
+                    if (!file.isFile()) continue;
+                    String fileName = file.getName();
+                    if (AndroidStorage.mediaStoreFileExists(context, Constants.FILENAME_SAVEGAME_DIRECTORY, fileName)) {
+                        hasExistingFiles = true;
+                        break;
+                    }
+                }
             }
         }
 
@@ -375,13 +412,14 @@ public final class LoadSaveActivity extends AndorsTrailBaseActivity implements O
     @RequiresApi(api = Build.VERSION_CODES.P)
     private void exportSaveGamesFolderContentToFolder(DocumentFile target, File[] files) {
         DocumentFile[] sourceFiles = new DocumentFile[files.length];
-
+        List<File> saveFiles = new ArrayList<>();
         File[] worldmapFiles = null;
 
         for (int i = 0; i < files.length; i++) {
             File file = files[i];
             if (file.isFile()) {
                 sourceFiles[i] = DocumentFile.fromFile(file);
+                saveFiles.add(file); // Used for the MediaStore export, which needs the files as File objects.
             } else if (file.isDirectory() && Objects.equals(file.getName(),
                                                             Constants.FILENAME_WORLDMAP_DIRECTORY)) {
                 worldmapFiles = file.listFiles();
@@ -389,8 +427,26 @@ public final class LoadSaveActivity extends AndorsTrailBaseActivity implements O
         }
         Context context = this;
         File[] finalWorldmapFiles = worldmapFiles;
-        CopyFilesToExternalFolder(target, sourceFiles, context, finalWorldmapFiles);
 
+        switch(getExportMode()) {
+            case EXPORT_API_STORAGE_ACCESS_FRAMEWORK:
+                CopyFilesToExternalFolder(target, sourceFiles, context, finalWorldmapFiles);
+                break;
+            case EXPORT_API_MEDIASTORE:
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) { // Check again to keep the compiler happy
+                    CopyFilesToDownloads(
+                            Constants.FILENAME_SAVEGAME_DIRECTORY,
+                            saveFiles.toArray(new File[0]),
+                            context,
+                            finalWorldmapFiles);
+                } else {
+                    showErrorExportingSaveGamesUnknown();
+                }
+                break;
+            default:
+                showErrorExportingSaveGamesUnknown();
+                break;
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.P)
@@ -413,6 +469,34 @@ public final class LoadSaveActivity extends AndorsTrailBaseActivity implements O
                                                                    false);
                                                        }
                                                    });
+    }
+
+    // Copy savegames to the Downloads/andors-trial folder using the MediaStore API, and the worldmap as a zip file inside that folder.
+    @RequiresApi(api = Build.VERSION_CODES.Q)
+    private void CopyFilesToDownloads(String subfolder, File[] sourceFiles, Context context, File[] finalWorldmapFiles) {
+
+        AndroidStorage.copyFilesToMediaStoreDownloadsAsync(
+                sourceFiles,
+                context,
+                subfolder,
+                getString(R.string.loadsave_exporting_savegames),
+                success -> {
+                    if (success) {
+                        AndroidStorage.createZipInMediaStoreDownloadsAsync(
+                                finalWorldmapFiles,
+                                context,
+                                subfolder,
+                                Constants.FILENAME_WORLDMAP_DIRECTORY, // becomes the zip file name
+                                getString(R.string.loadsave_exporting_worldmap),
+                                ( successWorldmap ) -> completeLoadSaveActivity(
+                                        SLOT_NUMBER_EXPORT_SAVEGAMES, successWorldmap));
+                    } else {
+                        completeLoadSaveActivity(
+                                SLOT_NUMBER_EXPORT_SAVEGAMES,
+                                false);
+                    }
+                });
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.P)
@@ -609,8 +693,13 @@ public final class LoadSaveActivity extends AndorsTrailBaseActivity implements O
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     private void clickExportSaveGames() {
-        showStartExportInfo(view -> startActivityForResult(AndroidStorage.getNewOpenDirectoryIntent(),
-                                                           -SLOT_NUMBER_EXPORT_SAVEGAMES));
+        if(getExportMode() == ExportAPI.EXPORT_API_STORAGE_ACCESS_FRAMEWORK) {
+            showStartExportInfo(view -> startActivityForResult(AndroidStorage.getNewOpenDirectoryIntent(),
+                    -SLOT_NUMBER_EXPORT_SAVEGAMES));
+        } else {
+            // Bypass directory request when exporting via MediaStore to Downloads
+            showStartExportDownloadsInfo(view -> exportSaveGames(null));
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.P)
@@ -679,10 +768,10 @@ public final class LoadSaveActivity extends AndorsTrailBaseActivity implements O
 
             StringBuilder messageSb = new StringBuilder();
             String existingFileDescription = getString(R.string.loadsave_import_existing_description,
-                                                       Integer.toString(slot),
+                                                       slot,
                                                        existingFileHeader.describe());
             String importedFileDescription = getString(R.string.loadsave_import_imported_description,
-                                                       Integer.toString(slot),
+                                                       slot,
                                                        importedFileHeader.describe());
             messageSb.append(getString(R.string.loadsave_import_file_exists_question,
                                        existingFileDescription,
@@ -698,27 +787,32 @@ public final class LoadSaveActivity extends AndorsTrailBaseActivity implements O
                                                                    true,
                                                                    false,
                                                                    true);
+            final AtomicBoolean proceed = new AtomicBoolean(false);
 
             CustomDialogFactory.addButton(dialog, R.string.loadsave_import_option_keep_existing, v -> {
-                //do nothing
-                GoToNextConflictOrFinish(resolver, appSavegameFolder, newFiles, dialogs);
+                proceed.set(true);
             });
 
             CustomDialogFactory.addButton(dialog, R.string.loadsave_import_option_keep_imported, v -> {
                 newFiles.add(alreadyExistingFile);
-                GoToNextConflictOrFinish(resolver, appSavegameFolder, newFiles, dialogs);
+                proceed.set(true);
             });
 
             CustomDialogFactory.addButton(dialog, R.string.loadsave_import_option_add_as_new, v -> {
                 newFiles.add(null);//add a null element as marker to know later if the next file
                 // should be imported as new or overwrite the existing one
                 newFiles.add(alreadyExistingFile);
-                GoToNextConflictOrFinish(resolver, appSavegameFolder, newFiles, dialogs);
+                proceed.set(true);
             });
 
             CustomDialogFactory.addCancelButton(dialog, android.R.string.cancel);
             CustomDialogFactory.setCancelListener(dialog, v -> {
                 completeLoadSaveActivity(SLOT_NUMBER_IMPORT_SAVEGAMES, false);
+            });
+            CustomDialogFactory.setDismissListener(dialog, dialogInterface -> {
+                if (proceed.get()) {
+                    GoToNextConflictOrFinish(resolver, appSavegameFolder, newFiles, dialogs);
+                }
             });
 
             dialogs.add(dialog);
@@ -791,6 +885,22 @@ public final class LoadSaveActivity extends AndorsTrailBaseActivity implements O
                                                                 getString(R.string.loadsave_export_info),
                                                                 null,
                                                                 true);
+        CustomDialogFactory.addButton(d, android.R.string.yes, onOk);
+        CustomDialogFactory.addDismissButton(d, android.R.string.no);
+        CustomDialogFactory.show(d);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.P)
+    private void showStartExportDownloadsInfo(OnClickListener onOk) {
+        final CustomDialog d = CustomDialogFactory.createDialog(this,
+                getString(R.string.loadsave_export),
+                getResources().getDrawable(android.R.drawable.ic_dialog_info),
+                getString(R.string.loadsave_export_downloads_info,
+                        Environment.DIRECTORY_DOWNLOADS,
+                        Constants.FILENAME_SAVEGAME_DIRECTORY
+                ),
+                null,
+                true);
         CustomDialogFactory.addButton(d, android.R.string.yes, onOk);
         CustomDialogFactory.addDismissButton(d, android.R.string.no);
         CustomDialogFactory.show(d);

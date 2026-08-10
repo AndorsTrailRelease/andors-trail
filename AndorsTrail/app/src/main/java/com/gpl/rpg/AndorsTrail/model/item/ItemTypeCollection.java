@@ -3,6 +3,7 @@ package com.gpl.rpg.AndorsTrail.model.item;
 import java.util.HashMap;
 
 import com.gpl.rpg.AndorsTrail.AndorsTrailApplication;
+import com.gpl.rpg.AndorsTrail.controller.Constants;
 import com.gpl.rpg.AndorsTrail.resource.parsers.ItemTypeParser;
 import com.gpl.rpg.AndorsTrail.util.L;
 
@@ -24,6 +25,16 @@ public final class ItemTypeCollection {
 	public static boolean isGoldItemType(String itemTypeID) {
 		if (itemTypeID == null) return false;
 		return itemTypeID.equals(ITEMTYPE_GOLD);
+	}
+
+	public static boolean isItemFilter(String itemTypeID) {
+		if (itemTypeID == null) return false;
+		return itemTypeID.toLowerCase().startsWith(Constants.ITEMFILTER_ID_PREFIX);
+	}
+	public static String getItemFilterID(String itemTypeID) {
+		if (isItemFilter(itemTypeID))
+			return itemTypeID.substring(Constants.ITEMFILTER_ID_PREFIX.length());
+		else return itemTypeID;
 	}
 
 	public void initialize(final ItemTypeParser parser, String input) {

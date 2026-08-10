@@ -6,9 +6,9 @@
                 "nextPhraseID":"thoronir_shadow_score_max",
                 "requires":[
                     {
-                        "requireType":"factionScore",
-                        "requireID":"factionCountShadow",
-                        "value":30
+                        "requireType":"questProgress",
+                        "requireID":"scores",
+                        "value":19
                     }
                 ]
             },
@@ -16,9 +16,9 @@
                 "nextPhraseID":"thoronir_shadow_score_very_high",
                 "requires":[
                     {
-                        "requireType":"factionScore",
-                        "requireID":"factionCountShadow",
-                        "value":18
+                        "requireType":"questProgress",
+                        "requireID":"scores",
+                        "value":19
                     }
                 ]
             },
@@ -26,9 +26,9 @@
                 "nextPhraseID":"thoronir_shadow_score_high",
                 "requires":[
                     {
-                        "requireType":"factionScore",
-                        "requireID":"factionCountShadow",
-                        "value":6
+                        "requireType":"questProgress",
+                        "requireID":"scores",
+                        "value":17
                     }
                 ]
             },
@@ -36,14 +36,24 @@
                 "nextPhraseID":"thoronir_shadow_score_average",
                 "requires":[
                     {
-                        "requireType":"factionScore",
-                        "requireID":"factionCountShadow",
-                        "value":-5
+                        "requireType":"questProgress",
+                        "requireID":"scores",
+                        "value":15
                     }
                 ]
             },
             {
-                "nextPhraseID":"thoronir_shadow_score_low"
+                "nextPhraseID":"thoronir_shadow_score_low1",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"scores",
+                        "value":13
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"thoronir_shadow_score_low3"
             }
         ]
     },
@@ -181,6 +191,17 @@
                         "requireType":"questProgress",
                         "requireID":"bonemeal",
                         "value":100
+                    }
+                ]
+            },
+            {
+                "text":"Do you have some special white powdered potions whose name must not be mentioned?",
+                "nextPhraseID":"thoronir_trade_bonemeal_a",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"bonemeal",
+                        "value":110
                     }
                 ]
             },

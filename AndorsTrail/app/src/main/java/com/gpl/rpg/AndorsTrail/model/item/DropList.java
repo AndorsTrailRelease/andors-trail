@@ -8,19 +8,41 @@ import com.gpl.rpg.AndorsTrail.util.ConstRange;
 public final class DropList {
 	private final DropItem[] items;
 
-	public DropList(DropItem[] items) {
+	private final ItemTypeCollection itemTypeCollection;
+	private final ItemFilterCollection itemFilterCollection;
+
+	public DropList(
+			DropItem[] items
+			, ItemTypeCollection itemTypeCollection
+			, ItemFilterCollection itemFilterCollection
+	) {
 		this.items = items;
+		this.itemTypeCollection = itemTypeCollection;
+		this.itemFilterCollection = itemFilterCollection;
 	}
+
 	public void createRandomLoot(Loot loot, Player player) {
 		for (DropItem item : items) {
 
-			final int chanceRollBias = SkillController.getDropChanceRollBias(item, player);
+			if (ItemTypeCollection.isItemFilter(item.itemTypeID)) {
+				ItemFilter itemFilter = itemFilterCollection.getItemFilter(item.itemTypeID);
+				item = new DropItem(
+						itemFilter.getRandomItem().id
+						, item.chance
+						, item.quantity
+				);
+			}
+
+			final int chanceRollBias = SkillController.getDropChanceRollBias(item, itemTypeCollection.getItemType(item.itemTypeID), player);
 			if (Constants.rollResult(item.chance, chanceRollBias)) {
 
 				final int quantityRollBias = SkillController.getDropQuantityRollBias(item, player);
 				int quantity = Constants.rollValue(item.quantity, quantityRollBias);
 
-				loot.add(item.itemType, quantity);
+				ItemType addItem = itemTypeCollection.getItemType(item.itemTypeID);
+				if (addItem != null) {
+					loot.add(addItem, quantity);
+				}
 			}
 		}
 	}
@@ -31,11 +53,11 @@ public final class DropList {
 	}
 
 	public static class DropItem {
-		public final ItemType itemType;
+		public final String itemTypeID;
 		public final ConstRange chance;
 		public final ConstRange quantity;
-		public DropItem(ItemType itemType, ConstRange chance, ConstRange quantity) {
-			this.itemType = itemType;
+		public DropItem(String itemTypeID, ConstRange chance, ConstRange quantity) {
+			this.itemTypeID = itemTypeID;
 			this.chance = chance;
 			this.quantity = quantity;
 		}

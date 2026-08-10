@@ -1437,6 +1437,46 @@
                 "nextPhraseID":"deebo_orchard_deebo_horse_talk_10"
             },
             {
+                "text":"Can I get a new batch of apples for the bakery?",
+                "nextPhraseID":"brightport_deebo_selector",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brightport_nondisplay",
+                        "value":205
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brightport_bakery",
+                        "value":50,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brightport_bakery",
+                        "value":40,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"Hello. Eatloni from Brightport sent me to ask about the apples. ",
+                "nextPhraseID":"brightport_deebo",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brightport_bakery",
+                        "value":25
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brightport_nondisplay",
+                        "value":205,
+                        "negate":true
+                    }
+                ]
+            },
+            {
                 "text":"I will let you get back to your business. Have a great time enjoying the nice weather.",
                 "nextPhraseID":"X"
             },
@@ -4739,12 +4779,12 @@
         "replies":[
             {
                 "text":"Oh, sorry, but this sounds exciting.",
-                "nextPhraseID":"ff_captain_beer_ 40"
+                "nextPhraseID":"ff_captain_beer_40"
             }
         ]
     },
     {
-        "id":"ff_captain_beer_ 40",
+        "id":"ff_captain_beer_40",
         "message":"Well, if you look around this tavern, both inside and outside, do you notice anything?",
         "replies":[
             {
@@ -4783,12 +4823,12 @@
         "replies":[
             {
                 "text":"Understood, but I am still not seeing how this means that a law has been broken.",
-                "nextPhraseID":" ff_captain_beer_80"
+                "nextPhraseID":"ff_captain_beer_80"
             }
         ]
     },
     {
-        "id":" ff_captain_beer_80",
+        "id":"ff_captain_beer_80",
         "message":"Well, you see kid, I used to work in the 'tax collection' division of the Feygard patrol and I don't ever remember seeing the kind of collected taxes that would reflect this kind of volume of beer.",
         "replies":[
             {
@@ -4825,7 +4865,7 @@
             },
             {
                 "text":"Sounds easy. I'll do it.",
-                "nextPhraseID":"ff_captain_beer_ 111"
+                "nextPhraseID":"ff_captain_beer_111"
             }
         ],
         "rewards":[
@@ -4841,8 +4881,8 @@
         "message":"Well, because I am a Feygard captain and as such, the tavern keep will never give me information."
     },
     {
-        "id":"ff_captain_beer_ 111",
-        "message":"Great. Report back to me when you have learnt something usefull."
+        "id":"ff_captain_beer_111",
+        "message":"Great. Report back to me when you have learnt something useful."
     },
     {
         "id":"ff_captain_selector",
@@ -6321,7 +6361,7 @@
         "switchToNPC":"sull_ravine_grazia"
     },
     {
-        "id":"sull_ravine_south of bridge",
+        "id":"sull_ravine_south_of_bridge",
         "rewards":[
             {
                 "rewardType":"questProgress",

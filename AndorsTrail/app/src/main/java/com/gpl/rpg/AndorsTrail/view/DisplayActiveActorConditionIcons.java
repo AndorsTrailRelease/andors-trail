@@ -288,14 +288,14 @@ public final class DisplayActiveActorConditionIcons implements ActorConditionLis
 			String magnitude = null;
 			boolean showMagnitude = (condition.magnitude != 1 && condition.magnitude != ActorCondition.MAGNITUDE_REMOVE_ALL);
 			if (showMagnitude) {
-				magnitude = "x"+Integer.toString(condition.magnitude);
+				magnitude = res.getString(R.string.actorcondition_icon_magnitude, condition.magnitude);
 			}
 			if (condition.duration == ActorCondition.DURATION_FOREVER || condition.duration == ActorCondition.DURATION_NONE) {
-				duration = "\u221e";
+				duration = res.getString(R.string.actorcondition_icon_duration_infinite);
 			} else if (condition.duration == ActorCondition.DURATION_FOREVER_UNTIL_SLEEP) {
 				duration = "";
 			} else {
-				duration = Integer.toString(condition.duration);
+				duration = res.getString(R.string.actorcondition_icon_duration, condition.duration);
 			}
 			tileManager.setImageViewTile(DisplayActiveActorConditionIcons.this.androidContext.get(), image, condition.conditionType, immunity, magnitude, duration);
 			
