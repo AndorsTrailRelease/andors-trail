@@ -132,12 +132,18 @@ public final class MapController {
 		world.model.statistics.addPlayerDeath(lostExp);
 
 		if (!world.model.statistics.isDead()) {
+			lotsOfTimePassed(); // Do BEFORE calling async task to avoid racing with respawn
 			controllers.movementController.respawnPlayerAsync();
-			lotsOfTimePassed();
+			// Run check for achievements - AFTER respawn is called so any dialogue appears over bed map
+			mapScriptExecutor.proceedToPhrase(controllers.getResources(), Constants.PASSIVE_ACHIEVEMENT_CHECK_PHRASE, true, true);
 		}
 		worldEventListeners.onPlayerDied(lostExp);
 	}
 
+	/**
+	 * Resets (despawns) all maps and resets round counters, simulating a lot of time passing during rest and resurrection.
+	 * Does NOT respawn the player or run passive achievement script; this is done by callers
+	 */
 	public void lotsOfTimePassed() {
 		final Player player = world.model.player;
 		controllers.actorStatsController.removeAllTemporaryConditions(player);
@@ -148,14 +154,14 @@ public final class MapController {
 		for (PredefinedMap m : world.maps.getAllMaps()) {
 			m.resetTemporaryData();
 		}
-		controllers.monsterSpawnController.spawnAll(world.model.currentMaps.map, world.model.currentMaps.tileMap);
 		world.model.worldData.tickWorldTime(20);
 		controllers.gameRoundController.resetRoundTimers();
-		mapScriptExecutor.proceedToPhrase(controllers.getResources(), Constants.PASSIVE_ACHIEVEMENT_CHECK_PHRASE, true, true);
 	}
 
 	public void rest(MapObject area) {
-		lotsOfTimePassed();
+		lotsOfTimePassed(); // Despawns all maps
+		controllers.monsterSpawnController.spawnAll(world.model.currentMaps.map, world.model.currentMaps.tileMap);
+		mapScriptExecutor.proceedToPhrase(controllers.getResources(), Constants.PASSIVE_ACHIEVEMENT_CHECK_PHRASE, true, true);
 		world.model.player.setSpawnPlace(world.model.currentMaps.map.name, area.id);
 		worldEventListeners.onPlayerRested();
 	}
