@@ -97,6 +97,7 @@ public final class MovementController implements TimedMessageTask.Callback {
 		}
 		final ModelContainer model = world.model;
 
+		if (model.currentMaps.map != null) model.currentMaps.map.updateLastVisitTime();
 		model.player.position.set(place.position.topLeft);
 		model.player.position.x += Math.min(offset_x, place.position.size.width-1);
 		model.player.position.y += Math.min(offset_y, place.position.size.height-1);
@@ -107,7 +108,6 @@ public final class MovementController implements TimedMessageTask.Callback {
 		}
 
 		prepareMapAsCurrentMap(newMap, res, true);
-
 	}
 
 	private void playerVisitsMapFirstTime(PredefinedMap m) {
