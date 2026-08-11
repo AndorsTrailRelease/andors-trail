@@ -334,7 +334,6 @@ public final class CombatController implements VisualEffectCompletedCallback {
 		endPlayerTurn();
 	}
 
-	// Update Handler to specify main looper for compatibility
 	private final Handler monsterTurnHandler = new Handler(Looper.getMainLooper()) {
 		@Override
 		public void handleMessage(Message msg) {

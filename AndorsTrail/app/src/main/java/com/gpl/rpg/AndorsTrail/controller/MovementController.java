@@ -48,18 +48,41 @@ public final class MovementController implements TimedMessageTask.Callback {
 		this.movementHandler = new TimedMessageTask(this, Constants.MINIMUM_INPUT_INTERVAL, false);
 	}
 
+	/**
+	 * Loads the target map and places the player at the given map object on a background thread.
+	 * This is done because loading and drawing the map can be slow on older devices.
+	 *
+	 * <p>The transition pauses game rounds until the new map is ready, then restores the pause
+	 * state on the main thread and notifies listeners on success.</p>
+	 *
+	 * @param objectType the type of map object to target
+	 * @param mapName the name of the map that contains the target object
+	 * @param placeName the name of the target object
+	 * @param offset_x the x offset within the target object
+	 * @param offset_y the y offset within the target object
+	 */
 	public void placePlayerAsyncAt(final MapObject.MapObjectType objectType, final String mapName, final String placeName, final int offset_x, final int offset_y) {
-		controllers.gameRoundController.pause();
+		controllers.gameRoundController.acquirePause(PauseReason.MAP_TRANSITION);
 		// This should run pretty quickly, so we won't worry about canceling if activity closes
 		executor.execute(() -> {
-            stopMovement();
-            placePlayerAt(controllers.getResources(), objectType, mapName, placeName, offset_x, offset_y);
-            mainHandler.post(() -> {
-                stopMovement();
-                playerMovementListeners.onPlayerEnteredNewMap(world.model.currentMaps.map, world.model.player.position);
-                controllers.gameRoundController.resume();
-            });
-        });
+			boolean mapLoadSucceeded = false;
+			try {
+				stopMovement();
+				placePlayerAt(controllers.getResources(), objectType, mapName, placeName, offset_x, offset_y);
+				mapLoadSucceeded = true;
+			} catch (RuntimeException e) {
+				L.error("Map transition failed: " + e.getMessage());
+			} finally {
+				final boolean notifyListeners = mapLoadSucceeded;
+				mainHandler.post(() -> {
+					stopMovement();
+					controllers.gameRoundController.releasePause(PauseReason.MAP_TRANSITION);
+					if (notifyListeners) {
+						playerMovementListeners.onPlayerEnteredNewMap(world.model.currentMaps.map, world.model.player.position);
+					}
+				});
+			}
+		});
 	}
 
 	/**
