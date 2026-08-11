@@ -132,12 +132,20 @@ public final class MapController {
 		world.model.statistics.addPlayerDeath(lostExp);
 
 		if (!world.model.statistics.isDead()) {
+			lotsOfTimePassed(); // Do BEFORE calling async task to avoid racing with respawn
 			controllers.movementController.respawnPlayerAsync();
-			lotsOfTimePassed();
+			// Run check for achievements - AFTER respawn is called so any dialogue appears over bed map.
+			// NOTE: Current map is indeterminate at the time achievement script runs.  Do not use map-dependent
+			// requirement types/rewards in passive_achievement_check scripts. (spawnAll, mapChange, etc).
+			mapScriptExecutor.proceedToPhrase(controllers.getResources(), Constants.PASSIVE_ACHIEVEMENT_CHECK_PHRASE, true, true);
 		}
 		worldEventListeners.onPlayerDied(lostExp);
 	}
 
+	/**
+	 * Resets (despawns) all maps and resets round counters, simulating a lot of time passing during rest and resurrection.
+	 * Does not respawn the player or run the passive achievement script; callers handle that.
+	 */
 	public void lotsOfTimePassed() {
 		final Player player = world.model.player;
 		controllers.actorStatsController.removeAllTemporaryConditions(player);
@@ -148,14 +156,14 @@ public final class MapController {
 		for (PredefinedMap m : world.maps.getAllMaps()) {
 			m.resetTemporaryData();
 		}
-		controllers.monsterSpawnController.spawnAll(world.model.currentMaps.map, world.model.currentMaps.tileMap);
 		world.model.worldData.tickWorldTime(20);
 		controllers.gameRoundController.resetRoundTimers();
-		mapScriptExecutor.proceedToPhrase(controllers.getResources(), Constants.PASSIVE_ACHIEVEMENT_CHECK_PHRASE, true, true);
 	}
 
 	public void rest(MapObject area) {
-		lotsOfTimePassed();
+		lotsOfTimePassed(); // Despawns all maps
+		controllers.monsterSpawnController.spawnAll(world.model.currentMaps.map, world.model.currentMaps.tileMap);
+		mapScriptExecutor.proceedToPhrase(controllers.getResources(), Constants.PASSIVE_ACHIEVEMENT_CHECK_PHRASE, true, true);
 		world.model.player.setSpawnPlace(world.model.currentMaps.map.name, area.id);
 		worldEventListeners.onPlayerRested();
 	}
