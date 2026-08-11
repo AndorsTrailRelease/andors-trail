@@ -134,7 +134,9 @@ public final class MapController {
 		if (!world.model.statistics.isDead()) {
 			lotsOfTimePassed(); // Do BEFORE calling async task to avoid racing with respawn
 			controllers.movementController.respawnPlayerAsync();
-			// Run check for achievements - AFTER respawn is called so any dialogue appears over bed map
+			// Run check for achievements - AFTER respawn is called so any dialogue appears over bed map.
+			// NOTE: Current map is indeterminate at the time achievement script runs.  Do not use map-dependent
+			// requirement types/rewards in passive_achievement_check scripts. (spawnAll, mapChange, etc).
 			mapScriptExecutor.proceedToPhrase(controllers.getResources(), Constants.PASSIVE_ACHIEVEMENT_CHECK_PHRASE, true, true);
 		}
 		worldEventListeners.onPlayerDied(lostExp);
