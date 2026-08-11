@@ -144,7 +144,7 @@ public final class MapController {
 
 	/**
 	 * Resets (despawns) all maps and resets round counters, simulating a lot of time passing during rest and resurrection.
-	 * Does NOT respawn the player or run passive achievement script; this is done by callers
+	 * Does not respawn the player or run the passive achievement script; callers handle that.
 	 */
 	public void lotsOfTimePassed() {
 		final Player player = world.model.player;
