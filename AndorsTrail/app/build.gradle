@@ -81,30 +81,32 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.activity:activity:1.0.0' // We need 1.0.0 for API 17 support
+    implementation 'androidx.fragment:fragment:1.1.0' // We need 1.1.0 for API 17 support
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.13.2'
 }
 
-task copyRes(type: Copy) {
+tasks.register('copyRes', Copy) {
     description = "Copies the res folder to the modules res folder (& renames .tmx to .xml)"
     from "${rootDir}/res"
     into "${projectDir}/build/gen-res"
     rename "(.*)\\.tmx", "\$1.xml"
 }
 
-task copyResValuesIn(type: Copy) {
+tasks.register('copyResValuesIn', Copy) {
     description = "Exception Indonesian language code (Old IN was renamed to now ID)"
     from "${rootDir}/res/values-id/"
     into "${projectDir}/build/gen-res/values-in/"
 }
 
-task copyTranslation(type: Copy) {
+tasks.register('copyTranslation', Copy) {
     description = "Copies the translation files to the modules translations folder"
     from "${rootDir}/assets/translation"
     into "${projectDir}/build/gen-assets/translation"
 }
 
-task cleanup(type: Delete) {
+tasks.register('cleanup', Delete) {
     description = "Deletes the assets/translation and the res folder from the modules folder"
     delete "${projectDir}/build/gen-res", "${projectDir}/build/gen-assets/translation"
 }
