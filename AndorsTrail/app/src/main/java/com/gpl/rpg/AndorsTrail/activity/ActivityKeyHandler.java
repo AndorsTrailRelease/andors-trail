@@ -22,7 +22,7 @@ public final class ActivityKeyHandler {
     public static boolean handleBackMappedKey(Activity activity, KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {
             if (InputController.isMappedKey(event.getKeyCode(), InputController.KEY_BACK)) {
-                activity.onBackPressed();
+                dispatchBackPressed(activity);
                 return true;
             }
         }
@@ -43,8 +43,12 @@ public final class ActivityKeyHandler {
         if (event.getDownTime() == lastMouseBackEventDownTime) return true;
         lastMouseBackEventDownTime = event.getDownTime();
 
-        activity.onBackPressed();
+        dispatchBackPressed(activity);
         return true;
+    }
+
+    private static void dispatchBackPressed(Activity activity) {
+        activity.onBackPressed();
     }
 
     /**

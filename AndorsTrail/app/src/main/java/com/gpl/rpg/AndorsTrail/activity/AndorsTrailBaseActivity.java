@@ -35,6 +35,7 @@ public abstract class AndorsTrailBaseActivity extends Activity {
     }
 
     // Global key handling for Back action (Adds Escape, Controller B button, and Back button as Back keys)
+    // These do not actually handle the back pressed itself, but dispatch onBackPressed
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         if (ActivityKeyHandler.handleBackMappedKey(this, event)) return true;

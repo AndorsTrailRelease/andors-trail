@@ -58,8 +58,7 @@ import com.gpl.rpg.AndorsTrail.view.VirtualDpadView;
 
 public final class MainActivity
 		extends AndorsTrailBaseActivity
-		implements
-		PlayerMovementListener
+		implements PlayerMovementListener
 		, CombatActionListener
 		, CombatTurnListener
 		, WorldEventListener {
