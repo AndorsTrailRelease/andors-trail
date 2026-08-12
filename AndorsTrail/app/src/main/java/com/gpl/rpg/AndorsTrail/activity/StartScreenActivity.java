@@ -2,7 +2,6 @@ package com.gpl.rpg.AndorsTrail.activity;
 
 import com.gpl.rpg.AndorsTrail.AndorsTrailApplication;
 import com.gpl.rpg.AndorsTrail.AndorsTrailPreferences;
-import com.gpl.rpg.AndorsTrail.Dialogs;
 import com.gpl.rpg.AndorsTrail.R;
 import com.gpl.rpg.AndorsTrail.activity.fragment.StartScreenActivity_MainMenu;
 import com.gpl.rpg.AndorsTrail.activity.fragment.StartScreenActivity_MainMenu.OnNewGameRequestedListener;
@@ -14,7 +13,6 @@ import com.gpl.rpg.AndorsTrail.view.CloudsAnimatorView;
 import com.gpl.rpg.AndorsTrail.view.CustomDialogFactory;
 import com.gpl.rpg.AndorsTrail.view.CustomDialogFactory.CustomDialog;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,7 +23,6 @@ import android.os.Bundle;
 import android.os.SystemClock;
 
 import androidx.activity.OnBackPressedCallback;
-import androidx.activity.OnBackPressedDispatcher;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
@@ -44,7 +41,6 @@ public final class StartScreenActivity extends AndorsTrailBaseFragmentActivity i
 	private TextView development_version;
 	private CloudsAnimatorView clouds_back, clouds_mid, clouds_front;
 	private Fragment currentFragment;
-	private final OnBackPressedDispatcher backPressedDispatcher = new OnBackPressedDispatcher(this::finish);
 	private final OnBackPressedCallback backPressedCallback = new OnBackPressedCallback(true) {
 		@Override
 		public void handleOnBackPressed() {
@@ -79,7 +75,7 @@ public final class StartScreenActivity extends AndorsTrailBaseFragmentActivity i
 			currentFragment = mainMenu;
 			
 			getSupportFragmentManager().addOnBackStackChangedListener(this);
-			backPressedDispatcher.addCallback(backPressedCallback);
+			getOnBackPressedDispatcher().addCallback(this, backPressedCallback);
 		}
 		
 		
@@ -299,11 +295,6 @@ public final class StartScreenActivity extends AndorsTrailBaseFragmentActivity i
 		}
 		lastBackPressTime = now;
 		return false;
-	}
-
-	@SuppressLint("GestureBackNavigation")
-    public void onBackPressed() {
-		backPressedDispatcher.onBackPressed();
 	}
 
 	public void onNewGameRequested() {
