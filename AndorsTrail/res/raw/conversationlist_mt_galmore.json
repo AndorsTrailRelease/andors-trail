@@ -2079,6 +2079,28 @@
             {
                 "text":"No, I don't think so.",
                 "nextPhraseID":"bela_witch_20"
+            },
+            {
+                "text":"Not now, I have something else to talk about.",
+                "nextPhraseID":"bela_rain_gold_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_barricades",
+                        "value":140
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_barricades",
+                        "value":150,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"gold",
+                        "value":4850
+                    }
+                ]
             }
         ]
     },

@@ -3197,12 +3197,47 @@
     },
     {
         "id":"brv_tavern_west_guard_100",
-        "message":"You are not welcome anymore."
+        "message":"You are not welcome anymore.",
+        "switchToNPC":"brv_tavern_west_guard",
+        "replies":[
+            {
+                "text":"Sure I am. I'm on official Alkapoan business.",
+                "nextPhraseID":"brv_tavern_west_guard_alkapaon_business_10",
+                "requires":[
+                    {
+                        "requireType":"questLatestProgress",
+                        "requireID":"place_to_forge",
+                        "value":40
+                    }
+                ]
+            },
+            {
+                "text":"Ah, right. I forgot.",
+                "nextPhraseID":"X"
+            }
+        ]
     },
     {
         "id":"brv_tavern_west_guard_90",
         "message":"I heard you fighting in there. Lucky for you that no one got killed. \nYou are not welcome anymore.",
         "switchToNPC":"brv_tavern_west_guard",
+        "replies":[
+            {
+                "text":"Sure I am. I'm on official Alkapoan business.",
+                "nextPhraseID":"brv_tavern_west_guard_alkapaon_business_10",
+                "requires":[
+                    {
+                        "requireType":"questLatestProgress",
+                        "requireID":"place_to_forge",
+                        "value":40
+                    }
+                ]
+            },
+            {
+                "text":"Calm down! I'm leaving right now.",
+                "nextPhraseID":"X"
+            }
+        ],
         "rewards":[
             {
                 "rewardType":"questProgress",
@@ -3290,7 +3325,26 @@
     {
         "id":"blackjack_dealer_20",
         "message":"Take a seat on the empty chair if you want to play a round.",
-        "switchToNPC":"brv_blackjack_dealer"
+        "switchToNPC":"brv_blackjack_dealer",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"blackjack_dealer_collect_tax_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"place_to_forge",
+                        "value":40
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"place_to_forge",
+                        "value":45,
+                        "negate":true
+                    }
+                ]
+            }
+        ]
     },
     {
         "id":"blackjack_dealer_30",
@@ -3722,7 +3776,7 @@
     },
     {
         "id":"brv_laundry_boss_4",
-        "message":"Improving a fine green hat costs 1,397 gold, fine snakeskin gloves costs 640 gold, and improving superior leather boots costs 432 gold.",
+        "message":"Improving a fine green hat costs 1397 gold, fine snakeskin gloves costs 640 gold, and improving superior leather boots costs 432 gold.",
         "replies":[
             {
                 "text":"I don't have any of this equipment. Can you sell me something else?",
@@ -4054,7 +4108,7 @@
     },
     {
         "id":"brv_brothers_8",
-        "message":"[You accidently make a noise and they turn their heads towards you]\n\nHey, what are you doing down here?\n\nNo matter, we have to shut his mouth.",
+        "message":"[You accidently make a noise and they turn their heads towards you]\n\nHey, what are you doing down here?\n\nNo matter, we have to shut their mouth.",
         "switchToNPC":"brv_attohead",
         "replies":[
             {
@@ -4195,7 +4249,7 @@
     },
     {
         "id":"brv_brothers_9",
-        "message":"Since he is already here, we could ask him if he will help us for saving his life.",
+        "message":"Since they are already here, we could ask them to help us, if they want to save their life.",
         "switchToNPC":"brv_alvies",
         "replies":[
             {
@@ -4709,6 +4763,22 @@
         "id":"brv_guard_captain_and_rich_man",
         "replies":[
             {
+                "nextPhraseID":"talk_about_white_house_20",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_hidden",
+                        "value":15
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"place_to_forge",
+                        "value":50,
+                        "negate":true
+                    }
+                ]
+            },
+            {
                 "nextPhraseID":"brv_guard_captain_and_rich_man_50",
                 "requires":[
                     {
@@ -4788,7 +4858,13 @@
     {
         "id":"brv_guard_captain_and_rich_man_50",
         "message":"You better disappear soon, or I might find some evidence that you are the evil spy from Loneford.",
-        "switchToNPC":"brv_guard_captain"
+        "switchToNPC":"brv_guard_captain",
+        "replies":[
+            {
+                "text":"We are all reasonable people here. Let us settle this, shall we?",
+                "nextPhraseID":"talk_about_white_house_10"
+            }
+        ]
     },
     {
         "id":"brv_prison_guard",
@@ -4910,7 +4986,7 @@
     },
     {
         "id":"brv_laundry_boss_5b",
-        "message":"You don't have the required 1,397 gold to improve your fine green hat.",
+        "message":"You don't have the required 1397 gold to improve your fine green hat.",
         "replies":[
             {
                 "text":"N",
@@ -6796,7 +6872,7 @@
     },
     {
         "id":"brv_shop_guard_20",
-        "message":"Hello again, Sir."
+        "message":"Hello again, traveler."
     },
     {
         "id":"brv_shop_guard_10",
@@ -6824,7 +6900,7 @@
     },
     {
         "id":"brv_shop_owner_20",
-        "message":"How can I serve you, Sir?",
+        "message":"How can I serve you, traveler?",
         "replies":[
             {
                 "text":"Show me your wares.",
@@ -6845,7 +6921,7 @@
     },
     {
         "id":"brv_shop_owner_10",
-        "message":"[His eyes widen.] Oh\nI was just kidding, child... I mean... Sir!",
+        "message":"[His eyes widen.] Oh\nI was just kidding, child... I mean... honored customer!",
         "replies":[
             {
                 "text":"Show me your wares, you worm.",
@@ -6862,7 +6938,7 @@
     },
     {
         "id":"brv_shop_owner_30",
-        "message":"No problem, Sir. I can arrange one for you. Just tell me how much you want to spend.",
+        "message":"No problem. I can arrange one for you. Just tell me how much you want to spend.",
         "replies":[
             {
                 "text":"I have to think about it.",
@@ -7403,7 +7479,7 @@
                 ]
             },
             {
-                "nextPhraseID":"brv_patrol_remove_all_bonemeals_lodar"
+                "nextPhraseID":"brv_patrol_remove_all_bonemeals_kazaul"
             }
         ],
         "rewards":[
@@ -7516,6 +7592,12 @@
                     {
                         "requireType":"inventoryKeep",
                         "requireID":"pot_bm_lodar",
+                        "value":1,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"pot_bm_kazaul",
                         "value":1,
                         "negate":true
                     }
@@ -10308,7 +10390,14 @@
             },
             {
                 "text":"Wanderer's Vitality",
-                "nextPhraseID":"brv_fortune_back_62"
+                "nextPhraseID":"brv_fortune_back_62",
+                "requires":[
+                    {
+                        "requireType":"skillIncrease",
+                        "requireID":"fortitude",
+                        "value":1
+                    }
+                ]
             },
             {
                 "text":"Mountainroot gold nugget",

@@ -931,7 +931,7 @@
     },
     {
         "id":"sullengard_kealwea_0",
-        "message":"Hey, young fellow. I am Kealwea. How can I help you my child?",
+        "message":"Ah, young traveller. I am Kealwea. How can I help you, my child?",
         "replies":[
             {
                 "text":"I am in need of supplies. Can you help?",
@@ -967,6 +967,23 @@
                         "requireType":"inventoryRemove",
                         "requireID":"sullengard_mayor_letter",
                         "value":1
+                    }
+                ]
+            },
+            {
+                "text":"I am searching for something called \"The Ritual of Five Aspects\". I was told it may have passed through this town long ago.",
+                "nextPhraseID":"sullengard_kealwea_kazaul_1",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"fifth_master",
+                        "value":30
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"fifth_master",
+                        "value":50,
+                        "negate":true
                     }
                 ]
             }
@@ -4026,7 +4043,7 @@
     },
     {
         "id":"sullengard_gs_3",
-        "message":"Erlumvu: A beloved wife and loyal drinking companion.\n"
+        "message":"Erlumvu: A beloved wife and loyal drinking companion."
     },
     {
         "id":"sullengard_gs_4",

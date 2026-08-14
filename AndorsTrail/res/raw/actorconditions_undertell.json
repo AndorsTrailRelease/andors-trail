@@ -1,0 +1,173 @@
+[
+    {
+        "id":"feebleness",
+        "iconID":"actorconditions_1:74",
+        "name":"Weapon feebleness",
+        "category":"mental",
+        "abilityEffect":{
+            "increaseAttackChance":-5,
+            "increaseAttackDamage":{
+                "min":-2,
+                "max":-2
+            }
+        }
+    },
+    {
+        "id":"deathtouch",
+        "iconID":"actorconditions_1:29",
+        "name":"Deathtouch",
+        "category":"spiritual",
+        "isStacking":1,
+        "roundEffect":{
+            "increaseCurrentHP":{
+                "min":-1,
+                "max":0
+            }
+        },
+        "abilityEffect":{
+            "increaseAttackChance":-5,
+            "increaseDamageResistance":-1
+        }
+    },
+    {
+        "id":"vainglory",
+        "iconID":"actorconditions_1:86",
+        "name":"Curse of Vainglory",
+        "category":"spiritual",
+        "roundEffect":{
+            "increaseCurrentHP":{
+                "min":-1,
+                "max":0
+            }
+        },
+        "abilityEffect":{
+            "increaseMaxHP":-5,
+            "increaseBlockChance":-5
+        }
+    },
+    {
+        "id":"revealed",
+        "iconID":"actorconditions_1:67",
+        "name":"Revealed",
+        "description":"Your focus sharpens, making enemy movements easier to anticipate.",
+        "category":"mental",
+        "isPositive":1,
+        "abilityEffect":{
+            "increaseAttackChance":5,
+            "increaseBlockChance":4
+        }
+    },
+    {
+        "id":"withering_focus",
+        "iconID":"actorconditions_1:100",
+        "name":"Withering Focus",
+        "description":"Focus and precision deteriorate, weakening both offense and defense.",
+        "category":"mental",
+        "abilityEffect":{
+            "increaseAttackChance":-5,
+            "increaseBlockChance":-5
+        }
+    },
+    {
+        "id":"kazaul_exposure",
+        "iconID":"actorconditions_japozero:58",
+        "name":"Kazaul exposure",
+        "description":"Defensive structure is methodically compromised, reducing resistance to damage.",
+        "category":"spiritual",
+        "abilityEffect":{
+            "increaseDamageResistance":-3
+        }
+    },
+    {
+        "id":"reclaimed_resilience",
+        "iconID":"actorconditions_japozero:13",
+        "name":"Reclaimed resilience",
+        "category":"physical",
+        "abilityEffect":{
+            "increaseDamageResistance":1
+        }
+    },
+    {
+        "id":"gilded_burden",
+        "iconID":"actorconditions_1:47",
+        "name":"Gilded burden",
+        "description":"Wealth weighs the soul down.",
+        "category":"spiritual",
+        "abilityEffect":{
+            "increaseMoveCost":2
+        }
+    },
+    {
+        "id":"kazaul_mortality",
+        "iconID":"actorconditions_japozero:1",
+        "name":"Kazaul mortality",
+        "description":"A severing influence that withdraws the Kazaul gaze, returning the body to its natural and fragile state.",
+        "category":"spiritual",
+        "roundEffect":{
+            "increaseCurrentHP":{
+                "min":-50,
+                "max":0
+            }
+        }
+    },
+    {
+        "id":"heartstone_poisoning",
+        "iconID":"actorconditions_japozero:10",
+        "name":"Heartstone poisoning",
+        "description":"A poisoning that seeps into the body like a slow-burning chill, numbing the limbs while twisting the mind with fevered dreams and creeping despair. Those exposed for too long grow weak, hollow-eyed and restless.",
+        "category":"physical",
+        "abilityEffect":{
+            "increaseAttackDamage":{
+                "min":-1,
+                "max":-1
+            },
+            "increaseMaxAP":-1,
+            "increaseMoveCost":1
+        }
+    },
+    {
+        "id":"bone_fracture_range",
+        "iconID":"actorconditions_1:89",
+        "name":"Marrow rend",
+        "description":"Deep internal damage causes the target to steadily lose health as its strength bleeds away.",
+        "category":"physical",
+        "isStacking":1,
+        "roundEffect":{
+            "increaseCurrentHP":{
+                "min":-5,
+                "max":-10
+            }
+        }
+    },
+    {
+        "id":"head_trauma",
+        "iconID":"actorconditions_1:48",
+        "name":"Head trauma",
+        "category":"physical",
+        "roundEffect":{
+            "increaseCurrentHP":{
+                "min":-2,
+                "max":-1
+            }
+        },
+        "abilityEffect":{
+            "increaseAttackChance":-15
+        }
+    },
+    {
+        "id":"vital_piercing",
+        "iconID":"actorconditions_japozero:54",
+        "name":"Vital piercing",
+        "description":"The wound seeps life from within, bleeding away the target's life while dulling its ability to land decisive blows.",
+        "category":"physical",
+        "roundEffect":{
+            "increaseCurrentHP":{
+                "min":-2,
+                "max":-2
+            }
+        },
+        "abilityEffect":{
+            "increaseCriticalSkill":-5
+        }
+    }
+]

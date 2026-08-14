@@ -1,0 +1,56 @@
+[
+    {
+        "id":"heros_body",
+        "iconID":"actorconditions_1:91",
+        "name":"Hero's body",
+        "category":"physical",
+        "isPositive":1,
+        "roundEffect":{
+            "visualEffectID":"blueSwirl",
+            "increaseCurrentHP":{
+                "min":30,
+                "max":50
+            }
+        },
+        "abilityEffect":{
+            "increaseAttackChance":20,
+            "increaseAttackDamage":{
+                "min":30,
+                "max":50
+            },
+            "increaseMaxHP":50,
+            "increaseMaxAP":2,
+            "increaseCriticalSkill":20,
+            "increaseBlockChance":20,
+            "increaseDamageResistance":20
+        }
+    },
+    {
+        "id":"scylla",
+        "iconID":"actorconditions_1:83",
+        "name":"Scylla's bite",
+        "category":"physical",
+        "isStacking":1,
+        "roundEffect":{
+            "visualEffectID":"blueSwirl",
+            "increaseCurrentHP":{
+                "min":-10,
+                "max":-5
+            }
+        }
+    },
+    {
+        "id":"solid_impact",
+        "iconID":"actorconditions_1:83",
+        "name":"Solid impact",
+        "category":"physical",
+        "isStacking":1,
+        "roundEffect":{
+            "visualEffectID":"blueSwirl",
+            "increaseCurrentHP":{
+                "min":-5,
+                "max":-10
+            }
+        }
+    }
+]

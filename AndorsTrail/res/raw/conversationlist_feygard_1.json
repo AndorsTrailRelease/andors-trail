@@ -6812,8 +6812,27 @@
         "message":"Oh, you silly child. This is a very well traveled road. All the people coming and going from and to Feygard. It's a long road and they get hungry.",
         "replies":[
             {
+                "text":"I'm not a child anymore!",
+                "nextPhraseID":"rosmara_heartsteel_10",
+                "requires":[
+                    {
+                        "requireType":"wear",
+                        "requireID":"#heartsteel_filter",
+                        "value":1
+                    }
+                ]
+            },
+            {
                 "text":"I am not a child!",
-                "nextPhraseID":"X"
+                "nextPhraseID":"X",
+                "requires":[
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"#heartsteel_filter",
+                        "value":1,
+                        "negate":true
+                    }
+                ]
             },
             {
                 "text":"OK, you sell food. What kind of food?",

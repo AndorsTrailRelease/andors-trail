@@ -3016,7 +3016,7 @@
     },
     {
         "id":"brightport_bryma29",
-        "message":"Not to mention that the origin of those bones could have very well humans. There have been stories of such things having been done, especially during plagues...",
+        "message":"Not to mention that the origin of those bones could have very well have been human. There have been stories of such things having been done, especially during plagues...",
         "replies":[
             {
                 "text":"I thought we would be talking about your research?",
@@ -4386,7 +4386,7 @@
     },
     {
         "id":"brightport_bryma10",
-        "message":"We sat down and he started asking me all sorts of questions. I was glad to have someone to talk to. But soon, he pulled out a list of ingredients and asked about how to acquire and use them. Most of of them are highly poisonous.",
+        "message":"We sat down and he started asking me all sorts of questions. I was glad to have someone to talk to. But soon, he pulled out a list of ingredients and asked about how to acquire and use them. Most which were highly poisonous.",
         "replies":[
             {
                 "text":"N",
@@ -4584,7 +4584,7 @@
                         "requireType":"questProgress",
                         "requireID":"andor",
                         "value":132,
-                        "negate":false
+                        "negate":true
                     }
                 ]
             },
@@ -4675,6 +4675,13 @@
             {
                 "text":"N",
                 "nextPhraseID":"brightport_bryma20"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"brightport_nondisplay",
+                "value":257
             }
         ]
     },
@@ -6893,7 +6900,7 @@
     },
     {
         "id":"brightport_smugglersign",
-        "message":"[DANGER, do not go past this sign!]"
+        "message":"DANGER, do not go past this sign!"
     },
     {
         "id":"brightport_t_selector",
@@ -8389,7 +8396,7 @@
                 "nextPhraseID":"brightport_silvear_bye",
                 "requires":[
                     {
-                        "requireType":"inventoryRemove",
+                        "requireType":"inventoryKeep",
                         "requireID":"gold",
                         "value":500,
                         "negate":true
@@ -8489,7 +8496,7 @@
                 "nextPhraseID":"brightport_silvear_bye",
                 "requires":[
                     {
-                        "requireType":"inventoryRemove",
+                        "requireType":"inventoryKeep",
                         "requireID":"gold",
                         "value":500,
                         "negate":true
@@ -10304,7 +10311,7 @@
         "message":"I was convinced you were sent to spy on us. So, what brings you around here.",
         "replies":[
             {
-                "text":"Im looking around the town searching for my brother.",
+                "text":"I'm looking around the town searching for my brother.",
                 "nextPhraseID":"brightport_goons7"
             },
             {
@@ -10878,14 +10885,14 @@
         "message":"Hmm, maybe you could. But I'm a little hesitant. If the merchant went missing, that could mean danger, and I don't want to be responsible for you.",
         "replies":[
             {
-                "text":"Don't worry I'm an experienced adventurer.",
+                "text":"Don't worry, I'm an experienced adventurer.",
                 "nextPhraseID":"brightport_allares8"
             }
         ]
     },
     {
         "id":"brightport_allares6",
-        "message":"Yes it should have arrived quite a while ago, usually they are on time. That is terrible for today of all times as we have a big order to fulfill in the next few days.",
+        "message":"Yes it should have arrived quite a while ago, usually they are on time. That is terrible for today of all days as we have a big order to fulfill in the next few days.",
         "replies":[
             {
                 "text":"I could go help look for it.",
@@ -11016,7 +11023,7 @@
     },
     {
         "id":"brightport_lizard0",
-        "message":"As you walk down the cave tunnel, you abruptly stop in your tracks as you notice a mysterious creature standing a stone throw's away from you.",
+        "message":"As you walk down the cave tunnel, you abruptly stop in your tracks as you notice a mysterious creature standing a stone's throws away from you.",
         "replies":[
             {
                 "text":"[Lunge towards it with your weapon.]",
@@ -13192,7 +13199,7 @@
     },
     {
         "id":"brightport_slaincheck3",
-        "message":"With this, the whole tribe is wiped out, I should return and tell Bryma.",
+        "message":"With this, the whole tribe is wiped out. I should return and tell Bryma.",
         "rewards":[
             {
                 "rewardType":"questProgress",
@@ -18071,7 +18078,7 @@
     },
     {
         "id":"brightport_othinus_1",
-        "message":"I'm in the middle of an important ritual. If you require something, please consult with my steward Stiyl.",
+        "message":"I'm in the middle of an important ritual. If you require something, please consult with my steward, Stiyl.",
         "switchToNPC":"brightportpriest",
         "rewards":[
             {
@@ -19068,7 +19075,7 @@
                 "nextPhraseID":"X",
                 "requires":[
                     {
-                        "requireType":"inventoryRemove",
+                        "requireType":"inventoryKeep",
                         "requireID":"gold",
                         "value":1500,
                         "negate":true
@@ -19719,7 +19726,7 @@
     },
     {
         "id":"brightport_mayor2",
-        "message":"Haha, don't sweat it! We're Brightporters, like any other. So, what brings you here?",
+        "message":"Haha, think nothing of it! We're Brightporters, like any other. So, what brings you here?",
         "replies":[
             {
                 "text":"Have you seen my brother Andor?",
@@ -19819,11 +19826,11 @@
     },
     {
         "id":"brightport_stanwick_andor8",
-        "message":"What this Lodar man told you lines up with what I've said, without a doubt, there is a connection. I don't know who Lady Lydalon is, but I doubt they'll let you meet her so easily The high priest of Nor city, of all places.",
+        "message":"What this Lodar man told you lines up with what I've said, without a doubt, there is a connection. I don't know who Lady Lydalon is, but I doubt they'll let you meet her so easily The high priest of Nor City, of all places.",
         "replies":[
             {
                 "text":"N",
-                "nextPhraseID":"brightport_stanwick_andor9"
+                "nextPhraseID":"brightport_stanwick_andor7"
             }
         ]
     },
@@ -20767,6 +20774,7 @@
                 ]
             },
             {
+                "text":"N",
                 "nextPhraseID":"brightport_silvear1_2"
             }
         ]
@@ -20854,7 +20862,7 @@
     },
     {
         "id":"brightport_storemaster5",
-        "message":"But it's not about the gold this time, we need them for an order and we can't be late ourselves. It would be nice if you could visit Deebo's Orchard south of the Duleian Road to see if the order of thirty apples had been picked up. ",
+        "message":"But it's not about the gold this time, we need them for an order and we can't be late ourselves. It would be nice if you could visit Deebo's Orchard south of the Duleian Road to see if the order of thirty apples has been picked up. ",
         "replies":[
             {
                 "text":"Sure, can do.",
@@ -21003,7 +21011,7 @@
     },
     {
         "id":"brightport_delon16",
-        "message":"Hmm, I think that was all of it. I would make you peel apples but I don't see any fresh apples from the orchard around, which is odd cause they were supposed to be delivered already.",
+        "message":"Hmm, I think that was all of it. I would make you peel apples but I don't see any fresh apples from the orchard around, which is odd because they were supposed to be delivered already.",
         "replies":[
             {
                 "text":"Can you tell me more about it?",
@@ -21850,11 +21858,18 @@
     },
     {
         "id":"brightport_silvear4",
-        "message":"Rest assured, I would not risk my contingency on shoddy information, with that in mind 1,500 gold sound like a better price.",
+        "message":"Rest assured, I would not risk my contingency on shoddy information, with that in mind 1500 gold sound like a better price.",
         "replies":[
             {
                 "text":"Fine, have your price. [Give him the gold.]",
-                "nextPhraseID":"brightport_silvear2"
+                "nextPhraseID":"brightport_silvear2",
+                "requires":[
+                    {
+                        "requireType":"inventoryRemove",
+                        "requireID":"gold",
+                        "value":1500
+                    }
+                ]
             },
             {
                 "text":"I'll be back when I have the gold. [Leave.]",
@@ -21871,11 +21886,18 @@
     },
     {
         "id":"brightport_silvear3",
-        "message":"I would sooner trust in Gunfryk dying of old age, $playername. My plans I carry alone; for yours, you'll have to pay. 1,500 is my asking price.",
+        "message":"I would sooner trust in Gunfryk dying of old age, $playername. My plans I carry alone; for yours, you'll have to pay. 1500 is my asking price.",
         "replies":[
             {
                 "text":"Fine, have your price. [Give him the gold.]",
-                "nextPhraseID":"brightport_silvear2"
+                "nextPhraseID":"brightport_silvear2",
+                "requires":[
+                    {
+                        "requireType":"inventoryRemove",
+                        "requireID":"gold",
+                        "value":1500
+                    }
+                ]
             },
             {
                 "text":"I'll be back when I have the gold. [Leave.]",
@@ -22117,7 +22139,7 @@
     },
     {
         "id":"brightport_mayor",
-        "message":"Im Rubiano, the Doughe of Brightport, speak up.",
+        "message":"I'm Rubiano, the Doughe of Brightport, speak up.",
         "replies":[
             {
                 "text":"Have you seen my brother Andor?",
@@ -22136,7 +22158,7 @@
                 "nextPhraseID":"brightport_mayor5"
             },
             {
-                "text":"What's a Doughe?",
+                "text":"What's a doughe?",
                 "nextPhraseID":"brightport_mayor1"
             },
             {
@@ -23663,58 +23685,59 @@
     },
     {
         "id":"dbg_prj",
-        "message":"***  brightport2  ***",
+        "message":"***  undertell  ***",
         "replies":[
             {
-                "text":"Teleport to Duleian road to Brightport",
-                "nextPhraseID":"dbg_prj_brightport2_teleport_start_from_south"
+                "text":"Entry to mine",
+                "nextPhraseID":"dbg_teleport_prj_undertell_entry"
             },
             {
-                "text":"Teleport to Poisoned lands towards Brightport",
-                "nextPhraseID":"dbg_prj_brightport2_teleport_start_from_north"
+                "text":"Heartstone area",
+                "nextPhraseID":"dbg_teleport_prj_undertell_heartstone"
             },
             {
-                "text":"Teleport to West of Brightport",
-                "nextPhraseID":"dbg_prj_brightport2_teleport_west_of_brightport"
+                "text":"Floor 1",
+                "nextPhraseID":"dbg_teleport_prj_undertell_floor1"
             },
             {
-                "text":"Teleport to Statue",
-                "nextPhraseID":"dbg_prj_brightport2_teleport_statue"
+                "text":"Town",
+                "nextPhraseID":"dbg_teleport_prj_undertell_town"
             },
             {
-                "text":"Teleport to Statue west",
-                "nextPhraseID":"dbg_prj_brightport2_teleport_statue_w"
+                "text":"Anoa",
+                "nextPhraseID":"dbg_teleport_prj_undertell_anoa"
             },
             {
-                "text":"Teleport to Statue north",
-                "nextPhraseID":"dbg_prj_brightport2_teleport_statue_n"
+                "text":"Ysrine",
+                "nextPhraseID":"dbg_teleport_prj_undertell_ysrine"
             },
             {
-                "text":"Teleport to Statue east",
-                "nextPhraseID":"dbg_prj_brightport2_teleport_statue_e"
+                "text":"Thalen",
+                "nextPhraseID":"dbg_teleport_prj_undertell_thalen"
             },
             {
-                "text":"Teleport to Statue to charwood",
-                "nextPhraseID":"dbg_prj_brightport2_teleport_statue_chr"
+                "text":"Morvath",
+                "nextPhraseID":"dbg_teleport_prj_undertell_morvath"
             },
             {
-                "text":"Teleport to Lizard cave",
-                "nextPhraseID":"dbg_prj_brightport2_teleport_lizards"
+                "text":"Zaroth",
+                "nextPhraseID":"dbg_teleport_prj_undertell_zaroth"
             },
             {
-                "text":"Teleport to Hills towards underground castle",
-                "nextPhraseID":"dbg_prj_brightport2_teleport_waytocastle"
+                "text":"Vaelzahr",
+                "nextPhraseID":"dbg_teleport_prj_undertell_vaelzahr"
             },
             {
-                "text":"Get 20 lizardman bones",
-                "nextPhraseID":"dbg_prj",
-                "requires":[
-                    {
-                        "requireType":"inventoryRemove",
-                        "requireID":"brightport_bone",
-                        "value":-20
-                    }
-                ]
+                "text":"Island hopping",
+                "nextPhraseID":"dbg_teleport_prj_undertell_island_hopping"
+            },
+            {
+                "text":"Island hoping - master",
+                "nextPhraseID":"dbg_teleport_prj_undertell_island_hopping_master"
+            },
+            {
+                "text":"Archive Room",
+                "nextPhraseID":"dbg_teleport_prj_undertell_archive_room"
             },
             {
                 "text":"Back",

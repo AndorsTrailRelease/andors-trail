@@ -309,6 +309,22 @@
             {
                 "text":"What do you do around here?",
                 "nextPhraseID":"skylenar_1"
+            },
+            {
+                "text":"I found a strange locked box in the library basement. Can you tell me anything about it?",
+                "nextPhraseID":"skylenar_kazaul_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"fifth_master",
+                        "value":58
+                    },
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"ancient_locked_box",
+                        "value":1
+                    }
+                ]
             }
         ]
     },
@@ -398,7 +414,26 @@
         "replies":[
             {
                 "text":"Mount Galmore, where is that?",
-                "nextPhraseID":"remgard_drunk2_5"
+                "nextPhraseID":"remgard_drunk2_5",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"swamp_healer",
+                        "value":10,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"Mount Galmore twists your mind? Oh, I see. You mean Undertell?",
+                "nextPhraseID":"remgard_drunk2_5",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_hidden",
+                        "value":5
+                    }
+                ]
             },
             {
                 "text":"I'll keep that in mind.",
@@ -412,7 +447,7 @@
     },
     {
         "id":"remgard_drunk2_5",
-        "message":"*burp* What was that? Were you saying something?"
+        "message":"[burp] What was that? Were you saying something?"
     },
     {
         "id":"remgard_farmer1",

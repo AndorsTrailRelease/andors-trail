@@ -14,18 +14,78 @@
         "message":"Wait, who are you again? Are you that guard?",
         "replies":[
             {
-                "text":"Yes",
+                "text":"Yes.",
                 "nextPhraseID":"fallhaven_drunk_3_1"
             },
             {
-                "text":"No",
+                "text":"No.",
                 "nextPhraseID":"fallhaven_drunk_3_2"
+            },
+            {
+                "text":"No, I am here to give you something.",
+                "nextPhraseID":"fallhaven_drunk_potion_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_barricades",
+                        "value":120
+                    },
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"pot_senses",
+                        "value":1
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_hidden",
+                        "value":55,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"gold",
+                        "value":5000
+                    }
+                ]
+            },
+            {
+                "text":"Shannal sent me.",
+                "nextPhraseID":"fallhaven_drunk_potion_30",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_hidden",
+                        "value":55
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_barricades",
+                        "value":130,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"gold",
+                        "value":5000
+                    }
+                ]
+            },
+            {
+                "text":"Are you okay now?",
+                "nextPhraseID":"fallhaven_drunk_remember_30",
+                "requires":[
+                    {
+                        "requireType":"questLatestProgress",
+                        "requireID":"undertell_barricades",
+                        "value":130
+                    }
+                ]
             }
         ]
     },
     {
         "id":"fallhaven_drunk_3_1",
-        "message":"Oh, sir. I'm not causing any trouble anymore, see? I sits outside now as you says, OK?",
+        "message":"Oh, guard. I'm not causing any trouble anymore, see? I sits outside now as you says, OK?",
         "replies":[
             {
                 "text":"N",

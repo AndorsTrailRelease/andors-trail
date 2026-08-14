@@ -11316,6 +11316,39 @@
             {
                 "text":"What are you doing down here?",
                 "nextPhraseID":"gwendolyn_3"
+            },
+            {
+                "text":"I'm searching for something called \"The Ritual of Five Aspects\". Have you ever heard of it?",
+                "nextPhraseID":"gwendolyn_kazaul_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"fifth_master",
+                        "value":40
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"fifth_master",
+                        "value":55,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"Gwendolyn, do you know anything about a locked box back here?",
+                "nextPhraseID":"gwendolyn_kazaul_locked_box_10",
+                "requires":[
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"ancient_locked_box",
+                        "value":1
+                    },
+                    {
+                        "requireType":"questLatestProgress",
+                        "requireID":"fifth_master",
+                        "value":55
+                    }
+                ]
             }
         ]
     },
