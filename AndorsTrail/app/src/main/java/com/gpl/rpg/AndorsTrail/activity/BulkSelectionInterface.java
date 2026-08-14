@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -53,7 +54,7 @@ public final class BulkSelectionInterface extends AndorsTrailBaseActivity implem
 	private Button okButton;
 	private Button cancelButton;
 
-	private final Handler timedEventHandler = new Handler();		// variables to count up or down on long presses on the buttons
+	private final Handler timedEventHandler = new Handler(Looper.getMainLooper());		// variables to count up or down on long presses on the buttons
 	private int countValue;
 	private int countTime;
 	private final Runnable countEvent = new Runnable() {

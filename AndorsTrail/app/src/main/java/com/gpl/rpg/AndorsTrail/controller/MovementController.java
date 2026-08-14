@@ -1,7 +1,10 @@
 package com.gpl.rpg.AndorsTrail.controller;
 
 import android.content.res.Resources;
-import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import com.gpl.rpg.AndorsTrail.AndorsTrailPreferences;
 import com.gpl.rpg.AndorsTrail.context.ControllerContext;
@@ -28,6 +31,9 @@ public final class MovementController implements TimedMessageTask.Callback {
 	private final WorldContext world;
 	//TODO restore final modifier before release
 	private TimedMessageTask movementHandler;
+	private static final ExecutorService executor = Executors.newSingleThreadExecutor();
+	private static final Handler mainHandler = new Handler(Looper.getMainLooper());
+
 	public final PlayerMovementListeners playerMovementListeners = new PlayerMovementListeners();
 
 	public MovementController(ControllerContext controllers, WorldContext world) {
@@ -42,41 +48,41 @@ public final class MovementController implements TimedMessageTask.Callback {
 		this.movementHandler = new TimedMessageTask(this, Constants.MINIMUM_INPUT_INTERVAL, false);
 	}
 
+	/**
+	 * Loads the target map and places the player at the given map object on a background thread.
+	 * This is done because loading and drawing the map can be slow on older devices.
+	 *
+	 * <p>The transition pauses game rounds until the new map is ready, then restores the pause
+	 * state on the main thread and notifies listeners on success.</p>
+	 *
+	 * @param objectType the type of map object to target
+	 * @param mapName the name of the map that contains the target object
+	 * @param placeName the name of the target object
+	 * @param offset_x the x offset within the target object
+	 * @param offset_y the y offset within the target object
+	 */
 	public void placePlayerAsyncAt(final MapObject.MapObjectType objectType, final String mapName, final String placeName, final int offset_x, final int offset_y) {
-
-		AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
-			private boolean mapLoadFailed = false;  // (1) flag to carry failure to onPostExecute
-
-			@Override
-			protected Void doInBackground(Void... arg0) {
-				stopMovement();
-
-				try {
-					placePlayerAt(controllers.getResources(), objectType, mapName, placeName, offset_x, offset_y);
-				} catch (RuntimeException e) {
-					L.error("Map transition failed: " + e.getMessage());  // (2) log it
-					mapLoadFailed = true;                                  // (3) signal failure
-				}
-
-				return null;
-			}
-
-			@Override
-			protected void onPostExecute(Void result) {
-				super.onPostExecute(result);
-				stopMovement();
-				// (4) always release the pause — timer can never get stuck
-				controllers.gameRoundController.releasePause(PauseReason.MAP_TRANSITION);
-				if (!mapLoadFailed) {
-					playerMovementListeners.onPlayerEnteredNewMap(
-							world.model.currentMaps.map, world.model.player.position);
-				}
-			}
-
-		};
-
 		controllers.gameRoundController.acquirePause(PauseReason.MAP_TRANSITION);
-		task.execute();
+		// This should run pretty quickly, so we won't worry about canceling if activity closes
+		executor.execute(() -> {
+			boolean mapLoadSucceeded = false;
+			try {
+				stopMovement();
+				placePlayerAt(controllers.getResources(), objectType, mapName, placeName, offset_x, offset_y);
+				mapLoadSucceeded = true;
+			} catch (RuntimeException e) {
+				L.error("Map transition failed: " + e.getMessage());
+			} finally {
+				final boolean notifyListeners = mapLoadSucceeded;
+				mainHandler.post(() -> {
+					stopMovement();
+					controllers.gameRoundController.releasePause(PauseReason.MAP_TRANSITION);
+					if (notifyListeners) {
+						playerMovementListeners.onPlayerEnteredNewMap(world.model.currentMaps.map, world.model.player.position);
+					}
+				});
+			}
+		});
 	}
 
 	/**
