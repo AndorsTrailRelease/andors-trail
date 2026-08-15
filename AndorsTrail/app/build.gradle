@@ -25,7 +25,7 @@ android {
 
     defaultConfig {
         applicationId "com.gpl.rpg.AndorsTrail"
-        minSdkVersion 17
+        minSdkVersion 21
         targetSdkVersion 36
     }
 
@@ -49,16 +49,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.txt'
         }
         debug {
-            manifestPlaceholders icon_name: 'icon_beta', fileproviderPath: 'AndorsTrail.beta2'
-            applicationIdSuffix = '.beta2'
+            manifestPlaceholders icon_name: 'icon_beta', fileproviderPath: 'AndorsTrail.beta'
+            applicationIdSuffix = '.beta'
             versionNameSuffix = 'dev'
             if (hasKeystoreProperties) {
                 signingConfig signingConfigs.betaKey
             }
         }
         beta {
-            manifestPlaceholders icon_name: 'icon_beta', fileproviderPath: 'AndorsTrail.beta2'
-            applicationIdSuffix = '.beta2'
+            debuggable false
+            manifestPlaceholders icon_name: 'icon_beta', fileproviderPath: 'AndorsTrail.beta'
+            applicationIdSuffix = '.beta'
             versionNameSuffix = 'beta'
             if (hasKeystoreProperties) {
                 signingConfig signingConfigs.betaKey
