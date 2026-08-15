@@ -49,7 +49,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.txt'
         }
         debug {
-            manifestPlaceholders icon_name: 'icon_beta', fileproviderPath: 'AndorsTrail.beta2'
+            manifestPlaceholders icon_name: 'icon_debug', fileproviderPath: 'AndorsTrail.beta2'
             applicationIdSuffix = '.beta2'
             versionNameSuffix = 'dev'
             if (hasKeystoreProperties) {
