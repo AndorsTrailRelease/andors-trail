@@ -40,6 +40,7 @@ import com.gpl.rpg.AndorsTrail.model.item.Inventory;
 import com.gpl.rpg.AndorsTrail.model.item.ItemContainer;
 import com.gpl.rpg.AndorsTrail.model.item.ItemType;
 import com.gpl.rpg.AndorsTrail.resource.tiles.TileCollection;
+import com.gpl.rpg.AndorsTrail.util.ThemeHelper;
 import com.gpl.rpg.AndorsTrail.view.CustomMenuInflater;
 import com.gpl.rpg.AndorsTrail.view.CustomDialogFactory;
 import com.gpl.rpg.AndorsTrail.view.ItemContainerAdapter;
@@ -272,18 +273,14 @@ public final class HeroinfoActivity_Inventory extends Fragment implements Custom
 			TextView status = new TextView(getActivity());
 			status.setText(isEquipmentPresetEmpty(preset) ? getString(R.string.equipment_preset_empty) : getString(R.string.equipment_preset_saved, preset + 1));
 			block.addView(status);
-			block.addView(createPresetPreview(preset));
-			LinearLayout actions = new LinearLayout(getActivity());
-			actions.setOrientation(LinearLayout.HORIZONTAL);
-			Button save = new Button(getActivity());
-			save.setText(getString(R.string.equipment_preset_save, preset + 1));
-			save.setOnClickListener(view -> saveEquipmentPreset(presetIndex, dialog));
-			Button load = new Button(getActivity());
-			load.setText(getString(R.string.equipment_preset_load, preset + 1));
-			load.setOnClickListener(view -> showLoadEquipmentPresetConfirmation(presetIndex, dialog));
-			actions.addView(save, new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
-			actions.addView(load, new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
-			block.addView(actions);
+			View preview = createPresetPreview(preset);
+			preview.setOnClickListener(view -> showLoadEquipmentPresetConfirmation(presetIndex, dialog));
+			preview.setOnLongClickListener(view -> {
+				saveEquipmentPreset(presetIndex, dialog);
+				return true;
+			});
+			preview.setLongClickable(true);
+			block.addView(preview);
 			content.addView(block);
 		}
 		CustomDialogFactory.addDismissButton(dialog, R.string.dialog_close);
@@ -317,6 +314,9 @@ public final class HeroinfoActivity_Inventory extends Fragment implements Custom
 	private View createPresetPreview(int preset) {
 		LinearLayout preview = new LinearLayout(getActivity());
 		preview.setOrientation(LinearLayout.HORIZONTAL);
+		int previewPadding = (int) (4 * getResources().getDisplayMetrics().density);
+		preview.setPadding(previewPadding, previewPadding, previewPadding, previewPadding);
+		preview.setBackgroundResource(ThemeHelper.getThemeResource(getActivity(), R.attr.ui_theme_textbutton_drawable));
 		ArrayList<Integer> iconIDs = new ArrayList<Integer>();
 		for (Inventory.WearSlot slot : Inventory.WearSlot.values()) {
 			String id = player.inventory.getEquipmentPresetItemTypeID(preset, slot);
