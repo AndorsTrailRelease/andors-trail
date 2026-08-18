@@ -9,6 +9,7 @@ import com.gpl.rpg.AndorsTrail.model.ChecksumBuilder;
 import com.gpl.rpg.AndorsTrail.savegames.LegacySavegameFormatReaderForItemContainer;
 
 public final class Inventory extends ItemContainer {
+	public static final int NUM_EQUIPMENT_PRESETS = 5;
 
 	public static enum WearSlot {
 		weapon
@@ -30,6 +31,8 @@ public final class Inventory extends ItemContainer {
 	private static final int NUM_WORN_SLOTS = WearSlot.values().length;
 	public static final int NUM_QUICK_SLOTS = 3;
 	private final ItemType[] wear = new ItemType[NUM_WORN_SLOTS];
+	private final String[][] equipmentPresets = new String[NUM_EQUIPMENT_PRESETS][NUM_WORN_SLOTS];
+	private final boolean[] equipmentPresetSaved = new boolean[NUM_EQUIPMENT_PRESETS];
 	public final ItemType[] quickitem = new ItemType[NUM_QUICK_SLOTS];
 
 	public Inventory() { }
@@ -55,6 +58,29 @@ public final class Inventory extends ItemContainer {
 	}
 	public void setItemTypeInWearSlot(WearSlot slot, ItemType type) {
 		wear[slot.ordinal()] = type;
+	}
+
+	public void saveEquipmentPreset(int preset) {
+		checkPreset(preset);
+		equipmentPresetSaved[preset] = true;
+		for (WearSlot slot : WearSlot.values()) {
+			ItemType type = getItemTypeInWearSlot(slot);
+			equipmentPresets[preset][slot.ordinal()] = type == null ? null : type.id;
+		}
+	}
+
+	public boolean isEquipmentPresetSaved(int preset) {
+		checkPreset(preset);
+		return equipmentPresetSaved[preset];
+	}
+
+	public String getEquipmentPresetItemTypeID(int preset, WearSlot slot) {
+		checkPreset(preset);
+		return equipmentPresets[preset][slot.ordinal()];
+	}
+
+	private static void checkPreset(int preset) {
+		if (preset < 0 || preset >= NUM_EQUIPMENT_PRESETS) throw new IllegalArgumentException("Invalid equipment preset: " + preset);
 	}
 
 	public boolean isWearing(String itemTypeID, int minNumber) {
@@ -184,6 +210,12 @@ public final class Inventory extends ItemContainer {
 				}
 			}
 		}
+		if (fileversion >= 87 && fileversion != 999 && fileversion != 1000) {
+			for (int preset = 0; preset < NUM_EQUIPMENT_PRESETS; ++preset) {
+				equipmentPresetSaved[preset] = src.readBoolean();
+				for (int slot = 0; slot < NUM_WORN_SLOTS; ++slot) equipmentPresets[preset][slot] = src.readBoolean() ? src.readUTF() : null;
+			}
+		}
 	}
 
 	@Override
@@ -208,6 +240,10 @@ public final class Inventory extends ItemContainer {
 				dest.writeBoolean(false);
 			}
 		}
+		for (int preset = 0; preset < NUM_EQUIPMENT_PRESETS; ++preset) {
+			dest.writeBoolean(equipmentPresetSaved[preset]);
+			for (int slot = 0; slot < NUM_WORN_SLOTS; ++slot) { String id = equipmentPresets[preset][slot]; dest.writeBoolean(id != null); if (id != null) dest.writeUTF(id); }
+		}
 	}
 	public void addToChecksum(ChecksumBuilder builder) {
 		super.addToChecksum(builder);
@@ -223,6 +259,10 @@ public final class Inventory extends ItemContainer {
 			if (quickitem[i] != null) {
 				builder.add(quickitem[i].id);
 			}
+		}
+		for (int preset = 0; preset < NUM_EQUIPMENT_PRESETS; ++preset) {
+			builder.add(equipmentPresetSaved[preset]);
+			for (int slot = 0; slot < NUM_WORN_SLOTS; ++slot) if (equipmentPresets[preset][slot] != null) builder.add(equipmentPresets[preset][slot]);
 		}
 
 	}

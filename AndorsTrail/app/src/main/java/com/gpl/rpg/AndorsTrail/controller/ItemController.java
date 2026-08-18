@@ -2,6 +2,9 @@ package com.gpl.rpg.AndorsTrail.controller;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import com.gpl.rpg.AndorsTrail.AndorsTrailPreferences;
 import com.gpl.rpg.AndorsTrail.R;
@@ -87,6 +90,49 @@ public final class ItemController {
 		player.inventory.addItem(removedItemType);
 		player.inventory.setItemTypeInWearSlot(slot, null);
 		controllers.actorStatsController.removeConditionsFromUnequippedItem(player, removedItemType);
+	}
+
+	public void saveEquipmentPreset(int preset) {
+		world.model.player.inventory.saveEquipmentPreset(preset);
+	}
+
+	public List<String> getMissingEquipmentPresetItems(int preset) {
+		Player player = world.model.player;
+		Map<String, Integer> available = new HashMap<String, Integer>();
+		for (ItemContainer.ItemEntry entry : player.inventory.items) available.put(entry.itemType.id, entry.quantity);
+		for (Inventory.WearSlot slot : Inventory.WearSlot.values()) {
+			ItemType type = player.inventory.getItemTypeInWearSlot(slot);
+			if (type != null) available.put(type.id, available.containsKey(type.id) ? available.get(type.id) + 1 : 1);
+		}
+		List<String> missing = new ArrayList<String>();
+		for (Inventory.WearSlot slot : Inventory.WearSlot.values()) {
+			String id = player.inventory.getEquipmentPresetItemTypeID(preset, slot);
+			if (id == null) continue;
+			int quantity = available.containsKey(id) ? available.get(id) : 0;
+			if (quantity == 0) missing.add(id); else available.put(id, quantity - 1);
+		}
+		return missing;
+	}
+
+	public void applyEquipmentPreset(int preset) {
+		final Player player = world.model.player;
+		final String[] target = new String[Inventory.WearSlot.values().length];
+		for (Inventory.WearSlot slot : Inventory.WearSlot.values()) target[slot.ordinal()] = player.inventory.getEquipmentPresetItemTypeID(preset, slot);
+		for (Inventory.WearSlot slot : Inventory.WearSlot.values()) unequipSlot(player, slot);
+		for (Inventory.WearSlot slot : Inventory.WearSlot.values()) {
+			String id = target[slot.ordinal()];
+			if (id == null) continue;
+			ItemType type = world.itemTypes.getItemType(id);
+			if (type == null || !player.inventory.removeItem(id, 1)) continue;
+			if (type.isTwohandWeapon()) unequipSlot(player, Inventory.WearSlot.shield);
+			else if (slot == Inventory.WearSlot.shield) {
+				ItemType weapon = player.inventory.getItemTypeInWearSlot(Inventory.WearSlot.weapon);
+				if (weapon != null && weapon.isTwohandWeapon()) unequipSlot(player, Inventory.WearSlot.weapon);
+			}
+			player.inventory.setItemTypeInWearSlot(slot, type);
+			controllers.actorStatsController.addConditionsFromEquippedItem(player, type);
+		}
+		controllers.actorStatsController.recalculatePlayerStats(player);
 	}
 
 	public void useItem(ItemType type) {
@@ -295,6 +341,24 @@ public final class ItemController {
 	public static int getBuyingPrice(Player player, ItemType itemType) {
 		return itemType.baseMarketCost + itemType.baseMarketCost * getMarketPriceFactor(player) / 100;
 	}
+	public static List<Integer> getEquipmentPresetsBrokenByRemoving(Player player, String itemTypeID, int quantity) {
+		List<Integer> result = new ArrayList<Integer>();
+		int remaining = player.inventory.getItemQuantity(itemTypeID) - quantity;
+		for (Inventory.WearSlot slot : Inventory.WearSlot.values()) {
+			ItemType equipped = player.inventory.getItemTypeInWearSlot(slot);
+			if (equipped != null && equipped.id.equals(itemTypeID)) remaining++;
+		}
+		for (int preset = 0; preset < Inventory.NUM_EQUIPMENT_PRESETS; ++preset) {
+			if (!player.inventory.isEquipmentPresetSaved(preset)) continue;
+			int required = 0;
+			for (Inventory.WearSlot slot : Inventory.WearSlot.values()) {
+				if (itemTypeID.equals(player.inventory.getEquipmentPresetItemTypeID(preset, slot))) required++;
+			}
+			if (required > remaining) result.add(preset);
+		}
+		return result;
+	}
+
 	public static int getSellingPrice(Player player, ItemType itemType) {
 		return itemType.baseMarketCost - itemType.baseMarketCost * getMarketPriceFactor(player) / 100;
 	}
