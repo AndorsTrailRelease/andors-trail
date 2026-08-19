@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
@@ -98,7 +97,7 @@ public final class HeroinfoActivity_Inventory extends Fragment implements Custom
 		heroinfo_stats_attack = (TextView) v.findViewById(R.id.heroinfo_stats_attack);
 		heroinfo_stats_defense = (TextView) v.findViewById(R.id.heroinfo_stats_defense);
 
-		Button presetsButton = (Button) v.findViewById(R.id.equipment_presets_button);
+		View presetsButton = v.findViewById(R.id.equipment_presets_button);
 		presetsButton.setOnClickListener(view -> showEquipmentPresets());
 
 		registerForContextMenu(inventoryList);

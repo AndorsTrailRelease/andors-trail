@@ -32,4 +32,48 @@
 		android:text="@string/actorinfo_defense"
 		/>
 
+	<FrameLayout
+		android:id="@+id/equipment_presets_button"
+		android:layout_width="@dimen/boxshape_width"
+		android:layout_height="wrap_content"
+		android:layout_margin="@dimen/boxshape_margin"
+		android:padding="@dimen/boxshape_margin"
+		android:background="?attr/ui_theme_richframe_bitmap"
+		android:foreground="?attr/ui_theme_textbutton_background_drawable"
+		android:clickable="true"
+		android:focusable="true"
+		android:contentDescription="@string/equipment_preset_short">
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:orientation="horizontal">
+
+			<ImageView
+				android:layout_width="30dp"
+				android:layout_height="32dp"
+				android:padding="3dp"
+				android:scaleType="fitCenter"
+				android:src="@drawable/equip_body"
+				android:contentDescription="@null" />
+
+			<ImageView
+				android:layout_width="30dp"
+				android:layout_height="32dp"
+				android:padding="3dp"
+				android:scaleType="fitCenter"
+				android:src="@drawable/ui_double_arrows"
+				android:contentDescription="@null" />
+
+			<ImageView
+				android:layout_width="30dp"
+				android:layout_height="32dp"
+				android:padding="3dp"
+				android:scaleType="fitCenter"
+				android:src="@drawable/equip_body_heavy"
+				android:contentDescription="@null" />
+		</LinearLayout>
+	</FrameLayout>
+
 </LinearLayout>
