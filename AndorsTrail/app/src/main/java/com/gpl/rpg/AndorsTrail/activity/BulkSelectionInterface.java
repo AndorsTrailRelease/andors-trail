@@ -20,6 +20,7 @@ import com.gpl.rpg.AndorsTrail.context.WorldContext;
 import com.gpl.rpg.AndorsTrail.controller.InputController;
 import com.gpl.rpg.AndorsTrail.controller.ItemController;
 import com.gpl.rpg.AndorsTrail.model.item.ItemType;
+import java.util.Collections;
 import java.util.List;
 import com.gpl.rpg.AndorsTrail.util.ThemeHelper;
 import com.gpl.rpg.AndorsTrail.view.CustomDialogFactory;
@@ -206,7 +207,9 @@ public final class BulkSelectionInterface extends AndorsTrailBaseActivity implem
 
 		// setup OK button
 		okButton.setOnClickListener(v -> {
-			List<Integer> brokenPresets = ItemController.getEquipmentPresetsBrokenByRemoving(world.model.player, itemType.id, getTextboxAmount());
+			List<Integer> brokenPresets = interfaceType == BulkInterfaceType.buy
+					? Collections.emptyList()
+					: ItemController.getEquipmentPresetsBrokenByRemoving(world.model.player, itemType.id, getTextboxAmount());
 			if (requiresConfirmation() || !brokenPresets.isEmpty()) {
 				final String displayType = ItemInfoActivity.getDisplayTypeString(res, itemType).toLowerCase();
 				String message = requiresConfirmation() ? res.getString(R.string.bulkselection_sell_confirmation, itemType.getName(world.model.player), displayType) : "";

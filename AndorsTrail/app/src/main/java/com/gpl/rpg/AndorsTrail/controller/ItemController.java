@@ -53,11 +53,7 @@ public final class ItemController {
 		if (!player.inventory.removeItem(type.id, 1)) return;
 
 		unequipSlot(player, slot);
-		if (type.isTwohandWeapon()) unequipSlot(player, Inventory.WearSlot.shield);
-		else if (slot == Inventory.WearSlot.shield) {
-			ItemType currentWeapon = player.inventory.getItemTypeInWearSlot(Inventory.WearSlot.weapon);
-			if (currentWeapon != null && currentWeapon.isTwohandWeapon()) unequipSlot(player, Inventory.WearSlot.weapon);
-		}
+		unequipConflictingTwohandOrShield(player, type, slot);
 
 		player.inventory.setItemTypeInWearSlot(slot, type);
 		controllers.actorStatsController.addConditionsFromEquippedItem(player, type);
@@ -81,6 +77,14 @@ public final class ItemController {
 		controllers.actorStatsController.recalculatePlayerStats(player);
 		if (world.model.uiSelections.isInCombat && !controllers.combatController.playerHasApLeft()) {
 			controllers.combatController.endPlayerTurn();
+		}
+	}
+
+	private void unequipConflictingTwohandOrShield(Player player, ItemType type, Inventory.WearSlot slot) {
+		if (type.isTwohandWeapon()) unequipSlot(player, Inventory.WearSlot.shield);
+		else if (slot == Inventory.WearSlot.shield) {
+			ItemType currentWeapon = player.inventory.getItemTypeInWearSlot(Inventory.WearSlot.weapon);
+			if (currentWeapon != null && currentWeapon.isTwohandWeapon()) unequipSlot(player, Inventory.WearSlot.weapon);
 		}
 	}
 
@@ -114,6 +118,18 @@ public final class ItemController {
 		return missing;
 	}
 
+	public List<String> getEquipmentPresetConflicts(int preset) {
+		Player player = world.model.player;
+		String weaponId = player.inventory.getEquipmentPresetItemTypeID(preset, Inventory.WearSlot.weapon);
+		String shieldId = player.inventory.getEquipmentPresetItemTypeID(preset, Inventory.WearSlot.shield);
+		List<String> conflicts = new ArrayList<String>();
+		if (weaponId != null && shieldId != null) {
+			ItemType weaponType = world.itemTypes.getItemType(weaponId);
+			if (weaponType != null && weaponType.isTwohandWeapon()) conflicts.add(weaponId);
+		}
+		return conflicts;
+	}
+
 	public void applyEquipmentPreset(int preset) {
 		final Player player = world.model.player;
 		final String[] target = new String[Inventory.WearSlot.values().length];
@@ -124,11 +140,7 @@ public final class ItemController {
 			if (id == null) continue;
 			ItemType type = world.itemTypes.getItemType(id);
 			if (type == null || !player.inventory.removeItem(id, 1)) continue;
-			if (type.isTwohandWeapon()) unequipSlot(player, Inventory.WearSlot.shield);
-			else if (slot == Inventory.WearSlot.shield) {
-				ItemType weapon = player.inventory.getItemTypeInWearSlot(Inventory.WearSlot.weapon);
-				if (weapon != null && weapon.isTwohandWeapon()) unequipSlot(player, Inventory.WearSlot.weapon);
-			}
+			unequipConflictingTwohandOrShield(player, type, slot);
 			player.inventory.setItemTypeInWearSlot(slot, type);
 			controllers.actorStatsController.addConditionsFromEquippedItem(player, type);
 		}

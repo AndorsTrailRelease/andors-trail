@@ -210,7 +210,7 @@ public final class Inventory extends ItemContainer {
 				}
 			}
 		}
-		if (fileversion >= 87 && fileversion != 999 && fileversion != 1000) {
+		if (fileversion >= 87) {
 			for (int preset = 0; preset < NUM_EQUIPMENT_PRESETS; ++preset) {
 				equipmentPresetSaved[preset] = src.readBoolean();
 				for (int slot = 0; slot < NUM_WORN_SLOTS; ++slot) equipmentPresets[preset][slot] = src.readBoolean() ? src.readUTF() : null;

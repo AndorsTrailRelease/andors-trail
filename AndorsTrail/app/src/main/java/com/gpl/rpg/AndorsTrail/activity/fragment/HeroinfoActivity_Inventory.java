@@ -372,22 +372,36 @@ public final class HeroinfoActivity_Inventory extends Fragment implements Custom
 			return;
 		}
 		java.util.List<String> missing = controllers.itemController.getMissingEquipmentPresetItems(preset);
-		if (missing.isEmpty()) {
+		java.util.List<String> conflicts = controllers.itemController.getEquipmentPresetConflicts(preset);
+		if (missing.isEmpty() && conflicts.isEmpty()) {
 			controllers.itemController.applyEquipmentPreset(preset);
 			update();
 			Toast.makeText(getActivity(), getString(R.string.equipment_preset_loaded_toast, preset + 1), Toast.LENGTH_SHORT).show();
 			return;
 		}
-		StringBuilder names = new StringBuilder();
-		for (String id : missing) {
-			if (names.length() > 0) names.append("\n");
-			names.append(world.itemTypes.getItemType(id).getName(player));
+		StringBuilder message = new StringBuilder();
+		if (!missing.isEmpty()) message.append(getString(R.string.equipment_preset_missing_message, joinItemNames(missing)));
+		if (!conflicts.isEmpty()) {
+			if (message.length() > 0) message.append("\n\n");
+			message.append(getString(R.string.equipment_preset_conflict_message, joinItemNames(conflicts)));
 		}
-		CustomDialogFactory.CustomDialog confirmation = CustomDialogFactory.createDialog(getActivity(), getString(R.string.equipment_preset_missing_title), null, getString(R.string.equipment_preset_missing_message, names.toString()), null, true);
+		message.append("\n\n").append(getString(R.string.equipment_preset_load_confirm));
+		CustomDialogFactory.CustomDialog confirmation = CustomDialogFactory.createDialog(getActivity(), getString(R.string.equipment_preset_removal_title), null, message.toString(), null, true);
 		CustomDialogFactory.setContent(confirmation, createMissingItemsPreview(missing));
 		CustomDialogFactory.addButton(confirmation, android.R.string.yes, view -> { controllers.itemController.applyEquipmentPreset(preset); update(); Toast.makeText(getActivity(), getString(R.string.equipment_preset_loaded_toast, preset + 1), Toast.LENGTH_SHORT).show(); });
 		CustomDialogFactory.addDismissButton(confirmation, android.R.string.no);
 		CustomDialogFactory.show(confirmation);
+	}
+
+	private String joinItemNames(java.util.List<String> itemTypeIDs) {
+		StringBuilder names = new StringBuilder();
+		for (String id : itemTypeIDs) {
+			ItemType type = world.itemTypes.getItemType(id);
+			if (type == null) continue;
+			if (names.length() > 0) names.append("\n");
+			names.append(type.getName(player));
+		}
+		return names.toString();
 	}
 
 	private void update() {
