@@ -2,6 +2,7 @@ package com.gpl.rpg.AndorsTrail.activity.fragment;
 
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -237,7 +238,7 @@ public final class HeroinfoActivity_Inventory extends Fragment implements Custom
 
 	private void dropItem(String itemTypeID, int quantity) {
 		ItemType itemType = world.itemTypes.getItemType(itemTypeID);
-		java.util.List<Integer> brokenPresets = ItemController.getEquipmentPresetsBrokenByRemoving(player, itemTypeID, quantity);
+		List<Integer> brokenPresets = ItemController.getEquipmentPresetsBrokenByRemoving(player, itemTypeID, quantity);
 		if (brokenPresets.isEmpty()) {
 			controllers.itemController.dropItem(itemType, quantity);
 			return;
@@ -372,8 +373,8 @@ public final class HeroinfoActivity_Inventory extends Fragment implements Custom
 			Toast.makeText(getActivity(), R.string.equipment_preset_empty_toast, Toast.LENGTH_SHORT).show();
 			return;
 		}
-		java.util.List<String> missing = controllers.itemController.getMissingEquipmentPresetItems(preset);
-		java.util.List<String> conflicts = controllers.itemController.getEquipmentPresetConflicts(preset);
+		List<String> missing = controllers.itemController.getMissingEquipmentPresetItems(preset);
+		List<String> conflicts = controllers.itemController.getEquipmentPresetConflicts(preset);
 		if (missing.isEmpty() && conflicts.isEmpty()) {
 			controllers.itemController.applyEquipmentPreset(preset);
 			update();
