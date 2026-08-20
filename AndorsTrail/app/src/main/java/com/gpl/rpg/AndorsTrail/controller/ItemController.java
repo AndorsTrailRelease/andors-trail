@@ -370,6 +370,14 @@ public final class ItemController {
 		}
 		return result;
 	}
+	public static String formatPresetNumbers(List<Integer> presets) {
+		StringBuilder names = new StringBuilder();
+		for (Integer preset : presets) {
+			if (names.length() > 0) names.append(", ");
+			names.append(preset + 1);
+		}
+		return names.toString();
+	}
 
 	public static int getSellingPrice(Player player, ItemType itemType) {
 		return itemType.baseMarketCost - itemType.baseMarketCost * getMarketPriceFactor(player) / 100;

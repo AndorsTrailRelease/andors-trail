@@ -242,9 +242,8 @@ public final class HeroinfoActivity_Inventory extends Fragment implements Custom
 			controllers.itemController.dropItem(itemType, quantity);
 			return;
 		}
-		StringBuilder presetNames = new StringBuilder();
-		for (Integer preset : brokenPresets) { if (presetNames.length() > 0) presetNames.append(", "); presetNames.append(preset + 1); }
-		CustomDialogFactory.CustomDialog warning = CustomDialogFactory.createDialog(getActivity(), getString(R.string.equipment_preset_removal_title), null, getString(R.string.equipment_preset_removal_warning, itemType.getName(player), getString(R.string.inventory_drop).toLowerCase(), presetNames.toString()), null, true);
+		String presetNames = ItemController.formatPresetNumbers(brokenPresets);
+		CustomDialogFactory.CustomDialog warning = CustomDialogFactory.createDialog(getActivity(), getString(R.string.equipment_preset_removal_title), null, getString(R.string.equipment_preset_removal_warning, itemType.getName(player), presetNames, getString(R.string.inventory_drop).toLowerCase()), null, true);
 		CustomDialogFactory.addButton(warning, android.R.string.yes, view -> {
 			controllers.itemController.dropItem(itemType, quantity);
 			update();
@@ -291,9 +290,11 @@ public final class HeroinfoActivity_Inventory extends Fragment implements Custom
 	}
 
 	private void saveEquipmentPreset(final int preset, final CustomDialogFactory.CustomDialog parentDialog) {
+		boolean isOverwrite = !isEquipmentPresetEmpty(preset);
 		String message = getString(R.string.equipment_preset_save_message, preset + 1);
-		if (!isEquipmentPresetEmpty(preset)) message += "\n\n" + getString(R.string.equipment_preset_overwrite_message);
-		CustomDialogFactory.CustomDialog confirmation = CustomDialogFactory.createDialog(getActivity(), getString(R.string.equipment_preset_save_title), null, message, null, true);
+		if (isOverwrite) message += "\n\n" + getString(R.string.equipment_preset_overwrite_message);
+		String title = getString(isOverwrite ? R.string.equipment_preset_overwrite_title : R.string.equipment_preset_save_title);
+		CustomDialogFactory.CustomDialog confirmation = CustomDialogFactory.createDialog(getActivity(), title, null, message, null, true);
 		CustomDialogFactory.addButton(confirmation, android.R.string.yes, view -> {
 			controllers.itemController.saveEquipmentPreset(preset);
 			parentDialog.dismiss();
