@@ -207,9 +207,9 @@ public final class BulkSelectionInterface extends AndorsTrailBaseActivity implem
 
 		// setup OK button
 		okButton.setOnClickListener(v -> {
-			List<Integer> brokenPresets = interfaceType == BulkInterfaceType.buy
-					? Collections.emptyList()
-					: ItemController.getEquipmentPresetsBrokenByRemoving(world.model.player, itemType.id, getTextboxAmount());
+			List<Integer> brokenPresets = interfaceType == BulkInterfaceType.sell
+					? ItemController.getEquipmentPresetsBrokenByRemoving(world.model.player, itemType.id, getTextboxAmount())
+					: Collections.emptyList();
 			if (requiresConfirmation() || !brokenPresets.isEmpty()) {
 				final String displayType = ItemInfoActivity.getDisplayTypeString(res, itemType).toLowerCase();
 				String message = requiresConfirmation() ? res.getString(R.string.bulkselection_sell_confirmation, itemType.getName(world.model.player), displayType) : "";
