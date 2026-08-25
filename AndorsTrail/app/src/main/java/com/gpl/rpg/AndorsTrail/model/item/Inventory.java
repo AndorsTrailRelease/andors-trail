@@ -211,9 +211,16 @@ public final class Inventory extends ItemContainer {
 			}
 		}
 		if (fileversion >= 87) {
-			for (int preset = 0; preset < NUM_EQUIPMENT_PRESETS; ++preset) {
-				equipmentPresetSaved[preset] = src.readBoolean();
-				for (int slot = 0; slot < NUM_WORN_SLOTS; ++slot) equipmentPresets[preset][slot] = src.readBoolean() ? src.readUTF() : null;
+			final int numPresets = src.readInt();
+			final int numPresetSlots = src.readInt();
+			if (numPresets < 0 || numPresetSlots < 0) throw new IOException("Invalid equipment preset dimensions");
+			for (int preset = 0; preset < numPresets; ++preset) {
+				final boolean presetSaved = src.readBoolean();
+				if (preset < NUM_EQUIPMENT_PRESETS) equipmentPresetSaved[preset] = presetSaved;
+				for (int slot = 0; slot < numPresetSlots; ++slot) {
+					final String itemTypeID = src.readBoolean() ? src.readUTF() : null;
+					if (preset < NUM_EQUIPMENT_PRESETS && slot < NUM_WORN_SLOTS) equipmentPresets[preset][slot] = itemTypeID;
+				}
 			}
 		}
 	}
@@ -240,12 +247,17 @@ public final class Inventory extends ItemContainer {
 				dest.writeBoolean(false);
 			}
 		}
+		dest.writeInt(NUM_EQUIPMENT_PRESETS);
+		dest.writeInt(NUM_WORN_SLOTS);
 		for (int preset = 0; preset < NUM_EQUIPMENT_PRESETS; ++preset) {
 			dest.writeBoolean(equipmentPresetSaved[preset]);
 			for (int slot = 0; slot < NUM_WORN_SLOTS; ++slot) { String id = equipmentPresets[preset][slot]; dest.writeBoolean(id != null); if (id != null) dest.writeUTF(id); }
 		}
 	}
 	public void addToChecksum(ChecksumBuilder builder) {
+		addToChecksum(builder, true);
+	}
+	public void addToChecksum(ChecksumBuilder builder, boolean includeEquipmentPresets) {
 		super.addToChecksum(builder);
 		builder.add(gold);
 		builder.add(NUM_WORN_SLOTS);
@@ -260,9 +272,11 @@ public final class Inventory extends ItemContainer {
 				builder.add(quickitem[i].id);
 			}
 		}
-		for (int preset = 0; preset < NUM_EQUIPMENT_PRESETS; ++preset) {
-			builder.add(equipmentPresetSaved[preset]);
-			for (int slot = 0; slot < NUM_WORN_SLOTS; ++slot) builder.add(equipmentPresets[preset][slot]);
+		if (includeEquipmentPresets) {
+			for (int preset = 0; preset < NUM_EQUIPMENT_PRESETS; ++preset) {
+				builder.add(equipmentPresetSaved[preset]);
+				for (int slot = 0; slot < NUM_WORN_SLOTS; ++slot) builder.add(equipmentPresets[preset][slot]);
+			}
 		}
 
 	}

@@ -492,6 +492,9 @@ public final class Player extends Actor {
 		dest.writeLong(savedVersion);
 	}
 	public void addToChecksum(ChecksumBuilder builder) {
+		addToChecksum(builder, AndorsTrailApplication.CURRENT_VERSION);
+	}
+	public void addToChecksum(ChecksumBuilder builder, int fileversion) {
 		//builder.add(baseTraits.iconID);// Do not add to checksum so that it can be changed without invalidating checksums
 		//builder.add(baseTraits.mapIconID);// Do not add to checksum so that it can be changed without invalidating checksums
 		builder.add(baseTraits.maxAP);
@@ -522,7 +525,7 @@ public final class Player extends Actor {
 		nextPosition.addToChecksum(builder);
 		builder.add(level);
 		builder.add(totalExperience);
-		inventory.addToChecksum(builder);
+		inventory.addToChecksum(builder, fileversion >= 87);
 		builder.add(baseTraits.useItemCost);
 		builder.add(baseTraits.reequipCost);
 		builder.add(skillLevels.size());
