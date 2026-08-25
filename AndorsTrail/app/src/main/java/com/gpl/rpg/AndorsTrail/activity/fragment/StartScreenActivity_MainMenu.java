@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,7 +28,9 @@ import com.gpl.rpg.AndorsTrail.R;
 import com.gpl.rpg.AndorsTrail.WorldSetup;
 import com.gpl.rpg.AndorsTrail.activity.AboutActivity;
 import com.gpl.rpg.AndorsTrail.activity.LoadingActivity;
+import com.gpl.rpg.AndorsTrail.activity.MainActivity;
 import com.gpl.rpg.AndorsTrail.activity.Preferences;
+import com.gpl.rpg.AndorsTrail.activity.StartScreenActivity;
 import com.gpl.rpg.AndorsTrail.controller.Constants;
 import com.gpl.rpg.AndorsTrail.resource.tiles.TileManager;
 import com.gpl.rpg.AndorsTrail.savegames.Savegames;
@@ -37,6 +40,8 @@ import com.gpl.rpg.AndorsTrail.util.L;
 import com.gpl.rpg.AndorsTrail.util.ThemeHelper;
 import com.gpl.rpg.AndorsTrail.view.CustomDialogFactory;
 import com.gpl.rpg.AndorsTrail.view.CustomDialogFactory.CustomDialog;
+
+import java.util.Objects;
 
 public class StartScreenActivity_MainMenu extends Fragment {
 
@@ -199,6 +204,11 @@ public class StartScreenActivity_MainMenu extends Fragment {
 		}
 		hasExistingGame = (playerName != null);
 		setButtonState(playerName, displayInfo, iconID, isDead);
+
+		Activity activity = getActivity();
+		if (activity != null && ((AndorsTrailApplication) activity.getApplication()).isAndroidTV()) {
+			Dialogs.showAndroidTVNotice(activity);
+		}
 
 		if (isNewVersion()) {
 			Dialogs.showNewVersion(getActivity(), new DialogInterface.OnDismissListener() {

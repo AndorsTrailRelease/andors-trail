@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import com.gpl.rpg.AndorsTrail.AndorsTrailPreferences;
 import com.gpl.rpg.AndorsTrail.context.ControllerContext;
 import com.gpl.rpg.AndorsTrail.context.WorldContext;
+import com.gpl.rpg.AndorsTrail.controller.GameRoundController.PauseReason;
 import com.gpl.rpg.AndorsTrail.controller.listeners.PlayerMovementListeners;
 import com.gpl.rpg.AndorsTrail.model.MapBundle;
 import com.gpl.rpg.AndorsTrail.model.ModelContainer;
@@ -44,11 +45,18 @@ public final class MovementController implements TimedMessageTask.Callback {
 	public void placePlayerAsyncAt(final MapObject.MapObjectType objectType, final String mapName, final String placeName, final int offset_x, final int offset_y) {
 
 		AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
+			private boolean mapLoadFailed = false;  // (1) flag to carry failure to onPostExecute
+
 			@Override
 			protected Void doInBackground(Void... arg0) {
 				stopMovement();
 
-				placePlayerAt(controllers.getResources(), objectType, mapName, placeName, offset_x, offset_y);
+				try {
+					placePlayerAt(controllers.getResources(), objectType, mapName, placeName, offset_x, offset_y);
+				} catch (RuntimeException e) {
+					L.error("Map transition failed: " + e.getMessage());  // (2) log it
+					mapLoadFailed = true;                                  // (3) signal failure
+				}
 
 				return null;
 			}
@@ -57,15 +65,26 @@ public final class MovementController implements TimedMessageTask.Callback {
 			protected void onPostExecute(Void result) {
 				super.onPostExecute(result);
 				stopMovement();
-				playerMovementListeners.onPlayerEnteredNewMap(world.model.currentMaps.map, world.model.player.position);
-				controllers.gameRoundController.resume();
+				// (4) always release the pause — timer can never get stuck
+				controllers.gameRoundController.releasePause(PauseReason.MAP_TRANSITION);
+				if (!mapLoadFailed) {
+					playerMovementListeners.onPlayerEnteredNewMap(
+							world.model.currentMaps.map, world.model.player.position);
+				}
 			}
 
 		};
-		controllers.gameRoundController.pause();
+
+		controllers.gameRoundController.acquirePause(PauseReason.MAP_TRANSITION);
 		task.execute();
 	}
 
+	/**
+	 * Places the player on a named map object and loads that map as the current map.
+	 *
+	 * <p>The previous map's visit time is refreshed before the transition so it remains
+	 * "recently visited" after leaving.</p>
+	 */
 	public void placePlayerAt(final Resources res, MapObject.MapObjectType objectType, String mapName, String placeName, int offset_x, int offset_y) {
 		if (mapName == null || placeName == null) return;
 		PredefinedMap newMap = world.maps.findPredefinedMap(mapName);
@@ -84,7 +103,6 @@ public final class MovementController implements TimedMessageTask.Callback {
 		}
 		final ModelContainer model = world.model;
 
-		if (model.currentMaps.map != null) model.currentMaps.map.updateLastVisitTime();
 		model.player.position.set(place.position.topLeft);
 		model.player.position.x += Math.min(offset_x, place.position.size.width-1);
 		model.player.position.y += Math.min(offset_y, place.position.size.height-1);
@@ -94,6 +112,9 @@ public final class MovementController implements TimedMessageTask.Callback {
 			playerVisitsMapFirstTime(newMap);
 		}
 
+		// Mark last visit time on current map before leaving it (unless it has been reset because we're in hero respawn)
+		if (model.currentMaps.map != null && !model.currentMaps.map.hasResetTemporaryData()) model.currentMaps.map.updateLastVisitTime();
+
 		prepareMapAsCurrentMap(newMap, res, true);
 	}
 
@@ -102,6 +123,13 @@ public final class MovementController implements TimedMessageTask.Callback {
 		world.maps.worldMapRequiresUpdate = true;
 	}
 
+	/**
+	 * Loads the given map bundle into {@code world.model.currentMaps} and performs the
+	 * follow-up setup needed after a transition.
+	 *
+	 * <p>When {@code spawnMonsters} is true, non-recently-visited maps are repopulated
+	 * before scripts, blocked-actor handling, and visual refreshes run.</p>
+	 */
 	public void prepareMapAsCurrentMap(PredefinedMap newMap, Resources res, boolean spawnMonsters) {
 		final ModelContainer model = world.model;
 		MapBundle newMaps = new MapBundle();

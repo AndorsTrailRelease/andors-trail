@@ -48,7 +48,7 @@ public final class RangeBar extends RelativeLayout {
 
 		progressBar.setMax(max);
 		progressBar.setProgress(Math.min(current, max));
-		progressBarText.setText(current + "/" + max);
+		progressBarText.setText(getResources().getString(R.string.rangebar_current_max, current, max));
 		invalidate();
 	}
 }

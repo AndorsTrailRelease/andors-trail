@@ -13,16 +13,16 @@ import com.gpl.rpg.AndorsTrail.view.CloudsAnimatorView;
 import com.gpl.rpg.AndorsTrail.view.CustomDialogFactory;
 import com.gpl.rpg.AndorsTrail.view.CustomDialogFactory.CustomDialog;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.SystemClock;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager.OnBackStackChangedListener;
@@ -30,14 +30,24 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+import android.widget.Toast;
 import android.widget.TextView;
 
 public final class StartScreenActivity extends AndorsTrailBaseFragmentActivity implements OnNewGameRequestedListener, GameCreationOverListener, OnBackStackChangedListener {
+
+	private static final long EXIT_PROMPT_TIMEOUT_MS = 2000L;
 
 	private TextView tv;
 	private TextView development_version;
 	private CloudsAnimatorView clouds_back, clouds_mid, clouds_front;
 	private Fragment currentFragment;
+	private final OnBackPressedCallback backPressedCallback = new OnBackPressedCallback(true) {
+		@Override
+		public void handleOnBackPressed() {
+			backPressed(true);
+		}
+	};
+	private long lastBackPressTime = 0L;
 	
 	//Means false by default, as a toggle is initiated in onCreate.
 	boolean ui_visible = true;
@@ -65,6 +75,7 @@ public final class StartScreenActivity extends AndorsTrailBaseFragmentActivity i
 			currentFragment = mainMenu;
 			
 			getSupportFragmentManager().addOnBackStackChangedListener(this);
+			getOnBackPressedDispatcher().addCallback(this, backPressedCallback);
 		}
 		
 		
@@ -110,7 +121,11 @@ public final class StartScreenActivity extends AndorsTrailBaseFragmentActivity i
 					);
 		}
 
-		toggleUiVisibility();
+
+		// Hide the UI for non-Android TV devices - the first tap anywhere will make it visible
+		if (!app.isAndroidTV()) {
+			toggleUiVisibility();
+		}
 
 		app.getWorldSetup().startResourceLoader(res);
 	}
@@ -243,17 +258,7 @@ public final class StartScreenActivity extends AndorsTrailBaseFragmentActivity i
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
-	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-				backPressed();
-				return true;
-			} else {
-				return super.onKeyDown(keyCode, event);
-			}
-		}
-
 		if (ui_visible) {
 			// If the focus is on the background, or it's not focused on anything, poke the
 			// current fragment so it grabs focus on its default button.  This happens when
@@ -271,11 +276,25 @@ public final class StartScreenActivity extends AndorsTrailBaseFragmentActivity i
 		return super.onKeyDown(keyCode, event);
 	}
 
-	private void backPressed() {
+	private void backPressed(boolean allowExitPrompt) {
 		if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+			lastBackPressTime = 0L;
 			getSupportFragmentManager().popBackStack();
 			currentFragment = getSupportFragmentManager().findFragmentById(R.id.startscreen_fragment_container);
+		} else if (allowExitPrompt && !isExitConfirmed()) {
+			Toast.makeText(this, R.string.startscreen_press_back_again_to_exit, Toast.LENGTH_SHORT).show();
+		} else {
+			finish();
 		}
+	}
+
+	private boolean isExitConfirmed() {
+		final long now = SystemClock.uptimeMillis();
+		if (now - lastBackPressTime <= EXIT_PROMPT_TIMEOUT_MS) {
+			return true;
+		}
+		lastBackPressTime = now;
+		return false;
 	}
 
 	public void onNewGameRequested() {
@@ -294,7 +313,7 @@ public final class StartScreenActivity extends AndorsTrailBaseFragmentActivity i
 	
 	@Override
 	public void onGameCreationCancelled() {
-		backPressed();
+		backPressed(false);
 	}
 
 	@Override
