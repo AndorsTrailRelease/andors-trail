@@ -262,7 +262,7 @@ public final class Inventory extends ItemContainer {
 		}
 		for (int preset = 0; preset < NUM_EQUIPMENT_PRESETS; ++preset) {
 			builder.add(equipmentPresetSaved[preset]);
-			for (int slot = 0; slot < NUM_WORN_SLOTS; ++slot) if (equipmentPresets[preset][slot] != null) builder.add(equipmentPresets[preset][slot]);
+			for (int slot = 0; slot < NUM_WORN_SLOTS; ++slot) builder.add(equipmentPresets[preset][slot]);
 		}
 
 	}

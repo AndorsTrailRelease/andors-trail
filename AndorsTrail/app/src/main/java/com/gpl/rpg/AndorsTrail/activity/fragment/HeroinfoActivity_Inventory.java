@@ -273,6 +273,7 @@ public final class HeroinfoActivity_Inventory extends Fragment implements Custom
 			status.setText(isEquipmentPresetEmpty(preset) ? getString(R.string.equipment_preset_empty) : getString(R.string.equipment_preset_saved, preset + 1));
 			block.addView(status);
 			View preview = createPresetPreview(preset);
+			preview.setFocusable(true);
 			preview.setOnClickListener(view -> showLoadEquipmentPresetConfirmation(presetIndex, dialog));
 			preview.setOnLongClickListener(view -> {
 				saveEquipmentPreset(presetIndex, dialog);
