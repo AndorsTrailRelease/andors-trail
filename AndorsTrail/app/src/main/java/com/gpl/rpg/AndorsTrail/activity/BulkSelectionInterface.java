@@ -10,6 +10,9 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import java.text.NumberFormat;
+import java.text.ParsePosition;
+import java.util.Locale;
 import com.gpl.rpg.AndorsTrail.util.Format;
 import android.widget.Button;
 import android.widget.EditText;
@@ -306,10 +309,13 @@ public final class BulkSelectionInterface extends AndorsTrailBaseActivity implem
 
 	private int getTextboxAmount() {
 		final String s = bulkselection_amount_taken.getText().toString();
-		if (s.equals("")) return 0;
-		try {
-			return Integer.parseInt(s);
-		} catch (NumberFormatException ignored) { }
+		if (s.isEmpty()) return 0;
+		NumberFormat numberFormat = NumberFormat.getIntegerInstance(Locale.getDefault());
+		ParsePosition parsePosition = new ParsePosition(0);
+		Number parsed = numberFormat.parse(s, parsePosition);
+		if (parsed != null && parsePosition.getIndex() == s.length()) {
+			return parsed.intValue();
+		}
 		return 0;
 	}
 
