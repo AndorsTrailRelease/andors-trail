@@ -285,7 +285,7 @@ public final class PredefinedMap {
 					} while (j != i);
 					if (AndorsTrailApplication.DEVELOPMENT_VALIDATEDATA) {
 						if (!found) {
-							L.log("WARNING: Trying to load monsters from savegame in map " + this.name + " for spawn #" + id + " but this area cannot be found. This will totally fail.");
+							L.log("WARNING: Trying to load monsters from savegame in map " + this.name + " for spawn area " + id + " but this area cannot be found. This will totally fail.");
 						}
 					}
 				} else {

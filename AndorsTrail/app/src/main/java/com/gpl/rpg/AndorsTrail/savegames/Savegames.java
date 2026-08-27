@@ -99,33 +99,59 @@ public final class Savegames {
 		try {
 			FileHeader fh = quickload(androidContext, slot);
 			if(fh == null) {
+				debugLoadFailure("Savegames.loadWorld(slot=" + slot + "): save file cannot be loaded because it is missing or unreadable.");
 				return LoadSavegameResult.unknownError;
 			}
 			if (!fh.hasUnlimitedSaves && slot != SLOT_QUICKSAVE && triedToCheat(androidContext, fh)) {
+				debugLoadFailure("Savegames.loadWorld(slot=" + slot + "): save file cannot be loaded because cheat detection failed for " + fh.describe() + ".");
 				return LoadSavegameResult.cheatingDetected;
 			}
 
 			FileInputStream fos = getInputFile(androidContext, slot);
-			LoadSavegameResult result = loadWorld(androidContext.getResources(), world, controllers, androidContext, fos, fh);
-			fos.close();
+			LoadSavegameResult result;
+			try {
+				result = loadWorld(androidContext.getResources(), world, controllers, androidContext, fos, fh);
+			} catch (IOException | DigestException e) {
+				debugLoadFailure("Savegames.loadWorld(slot=" + slot + "): scene cannot be loaded from " + fh.describe() + ".", e);
+				return LoadSavegameResult.unknownError;
+			} finally {
+				try {
+					fos.close();
+				} catch (IOException e) {
+					debugLoadFailure("Savegames.loadWorld(slot=" + slot + "): failed to close the save file after loading.", e);
+				}
+			}
+			if (result == LoadSavegameResult.savegameIsFromAFutureVersion) {
+				debugLoadFailure("Savegames.loadWorld(slot=" + slot + "): scene cannot be loaded because savegame version " + fh.fileversion + " is newer than current version " + AndorsTrailApplication.CURRENT_VERSION + ".");
+			}
 			if (result == LoadSavegameResult.success && slot != SLOT_QUICKSAVE && !world.model.statistics.hasUnlimitedSaves()) {
 				// save to the quicksave slot before deleting the file
 				if (!saveWorld(world, androidContext, SLOT_QUICKSAVE)) {
+					debugLoadFailure("Savegames.loadWorld(slot=" + slot + "): scene loaded, but quicksaving before deleting the original save file failed.");
 					return LoadSavegameResult.unknownError;
 				}
 				getSlotFile(slot, androidContext).delete();
 				writeCheatCheck(androidContext, DENY_LOADING_BECAUSE_GAME_IS_CURRENTLY_PLAYED, fh.playerId);
 			}
 			return result;
-		} catch (IOException | DigestException e) {
-			if (AndorsTrailApplication.DEVELOPMENT_DEBUGMESSAGES) {
-				L.log("Error loading world: " + e.toString());
-				StringWriter sw = new StringWriter();
-				PrintWriter pw = new PrintWriter(sw);
-				e.printStackTrace(pw);
-				L.log("Load error: " + sw.toString());
-			}
+		} catch (IOException e) {
+			debugLoadFailure("Savegames.loadWorld(slot=" + slot + "): save file or scene cannot be loaded.", e);
 			return LoadSavegameResult.unknownError;
+		}
+	}
+
+	private static void debugLoadFailure(String message) {
+		if (AndorsTrailApplication.DEVELOPMENT_DEBUGMESSAGES) {
+			L.debug(message);
+		}
+	}
+
+	private static void debugLoadFailure(String message, Throwable e) {
+		if (AndorsTrailApplication.DEVELOPMENT_DEBUGMESSAGES) {
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			e.printStackTrace(pw);
+			L.debug(message + " " + e.toString() + "\n" + sw.toString());
 		}
 	}
 
@@ -280,6 +306,7 @@ public final class Savegames {
 			fos.close();
 			return header;
 		} catch (Exception e) {
+			debugLoadFailure("Savegames.quickload(slot=" + slot + "): save file cannot be loaded.", e);
 			return null;
 		}
 	}
