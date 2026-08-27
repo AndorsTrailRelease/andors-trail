@@ -65,9 +65,15 @@ public final class MapCollection {
 		for(int i = 0; i < size; ++i) {
 			String name;
 			if (fileversion >= 35) {
+				if (AndorsTrailApplication.DEVELOPMENT_DEBUGMESSAGES) {
+					L.debug("MapCollection.readFromParcel: reading map name for entry " + i + " of " + size + ".");
+				}
 				name = src.readUTF();
 			} else {
 				name = LegacySavegameFormatReaderForMap.getMapnameFromIndex(i);
+			}
+			if (AndorsTrailApplication.DEVELOPMENT_DEBUGMESSAGES) {
+				L.debug("MapCollection.readFromParcel: loading map \"" + name + "\" (" + (i + 1) + "/" + size + ").");
 			}
 			PredefinedMap map = predefinedMaps.get(name);
 			if (map == null) {
@@ -77,6 +83,9 @@ public final class MapCollection {
 				continue;
 			}
 			map.readFromParcel(src, world, controllers, fileversion);
+			if (AndorsTrailApplication.DEVELOPMENT_DEBUGMESSAGES) {
+				L.debug("MapCollection.readFromParcel: loaded map \"" + name + "\" (" + (i + 1) + "/" + size + ").");
+			}
 			if (i >= 40) {
 				if (fileversion < 15) map.visited = false;
 			}
