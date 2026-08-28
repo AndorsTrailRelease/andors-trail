@@ -80,7 +80,7 @@ public final class MapCollection {
 				if (AndorsTrailApplication.DEVELOPMENT_VALIDATEDATA) {
 					L.log("WARNING: Tried to load savegame with map \"" + name + "\", but no such map exists.");
 				}
-				continue;
+				throw new IOException("Savegame contains unknown map \"" + name + "\".");
 			}
 			map.readFromParcel(src, world, controllers, fileversion);
 			if (AndorsTrailApplication.DEVELOPMENT_DEBUGMESSAGES) {

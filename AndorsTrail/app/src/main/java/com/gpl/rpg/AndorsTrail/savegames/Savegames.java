@@ -49,6 +49,8 @@ public final class Savegames {
 		, cheatingDetected
 	}
 
+	private static String lastLoadFailureMessage = null;
+
 	public static boolean saveWorld(WorldContext world, Context androidContext, int slot) {
 		try {
 			final String displayInfo = androidContext.getString(R.string.savegame_currenthero_displayinfo, world.model.player.getLevel(), world.model.player.getTotalExperience(), world.model.player.getGold());
@@ -96,6 +98,7 @@ public final class Savegames {
 	}
 
 	public static LoadSavegameResult loadWorld(WorldContext world, ControllerContext controllers, Context androidContext, int slot) {
+		lastLoadFailureMessage = null;
 		try {
 			FileHeader fh = quickload(androidContext, slot);
 			if(fh == null) {
@@ -112,6 +115,7 @@ public final class Savegames {
 			try {
 				result = loadWorld(androidContext.getResources(), world, controllers, androidContext, fos, fh);
 			} catch (IOException | DigestException e) {
+				lastLoadFailureMessage = e.getMessage() != null ? e.getMessage() : e.toString();
 				debugLoadFailure("Savegames.loadWorld(slot=" + slot + "): scene cannot be loaded from " + fh.describe() + ".", e);
 				return LoadSavegameResult.unknownError;
 			} finally {
@@ -135,9 +139,14 @@ public final class Savegames {
 			}
 			return result;
 		} catch (IOException e) {
+			lastLoadFailureMessage = e.getMessage() != null ? e.getMessage() : e.toString();
 			debugLoadFailure("Savegames.loadWorld(slot=" + slot + "): save file or scene cannot be loaded.", e);
 			return LoadSavegameResult.unknownError;
 		}
+	}
+
+	public static String getLastLoadFailureMessage() {
+		return lastLoadFailureMessage;
 	}
 
 	private static void debugLoadFailure(String message) {

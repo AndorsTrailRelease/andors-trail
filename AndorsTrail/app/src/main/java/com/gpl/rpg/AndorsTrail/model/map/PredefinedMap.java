@@ -20,6 +20,7 @@ import com.gpl.rpg.AndorsTrail.model.map.MapObject.MapObjectType;
 import com.gpl.rpg.AndorsTrail.util.Coord;
 import com.gpl.rpg.AndorsTrail.util.CoordRect;
 import com.gpl.rpg.AndorsTrail.util.L;
+import com.gpl.rpg.AndorsTrail.util.Range;
 import com.gpl.rpg.AndorsTrail.util.Size;
 
 public final class PredefinedMap {
@@ -283,9 +284,25 @@ public final class PredefinedMap {
 						} 
 						j = (j+1)%spawnAreas.length;
 					} while (j != i);
-					if (AndorsTrailApplication.DEVELOPMENT_VALIDATEDATA) {
-						if (!found) {
+					if (!found) {
+						if (AndorsTrailApplication.DEVELOPMENT_VALIDATEDATA) {
 							L.log("WARNING: Trying to load monsters from savegame in map " + this.name + " for spawn area " + id + " but this area cannot be found. This will totally fail.");
+							throw new IOException("Savegame contains unknown spawn area \"" + id + "\" in map \"" + this.name + "\".");
+						} else {
+							// In production mode only, read and discard the missing spawn area.  This should never happen,
+							// because these content bugs should be caught before it goes to prod, but at least the user can
+							// still use their savefile.  In almost all cases, this should be harmless.
+							new MonsterSpawnArea(
+									new CoordRect(new Coord(), new Size(1, 1))
+									, new Range(0, 0)
+									, new Range(0, 0)
+									, id
+									, new String[0]
+									, false
+									, false
+									, ""
+									, false
+							).readFromParcel(src, world, fileversion);
 						}
 					}
 				} else {
