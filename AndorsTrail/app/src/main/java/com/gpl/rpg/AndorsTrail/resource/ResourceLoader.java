@@ -439,7 +439,7 @@ public final class ResourceLoader {
 		loader.prepareTileset(R.drawable.map_fence_2, "map_fence_2", mapTileSize, sz1x1, mTileSize);
 		loader.prepareTileset(R.drawable.map_fence_3, "map_fence_3", mapTileSize, sz1x1, mTileSize);
 		loader.prepareTileset(R.drawable.map_fence_4, "map_fence_4", mapTileSize, sz1x1, mTileSize);
-		loader.prepareTileset(R.drawable.map_feygard1, "map_feygard1", mapTileSize, sz1x1, mTileSize);
+		loader.prepareTileset(R.drawable.map_feygard_1, "map_feygard_1", mapTileSize, sz1x1, mTileSize);
 		loader.prepareTileset(R.drawable.map_ground_1, "map_ground_1", mapTileSize, sz1x1, mTileSize);
 		loader.prepareTileset(R.drawable.map_ground_2, "map_ground_2", mapTileSize, sz1x1, mTileSize);
 		loader.prepareTileset(R.drawable.map_ground_3, "map_ground_3", mapTileSize, sz1x1, mTileSize);
