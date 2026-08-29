@@ -286,12 +286,13 @@ public final class PredefinedMap {
 					} while (j != i);
 					if (!found) {
 						if (AndorsTrailApplication.DEVELOPMENT_VALIDATEDATA) {
-							L.log("WARNING: Trying to load monsters from savegame in map " + this.name + " for spawn area " + id + " but this area cannot be found. This will totally fail.");
+							L.warn("WARNING: Trying to load monsters from savegame in map " + this.name + " for spawn area " + id + " but this area cannot be found. This will totally fail.");
 							throw new IOException("Savegame contains unknown spawn area \"" + id + "\" in map \"" + this.name + "\".");
 						} else {
 							// In production mode only, read and discard the missing spawn area.  This should never happen,
-							// because these content bugs should be caught before it goes to prod, but at least the user can
-							// still use their savefile.  In almost all cases, this should be harmless.
+							// because these content bugs should be caught before it goes to prod, but just in case we want
+							// to make sure that the user can still use their savefile if it happens anyway.
+							// In almost all cases, this should be harmless to the game state.
 							new MonsterSpawnArea(
 									new CoordRect(new Coord(), new Size(1, 1))
 									, new Range(0, 0)

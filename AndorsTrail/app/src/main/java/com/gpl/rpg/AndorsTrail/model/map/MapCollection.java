@@ -65,27 +65,18 @@ public final class MapCollection {
 		for(int i = 0; i < size; ++i) {
 			String name;
 			if (fileversion >= 35) {
-				if (AndorsTrailApplication.DEVELOPMENT_DEBUGMESSAGES) {
-					L.debug("MapCollection.readFromParcel: reading map name for entry " + i + " of " + size + ".");
-				}
+				L.debug("MapCollection.readFromParcel: reading map name for entry " + i + " of " + size + ".");
 				name = src.readUTF();
 			} else {
 				name = LegacySavegameFormatReaderForMap.getMapnameFromIndex(i);
 			}
-			if (AndorsTrailApplication.DEVELOPMENT_DEBUGMESSAGES) {
-				L.debug("MapCollection.readFromParcel: loading map \"" + name + "\" (" + (i + 1) + "/" + size + ").");
-			}
+			L.debug("MapCollection.readFromParcel: loading map \"" + name + "\" (" + (i + 1) + "/" + size + ").");
 			PredefinedMap map = predefinedMaps.get(name);
 			if (map == null) {
-				if (AndorsTrailApplication.DEVELOPMENT_VALIDATEDATA) {
-					L.log("WARNING: Tried to load savegame with map \"" + name + "\", but no such map exists.");
-				}
 				throw new IOException("Savegame contains unknown map \"" + name + "\".");
 			}
 			map.readFromParcel(src, world, controllers, fileversion);
-			if (AndorsTrailApplication.DEVELOPMENT_DEBUGMESSAGES) {
-				L.debug("MapCollection.readFromParcel: loaded map \"" + name + "\" (" + (i + 1) + "/" + size + ").");
-			}
+			L.debug("MapCollection.readFromParcel: loaded map \"" + name + "\" (" + (i + 1) + "/" + size + ").");
 			if (i >= 40) {
 				if (fileversion < 15) map.visited = false;
 			}
@@ -94,9 +85,8 @@ public final class MapCollection {
 
 	public static boolean shouldSaveMap(WorldContext world, PredefinedMap map) {
 		if (map.visited) return true;
-		if (map.shouldSaveMapData(world)) return true;
-		return false;
-	}
+        return map.shouldSaveMapData(world);
+    }
 
 	public void writeToParcel(DataOutputStream dest, WorldContext world) throws IOException {
 		List<PredefinedMap> mapsToExport = new ArrayList<PredefinedMap>();
