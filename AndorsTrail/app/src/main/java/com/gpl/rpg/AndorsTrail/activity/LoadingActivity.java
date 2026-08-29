@@ -166,7 +166,7 @@ public final class LoadingActivity extends AndorsTrailBaseActivity implements On
 
 	private void showLoadingFailedDialog(int messageResourceID) {
 		String message = Savegames.getLastLoadFailureMessage();
-		if (AndorsTrailApplication.DEVELOPMENT_VALIDATEDATA && (message == null || message.isEmpty())) {
+		if (AndorsTrailApplication.DEVELOPMENT_VALIDATEDATA && message != null && !message.isEmpty()) {
 			message = Savegames.getLastLoadFailureMessage();
 		} else {
 			message = getResources().getString(messageResourceID);
