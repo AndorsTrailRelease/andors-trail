@@ -309,20 +309,8 @@ public final class PredefinedMap {
 							).readFromParcel(src, world, fileversion);
 						}
 					}
-				} else if (i < this.spawnAreas.length) { // fileversion < 43
+				} else {
 					this.spawnAreas[i].readFromParcel(src, world, fileversion);
-				} else { // This should never happen, but is here to handle discarding of spawn areas in missing maps for savefiles <43
-					new MonsterSpawnArea(
-							new CoordRect(new Coord(), new Size(1, 1))
-							, new Range(0, 0)
-							, new Range(0, 0)
-							, ""
-							, new String[0]
-							, false
-							, false
-							, ""
-							, false
-					).readFromParcel(src, world, fileversion);
 				}
 			}
 			
