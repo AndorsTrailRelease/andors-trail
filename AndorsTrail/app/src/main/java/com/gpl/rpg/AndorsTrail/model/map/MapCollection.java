@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Collections;
 
 import com.gpl.rpg.AndorsTrail.AndorsTrailApplication;
 import com.gpl.rpg.AndorsTrail.context.ControllerContext;
@@ -14,6 +15,7 @@ import com.gpl.rpg.AndorsTrail.context.WorldContext;
 import com.gpl.rpg.AndorsTrail.model.ChecksumBuilder;
 import com.gpl.rpg.AndorsTrail.savegames.LegacySavegameFormatReaderForMap;
 import com.gpl.rpg.AndorsTrail.util.L;
+import com.gpl.rpg.AndorsTrail.util.Size;
 
 public final class MapCollection {
 	private final HashMap<String, PredefinedMap> predefinedMaps = new HashMap<String, PredefinedMap>();
@@ -73,12 +75,21 @@ public final class MapCollection {
 			L.debug("MapCollection.readFromParcel: loading map \"" + name + "\" (" + (i + 1) + "/" + size + ").");
 			PredefinedMap map = predefinedMaps.get(name);
 			if (map == null) {
-				throw new IOException("Savegame contains unknown map \"" + name + "\".");
-			}
-			map.readFromParcel(src, world, controllers, fileversion);
-			L.debug("MapCollection.readFromParcel: loaded map \"" + name + "\" (" + (i + 1) + "/" + size + ").");
-			if (i >= 40) {
-				if (fileversion < 15) map.visited = false;
+				// Map not found.  In production mode only, read and discard the missing map.  This should never happen,
+				// because these content bugs should be caught before it goes to prod, but just in case we want
+				// to make sure that the user can still use their savefile if it happens anyway.
+				if (AndorsTrailApplication.DEVELOPMENT_VALIDATEDATA) {
+					throw new IOException("Savegame contains unknown map \"" + name + "\".");
+				} else {
+					PredefinedMap placeholder = new PredefinedMap(-1, name, new Size(1, 1), new MapObject[0], new MonsterSpawnArea[0], Collections.emptyList(), false, null);
+					placeholder.readFromParcel(src, world, controllers, fileversion);
+				}
+			} else {
+				map.readFromParcel(src, world, controllers, fileversion);
+				L.debug("MapCollection.readFromParcel: loaded map \"" + name + "\" (" + (i + 1) + "/" + size + ").");
+				if (i >= 40) {
+					if (fileversion < 15) map.visited = false;
+				}
 			}
 		}
 	}

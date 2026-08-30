@@ -274,16 +274,19 @@ public final class PredefinedMap {
 				if(fileversion >= 43) {
 					//Spawn areas now have unique IDs. Need to check as maps can change.
 					String id = src.readUTF();
-					int j = i;
 					boolean found = false;
-					do {
-						if (this.spawnAreas[j].areaID.equals(id)) {
-							this.spawnAreas[j].readFromParcel(src, world, fileversion);
-							found = true;
-							break;
-						} 
-						j = (j+1)%spawnAreas.length;
-					} while (j != i);
+					if (this.spawnAreas.length > 0) {
+						int start = i % this.spawnAreas.length;
+						int j = start;
+						do {
+							if (this.spawnAreas[j].areaID.equals(id)) {
+								this.spawnAreas[j].readFromParcel(src, world, fileversion);
+								found = true;
+								break;
+							}
+							j = (j + 1) % this.spawnAreas.length;
+						} while (j != start);
+					}
 					if (!found) {
 						if (AndorsTrailApplication.DEVELOPMENT_VALIDATEDATA) {
 							L.warn("WARNING: Trying to load monsters from savegame in map " + this.name + " for spawn area " + id + " but this area cannot be found. This will totally fail.");

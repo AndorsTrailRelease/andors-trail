@@ -116,7 +116,7 @@ public final class Savegames {
 				result = loadWorld(androidContext.getResources(), world, controllers, androidContext, fos, fh);
 			} catch (IOException | DigestException e) {
 				lastLoadFailureMessage = e.getMessage() != null ? e.getMessage() : e.toString();
-				L.warn("Savegames.loadWorld(slot=" + slot + "): scene cannot be loaded from " + fh.describe() + ": " + e);
+				debugLoadFailure("Savegames.loadWorld(slot=" + slot + "): scene cannot be loaded from " + fh.describe() + ".", e);
 				return LoadSavegameResult.unknownError;
 			} finally {
 				fos.close();
@@ -153,7 +153,7 @@ public final class Savegames {
 			StringWriter sw = new StringWriter();
 			PrintWriter pw = new PrintWriter(sw);
 			e.printStackTrace(pw);
-			L.debug(message + " " + e + "\n" + sw);
+			L.warn(message + " " + e + "\n" + sw);
 		}
 	}
 
@@ -308,6 +308,7 @@ public final class Savegames {
 			fos.close();
 			return header;
 		} catch (Exception e) {
+			lastLoadFailureMessage = e.getMessage() != null ? e.getMessage() : e.toString();
 			debugLoadFailure("Savegames.quickload(slot=" + slot + "): save file cannot be loaded." , e);
 			return null;
 		}
