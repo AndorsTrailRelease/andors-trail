@@ -20,6 +20,7 @@ import com.gpl.rpg.AndorsTrail.model.map.MapObject.MapObjectType;
 import com.gpl.rpg.AndorsTrail.util.Coord;
 import com.gpl.rpg.AndorsTrail.util.CoordRect;
 import com.gpl.rpg.AndorsTrail.util.L;
+import com.gpl.rpg.AndorsTrail.util.Range;
 import com.gpl.rpg.AndorsTrail.util.Size;
 
 public final class PredefinedMap {
@@ -273,19 +274,39 @@ public final class PredefinedMap {
 				if(fileversion >= 43) {
 					//Spawn areas now have unique IDs. Need to check as maps can change.
 					String id = src.readUTF();
-					int j = i;
 					boolean found = false;
-					do {
-						if (this.spawnAreas[j].areaID.equals(id)) {
-							this.spawnAreas[j].readFromParcel(src, world, fileversion);
-							found = true;
-							break;
-						} 
-						j = (j+1)%spawnAreas.length;
-					} while (j != i);
-					if (AndorsTrailApplication.DEVELOPMENT_VALIDATEDATA) {
-						if (!found) {
-							L.log("WARNING: Trying to load monsters from savegame in map " + this.name + " for spawn #" + id + " but this area cannot be found. This will totally fail.");
+					if (this.spawnAreas.length > 0) {
+						int start = i % this.spawnAreas.length;
+						int j = start;
+						do {
+							if (this.spawnAreas[j].areaID.equals(id)) {
+								this.spawnAreas[j].readFromParcel(src, world, fileversion);
+								found = true;
+								break;
+							}
+							j = (j + 1) % this.spawnAreas.length;
+						} while (j != start);
+					}
+					if (!found) {
+						if (AndorsTrailApplication.DEVELOPMENT_VALIDATEDATA) {
+							L.warn("WARNING: Trying to load monsters from savegame in map " + this.name + " for spawn area " + id + " but this area cannot be found. This will totally fail.");
+							throw new IOException("Savegame contains unknown spawn area \"" + id + "\" in map \"" + this.name + "\".");
+						} else {
+							// In production mode only, read and discard the missing spawn area.  This should never happen,
+							// because these content bugs should be caught before it goes to prod, but just in case we want
+							// to make sure that the user can still use their savefile if it happens anyway.
+							// In almost all cases, this should be harmless to the game state.
+							new MonsterSpawnArea(
+									new CoordRect(new Coord(), new Size(1, 1))
+									, new Range(0, 0)
+									, new Range(0, 0)
+									, id
+									, new String[0]
+									, false
+									, false
+									, ""
+									, false
+							).readFromParcel(src, world, fileversion);
 						}
 					}
 				} else {
