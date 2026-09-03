@@ -21,12 +21,12 @@ if (keystorePropertiesFile.exists()) {
 
 android {
 
-    compileSdkVersion 36
+    compileSdkVersion 37
 
     defaultConfig {
         applicationId "com.gpl.rpg.AndorsTrail"
-        minSdkVersion 17
-        targetSdkVersion 36
+        minSdkVersion 21
+        targetSdkVersion 37
     }
 
     signingConfigs {
@@ -81,8 +81,8 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.activity:activity:1.0.0' // We need 1.0.0 for API 17 support
-    implementation 'androidx.fragment:fragment:1.1.0' // We need 1.1.0 for API 17 support
+    implementation 'androidx.activity:activity:1.11.0' // 1.11 for API 21 support
+    implementation 'androidx.fragment:fragment:1.8.1'  // 1.8.1 for API 21 support
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.13.2'
 }
