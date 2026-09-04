@@ -5,7 +5,7 @@ import com.gpl.rpg.AndorsTrail.model.script.ScriptEffect;
 public final class Phrase {
 	private static final Reply[] NO_REPLIES = new Reply[0];
 
-	public final String message;
+	public String message;
 	public final Reply[] replies;
 	public final ScriptEffect[] scriptEffects; // If this phrase is reached, all these effects will run
 	public final String switchToNPC;
