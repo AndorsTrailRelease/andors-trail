@@ -1,5 +1,6 @@
 package com.gpl.rpg.AndorsTrail.context;
 
+import com.gpl.rpg.AndorsTrail.AndorsTrailApplication;
 import com.gpl.rpg.AndorsTrail.model.ChecksumBuilder;
 import com.gpl.rpg.AndorsTrail.model.ModelContainer;
 import com.gpl.rpg.AndorsTrail.model.ability.ActorConditionTypeCollection;
@@ -71,8 +72,12 @@ public final class WorldContext {
 	}
 
 	public byte[] getChecksum() throws DigestException {
+		return getChecksum(AndorsTrailApplication.CURRENT_VERSION);
+	}
+
+	public byte[] getChecksum(int fileversion) throws DigestException {
 		ChecksumBuilder checksumBuilder = new ChecksumBuilder();
-		model.addToChecksum(checksumBuilder);
+		model.addToChecksum(checksumBuilder, fileversion);
 		maps.addToChecksum(checksumBuilder, this);
 		return checksumBuilder.build();
 	}

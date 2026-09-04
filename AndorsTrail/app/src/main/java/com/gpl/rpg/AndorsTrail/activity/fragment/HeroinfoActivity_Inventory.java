@@ -1,6 +1,8 @@
 package com.gpl.rpg.AndorsTrail.activity.fragment;
 
 import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,12 +16,15 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.Toast;
 import android.widget.TextView;
 
 import com.gpl.rpg.AndorsTrail.AndorsTrailApplication;
@@ -35,7 +40,9 @@ import com.gpl.rpg.AndorsTrail.model.item.Inventory;
 import com.gpl.rpg.AndorsTrail.model.item.ItemContainer;
 import com.gpl.rpg.AndorsTrail.model.item.ItemType;
 import com.gpl.rpg.AndorsTrail.resource.tiles.TileCollection;
+import com.gpl.rpg.AndorsTrail.util.ThemeHelper;
 import com.gpl.rpg.AndorsTrail.view.CustomMenuInflater;
+import com.gpl.rpg.AndorsTrail.view.CustomDialogFactory;
 import com.gpl.rpg.AndorsTrail.view.ItemContainerAdapter;
 import com.gpl.rpg.AndorsTrail.view.SpinnerEmulator;
 
@@ -90,6 +97,9 @@ public final class HeroinfoActivity_Inventory extends Fragment implements Custom
 		heroinfo_stats_gold = (TextView) v.findViewById(R.id.heroinfo_stats_gold);
 		heroinfo_stats_attack = (TextView) v.findViewById(R.id.heroinfo_stats_attack);
 		heroinfo_stats_defense = (TextView) v.findViewById(R.id.heroinfo_stats_defense);
+
+		View presetsButton = v.findViewById(R.id.equipment_presets_button);
+		presetsButton.setOnClickListener(view -> showEquipmentPresets());
 
 		registerForContextMenu(inventoryList);
 		inventoryList.setOnItemClickListener(new OnItemClickListener() {
@@ -228,7 +238,173 @@ public final class HeroinfoActivity_Inventory extends Fragment implements Custom
 
 	private void dropItem(String itemTypeID, int quantity) {
 		ItemType itemType = world.itemTypes.getItemType(itemTypeID);
-		controllers.itemController.dropItem(itemType, quantity);
+		List<Integer> brokenPresets = ItemController.getEquipmentPresetsBrokenByRemoving(player, itemTypeID, quantity);
+		if (brokenPresets.isEmpty()) {
+			controllers.itemController.dropItem(itemType, quantity);
+			return;
+		}
+		String presetNames = ItemController.formatPresetNumbers(brokenPresets);
+		CustomDialogFactory.CustomDialog warning = CustomDialogFactory.createDialog(getActivity(), getString(R.string.equipment_preset_removal_title), null, getString(R.string.equipment_preset_removal_warning, itemType.getName(player), presetNames, getString(R.string.inventory_drop).toLowerCase()), null, true);
+		CustomDialogFactory.addButton(warning, android.R.string.yes, view -> {
+			controllers.itemController.dropItem(itemType, quantity);
+			update();
+		});
+		CustomDialogFactory.addDismissButton(warning, android.R.string.no);
+		CustomDialogFactory.show(warning);
+	}
+
+	private void showEquipmentPresets() {
+		if (world.model.uiSelections.isInCombat) {
+			CustomDialogFactory.CustomDialog error = CustomDialogFactory.createErrorDialog(getActivity(), getString(R.string.equipment_presets), getString(R.string.equipment_preset_not_available_combat));
+			CustomDialogFactory.show(error);
+			return;
+		}
+		LinearLayout content = new LinearLayout(getActivity());
+		content.setOrientation(LinearLayout.VERTICAL);
+		ScrollView scroll = new ScrollView(getActivity());
+		scroll.addView(content);
+		final CustomDialogFactory.CustomDialog dialog = CustomDialogFactory.createDialog(getActivity(), getString(R.string.equipment_presets), null, null, scroll, true);
+		for (int preset = 0; preset < Inventory.NUM_EQUIPMENT_PRESETS; ++preset) {
+			final int presetIndex = preset;
+			LinearLayout block = new LinearLayout(getActivity());
+			block.setOrientation(LinearLayout.VERTICAL);
+			block.setPadding(0, 8, 0, 8);
+			TextView status = new TextView(getActivity());
+			status.setText(isEquipmentPresetEmpty(preset) ? getString(R.string.equipment_preset_empty) : getString(R.string.equipment_preset_saved, preset + 1));
+			block.addView(status);
+			View preview = createPresetPreview(preset);
+			preview.setFocusable(true);
+			preview.setOnClickListener(view -> showLoadEquipmentPresetConfirmation(presetIndex, dialog));
+			preview.setOnLongClickListener(view -> {
+				saveEquipmentPreset(presetIndex, dialog);
+				return true;
+			});
+			preview.setLongClickable(true);
+			block.addView(preview);
+			content.addView(block);
+		}
+		CustomDialogFactory.addDismissButton(dialog, R.string.dialog_close);
+		CustomDialogFactory.show(dialog);
+	}
+
+	private boolean isEquipmentPresetEmpty(int preset) {
+		return !player.inventory.isEquipmentPresetSaved(preset);
+	}
+
+	private void saveEquipmentPreset(final int preset, final CustomDialogFactory.CustomDialog parentDialog) {
+		boolean isOverwrite = !isEquipmentPresetEmpty(preset);
+		String message = getString(R.string.equipment_preset_save_message, preset + 1);
+		if (isOverwrite) message += "\n\n" + getString(R.string.equipment_preset_overwrite_message);
+		String title = getString(isOverwrite ? R.string.equipment_preset_overwrite_title : R.string.equipment_preset_save_title);
+		CustomDialogFactory.CustomDialog confirmation = CustomDialogFactory.createDialog(getActivity(), title, null, message, null, true);
+		CustomDialogFactory.addButton(confirmation, android.R.string.yes, view -> {
+			controllers.itemController.saveEquipmentPreset(preset);
+			parentDialog.dismiss();
+			Toast.makeText(getActivity(), getString(R.string.equipment_preset_saved_toast, preset + 1), Toast.LENGTH_SHORT).show();
+		});
+		CustomDialogFactory.addDismissButton(confirmation, android.R.string.no);
+		CustomDialogFactory.show(confirmation);
+	}
+
+	private void showLoadEquipmentPresetConfirmation(final int preset, final CustomDialogFactory.CustomDialog parentDialog) {
+		CustomDialogFactory.CustomDialog confirmation = CustomDialogFactory.createDialog(getActivity(), getString(R.string.equipment_preset_load_title), null, getString(R.string.equipment_preset_load_message, preset + 1), null, true);
+		CustomDialogFactory.addButton(confirmation, android.R.string.yes, view -> { parentDialog.dismiss(); loadEquipmentPreset(preset); });
+		CustomDialogFactory.addDismissButton(confirmation, android.R.string.no);
+		CustomDialogFactory.show(confirmation);
+	}
+
+	private View createPresetPreview(int preset) {
+		LinearLayout preview = new LinearLayout(getActivity());
+		preview.setOrientation(LinearLayout.HORIZONTAL);
+		int previewPadding = (int) (4 * getResources().getDisplayMetrics().density);
+		preview.setPadding(previewPadding, previewPadding, previewPadding, previewPadding);
+		preview.setBackgroundResource(ThemeHelper.getThemeResource(getActivity(), R.attr.ui_theme_textbutton_drawable));
+		ArrayList<Integer> iconIDs = new ArrayList<Integer>();
+		for (Inventory.WearSlot slot : Inventory.WearSlot.values()) {
+			String id = player.inventory.getEquipmentPresetItemTypeID(preset, slot);
+			if (id != null) { ItemType type = world.itemTypes.getItemType(id); if (type != null) iconIDs.add(type.iconID); }
+		}
+		TileCollection tiles = iconIDs.isEmpty() ? null : world.tileManager.loadTilesFor(iconIDs, getResources());
+		for (Inventory.WearSlot slot : Inventory.WearSlot.values()) {
+			String id = player.inventory.getEquipmentPresetItemTypeID(preset, slot);
+			ItemType type = id == null ? null : world.itemTypes.getItemType(id);
+			ImageView image = new ImageView(getActivity());
+			int size = (int) (32 * getResources().getDisplayMetrics().density);
+			image.setLayoutParams(new LinearLayout.LayoutParams(size, size));
+			if (type != null) {
+				world.tileManager.setImageViewTile(getResources(), image, type, tiles);
+				image.setContentDescription(type.getName(player));
+			} else {
+				image.setImageResource(defaultWornItemImageResourceIDs[slot.ordinal()]);
+			}
+			preview.addView(image);
+		}
+		return preview;
+	}
+
+	private View createMissingItemsPreview(java.util.List<String> missing) {
+		LinearLayout preview = new LinearLayout(getActivity());
+		preview.setOrientation(LinearLayout.VERTICAL);
+		ArrayList<Integer> iconIDs = new ArrayList<Integer>();
+		for (String id : missing) {
+			ItemType type = world.itemTypes.getItemType(id);
+			if (type != null) iconIDs.add(type.iconID);
+		}
+		TileCollection tiles = world.tileManager.loadTilesFor(iconIDs, getResources());
+		for (String id : missing) {
+			ItemType type = world.itemTypes.getItemType(id);
+			if (type == null) continue;
+			LinearLayout row = new LinearLayout(getActivity());
+			row.setOrientation(LinearLayout.HORIZONTAL);
+			ImageView image = new ImageView(getActivity());
+			int size = (int) (32 * getResources().getDisplayMetrics().density);
+			image.setLayoutParams(new LinearLayout.LayoutParams(size, size));
+			world.tileManager.setImageViewTile(getResources(), image, type, tiles);
+			TextView name = new TextView(getActivity());
+			name.setText(type.getName(player));
+			row.addView(image);
+			row.addView(name);
+			preview.addView(row);
+		}
+		return preview;
+	}
+
+	private void loadEquipmentPreset(final int preset) {
+		if (!player.inventory.isEquipmentPresetSaved(preset)) {
+			Toast.makeText(getActivity(), R.string.equipment_preset_empty_toast, Toast.LENGTH_SHORT).show();
+			return;
+		}
+		List<String> missing = controllers.itemController.getMissingEquipmentPresetItems(preset);
+		List<String> conflicts = controllers.itemController.getEquipmentPresetConflicts(preset);
+		if (missing.isEmpty() && conflicts.isEmpty()) {
+			controllers.itemController.applyEquipmentPreset(preset);
+			update();
+			Toast.makeText(getActivity(), getString(R.string.equipment_preset_loaded_toast, preset + 1), Toast.LENGTH_SHORT).show();
+			return;
+		}
+		StringBuilder message = new StringBuilder();
+		if (!missing.isEmpty()) message.append(getString(R.string.equipment_preset_missing_message, joinItemNames(missing)));
+		if (!conflicts.isEmpty()) {
+			if (message.length() > 0) message.append("\n\n");
+			message.append(getString(R.string.equipment_preset_conflict_message, joinItemNames(conflicts)));
+		}
+		message.append("\n\n").append(getString(R.string.equipment_preset_load_confirm));
+		CustomDialogFactory.CustomDialog confirmation = CustomDialogFactory.createDialog(getActivity(), getString(R.string.equipment_preset_removal_title), null, message.toString(), null, true);
+		CustomDialogFactory.setContent(confirmation, createMissingItemsPreview(missing));
+		CustomDialogFactory.addButton(confirmation, android.R.string.yes, view -> { controllers.itemController.applyEquipmentPreset(preset); update(); Toast.makeText(getActivity(), getString(R.string.equipment_preset_loaded_toast, preset + 1), Toast.LENGTH_SHORT).show(); });
+		CustomDialogFactory.addDismissButton(confirmation, android.R.string.no);
+		CustomDialogFactory.show(confirmation);
+	}
+
+	private String joinItemNames(java.util.List<String> itemTypeIDs) {
+		StringBuilder names = new StringBuilder();
+		for (String id : itemTypeIDs) {
+			ItemType type = world.itemTypes.getItemType(id);
+			if (type == null) continue;
+			if (names.length() > 0) names.append("\n");
+			names.append(type.getName(player));
+		}
+		return names.toString();
 	}
 
 	private void update() {

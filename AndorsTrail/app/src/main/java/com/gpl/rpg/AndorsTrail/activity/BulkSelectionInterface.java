@@ -25,6 +25,8 @@ import com.gpl.rpg.AndorsTrail.context.WorldContext;
 import com.gpl.rpg.AndorsTrail.controller.InputController;
 import com.gpl.rpg.AndorsTrail.controller.ItemController;
 import com.gpl.rpg.AndorsTrail.model.item.ItemType;
+import java.util.Collections;
+import java.util.List;
 import com.gpl.rpg.AndorsTrail.util.ThemeHelper;
 import com.gpl.rpg.AndorsTrail.view.CustomDialogFactory;
 import com.gpl.rpg.AndorsTrail.view.CustomDialogFactory.CustomDialog;
@@ -210,12 +212,20 @@ public final class BulkSelectionInterface extends AndorsTrailBaseActivity implem
 
 		// setup OK button
 		okButton.setOnClickListener(v -> {
-			if (requiresConfirmation()) {
+			List<Integer> brokenPresets = interfaceType == BulkInterfaceType.sell
+					? ItemController.getEquipmentPresetsBrokenByRemoving(world.model.player, itemType.id, getTextboxAmount())
+					: Collections.emptyList();
+			if (requiresConfirmation() || !brokenPresets.isEmpty()) {
 				final String displayType = ItemInfoActivity.getDisplayTypeString(res, itemType).toLowerCase();
-				final String message = res.getString(R.string.bulkselection_sell_confirmation, itemType.getName(world.model.player), displayType);
+				String message = requiresConfirmation() ? res.getString(R.string.bulkselection_sell_confirmation, itemType.getName(world.model.player), displayType) : "";
+				if (!brokenPresets.isEmpty()) {
+					String presetNames = ItemController.formatPresetNumbers(brokenPresets);
+					if (!message.isEmpty()) message += "\n\n";
+					message += res.getString(R.string.equipment_preset_removal_warning, itemType.getName(world.model.player), presetNames, actionText.toLowerCase());
+				}
 
 				final CustomDialog d = CustomDialogFactory.createDialog(v.getContext(),
-						v.getContext().getResources().getString(R.string.bulkselection_sell_confirmation_title),
+						v.getContext().getResources().getString(requiresConfirmation() ? R.string.bulkselection_sell_confirmation_title : R.string.equipment_preset_removal_title),
 						v.getContext().getResources().getDrawable(android.R.drawable.ic_dialog_info),
 						message,
 						null,

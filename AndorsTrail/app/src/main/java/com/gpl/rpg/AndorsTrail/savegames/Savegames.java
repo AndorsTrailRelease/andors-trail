@@ -268,7 +268,7 @@ public final class Savegames {
 		world.model = new ModelContainer(src, world, controllers, header.fileversion);
 		src.close();
 		if (header.fileversion >= 81) {
-			checkChecksum(world);
+			checkChecksum(world, header.fileversion);
 		}
 		WorldMapController.populateWorldMap(androidContext, world, controllers.getResources());
 
@@ -281,8 +281,8 @@ public final class Savegames {
 		return LoadSavegameResult.success;
 	}
 
-	private static void checkChecksum(WorldContext world) throws DigestException {
-		byte[] checksum = world.getChecksum();
+	private static void checkChecksum(WorldContext world, int fileversion) throws DigestException {
+		byte[] checksum = world.getChecksum(fileversion);
 		if (!world.model.statistics.compareChecksum(checksum)) {
 			world.model.statistics.markAsAlteredSavegame();
 		}
