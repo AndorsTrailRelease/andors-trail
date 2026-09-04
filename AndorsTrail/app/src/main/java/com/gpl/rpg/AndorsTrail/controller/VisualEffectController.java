@@ -46,8 +46,48 @@ public final class VisualEffectController {
 	}
 
 	public void startEffect(Coord position, VisualEffectCollection.VisualEffectID effectID, String displayValue, VisualEffectCompletedCallback callback, int callbackValue) {
-		VisualEffectAnimation animation = new VisualEffectAnimation(effectTypes.getVisualEffect(effectID), position, displayValue, callback, callbackValue);
+		startEffect(position, effectID, displayValue, callback, callbackValue, 0);
+	}
+
+	public void startEffect(Coord position, VisualEffectCollection.VisualEffectID effectID, String displayValue, VisualEffectCompletedCallback callback, int callbackValue, float rotationDegrees) {
+		startEffect(position, effectID, displayValue, callback, callbackValue, rotationDegrees, 1f);
+	}
+
+	public void startEffect(Coord position, VisualEffectCollection.VisualEffectID effectID, String displayValue, VisualEffectCompletedCallback callback, int callbackValue, float rotationDegrees, float distanceScale) {
+		startEffect(position, effectID, displayValue, callback, callbackValue, rotationDegrees, distanceScale, false, null, 0f);
+	}
+
+	public void startEffect(Coord position, VisualEffectCollection.VisualEffectID effectID, String displayValue, VisualEffectCompletedCallback callback, int callbackValue, float rotationDegrees, float distanceScale, boolean mirrorAcrossAttackAxis, Coord rotationCenter, float additionalRotationDegrees) {
+		startEffect(position, effectID, displayValue, callback, callbackValue, rotationDegrees, distanceScale, mirrorAcrossAttackAxis, rotationCenter, additionalRotationDegrees, 0f, 0f);
+	}
+
+	public void startEffect(Coord position, VisualEffectCollection.VisualEffectID effectID, String displayValue, VisualEffectCompletedCallback callback, int callbackValue, float rotationDegrees, float distanceScale, boolean mirrorAcrossAttackAxis, Coord rotationCenter, float additionalRotationDegrees, float offsetX, float offsetY) {
+		startEffect(position, effectID, displayValue, callback, callbackValue, rotationDegrees, distanceScale, mirrorAcrossAttackAxis, rotationCenter, additionalRotationDegrees, offsetX, offsetY, false);
+	}
+
+	public void startEffect(Coord position, VisualEffectCollection.VisualEffectID effectID, String displayValue, VisualEffectCompletedCallback callback, int callbackValue, float rotationDegrees, float distanceScale, boolean mirrorAcrossAttackAxis, Coord rotationCenter, float additionalRotationDegrees, float offsetX, float offsetY, boolean mirrorAcrossVerticalAxis) {
+		VisualEffectAnimation animation = new VisualEffectAnimation(effectTypes.getVisualEffect(effectID), position, displayValue, callback, callbackValue, rotationDegrees, distanceScale, mirrorAcrossAttackAxis, rotationCenter, additionalRotationDegrees, offsetX, offsetY, mirrorAcrossVerticalAxis);
 		animation.start();
+	}
+
+	public void startEffectAfterDelay(final Coord position, final VisualEffectCollection.VisualEffectID effectID, final String displayValue, final VisualEffectCompletedCallback callback, final int callbackValue, final float rotationDegrees, final float distanceScale, final boolean mirrorAcrossAttackAxis, final Coord rotationCenter, final float additionalRotationDegrees, long delayMilliseconds) {
+		startEffectAfterDelay(position, effectID, displayValue, callback, callbackValue, rotationDegrees, distanceScale, mirrorAcrossAttackAxis, rotationCenter, additionalRotationDegrees, delayMilliseconds, false);
+	}
+
+	public void startEffectAfterDelay(final Coord position, final VisualEffectCollection.VisualEffectID effectID, final String displayValue, final VisualEffectCompletedCallback callback, final int callbackValue, final float rotationDegrees, final float distanceScale, final boolean mirrorAcrossAttackAxis, final Coord rotationCenter, final float additionalRotationDegrees, long delayMilliseconds, final boolean mirrorAcrossVerticalAxis) {
+		animationHandler.postDelayed(new Runnable() {
+			 public void run() {
+				startEffect(position, effectID, displayValue, callback, callbackValue, rotationDegrees, distanceScale, mirrorAcrossAttackAxis, rotationCenter, additionalRotationDegrees, 0f, 0f, mirrorAcrossVerticalAxis);
+			}
+		}, delayMilliseconds);
+	}
+
+	public void startEffectAfterDelay(final Coord position, final VisualEffectCollection.VisualEffectID effectID, final String displayValue, final VisualEffectCompletedCallback callback, final int callbackValue, final float rotationDegrees, final float distanceScale, final boolean mirrorAcrossAttackAxis, final Coord rotationCenter, final float additionalRotationDegrees, final float offsetX, final float offsetY, long delayMilliseconds, final boolean mirrorAcrossVerticalAxis) {
+		animationHandler.postDelayed(new Runnable() {
+				public void run() {
+					startEffect(position, effectID, displayValue, callback, callbackValue, rotationDegrees, distanceScale, mirrorAcrossAttackAxis, rotationCenter, additionalRotationDegrees, offsetX, offsetY, mirrorAcrossVerticalAxis);
+				}
+		}, delayMilliseconds);
 	}
 
 	private void startAnimation(VisualEffectAnimation animation) {
@@ -203,17 +243,33 @@ public final class VisualEffectController {
 		private final VisualEffect effect;
 
 		public final Coord position;
+		public final float rotationDegrees;
+		public final float distanceScale;
+		public final boolean mirrorAcrossAttackAxis;
+		public final Coord rotationCenter;
+		public final float additionalRotationDegrees;
+		public final float offsetX;
+		public final float offsetY;
+		public final boolean mirrorAcrossVerticalAxis;
 		public final String displayText;
 		public final CoordRect area;
 		private final int beginFadeAtFrame;
 		private final VisualEffectCompletedCallback callback;
 		private final int callbackValue;
 
-		public VisualEffectAnimation(VisualEffect effect, Coord position, String displayValue, VisualEffectCompletedCallback callback, int callbackValue) {
+		public VisualEffectAnimation(VisualEffect effect, Coord position, String displayValue, VisualEffectCompletedCallback callback, int callbackValue, float rotationDegrees, float distanceScale, boolean mirrorAcrossAttackAxis, Coord rotationCenter, float additionalRotationDegrees, float offsetX, float offsetY, boolean mirrorAcrossVerticalAxis) {
 			this.position = position;
 			this.callback = callback;
 			this.callbackValue = callbackValue;
 			this.effect = effect;
+			this.rotationDegrees = rotationDegrees;
+			this.distanceScale = distanceScale;
+			this.mirrorAcrossAttackAxis = mirrorAcrossAttackAxis;
+			this.rotationCenter = rotationCenter;
+			this.additionalRotationDegrees = additionalRotationDegrees;
+			this.offsetX = offsetX;
+			this.offsetY = offsetY;
+			this.mirrorAcrossVerticalAxis = mirrorAcrossVerticalAxis;
 			this.displayText = displayValue == null ? "" : displayValue;
 			textPaint.setColor(effect.textColor);
 			textPaint.setTextSize(world.tileManager.tileSize * 0.5f); // 32dp.
@@ -221,7 +277,9 @@ public final class VisualEffectController {
 			textPaint.getTextBounds(displayText, 0, displayText.length(), textBounds);
 			int widthNeededInTiles = 1 + (textBounds.width() / world.tileManager.tileSize);
 			if (widthNeededInTiles % 2 == 0) widthNeededInTiles++;
-			this.area = new CoordRect(new Coord(position.x - (widthNeededInTiles / 2), position.y - 1), new Size(widthNeededInTiles, 2));
+			int areaWidth = Math.max(widthNeededInTiles, effect.widthInTiles);
+			int areaHeight = effect.heightInTiles == 1 ? 2 : effect.heightInTiles;
+			this.area = new CoordRect(new Coord(position.x - (areaWidth / 2), position.y - (areaHeight / 2)), new Size(areaWidth, areaHeight));
 			this.beginFadeAtFrame = effect.lastFrame / 2;
 		}
 
