@@ -678,11 +678,9 @@ public final class CombatController implements VisualEffectCompletedCallback {
 		if (player.inventory.getItemTypeInWearSlot(Inventory.WearSlot.weapon) != null
 				|| player.inventory.getItemTypeInWearSlot(Inventory.WearSlot.shield) != null) return;
 
-		Coord attacker = player.position;
 		if (Constants.rnd.nextFloat() < 0.3f) {
-			controllers.effectController.startEffect(target, VisualEffectCollection.VisualEffectID.footSweep, null, null, 0,
-					getAxeAttackRotation(attacker, target), 1f, false, null, 0f, 0f, 0f,
-					target.x <= attacker.x);
+			controllers.effectController.startEffect(
+					target, VisualEffectCollection.VisualEffectID.footSweep, null, null, 0);
 		} else {
 			float offsetX = Constants.rnd.nextFloat() * 0.25f - 0.125f;
 			float offsetY = Constants.rnd.nextFloat() * 0.25f - 0.125f;

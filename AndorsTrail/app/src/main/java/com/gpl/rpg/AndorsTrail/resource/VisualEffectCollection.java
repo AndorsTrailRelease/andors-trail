@@ -40,11 +40,11 @@ public final class VisualEffectCollection {
 		effects[VisualEffectID.miss.ordinal()] = createEffect(loader, R.drawable.effect_miss1, new ConstRange(16, 0), 400, Color.GRAY);
 		effects[VisualEffectID.poleAttack.ordinal()] = createEffect(loader, R.drawable.pole_attack_ne_16f_96x96_v2, new ConstRange(16, 0), 533, Color.WHITE, 3, 3);
 		effects[VisualEffectID.longswordAttack.ordinal()] = createEffect(loader, R.drawable.longsword_attack_ne_16f_96x96, new ConstRange(16, 0), 533, Color.WHITE, 3, 3);
-		effects[VisualEffectID.axeAttack.ordinal()] = createEffect(loader, R.drawable.axe_attack_ne_16f_96x96_v4, new ConstRange(16, 0),  267, Color.WHITE, 3, 3);
+		effects[VisualEffectID.axeAttack.ordinal()] = createEffect(loader, R.drawable.axe_attack_ne_16f_96x96_v4, new ConstRange(16, 0), 320, Color.WHITE, 3, 3);
 		effects[VisualEffectID.lightBladeCut.ordinal()] = createEffect(loader, R.drawable.light_blade_cut_shared_16f_96x96_v2, new ConstRange(16, 0), 400, Color.WHITE, 3, 3);
 		effects[VisualEffectID.lightBladeThrust.ordinal()] = createEffect(loader, R.drawable.light_blade_thrust_ne_shared_16f_96x96_v2, new ConstRange(16, 0), 400, Color.WHITE, 3, 3);
 		effects[VisualEffectID.dualAxesAttack.ordinal()] = createEffect(loader, R.drawable.dual_axes_attack_ne_16f_96x96_v1, new ConstRange(16, 0),  267, Color.WHITE, 3, 3);
-		effects[VisualEffectID.broadswordAttack.ordinal()] = createEffect(loader, R.drawable.broadsword_attack_ne_16f_96x96_v2, new ConstRange(16, 0), 533, Color.WHITE, 3, 3);
+		effects[VisualEffectID.broadswordAttack.ordinal()] = createEffect(loader, R.drawable.broadsword_attack_ne_16f_96x96_v2, new ConstRange(16, 0), 640, Color.WHITE, 3, 3);
 		effects[VisualEffectID.whipAttack.ordinal()] = createEffect(loader, R.drawable.whip_attack_ne_16f_96x96_v4, new ConstRange(16, 0), 400, Color.WHITE, 3, 3);
 		effects[VisualEffectID.groundShockwave.ordinal()] = createEffect(loader, R.drawable.ground_shockwave_ellipse_16f_32x32_v1, new ConstRange(16, 0), 267, Color.WHITE);
 		effects[VisualEffectID.bluntImpact.ordinal()] = createEffect(loader, R.drawable.blunt_impact_hollow_circle_16f_32x32_v3, new ConstRange(16, 0), 267, Color.WHITE);
