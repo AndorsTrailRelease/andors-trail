@@ -76,6 +76,10 @@ public final class MovementController implements TimedMessageTask.Callback {
 
 		};
 
+		if (mapTransitionInProgress) {
+			L.error("placePlayerAsyncAt called while a map transition is already in progress");
+			return;
+		}
 		controllers.gameRoundController.acquirePause(PauseReason.MAP_TRANSITION);
 		mapTransitionInProgress = true;
 
