@@ -28,6 +28,7 @@ public final class MovementController implements TimedMessageTask.Callback {
 	private final WorldContext world;
 	//TODO restore final modifier before release
 	private TimedMessageTask movementHandler;
+	private volatile boolean mapTransitionInProgress = false;
 	public final PlayerMovementListeners playerMovementListeners = new PlayerMovementListeners();
 
 	public MovementController(ControllerContext controllers, WorldContext world) {
@@ -43,7 +44,6 @@ public final class MovementController implements TimedMessageTask.Callback {
 	}
 
 	public void placePlayerAsyncAt(final MapObject.MapObjectType objectType, final String mapName, final String placeName, final int offset_x, final int offset_y) {
-
 		AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
 			private boolean mapLoadFailed = false;  // (1) flag to carry failure to onPostExecute
 
@@ -67,6 +67,7 @@ public final class MovementController implements TimedMessageTask.Callback {
 				stopMovement();
 				// (4) always release the pause — timer can never get stuck
 				controllers.gameRoundController.releasePause(PauseReason.MAP_TRANSITION);
+				mapTransitionInProgress = false;
 				if (!mapLoadFailed) {
 					playerMovementListeners.onPlayerEnteredNewMap(
 							world.model.currentMaps.map, world.model.player.position);
@@ -76,6 +77,8 @@ public final class MovementController implements TimedMessageTask.Callback {
 		};
 
 		controllers.gameRoundController.acquirePause(PauseReason.MAP_TRANSITION);
+		mapTransitionInProgress = true;
+
 		task.execute();
 	}
 
@@ -302,8 +305,13 @@ public final class MovementController implements TimedMessageTask.Callback {
 		placePlayerAt(res, MapObject.MapObjectType.rest, world.model.player.getSpawnMap(), world.model.player.getSpawnPlace(), 0, 0);
 		playerMovementListeners.onPlayerEnteredNewMap(world.model.currentMaps.map, world.model.player.position);
 	}
+
 	public void respawnPlayerAsync() {
 		placePlayerAsyncAt(MapObject.MapObjectType.rest, world.model.player.getSpawnMap(), world.model.player.getSpawnPlace(), 0, 0);
+	}
+
+	public boolean isMapTransitionInProgress() {
+		return mapTransitionInProgress;
 	}
 
 	public void moveBlockedActors(PredefinedMap map, LayeredTileMap tileMap) {
