@@ -570,7 +570,13 @@ public final class CombatController implements VisualEffectCompletedCallback {
 			controllers.effectController.startEffect(attacker, VisualEffectCollection.VisualEffectID.dualAxesAttack, null, null, 0, rotation, distanceScale, false, null, 0f, 0f, 0f, mirrorAcrossVerticalAxis);
 			controllers.effectController.startEffect(target, VisualEffectCollection.VisualEffectID.groundShockwave, null, null, 0);
 		} else {
-			controllers.effectController.startEffect(attacker, VisualEffectCollection.VisualEffectID.axeAttack, null, null, 0, rotation, distanceScale, false, null, 0f, 0f, 0f, mirrorAcrossVerticalAxis);
+			VisualEffectCollection.VisualEffectID effectID = isGreataxe(mainHand)
+					? VisualEffectCollection.VisualEffectID.greatAxeAttack
+					: VisualEffectCollection.VisualEffectID.axeAttack;
+			float animationScale = isGreataxe(mainHand)
+					? distanceScale * VisualEffectCollection.GREATAXE_ATTACK_SCALE
+					: distanceScale;
+			controllers.effectController.startEffect(attacker, effectID, null, null, 0, rotation, animationScale, false, null, 0f, 0f, 0f, mirrorAcrossVerticalAxis);
 		}
 
 		if (isGreataxe(mainHand) && Constants.rnd.nextBoolean() && controllers.preferences.enableUiAnimations) {
@@ -636,10 +642,8 @@ public final class CombatController implements VisualEffectCompletedCallback {
 		if (!isCategory(weapon, "rapier")) return;
 
 		Coord attacker = player.position;
-		float offsetX = Constants.rnd.nextFloat() * 0.5f - 0.25f;
-		float offsetY = Constants.rnd.nextFloat() * 0.5f - 0.25f;
 		controllers.effectController.startEffect(attacker, VisualEffectCollection.VisualEffectID.rapierThrust, null, null, 0,
-				getPoleAttackRotation(attacker, target), getPoleAttackScale(attacker, target), false, null, 0f, offsetX, offsetY);
+				getPoleAttackRotation(attacker, target), getPoleAttackScale(attacker, target), false, attacker, getRapierVariation(), 0f, 0f);
 	}
 
 	private void startBluntWeaponAttack(Player player, Coord target) {
@@ -658,8 +662,8 @@ public final class CombatController implements VisualEffectCompletedCallback {
 		Coord attacker = player.position;
 		controllers.effectController.startEffect(attacker, VisualEffectCollection.VisualEffectID.poleAttack, null, null, 0,
 				getPoleAttackRotation(attacker, target), getPoleAttackScale(attacker, target));
-		startBluntImpactAtFrame(target, 6, 533);
-		startBluntImpactAtFrame(target, 12, 533);
+		startBluntImpactAtFrame(target, 6, VisualEffectCollection.POLE_ATTACK_DURATION);
+		startBluntImpactAtFrame(target, 12, VisualEffectCollection.POLE_ATTACK_DURATION);
 	}
 
 	private void startHeavyBluntAttack(Player player, Coord target) {
@@ -671,7 +675,7 @@ public final class CombatController implements VisualEffectCompletedCallback {
 				getAxeAttackRotation(attacker, target) - 30f, getPoleAttackScale(attacker, target),
 				false, null, 0f, 0f, 0f, target.x <= attacker.x);
 		startBluntImpactAtFrame(target, 7, 533, 0L, 1.2f);
-		if (Constants.rnd.nextBoolean()) startGroundShockwaveAtFrame(target, 9, 533);
+		startGroundShockwaveAtFrame(target, 9, 533);
 	}
 
 	private void startBarehandedAttack(Player player, Coord target) {
@@ -766,7 +770,7 @@ public final class CombatController implements VisualEffectCompletedCallback {
 				startEffectWithDelay(VisualEffectCollection.VisualEffectID.lightBladeThrust, attacker, target, getPoleAttackRotation(attacker, target), distanceScale, flip, null, 0f, 0f, 0f, delay);
 			}
 		} else if (isCategory(weapon, "rapier")) {
-			startEffectWithDelay(VisualEffectCollection.VisualEffectID.rapierThrust, attacker, target, getPoleAttackRotation(attacker, target), distanceScale, flip, null, 0f, Constants.rnd.nextFloat() * 0.5f - 0.25f, Constants.rnd.nextFloat() * 0.5f - 0.25f, delay);
+			startEffectWithDelay(VisualEffectCollection.VisualEffectID.rapierThrust, attacker, target, getPoleAttackRotation(attacker, target), distanceScale, flip, attacker, getRapierVariation(), 0f, 0f, delay);
 		} else if (isAxe(weapon)) {
 			startEffectWithDelay(VisualEffectCollection.VisualEffectID.axeAttack, attacker, target, getAxeAttackRotation(attacker, target), distanceScale, flip, null, 0f, 0f, 0f, delay, target.x <= attacker.x);
 		} else if (isLongsword(weapon)) {
@@ -831,6 +835,10 @@ public final class CombatController implements VisualEffectCompletedCallback {
 
 	private static float getLongswordVariation() {
 		return Constants.rnd.nextFloat() * 60f - 30f;
+	}
+
+	private static float getRapierVariation() {
+		return Constants.rnd.nextFloat() * 30f - 15f;
 	}
 
 	private void startMissedEffect(AttackResult attack, final Coord position, VisualEffectCompletedCallback callback, int callbackValue) {

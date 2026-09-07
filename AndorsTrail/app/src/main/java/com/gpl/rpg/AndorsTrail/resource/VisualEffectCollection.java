@@ -6,6 +6,10 @@ import com.gpl.rpg.AndorsTrail.R;
 import com.gpl.rpg.AndorsTrail.util.ConstRange;
 
 public final class VisualEffectCollection {
+	public static final int POLE_ATTACK_DURATION = 640;
+	public static final int DUAL_AXES_ATTACK_DURATION = 320;
+	public static final int GREATAXE_ATTACK_DURATION = 400;
+	public static final float GREATAXE_ATTACK_SCALE = 1.15f;
 
 	public static enum VisualEffectID {
 		redSplash
@@ -15,6 +19,7 @@ public final class VisualEffectCollection {
 		,poleAttack
 		,longswordAttack
 		,axeAttack
+		,greatAxeAttack
 		,lightBladeCut
 		,lightBladeThrust
 		,dualAxesAttack
@@ -38,18 +43,19 @@ public final class VisualEffectCollection {
 		effects[VisualEffectID.blueSwirl.ordinal()] = createEffect(loader, R.drawable.effect_heal2, new ConstRange(16, 0), 400, Color.rgb(150, 150, 255));
 		effects[VisualEffectID.greenSplash.ordinal()] = createEffect(loader, R.drawable.effect_poison1, new ConstRange(16, 0), 400, Color.GREEN);
 		effects[VisualEffectID.miss.ordinal()] = createEffect(loader, R.drawable.effect_miss1, new ConstRange(16, 0), 400, Color.GRAY);
-		effects[VisualEffectID.poleAttack.ordinal()] = createEffect(loader, R.drawable.pole_attack_ne_16f_96x96_v2, new ConstRange(16, 0), 533, Color.WHITE, 3, 3);
-		effects[VisualEffectID.longswordAttack.ordinal()] = createEffect(loader, R.drawable.longsword_attack_ne_16f_96x96, new ConstRange(16, 0), 533, Color.WHITE, 3, 3);
-		effects[VisualEffectID.axeAttack.ordinal()] = createEffect(loader, R.drawable.axe_attack_ne_16f_96x96_v4, new ConstRange(16, 0), 320, Color.WHITE, 3, 3);
-		effects[VisualEffectID.lightBladeCut.ordinal()] = createEffect(loader, R.drawable.light_blade_cut_shared_16f_96x96_v2, new ConstRange(16, 0), 400, Color.WHITE, 3, 3);
-		effects[VisualEffectID.lightBladeThrust.ordinal()] = createEffect(loader, R.drawable.light_blade_thrust_ne_shared_16f_96x96_v2, new ConstRange(16, 0), 400, Color.WHITE, 3, 3);
-		effects[VisualEffectID.dualAxesAttack.ordinal()] = createEffect(loader, R.drawable.dual_axes_attack_ne_16f_96x96_v1, new ConstRange(16, 0),  267, Color.WHITE, 3, 3);
-		effects[VisualEffectID.broadswordAttack.ordinal()] = createEffect(loader, R.drawable.broadsword_attack_ne_16f_96x96_v2, new ConstRange(16, 0), 640, Color.WHITE, 3, 3);
-		effects[VisualEffectID.whipAttack.ordinal()] = createEffect(loader, R.drawable.whip_attack_ne_16f_96x96_v4, new ConstRange(16, 0), 400, Color.WHITE, 3, 3);
-		effects[VisualEffectID.groundShockwave.ordinal()] = createEffect(loader, R.drawable.ground_shockwave_ellipse_16f_32x32_v1, new ConstRange(16, 0), 267, Color.WHITE);
-		effects[VisualEffectID.bluntImpact.ordinal()] = createEffect(loader, R.drawable.blunt_impact_hollow_circle_16f_32x32_v3, new ConstRange(16, 0), 267, Color.WHITE);
-		effects[VisualEffectID.rapierThrust.ordinal()] = createEffect(loader, R.drawable.rapier_thrust_ne_16f_96x96_v1, new ConstRange(16, 0), 267, Color.WHITE, 3, 3);
-		effects[VisualEffectID.footSweep.ordinal()] = createEffect(loader, R.drawable.foot_sweep_16f_32x32_v2, new ConstRange(16, 0), 267, Color.WHITE);
+		effects[VisualEffectID.poleAttack.ordinal()] = createEffect(loader, R.drawable.attack_pole, new ConstRange(16, 0), POLE_ATTACK_DURATION, Color.WHITE, 3, 3);
+		effects[VisualEffectID.longswordAttack.ordinal()] = createEffect(loader, R.drawable.attack_lsword, new ConstRange(16, 0), 533, Color.WHITE, 3, 3);
+		effects[VisualEffectID.axeAttack.ordinal()] = createEffect(loader, R.drawable.attack_axe, new ConstRange(16, 0), 320, Color.WHITE, 3, 3);
+		effects[VisualEffectID.greatAxeAttack.ordinal()] = createEffect(loader, R.drawable.attack_axe, new ConstRange(16, 0), GREATAXE_ATTACK_DURATION, Color.WHITE, 3, 3);
+		effects[VisualEffectID.lightBladeCut.ordinal()] = createEffect(loader, R.drawable.attack_cut, new ConstRange(16, 0), 400, Color.WHITE, 3, 3);
+		effects[VisualEffectID.lightBladeThrust.ordinal()] = createEffect(loader, R.drawable.attack_thrust, new ConstRange(16, 0), 400, Color.WHITE, 3, 3);
+		effects[VisualEffectID.dualAxesAttack.ordinal()] = createEffect(loader, R.drawable.attack_axes, new ConstRange(16, 0), DUAL_AXES_ATTACK_DURATION, Color.WHITE, 3, 3);
+		effects[VisualEffectID.broadswordAttack.ordinal()] = createEffect(loader, R.drawable.attack_broad, new ConstRange(16, 0), 640, Color.WHITE, 3, 3);
+		effects[VisualEffectID.whipAttack.ordinal()] = createEffect(loader, R.drawable.attack_whip, new ConstRange(16, 0), 400, Color.WHITE, 3, 3);
+		effects[VisualEffectID.groundShockwave.ordinal()] = createEffect(loader, R.drawable.attack_ground, new ConstRange(16, 0), 267, Color.WHITE);
+		effects[VisualEffectID.bluntImpact.ordinal()] = createEffect(loader, R.drawable.attack_blunt, new ConstRange(16, 0), 267, Color.WHITE);
+		effects[VisualEffectID.rapierThrust.ordinal()] = createEffect(loader, R.drawable.attack_rapier, new ConstRange(16, 0), 267, Color.WHITE, 3, 3);
+		effects[VisualEffectID.footSweep.ordinal()] = createEffect(loader, R.drawable.attack_sweep, new ConstRange(16, 0), 267, Color.WHITE);
 	}
 
 	public VisualEffect getVisualEffect(VisualEffectID effectID) {
