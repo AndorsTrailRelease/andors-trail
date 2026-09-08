@@ -139,6 +139,9 @@ public final class GameRoundController implements TimedMessageTask.Callback {
 		}
 		activePauses.remove(reason);
 		updateTimerState();
+		if (!hasPauseReasons()) {
+			controllers.combatController.resumeCombatIfNeeded();
+		}
 	}
 
 	/**
@@ -156,7 +159,6 @@ public final class GameRoundController implements TimedMessageTask.Callback {
 	 */
 	public void onMainActivityResumed() {
 		releasePause(PauseReason.ACTIVITY_HIDDEN);
-		controllers.combatController.resumeCombatIfNeeded();
 	}
 
 	/**
@@ -201,6 +203,7 @@ public final class GameRoundController implements TimedMessageTask.Callback {
 			roundTimer.stop();
 			return;
 		}
+		// TODO: Don't use visibility flag as proxy for pause state, or at least rename it.
 		world.model.uiSelections.isMainActivityVisible = !hasPauseReasons();
 		if (hasPauseReasons() || world.model.uiSelections.isInCombat) {
 			roundTimer.stop();
