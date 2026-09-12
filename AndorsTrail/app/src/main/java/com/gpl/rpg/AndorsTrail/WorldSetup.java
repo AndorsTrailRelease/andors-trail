@@ -40,7 +40,7 @@ public final class WorldSetup {
 	public WorldSetup(WorldContext world, ControllerContext controllers, Context androidContext) {
 		this.world = world;
 		this.controllers = controllers;
-		this.androidContext = new WeakReference<Context>(androidContext);
+		this.androidContext = new WeakReference<>(androidContext);
 	}
 
 	public void setOnResourcesLoadedListener(OnResourcesLoadedListener listener) {
@@ -50,7 +50,7 @@ public final class WorldSetup {
 				if (listener != null) listener.onResourcesLoaded();
 				return;
 			}
-			onResourcesLoadedListener = new WeakReference<WorldSetup.OnResourcesLoadedListener>(listener);
+			onResourcesLoadedListener = new WeakReference<>(listener);
 		}
 	}
 
@@ -102,7 +102,7 @@ public final class WorldSetup {
 
 	public void startCharacterSetup(final OnSceneLoadedListener listener) {
 		synchronized (WorldSetup.this) {
-			this.onSceneLoadedListener = new WeakReference<OnSceneLoadedListener>(listener);
+			this.onSceneLoadedListener = new WeakReference<>(listener);
 		}
 		startSceneLoader();
 	}
@@ -133,7 +133,7 @@ public final class WorldSetup {
 						localResult = continueWorld();
 					}
 				} catch (RuntimeException e) {
-					L.log("Error loading world: " + e.toString());
+					L.log("Error loading world: " + e);
 					localResult = Savegames.LoadSavegameResult.unknownError;
 				} finally {
 					createNewCharacter = false;
