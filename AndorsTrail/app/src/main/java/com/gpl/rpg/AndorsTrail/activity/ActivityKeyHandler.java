@@ -5,6 +5,8 @@ import android.view.InputDevice;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
+import androidx.fragment.app.Fragment;
+
 import com.gpl.rpg.AndorsTrail.controller.InputController;
 
 public final class ActivityKeyHandler {
@@ -22,7 +24,7 @@ public final class ActivityKeyHandler {
     public static boolean handleBackMappedKey(Activity activity, KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_DOWN && event.getRepeatCount() == 0) {
             if (InputController.isMappedKey(event.getKeyCode(), InputController.KEY_BACK)) {
-                activity.onBackPressed();
+                dispatchBackPressed(activity);
                 return true;
             }
         }
@@ -43,8 +45,25 @@ public final class ActivityKeyHandler {
         if (event.getDownTime() == lastMouseBackEventDownTime) return true;
         lastMouseBackEventDownTime = event.getDownTime();
 
-        activity.onBackPressed();
+        dispatchBackPressed(activity);
         return true;
+    }
+
+    /**
+     * Dispatches a Back action using the activity's back-press handling.
+     *
+     * <p>Start screen activities route through the back-press dispatcher so any
+     * registered callbacks run before falling back to the legacy activity hook.</p>
+     *
+     * @param activity the activity to notify
+     */
+    // TODO: Convert other activities to extend ComponentActivity and use modern OnBackPressedDispatcher everywhere.
+    private static void dispatchBackPressed(Activity activity) {
+        if (activity instanceof StartScreenActivity) {
+            ((StartScreenActivity) activity).getOnBackPressedDispatcher().onBackPressed();
+            return;
+        }
+        activity.onBackPressed();
     }
 
     /**

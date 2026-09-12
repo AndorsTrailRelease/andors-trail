@@ -34,6 +34,7 @@ public final class MovementController implements TimedMessageTask.Callback {
 	private static final ExecutorService executor = Executors.newSingleThreadExecutor();
 	private static final Handler mainHandler = new Handler(Looper.getMainLooper());
 
+	private volatile boolean mapTransitionInProgress = false;
 	public final PlayerMovementListeners playerMovementListeners = new PlayerMovementListeners();
 
 	public MovementController(ControllerContext controllers, WorldContext world) {
@@ -62,26 +63,34 @@ public final class MovementController implements TimedMessageTask.Callback {
 	 * @param offset_y the y offset within the target object
 	 */
 	public void placePlayerAsyncAt(final MapObject.MapObjectType objectType, final String mapName, final String placeName, final int offset_x, final int offset_y) {
-		controllers.gameRoundController.acquirePause(PauseReason.MAP_TRANSITION);
-		// This should run pretty quickly, so we won't worry about canceling if activity closes
-		executor.execute(() -> {
-			boolean mapLoadSucceeded = false;
-			try {
-				stopMovement();
-				placePlayerAt(controllers.getResources(), objectType, mapName, placeName, offset_x, offset_y);
-				mapLoadSucceeded = true;
-			} catch (RuntimeException e) {
-				L.error("Map transition failed: " + e.getMessage());
-			} finally {
-				final boolean notifyListeners = mapLoadSucceeded;
-				mainHandler.post(() -> {
-					stopMovement();
-					controllers.gameRoundController.releasePause(PauseReason.MAP_TRANSITION);
-					if (notifyListeners) {
-						playerMovementListeners.onPlayerEnteredNewMap(world.model.currentMaps.map, world.model.player.position);
-					}
-				});
-			}
+        if (mapTransitionInProgress) {
+            L.error("placePlayerAsyncAt called while a map transition is already in progress");
+            return;
+        }
+
+        controllers.gameRoundController.acquirePause(PauseReason.MAP_TRANSITION);
+        mapTransitionInProgress = true;
+
+        // This should run pretty quickly, so we won't worry about canceling if activity closes
+        executor.execute(() -> {
+            boolean mapLoadSucceeded = false;
+            try {
+                stopMovement();
+                placePlayerAt(controllers.getResources(), objectType, mapName, placeName, offset_x, offset_y);
+                mapLoadSucceeded = true;
+            } catch (RuntimeException e) {
+                L.error("Map transition failed: " + e.getMessage());
+            } finally {
+                final boolean notifyListeners = mapLoadSucceeded;
+                mainHandler.post(() -> {
+                    stopMovement();
+                    controllers.gameRoundController.releasePause(PauseReason.MAP_TRANSITION);
+                    mapTransitionInProgress = false;
+                    if (notifyListeners) {
+                        playerMovementListeners.onPlayerEnteredNewMap(world.model.currentMaps.map, world.model.player.position);
+                    }
+                });
+            }
 		});
 	}
 
@@ -308,8 +317,13 @@ public final class MovementController implements TimedMessageTask.Callback {
 		placePlayerAt(res, MapObject.MapObjectType.rest, world.model.player.getSpawnMap(), world.model.player.getSpawnPlace(), 0, 0);
 		playerMovementListeners.onPlayerEnteredNewMap(world.model.currentMaps.map, world.model.player.position);
 	}
+
 	public void respawnPlayerAsync() {
 		placePlayerAsyncAt(MapObject.MapObjectType.rest, world.model.player.getSpawnMap(), world.model.player.getSpawnPlace(), 0, 0);
+	}
+
+	public boolean isMapTransitionInProgress() {
+		return mapTransitionInProgress;
 	}
 
 	public void moveBlockedActors(PredefinedMap map, LayeredTileMap tileMap) {

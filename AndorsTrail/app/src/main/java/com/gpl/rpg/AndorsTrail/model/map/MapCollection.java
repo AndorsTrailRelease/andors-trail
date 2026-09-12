@@ -65,29 +65,31 @@ public final class MapCollection {
 		for(int i = 0; i < size; ++i) {
 			String name;
 			if (fileversion >= 35) {
+				L.debug("MapCollection.readFromParcel: reading map name for entry " + i + " of " + size + ".");
 				name = src.readUTF();
 			} else {
 				name = LegacySavegameFormatReaderForMap.getMapnameFromIndex(i);
 			}
+			L.debug("MapCollection.readFromParcel: loading map \"" + name + "\" (" + (i + 1) + "/" + size + ").");
 			PredefinedMap map = predefinedMaps.get(name);
 			if (map == null) {
-				if (AndorsTrailApplication.DEVELOPMENT_VALIDATEDATA) {
-					L.log("WARNING: Tried to load savegame with map \"" + name + "\", but no such map exists.");
+				// Savegame contains unknown map, bail out.  This will fail in production too;
+				// a missing map is a critical content bug that should be caught before it goes to prod.
+				throw new IOException("Savegame contains unknown map \"" + name + "\".");
+			} else {
+				map.readFromParcel(src, world, controllers, fileversion);
+				L.debug("MapCollection.readFromParcel: loaded map \"" + name + "\" (" + (i + 1) + "/" + size + ").");
+				if (i >= 40) {
+					if (fileversion < 15) map.visited = false;
 				}
-				continue;
-			}
-			map.readFromParcel(src, world, controllers, fileversion);
-			if (i >= 40) {
-				if (fileversion < 15) map.visited = false;
 			}
 		}
 	}
 
 	public static boolean shouldSaveMap(WorldContext world, PredefinedMap map) {
 		if (map.visited) return true;
-		if (map.shouldSaveMapData(world)) return true;
-		return false;
-	}
+        return map.shouldSaveMapData(world);
+    }
 
 	public void writeToParcel(DataOutputStream dest, WorldContext world) throws IOException {
 		List<PredefinedMap> mapsToExport = new ArrayList<PredefinedMap>();

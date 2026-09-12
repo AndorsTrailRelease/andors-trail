@@ -49,6 +49,8 @@ public final class Savegames {
 		, cheatingDetected
 	}
 
+	private static String lastLoadFailureMessage = null;
+
 	public static boolean saveWorld(WorldContext world, Context androidContext, int slot) {
 		try {
 			final String displayInfo = androidContext.getString(R.string.savegame_currenthero_displayinfo, world.model.player.getLevel(), world.model.player.getTotalExperience(), world.model.player.getGold());
@@ -96,36 +98,62 @@ public final class Savegames {
 	}
 
 	public static LoadSavegameResult loadWorld(WorldContext world, ControllerContext controllers, Context androidContext, int slot) {
+		lastLoadFailureMessage = null;
 		try {
 			FileHeader fh = quickload(androidContext, slot);
 			if(fh == null) {
+				L.warn("Savegames.loadWorld(slot=" + slot + "): save file cannot be loaded because it is missing or unreadable.");
 				return LoadSavegameResult.unknownError;
 			}
 			if (!fh.hasUnlimitedSaves && slot != SLOT_QUICKSAVE && triedToCheat(androidContext, fh)) {
+				L.warn("Savegames.loadWorld(slot=" + slot + "): save file cannot be loaded because cheat detection failed for " + fh.describe() + ".");
 				return LoadSavegameResult.cheatingDetected;
 			}
 
 			FileInputStream fos = getInputFile(androidContext, slot);
-			LoadSavegameResult result = loadWorld(androidContext.getResources(), world, controllers, androidContext, fos, fh);
-			fos.close();
+			LoadSavegameResult result;
+			try {
+				result = loadWorld(androidContext.getResources(), world, controllers, androidContext, fos, fh);
+			} catch (IOException | DigestException e) {
+				lastLoadFailureMessage = e.getMessage() != null ? e.getMessage() : e.toString();
+				debugLoadFailure("Savegames.loadWorld(slot=" + slot + "): scene cannot be loaded from " + fh.describe() + ".", e);
+				return LoadSavegameResult.unknownError;
+			} finally {
+				fos.close();
+			}
+
+			if (result == LoadSavegameResult.savegameIsFromAFutureVersion) {
+				L.warn("Savegames.loadWorld(slot=" + slot + "): scene cannot be loaded because savegame version " + fh.fileversion + " is newer than current version " + AndorsTrailApplication.CURRENT_VERSION + ".");
+			}
+
 			if (result == LoadSavegameResult.success && slot != SLOT_QUICKSAVE && !world.model.statistics.hasUnlimitedSaves()) {
 				// save to the quicksave slot before deleting the file
 				if (!saveWorld(world, androidContext, SLOT_QUICKSAVE)) {
+					L.warn("Savegames.loadWorld(slot=" + slot + "): scene loaded, but quicksaving before deleting the original save file failed.");
 					return LoadSavegameResult.unknownError;
 				}
-				getSlotFile(slot, androidContext).delete();
+
+				boolean b = getSlotFile(slot, androidContext).delete();
 				writeCheatCheck(androidContext, DENY_LOADING_BECAUSE_GAME_IS_CURRENTLY_PLAYED, fh.playerId);
 			}
 			return result;
-		} catch (IOException | DigestException e) {
-			if (AndorsTrailApplication.DEVELOPMENT_DEBUGMESSAGES) {
-				L.log("Error loading world: " + e.toString());
-				StringWriter sw = new StringWriter();
-				PrintWriter pw = new PrintWriter(sw);
-				e.printStackTrace(pw);
-				L.log("Load error: " + sw.toString());
-			}
+		} catch (IOException e) {
+			lastLoadFailureMessage = e.getMessage() != null ? e.getMessage() : e.toString();
+			debugLoadFailure("Savegames.loadWorld(slot=" + slot + "): save file cannot be loaded." , e);
 			return LoadSavegameResult.unknownError;
+		}
+	}
+
+	public static String getLastLoadFailureMessage() {
+		return lastLoadFailureMessage;
+	}
+
+	private static void debugLoadFailure(String message, Throwable e) {
+		if (AndorsTrailApplication.DEVELOPMENT_DEBUGMESSAGES) {
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			e.printStackTrace(pw);
+			L.warn(message + " " + e + "\n" + sw);
 		}
 	}
 
@@ -280,6 +308,8 @@ public final class Savegames {
 			fos.close();
 			return header;
 		} catch (Exception e) {
+			lastLoadFailureMessage = e.getMessage() != null ? e.getMessage() : e.toString();
+			debugLoadFailure("Savegames.quickload(slot=" + slot + "): save file cannot be loaded." , e);
 			return null;
 		}
 	}

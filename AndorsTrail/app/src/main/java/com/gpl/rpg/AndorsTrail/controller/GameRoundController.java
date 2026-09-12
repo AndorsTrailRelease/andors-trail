@@ -21,6 +21,14 @@ public final class GameRoundController implements TimedMessageTask.Callback {
 	}
 
 	/**
+	 * Callback used to resume combat after the last blocking pause is released.
+	 * Implemented as interface to support unit testing.
+	 */
+	interface CombatResumeHook {
+		void resumeCombatIfNeeded();
+	}
+
+	/**
 	 * Production timer implementation backed by {@link TimedMessageTask}.
 	 */
 	private static final class TimedRoundTimer implements RoundTimer {
@@ -50,6 +58,7 @@ public final class GameRoundController implements TimedMessageTask.Callback {
 
 	private final ControllerContext controllers;
 	private final WorldContext world;
+	private final CombatResumeHook combatResumeHook;
 	private final RoundTimer roundTimer;
 	private final EnumSet<PauseReason> activePauses = EnumSet.noneOf(PauseReason.class);
 	public final GameRoundListeners gameRoundListeners = new GameRoundListeners();
@@ -60,6 +69,7 @@ public final class GameRoundController implements TimedMessageTask.Callback {
 	public GameRoundController(ControllerContext controllers, WorldContext world) {
 		this.controllers = controllers;
 		this.world = world;
+		this.combatResumeHook = controllers.combatController::resumeCombatIfNeeded;
 		this.roundTimer = new TimedRoundTimer(new TimedMessageTask(this, Constants.TICK_DELAY, true));
 		activePauses.add(PauseReason.ACTIVITY_HIDDEN);
 		updateTimerState();
@@ -68,9 +78,10 @@ public final class GameRoundController implements TimedMessageTask.Callback {
 	/**
 	 * Test-only constructor that allows the round timer implementation to be replaced.
 	 */
-	GameRoundController(ControllerContext controllers, WorldContext world, RoundTimer roundTimer) {
+	GameRoundController(ControllerContext controllers, WorldContext world, CombatResumeHook combatResumeHook, RoundTimer roundTimer) {
 		this.controllers = controllers;
 		this.world = world;
+		this.combatResumeHook = combatResumeHook;
 		this.roundTimer = roundTimer;
 		activePauses.add(PauseReason.ACTIVITY_HIDDEN);
 		updateTimerState();
@@ -139,6 +150,9 @@ public final class GameRoundController implements TimedMessageTask.Callback {
 		}
 		activePauses.remove(reason);
 		updateTimerState();
+		if (!hasPauseReasons()) {
+			combatResumeHook.resumeCombatIfNeeded();
+		}
 	}
 
 	/**
@@ -156,7 +170,6 @@ public final class GameRoundController implements TimedMessageTask.Callback {
 	 */
 	public void onMainActivityResumed() {
 		releasePause(PauseReason.ACTIVITY_HIDDEN);
-		controllers.combatController.resumeCombatIfNeeded();
 	}
 
 	/**
@@ -201,6 +214,7 @@ public final class GameRoundController implements TimedMessageTask.Callback {
 			roundTimer.stop();
 			return;
 		}
+		// TODO: Don't use visibility flag as proxy for pause state, or at least rename it.
 		world.model.uiSelections.isMainActivityVisible = !hasPauseReasons();
 		if (hasPauseReasons() || world.model.uiSelections.isInCombat) {
 			roundTimer.stop();

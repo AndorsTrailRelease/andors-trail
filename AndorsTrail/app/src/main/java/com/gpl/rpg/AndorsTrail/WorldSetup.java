@@ -175,8 +175,8 @@ public final class WorldSetup {
 		world.model.player.initializeNewPlayer(world.dropLists, newHeroName, newHeroIcon);
 
 		controllers.actorStatsController.recalculatePlayerStats(world.model.player);
+        controllers.mapController.lotsOfTimePassed();
 		controllers.movementController.respawnPlayer(ctx.getResources());
-		controllers.mapController.lotsOfTimePassed();
 		return Savegames.LoadSavegameResult.success;
 	}
 
