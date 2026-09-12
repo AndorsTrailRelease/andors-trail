@@ -32,6 +32,22 @@
                         "value":11
                     }
                 ]
+            },
+            {
+                "text":"Please keep these 4850 gold coins for safekeeping. Rain asked for you until he gets over his hangover, he'll come collect them when he is ready.",
+                "nextPhraseID":"bela_rain",
+                "requires":[
+                    {
+                        "requireType":"questLatestProgress",
+                        "requireID":"undertell_barricades",
+                        "value":140
+                    },
+                    {
+                        "requireType":"inventoryRemove",
+                        "requireID":"gold",
+                        "value":4850
+                    }
+                ]
             }
         ]
     },

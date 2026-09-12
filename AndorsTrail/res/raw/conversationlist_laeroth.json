@@ -587,7 +587,7 @@
                 "nextPhraseID":"X"
             },
             {
-                "text":"Um...sure, I guess",
+                "text":"Um...sure, I guess.",
                 "nextPhraseID":"gylew2"
             }
         ]
@@ -885,7 +885,7 @@
                 ]
             },
             {
-                "text":"Um...I am returning something to a man name Gylew.",
+                "text":"Um...I am returning something to a man named Gylew.",
                 "nextPhraseID":"forenza_island_10",
                 "requires":[
                     {
@@ -1083,7 +1083,7 @@
         "message":"You will do this for me?",
         "replies":[
             {
-                "text":"Yes",
+                "text":"Yes.",
                 "nextPhraseID":"forenza_island_180"
             },
             {
@@ -1135,7 +1135,7 @@
         "message":"Hey, kid, nice to see you again.",
         "replies":[
             {
-                "text":"It's nice to see you too.  Can we talk about the Korhald coins?",
+                "text":"It's nice to see you too. Can we talk about the Korhald coins?",
                 "nextPhraseID":"forenza_brimhaven_5",
                 "requires":[
                     {
@@ -2343,7 +2343,7 @@
         "message":"Hmm...these are indeed interesting. Very interesting in fact.",
         "replies":[
             {
-                "text":"[While trying to hold back the giant smile that you can feel growing upon your face, you ask]'why is that'?",
+                "text":"[While trying to hold back the giant smile that you can feel growing upon your face, you ask:] 'Why is that'?",
                 "nextPhraseID":"forenza_korhald_cop_20"
             }
         ]
@@ -11316,6 +11316,39 @@
             {
                 "text":"What are you doing down here?",
                 "nextPhraseID":"gwendolyn_3"
+            },
+            {
+                "text":"I'm searching for something called \"The Ritual of Five Aspects\". Have you ever heard of it?",
+                "nextPhraseID":"gwendolyn_kazaul_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"fifth_master",
+                        "value":40
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"fifth_master",
+                        "value":55,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"Gwendolyn, do you know anything about a locked box back here?",
+                "nextPhraseID":"gwendolyn_kazaul_locked_box_10",
+                "requires":[
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"ancient_locked_box",
+                        "value":1
+                    },
+                    {
+                        "requireType":"questLatestProgress",
+                        "requireID":"fifth_master",
+                        "value":55
+                    }
+                ]
             }
         ]
     },

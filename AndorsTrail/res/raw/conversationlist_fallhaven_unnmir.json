@@ -6,9 +6,19 @@
                 "nextPhraseID":"unnmir_r",
                 "requires":[
                     {
-                        "requireType":"questProgress",
+                        "requireType":"questLatestProgress",
                         "requireID":"nocmar",
                         "value":10
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"unnmir_hs_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"nocmar",
+                        "value":40
                     }
                 ]
             },
@@ -39,6 +49,28 @@
                         "requireType":"questProgress",
                         "requireID":"fallhavendrunk",
                         "value":100
+                    }
+                ]
+            },
+            {
+                "text":"Inside Undertell, I stumbled across the remains of an adventurer. Among his possessions, he had a 'Jewel of Fallhaven'.",
+                "nextPhraseID":"unnmir_undertell_book_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_book",
+                        "value":10
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_book",
+                        "value":40,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"undertell_book",
+                        "value":1
                     }
                 ]
             }

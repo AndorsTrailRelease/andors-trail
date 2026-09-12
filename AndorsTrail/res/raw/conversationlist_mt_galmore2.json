@@ -1621,11 +1621,17 @@
     },
     {
         "id":"lava_ground",
-        "rewards":[
+        "replies":[
             {
-                "rewardType":"actorCondition",
-                "rewardID":"burning",
-                "value":1
+                "nextPhraseID":"lava_ground_burn",
+                "requires":[
+                    {
+                        "requireType":"wear",
+                        "requireID":"heartfire_pendant",
+                        "value":1,
+                        "negate":true
+                    }
+                ]
             }
         ]
     },
@@ -4997,7 +5003,40 @@
                 ]
             },
             {
-                "text":"I'm wondering if you could help me? I'm looking for something.",
+                "text":"I was wondering, why are those barricades there? [pointing southwest]",
+                "nextPhraseID":"mg_myrelis_barricades_10",
+                "requires":[
+                    {
+                        "requireType":"questLatestProgress",
+                        "requireID":"nocmar",
+                        "value":20
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_hidden",
+                        "value":3
+                    }
+                ]
+            },
+            {
+                "text":"How do I get past those barricades?",
+                "nextPhraseID":"mg_myrelis_shannal_10",
+                "requires":[
+                    {
+                        "requireType":"questLatestProgress",
+                        "requireID":"nocmar",
+                        "value":35
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_barricades",
+                        "value":20,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"I am wondering if you could help me, I am looking for something.",
                 "nextPhraseID":"mg_myrelis_undertell_10",
                 "requires":[
                     {
@@ -10040,7 +10079,7 @@
         "message":"What is it?",
         "replies":[
             {
-                "text":"I'm looking for something called \"Undertell\", do you know where it is?",
+                "text":"I'm looking for some place called \"Undertell\", do you know where it is?",
                 "nextPhraseID":"mg_myrelis_undertell_20"
             },
             {
@@ -10064,6 +10103,12 @@
         "id":"mg_myrelis_undertell_30",
         "message":"Over there, but it looks like it's blocked.",
         "switchToNPC":"mg_myrelis",
+        "replies":[
+            {
+                "text":"How do I get past those barricades?",
+                "nextPhraseID":"mg_myrelis_shannal_10"
+            }
+        ],
         "rewards":[
             {
                 "rewardType":"questProgress",

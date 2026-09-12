@@ -19,6 +19,53 @@
                 ]
             },
             {
+                "nextPhraseID":"benbyr_shannal_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_barricades",
+                        "value":40
+                    },
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"trader_guild-coins",
+                        "value":1
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_barricades",
+                        "value":70,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"benbyr_step_70",
+                "requires":[
+                    {
+                        "requireType":"questLatestProgress",
+                        "requireID":"undertell_barricades",
+                        "value":70
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"benbyr_restitution_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_barricades",
+                        "value":90
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_barricades",
+                        "value":120,
+                        "negate":true
+                    }
+                ]
+            },
+            {
                 "nextPhraseID":"benbyr_declined",
                 "requires":[
                     {

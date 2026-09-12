@@ -38,6 +38,187 @@
                         "value":20
                     }
                 ]
+            },
+            {
+                "text":"What am I supposed to do again?",
+                "nextPhraseID":"arcir_remind_40",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_book",
+                        "value":40
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_book",
+                        "value":50,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_book",
+                        "value":60,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_book",
+                        "value":70,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"The Elytharan ghost still remembers who he was.",
+                "nextPhraseID":"arcir_partial_50",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_book",
+                        "value":50
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_book",
+                        "value":60,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_book",
+                        "value":70,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"The ghost spoke only of work, of tasks repeated.",
+                "nextPhraseID":"arcir_partial_60",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_book",
+                        "value":60
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_book",
+                        "value":50,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_book",
+                        "value":70,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"I tried to speak to a ghost, but it would not speak at all.",
+                "nextPhraseID":"arcir_partial_70",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_book",
+                        "value":70
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_book",
+                        "value":50,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_book",
+                        "value":60,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"I spoke to more than one Elytharan ghost.",
+                "nextPhraseID":"arcir_partial_two",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_book",
+                        "value":50
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_book",
+                        "value":60
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_book",
+                        "value":70,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"I spoke to more than one Elytharan ghost.",
+                "nextPhraseID":"arcir_partial_two",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_book",
+                        "value":70
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_book",
+                        "value":60
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_book",
+                        "value":50,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"I spoke to more than one Elytharan ghost.",
+                "nextPhraseID":"arcir_partial_two",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_book",
+                        "value":50
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_book",
+                        "value":70
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_book",
+                        "value":60,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"The Elytharan ghosts remember different things.",
+                "nextPhraseID":"arcir_undertell_complete_npc",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_book",
+                        "value":80
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_book",
+                        "value":90,
+                        "negate":true
+                    }
+                ]
             }
         ]
     },
@@ -92,7 +273,7 @@
                 "nextPhraseID":"arcir_anythingelse"
             },
             {
-                "text":"I have found some valuable looking map. Want to have a look?",
+                "text":"I have found some valuable-looking map. Want to have a look?",
                 "nextPhraseID":"arcir_books_rares_map",
                 "requires":[
                     {
@@ -119,12 +300,29 @@
                 ]
             },
             {
-                "text":"I have got a book about world history. Interested?",
+                "text":"I have a book about world history. Interested?",
                 "nextPhraseID":"arcir_books_rares_book2",
                 "requires":[
                     {
                         "requireType":"inventoryKeep",
                         "requireID":"book_world_history",
+                        "value":1
+                    }
+                ]
+            },
+            {
+                "text":"I found a book about Undertell. I thought you might know something about it.",
+                "nextPhraseID":"arcir_undertell_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_book",
+                        "value":40,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"undertell_book",
                         "value":1
                     }
                 ]

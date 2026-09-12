@@ -1,7 +1,7 @@
 [
     {
         "id":"nocmar",
-        "message":"Hello. I'm Nocmar.",
+        "message":"Hello and welcome to my place.",
         "replies":[
             {
                 "text":"This place looks like a smithy. Do you have anything to trade?",
@@ -15,12 +15,29 @@
                         "requireType":"questProgress",
                         "requireID":"nocmar",
                         "value":10
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"place_to_forge",
+                        "value":60,
+                        "negate":true
                     }
                 ]
             },
             {
                 "text":"Bye.",
                 "nextPhraseID":"X"
+            },
+            {
+                "text":"What will you do now?",
+                "nextPhraseID":"nocmar_deed_receive_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"place_to_forge",
+                        "value":60
+                    }
+                ]
             }
         ]
     },
@@ -33,7 +50,7 @@
                     {
                         "requireType":"questProgress",
                         "requireID":"nocmar",
-                        "value":200
+                        "value":80
                     }
                 ]
             },
@@ -195,12 +212,18 @@
         "replies":[
             {
                 "text":"Yes, at last I found it.",
-                "nextPhraseID":"nocmar_complete",
+                "nextPhraseID":"nocmar_unrefined_stone_10",
                 "requires":[
                     {
-                        "requireType":"inventoryRemove",
-                        "requireID":"heartstone",
+                        "requireType":"inventoryKeep",
+                        "requireID":"heartstone_unrefined",
                         "value":1
+                    },
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"heartstone",
+                        "value":1,
+                        "negate":true
                     }
                 ]
             },
@@ -211,6 +234,50 @@
             {
                 "text":"No, not yet.",
                 "nextPhraseID":"nocmar_continue_2"
+            },
+            {
+                "text":"Actually, I found two. [extend your hands, one stone in each]",
+                "nextPhraseID":"nocmar_two_stones_10",
+                "requires":[
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"heartstone_unrefined",
+                        "value":1
+                    },
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"heartstone",
+                        "value":1
+                    }
+                ]
+            },
+            {
+                "text":"Yes, at last I found it.",
+                "nextPhraseID":"nocmar_complete",
+                "requires":[
+                    {
+                        "requireType":"inventoryRemove",
+                        "requireID":"heartstone",
+                        "value":1
+                    },
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"heartstone_unrefined",
+                        "value":1,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"[while shaking your head] It's in your hand.",
+                "nextPhraseID":"nocmar_complete_2",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_hidden",
+                        "value":10
+                    }
+                ]
             }
         ]
     },
@@ -220,7 +287,7 @@
     },
     {
         "id":"nocmar_complete",
-        "message":"By the Shadow. You actually found a heartstone. I thought I wouldn't live to see the day.",
+        "message":"So you truly have it? The heartstone...beautiful and intact. Remarkable. You've done what few would dare. Can you see the glow? It's literally pulsating.",
         "replies":[
             {
                 "text":"N",
@@ -230,34 +297,44 @@
         "rewards":[
             {
                 "rewardType":"questProgress",
-                "rewardID":"nocmar",
-                "value":200
+                "rewardID":"undertell_hidden",
+                "value":10
             }
         ]
     },
     {
         "id":"nocmar_complete_2",
-        "message":"Can you see the glow? It's literally pulsating.",
+        "message":"He studies it with reverence, then grows troubled.",
+        "switchToNPC":"none",
         "replies":[
             {
-                "text":"N",
+                "text":"Oh, no!",
                 "nextPhraseID":"nocmar_complete_3"
             }
         ]
     },
     {
         "id":"nocmar_complete_3",
-        "message":"Quick. Let's get these old heartsteel weapons glowing again.",
+        "message":"But no, I cannot work it here. Too many eyes, too many whispers. If I were caught forging heartsteel in this shop, it would mean ruin for me. I need a place that is safe, hidden, yet...proper. Somewhere I can work without Lord Geomyr's men breathing down my neck. A place where I am allowed to be.",
+        "switchToNPC":"nocmar",
         "replies":[
             {
                 "text":"N",
                 "nextPhraseID":"nocmar_complete_4"
             }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"nocmar",
+                "value":80
+            }
         ]
     },
     {
         "id":"nocmar_complete_4",
-        "message":"[Nocmar places the heartstone among the heartsteel weapons]",
+        "message":"While pausing, Nocmar looks down, then sighs.",
+        "switchToNPC":"none",
         "replies":[
             {
                 "text":"N",
@@ -267,11 +344,48 @@
     },
     {
         "id":"nocmar_complete_5",
-        "message":"Can you feel it? The heartsteel is glowing again.",
+        "message":"There was a time, before all this, when I had a place. A house. Not just any house...a white house on the edge of Fallhaven, glowing as if lit by the gods themselves. That glow comes from the forge inside. A forge unlike any other, always hot, always ready. It was there that I forged heartsteel in secret, while the shopfront stayed clean for coin and trade.",
+        "switchToNPC":"nocmar",
         "replies":[
             {
-                "text":"Let me see what items you have available.",
-                "nextPhraseID":"S"
+                "text":"Wait, that's your house?",
+                "nextPhraseID":"nocmar_white_house_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"place_to_forge",
+                        "value":50,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"Well, that time has come back! I have the deed and the key to your forge house. [hand them to Nocmar]",
+                "nextPhraseID":"nocmar_wh_10",
+                "requires":[
+                    {
+                        "requireType":"questLatestProgress",
+                        "requireID":"place_to_forge",
+                        "value":50
+                    },
+                    {
+                        "requireType":"inventoryRemove",
+                        "requireID":"white_house_deed",
+                        "value":1
+                    },
+                    {
+                        "requireType":"inventoryRemove",
+                        "requireID":"white_house_key",
+                        "value":1
+                    }
+                ]
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"place_to_forge",
+                "value":10
             }
         ]
     }
