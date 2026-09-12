@@ -7,6 +7,8 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +17,6 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.gpl.rpg.AndorsTrail.AndorsTrailApplication;
@@ -40,6 +41,7 @@ public final class WorldMapController {
 
 	private static final int WORLDMAP_SCREENSHOT_TILESIZE = 8;
 	public static final int WORLDMAP_DISPLAY_TILESIZE = WORLDMAP_SCREENSHOT_TILESIZE;
+	private static final ExecutorService executor = Executors.newSingleThreadExecutor();
 
 	public static void updateWorldMap(Context context, final WorldContext world, final Resources res) {
 		updateWorldMap(context, world, world.model.currentMaps.map, world.model.currentMaps.tileMap, world.model.currentMaps.tiles, res);
@@ -56,23 +58,19 @@ public final class WorldMapController {
 
 		if (!shouldUpdateWorldMap(context, map, worldMapSegmentName, world.maps.worldMapRequiresUpdate)) return;
 
-		(new AsyncTask<Void, Void, Void>() {
-			@Override
-			protected Void doInBackground(Void... arg0) {
-				final MapRenderer renderer = new MapRenderer(world, map, mapTiles, cachedTiles);
-				try {
-					updateCachedBitmap(context, map, renderer);
-					updateWorldMapSegment(context, res, world, worldMapSegmentName);
-					world.maps.worldMapRequiresUpdate = false;
-					if (AndorsTrailApplication.DEVELOPMENT_DEBUGMESSAGES) {
-						L.log("WorldMapController: Updated worldmap segment " + worldMapSegmentName + " for map " + map.name);
-					}
-				} catch (IOException e) {
-					L.log("Error creating worldmap file for map " + map.name + " : " + e.toString());
+		executor.execute(() -> {
+			final MapRenderer renderer = new MapRenderer(world, map, mapTiles, cachedTiles);
+			try {
+				updateCachedBitmap(context, map, renderer);
+				updateWorldMapSegment(context, res, world, worldMapSegmentName);
+				world.maps.worldMapRequiresUpdate = false;
+				if (AndorsTrailApplication.DEVELOPMENT_DEBUGMESSAGES) {
+					L.log("WorldMapController: Updated worldmap segment " + worldMapSegmentName + " for map " + map.name);
 				}
-				return null;
+			} catch (IOException e) {
+				L.log("Error creating worldmap file for map " + map.name + " : " + e.toString());
 			}
-		}).execute();
+		});
 	}
 
 	private static boolean shouldUpdateWorldMap(Context context, PredefinedMap map, String worldMapSegmentName, boolean forceUpdate) {
