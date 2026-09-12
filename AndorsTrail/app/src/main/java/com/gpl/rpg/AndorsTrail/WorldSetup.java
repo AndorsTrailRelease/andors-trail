@@ -174,7 +174,6 @@ public final class WorldSetup {
 		world.model = new ModelContainer(newHeroStartLives, newHeroUnlimitedSaves);
 		world.model.player.initializeNewPlayer(world.dropLists, newHeroName, newHeroIcon);
 
-		controllers.actorStatsController.recalculatePlayerStats(world.model.player);
         controllers.mapController.lotsOfTimePassed();
 		controllers.movementController.respawnPlayer(ctx.getResources());
 		return Savegames.LoadSavegameResult.success;
