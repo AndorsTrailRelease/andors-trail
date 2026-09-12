@@ -62,7 +62,7 @@ public final class WorldSetup {
 			isInitializingResources = true;
 		}
 
-		//Load resources essential to the app synchroneously
+		//Load resources essential to the app synchronously
 		try {
 			ResourceLoader.loadResourcesSync(world, r);
 		} catch (RuntimeException e) {
@@ -174,7 +174,7 @@ public final class WorldSetup {
 		world.model = new ModelContainer(newHeroStartLives, newHeroUnlimitedSaves);
 		world.model.player.initializeNewPlayer(world.dropLists, newHeroName, newHeroIcon);
 
-        controllers.mapController.lotsOfTimePassed();
+		controllers.mapController.lotsOfTimePassed();
 		controllers.movementController.respawnPlayer(ctx.getResources());
 		return Savegames.LoadSavegameResult.success;
 	}
