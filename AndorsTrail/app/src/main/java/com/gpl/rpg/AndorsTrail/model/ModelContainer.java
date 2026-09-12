@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import com.gpl.rpg.AndorsTrail.context.ControllerContext;
+import com.gpl.rpg.AndorsTrail.AndorsTrailApplication;
 import com.gpl.rpg.AndorsTrail.context.WorldContext;
 import com.gpl.rpg.AndorsTrail.model.actor.Player;
 
@@ -50,7 +51,10 @@ public final class ModelContainer {
 		worldData.writeToParcel(dest);
 	}
 	public void addToChecksum(ChecksumBuilder builder){
-		player.addToChecksum(builder);
+		addToChecksum(builder, AndorsTrailApplication.CURRENT_VERSION);
+	}
+	public void addToChecksum(ChecksumBuilder builder, int fileversion){
+		player.addToChecksum(builder, fileversion);
 		builder.add(currentMaps.map.name);
 		uiSelections.addToChecksum(builder);
 		statistics.addToChecksum(builder);
