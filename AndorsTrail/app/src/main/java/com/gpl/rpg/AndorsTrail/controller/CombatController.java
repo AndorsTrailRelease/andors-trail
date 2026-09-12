@@ -20,6 +20,8 @@ import com.gpl.rpg.AndorsTrail.model.actor.Monster;
 import com.gpl.rpg.AndorsTrail.model.actor.MonsterType;
 import com.gpl.rpg.AndorsTrail.model.actor.Player;
 import com.gpl.rpg.AndorsTrail.model.item.ItemContainer;
+import com.gpl.rpg.AndorsTrail.model.item.ItemType;
+import com.gpl.rpg.AndorsTrail.model.item.Inventory;
 import com.gpl.rpg.AndorsTrail.model.item.ItemTraits_OnHitReceived;
 import com.gpl.rpg.AndorsTrail.model.item.ItemTraits_OnUse;
 import com.gpl.rpg.AndorsTrail.model.item.Loot;
@@ -225,7 +227,7 @@ public final class CombatController implements VisualEffectCompletedCallback {
 			}
 
 			controllers.skillController.applySkillEffectsFromPlayerAttack(attack, target);
-			startAttackEffect(attack, attackPosition, this, CALLBACK_PLAYERATTACK);
+			startAttackEffect(attack, world.model.player, attackPosition, this, CALLBACK_PLAYERATTACK);
 		} else {
 			combatActionListeners.onPlayerAttackMissed(target, attack);
 			controllers.skillController.applySkillEffectsFromPlayerAttack(attack, target);
@@ -486,12 +488,31 @@ public final class CombatController implements VisualEffectCompletedCallback {
 	}
 
 	private void startAttackEffect(AttackResult attack, final Coord position, VisualEffectCompletedCallback callback, int callbackValue) {
+		startAttackEffect(attack, null, position, callback, callbackValue);
+	}
+
+	private void startAttackEffect(AttackResult attack, final Actor attacker, final Coord position, VisualEffectCompletedCallback callback, int callbackValue) {
 		if (controllers.preferences.attackspeed_milliseconds <= 0) {
 			callback.onVisualEffectCompleted(callbackValue);
 			return;
 		}
 
 		String displayValue = attack.damage == 0 ? null : Format.localizeInt(attack.damage);
+		if (attacker instanceof Player && isPoleWeapon((Player) attacker)) {
+			controllers.effectController.startEffect(attacker.position, VisualEffectCollection.VisualEffectID.poleAttack, null, null, 0, getPoleAttackRotation(attacker.position, position), getPoleAttackScale(attacker.position, position));
+		}
+		if (attacker instanceof Player) startLongswordAttack((Player) attacker, position);
+		if (attacker instanceof Player) startAxeAttack((Player) attacker, position);
+		if (attacker instanceof Player) startLightBladeAttack((Player) attacker, position);
+		if (attacker instanceof Player) startBroadswordAttack((Player) attacker, position);
+		if (attacker instanceof Player) startWhipAttack((Player) attacker, position);
+		if (attacker instanceof Player) startRapierAttack((Player) attacker, position);
+		if (attacker instanceof Player) startBluntWeaponAttack((Player) attacker, position);
+		if (attacker instanceof Player) startQuarterstaffAttack((Player) attacker, position);
+		if (attacker instanceof Player) startHeavyBluntAttack((Player) attacker, position);
+		if (attacker instanceof Player) startBarehandedAttack((Player) attacker, position);
+		if (attacker instanceof Player) startGauntletAttack((Player) attacker, position);
+		if (attacker instanceof Player) startOtherOffhandAttack((Player) attacker, position);
 
 		controllers.effectController.startEffect(
 				position
@@ -501,6 +522,317 @@ public final class CombatController implements VisualEffectCompletedCallback {
 				, callbackValue);
 	}
 	
+	private static boolean isPoleWeapon(Player player) {
+		if (player.inventory.getItemTypeInWearSlot(Inventory.WearSlot.weapon) == null) return false;
+		return "pole".equals(player.inventory.getItemTypeInWearSlot(Inventory.WearSlot.weapon).category.id);
+	}
+
+	private static float getPoleAttackRotation(Coord attacker, Coord target) {
+		return (float) Math.toDegrees(Math.atan2(target.y - attacker.y, target.x - attacker.x)) + 45f;
+	}
+
+	private static float getPoleAttackScale(Coord attacker, Coord target) {
+		int dx = target.x - attacker.x;
+		int dy = target.y - attacker.y;
+		return (float) (Math.sqrt((double) dx * dx + (double) dy * dy) / Math.sqrt(2.0));
+	}
+
+	private void startLongswordAttack(Player player, Coord target) {
+		ItemType mainHand = player.inventory.getItemTypeInWearSlot(Inventory.WearSlot.weapon);
+		if (!isLongsword(mainHand)) return;
+
+		Coord attacker = player.position;
+		float distanceScale = getPoleAttackScale(attacker, target);
+		controllers.effectController.startEffect(attacker, VisualEffectCollection.VisualEffectID.longswordAttack, null, null, 0, getPoleAttackRotation(attacker, target), distanceScale, false, target, getLongswordVariation());
+
+		ItemType offHand = player.inventory.getItemTypeInWearSlot(Inventory.WearSlot.shield);
+		if (isLongsword(offHand)) {
+			long firstAnimationDuration = 533L * controllers.preferences.attackspeed_milliseconds / AndorsTrailPreferences.ATTACKSPEED_DEFAULT_MILLISECONDS;
+			long delay = Math.max(1L, firstAnimationDuration / 2L);
+			controllers.effectController.startEffectAfterDelay(attacker, VisualEffectCollection.VisualEffectID.longswordAttack, null, null, 0, getPoleAttackRotation(attacker, target), distanceScale, true, target, getLongswordVariation(), delay);
+		}
+	}
+
+	private static boolean isLongsword(ItemType item) {
+		return item != null && "lsword".equals(item.category.id);
+	}
+
+	private void startAxeAttack(Player player, Coord target) {
+		ItemType mainHand = player.inventory.getItemTypeInWearSlot(Inventory.WearSlot.weapon);
+		if (!isAxe(mainHand)) return;
+
+		Coord attacker = player.position;
+		float rotation = getAxeAttackRotation(attacker, target);
+		float distanceScale = getPoleAttackScale(attacker, target);
+		boolean mirrorAcrossVerticalAxis = target.x <= attacker.x;
+		ItemType offHand = player.inventory.getItemTypeInWearSlot(Inventory.WearSlot.shield);
+		if (isAxe(offHand)) {
+			controllers.effectController.startEffect(attacker, VisualEffectCollection.VisualEffectID.dualAxesAttack, null, null, 0, rotation, distanceScale, false, null, 0f, 0f, 0f, mirrorAcrossVerticalAxis);
+			controllers.effectController.startEffect(target, VisualEffectCollection.VisualEffectID.groundShockwave, null, null, 0);
+		} else {
+			controllers.effectController.startEffect(attacker, VisualEffectCollection.VisualEffectID.axeAttack, null, null, 0, rotation, distanceScale, false, null, 0f, 0f, 0f, mirrorAcrossVerticalAxis);
+		}
+
+		if (isGreataxe(mainHand) && Constants.rnd.nextBoolean() && controllers.preferences.enableUiAnimations) {
+			long shockwaveDelay = 8L * 400L * controllers.preferences.attackspeed_milliseconds
+					/ AndorsTrailPreferences.ATTACKSPEED_DEFAULT_MILLISECONDS / 16L;
+			controllers.effectController.startEffectAfterDelay(target, VisualEffectCollection.VisualEffectID.groundShockwave, null, null, 0, 0f, 1f, false, null, 0f, Math.max(1L, shockwaveDelay));
+		}
+
+	}
+
+	private static float getAxeAttackRotation(Coord attacker, Coord target) {
+		return (float) Math.toDegrees(Math.atan2(target.y - attacker.y, Math.abs(target.x - attacker.x))) + 45f;
+	}
+
+	private static boolean isAxe(ItemType item) {
+		return item != null && ("axe".equals(item.category.id) || "axe2h".equals(item.category.id));
+	}
+
+	private static boolean isGreataxe(ItemType item) {
+		return item != null && "axe2h".equals(item.category.id);
+	}
+
+
+	private void startBroadswordAttack(Player player, Coord target) {
+		ItemType weapon = player.inventory.getItemTypeInWearSlot(Inventory.WearSlot.weapon);
+		if (!isBroadsword(weapon) && !isTwoHandedSword(weapon) && !isCategory(weapon, "bigtorch")) return;
+
+		Coord attacker = player.position;
+		controllers.effectController.startEffect(attacker, VisualEffectCollection.VisualEffectID.broadswordAttack, null, null, 0, getPoleAttackRotation(attacker, target), getPoleAttackScale(attacker, target));
+	}
+
+	private static boolean isBroadsword(ItemType item) {
+		return item != null && "bsword".equals(item.category.id);
+	}
+
+	private static boolean isTwoHandedSword(ItemType item) {
+		return item != null && "2hsword".equals(item.category.id);
+	}
+
+	private void startWhipAttack(Player player, Coord target) {
+		ItemType weapon = player.inventory.getItemTypeInWearSlot(Inventory.WearSlot.weapon);
+		if (!isWhip(weapon)) return;
+
+		Coord attacker = player.position;
+		float rotation = getAxeAttackRotation(attacker, target);
+		float distanceScale = getPoleAttackScale(attacker, target);
+		boolean mirrorAcrossVerticalAxis = target.x <= attacker.x;
+		controllers.effectController.startEffect(attacker, VisualEffectCollection.VisualEffectID.whipAttack, null, null, 0, rotation, distanceScale, false, null, 0f, 0f, 0f, mirrorAcrossVerticalAxis);
+		if (controllers.preferences.enableUiAnimations) {
+			long impactDelay = 10L * 400L * controllers.preferences.attackspeed_milliseconds
+					/ AndorsTrailPreferences.ATTACKSPEED_DEFAULT_MILLISECONDS / 16L;
+			controllers.effectController.startEffectAfterDelay(target, VisualEffectCollection.VisualEffectID.bluntImpact, null, null, 0, 0f, 1f, false, null, 0f, Math.max(1L, impactDelay));
+		}
+	}
+
+	private static boolean isWhip(ItemType item) {
+		return item != null && "whip".equals(item.category.id);
+	}
+
+
+	private void startRapierAttack(Player player, Coord target) {
+		ItemType weapon = player.inventory.getItemTypeInWearSlot(Inventory.WearSlot.weapon);
+		if (!isCategory(weapon, "rapier")) return;
+
+		Coord attacker = player.position;
+		float offsetX = Constants.rnd.nextFloat() * 0.5f - 0.25f;
+		float offsetY = Constants.rnd.nextFloat() * 0.5f - 0.25f;
+		controllers.effectController.startEffect(attacker, VisualEffectCollection.VisualEffectID.rapierThrust, null, null, 0,
+				getPoleAttackRotation(attacker, target), getPoleAttackScale(attacker, target), false, null, 0f, offsetX, offsetY);
+	}
+
+	private void startBluntWeaponAttack(Player player, Coord target) {
+		ItemType weapon = player.inventory.getItemTypeInWearSlot(Inventory.WearSlot.weapon);
+		if (!isCategory(weapon, "club") && !isCategory(weapon, "mace")
+				&& !isCategory(weapon, "scepter") && !isCategory(weapon, "hammer")) return;
+
+		startAxeDirectedAttack(player, target, VisualEffectCollection.VisualEffectID.longswordAttack);
+		startBluntImpactAtFrame(target, 4, 533, 0L, 1.15f);
+	}
+
+	private void startQuarterstaffAttack(Player player, Coord target) {
+		ItemType weapon = player.inventory.getItemTypeInWearSlot(Inventory.WearSlot.weapon);
+		if (!isCategory(weapon, "staff")) return;
+
+		Coord attacker = player.position;
+		controllers.effectController.startEffect(attacker, VisualEffectCollection.VisualEffectID.poleAttack, null, null, 0,
+				getPoleAttackRotation(attacker, target), getPoleAttackScale(attacker, target));
+		startBluntImpactAtFrame(target, 6, 533);
+		startBluntImpactAtFrame(target, 12, 533);
+	}
+
+	private void startHeavyBluntAttack(Player player, Coord target) {
+		ItemType weapon = player.inventory.getItemTypeInWearSlot(Inventory.WearSlot.weapon);
+		if (!isCategory(weapon, "mace2h") && !isCategory(weapon, "hammer2h")) return;
+
+		Coord attacker = player.position;
+		controllers.effectController.startEffect(attacker, VisualEffectCollection.VisualEffectID.broadswordAttack, null, null, 0,
+				getAxeAttackRotation(attacker, target) - 30f, getPoleAttackScale(attacker, target),
+				false, null, 0f, 0f, 0f, target.x <= attacker.x);
+		startBluntImpactAtFrame(target, 7, 533, 0L, 1.2f);
+		if (Constants.rnd.nextBoolean()) startGroundShockwaveAtFrame(target, 9, 533);
+	}
+
+	private void startBarehandedAttack(Player player, Coord target) {
+		if (player.inventory.getItemTypeInWearSlot(Inventory.WearSlot.weapon) != null
+				|| player.inventory.getItemTypeInWearSlot(Inventory.WearSlot.shield) != null) return;
+
+		if (Constants.rnd.nextFloat() < 0.3f) {
+			controllers.effectController.startEffect(
+					target, VisualEffectCollection.VisualEffectID.footSweep, null, null, 0);
+		} else {
+			float offsetX = Constants.rnd.nextFloat() * 0.25f - 0.125f;
+			float offsetY = Constants.rnd.nextFloat() * 0.25f - 0.125f;
+			controllers.effectController.startEffect(target, VisualEffectCollection.VisualEffectID.bluntImpact, null, null, 0,
+					0f, 1f, false, null, 0f, offsetX, offsetY);
+		}
+	}
+
+	private void startGauntletAttack(Player player, Coord target) {
+		ItemType weapon = player.inventory.getItemTypeInWearSlot(Inventory.WearSlot.weapon);
+		if (!isCategory(weapon, "gauntlet")) return;
+
+		if (Constants.rnd.nextBoolean()) {
+			startAxeDirectedAttack(player, target, VisualEffectCollection.VisualEffectID.longswordAttack);
+			startBluntImpactAtFrame(target, 4, 533, 0L, 1.15f);
+		} else {
+			Coord attacker = player.position;
+			controllers.effectController.startEffect(attacker, VisualEffectCollection.VisualEffectID.rapierThrust, null, null, 0,
+					getPoleAttackRotation(attacker, target), getPoleAttackScale(attacker, target));
+			startBluntImpactAtFrame(target, 8, 267);
+		}
+	}
+
+	private void startAxeDirectedAttack(Player player, Coord target, VisualEffectCollection.VisualEffectID effectID) {
+		Coord attacker = player.position;
+		controllers.effectController.startEffect(attacker, effectID, null, null, 0,
+				getAxeAttackRotation(attacker, target), getPoleAttackScale(attacker, target),
+				false, null, 0f, 0f, 0f, target.x <= attacker.x);
+	}
+
+	private void startBluntImpactAtFrame(Coord target, int frame, long animationDuration) {
+		startBluntImpactAtFrame(target, frame, animationDuration, 0L);
+	}
+
+	private void startBluntImpactAtFrame(Coord target, int frame, long animationDuration, long initialDelay) {
+		if (!controllers.preferences.enableUiAnimations) return;
+		long delay = initialDelay + frame * animationDuration * controllers.preferences.attackspeed_milliseconds
+				/ AndorsTrailPreferences.ATTACKSPEED_DEFAULT_MILLISECONDS / 16L;
+		controllers.effectController.startEffectAfterDelay(target, VisualEffectCollection.VisualEffectID.bluntImpact,
+				null, null, 0, 0f, 1f, false, null, 0f, Math.max(1L, delay));
+	}
+
+	private void startBluntImpactAtFrame(Coord target, int frame, long animationDuration, long initialDelay, float scale) {
+		if (!controllers.preferences.enableUiAnimations) return;
+		long delay = initialDelay + frame * animationDuration * controllers.preferences.attackspeed_milliseconds
+				/ AndorsTrailPreferences.ATTACKSPEED_DEFAULT_MILLISECONDS / 16L;
+		controllers.effectController.startEffectAfterDelay(target, VisualEffectCollection.VisualEffectID.bluntImpact,
+				null, null, 0, 0f, scale, false, null, 0f, Math.max(1L, delay));
+	}
+
+	private void startGroundShockwaveAtFrame(Coord target, int frame, long animationDuration) {
+		if (!controllers.preferences.enableUiAnimations) return;
+		long delay = frame * animationDuration * controllers.preferences.attackspeed_milliseconds
+				/ AndorsTrailPreferences.ATTACKSPEED_DEFAULT_MILLISECONDS / 16L;
+		controllers.effectController.startEffectAfterDelay(target, VisualEffectCollection.VisualEffectID.groundShockwave,
+				null, null, 0, 0f, 1f, false, null, 0f, Math.max(1L, delay));
+	}
+
+	private static boolean isCategory(ItemType item, String categoryID) {
+		return item != null && categoryID.equals(item.category.id);
+	}
+
+
+	private void startOtherOffhandAttack(Player player, Coord target) {
+		ItemType mainHand = player.inventory.getItemTypeInWearSlot(Inventory.WearSlot.weapon);
+		ItemType offHand = player.inventory.getItemTypeInWearSlot(Inventory.WearSlot.shield);
+		if (offHand == null || !offHand.category.isOffhandCapableWeapon()) return;
+		if (isAxe(mainHand) && isAxe(offHand)) return;
+		if (isLongsword(mainHand) && isLongsword(offHand)) return;
+
+		long delay = getScaledHalfAnimationDuration(mainHand);
+		boolean flip = !isAxeStyleWeapon(offHand) || isAxeStyleWeapon(mainHand);
+		startOffhandWeaponAttack(offHand, player.position, target, flip, delay);
+	}
+
+	private void startOffhandWeaponAttack(ItemType weapon, Coord attacker, Coord target, boolean flip, long delay) {
+		float distanceScale = getPoleAttackScale(attacker, target);
+		if (isDagger(weapon) || isShortsword(weapon)) {
+			boolean cut = isDagger(weapon) ? Constants.rnd.nextFloat() >= 0.6f : Constants.rnd.nextFloat() < 0.6f;
+			if (cut) {
+				startEffectWithDelay(VisualEffectCollection.VisualEffectID.lightBladeCut, attacker, target, getPoleAttackRotation(attacker, target), distanceScale, flip, target, Constants.rnd.nextInt(360), Constants.rnd.nextFloat() * 0.25f - 0.125f, Constants.rnd.nextFloat() * 0.25f - 0.125f, delay);
+			} else {
+				startEffectWithDelay(VisualEffectCollection.VisualEffectID.lightBladeThrust, attacker, target, getPoleAttackRotation(attacker, target), distanceScale, flip, null, 0f, 0f, 0f, delay);
+			}
+		} else if (isCategory(weapon, "rapier")) {
+			startEffectWithDelay(VisualEffectCollection.VisualEffectID.rapierThrust, attacker, target, getPoleAttackRotation(attacker, target), distanceScale, flip, null, 0f, Constants.rnd.nextFloat() * 0.5f - 0.25f, Constants.rnd.nextFloat() * 0.5f - 0.25f, delay);
+		} else if (isAxe(weapon)) {
+			startEffectWithDelay(VisualEffectCollection.VisualEffectID.axeAttack, attacker, target, getAxeAttackRotation(attacker, target), distanceScale, flip, null, 0f, 0f, 0f, delay, target.x <= attacker.x);
+		} else if (isLongsword(weapon)) {
+			startEffectWithDelay(VisualEffectCollection.VisualEffectID.longswordAttack, attacker, target, getPoleAttackRotation(attacker, target), distanceScale, flip, target, getLongswordVariation(), 0f, 0f, delay);
+		} else if (isBroadsword(weapon) || isTwoHandedSword(weapon) || isCategory(weapon, "bigtorch")) {
+			startEffectWithDelay(VisualEffectCollection.VisualEffectID.broadswordAttack, attacker, target, getPoleAttackRotation(attacker, target), distanceScale, flip, null, 0f, 0f, 0f, delay);
+		} else if (isCategory(weapon, "club") || isCategory(weapon, "mace") || isCategory(weapon, "scepter") || isCategory(weapon, "hammer")) {
+			startEffectWithDelay(VisualEffectCollection.VisualEffectID.longswordAttack, attacker, target, getAxeAttackRotation(attacker, target), distanceScale, flip, null, 0f, 0f, 0f, delay, target.x <= attacker.x);
+			startBluntImpactAtFrame(target, 4, 533, delay, 1.15f);
+		} else if (isWhip(weapon)) {
+			startEffectWithDelay(VisualEffectCollection.VisualEffectID.whipAttack, attacker, target, getAxeAttackRotation(attacker, target), distanceScale, flip, null, 0f, 0f, 0f, delay, target.x <= attacker.x);
+			startBluntImpactAtFrame(target, 10, 400, delay);
+		}
+	}
+
+	private void startEffectWithDelay(VisualEffectCollection.VisualEffectID effectID, Coord attacker, Coord target, float rotation, float distanceScale, boolean flip, Coord rotationCenter, float additionalRotation, float offsetX, float offsetY, long delay) {
+		startEffectWithDelay(effectID, attacker, target, rotation, distanceScale, flip, rotationCenter, additionalRotation, offsetX, offsetY, delay, false);
+	}
+
+	private void startEffectWithDelay(VisualEffectCollection.VisualEffectID effectID, Coord attacker, Coord target, float rotation, float distanceScale, boolean flip, Coord rotationCenter, float additionalRotation, float offsetX, float offsetY, long delay, boolean mirrorAcrossVerticalAxis) {
+		if (delay == 0L) {
+			controllers.effectController.startEffect(attacker, effectID, null, null, 0, rotation, distanceScale, flip, rotationCenter, additionalRotation, offsetX, offsetY, mirrorAcrossVerticalAxis);
+		} else {
+			controllers.effectController.startEffectAfterDelay(attacker, effectID, null, null, 0, rotation, distanceScale, flip, rotationCenter, additionalRotation, offsetX, offsetY, delay, mirrorAcrossVerticalAxis);
+		}
+	}
+
+	private static boolean isAxeStyleWeapon(ItemType item) {
+		return isAxe(item) || isWhip(item) || isCategory(item, "club") || isCategory(item, "mace")
+				|| isCategory(item, "scepter") || isCategory(item, "hammer");
+	}
+
+	private long getScaledHalfAnimationDuration(ItemType item) {
+		if (item == null) return 0L;
+		long duration = isDagger(item) || isShortsword(item)
+				? 400L : isAxe(item) || isCategory(item, "rapier") || isWhip(item) ? 400L : 533L;
+		return Math.max(1L, duration * controllers.preferences.attackspeed_milliseconds
+				/ AndorsTrailPreferences.ATTACKSPEED_DEFAULT_MILLISECONDS / 2L);
+	}
+
+	private void startLightBladeAttack(Player player, Coord target) {
+		ItemType weapon = player.inventory.getItemTypeInWearSlot(Inventory.WearSlot.weapon);
+		if (!isDagger(weapon) && !isShortsword(weapon)) return;
+
+		boolean cut = isDagger(weapon) ? Constants.rnd.nextFloat() >= 0.6f : Constants.rnd.nextFloat() < 0.6f;
+		if (cut) {
+			float cutRotation = Constants.rnd.nextInt(360);
+			float perpendicularOffset = (Constants.rnd.nextFloat() * 8f - 4f) / 32f;
+			controllers.effectController.startEffect(player.position, VisualEffectCollection.VisualEffectID.lightBladeCut, null, null, 0, getPoleAttackRotation(player.position, target), getPoleAttackScale(player.position, target), false, target, cutRotation, 0f, perpendicularOffset);
+		} else {
+			controllers.effectController.startEffect(player.position, VisualEffectCollection.VisualEffectID.lightBladeThrust, null, null, 0, getPoleAttackRotation(player.position, target), getPoleAttackScale(player.position, target));
+		}
+	}
+
+	private static boolean isDagger(ItemType item) {
+		return item != null && "dagger".equals(item.category.id);
+	}
+
+	private static boolean isShortsword(ItemType item) {
+		return item != null && "ssword".equals(item.category.id);
+	}
+
+	private static float getLongswordVariation() {
+		return Constants.rnd.nextFloat() * 60f - 30f;
+	}
+
 	private void startMissedEffect(AttackResult attack, final Coord position, VisualEffectCompletedCallback callback, int callbackValue) {
 		if (controllers.preferences.attackspeed_milliseconds <= 0) {
 			callback.onVisualEffectCompleted(callbackValue);

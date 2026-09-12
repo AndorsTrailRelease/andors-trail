@@ -510,5 +510,17 @@ public final class ResourceLoader {
 		loader.prepareTileset(R.drawable.effect_heal2, "effect_heal2", new Size(8, 2), sz1x1, mTileSize);
 		loader.prepareTileset(R.drawable.effect_poison1, "effect_poison1", new Size(8, 2), sz1x1, mTileSize);
 		loader.prepareTileset(R.drawable.effect_miss1, "effect_miss1", new Size(8, 2), sz1x1, mTileSize);
+		loader.prepareTileset(R.drawable.pole_attack_ne_16f_96x96_v2, "pole_attack_ne_16f_96x96_v2", new Size(16, 1), new Size(3, 3), mTileSize);
+		loader.prepareTileset(R.drawable.longsword_attack_ne_16f_96x96, "longsword_attack_ne_16f_96x96", new Size(16, 1), new Size(3, 3), mTileSize);
+		loader.prepareTileset(R.drawable.axe_attack_ne_16f_96x96_v4, "axe_attack_ne_16f_96x96_v4", new Size(16, 1), new Size(3, 3), mTileSize);
+		loader.prepareTileset(R.drawable.light_blade_cut_shared_16f_96x96_v2, "light_blade_cut_shared_16f_96x96_v2", new Size(16, 1), new Size(3, 3), mTileSize);
+		loader.prepareTileset(R.drawable.light_blade_thrust_ne_shared_16f_96x96_v2, "light_blade_thrust_ne_shared_16f_96x96_v2", new Size(16, 1), new Size(3, 3), mTileSize);
+		loader.prepareTileset(R.drawable.dual_axes_attack_ne_16f_96x96_v1, "dual_axes_attack_ne_16f_96x96_v1", new Size(16, 1), new Size(3, 3), mTileSize);
+		loader.prepareTileset(R.drawable.broadsword_attack_ne_16f_96x96_v2, "broadsword_attack_ne_16f_96x96_v2", new Size(16, 1), new Size(3, 3), mTileSize);
+		loader.prepareTileset(R.drawable.whip_attack_ne_16f_96x96_v4, "whip_attack_ne_16f_96x96_v4", new Size(16, 1), new Size(3, 3), mTileSize);
+		loader.prepareTileset(R.drawable.ground_shockwave_ellipse_16f_32x32_v1, "ground_shockwave_ellipse_16f_32x32_v1", new Size(16, 1), new Size(1, 1), mTileSize);
+		loader.prepareTileset(R.drawable.blunt_impact_hollow_circle_16f_32x32_v3, "blunt_impact_hollow_circle_16f_32x32_v3", new Size(16, 1), new Size(1, 1), mTileSize);
+		loader.prepareTileset(R.drawable.rapier_thrust_ne_16f_96x96_v1, "rapier_thrust_ne_16f_96x96_v1", new Size(16, 1), new Size(3, 3), mTileSize);
+		loader.prepareTileset(R.drawable.foot_sweep_16f_32x32_v2, "foot_sweep_16f_32x32_v2", new Size(16, 1), new Size(1, 1), mTileSize);
 	}
 }
