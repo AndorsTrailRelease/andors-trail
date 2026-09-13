@@ -156,15 +156,6 @@ public final class GameRoundController implements TimedMessageTask.Callback {
 	}
 
 	/**
-	 * Clear ALL existing pause reasons.
-	 */
-	public void clearAllPauses() {
-		activePauses.clear();
-		updateTimerState();
-	}
-
-
-	/**
 	 * Marks the gameplay activity as hidden and stops the round timer until the
 	 * activity becomes visible again.  This is called when Android pauses the main activity,
 	 * such as when the user switches to another app or the device goes to sleep.
@@ -174,12 +165,10 @@ public final class GameRoundController implements TimedMessageTask.Callback {
 	}
 
 	/**
-	 * Clears the activity-hidden pause and restores combat state if the player
-	 * is returning to an in-progress combat session.
+	 * Clears the activity-hidden pause
 	 */
 	public void onMainActivityResumed() {
-		// Conditional because the pause flag may have already been cleared in onCreate().
-		if (isPausedFor(PauseReason.ACTIVITY_HIDDEN)) releasePause(PauseReason.ACTIVITY_HIDDEN);
+		releasePause(PauseReason.ACTIVITY_HIDDEN);
 	}
 
 	/**
