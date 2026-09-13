@@ -105,6 +105,9 @@ public final class MainActivity
 		statusview.registerToolboxViews(toolboxview, quickitemview);
 		toolboxview.setFocusReturnView(mainview);
 
+		// Clear any pauses, in case this activity is being restarted
+		controllers.gameRoundController.clearAllPauses();
+
 		// Hide toolbox when mainview gets focus, generally because some other activity closed and
 		// returned control to the playfield.  TODO: Check for touch mode compatibility
 		mainview.setOnFocusChangeListener((v, hasFocus) -> {
