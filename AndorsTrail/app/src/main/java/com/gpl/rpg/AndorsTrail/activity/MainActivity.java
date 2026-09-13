@@ -106,7 +106,11 @@ public final class MainActivity
 		toolboxview.setFocusReturnView(mainview);
 
 		// Clear any pauses, in case this activity is being restarted
-		controllers.gameRoundController.clearAllPauses();
+		// HIDDEN is released via onResume(), called by Android after this
+		//if (controllers.gameRoundController.isPausedFor(PauseReason.ACTIVITY_HIDDEN)) controllers.gameRoundController.releasePause(PauseReason.ACTIVITY_HIDDEN);
+		if (controllers.gameRoundController.isPausedFor(PauseReason.BLOCKING_ACTIVITY)) controllers.gameRoundController.releasePause(PauseReason.BLOCKING_ACTIVITY);
+		if (controllers.gameRoundController.isPausedFor(PauseReason.BLOCKING_DIALOG)) controllers.gameRoundController.releasePause(PauseReason.BLOCKING_DIALOG);
+		if (controllers.gameRoundController.isPausedFor(PauseReason.MAP_TRANSITION)) controllers.gameRoundController.releasePause(PauseReason.MAP_TRANSITION);
 
 		// Hide toolbox when mainview gets focus, generally because some other activity closed and
 		// returned control to the playfield.  TODO: Check for touch mode compatibility
