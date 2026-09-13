@@ -66,5 +66,74 @@
                 ]
             }
         ]
+    },
+    {
+        "id":"brightport_catestash",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"brightport_catestash1",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brightport_nondisplay",
+                        "value":40,
+                        "negate":true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id":"brightport_catestash1",
+        "message":"Behind the rocks in a crack, you notice a bag.",
+        "replies":[
+            {
+                "text":"[Take it.]",
+                "nextPhraseID":"brightport_catestash2"
+            }
+        ]
+    },
+    {
+        "id":"brightport_catestash2",
+        "message":"You take the bag out and open it to reveal 500 coins and a note. \n\nThe note reads: \"To B and D. The goods were of sufficient quality this time, I'll arrange for a boat next so we can haul more - Ezicate\"",
+        "replies":[
+            {
+                "text":"Some easy gold, who doesn't love that. [Take the gold.]",
+                "nextPhraseID":"brightport_catestash3"
+            }
+        ]
+    },
+    {
+        "id":"brightport_catestash3",
+        "message":"You take the 500 gold.",
+        "replies":[
+            {
+                "text":"Time to go.",
+                "nextPhraseID":"X"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"brightport_nondisplay",
+                "value":40
+            },
+            {
+                "rewardType":"giveItem",
+                "rewardID":"gold",
+                "value":500
+            }
+        ]
+    },
+    {
+        "id":"fulus_return_4",
+        "message":"Hello again. Have you been able to retrieve that dagger from Bjorgur's family grave yet?",
+        "replies":[
+            {
+                "text":"I have already helped Bjorgur return the dagger to its original place.",
+                "nextPhraseID":"fulus_return_3"
+            }
+        ]
     }
 ]
