@@ -525,7 +525,7 @@ public final class Player extends Actor {
 		nextPosition.addToChecksum(builder);
 		builder.add(level);
 		builder.add(totalExperience);
-		inventory.addToChecksum(builder, fileversion >= 88);
+		inventory.addToChecksum(builder, fileversion >= 90);
 		builder.add(baseTraits.useItemCost);
 		builder.add(baseTraits.reequipCost);
 		builder.add(skillLevels.size());

@@ -274,7 +274,10 @@ public final class HeroinfoActivity_Inventory extends Fragment implements Custom
 			block.addView(status);
 			View preview = createPresetPreview(preset);
 			preview.setFocusable(true);
-			preview.setOnClickListener(view -> showLoadEquipmentPresetConfirmation(presetIndex, dialog));
+			preview.setOnClickListener(view -> {
+				if (isEquipmentPresetEmpty(presetIndex)) showEmptyEquipmentPresetDialog();
+				else showLoadEquipmentPresetConfirmation(presetIndex, dialog);
+			});
 			preview.setOnLongClickListener(view -> {
 				saveEquipmentPreset(presetIndex, dialog);
 				return true;
@@ -289,6 +292,11 @@ public final class HeroinfoActivity_Inventory extends Fragment implements Custom
 
 	private boolean isEquipmentPresetEmpty(int preset) {
 		return !player.inventory.isEquipmentPresetSaved(preset);
+	}
+
+	private void showEmptyEquipmentPresetDialog() {
+		CustomDialogFactory.CustomDialog dialog = CustomDialogFactory.createErrorDialog(getActivity(), getString(R.string.equipment_preset_empty), getString(R.string.equipment_preset_empty_help));
+		CustomDialogFactory.show(dialog);
 	}
 
 	private void saveEquipmentPreset(final int preset, final CustomDialogFactory.CustomDialog parentDialog) {
