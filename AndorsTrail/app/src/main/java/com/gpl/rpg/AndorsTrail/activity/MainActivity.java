@@ -80,6 +80,7 @@ public final class MainActivity
 	private WeakReference<Toast> lastToast = null;
 	//private ContextMenuInfo lastSelectedMenu = null;
 	private OnLongClickListener quickButtonLongClickListener = null;
+	private boolean deferredQuicksave = false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -103,6 +104,13 @@ public final class MainActivity
 		toolboxview = (ToolboxView) findViewById(R.id.main_toolboxview);
 		statusview.registerToolboxViews(toolboxview, quickitemview);
 		toolboxview.setFocusReturnView(mainview);
+
+		// Clear any pauses, in case this activity is being restarted
+		// HIDDEN is released via onResume(), called by Android after this
+		//if (controllers.gameRoundController.isPausedFor(PauseReason.ACTIVITY_HIDDEN)) controllers.gameRoundController.releasePause(PauseReason.ACTIVITY_HIDDEN);
+		if (controllers.gameRoundController.isPausedFor(PauseReason.BLOCKING_ACTIVITY)) controllers.gameRoundController.releasePause(PauseReason.BLOCKING_ACTIVITY);
+		if (controllers.gameRoundController.isPausedFor(PauseReason.BLOCKING_DIALOG)) controllers.gameRoundController.releasePause(PauseReason.BLOCKING_DIALOG);
+		if (controllers.gameRoundController.isPausedFor(PauseReason.MAP_TRANSITION)) controllers.gameRoundController.releasePause(PauseReason.MAP_TRANSITION);
 
 		// Hide toolbox when mainview gets focus, generally because some other activity closed and
 		// returned control to the playfield.  TODO: Check for touch mode compatibility
@@ -176,6 +184,18 @@ public final class MainActivity
 		return Savegames.saveWorld(world, this, slot);
 	}
 
+	private void saveQuicksave() {
+		if (save(Savegames.SLOT_QUICKSAVE)) {
+			deferredQuicksave = false;
+		}
+	}
+
+	private void saveDeferredQuicksaveIfNeeded() {
+		if (!deferredQuicksave) return;
+		if (controllers.movementController.isMapTransitionInProgress()) return;
+		saveQuicksave();
+	}
+
 	@Override
 	protected void onStart() {
 		super.onStart();
@@ -194,8 +214,11 @@ public final class MainActivity
 		super.onPause();
 		controllers.gameRoundController.onMainActivityPaused();
 		controllers.movementController.stopMovement();
-
-		save(Savegames.SLOT_QUICKSAVE);
+		if (controllers.movementController.isMapTransitionInProgress()) {
+			deferredQuicksave = true;
+		} else {
+			saveQuicksave();
+		}
 	}
 
 	@Override
@@ -206,6 +229,9 @@ public final class MainActivity
 		if (world.model.statistics.isDead()) this.finish();
 		else {
 			controllers.gameRoundController.onMainActivityResumed();
+			// It's possible the pause() quicksave was deferred because the map was in transition.  If
+			// so, we do it now so the new map is saved.
+			saveDeferredQuicksaveIfNeeded();
 			updateStatus();
 		}
 	}
@@ -356,7 +382,10 @@ public final class MainActivity
 	public void onPlayerMoved(PredefinedMap map, Coord newPosition, Coord previousPosition) { }
 
 	@Override
-	public void onPlayerEnteredNewMap(PredefinedMap map, Coord p) { }
+	public void onPlayerEnteredNewMap(PredefinedMap map, Coord p) {
+		// If a quicksave was delayed because the map was still transitioning, do it now.
+		saveDeferredQuicksaveIfNeeded();
+	}
 
 	@Override
 	public void onCombatStarted() {

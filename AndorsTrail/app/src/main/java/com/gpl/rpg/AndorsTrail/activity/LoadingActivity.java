@@ -165,15 +165,16 @@ public final class LoadingActivity extends AndorsTrailBaseActivity implements On
 	}
 
 	private void showLoadingFailedDialog(int messageResourceID) {
-		final CustomDialog d = CustomDialogFactory.createDialog(this, getResources().getString(R.string.dialog_loading_failed_title), null, getResources().getString(messageResourceID), null, true);
+		String message = Savegames.getLastLoadFailureMessage();
+		if (AndorsTrailApplication.DEVELOPMENT_VALIDATEDATA && message != null && !message.isEmpty()) {
+			message = getResources().getString(R.string.dialog_loading_failed_details, message);
+		} else {
+			message = getResources().getString(messageResourceID);
+		}
+		final CustomDialog d = CustomDialogFactory.createDialog(this, getResources().getString(R.string.dialog_loading_failed_title), null, message, null, true);
 		CustomDialogFactory.addDismissButton(d, android.R.string.ok);
-		CustomDialogFactory.setDismissListener(d, new OnDismissListener() {
-			@Override
-			public void onDismiss(DialogInterface dialog) {
-				LoadingActivity.this.finish();
-			}
-		});
+		CustomDialogFactory.setDismissListener(d, dialog -> LoadingActivity.this.finish());
 		CustomDialogFactory.show(d);
-		
+
 	}
 }

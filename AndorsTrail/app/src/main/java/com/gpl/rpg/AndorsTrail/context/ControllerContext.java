@@ -43,8 +43,8 @@ public final class ControllerContext {
 		this.preferences = app.getPreferences();
 
 		this.mapController = new MapController(this, world);
+		this.combatController = new CombatController(this, world);  // Must be before GameRoundController due to interface dependency
 		this.gameRoundController = new GameRoundController(this, world);
-		this.combatController = new CombatController(this, world);
 		this.conversationController = new ConversationController(this, world);
 		this.effectController = new VisualEffectController(this, world);
 		this.itemController = new ItemController(this, world);

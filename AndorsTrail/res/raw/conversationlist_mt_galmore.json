@@ -346,7 +346,7 @@
     },
     {
         "id":"thief_seraphina_20",
-        "message":"Well, as a matter of fact, I do. I have a board right here under the bridge that you can place over the hole. But it's going to cost you 1000 gold.",
+        "message":"Well, as a matter of fact, I do. I have a board right here under the bridge that you can place over the hole. But it's going to cost you {1000} gold.",
         "replies":[
             {
                 "text":"Wow! All you thieves are alike. Here, take it.",
@@ -2079,6 +2079,28 @@
             {
                 "text":"No, I don't think so.",
                 "nextPhraseID":"bela_witch_20"
+            },
+            {
+                "text":"Not now, I have something else to talk about.",
+                "nextPhraseID":"bela_rain_gold_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_barricades",
+                        "value":140
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"undertell_barricades",
+                        "value":150,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"gold",
+                        "value":4850
+                    }
+                ]
             }
         ]
     },

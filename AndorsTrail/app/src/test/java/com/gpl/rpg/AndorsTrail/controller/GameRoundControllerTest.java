@@ -29,8 +29,21 @@ public final class GameRoundControllerTest {
 		}
 	}
 
-	private static GameRoundController createController(WorldContext world, FakeRoundTimer timer) {
-		return new GameRoundController(null, world, timer);
+	private static final class FakeCombatResumeHook implements GameRoundController.CombatResumeHook {
+		private int calls = 0;
+
+		@Override
+		public void resumeCombatIfNeeded() {
+			calls++;
+		}
+
+		private void reset() {
+			calls = 0;
+		}
+	}
+
+	private static GameRoundController createController(WorldContext world, FakeRoundTimer timer, FakeCombatResumeHook hook) {
+		return new GameRoundController(null, world, hook, timer);
 	}
 
 	private static WorldContext createLoadedWorld() {
@@ -43,8 +56,9 @@ public final class GameRoundControllerTest {
 	public void constructorIsSafeBeforeModelLoads() {
 		WorldContext world = new WorldContext();
 		FakeRoundTimer timer = new FakeRoundTimer();
+		FakeCombatResumeHook hook = new FakeCombatResumeHook();
 
-		GameRoundController controller = createController(world, timer);
+		GameRoundController controller = createController(world, timer, hook);
 
 		assertFalse(controller.onTick(null));
 		assertEquals(0, timer.startCount);
@@ -56,21 +70,24 @@ public final class GameRoundControllerTest {
 	public void releasingActivityHiddenStartsTimerWhenNoOtherPauseExists() {
 		WorldContext world = createLoadedWorld();
 		FakeRoundTimer timer = new FakeRoundTimer();
-		GameRoundController controller = createController(world, timer);
-
+		FakeCombatResumeHook hook = new FakeCombatResumeHook();
+		GameRoundController controller = createController(world, timer, hook);
 		controller.releasePause(GameRoundController.PauseReason.ACTIVITY_HIDDEN);
 
 		assertTrue(world.model.uiSelections.isMainActivityVisible);
 		assertEquals(1, timer.startCount);
 		assertTrue(timer.running);
+		assertEquals(1, hook.calls);
 	}
 
 	@Test
 	public void mapTransitionReleaseDoesNotRestartTimerWhileBlockingActivityIsActive() {
 		WorldContext world = createLoadedWorld();
 		FakeRoundTimer timer = new FakeRoundTimer();
-		GameRoundController controller = createController(world, timer);
+		FakeCombatResumeHook hook = new FakeCombatResumeHook();
+		GameRoundController controller = createController(world, timer, hook);
 		controller.releasePause(GameRoundController.PauseReason.ACTIVITY_HIDDEN);
+		hook.reset();
 
 		controller.acquirePause(GameRoundController.PauseReason.BLOCKING_ACTIVITY);
 		controller.acquirePause(GameRoundController.PauseReason.MAP_TRANSITION);
@@ -79,19 +96,23 @@ public final class GameRoundControllerTest {
 		assertFalse(timer.running);
 		assertEquals(1, timer.startCount);
 		assertEquals(4, timer.stopCount);
+		assertEquals(0, hook.calls);
 
 		controller.releasePause(GameRoundController.PauseReason.BLOCKING_ACTIVITY);
 
 		assertTrue(timer.running);
 		assertEquals(2, timer.startCount);
+		assertEquals(1, hook.calls);
 	}
 
 	@Test
 	public void combatStateChangeStopsAndRestartsTimer() {
 		WorldContext world = createLoadedWorld();
 		FakeRoundTimer timer = new FakeRoundTimer();
-		GameRoundController controller = createController(world, timer);
+		FakeCombatResumeHook hook = new FakeCombatResumeHook();
+		GameRoundController controller = createController(world, timer, hook);
 		controller.releasePause(GameRoundController.PauseReason.ACTIVITY_HIDDEN);
+		hook.reset();
 
 		world.model.uiSelections.isInCombat = true;
 		controller.onCombatStateChanged();
@@ -107,8 +128,10 @@ public final class GameRoundControllerTest {
 	public void blockingDialogClearsMainActivityVisibilityUntilReleased() {
 		WorldContext world = createLoadedWorld();
 		FakeRoundTimer timer = new FakeRoundTimer();
-		GameRoundController controller = createController(world, timer);
+		FakeCombatResumeHook hook = new FakeCombatResumeHook();
+		GameRoundController controller = createController(world, timer, hook);
 		controller.releasePause(GameRoundController.PauseReason.ACTIVITY_HIDDEN);
+		hook.reset();
 
 		controller.acquirePause(GameRoundController.PauseReason.BLOCKING_DIALOG);
 
@@ -119,14 +142,17 @@ public final class GameRoundControllerTest {
 
 		assertTrue(world.model.uiSelections.isMainActivityVisible);
 		assertTrue(timer.running);
+		assertEquals(1, hook.calls);
 	}
 
 	@Test(expected = AssertionError.class)
 	public void duplicateAcquireFailsFastInDebugBuilds() {
 		WorldContext world = createLoadedWorld();
 		FakeRoundTimer timer = new FakeRoundTimer();
-		GameRoundController controller = createController(world, timer);
+		FakeCombatResumeHook hook = new FakeCombatResumeHook();
+		GameRoundController controller = createController(world, timer, hook);
 		controller.releasePause(GameRoundController.PauseReason.ACTIVITY_HIDDEN);
+		hook.reset();
 
 		controller.acquirePause(GameRoundController.PauseReason.BLOCKING_DIALOG);
 		controller.acquirePause(GameRoundController.PauseReason.BLOCKING_DIALOG);
@@ -136,8 +162,10 @@ public final class GameRoundControllerTest {
 	public void unmatchedReleaseFailsFastInDebugBuilds() {
 		WorldContext world = createLoadedWorld();
 		FakeRoundTimer timer = new FakeRoundTimer();
-		GameRoundController controller = createController(world, timer);
+		FakeCombatResumeHook hook = new FakeCombatResumeHook();
+		GameRoundController controller = createController(world, timer, hook);
 		controller.releasePause(GameRoundController.PauseReason.ACTIVITY_HIDDEN);
+		hook.reset();
 
 		controller.releasePause(GameRoundController.PauseReason.MAP_TRANSITION);
 	}
