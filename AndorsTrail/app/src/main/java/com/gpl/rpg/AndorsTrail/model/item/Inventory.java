@@ -226,7 +226,7 @@ public final class Inventory extends ItemContainer {
 				}
 			}
 		}
-		if (fileversion >= 87) {
+		if (fileversion >= 90) {
 			final int numPresets = src.readInt();
 			final int numPresetSlots = src.readInt();
 			if (numPresets < 0 || numPresetSlots < 0) throw new IOException("Invalid equipment preset dimensions");
