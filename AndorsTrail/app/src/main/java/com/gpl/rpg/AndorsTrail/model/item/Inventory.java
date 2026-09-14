@@ -31,11 +31,17 @@ public final class Inventory extends ItemContainer {
 	private static final int NUM_WORN_SLOTS = WearSlot.values().length;
 	public static final int NUM_QUICK_SLOTS = 3;
 	private final ItemType[] wear = new ItemType[NUM_WORN_SLOTS];
-	private final String[][] equipmentPresets = new String[NUM_EQUIPMENT_PRESETS][NUM_WORN_SLOTS];
-	private final boolean[] equipmentPresetSaved = new boolean[NUM_EQUIPMENT_PRESETS];
+	private static final class EquipmentPreset {
+		boolean saved;
+		String presetName;
+		final String[] itemTypeIDs = new String[NUM_WORN_SLOTS];
+	}
+	private final EquipmentPreset[] equipmentPresets = new EquipmentPreset[NUM_EQUIPMENT_PRESETS];
 	public final ItemType[] quickitem = new ItemType[NUM_QUICK_SLOTS];
 
-	public Inventory() { }
+	public Inventory() {
+		for (int preset = 0; preset < NUM_EQUIPMENT_PRESETS; ++preset) equipmentPresets[preset] = new EquipmentPreset();
+	}
 
 	public void clear() {
 		for(int i = 0; i < NUM_WORN_SLOTS; ++i) wear[i] = null;
@@ -62,21 +68,31 @@ public final class Inventory extends ItemContainer {
 
 	public void saveEquipmentPreset(int preset) {
 		checkPreset(preset);
-		equipmentPresetSaved[preset] = true;
+		equipmentPresets[preset].saved = true;
 		for (WearSlot slot : WearSlot.values()) {
 			ItemType type = getItemTypeInWearSlot(slot);
-			equipmentPresets[preset][slot.ordinal()] = type == null ? null : type.id;
+			equipmentPresets[preset].itemTypeIDs[slot.ordinal()] = type == null ? null : type.id;
 		}
 	}
 
 	public boolean isEquipmentPresetSaved(int preset) {
 		checkPreset(preset);
-		return equipmentPresetSaved[preset];
+		return equipmentPresets[preset].saved;
 	}
 
 	public String getEquipmentPresetItemTypeID(int preset, WearSlot slot) {
 		checkPreset(preset);
-		return equipmentPresets[preset][slot.ordinal()];
+		return equipmentPresets[preset].itemTypeIDs[slot.ordinal()];
+	}
+
+	public String getEquipmentPresetName(int preset) {
+		checkPreset(preset);
+		return equipmentPresets[preset].presetName;
+	}
+
+	public void setEquipmentPresetName(int preset, String presetName) {
+		checkPreset(preset);
+		equipmentPresets[preset].presetName = presetName;
 	}
 
 	private static void checkPreset(int preset) {
@@ -216,10 +232,15 @@ public final class Inventory extends ItemContainer {
 			if (numPresets < 0 || numPresetSlots < 0) throw new IOException("Invalid equipment preset dimensions");
 			for (int preset = 0; preset < numPresets; ++preset) {
 				final boolean presetSaved = src.readBoolean();
-				if (preset < NUM_EQUIPMENT_PRESETS) equipmentPresetSaved[preset] = presetSaved;
+				final String presetName = src.readBoolean() ? src.readUTF() : null;
+				if (preset < NUM_EQUIPMENT_PRESETS) {
+					EquipmentPreset equipmentPreset = equipmentPresets[preset];
+					equipmentPreset.saved = presetSaved;
+					equipmentPreset.presetName = presetName;
+				}
 				for (int slot = 0; slot < numPresetSlots; ++slot) {
 					final String itemTypeID = src.readBoolean() ? src.readUTF() : null;
-					if (preset < NUM_EQUIPMENT_PRESETS && slot < NUM_WORN_SLOTS) equipmentPresets[preset][slot] = itemTypeID;
+					if (preset < NUM_EQUIPMENT_PRESETS && slot < NUM_WORN_SLOTS) equipmentPresets[preset].itemTypeIDs[slot] = itemTypeID;
 				}
 			}
 		}
@@ -250,8 +271,11 @@ public final class Inventory extends ItemContainer {
 		dest.writeInt(NUM_EQUIPMENT_PRESETS);
 		dest.writeInt(NUM_WORN_SLOTS);
 		for (int preset = 0; preset < NUM_EQUIPMENT_PRESETS; ++preset) {
-			dest.writeBoolean(equipmentPresetSaved[preset]);
-			for (int slot = 0; slot < NUM_WORN_SLOTS; ++slot) { String id = equipmentPresets[preset][slot]; dest.writeBoolean(id != null); if (id != null) dest.writeUTF(id); }
+			dest.writeBoolean(equipmentPresets[preset].saved);
+			String presetName = equipmentPresets[preset].presetName;
+			dest.writeBoolean(presetName != null);
+			if (presetName != null) dest.writeUTF(presetName);
+			for (int slot = 0; slot < NUM_WORN_SLOTS; ++slot) { String id = equipmentPresets[preset].itemTypeIDs[slot]; dest.writeBoolean(id != null); if (id != null) dest.writeUTF(id); }
 		}
 	}
 	public void addToChecksum(ChecksumBuilder builder) {
@@ -274,8 +298,9 @@ public final class Inventory extends ItemContainer {
 		}
 		if (includeEquipmentPresets) {
 			for (int preset = 0; preset < NUM_EQUIPMENT_PRESETS; ++preset) {
-				builder.add(equipmentPresetSaved[preset]);
-				for (int slot = 0; slot < NUM_WORN_SLOTS; ++slot) builder.add(equipmentPresets[preset][slot]);
+				builder.add(equipmentPresets[preset].saved);
+				builder.add(equipmentPresets[preset].presetName);
+				for (int slot = 0; slot < NUM_WORN_SLOTS; ++slot) builder.add(equipmentPresets[preset].itemTypeIDs[slot]);
 			}
 		}
 
