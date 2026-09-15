@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.gpl.rpg.AndorsTrail.util.Format;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 
 import com.gpl.rpg.AndorsTrail.AndorsTrailPreferences;
@@ -333,7 +334,7 @@ public final class CombatController implements VisualEffectCompletedCallback {
 		endPlayerTurn();
 	}
 
-	private final Handler monsterTurnHandler = new Handler() {
+	private final Handler monsterTurnHandler = new Handler(Looper.getMainLooper()) {
 		@Override
 		public void handleMessage(Message msg) {
 			removeMessages(0);

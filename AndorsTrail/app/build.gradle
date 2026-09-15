@@ -78,6 +78,9 @@ android {
             assets.srcDirs = ['build/gen-assets', 'src/main/assets']
         }
     }
+    tasks.withType(JavaCompile).configureEach {
+        //options.compilerArgs += ["-Xlint:deprecation"]
+    }
 }
 
 dependencies {
