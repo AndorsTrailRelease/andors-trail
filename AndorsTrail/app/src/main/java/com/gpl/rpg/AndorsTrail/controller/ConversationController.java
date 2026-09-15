@@ -586,6 +586,15 @@ public final class ConversationController {
 		public String getCurrentPhraseID() { return currentPhraseID; }
 
 		public void playerSelectedReply(final Resources res, Reply r) {
+			// Re-check requirements to prevent cheating by opening menu during dialogue-open race
+			if (r.hasRequirements()) {
+				for (Requirement requirement : r.requires) {
+					if (requirement.requireType == Requirement.RequirementType.random) continue;
+					if (!canFulfillRequirement(world, requirement)) {
+						proceedToPhrase(res, Constants.REQUIREMENT_CHEAT_DETECT_PHRASE, true, true);
+					}
+				}
+			}
 			applyReplyEffect(world, r, controllers);
 			proceedToPhrase(res, getNextPhraseID(world, r), true, true);
 		}
