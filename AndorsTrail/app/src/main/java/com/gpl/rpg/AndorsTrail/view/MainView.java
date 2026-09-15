@@ -289,7 +289,9 @@ public final class MainView extends SurfaceView
 		for (VisualEffectAnimation effect : effects) {
 			int tileID = effect.tileID;
 			int textYOffset = effect.textYOffset;
-			drawFromMapPosition(canvas, effect.area, effect.position, tileID);
+			if (effect.area.size.width == 3 && effect.area.size.height == 3) drawFromMapPosition(canvas, effect.area, effect.area, tileID, effect.rotationDegrees, effect.distanceScale, effect.mirrorAcrossAttackAxis, effect.rotationCenter, effect.additionalRotationDegrees, effect.offsetX, effect.offsetY, effect.mirrorAcrossVerticalAxis);
+			else if (effect.rotationDegrees != 0f || effect.distanceScale != 1f || effect.mirrorAcrossAttackAxis || effect.offsetX != 0f || effect.offsetY != 0f || effect.mirrorAcrossVerticalAxis) drawFromMapPosition(canvas, effect.area, new CoordRect(effect.position, new Size(1, 1)), tileID, effect.rotationDegrees, effect.distanceScale, effect.mirrorAcrossAttackAxis, effect.rotationCenter, effect.additionalRotationDegrees, effect.offsetX, effect.offsetY, effect.mirrorAcrossVerticalAxis);
+			else drawFromMapPosition(canvas, effect.area, effect.position, tileID);
 			if (effect.displayText != null) {
 				drawEffectText(canvas, effect.area, effect, textYOffset, effect.getTextPaint());
 			}
@@ -515,16 +517,39 @@ public final class MainView extends SurfaceView
 		if (!area.intersects(p)) return;
 		_drawFromMapPosition(canvas, area, p.topLeft.x, p.topLeft.y, tile, isFlippedX);
 	}
+	private void drawFromMapPosition(Canvas canvas, final CoordRect area, final CoordRect p, final int tile, final float rotationDegrees) {
+		_drawFromMapPosition(canvas, area, p.topLeft.x, p.topLeft.y, tile, false, rotationDegrees, 1f);
+	}
+	private void drawFromMapPosition(Canvas canvas, final CoordRect area, final CoordRect p, final int tile, final float rotationDegrees, final float distanceScale) {
+		if (!area.intersects(p)) return;
+		_drawFromMapPosition(canvas, area, p.topLeft.x, p.topLeft.y, tile, false, rotationDegrees, distanceScale, false, null, 0f, 0f, 0f);
+	}
+	private void drawFromMapPosition(Canvas canvas, final CoordRect area, final CoordRect p, final int tile, final float rotationDegrees, final float distanceScale, final boolean mirrorAcrossAttackAxis, final Coord rotationCenter, final float additionalRotationDegrees, final float offsetX, final float offsetY) {
+		drawFromMapPosition(canvas, area, p, tile, rotationDegrees, distanceScale, mirrorAcrossAttackAxis, rotationCenter, additionalRotationDegrees, offsetX, offsetY, false);
+	}
+	private void drawFromMapPosition(Canvas canvas, final CoordRect area, final CoordRect p, final int tile, final float rotationDegrees, final float distanceScale, final boolean mirrorAcrossAttackAxis, final Coord rotationCenter, final float additionalRotationDegrees, final float offsetX, final float offsetY, final boolean flipVertically) {
+		if (!area.intersects(p)) return;
+		_drawFromMapPosition(canvas, area, p.topLeft.x, p.topLeft.y, tile, false, rotationDegrees, distanceScale, mirrorAcrossAttackAxis, rotationCenter, additionalRotationDegrees, offsetX, offsetY, flipVertically);
+	}
 	private void _drawFromMapPosition(Canvas canvas, final CoordRect area, int x, int y, final int tile) {
 		_drawFromMapPosition(canvas, area, x, y, tile, false);
 	}
 	private void _drawFromMapPosition(Canvas canvas, final CoordRect area, int x, int y, final int tile, final boolean isFlippedX) {
+		_drawFromMapPosition(canvas, area, x, y, tile, isFlippedX, 0);
+	}
+	private void _drawFromMapPosition(Canvas canvas, final CoordRect area, int x, int y, final int tile, final boolean isFlippedX, final float rotationDegrees) {
+		_drawFromMapPosition(canvas, area, x, y, tile, isFlippedX, rotationDegrees, 1f);
+	}
+	private void _drawFromMapPosition(Canvas canvas, final CoordRect area, int x, int y, final int tile, final boolean isFlippedX, final float rotationDegrees, final float scale) {
+		_drawFromMapPosition(canvas, area, x, y, tile, isFlippedX, rotationDegrees, scale, false, null, 0f, 0f, 0f);
+	}
+	private void _drawFromMapPosition(Canvas canvas, final CoordRect area, int x, int y, final int tile, final boolean isFlippedX, final float rotationDegrees, final float scale, final boolean mirrorAcrossAttackAxis, final Coord rotationCenter, final float additionalRotationDegrees, final float offsetX, final float offsetY) {
+		_drawFromMapPosition(canvas, area, x, y, tile, isFlippedX, rotationDegrees, scale, mirrorAcrossAttackAxis, rotationCenter, additionalRotationDegrees, offsetX, offsetY, false);
+	}
+	private void _drawFromMapPosition(Canvas canvas, final CoordRect area, int x, int y, final int tile, final boolean isFlippedX, final float rotationDegrees, final float scale, final boolean mirrorAcrossAttackAxis, final Coord rotationCenter, final float additionalRotationDegrees, final float offsetX, final float offsetY, final boolean flipVertically) {
 		x -= mapViewArea.topLeft.x;
 		y -= mapViewArea.topLeft.y;
-//		if (	   (x >= 0 && x < mapViewArea.size.width)
-//				&& (y >= 0 && y < mapViewArea.size.height)) {
-		tiles.drawTile(canvas, tile, x * tileSize, y * tileSize, mPaint, isFlippedX);
-//		}
+		tiles.drawTile(canvas, tile, x * tileSize, y * tileSize, mPaint, isFlippedX, rotationDegrees, scale, mirrorAcrossAttackAxis, rotationCenter == null ? x * tileSize + tileSize * 1.5f : (rotationCenter.x - mapViewArea.topLeft.x) * tileSize + tileSize * 0.5f, rotationCenter == null ? y * tileSize + tileSize * 1.5f : (rotationCenter.y - mapViewArea.topLeft.y) * tileSize + tileSize * 0.5f, additionalRotationDegrees, offsetX * tileSize, offsetY * tileSize, flipVertically);
 	}
 
 	private void drawEffectText(Canvas canvas, final CoordRect area, final VisualEffectAnimation e, int textYOffset, Paint textPaint) {
