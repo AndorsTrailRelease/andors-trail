@@ -219,9 +219,9 @@ public final class BulkSelectionInterface extends AndorsTrailBaseActivity implem
 				final String displayType = ItemInfoActivity.getDisplayTypeString(res, itemType).toLowerCase();
 				String message = requiresConfirmation() ? res.getString(R.string.bulkselection_sell_confirmation, itemType.getName(world.model.player), displayType) : "";
 				if (!brokenPresets.isEmpty()) {
-					String presetNames = ItemController.formatPresetNumbers(brokenPresets);
+					String presetNames = ItemController.formatPresetNumbers(res, brokenPresets);
 					if (!message.isEmpty()) message += "\n\n";
-					message += res.getString(R.string.equipment_preset_removal_warning, itemType.getName(world.model.player), presetNames, actionText.toLowerCase());
+					message += res.getString(R.string.equipment_preset_removal_warning_sell, itemType.getName(world.model.player), presetNames);
 				}
 
 				final CustomDialog d = CustomDialogFactory.createDialog(v.getContext(),

@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.content.res.Resources;
+
 import com.gpl.rpg.AndorsTrail.util.Format;
 
 import com.gpl.rpg.AndorsTrail.AndorsTrailPreferences;
@@ -371,11 +373,11 @@ public final class ItemController {
 		}
 		return result;
 	}
-	public static String formatPresetNumbers(List<Integer> presets) {
+	public static String formatPresetNumbers(Resources res, List<Integer> presets) {
 		StringBuilder names = new StringBuilder();
 		for (Integer preset : presets) {
-			if (names.length() > 0) names.append(", ");
-			names.append(preset + 1);
+			if (names.length() > 0) names.append("\n");
+			names.append(res.getString(R.string.equipment_preset_saved, preset + 1));
 		}
 		return names.toString();
 	}

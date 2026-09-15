@@ -243,8 +243,8 @@ public final class HeroinfoActivity_Inventory extends Fragment implements Custom
 			controllers.itemController.dropItem(itemType, quantity);
 			return;
 		}
-		String presetNames = ItemController.formatPresetNumbers(brokenPresets);
-		CustomDialogFactory.CustomDialog warning = CustomDialogFactory.createDialog(getActivity(), getString(R.string.equipment_preset_removal_title), null, getString(R.string.equipment_preset_removal_warning, itemType.getName(player), presetNames, getString(R.string.inventory_drop).toLowerCase()), null, true);
+		String presetNames = ItemController.formatPresetNumbers(getResources(), brokenPresets);
+		CustomDialogFactory.CustomDialog warning = CustomDialogFactory.createDialog(getActivity(), getString(R.string.equipment_preset_removal_title), null, getString(R.string.equipment_preset_removal_warning_drop, itemType.getName(player), presetNames), null, true);
 		CustomDialogFactory.addButton(warning, android.R.string.yes, view -> {
 			controllers.itemController.dropItem(itemType, quantity);
 			update();
