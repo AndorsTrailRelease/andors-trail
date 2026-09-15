@@ -315,10 +315,22 @@ public final class HeroinfoActivity_Inventory extends Fragment implements Custom
 	}
 
 	private void showLoadEquipmentPresetConfirmation(final int preset, final CustomDialogFactory.CustomDialog parentDialog) {
-		CustomDialogFactory.CustomDialog confirmation = CustomDialogFactory.createDialog(getActivity(), getString(R.string.equipment_preset_load_title), null, getString(R.string.equipment_preset_load_message, preset + 1), null, true);
+		String message = getString(R.string.equipment_preset_load_message, preset + 1)
+				+ "\n\n" + getString(R.string.equipment_preset_load_items_header, preset + 1);
+		CustomDialogFactory.CustomDialog confirmation = CustomDialogFactory.createDialog(getActivity(), getString(R.string.equipment_preset_load_title), null, message, null, true);
+		CustomDialogFactory.setContent(confirmation, createItemListPreview(getEquipmentPresetItemTypeIDs(preset)));
 		CustomDialogFactory.addButton(confirmation, android.R.string.yes, view -> { parentDialog.dismiss(); loadEquipmentPreset(preset); });
 		CustomDialogFactory.addDismissButton(confirmation, android.R.string.no);
 		CustomDialogFactory.show(confirmation);
+	}
+
+	private List<String> getEquipmentPresetItemTypeIDs(int preset) {
+		List<String> itemTypeIDs = new ArrayList<String>();
+		for (Inventory.WearSlot slot : Inventory.WearSlot.values()) {
+			String id = player.inventory.getEquipmentPresetItemTypeID(preset, slot);
+			if (id != null) itemTypeIDs.add(id);
+		}
+		return itemTypeIDs;
 	}
 
 	private View createPresetPreview(int preset) {
@@ -350,16 +362,16 @@ public final class HeroinfoActivity_Inventory extends Fragment implements Custom
 		return preview;
 	}
 
-	private View createMissingItemsPreview(java.util.List<String> missing) {
+	private View createItemListPreview(java.util.List<String> itemTypeIDs) {
 		LinearLayout preview = new LinearLayout(getActivity());
 		preview.setOrientation(LinearLayout.VERTICAL);
 		ArrayList<Integer> iconIDs = new ArrayList<Integer>();
-		for (String id : missing) {
+		for (String id : itemTypeIDs) {
 			ItemType type = world.itemTypes.getItemType(id);
 			if (type != null) iconIDs.add(type.iconID);
 		}
 		TileCollection tiles = world.tileManager.loadTilesFor(iconIDs, getResources());
-		for (String id : missing) {
+		for (String id : itemTypeIDs) {
 			ItemType type = world.itemTypes.getItemType(id);
 			if (type == null) continue;
 			LinearLayout row = new LinearLayout(getActivity());
@@ -398,7 +410,7 @@ public final class HeroinfoActivity_Inventory extends Fragment implements Custom
 		}
 		message.append("\n\n").append(getString(R.string.equipment_preset_load_confirm));
 		CustomDialogFactory.CustomDialog confirmation = CustomDialogFactory.createDialog(getActivity(), getString(R.string.equipment_preset_removal_title), null, message.toString(), null, true);
-		CustomDialogFactory.setContent(confirmation, createMissingItemsPreview(missing));
+		CustomDialogFactory.setContent(confirmation, createItemListPreview(missing));
 		CustomDialogFactory.addButton(confirmation, android.R.string.yes, view -> { controllers.itemController.applyEquipmentPreset(preset); update(); Toast.makeText(getActivity(), getString(R.string.equipment_preset_loaded_toast, preset + 1), Toast.LENGTH_SHORT).show(); });
 		CustomDialogFactory.addDismissButton(confirmation, android.R.string.no);
 		CustomDialogFactory.show(confirmation);
