@@ -592,6 +592,7 @@ public final class ConversationController {
 					if (requirement.requireType == Requirement.RequirementType.random) continue;
 					if (!canFulfillRequirement(world, requirement)) {
 						proceedToPhrase(res, Constants.REQUIREMENT_CHEAT_DETECT_PHRASE, true, true);
+						return;
 					}
 				}
 			}
