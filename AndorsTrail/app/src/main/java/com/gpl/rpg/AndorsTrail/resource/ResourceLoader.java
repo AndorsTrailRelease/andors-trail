@@ -510,5 +510,17 @@ public final class ResourceLoader {
 		loader.prepareTileset(R.drawable.effect_heal2, "effect_heal2", new Size(8, 2), sz1x1, mTileSize);
 		loader.prepareTileset(R.drawable.effect_poison1, "effect_poison1", new Size(8, 2), sz1x1, mTileSize);
 		loader.prepareTileset(R.drawable.effect_miss1, "effect_miss1", new Size(8, 2), sz1x1, mTileSize);
+		loader.prepareTileset(R.drawable.attack_pole, "attack_pole", new Size(16, 1), new Size(3, 3), mTileSize);
+		loader.prepareTileset(R.drawable.attack_lsword, "attack_lsword", new Size(16, 1), new Size(3, 3), mTileSize);
+		loader.prepareTileset(R.drawable.attack_axe, "attack_axe", new Size(16, 1), new Size(3, 3), mTileSize);
+		loader.prepareTileset(R.drawable.attack_cut, "attack_cut", new Size(16, 1), new Size(3, 3), mTileSize);
+		loader.prepareTileset(R.drawable.attack_thrust, "attack_thrust", new Size(16, 1), new Size(3, 3), mTileSize);
+		loader.prepareTileset(R.drawable.attack_axes, "attack_axes", new Size(16, 1), new Size(3, 3), mTileSize);
+		loader.prepareTileset(R.drawable.attack_broad, "attack_broad", new Size(16, 1), new Size(3, 3), mTileSize);
+		loader.prepareTileset(R.drawable.attack_whip, "attack_whip", new Size(16, 1), new Size(3, 3), mTileSize);
+		loader.prepareTileset(R.drawable.attack_ground, "attack_ground", new Size(16, 1), new Size(1, 1), mTileSize);
+		loader.prepareTileset(R.drawable.attack_blunt, "attack_blunt", new Size(16, 1), new Size(1, 1), mTileSize);
+		loader.prepareTileset(R.drawable.attack_rapier, "attack_rapier", new Size(16, 1), new Size(3, 3), mTileSize);
+		loader.prepareTileset(R.drawable.attack_sweep, "attack_sweep", new Size(16, 1), new Size(1, 1), mTileSize);
 	}
 }
