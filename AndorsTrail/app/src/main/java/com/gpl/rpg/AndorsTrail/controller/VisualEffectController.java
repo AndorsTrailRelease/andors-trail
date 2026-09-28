@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Rect;
 import android.os.Handler;
+import android.os.Looper;
 
 import com.gpl.rpg.AndorsTrail.AndorsTrailPreferences;
 import com.gpl.rpg.AndorsTrail.context.ControllerContext;
@@ -31,7 +32,7 @@ public final class VisualEffectController {
 	private final ControllerContext controllers;
 	private final WorldContext world;
 	private final VisualEffectCollection effectTypes;
-	private final Handler animationHandler = new Handler();
+	private final Handler animationHandler = new Handler(Looper.getMainLooper());
 	private final List<VisualEffectAnimation> activeAnimations = new ArrayList<>();
 
 	public final VisualEffectFrameListeners visualEffectFrameListeners = new VisualEffectFrameListeners();
@@ -105,7 +106,7 @@ public final class VisualEffectController {
 	}
 
 	public final class SpriteMoveAnimation implements Runnable {
-		private final Handler handler = new Handler();
+		private final Handler handler = new Handler(Looper.getMainLooper());
 
 		private final VisualEffectCompletedCallback callback;
 		private final int callbackValue;
