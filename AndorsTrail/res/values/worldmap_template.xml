@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!--
+	This template is processed as an Android string resource, so every double quote inside it must be
+	written as \". An unescaped double quote is silently removed and also stops line breaks from being
+	preserved, which breaks the script below. WorldMapTemplateTest checks this.
+-->
 <resources><string name="worldmap_template">"<![CDATA[<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">
 <html xmlns=\"http://www.w3.org/1999/xhtml\">
 <head>
@@ -13,6 +18,7 @@ div#cell { display:table-cell; vertical-align:middle; text-align:center;}
 div#maps { width:{{sizex}}px; height:{{sizey}}px; position:relative; display:inline-block; }
 div#playerPosition { position:absolute; z-index:3; font-size:19pt; color:red; text-shadow:rgba(0, 0, 0, 1) 2px 2px 2px; }
 img { z-index:1; position:absolute; }
+img[data-src] { visibility:hidden; }
 .namedarea { position: absolute; z-index:2; font-size:16pt; text-shadow:black 0.1em 0.1em 0.2em; text-align:center; }
 .namedarea span { display:inline-block; vertical-align:middle; line-height:1em; }
 .settlement { color:white; }
@@ -37,7 +43,7 @@ var params = window.location.search.substring(1);
 var playerX = null;
 var playerY = null;
 if (params) {
-	var pos = params.split(\",");
+	var pos = params.split(\",\");
 	playerX = parseInt(pos[0])-({{offsetx}});
 	playerY = parseInt(pos[1])-({{offsety}});
 	player.style.top = playerY + \"px\";
@@ -46,90 +52,98 @@ if (params) {
 	player.style.display = \"none\";
 }
 
+// A world map segment can contain hundreds of map images. Loading all of them makes the
+// map slow to open, so the images only get their src when they come close to the screen.
 (function() {
-	var preloadMargin = 768;
-	var images = document.querySelectorAll(\"img[data-src]\");
-	var lazyLoadingStarted = false;
+	var maps = document.getElementById(\"maps\");
+	var images = maps.getElementsByTagName(\"img\");
+	var pending = [];
+	var loadScheduled = false;
 
 	function loadImage(image) {
-		var src = image.getAttribute(\"data-src\");
-		if (!src) return;
-		image.setAttribute(\"src\", src);
+		image.setAttribute(\"src\", image.getAttribute(\"data-src\"));
 		image.removeAttribute(\"data-src\");
 	}
 
-	// The document initially centers the complete map. Preload around the player
-	// before relying on viewport observation, so the first visible area is useful
-	// immediately after the activity recenters the WebView.
-	function loadImagesNearPlayer() {
-		if (playerX === null || playerY === null) return;
-		for (var i = 0; i < images.length; ++i) {
-			if (!images[i].getAttribute(\"data-src\")) continue;
-			var left = parseInt(images[i].style.left, 10);
-			var top = parseInt(images[i].style.top, 10);
-			var right = left + parseInt(images[i].style.width, 10);
-			var bottom = top + parseInt(images[i].style.height, 10);
-			if (right >= playerX - preloadMargin &&
-				bottom >= playerY - preloadMargin &&
-				left <= playerX + preloadMargin &&
-				top <= playerY + preloadMargin) {
-				loadImage(images[i]);
-			}
+	for (var i = 0; i < images.length; ++i) {
+		var image = images[i];
+		if (!image.getAttribute(\"data-src\")) continue;
+		var left = parseInt(image.style.left, 10);
+		var top = parseInt(image.style.top, 10);
+		var width = parseInt(image.style.width, 10);
+		var height = parseInt(image.style.height, 10);
+		if (isNaN(left) || isNaN(top) || isNaN(width) || isNaN(height)) {
+			loadImage(image);
+			continue;
 		}
+		pending.push({ image: image, left: left, top: top, right: left + width, bottom: top + height });
 	}
 
-	function startLazyLoading() {
-		if (lazyLoadingStarted) return;
-		lazyLoadingStarted = true;
-
-		if (\"IntersectionObserver\" in window) {
-			var observer = new IntersectionObserver(function(entries) {
-				for (var i = 0; i < entries.length; ++i) {
-					if (entries[i].isIntersecting || entries[i].intersectionRatio > 0) {
-						loadImage(entries[i].target);
-						observer.unobserve(entries[i].target);
-					}
-				}
-			}, { rootMargin: preloadMargin + \"px\" });
-
-			for (var i = 0; i < images.length; ++i) {
-				observer.observe(images[i]);
+	// Loads the images that overlap the given area. Coordinates are relative to the maps element.
+	function loadImagesInArea(left, top, right, bottom) {
+		var remaining = [];
+		for (var i = 0; i < pending.length; ++i) {
+			var p = pending[i];
+			if (p.right >= left && p.bottom >= top && p.left <= right && p.top <= bottom) {
+				loadImage(p.image);
+			} else {
+				remaining.push(p);
 			}
+		}
+		pending = remaining;
+	}
+
+	// What is shown on screen is the visual viewport. The layout viewport of this page is
+	// enlarged to fit the minimum zoom level and covers most of the map, so IntersectionObserver
+	// and loading=lazy, which are based on the layout viewport, would still load almost everything.
+	function loadVisibleImages() {
+		loadScheduled = false;
+		var viewport = window.visualViewport;
+		var x, y, width, height;
+		if (viewport) {
+			x = viewport.pageLeft;
+			y = viewport.pageTop;
+			width = viewport.width;
+			height = viewport.height;
 		} else {
-			var loadScheduled = false;
-
-			function loadVisibleImages() {
-				loadScheduled = false;
-				var viewportWidth = document.documentElement.clientWidth || window.innerWidth;
-				var viewportHeight = document.documentElement.clientHeight || window.innerHeight;
-
-				for (var i = 0; i < images.length; ++i) {
-					if (!images[i].getAttribute(\"data-src\")) continue;
-					var rect = images[i].getBoundingClientRect();
-					if (rect.bottom >= -preloadMargin &&
-						rect.right >= -preloadMargin &&
-						rect.top <= viewportHeight + preloadMargin &&
-						rect.left <= viewportWidth + preloadMargin) {
-						loadImage(images[i]);
-					}
-				}
-			}
-
-			function scheduleLoad() {
-				if (loadScheduled) return;
-				loadScheduled = true;
-				window.setTimeout(loadVisibleImages, 50);
-			}
-
-			window.addEventListener(\"scroll\", scheduleLoad, false);
-			window.addEventListener(\"resize\", scheduleLoad, false);
-			scheduleLoad();
+			x = window.pageXOffset;
+			y = window.pageYOffset;
+			width = window.innerWidth;
+			height = window.innerHeight;
 		}
+		var origin = maps.getBoundingClientRect();
+		x -= origin.left + window.pageXOffset;
+		y -= origin.top + window.pageYOffset;
+		// Also load half a screen around the visible area, so that images are ready when scrolling.
+		var margin = Math.max(width, height) / 2;
+		loadImagesInArea(x - margin, y - margin, x + width + margin, y + height + margin);
 	}
 
-	loadImagesNearPlayer();
-	window.startWorldMapLazyLoading = startLazyLoading;
-	window.setTimeout(startLazyLoading, 1000);
+	function scheduleLoad() {
+		if (loadScheduled || pending.length == 0) return;
+		loadScheduled = true;
+		window.setTimeout(loadVisibleImages, 50);
+	}
+
+	window.addEventListener(\"scroll\", scheduleLoad, false);
+	window.addEventListener(\"resize\", scheduleLoad, false);
+	if (window.visualViewport) {
+		window.visualViewport.addEventListener(\"scroll\", scheduleLoad, false);
+		window.visualViewport.addEventListener(\"resize\", scheduleLoad, false);
+	}
+	// Called by DisplayWorldMapActivity after it has scrolled to the player.
+	window.startWorldMapLazyLoading = scheduleLoad;
+
+	if (playerX === null || playerY === null || isNaN(playerX) || isNaN(playerY)) {
+		scheduleLoad();
+	} else {
+		// The page starts at its top left corner until the activity scrolls to the player,
+		// so load the area around the player right away to have it ready at that point.
+		var screenSize = window.visualViewport ? Math.max(window.visualViewport.width, window.visualViewport.height) : 0;
+		var radius = screenSize > 0 ? screenSize : 1024;
+		loadImagesInArea(playerX - radius, playerY - radius, playerX + radius, playerY + radius);
+		window.setTimeout(scheduleLoad, 1000);
+	}
 })();
 </script>
 
