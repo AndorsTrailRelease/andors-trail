@@ -1,10 +1,12 @@
 package com.gpl.rpg.AndorsTrail.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -39,6 +41,9 @@ import com.gpl.rpg.AndorsTrail.util.Size;
 public final class WorldMapController {
 
 	private static final int WORLDMAP_SCREENSHOT_TILESIZE = 8;
+	// Increment when the generated world-map HTML format changes.
+	private static final int WORLDMAP_HTML_FORMAT_VERSION = 1;
+	private static final String WORLDMAP_HTML_VERSION_MARKER = "<!-- worldmap-format-version:" + WORLDMAP_HTML_FORMAT_VERSION + " -->";
 	public static final int WORLDMAP_DISPLAY_TILESIZE = WORLDMAP_SCREENSHOT_TILESIZE;
 
 	public static void updateWorldMap(Context context, final WorldContext world, final Resources res) {
@@ -82,7 +87,7 @@ public final class WorldMapController {
 		if (!file.exists()) return true;
 
 		file = getCombinedWorldMapFile(context, worldMapSegmentName);
-		if (!file.exists()) return true;
+		if (!isWorldMapHtmlCurrent(file)) return true;
 
 		return false;
 	}
@@ -212,7 +217,7 @@ public final class WorldMapController {
 
 			Size size = getMapSize(segmentMap, world);
 			mapsAsHtml
-				.append("<img src=\"")
+				.append("<img data-src=\"")
 				.append(f.getName())
 				.append("\" id=\"")
 				.append(segmentMap.mapName)
@@ -224,7 +229,7 @@ public final class WorldMapController {
 				.append((segmentMap.worldPosition.x - offsetWorldmapTo.x) * WorldMapController.WORLDMAP_DISPLAY_TILESIZE)
 				.append("px; top:")
 				.append((segmentMap.worldPosition.y - offsetWorldmapTo.y) * WorldMapController.WORLDMAP_DISPLAY_TILESIZE)
-				.append("px;\" />");
+				.append("px;\" loading=\"lazy\" decoding=\"async\" />");
 			if (AndorsTrailApplication.DEVELOPMENT_DEBUGMESSAGES) mapsAsHtml.append('\n');
 
 			bottomRight.x = Math.max(bottomRight.x, segmentMap.worldPosition.x + size.width);
@@ -296,11 +301,42 @@ public final class WorldMapController {
 	}
 
 	public static void updateWorldMapSegment(Context context, Resources res, WorldContext world, String segmentName) throws IOException {
-		String mapAsHtml = getWorldMapSegmentAsHtml(context, res, world, segmentName);
+		String mapAsHtml = WORLDMAP_HTML_VERSION_MARKER + "\n" + getWorldMapSegmentAsHtml(context, res, world, segmentName);
 		File outputFile = getCombinedWorldMapFile(context, segmentName);
 		PrintWriter pw = new PrintWriter(outputFile);
 		pw.write(mapAsHtml);
 		pw.close();
+	}
+
+	private static boolean isWorldMapPopulationCurrent(File idFile) {
+		if (!idFile.isFile()) return false;
+		try (FileInputStream fis = new FileInputStream(idFile)) {
+			byte[] buffer = new byte[32];
+			int bytesRead = fis.read(buffer);
+			String version = Integer.toString(WORLDMAP_HTML_FORMAT_VERSION);
+			return bytesRead == version.length() && version.equals(new String(buffer, 0, bytesRead, "UTF-8"));
+		} catch (IOException e) {
+			return false;
+		}
+	}
+
+	static boolean isWorldMapHtmlCurrent(File file) {
+		if (!file.isFile()) return false;
+		try (FileInputStream fis = new FileInputStream(file)) {
+			byte[] buffer = new byte[256];
+			int bytesRead = fis.read(buffer);
+			if (bytesRead <= 0) return false;
+			String header = new String(buffer, 0, bytesRead, "UTF-8");
+			return header.indexOf(WORLDMAP_HTML_VERSION_MARKER) >= 0;
+		} catch (IOException e) {
+			return false;
+		}
+	}
+
+	private static void writeWorldMapPopulationVersion(File idFile) throws IOException {
+		try (FileOutputStream fos = new FileOutputStream(idFile)) {
+			fos.write(Integer.toString(WORLDMAP_HTML_FORMAT_VERSION).getBytes("UTF-8"));
+		}
 	}
 
 	public static boolean displayWorldMap(Context context, WorldContext world) {
@@ -322,8 +358,11 @@ public final class WorldMapController {
 		File dir = getWorldmapDirectory(context);
 
 		File idFile = new File(dir, world.model.player.id);
-		if (idFile.exists()) return;
-		idFile.createNewFile();
+		if (isWorldMapPopulationCurrent(idFile)) return;
+		if (!idFile.exists()) idFile.createNewFile();
+
+		Set<String> segmentsRequiringUpdate = new HashSet<String>();
+		Map<String, Boolean> worldMapHtmlStatus = new HashMap<String, Boolean>();
 
 		for (PredefinedMap map : world.maps.getAllMaps()) {
 			if (!map.visited) continue;
@@ -333,15 +372,30 @@ public final class WorldMapController {
 
 			boolean mapFileExists = fileForMapExists(context, map);
 			File worldMapFile = getCombinedWorldMapFile(context, worldMapSegmentName);
-			if (mapFileExists && worldMapFile.exists()) continue;
 
-			LayeredTileMap mapTiles = TMXMapTranslator.readLayeredTileMap(res, world.tileManager.tileCache, map);
-			mapTiles.changeColorFilter(map.currentColorFilter);
-			TileCollection cachedTiles = world.tileManager.loadTilesFor(map, mapTiles, world, res);
+			if (!mapFileExists) {
+				LayeredTileMap mapTiles = TMXMapTranslator.readLayeredTileMap(res, world.tileManager.tileCache, map);
+				mapTiles.changeColorFilter(map.currentColorFilter);
+				TileCollection cachedTiles = world.tileManager.loadTilesFor(map, mapTiles, world, res);
 
-			MapRenderer renderer = new MapRenderer(world, map, mapTiles, cachedTiles);
-			updateCachedBitmap(context, map, renderer);
-			updateWorldMapSegment(context, res, world, worldMapSegmentName);
+				MapRenderer renderer = new MapRenderer(world, map, mapTiles, cachedTiles);
+				updateCachedBitmap(context, map, renderer);
+			}
+
+			Boolean htmlCurrent = worldMapHtmlStatus.get(worldMapSegmentName);
+			if (htmlCurrent == null) {
+				htmlCurrent = isWorldMapHtmlCurrent(worldMapFile);
+				worldMapHtmlStatus.put(worldMapSegmentName, htmlCurrent);
+			}
+			if (!htmlCurrent) {
+				segmentsRequiringUpdate.add(worldMapSegmentName);
+			}
 		}
+
+		for (String segmentName : segmentsRequiringUpdate) {
+			updateWorldMapSegment(context, res, world, segmentName);
+		}
+
+		writeWorldMapPopulationVersion(idFile);
 	}
 }

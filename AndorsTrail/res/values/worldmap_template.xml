@@ -34,15 +34,103 @@ img { z-index:1; position:absolute; }
 <script type=\"text/javascript\">
 var player = document.getElementById(\"playerPosition\");
 var params = window.location.search.substring(1);
+var playerX = null;
+var playerY = null;
 if (params) {
-	var pos = params.split(\",\");
-	var x = parseInt(pos[0])-({{offsetx}});
-	var y = parseInt(pos[1])-({{offsety}});
-	player.style.top = y + \"px\";
-	player.style.left = x + \"px\";
+	var pos = params.split(\",");
+	playerX = parseInt(pos[0])-({{offsetx}});
+	playerY = parseInt(pos[1])-({{offsety}});
+	player.style.top = playerY + \"px\";
+	player.style.left = playerX + \"px\";
 } else {
 	player.style.display = \"none\";
 }
+
+(function() {
+	var preloadMargin = 768;
+	var images = document.querySelectorAll(\"img[data-src]\");
+	var lazyLoadingStarted = false;
+
+	function loadImage(image) {
+		var src = image.getAttribute(\"data-src\");
+		if (!src) return;
+		image.setAttribute(\"src\", src);
+		image.removeAttribute(\"data-src\");
+	}
+
+	// The document initially centers the complete map. Preload around the player
+	// before relying on viewport observation, so the first visible area is useful
+	// immediately after the activity recenters the WebView.
+	function loadImagesNearPlayer() {
+		if (playerX === null || playerY === null) return;
+		for (var i = 0; i < images.length; ++i) {
+			if (!images[i].getAttribute(\"data-src\")) continue;
+			var left = parseInt(images[i].style.left, 10);
+			var top = parseInt(images[i].style.top, 10);
+			var right = left + parseInt(images[i].style.width, 10);
+			var bottom = top + parseInt(images[i].style.height, 10);
+			if (right >= playerX - preloadMargin &&
+				bottom >= playerY - preloadMargin &&
+				left <= playerX + preloadMargin &&
+				top <= playerY + preloadMargin) {
+				loadImage(images[i]);
+			}
+		}
+	}
+
+	function startLazyLoading() {
+		if (lazyLoadingStarted) return;
+		lazyLoadingStarted = true;
+
+		if (\"IntersectionObserver\" in window) {
+			var observer = new IntersectionObserver(function(entries) {
+				for (var i = 0; i < entries.length; ++i) {
+					if (entries[i].isIntersecting || entries[i].intersectionRatio > 0) {
+						loadImage(entries[i].target);
+						observer.unobserve(entries[i].target);
+					}
+				}
+			}, { rootMargin: preloadMargin + \"px\" });
+
+			for (var i = 0; i < images.length; ++i) {
+				observer.observe(images[i]);
+			}
+		} else {
+			var loadScheduled = false;
+
+			function loadVisibleImages() {
+				loadScheduled = false;
+				var viewportWidth = document.documentElement.clientWidth || window.innerWidth;
+				var viewportHeight = document.documentElement.clientHeight || window.innerHeight;
+
+				for (var i = 0; i < images.length; ++i) {
+					if (!images[i].getAttribute(\"data-src\")) continue;
+					var rect = images[i].getBoundingClientRect();
+					if (rect.bottom >= -preloadMargin &&
+						rect.right >= -preloadMargin &&
+						rect.top <= viewportHeight + preloadMargin &&
+						rect.left <= viewportWidth + preloadMargin) {
+						loadImage(images[i]);
+					}
+				}
+			}
+
+			function scheduleLoad() {
+				if (loadScheduled) return;
+				loadScheduled = true;
+				window.setTimeout(loadVisibleImages, 50);
+			}
+
+			window.addEventListener(\"scroll\", scheduleLoad, false);
+			window.addEventListener(\"resize\", scheduleLoad, false);
+			scheduleLoad();
+		}
+	}
+
+	loadImagesNearPlayer();
+	window.startWorldMapLazyLoading = startLazyLoading;
+	window.setTimeout(startLazyLoading, 1000);
+})();
 </script>
 
 </body>
