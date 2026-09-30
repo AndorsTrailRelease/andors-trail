@@ -155,9 +155,7 @@ if (params) {
 	// used, because it only moves the enlarged layout viewport and not what is shown on screen.
 	// scrollIntoView with options is available from Chromium 61, older WebViews let the activity scroll.
 	function scrollToPlayer() {
-		if (!(\"scrollBehavior\" in document.documentElement.style)) return false;
 		player.scrollIntoView({ block: \"center\", inline: \"center\" });
-		return true;
 	}
 
 	// Shows the page once the given images are loaded and decoded, so that the first screen
@@ -193,13 +191,45 @@ if (params) {
 	// Called by DisplayWorldMapActivity after it has scrolled, for example with the recenter button.
 	window.startWorldMapLazyLoading = scheduleLoad;
 
+	function hasVisibleArea() {
+		var viewport = window.visualViewport;
+		if (viewport) return viewport.width > 0 && viewport.height > 0;
+		return window.innerWidth > 0 && window.innerHeight > 0;
+	}
+
 	var hasPlayer = playerX !== null && playerY !== null && !isNaN(playerX) && !isNaN(playerY);
-	if (hasPlayer && scrollToPlayer()) {
-		// Tells DisplayWorldMapActivity that it does not need to scroll to the player itself.
-		window.worldMapCenteredOnPlayer = true;
-		// The load event waits for every image that has a src, so the page is shown at the latest then.
-		window.addEventListener(\"load\", show, false);
-		showWhenReady(loadVisibleImages());
+	if (hasPlayer && (\"scrollBehavior\" in document.documentElement.style)) {
+		// The WebView can run this script before it has its final size: the visible area is then empty,
+		// and centering on it puts the player in the top left corner. The size, and with it the scroll
+		// position, can also change afterwards. So the map is centered again whenever the visible area
+		// changes, until the user moves the map, and it is shown once it has been centered on a real area.
+		var userMovedMap = false;
+		var centered = false;
+		var onUserInput = function() {
+			userMovedMap = true;
+		};
+		var keepCenteredOnPlayer = function() {
+			if (userMovedMap || !hasVisibleArea()) return;
+			scrollToPlayer();
+			if (centered) return;
+			centered = true;
+			// Tells DisplayWorldMapActivity that it does not need to scroll to the player itself.
+			window.worldMapCenteredOnPlayer = true;
+			// The load event waits for every image that has a src, so the page is shown at the latest then.
+			window.addEventListener(\"load\", show, false);
+			showWhenReady(loadVisibleImages());
+		};
+		var inputEvents = [\"touchstart\", \"mousedown\", \"wheel\", \"keydown\"];
+		for (var i = 0; i < inputEvents.length; ++i) {
+			window.addEventListener(inputEvents[i], onUserInput, true);
+		}
+		window.addEventListener(\"resize\", keepCenteredOnPlayer, false);
+		window.addEventListener(\"scroll\", keepCenteredOnPlayer, false);
+		if (window.visualViewport) {
+			window.visualViewport.addEventListener(\"resize\", keepCenteredOnPlayer, false);
+			window.visualViewport.addEventListener(\"scroll\", keepCenteredOnPlayer, false);
+		}
+		keepCenteredOnPlayer();
 	} else if (hasPlayer) {
 		// DisplayWorldMapActivity scrolls to the player when the page has loaded, and then shows it.
 		// Load the area around the player now, so that it is ready at that point.
