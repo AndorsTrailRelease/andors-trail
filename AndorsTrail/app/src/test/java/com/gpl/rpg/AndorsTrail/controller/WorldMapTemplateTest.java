@@ -31,6 +31,8 @@ public final class WorldMapTemplateTest {
 		assertTrue("unexpected start of the page", html.startsWith("<!DOCTYPE html"));
 		assertTrue("quotes or line breaks of the script were lost", html.contains("\tvar pos = params.split(\",\");\n"));
 		assertTrue("the entry point used by DisplayWorldMapActivity is missing", html.contains("\twindow.startWorldMapLazyLoading = scheduleLoad;\n"));
+		assertTrue("the page must be hidden until it is positioned", html.contains("\tdocument.documentElement.className = \"positioning\";\n"));
+		assertTrue("the flag read by DisplayWorldMapActivity is missing", html.contains("\t\twindow.worldMapCenteredOnPlayer = true;\n"));
 		for (String placeholder : new String[] { "{{maps}}", "{{areas}}", "{{sizex}}", "{{sizey}}", "{{offsetx}}", "{{offsety}}" }) {
 			assertTrue("missing " + placeholder, html.contains(placeholder));
 		}

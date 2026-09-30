@@ -19,11 +19,18 @@ div#maps { width:{{sizex}}px; height:{{sizey}}px; position:relative; display:inl
 div#playerPosition { position:absolute; z-index:3; font-size:19pt; color:red; text-shadow:rgba(0, 0, 0, 1) 2px 2px 2px; }
 img { z-index:1; position:absolute; }
 img[data-src] { visibility:hidden; }
+html.positioning body { visibility:hidden; }
 .namedarea { position: absolute; z-index:2; font-size:16pt; text-shadow:black 0.1em 0.1em 0.2em; text-align:center; }
 .namedarea span { display:inline-block; vertical-align:middle; line-height:1em; }
 .settlement { color:white; }
 .other { color:#cccccc; }
 	</style>
+	<script type=\"text/javascript\">
+	// Keeps the page hidden until the script at the end of the body has scrolled to the player and the
+	// images around it are ready, so that neither the top left corner nor empty frames are ever shown.
+	// If that script does not run, DisplayWorldMapActivity removes this class when the page has loaded.
+	document.documentElement.className = \"positioning\";
+	</script>
 </head>
 <body>
 
@@ -60,6 +67,10 @@ if (params) {
 	var pending = [];
 	var loadScheduled = false;
 
+	function show() {
+		document.documentElement.className = \"\";
+	}
+
 	function loadImage(image) {
 		image.setAttribute(\"src\", image.getAttribute(\"data-src\"));
 		image.removeAttribute(\"data-src\");
@@ -79,25 +90,32 @@ if (params) {
 		pending.push({ image: image, left: left, top: top, right: left + width, bottom: top + height });
 	}
 
-	// Loads the images that overlap the given area. Coordinates are relative to the maps element.
-	function loadImagesInArea(left, top, right, bottom) {
+	function overlaps(p, area) {
+		return p.right >= area.left && p.bottom >= area.top && p.left <= area.right && p.top <= area.bottom;
+	}
+
+	// Loads the images that overlap the given area, and returns the ones among them that overlap
+	// the visible area. Coordinates are relative to the maps element.
+	function loadImagesInArea(area, visibleArea) {
 		var remaining = [];
+		var visible = [];
 		for (var i = 0; i < pending.length; ++i) {
 			var p = pending[i];
-			if (p.right >= left && p.bottom >= top && p.left <= right && p.top <= bottom) {
+			if (overlaps(p, area)) {
 				loadImage(p.image);
+				if (overlaps(p, visibleArea)) visible.push(p.image);
 			} else {
 				remaining.push(p);
 			}
 		}
 		pending = remaining;
+		return visible;
 	}
 
 	// What is shown on screen is the visual viewport. The layout viewport of this page is
 	// enlarged to fit the minimum zoom level and covers most of the map, so IntersectionObserver
 	// and loading=lazy, which are based on the layout viewport, would still load almost everything.
-	function loadVisibleImages() {
-		loadScheduled = false;
+	function getVisibleArea() {
 		var viewport = window.visualViewport;
 		var x, y, width, height;
 		if (viewport) {
@@ -114,9 +132,16 @@ if (params) {
 		var origin = maps.getBoundingClientRect();
 		x -= origin.left + window.pageXOffset;
 		y -= origin.top + window.pageYOffset;
-		// Also load half a screen around the visible area, so that images are ready when scrolling.
-		var margin = Math.max(width, height) / 2;
-		loadImagesInArea(x - margin, y - margin, x + width + margin, y + height + margin);
+		return { left: x, top: y, right: x + width, bottom: y + height };
+	}
+
+	// Loads the visible images and half a screen around them, so that images are ready when scrolling.
+	function loadVisibleImages() {
+		loadScheduled = false;
+		var visibleArea = getVisibleArea();
+		var margin = Math.max(visibleArea.right - visibleArea.left, visibleArea.bottom - visibleArea.top) / 2;
+		var area = { left: visibleArea.left - margin, top: visibleArea.top - margin, right: visibleArea.right + margin, bottom: visibleArea.bottom + margin };
+		return loadImagesInArea(area, visibleArea);
 	}
 
 	function scheduleLoad() {
@@ -125,24 +150,65 @@ if (params) {
 		window.setTimeout(loadVisibleImages, 50);
 	}
 
+	// Scrolls the page so that the player marker is in the middle of the screen. The layout is final
+	// at this point: the page and every image have a fixed size and position. window.scrollTo cannot be
+	// used, because it only moves the enlarged layout viewport and not what is shown on screen.
+	// scrollIntoView with options is available from Chromium 61, older WebViews let the activity scroll.
+	function scrollToPlayer() {
+		if (!(\"scrollBehavior\" in document.documentElement.style)) return false;
+		player.scrollIntoView({ block: \"center\", inline: \"center\" });
+		return true;
+	}
+
+	// Shows the page once the given images are loaded and decoded, so that the first screen
+	// is complete when it appears. Later images appear when they are ready.
+	function showWhenReady(visibleImages) {
+		var remaining = visibleImages.length;
+		function imageReady() {
+			if (--remaining == 0) show();
+		}
+		if (remaining == 0) {
+			show();
+			return;
+		}
+		for (var i = 0; i < visibleImages.length; ++i) {
+			var image = visibleImages[i];
+			if (image.decode) {
+				image.decode().then(imageReady, imageReady);
+			} else if (image.complete) {
+				imageReady();
+			} else {
+				image.addEventListener(\"load\", imageReady, false);
+				image.addEventListener(\"error\", imageReady, false);
+			}
+		}
+	}
+
 	window.addEventListener(\"scroll\", scheduleLoad, false);
 	window.addEventListener(\"resize\", scheduleLoad, false);
 	if (window.visualViewport) {
 		window.visualViewport.addEventListener(\"scroll\", scheduleLoad, false);
 		window.visualViewport.addEventListener(\"resize\", scheduleLoad, false);
 	}
-	// Called by DisplayWorldMapActivity after it has scrolled to the player.
+	// Called by DisplayWorldMapActivity after it has scrolled, for example with the recenter button.
 	window.startWorldMapLazyLoading = scheduleLoad;
 
-	if (playerX === null || playerY === null || isNaN(playerX) || isNaN(playerY)) {
-		scheduleLoad();
+	var hasPlayer = playerX !== null && playerY !== null && !isNaN(playerX) && !isNaN(playerY);
+	if (hasPlayer && scrollToPlayer()) {
+		// Tells DisplayWorldMapActivity that it does not need to scroll to the player itself.
+		window.worldMapCenteredOnPlayer = true;
+		// The load event waits for every image that has a src, so the page is shown at the latest then.
+		window.addEventListener(\"load\", show, false);
+		showWhenReady(loadVisibleImages());
+	} else if (hasPlayer) {
+		// DisplayWorldMapActivity scrolls to the player when the page has loaded, and then shows it.
+		// Load the area around the player now, so that it is ready at that point.
+		var screenSize = window.visualViewport ? Math.max(window.visualViewport.width, window.visualViewport.height) : 1024;
+		var aroundPlayer = { left: playerX - screenSize, top: playerY - screenSize, right: playerX + screenSize, bottom: playerY + screenSize };
+		loadImagesInArea(aroundPlayer, aroundPlayer);
 	} else {
-		// The page starts at its top left corner until the activity scrolls to the player,
-		// so load the area around the player right away to have it ready at that point.
-		var screenSize = window.visualViewport ? Math.max(window.visualViewport.width, window.visualViewport.height) : 0;
-		var radius = screenSize > 0 ? screenSize : 1024;
-		loadImagesInArea(playerX - radius, playerY - radius, playerX + radius, playerY + radius);
-		window.setTimeout(scheduleLoad, 1000);
+		show();
+		scheduleLoad();
 	}
 })();
 </script>
