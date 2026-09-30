@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 
 import com.gpl.rpg.AndorsTrail.context.ControllerContext;
 import com.gpl.rpg.AndorsTrail.context.WorldContext;
+import com.gpl.rpg.AndorsTrail.controller.WorldMapController;
 import com.gpl.rpg.AndorsTrail.model.ModelContainer;
 import com.gpl.rpg.AndorsTrail.resource.ResourceLoader;
 import com.gpl.rpg.AndorsTrail.savegames.Savegames;
@@ -110,6 +111,7 @@ public final class WorldSetup {
 			@Override
 			protected Void doInBackground(Void... arg0) {
 				synchronized (onlyOneThreadAtATimeMayLoadSavegames) {
+					WorldMapController.stopWorldMapPopulation(); // It must not see the reset maps, also if loading fails.
 					if (world.model != null) world.resetForNewGame();
 					if (createNewCharacter) {
 						createNewWorld();

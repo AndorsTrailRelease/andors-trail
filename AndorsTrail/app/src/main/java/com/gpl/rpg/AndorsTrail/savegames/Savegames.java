@@ -270,13 +270,14 @@ public final class Savegames {
 		if (header.fileversion >= 81) {
 			checkChecksum(world, header.fileversion);
 		}
-		WorldMapController.populateWorldMap(androidContext, world, controllers.getResources());
-
 		if (header.fileversion < 45) {
 			LegacySavegamesContentAdaptations.adaptToNewContentForVersion45(world, controllers, res);
 		}
 
 		onWorldLoaded(res, world, controllers);
+
+		// Runs in the background, after the world map update of the current map.
+		WorldMapController.populateWorldMap(androidContext, world, controllers.getResources());
 
 		return LoadSavegameResult.success;
 	}

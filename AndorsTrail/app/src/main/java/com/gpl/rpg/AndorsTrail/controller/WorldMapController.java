@@ -4,9 +4,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Executor;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,12 +19,14 @@ import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.AsyncTask;
+import android.os.Process;
 import android.widget.Toast;
 
 import com.gpl.rpg.AndorsTrail.AndorsTrailApplication;
 import com.gpl.rpg.AndorsTrail.R;
 import com.gpl.rpg.AndorsTrail.activity.DisplayWorldMapActivity;
 import com.gpl.rpg.AndorsTrail.context.WorldContext;
+import com.gpl.rpg.AndorsTrail.model.ModelContainer;
 import com.gpl.rpg.AndorsTrail.model.map.LayeredTileMap;
 import com.gpl.rpg.AndorsTrail.model.map.MapLayer;
 import com.gpl.rpg.AndorsTrail.model.map.PredefinedMap;
@@ -344,31 +349,170 @@ public final class WorldMapController {
 		return true;
 	}
 
-	public static void populateWorldMap(Context context, WorldContext world, Resources res) throws IOException {
+	private static volatile WorldMapPopulation currentPopulation;
+
+	/**
+	 * Starts generating the world map files that are missing for the maps visited in the loaded savegame.
+	 *
+	 * <p>The files are generated in the background, so that loading a savegame does not wait for them.
+	 * Rendering hundreds of maps made loading a savegame with many visited maps very slow when its world
+	 * map files had not been imported. See {@link WorldMapPopulation} for how the work is scheduled, and
+	 * when it is stopped and repeated.</p>
+	 *
+	 * <p>Does nothing if the files of this savegame's player were generated completely before. Must be called
+	 * on {@link AsyncTask#SERIAL_EXECUTOR}, after the savegame has been loaded into {@code world}.</p>
+	 *
+	 * @throws IOException if the world map directory cannot be created.
+	 */
+	public static void populateWorldMap(final Context context, final WorldContext world, final Resources res) throws IOException {
 		ensureWorldmapDirectoryExists(context);
-		File dir = getWorldmapDirectory(context);
-
-		File idFile = new File(dir, world.model.player.id);
+		File idFile = new File(getWorldmapDirectory(context), world.model.player.id);
 		if (idFile.exists()) return;
-		idFile.createNewFile();
 
-		for (PredefinedMap map : world.maps.getAllMaps()) {
-			if (!map.visited) continue;
+		startPopulation(new WorldMapPopulation(
+				AsyncTask.SERIAL_EXECUTOR,
+				world,
+				new ArrayList<PredefinedMap>(world.maps.getAllMaps()),
+				new WorldMapPopulation.MapFileGenerator() {
+					@Override
+					public boolean generateMissingFiles(PredefinedMap map) throws IOException {
+						return generateMissingWorldMapFiles(context, world, res, map);
+					}
+				},
+				idFile));
+	}
 
-			String worldMapSegmentName = world.maps.getWorldMapSegmentNameForMap(map.name);
-			if (worldMapSegmentName == null) continue;
+	/**
+	 * Makes {@code population} the current population, which stops the previous one, and queues its first step.
+	 */
+	static void startPopulation(WorldMapPopulation population) {
+		currentPopulation = population;
+		population.executor.execute(population);
+	}
 
-			boolean mapFileExists = fileForMapExists(context, map);
-			File worldMapFile = getCombinedWorldMapFile(context, worldMapSegmentName);
-			if (mapFileExists && worldMapFile.exists()) continue;
+	/**
+	 * Stops the current world map population, if any: its next step does nothing. Must be called on
+	 * {@link AsyncTask#SERIAL_EXECUTOR} before the world is reset for loading a savegame or starting a new game,
+	 * because the population must not continue with the maps of another world, also if loading fails.
+	 */
+	public static void stopWorldMapPopulation() {
+		currentPopulation = null;
+	}
 
-			LayeredTileMap mapTiles = TMXMapTranslator.readLayeredTileMap(res, world.tileManager.tileCache, map);
-			mapTiles.changeColorFilter(map.currentColorFilter);
-			TileCollection cachedTiles = world.tileManager.loadTilesFor(map, mapTiles, world, res);
+	/**
+	 * Generates the world map image of a visited map, and the page of its world map segment, if either is missing.
+	 *
+	 * @return true if files were generated; false if the map is not visited, not part of the world map, or complete.
+	 */
+	private static boolean generateMissingWorldMapFiles(Context context, WorldContext world, Resources res, PredefinedMap map) throws IOException {
+		if (!map.visited) return false;
 
-			MapRenderer renderer = new MapRenderer(world, map, mapTiles, cachedTiles);
-			updateCachedBitmap(context, map, renderer);
-			updateWorldMapSegment(context, res, world, worldMapSegmentName);
+		String worldMapSegmentName = world.maps.getWorldMapSegmentNameForMap(map.name);
+		if (worldMapSegmentName == null) return false;
+
+		boolean mapFileExists = fileForMapExists(context, map);
+		File worldMapFile = getCombinedWorldMapFile(context, worldMapSegmentName);
+		if (mapFileExists && worldMapFile.exists()) return false;
+
+		Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND); // As in AsyncTask, so that the game is not slowed down.
+		LayeredTileMap mapTiles = TMXMapTranslator.readLayeredTileMap(res, world.tileManager.tileCache, map);
+		mapTiles.changeColorFilter(map.currentColorFilter);
+		TileCollection cachedTiles = world.tileManager.loadTilesFor(map, mapTiles, world, res);
+
+		MapRenderer renderer = new MapRenderer(world, map, mapTiles, cachedTiles);
+		updateCachedBitmap(context, map, renderer);
+		updateWorldMapSegment(context, res, world, worldMapSegmentName);
+		return true;
+	}
+
+	/**
+	 * Generates the missing world map files of one loaded savegame in the background.
+	 *
+	 * <p>The maps are processed in steps on an executor. A step ends after the first map for which files had
+	 * to be generated, and the next step is queued behind the tasks that were queued meanwhile. In the app the
+	 * executor is {@link AsyncTask#SERIAL_EXECUTOR}, which also loads savegames, performs map transitions and
+	 * updates the world map of the current map. So a step never runs at the same time as these tasks: it sees
+	 * either the completely loaded world of its savegame or another world, never one that is being loaded, and
+	 * no two tasks write the same world map file at the same time. A map transition waits for at most one
+	 * step.</p>
+	 *
+	 * <p>The population stops when another population is started, when {@link #stopWorldMapPopulation} is
+	 * called before the world is reset, or when the world holds another {@link ModelContainer}. The marker file
+	 * is written only after all maps have been processed without an error. Otherwise, the population runs again
+	 * at the next load of the savegame, and only generates the files that are still missing.</p>
+	 */
+	static final class WorldMapPopulation implements Runnable {
+		/** Generates the missing world map files of one map. */
+		interface MapFileGenerator {
+			/**
+			 * @return true if files were generated, false if nothing was missing.
+			 */
+			boolean generateMissingFiles(PredefinedMap map) throws IOException;
+		}
+
+		private final Executor executor;
+		private final WorldContext world;
+		private final ModelContainer model;
+		private final List<PredefinedMap> maps;
+		private final MapFileGenerator generator;
+		private final File markerFile;
+		private int nextMap = 0;
+		private boolean failed = false;
+
+		/**
+		 * @param executor runs the steps; {@link AsyncTask#SERIAL_EXECUTOR} in the app, see the class documentation.
+		 * @param world the world, loaded with the savegame whose files are generated.
+		 * @param maps the maps to process.
+		 * @param generator generates the files of one map.
+		 * @param markerFile created when all maps have been processed without an error.
+		 */
+		WorldMapPopulation(Executor executor, WorldContext world, List<PredefinedMap> maps, MapFileGenerator generator, File markerFile) {
+			this.executor = executor;
+			this.world = world;
+			this.model = world.model;
+			this.maps = maps;
+			this.generator = generator;
+			this.markerFile = markerFile;
+		}
+
+		/**
+		 * Runs one step: processes maps until files have been generated for one of them, then queues the next
+		 * step. After the last map, writes the marker file if no map failed.
+		 */
+		@Override
+		public void run() {
+			if (currentPopulation != this || world.model != model) return; // Replaced, or another world was loaded.
+
+			while (nextMap < maps.size()) {
+				if (generateMissingFiles(maps.get(nextMap++))) {
+					executor.execute(this); // Let the tasks that were queued meanwhile run first.
+					return;
+				}
+			}
+
+			currentPopulation = null;
+			if (failed) return; // Retried at the next load.
+			try {
+				markerFile.createNewFile();
+			} catch (IOException e) {
+				L.error("WorldMapController: Cannot write " + markerFile + ": " + e);
+			}
+		}
+
+		/**
+		 * Generates the files of one map. A failure is remembered, so that the population is not marked
+		 * as complete, and the remaining maps are still processed.
+		 *
+		 * @return true if files were generated.
+		 */
+		private boolean generateMissingFiles(PredefinedMap map) {
+			try {
+				return generator.generateMissingFiles(map);
+			} catch (IOException | RuntimeException e) {
+				failed = true;
+				L.error("WorldMapController: Cannot generate the world map files of " + map.name, e);
+				return false;
+			}
 		}
 	}
 }
