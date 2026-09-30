@@ -377,35 +377,41 @@ public final class WorldMapController {
 
 		File idFile = new File(dir, world.model.player.id);
 		if (isWorldMapPopulationCurrent(idFile, htmlVersion)) return;
-		// Marked before generating anything, so that a failure below cannot make every later load of this savegame fail.
-		writeWorldMapPopulationVersion(idFile, htmlVersion);
 
-		// Each segment is regenerated at most once, after all its missing map images have been rendered.
-		Set<String> segmentsRequiringUpdate = new HashSet<String>();
-		Set<String> segmentsChecked = new HashSet<String>();
+		try {
+			// Each segment is regenerated at most once, after all its missing map images have been rendered.
+			Set<String> segmentsRequiringUpdate = new HashSet<String>();
+			Set<String> segmentsChecked = new HashSet<String>();
 
-		for (PredefinedMap map : world.maps.getAllMaps()) {
-			if (!map.visited) continue;
+			for (PredefinedMap map : world.maps.getAllMaps()) {
+				if (!map.visited) continue;
 
-			String worldMapSegmentName = world.maps.getWorldMapSegmentNameForMap(map.name);
-			if (worldMapSegmentName == null) continue;
+				String worldMapSegmentName = world.maps.getWorldMapSegmentNameForMap(map.name);
+				if (worldMapSegmentName == null) continue;
 
-			if (!fileForMapExists(context, map)) {
-				LayeredTileMap mapTiles = TMXMapTranslator.readLayeredTileMap(res, world.tileManager.tileCache, map);
-				mapTiles.changeColorFilter(map.currentColorFilter);
-				TileCollection cachedTiles = world.tileManager.loadTilesFor(map, mapTiles, world, res);
+				if (!fileForMapExists(context, map)) {
+					LayeredTileMap mapTiles = TMXMapTranslator.readLayeredTileMap(res, world.tileManager.tileCache, map);
+					mapTiles.changeColorFilter(map.currentColorFilter);
+					TileCollection cachedTiles = world.tileManager.loadTilesFor(map, mapTiles, world, res);
 
-				MapRenderer renderer = new MapRenderer(world, map, mapTiles, cachedTiles);
-				updateCachedBitmap(context, map, renderer);
-				segmentsRequiringUpdate.add(worldMapSegmentName);
-			} else if (segmentsChecked.add(worldMapSegmentName)) {
-				File worldMapFile = getCombinedWorldMapFile(context, worldMapSegmentName);
-				if (!isWorldMapHtmlCurrent(worldMapFile, htmlVersion)) segmentsRequiringUpdate.add(worldMapSegmentName);
+					MapRenderer renderer = new MapRenderer(world, map, mapTiles, cachedTiles);
+					updateCachedBitmap(context, map, renderer);
+					segmentsRequiringUpdate.add(worldMapSegmentName);
+				} else if (segmentsChecked.add(worldMapSegmentName)) {
+					File worldMapFile = getCombinedWorldMapFile(context, worldMapSegmentName);
+					if (!isWorldMapHtmlCurrent(worldMapFile, htmlVersion)) segmentsRequiringUpdate.add(worldMapSegmentName);
+				}
 			}
-		}
 
-		for (String segmentName : segmentsRequiringUpdate) {
-			updateWorldMapSegment(context, res, world, segmentName);
+			for (String segmentName : segmentsRequiringUpdate) {
+				updateWorldMapSegment(context, res, world, segmentName);
+			}
+
+			// Marked only after everything has been generated, so that a failure above is retried on the next load.
+			writeWorldMapPopulationVersion(idFile, htmlVersion);
+		} catch (IOException | RuntimeException e) {
+			// The world map files are a cache: the savegame still loads, and the next load tries again.
+			L.log("WorldMapController: Could not populate the world map: " + e);
 		}
 	}
 }
