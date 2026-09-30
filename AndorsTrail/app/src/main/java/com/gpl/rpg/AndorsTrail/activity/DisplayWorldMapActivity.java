@@ -20,12 +20,30 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.webkit.ValueCallback;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.Toast;
 
 public final class DisplayWorldMapActivity extends AndorsTrailBaseActivity {
+	// Lets the page load the map images around the visible area (see worldmap_template.xml).
+	// If the page script has not run, all images are loaded instead, so that the map is never left empty.
+	// The page is also shown, in case it was still hidden by the template.
+	private static final String START_LOADING_MAP_IMAGES_JS =
+			"if (window.startWorldMapLazyLoading) {"
+			+ " window.startWorldMapLazyLoading();"
+			+ "} else {"
+			+ " var images = document.querySelectorAll('img[data-src]');"
+			+ " for (var i = 0; i < images.length; ++i) {"
+			+ "  images[i].setAttribute('src', images[i].getAttribute('data-src'));"
+			+ "  images[i].removeAttribute('data-src');"
+			+ " }"
+			+ "}"
+			+ "document.documentElement.className = '';";
+	// The page scrolls to the player itself before it is shown (see worldmap_template.xml).
+	private static final String IS_CENTERED_ON_PLAYER_JS = "window.worldMapCenteredOnPlayer === true";
+
 	private WorldContext world;
 
 	private WebView displayworldmap_webview;
@@ -131,16 +149,22 @@ public final class DisplayWorldMapActivity extends AndorsTrailBaseActivity {
 				+ ','
 				+ (world.model.player.position.y + map.worldPosition.y-1) * WorldMapController.WORLDMAP_DISPLAY_TILESIZE;
 		L.log("Showing " + url);
-		displayworldmap_webview.loadUrl(url);
 		displayworldmap_webview.setBackgroundColor(ThemeHelper.getThemeColor(this, R.attr.ui_theme_displayworldmap_bg_color));
 		displayworldmap_webview.setWebViewClient(new WebViewClient() {
 			@SuppressLint("NewApi")
 			@Override
 			public void onPageFinished(WebView view, String url)
 			{
-				recenter();
+				// Scrolling again here would move a map that is already shown centered on the player.
+				view.evaluateJavascript(IS_CENTERED_ON_PLAYER_JS, new ValueCallback<String>() {
+					@Override
+					public void onReceiveValue(String isCentered) {
+						if (!"true".equals(isCentered)) recenter();
+					}
+				});
 			}
 		});
+		displayworldmap_webview.loadUrl(url);
 	}
 	
 	private void recenter() {
@@ -169,6 +193,7 @@ public final class DisplayWorldMapActivity extends AndorsTrailBaseActivity {
 					y -= displayworldmap_webview.getHeight() / 2;
 					
 					displayworldmap_webview.scrollTo(x, y);
+					displayworldmap_webview.evaluateJavascript(START_LOADING_MAP_IMAGES_JS, null);
 				}
 			}
 		}, 100);

@@ -76,7 +76,7 @@ public final class MainView extends SurfaceView
 	private final Paint debugPaint = new Paint();
 	private final int[] debugColors = {Color.MAGENTA, Color.BLUE, Color.CYAN, Color.GREEN, Color.YELLOW, Color.RED, Color.WHITE};
 	private final CoordRect p1x1 = new CoordRect(new Coord(), new Size(1,1));
-	private boolean hasSurface = false;
+	private boolean hasSurface = false; // The surface exists and its buffer has the size of surfaceSize.
 	
 	//DEBUG
 //	private Coord touchedTile = null;
@@ -164,9 +164,15 @@ public final class MainView extends SurfaceView
 			);
 		
 		if (sh.getSurfaceFrame().right != surfaceSize.width || sh.getSurfaceFrame().bottom != surfaceSize.height) {
+			// The buffer still has the size of the view. Anything drawn now would be laid out for the
+			// scaled buffer size and be shown for a frame in a corner of the screen. setFixedSize makes
+			// the SurfaceView call surfaceChanged again with the new size, so draw only then.
+			hasSurface = false;
 			sh.setFixedSize(surfaceSize.width, surfaceSize.height);
+			return;
 		}
-		
+		hasSurface = true;
+
 		if (model.currentMaps.map != null) {
 			onPlayerEnteredNewMap(model.currentMaps.map, model.player.position);
 		} else {
@@ -176,7 +182,7 @@ public final class MainView extends SurfaceView
 
 	@Override
 	public void surfaceCreated(SurfaceHolder sh) {
-		hasSurface = true;
+		// hasSurface is set in surfaceChanged, once the buffer has the size that the drawing code expects.
 	}
 
 	@Override
