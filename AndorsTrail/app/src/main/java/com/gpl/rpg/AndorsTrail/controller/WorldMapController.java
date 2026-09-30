@@ -94,11 +94,14 @@ public final class WorldMapController {
 		if (file.exists()) return;
 
 		Bitmap image = renderer.drawMap();
-		FileOutputStream fos = new FileOutputStream(file);
-		image.compress(Bitmap.CompressFormat.PNG, 70, fos);
+		File tempFile = getTempFile(file);
+		FileOutputStream fos = new FileOutputStream(tempFile);
+		boolean compressed = image.compress(Bitmap.CompressFormat.PNG, 70, fos);
 		fos.flush();
 		fos.close();
 		image.recycle();
+		if (!compressed) throw new IOException("Cannot compress " + file);
+		replaceWithTempFile(tempFile, file);
 		L.log("WorldMapController: Wrote " + file.getAbsolutePath());
 	}
 
@@ -298,9 +301,33 @@ public final class WorldMapController {
 	public static void updateWorldMapSegment(Context context, Resources res, WorldContext world, String segmentName) throws IOException {
 		String mapAsHtml = getWorldMapSegmentAsHtml(context, res, world, segmentName);
 		File outputFile = getCombinedWorldMapFile(context, segmentName);
-		PrintWriter pw = new PrintWriter(outputFile);
+		File tempFile = getTempFile(outputFile);
+		PrintWriter pw = new PrintWriter(tempFile);
 		pw.write(mapAsHtml);
 		pw.close();
+		if (pw.checkError()) throw new IOException("Cannot write " + tempFile); // PrintWriter does not throw.
+		replaceWithTempFile(tempFile, outputFile);
+	}
+
+	/**
+	 * Returns the file that a world map file is written to before it replaces that file.
+	 * See {@link #replaceWithTempFile}.
+	 */
+	private static File getTempFile(File file) {
+		return new File(file.getPath() + ".tmp");
+	}
+
+	/**
+	 * Replaces a world map file with its completely written temporary file.
+	 *
+	 * <p>Renaming is atomic, so a world map file that exists is always complete, also while it is being replaced
+	 * and after the process was killed while writing it. All world map files are written on
+	 * {@link AsyncTask#SERIAL_EXECUTOR}, so two writers never use the same temporary file at the same time.</p>
+	 *
+	 * @throws IOException if the file cannot be replaced; the previous file, if any, is then left unchanged.
+	 */
+	private static void replaceWithTempFile(File tempFile, File file) throws IOException {
+		if (!tempFile.renameTo(file)) throw new IOException("Cannot rename " + tempFile + " to " + file);
 	}
 
 	public static boolean displayWorldMap(Context context, WorldContext world) {
