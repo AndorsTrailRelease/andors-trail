@@ -503,7 +503,7 @@ public final class WorldMapController {
 		 * Generates the files of one map. A failure is remembered, so that the population is not marked
 		 * as complete, and the remaining maps are still processed.
 		 *
-		 * @return true if files were generated.
+		 * @return true if generation work was performed and the population should yield before continuing.
 		 */
 		private boolean generateMissingFiles(PredefinedMap map) {
 			try {
@@ -511,7 +511,7 @@ public final class WorldMapController {
 			} catch (IOException | RuntimeException e) {
 				failed = true;
 				L.error("WorldMapController: Cannot generate the world map files of " + map.name, e);
-				return false;
+				return true;
 			}
 		}
 	}
