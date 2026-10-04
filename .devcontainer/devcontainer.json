@@ -1,0 +1,7 @@
+{
+  "name": "Andors Trail",
+  "containerEnv": {
+    "ANDROID_HOME": "/home/codespace/Android/Sdk"
+  },
+  "postCreateCommand": "bash .devcontainer/install-android-sdk-tools.sh && bash .devcontainer/setup-gradle.sh"
+}
