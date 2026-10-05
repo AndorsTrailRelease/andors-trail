@@ -15,7 +15,7 @@ if [[ "${CODESPACES:-false}" == "true" ]]; then
             printf 'Failed to read %s\n' "$gradle_properties" >&2
             exit "$grep_status"
         fi
-        printf '\n# Limit build memory pressure in GitHub Codespaces.\norg.gradle.workers.max=2\n' >> "$gradle_properties"
+        printf '\n# Limit build memory pressure in GitHub Codespaces.\norg.gradle.workers.max=4\n' >> "$gradle_properties"
         printf 'Initialized Gradle worker limit in %s\n' "$gradle_properties"
     fi
 fi
