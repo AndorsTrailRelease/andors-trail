@@ -44,8 +44,10 @@ Latest version of APK available from:
 * **Draze**
 * **Antison** **\***
 * **OMGeeky** **\***
+* **Guru Meditation No. 42** **\***
 
-   (**\*** Currently active on team)
+
+   ( **\*** Currently active on team)
 
 
 
