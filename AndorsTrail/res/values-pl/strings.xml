@@ -13,7 +13,7 @@
     <string name="savegame_currenthero_displayinfo">Poziom: %1$,d, Punkty doświadczenia: %2$,d, Złoto: %3$,d</string>
     <string name="dialog_loading_message">Wczytywanie gry…</string>
     <string name="dialog_loading_failed_title">Wczytanie gry nieudane</string>
-    <string name="dialog_loading_failed_message">Andor\'s Trail nie był w stanie wczytać zapisu gry.\n\n:(\n\nPlik może być uszkodzony lub niekompletny.</string>
+    <string name="dialog_loading_failed_message">Andor\'s Trail nie mógł załadować pliku zapisu gry.\n\n:(\n\nPlik może być uszkodzony lub niekompletny.\n\nSkontaktuj się z nami na naszym forum lub kanale Discord, aby uzyskać pomoc.</string>
     <string name="dialog_loading_failed_incorrectversion">Andor\'s Trail nie był w stanie wczytać pliku z zapisem gry. Został on utworzony w późniejszej wersji gry, niż obecnie uruchomiona.</string>
     <string name="dialog_close">Zamknij</string>
     <string name="dialog_monsterencounter_title">Potyczka</string>
@@ -49,8 +49,8 @@
     <string name="combat_result_monsterhit">%1$s trafia Cię - tracisz %2$,d PŻ!</string>
     <string name="combat_result_monsterhitcritical">%1$s zadaje Ci cios krytyczny - tracisz  %2$,d PŻ!</string>
     <string name="combat_result_heromiss">Twój cios chybił.</string>
-    <string name="combat_result_herohit">Trafiasz- %1$s traci %2$,d PŻ!</string>
-    <string name="combat_result_herohitcritical">Zadajesz cios krytyczny- %1$s traci %2$,d PŻ!</string>
+    <string name="combat_result_herohit">Trafiasz w cel - %1$s traci %2$,d PŻ!</string>
+    <string name="combat_result_herohitcritical">Zadajesz cios krytyczny - %1$s traci %2$,d PŻ!</string>
     <string name="combat_result_herokillsmonster">%1$s ginie!</string>
     <string name="combat_not_enough_ap">Pozostało zbyt mało PA do podjęcia akcji.</string>
     <string name="combat_hero_dies">Upadasz nieprzytomny, ale na szczęście budzisz się żywy, oszołomiony i zmęczony. Tracisz %1$,d punktów doświadczenia.</string>
@@ -82,10 +82,10 @@
     <string name="actorinfo_health">Zdrowie:</string>
     <string name="actorinfo_attack">Atak:</string>
     <string name="actorinfo_defense">Obrona:</string>
-    <string name="actorinfo_movecost">Koszt ruchu (PA):</string>
+    <string name="actorinfo_movecost">Koszt ruchu:</string>
     <string name="actorinfo_basetraits">Bazowe współczynniki walki (bez ekwipunku i umiejętności)</string>
     <string name="actorinfo_currenttraits">Współczynniki walki (bieżące)</string>
-    <string name="traitsinfo_attack_cost">Koszt ataku (PA):</string>
+    <string name="traitsinfo_attack_cost">Koszt ataku:</string>
     <string name="traitsinfo_attack_chance">Szansa trafienia:</string>
     <string name="traitsinfo_attack_damage">Zadawane obrażenia:</string>
     <string name="traitsinfo_criticalhit_skill">Cios krytyczny:</string>
@@ -103,7 +103,7 @@
     <string name="startscreen_continue">Kontynuuj bieżącą grę</string>
     <string name="startscreen_newgame">Nowa gra</string>
     <string name="startscreen_newgame_confirm">Utracisz swoją bieżącą grę i postać, czy na pewno chcesz rozpocząć przygodę od nowa?</string>
-    <string name="startscreen_about">O grze/pomoc</string>
+    <string name="startscreen_about">O grze/Pomoc</string>
     <string name="startscreen_enterheroname">Wpisz imię bohatera</string>
     <string name="startscreen_load">Wczytaj</string>
     <!-- <string name="conversation_title">%1$s says</string> -->
@@ -139,69 +139,17 @@
     <string name="about_button1">Pomoc</string>
     <string name="about_button2">Autorzy</string>
     <string name="about_button3">Licencja</string>
-    <string name="about_contents1">Witaj w Andor\'s Trail – otwartej grze roguelike RPG na Androida.&lt;br /&gt; &lt;br /&gt; &lt;a href=http://andorstrail.com/&gt;Forum gry na andorstrail.com – pytania i dyskusje o grze .&lt;/a&gt;&lt;br /&gt; &lt;br /&gt; &lt;a href=https://andorstrail.gitbook.io/docs&gt;Strona wiki z informacjami o Andors Trail.&lt;/a&gt;&lt;br /&gt; &lt;br /&gt; &lt;a href=https://github.com/AndorsTrailRelease/andors-trail/&gt;Kod źródłowy gry dla deweloperów na github.com.&lt;/a&gt;&lt;br /&gt; &lt;br /&gt; Zachęcamy do odwiedzenia forum gry i dyskusji z innymi graczami.&lt;br /&gt;</string>
+    <string name="about_contents1">Witamy w Andor\'s Trail, grze na Androida typu roguelike RPG z otwartym kodem źródłowym.&lt;br&gt; &lt;br&gt; &lt;a href=\"http://andorstrail.com/\"&gt;Forum gry na andorstrail.com&lt;/a&gt;, gdzie można zadawać pytania i dyskutować o rozgrywce.&lt;br&gt; &lt;br&gt; &lt;a href=\"https://discord.gg/REYWvSHzAu\"&gt;Dołącz do naszego kanału na Discord&lt;/a&gt;, aby porozmawiać z zespołem i innymi graczami.&lt;br&gt; &lt;br&gt; &lt;a href=\"https://andorstrail.gitbook.io/docs\"&gt;Strona Wiki dla gry&lt;/a&gt;, gdzie znajdziesz instrukcje i informacje o świecie Andor\'s Trail oraz wiele innych rzeczy.&lt;br&gt; &lt;br&gt; &lt;a href=\"https://github.com/AndorsTrailRelease/andors-trail/\"&gt;Kod źródłowy projektu na github.com&lt;/a&gt; dla Twórców.&lt;br&gt; &lt;br&gt; Odwiedź forum, aby porozmawiać o grze z innymi graczami.&lt;br&gt;</string>
     <!--
 		This is the GNU GPL v2 text, originally from
 			http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 		For translation of this text, you might be able to find a version in your language here:
 			http://www.gnu.org/licenses/old-licenses/gpl-2.0-translations.html
 	-->
-    <string name="about_contents3">Niniejszy program jest wolnym oprogramowaniem; możesz go rozprowadzać dalej i/lub modyfikować na warunkach Powszechnej Licencji Publicznej GNU, wydanej przez Fundację Wolnego Oprogramowania - według wersji 2-giej tej Licencji lub którejś z późniejszych wersji.&lt;br /&gt; &lt;br /&gt; Niniejszy program rozpowszechniany jest z nadzieją, iż będzie on użyteczny - jednak BEZ JAKIEJKOLWIEK GWARANCJI, nawet domyślnej gwarancji PRZYDATNOŚCI HANDLOWEJ albo PRZYDATNOŚCI DO OKREŚLONYCH ZASTOSOWAŃ. W celu uzyskania bliższych informacji -patrz Powszechna Licencja Publiczna GNU&lt;br /&gt; &lt;br /&gt; Z pewnością wraz z niniejszym programem otrzymałeś też egzemplarz Powszechnej Licencji Publicznej GNU (GNU General Public License);jeśli nie to patrz &lt;a href=http://www.gnu.org/licenses&gt;http://www.gnu.org/licenses&lt;/a&gt; &lt;br /&gt; &lt;br /&gt; W celu pobrania kodu źródłowego i opisu gry odwiedź stronę projektu: &lt;a href=https://github.com/AndorsTrailRelease/andors-trail/&gt;https://github.com/AndorsTrailRelease/andors-trail/&lt;/a&gt;&lt;br /&gt;</string>
-    <string name="about_interface"><![CDATA[
-
-<div><b>Opcje Gry</b> uzyskasz, gdy wciśniesz przycisk menu.</div>
-
-<p>________________</p>
-<h1>Ikony interfejsu</h1>
-
-<div><b>Skrzynia</b><img alt="chest" src="chest.png" /></div>
-<p>Sloty ekwipunku [Przytrzymaj dłużej palec na slocie, aby przypisać mu przedmiot]</p>
-
-<div><b>Bohater</b><img alt="hero" src="char_hero.png" /></div>
-<p>Menu [Przegląd, Zadania, Umiejętności oraz Ekwipunek *]</p>
-<p>* (Gdy jesteś w zakładce ekwipunku kliknij przedmiot, żeby otrzymać informacje lub przytrzymaj dłużej palec na przedmiocie aby uzyskać więcej opcji)</p>
-
-<div><b>Przeciwnik</b><img alt="monster" src="monster.png" /></div>
-<p>Informacja [Wyświetlana podczas walki]</p>
-
-
-
-<p>________________</p>
-<h1>Walka</h1>
-
-<p>Działania wykonywane podczas walki kosztują Punkty Akcji (PA)....</p>
-
-<div><b>Atak</b> - [3PA] *</div>
-<img alt="attacking" src="doubleattackexample.png" />
-<p>* (Ekwipunek oraz użyte przedmioty mogą zmienić ilość PA potrzebnych do wykonania akcji)</p>
-
-<div><b>Użycie przedmiotu</b> - [5PA]</div>
-<div><b>Ucieczka</b> - [6PA]</div>
-
-
-
-<p>________________</p>
-<h1>Zaawansowana Walka</h1>
-
-<div>Podczas walki przytrzymaj dłużej palec na polu sąsiadującym z Bohaterem...</div>
-
-<div><b>Aby uciec</b></div>
-<p>(wybrane pole podświetla się - atak zamienia się w ruch)</p>
-<img alt="flee" src="flee_example.png" />
-<p>[Gdy jest aktywny tryb ucieczki - przytrzymaj dłużej palec na przeciwniku aby powrócić do trybu walki]</p>
-
-<div><b>Aby zmienić cel</b></div>
-<p>(przełącza czerwone podświetlenie celu między poszczególnymi przeciwnikami)</p>
-<p>[Cel został zmieniony]</p>
-
-]]></string>
+    <string name="about_contents3">Ten program jest wolnym oprogramowaniem; możesz go redystrybuować i/lub modyfikować zgodnie z warunkami Powszechnej Licencji Publicznej GNU, opublikowanej przez Fundację Wolnego Oprogramowania; albo w wersji 2 Licencji, albo (według Twojego wyboru) dowolnej późniejszej wersji.&lt;br&gt; &lt;br&gt; Ten program jest rozpowszechniany z nadzieją, że będzie użyteczny, ale BEZ ŻADNEJ GWARANCJI; nawet bez domniemanej gwarancji PRZYDATNOŚCI HANDLOWEJ lub PRZYDATNOŚCI DO OKREŚLONEGO CELU. Więcej szczegółów znajdziesz w Powszechnej Licencji Publicznej GNU.&lt;br&gt; &lt;br&gt; Powinieneś otrzymać kopię Powszechnej Licencji Publicznej GNU wraz z tym programem; Jeśli nie, zobacz &lt;a href=\"http://www.gnu.org/licenses\"&gt;http://www.gnu.org/licenses&lt;/a&gt;&lt;br&gt; &lt;br&gt; Aby uzyskać kod źródłowy i prośby o funkcje, odwiedź stronę projektu pod adresem &lt;a href=\"https://github.com/AndorsTrailRelease/andors-trail/\"&gt;https://github.com/AndorsTrailRelease/andors-trail/&lt;/a&gt;&lt;br&gt;</string>
+    <string name="about_interface"><![CDATA[\n\n<div><b>Opcje Gry</b> uzyskasz, gdy wciśniesz przycisk menu.</div>\n\n<p>________________</p>\n<h1>Ikony interfejsu</h1>\n\n<div><b>Skrzynia</b><img alt=\"chest\" src=\"chest.png\"></div>\n<p>Sloty ekwipunku [Przytrzymaj dłużej palec na slocie, aby przypisać mu przedmiot]</p>\n\n<div><b>Bohater</b><img alt=\"hero\" src=\"char_hero.png\"></div>\n<p>Menu [Przegląd, Zadania, Umiejętności oraz Ekwipunek *]</p>\n<p>* (Gdy jesteś w zakładce ekwipunku kliknij przedmiot, żeby otrzymać informacje lub przytrzymaj dłużej palec na przedmiocie aby uzyskać więcej opcji)</p>\n\n<div><b>Przeciwnik</b><img alt=\"monster\" src=\"monster.png\"></div>\n<p>Informacja [Wyświetlana podczas walki]</p>\n\n\n\n<p>________________</p>\n<h1>Walka</h1>\n\n<p>Działania wykonywane podczas walki kosztują Punkty Akcji (PA)....</p>\n\n<div><b>Atak</b> - [3PA] *</div>\n<img alt=\"attacking\" src=\"doubleattackexample.png\">\n<p>* (Ekwipunek oraz użyte przedmioty mogą zmienić ilość PA potrzebnych do wykonania akcji)</p>\n\n<div><b>Użycie przedmiotu</b> - [5PA]</div>\n<div><b>Ucieczka</b> - [6PA]</div>\n\n\n\n<p>________________</p>\n<h1>Zaawansowana Walka</h1>\n\n<div>Podczas walki przytrzymaj dłużej palec na polu sąsiadującym z Bohaterem...</div>\n\n<div><b>Aby uciec</b></div>\n<p>(wybrane pole podświetla się - atak zamienia się w ruch)</p>\n<img alt=\"flee\" src=\"flee_example.png\">\n<p>[Gdy jest aktywny tryb ucieczki - przytrzymaj dłużej palec na przeciwniku aby powrócić do trybu walki]</p>\n\n<div><b>Aby zmienić cel</b></div>\n<p>(przełącza czerwone podświetlenie celu między poszczególnymi przeciwnikami)</p>\n<p>[Cel został zmieniony]</p>\n\n]]></string>
     <string name="dialog_newversion_title">Witaj</string>
-    <string name="dialog_newversion_message">Dziękujemy za instalację Andor\'s Trail! 
-\n 
-\nZwracamy uwagę, iż prace nad grą ciągle trwają, co oznacza, że nie wszystkie mapy są jeszcze gotowe. 
-\nZapraszamy do dyskusji na forum (więcej informacji w zakładce \"O grze\"). 
-\n 
-\nDziękujemy za wszelkie sugestie i uwagi dotyczące gry!</string>
+    <string name="dialog_newversion_message">Dziękujemy za instalację Andor\'s Trail! \n \nPamiętaj, że gra jest ciągle w trakcie tworzenia, co oznacza, że niektóre mapy i zadania nie zostały jeszcze ukończone.\n\nZachęcamy do odwiedzenia naszego kanału Discord lub Forum, aby porozmawiać o grze z innymi graczami i pomóc w jej ulepszeniu! (Patrz zakładka \"O grze\")\n \nDziękujemy za wszelkie sugestie i uwagi dotyczące gry!\n\n— Zespół tworzący grę Andor\'s Trail</string>
     <string name="questlog_includecompleted_prompt">Wybierz zadania, które chcesz wyświetlić</string>
     <string name="questlog_includecompleted_hidecompleted">Aktywne zadania</string>
     <string name="questlog_includecompleted_includecompleted">Wszystkie zadania</string>
@@ -447,8 +395,8 @@
     <string name="preferences_dialog_overwrite_savegame">Zadaje pytanie za każdym razem, gdy chcesz zapisać grę w slocie w którym znajduje się już zapis gry.</string>
     <!-- =========================================== -->
     <!-- Added in v0.7.0 -->
-    <string name="heroinfo_reequip_cost">Koszt ponownego wyekwipowania (PA):</string>
-    <string name="heroinfo_useitem_cost">Koszt użycia przedmiotu (PA):</string>
+    <string name="heroinfo_reequip_cost">Koszt ponownego wyekwipowania:</string>
+    <string name="heroinfo_useitem_cost">Koszt użycia przedmiotu:</string>
     <string name="combat_result_monstermoved">%1$s przemieszcza się.</string>
     <string name="combat_log_title">Dziennik walki</string>
     <string name="localize_resources_from_mo_filename">pl.mo</string>
@@ -676,7 +624,7 @@ Każdy poziom umiejętności podnosi obrażenia zadawane każdą broń dwuręczn
     <string name="loadsave_export_successfull">Eksportowanie plików zakończone sukcesem</string>
     <string name="loadsave_export_unsuccessfull">Eksportowanie plików nie powiodło się</string>
     <string name="loadsave_export_overwrite_confirmation_title">Nadpisać istniejące pliki\?</string>
-    <string name="loadsave_export_overwrite_confirmation">Katalog docelowy zawiera pliki o identycznych nazwach jak te, które będą eksportowane. Czy chcesz je napisać\?</string>
+    <string name="loadsave_export_overwrite_confirmation">Folder docelowy zawiera jeden lub więcej plików zapisu gry, które zostaną nadpisane. Czy na pewno chcesz kontynuować?</string>
     <string name="loadsave_import_save">Importuj pliki zapisów gry</string>
     <string name="loadsave_import_save_successfull">Import plików zakończony sukcesem</string>
     <string name="loadsave_import_save_unsuccessfull">Import plików zakończony niepowodzeniem</string>
@@ -684,10 +632,8 @@ Każdy poziom umiejętności podnosi obrażenia zadawane każdą broń dwuręczn
     <string name="loadsave_import_option_keep_imported">Zachowaj importowany plik zapisu gry</string>
     <string name="loadsave_import_option_keep_existing">Zachowaj istniejący plik zapisu gry</string>
     <string name="loadsave_import_option_add_as_new">Dodaj jako nowy plik zapisu gry</string>
-    <string name="loadsave_import_existing_description">Istniejący plik zapisu gry: Slot: %1$s:
-\n\t%2$s</string>
-    <string name="loadsave_import_imported_description">Importowany plik zapisu gry: Slot: %1$s:
-\n\t%2$s</string>
+    <string name="loadsave_import_existing_description">Istniejący zapis gry w slocie %1$,d:\n%2$s</string>
+    <string name="loadsave_import_imported_description">Importowanie zapisu gry do slotu %1$,d:\n%2$s</string>
     <string name="loadsave_import_file_exists_question">W wybranym slocie znajduje się już zapis gry. Chcesz go zachować, napisać czy też utworzyć nowy slot z zapisem gry\?
 \n
 \n%1$s
