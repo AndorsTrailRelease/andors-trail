@@ -13,6 +13,7 @@ public final class ConversationCollection {
 	public static final String PHRASE_ATTACK = "F";
 	public static final String PHRASE_REMOVE = "R";
 	public static final String REPLY_NEXT = "N";
+	public static final String REPLY_CONCAT = "C";
 
 	private final HashMap<String, Phrase> phrases = new HashMap<String, Phrase>();
 
