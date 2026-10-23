@@ -8,7 +8,7 @@
                 "nextPhraseID":"S"
             },
             {
-                "text":"Do you have anything to help against food-poisoning?",
+                "text":"Do you have anything to help against food poisoning?",
                 "nextPhraseID":"fallhaven_pot_antifoodp1"
             },
             {
@@ -98,6 +98,119 @@
                         "requireType":"inventoryRemove",
                         "requireID":"fungi_panic_bag",
                         "value":1
+                    }
+                ]
+            },
+            {
+                "text":"Thoronir sent me here. He said you could help me save a child.",
+                "nextPhraseID":"fishy_med_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":40
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":50,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"What is bonemeal poisoning?",
+                "nextPhraseID":"fishy_med_40",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":50
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":60,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"About the Shadowwater...",
+                "nextPhraseID":"fishy_med_no_water",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":60
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":110,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"Where can I find those ancient stone worms?",
+                "nextPhraseID":"fishy_med_jelly_40",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":110
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":120,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"lithic_scale",
+                        "value":3,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"I have those scales.",
+                "nextPhraseID":"fishy_med_has_three_lithic_scales",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":110
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":120,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"lithic_scale",
+                        "value":3
+                    }
+                ]
+            },
+            {
+                "text":"About the medicine...",
+                "nextPhraseID":"fishy_med_scales_30",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":120
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":130,
+                        "negate":true
                     }
                 ]
             }

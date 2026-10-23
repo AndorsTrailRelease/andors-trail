@@ -3555,7 +3555,7 @@
     },
     {
         "id":"mg2_starwatcher_18",
-        "message":"'Bring these shards to me now. Before the mountain's curse draws worse than beasts to them!",
+        "message":"Bring these shards to me now. Before the mountain's curse draws worse than beasts to them!",
         "replies":[
             {
                 "text":"But ...",
@@ -5090,6 +5090,24 @@
                         "value":10
                     }
                 ]
+            },
+            {
+                "text":"Great, but I'm wondering if you could help me? I'm looking for something.",
+                "nextPhraseID":"mg_myrelis_undertell_10",
+                "requires":[
+                    {
+                        "requireType":"questLatestProgress",
+                        "requireID":"nocmar",
+                        "value":30
+                    }
+                ]
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"galmore_nondisplayed",
+                "value":10
             }
         ]
     },
@@ -5100,13 +5118,6 @@
             {
                 "text":"Do you know of Vaelric, the healer?",
                 "nextPhraseID":"mg_myrelis_vaelric_20"
-            }
-        ],
-        "rewards":[
-            {
-                "rewardType":"questProgress",
-                "rewardID":"galmore_nondisplayed",
-                "value":10
             }
         ]
     },

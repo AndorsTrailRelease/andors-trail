@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="20" height="10" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="6">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="20" height="10" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="6">
  <tileset firstgid="1" name="map_bed_1" tilewidth="32" tileheight="32" tilecount="160" columns="16">
   <image source="../drawable/map_bed_1.png" width="512" height="320"/>
  </tileset>
@@ -120,6 +120,9 @@
  <tileset firstgid="4949" name="map_window_2" tilewidth="32" tileheight="32" tilecount="128" columns="16">
   <image source="../drawable/map_window_2.png" width="512" height="256"/>
  </tileset>
+ <tileset firstgid="5077" name="map_tree_3" tilewidth="32" tileheight="32" tilecount="544" columns="32">
+  <image source="../drawable/map_tree_3.png" width="1024" height="544"/>
+ </tileset>
  <layer id="1" name="Ground" width="20" height="10">
   <data encoding="base64" compression="zlib">
    eJx7ysbA8HQA8U3+gbUfH+biQ2AQANGUmCfFh4kpMc9JiIHBGQ27CJFvXiBQbxAUb2eF0MEUmDccMADnrak6
@@ -127,12 +130,17 @@
  </layer>
  <layer id="2" name="Objects" width="20" height="10">
   <data encoding="base64" compression="zlib">
-   eJyNUjsOwjAMNUioUoXbVB2QgH4kOAIH4AjcASYWRjbYOApMnIzfyACivCoJSb/C0tOLHefVrk0BkQ8kNUwKdjwGIovt+JHrc8vatsZZ0M9efZOv78v1CK5qRyzvPOACjRT+lCXHpfymXh3gKYpxbdeOObtesb7y/2hjv1vVG3rFvJBlPK97qM4jln2nyh+DB+jzAZ15SPQGn3pEd6W7FUZzLdqxARLoudDL8H4BPU/V+YHPgdSL9T6QqUswFWwJf9fwnT2w4ub51u2KtpnVd25OYOITa74Ha//yWWaifv/+4ZvaxS9Oui+c
+   eJx9UjsOwjAMNUioCOE2iEpIfFokOAIr3xNwB5hYGNlg4ygwcTJ+IwMIeFESkraApScnjv1iJ48qRAEQf/Gk4cYjoOV4N77j3zn9kGgQZs8Pgj52LyfrIl3roa4Yql7EtztYnfnAERxt7LusfMS2vpWaQXKPEZ8AHtY3YXNlnrFTzq5Lvqozd0sMkT8Ks72nfZDP8tX9ZF6VVVz2XdfrBqu523rfhK9hzit4RlWiB/y+QHTRvCthORfiP5ZADL4S+F6on4LP130+Hb7I6IFsX4IpYTPs1z/u2QBztm9l3j2tK/dPjPWcuaV5FRvvOHrYstWq/MuXyOrQ/d9/+jxrLb4BjRMxiQ==
   </data>
  </layer>
  <layer id="3" name="Above" width="20" height="10">
   <data encoding="base64" compression="zlib">
-   eJzjFWTACfiAcrx45JEBSB0fmtoPArjVw+RacajBZje62HMBwu6EiWNzHz6zRdlQ5bn4EGwxNtLCBgRM2XDLmbERdh8pAGYWvvAnBfALIszkQ2Kj06QAdPWguER3Lz67kGkYQGZTGpYw/QDEzAzH
+   eJylUlsKgDAM69c+BEVx+jdfd9Abelb93BFcwWJ0HSIGxsaShqxdXpEKZ4m6sPIE/wTrilO71UR7WL68eObQS7gVNAKpF73U8j6GTJM9dWWsTeXCfH2oH2zsjXtj7j5ZcZ1bE7/nDbNJc4u55/sL8fJKb7+Ce+Wg71q/cCZf8iF4lpIXvXG+eK/9TzyjvzZvBubGe/FmHAzbGNk=
+  </data>
+ </layer>
+ <layer id="9" name="Top" width="20" height="10">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFowA/UBAZaBcMHAAANjwANQ==
   </data>
  </layer>
  <layer id="4" name="Walkable" width="20" height="10" visible="0">

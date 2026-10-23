@@ -2749,6 +2749,23 @@
             {
                 "text":"OK. I'll leave [lie].",
                 "nextPhraseID":"X"
+            },
+            {
+                "text":"I'm on an assignment and I need to take Quasi. He needs to dig a grave for a kid in Vilegard. Please permit him.",
+                "nextPhraseID":"bcg_quasi_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":50
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":60,
+                        "negate":true
+                    }
+                ]
             }
         ]
     },

@@ -166,11 +166,29 @@
     },
     {
         "id":"vilegard_villager_friend",
-        "message":"Hello there. I heard you helped us common folk here in Vilegard. Please stay for as long as you like friend.",
+        "message":"Hello there. I heard you helped us common folk here in Vilegard. Please stay for as long as you like, friend.",
         "replies":[
             {
                 "text":"Thank you. Have you seen my brother Andor around here?",
                 "nextPhraseID":"vilegard_villager_friend_1"
+            },
+            {
+                "text":"Thank you. Have you seen my brother Andor around here?",
+                "nextPhraseID":"vilegard_villager_friend_1f",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":5,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":10,
+                        "negate":true
+                    }
+                ]
             },
             {
                 "text":"Thank you. See you.",

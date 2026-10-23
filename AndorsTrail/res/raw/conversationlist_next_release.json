@@ -135,5 +135,49 @@
                 "nextPhraseID":"fulus_return_3"
             }
         ]
+    },
+    {
+        "id":"nocmar_hammer_10",
+        "message":"Ah, that hammer requires weight and a strong wielder. I work the heartsteel into a mighty head, then temper it in the dragon-warmed coals.",
+        "replies":[
+            {
+                "text":"Sounds great! Let's do it.",
+                "nextPhraseID":"nocmar_hammer_20"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"undertell_hidden",
+                "value":41
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"undertell_hidden",
+                "value":39
+            }
+        ]
+    },
+    {
+        "id":"nocmar_hammer_20",
+        "message":"It is done. The weapon cools beneath my hand. Take it, and guard it well. There will never be another like it.",
+        "replies":[
+            {
+                "text":"Thank you. I will guard it.",
+                "nextPhraseID":"X"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"giveItem",
+                "rewardID":"heartsteel_2h_hammer",
+                "value":1
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"nocmar",
+                "value":200
+            }
+        ]
     }
 ]

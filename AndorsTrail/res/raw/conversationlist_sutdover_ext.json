@@ -1,0 +1,3877 @@
+[
+    {
+        "id":"locked_door_map_key_sutdover",
+        "message":"The door is locked to keep intruders out."
+    },
+    {
+        "id":"anaeth_selector",
+        "switchToNPC":"anaeth",
+        "replies":[
+            {
+                "nextPhraseID":"anaeth_followup_ask_help_wrye_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":10
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":20
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":30,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"anaeth_blocker_15",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":20,
+                        "negate":false
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":30,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"anaeth_quasi_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":30
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":50,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"anaeth_no_shovel",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":40
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":60,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"anaeth_no_shovel",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":70
+                    },
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"quasi_shovel",
+                        "value":1,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":90,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"anaeth_shovel_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":70
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":90,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"quasi_shovel",
+                        "value":1
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"anaeth_no_body_10",
+                "requires":[
+                    {
+                        "requireType":"questLatestProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":90
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"oluag_delivered_coffin_10",
+                "requires":[
+                    {
+                        "requireType":"questLatestProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":110
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"pc_delivered_coffin_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"nondisplay_sutdover_lake",
+                        "value":10
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":110,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":140,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"anaeth_pc_dig_10",
+                "requires":[
+                    {
+                        "requireType":"questLatestProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":140
+                    },
+                    {
+                        "requireType":"wear",
+                        "requireID":"quasi_shovel",
+                        "value":1
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"anaeth_pc_dig_no_shovel",
+                "requires":[
+                    {
+                        "requireType":"questLatestProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":140
+                    },
+                    {
+                        "requireType":"wear",
+                        "requireID":"quasi_shovel",
+                        "value":1,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"anaeth_go_get_wrye",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":150
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":160,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"anaeth_talk_to_jolnor",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":170
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":180,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"anaeth_can_pass_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":180
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"anaeth_blocker_20",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":20,
+                        "negate":true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id":"anaeth_blocker_10",
+        "message":"And where do you think you're going?",
+        "switchToNPC":"anaeth",
+        "replies":[
+            {
+                "text":"Umm...[while pointing west] over there.",
+                "nextPhraseID":"anaeth_blocker_20"
+            }
+        ]
+    },
+    {
+        "id":"anaeth_blocker_20",
+        "message":"This is a graveyard. Not a playground. Go away.",
+        "replies":[
+            {
+                "text":"I am not some ordinary kid. I am an adventurer.",
+                "nextPhraseID":"anaeth_blocker_30"
+            }
+        ]
+    },
+    {
+        "id":"anaeth_blocker_30",
+        "message":"All the more reason not to be travelling through and disturbing the graveyard. Let the dearly departed have their final rest.",
+        "replies":[
+            {
+                "text":"I only want to see if my brother Andor came through here or not.",
+                "nextPhraseID":"anaeth_blocker_40"
+            }
+        ]
+    },
+    {
+        "id":"anaeth_blocker_40",
+        "message":"I have not seen anyone who goes by that name around here. Now, please leave.",
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"requiescat_in_pace",
+                "value":10
+            }
+        ]
+    },
+    {
+        "id":"wrye_requiescat_return_son_10",
+        "message":"I know you're a kid, but you have helped me once. Perhaps [sob] what I ask for is too much, but can you bring him home?",
+        "replies":[
+            {
+                "text":"Don't worry, I will help. But please guide me. What do you mean \"bring him home\"?",
+                "nextPhraseID":"wrye_requiescat_return_son_20"
+            }
+        ]
+    },
+    {
+        "id":"wrye_requiescat_return_son_20",
+        "message":"We have family plots in the graveyard of our small town. Even for [sob] Rincel. This mother [sob] would like to see her son there [sob].",
+        "replies":[
+            {
+                "text":"Oh, I understand. Let me go find a way to get him home.",
+                "nextPhraseID":"wrye_requiescat_return_son_30"
+            }
+        ]
+    },
+    {
+        "id":"wrye_requiescat_return_son_30",
+        "message":"You should check with Anaeth first as she maintains our graves. To keep [sob] Rincel's resting place ready.",
+        "replies":[
+            {
+                "text":"I will do that.",
+                "nextPhraseID":"wrye_requiescat_return_son_40"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"requiescat_in_pace",
+                "value":20
+            }
+        ]
+    },
+    {
+        "id":"wrye_requiescat_return_son_40",
+        "message":"Here's fifty gold to help with any expenses.",
+        "replies":[
+            {
+                "text":"You don't need to give me...",
+                "nextPhraseID":"wrye_requiescat_return_son_50"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"giveItem",
+                "rewardID":"gold",
+                "value":50
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"nondisplay_sutdover_lake",
+                "value":5
+            }
+        ]
+    },
+    {
+        "id":"wrye_requiescat_return_son_50",
+        "message":"[sob] Please, a mother insists.",
+        "replies":[
+            {
+                "text":"Thank you!",
+                "nextPhraseID":"X"
+            }
+        ]
+    },
+    {
+        "id":"wrye_return_son_default",
+        "message":"Please...bring my son home.",
+        "replies":[
+            {
+                "text":"I'm working on it.",
+                "nextPhraseID":"X"
+            }
+        ]
+    },
+    {
+        "id":"anaeth_followup_ask_help_wrye_10",
+        "message":"You again?",
+        "replies":[
+            {
+                "text":"Wrye sent me. She wants to bring Rincel back home and asked me to check his final resting place.",
+                "nextPhraseID":"anaeth_followup_ask_help_wrye_20"
+            }
+        ]
+    },
+    {
+        "id":"anaeth_followup_ask_help_wrye_20",
+        "message":"Aye. A bad business at that. You may go check Rincel's plot. It's right there in the corner [pointing north].",
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"requiescat_in_pace",
+                "value":25
+            }
+        ]
+    },
+    {
+        "id":"anaeth_blocker_15",
+        "message":"This is a graveyard. Not a playground. Go away.",
+        "replies":[
+            {
+                "text":"I come on Wrye's behalf. She wants to bring Rincel back home. She asked me to check his final resting place.",
+                "nextPhraseID":"anaeth_followup_ask_help_wrye_15"
+            }
+        ]
+    },
+    {
+        "id":"anaeth_followup_ask_help_wrye_15",
+        "message":"You are the one who brought his news, are you not? Fine, you may go check Rincel's plot. It's right there in the corner [pointing north].",
+        "replies":[
+            {
+                "text":"One last question before I go in: Have you seen my brother Andor? It is to seek him that I find myself travelling all around.",
+                "nextPhraseID":"anaeth_followup_ask_andor"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"requiescat_in_pace",
+                "value":25
+            }
+        ]
+    },
+    {
+        "id":"anaeth_followup_ask_andor",
+        "message":"I have not seen anyone who goes by that name around here. Now, please leave.",
+        "replies":[
+            {
+                "text":"Oh, thanks anyway.",
+                "nextPhraseID":"X"
+            }
+        ]
+    },
+    {
+        "id":"nysera_epithet_key",
+        "message":"Nysera Vahl: First among women to walk the Shadow, faithful keeper of Vilegard."
+    },
+    {
+        "id":"wrye_family_plots_key_selector",
+        "replies":[
+            {
+                "nextPhraseID":"wrye_family_plots_discovery_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":30,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"rincel_epithet",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":80,
+                        "negate":false
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id":"wrye_family_plots_discovery_10",
+        "message":"These two plots are reserved for Wrye of Vilegard and her next of kin.",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"wrye_family_plots_discovery_ponder_10"
+            }
+        ]
+    },
+    {
+        "id":"wrye_family_plots_discovery_ponder_10",
+        "message":"You begin to ponder the gravity of the situation...",
+        "replies":[
+            {
+                "text":"[talking to yourself] So, this is the final resting place of Rincel, next to his mother, Wrye. No parent should have to bury their child.",
+                "nextPhraseID":"wrye_family_plots_discovery_ponder_20"
+            },
+            {
+                "text":"[talking to yourself] I hope Andor is taking care of himself. This is not news I want to take to Mikhail.",
+                "nextPhraseID":"wrye_family_plots_discovery_ponder_20"
+            }
+        ]
+    },
+    {
+        "id":"wrye_family_plots_discovery_ponder_20",
+        "message":"After all that thinking, you realize that the plot needs to be dug and a gravestone needs to be placed. All before Rincel can come home.",
+        "replies":[
+            {
+                "text":"[talking to yourself] Let me talk to Anaeth.",
+                "nextPhraseID":"X"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"requiescat_in_pace",
+                "value":30
+            }
+        ]
+    },
+    {
+        "id":"anaeth_quasi_10",
+        "message":"All is well?",
+        "replies":[
+            {
+                "text":"Yes, the plot is as described, but I suspect that much work must be completed before Rincel can be laid to rest there.",
+                "nextPhraseID":"anaeth_quasi_20"
+            }
+        ]
+    },
+    {
+        "id":"anaeth_quasi_20",
+        "message":"Indeed! Lots of work to be done. The ground is hard. The tombstone needs to be carved. The body will need to be recovered. A coffin needs to be made.",
+        "replies":[
+            {
+                "text":"Lots of preparation to see off a dearly departed.",
+                "nextPhraseID":"anaeth_quasi_30"
+            }
+        ]
+    },
+    {
+        "id":"anaeth_quasi_30",
+        "message":"Aye. First things first. There's a gravedigger in Brimhaven. Quasi is his name. He can help dig the grave. I will carve the tombstone; after all, it is among my duties.",
+        "replies":[
+            {
+                "text":"I will go find him.",
+                "nextPhraseID":"X",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"mikhail_bread"
+                    }
+                ]
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"requiescat_in_pace",
+                "value":40
+            }
+        ]
+    },
+    {
+        "id":"quasi_rincel_10",
+        "message":"I do...I mean you do?",
+        "replies":[
+            {
+                "text":"Anaeth sent me. She wants you to dig up space for a grave at the Vilegard graveyard.",
+                "nextPhraseID":"quasi_rincel_20"
+            }
+        ]
+    },
+    {
+        "id":"quasi_rincel_20",
+        "message":"Quasi stay here. No go anywhere else. Big guard above stop Quasi.",
+        "replies":[
+            {
+                "text":"What if I talk to him?",
+                "nextPhraseID":"quasi_rincel_30"
+            }
+        ]
+    },
+    {
+        "id":"quasi_rincel_30",
+        "message":"You talk. He no allow.",
+        "replies":[
+            {
+                "text":"Let me try.",
+                "nextPhraseID":"X"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"requiescat_in_pace",
+                "value":50
+            }
+        ]
+    },
+    {
+        "id":"bcg_quasi_10",
+        "message":"No can do. You have spoken to Quasi. With his fancy of burying people alive, folks here are at risk. We unfortunately need his services as a gravedigger here far too often, what with the goblins of Charwood and other monsters preying on folk here.",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"bcg_quasi_11"
+            }
+        ]
+    },
+    {
+        "id":"bcg_quasi_11",
+        "message":"This church, the town's leader and the Knights of Elythom never agree on anything except on this matter: Quasi cannot leave the Brimhaven church basement. Sorry. That's how it is.",
+        "replies":[
+            {
+                "text":"OK. Anything and everything for the glory of Feygard.",
+                "nextPhraseID":"X"
+            },
+            {
+                "text":"Ugh! Another Feygard soldier lording his authority over others.",
+                "nextPhraseID":"X"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"requiescat_in_pace",
+                "value":60
+            }
+        ]
+    },
+    {
+        "id":"quasi_cannot_leave_10",
+        "message":"Quasi no go anywhere. Quasi sell shovel. You dig.",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"quasi_cannot_leave_selector"
+            }
+        ]
+    },
+    {
+        "id":"quasi_sell_shovel_10",
+        "message":"Shovel here. 200 Gold.",
+        "replies":[
+            {
+                "text":"[thinking to yourself] This is more than what Wrye gave me...guess I will have to cover it with my own funds.",
+                "nextPhraseID":"X",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"nondisplay_sutdover_lake",
+                        "value":5
+                    }
+                ]
+            },
+            {
+                "text":"Wrye's ask is starting to cost me some serious gold!",
+                "nextPhraseID":"X",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"nondisplay_sutdover_lake",
+                        "value":5,
+                        "negate":true
+                    }
+                ]
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"giveItem",
+                "rewardID":"quasi_shovel",
+                "value":1
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"requiescat_in_pace",
+                "value":70
+            }
+        ]
+    },
+    {
+        "id":"quasi_sell_shovel_no_gold",
+        "message":"Two hundred gold, please.",
+        "replies":[
+            {
+                "text":"I don't have it. I will be back when I have it.",
+                "nextPhraseID":"X"
+            }
+        ]
+    },
+    {
+        "id":"anaeth_no_shovel",
+        "message":"Don't let poor Wrye wait too long!"
+    },
+    {
+        "id":"anaeth_shovel_10",
+        "message":"You're back. Just in time, the tombstone is ready. It says 'Rincel. Taken too soon. Apple of his mother's eye.' I hope it is good. I never could find the right words when needed.",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"anaeth_shovel_20"
+            }
+        ]
+    },
+    {
+        "id":"anaeth_shovel_20",
+        "message":"You have the shovel too. Hang on to it.",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"anaeth_coffin_10"
+            }
+        ]
+    },
+    {
+        "id":"anaeth_coffin_10",
+        "message":"A coffin is what is left to be obtained. It will be most handy to gather Rincel, or whatever is left of him.",
+        "replies":[
+            {
+                "text":"How morbid!",
+                "nextPhraseID":"anaeth_coffin_20"
+            }
+        ]
+    },
+    {
+        "id":"anaeth_coffin_20",
+        "message":"Just a realist. In these trying times. At least you will spare the mother from further grief via a closed coffin.",
+        "replies":[
+            {
+                "text":"So who can sell me one?",
+                "nextPhraseID":"anaeth_coffin_30"
+            }
+        ]
+    },
+    {
+        "id":"anaeth_coffin_30",
+        "message":"The woodcutter in Fallhaven, Jakrar. He can sell you one.",
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"requiescat_in_pace",
+                "value":80
+            }
+        ]
+    },
+    {
+        "id":"rincel_epithet",
+        "message":"Rincel. Taken too soon. Apple of his mother's eye."
+    },
+    {
+        "id":"jakrar_coffin_10",
+        "message":"Sorry for your loss. The monsters got another one, it seems.",
+        "replies":[
+            {
+                "text":"Yes, a child.",
+                "nextPhraseID":"jakrar_coffin_20"
+            }
+        ]
+    },
+    {
+        "id":"jakrar_coffin_20",
+        "message":"That's truly sad. Unfortunately, I need to charge you 150 gold for it. Sorry.",
+        "replies":[
+            {
+                "text":"Oh, that much? I'm a little short right now. I will be back when I get that much.",
+                "nextPhraseID":"X",
+                "requires":[
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"gold",
+                        "value":150,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"But I already paid for it?",
+                "nextPhraseID":"jakrar_coffin_30",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"nondisplay_sutdover_lake",
+                        "value":15
+                    }
+                ]
+            },
+            {
+                "text":"Understandable. Here you go.",
+                "nextPhraseID":"jakrar_coffin_30",
+                "requires":[
+                    {
+                        "requireType":"inventoryRemove",
+                        "requireID":"gold",
+                        "value":150
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"nondisplay_sutdover_lake",
+                        "value":15,
+                        "negate":true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id":"jakrar_coffin_30",
+        "message":"Well, you are in luck. You see, I previously started the construction of a coffin for another client, but it turned out to not be needed as the person was found alive.",
+        "replies":[
+            {
+                "text":"Oh, so why is that lucky?",
+                "nextPhraseID":"jakrar_coffin_40"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"nondisplay_sutdover_lake",
+                "value":15
+            }
+        ]
+    },
+    {
+        "id":"jakrar_coffin_40",
+        "message":"Well, only because you didn't have to wait long for me to finish it. Here you go.",
+        "replies":[
+            {
+                "text":"Great! Oh, boy, this is really heavy! I just hope that I am strong enough to get this to where Rincel is now buried.",
+                "nextPhraseID":"X"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"giveItem",
+                "rewardID":"rincel_coffin",
+                "value":1
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"requiescat_in_pace",
+                "value":90
+            }
+        ]
+    },
+    {
+        "id":"oluag_unbury_10",
+        "message":"You're back? Not to steal my crates, I hope.",
+        "replies":[
+            {
+                "text":"I've been asked to take Rincel back home.",
+                "nextPhraseID":"oluag_unbury_20"
+            }
+        ]
+    },
+    {
+        "id":"oluag_unbury_20",
+        "message":"The remains have been buried in simple sacking...it will not be pretty.",
+        "replies":[
+            {
+                "text":"Will you exhume him, and take him to Anaeth?",
+                "nextPhraseID":"oluag_does_digging_10"
+            }
+        ]
+    },
+    {
+        "id":"oluag_does_digging_10",
+        "message":"For such an onerous task, it will cost you five hundred shiny gold coins.",
+        "replies":[
+            {
+                "text":"I'm too squeamish, so I guess I will have to pay up. Here you go. Do you need my shovel?",
+                "nextPhraseID":"oluag_does_digging_shovel",
+                "requires":[
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"quasi_shovel",
+                        "value":1
+                    },
+                    {
+                        "requireType":"inventoryRemove",
+                        "requireID":"gold",
+                        "value":500
+                    }
+                ]
+            },
+            {
+                "text":"I'm too squeamish, so I guess I will have to pay up. Here you go.",
+                "nextPhraseID":"oluag_does_digging_no_shovel",
+                "requires":[
+                    {
+                        "requireType":"inventoryRemove",
+                        "requireID":"gold",
+                        "value":500
+                    }
+                ]
+            },
+            {
+                "text":"I don't have five hundred coins.",
+                "nextPhraseID":"oluag_does_digging_only_10",
+                "requires":[
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"gold",
+                        "value":500,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"That price is too high.",
+                "nextPhraseID":"oluag_does_digging_only_10"
+            }
+        ]
+    },
+    {
+        "id":"oluag_does_digging_shovel",
+        "message":"I have my own, thanks. Who do I give it to and where?",
+        "replies":[
+            {
+                "text":"Give it to Anaeth in Vilegard.",
+                "nextPhraseID":"oluag_digs_and_delivers",
+                "requires":[
+                    {
+                        "requireType":"inventoryRemove",
+                        "requireID":"rincel_coffin",
+                        "value":1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id":"oluag_does_digging_no_shovel",
+        "message":"Who do I give it to and where?",
+        "replies":[
+            {
+                "text":"Give it to Anaeth in Vilegard.",
+                "nextPhraseID":"oluag_digs_and_delivers",
+                "requires":[
+                    {
+                        "requireType":"inventoryRemove",
+                        "requireID":"rincel_coffin",
+                        "value":1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id":"oluag_digs_and_delivers",
+        "message":"Consider it done. Thanks for the gold but don't touch my crates while I'm gone.",
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"requiescat_in_pace",
+                "value":110
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"nondisplay_sutdover_lake",
+                "value":10
+            },
+            {
+                "rewardType":"removeSpawnArea",
+                "rewardID":"oluag",
+                "mapName":"wild14_clearing"
+            }
+        ]
+    },
+    {
+        "id":"oluag_does_digging_only_10",
+        "message":"OK, how about this then: I'll do the digging and get him in the coffin and it will cost you three hundred gold coins?",
+        "replies":[
+            {
+                "text":"I don't have so many coins right now. Can't you do it for a grieving mother?",
+                "nextPhraseID":"oluag_does_nothing_10",
+                "requires":[
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"gold",
+                        "value":300,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"I'm too squeamish. Here you go. Do you need my shovel?",
+                "nextPhraseID":"oluag_does_digging_only_shovel_10",
+                "requires":[
+                    {
+                        "requireType":"inventoryRemove",
+                        "requireID":"gold",
+                        "value":300
+                    },
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"quasi_shovel",
+                        "value":1
+                    }
+                ]
+            },
+            {
+                "text":"I'm too squeamish. Here, take the three hundred gold, it's well worth it.",
+                "nextPhraseID":"oluag_does_digging_only_20",
+                "requires":[
+                    {
+                        "requireType":"inventoryRemove",
+                        "requireID":"gold",
+                        "value":300
+                    },
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"quasi_shovel",
+                        "value":1,
+                        "negate":true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id":"oluag_does_digging_only_shovel_10",
+        "message":"I have my own, thanks.",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"oluag_does_digging_only_20"
+            }
+        ]
+    },
+    {
+        "id":"oluag_does_digging_only_20",
+        "message":"Oluag takes his own shovel and after many minutes of laborious, back-breaking work, he removes and places Rincel's remains in the coffin.",
+        "switchToNPC":"none",
+        "replies":[
+            {
+                "text":"Thanks, Oluag.",
+                "nextPhraseID":"oluag_does_digging_only_30"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"requiescat_in_pace",
+                "value":120
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"nondisplay_sutdover_lake",
+                "value":10
+            }
+        ]
+    },
+    {
+        "id":"oluag_does_digging_only_30",
+        "message":"Have fun carrying that all the way back to Vilegard.",
+        "switchToNPC":"oluag"
+    },
+    {
+        "id":"oluag_does_nothing_10",
+        "message":"Nope. Look around you, does it look like I can afford to do this for free? Do it yourself.",
+        "replies":[
+            {
+                "text":"OK, I'll do it myself.",
+                "nextPhraseID":"X"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"requiescat_in_pace",
+                "value":130
+            }
+        ]
+    },
+    {
+        "id":"rincel_plot_wild14_key_selector",
+        "replies":[
+            {
+                "nextPhraseID":"pc_undigs_rincel_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":130
+                    },
+                    {
+                        "requireType":"wear",
+                        "requireID":"quasi_shovel",
+                        "value":1
+                    },
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"rincel_coffin",
+                        "value":1
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"pc_no_shovel_to_undig_rincel",
+                "requires":[
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"rincel_coffin",
+                        "value":1
+                    },
+                    {
+                        "requireType":"wear",
+                        "requireID":"quasi_shovel",
+                        "value":1,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":130
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"rincel_unburied",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"nondisplay_sutdover_lake",
+                        "value":10
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"sign_oluag"
+            }
+        ]
+    },
+    {
+        "id":"pc_undigs_rincel_10",
+        "message":"It's time for you to get your hands dirty.",
+        "replies":[
+            {
+                "text":"OK, this will not be one of my happiest moments.",
+                "nextPhraseID":"pc_undigs_rincel_20"
+            }
+        ]
+    },
+    {
+        "id":"pc_no_shovel_to_undig_rincel",
+        "message":"It's time for you to get your hands dirty, but first you need to put away your weapon and take out Quasi's shovel.",
+        "replies":[
+            {
+                "text":"Oh, right. I forgot.",
+                "nextPhraseID":"X"
+            }
+        ]
+    },
+    {
+        "id":"pc_undigs_rincel_20",
+        "message":"You begin digging and after many minutes of labor-intensive, back-breaking work, you remove and place Rincel's remains in the coffin.",
+        "replies":[
+            {
+                "text":"Oh, I need a bath in the worst way!",
+                "nextPhraseID":"X"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"nondisplay_sutdover_lake",
+                "value":10
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"requiescat_in_pace",
+                "value":135
+            },
+            {
+                "rewardType":"actorCondition",
+                "rewardID":"fatigue_minor",
+                "value":10
+            }
+        ]
+    },
+    {
+        "id":"rincel_unburied",
+        "message":"Rincel's remains have been removed."
+    },
+    {
+        "id":"rincel_wild14_dirt",
+        "message":"A pile of dirt is in your way."
+    },
+    {
+        "id":"oluag_delivered_coffin_10",
+        "message":"A man named Oluag came and gave me Rincel's remains, inside this coffin.",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"anaeth_get_plot_ready_10"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"spawnAll",
+                "rewardID":"oluag",
+                "mapName":"wild14_clearing"
+            }
+        ]
+    },
+    {
+        "id":"pc_delivered_coffin_10",
+        "message":"So you managed to get Rincel home? Here, give me the coffin for safekeeping.",
+        "replies":[
+            {
+                "text":"Yes, please, take it! I'm tired of carrying it.",
+                "nextPhraseID":"anaeth_get_plot_ready_10",
+                "requires":[
+                    {
+                        "requireType":"inventoryRemove",
+                        "requireID":"rincel_coffin",
+                        "value":1
+                    }
+                ]
+            },
+            {
+                "text":"Oops, I forgot to bring it.",
+                "nextPhraseID":"X",
+                "requires":[
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"rincel_coffin",
+                        "value":1,
+                        "negate":true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id":"anaeth_get_plot_ready_10",
+        "message":"Time to get the plot ready. Let me help you. Let's go over to Rincel's plot.",
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"requiescat_in_pace",
+                "value":140
+            },
+            {
+                "rewardType":"spawnAll",
+                "rewardID":"anaeth_plot",
+                "mapName":"vilegard_gy_1"
+            },
+            {
+                "rewardType":"removeSpawnArea",
+                "rewardID":"anaeth_spawn",
+                "mapName":"vilegard_gy_1"
+            }
+        ]
+    },
+    {
+        "id":"anaeth_pc_dig_10",
+        "message":"The ground is too hard for one person to dig continuously. Let us take turns.",
+        "replies":[
+            {
+                "text":"Yes, that sounds like a great idea.",
+                "nextPhraseID":"anaeth_pc_dig_20"
+            }
+        ]
+    },
+    {
+        "id":"anaeth_pc_dig_no_shovel",
+        "message":"What is wrong with you? Where is your shovel you got from Quasi?",
+        "replies":[
+            {
+                "text":"Oh, right. Let me get it.",
+                "nextPhraseID":"X"
+            }
+        ]
+    },
+    {
+        "id":"anaeth_pc_dig_20",
+        "message":"You dig for a bit and pass the shovel to Anaeth; she digs for a bit and hands you back the shovel.",
+        "switchToNPC":"none",
+        "replies":[
+            {
+                "text":"Ugh! This is hard work.",
+                "nextPhraseID":"anaeth_pc_dig_30"
+            }
+        ]
+    },
+    {
+        "id":"anaeth_pc_dig_30",
+        "message":"You dig for a bit and pass the shovel to Anaeth; she digs for a bit and hands you back the shovel.",
+        "replies":[
+            {
+                "text":"I'm glad that I don't have to do this every day.",
+                "nextPhraseID":"anaeth_pc_dig_40"
+            }
+        ]
+    },
+    {
+        "id":"anaeth_pc_dig_40",
+        "message":"You dig for a bit and pass the shovel to Anaeth; she digs for a bit and hands you back the shovel.",
+        "replies":[
+            {
+                "text":"I could really use some water right about now.",
+                "nextPhraseID":"anaeth_pc_dig_50"
+            }
+        ]
+    },
+    {
+        "id":"anaeth_pc_dig_50",
+        "message":"You dig for a bit and pass the shovel to Anaeth; she digs for a bit and hands you back the shovel.",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"anaeth_pc_dig_60"
+            }
+        ]
+    },
+    {
+        "id":"anaeth_pc_dig_60",
+        "message":"This should be good now, nice and deep. Please go get Wrye, I will get Jolnor.",
+        "switchToNPC":"anaeth",
+        "replies":[
+            {
+                "text":"OK, sure, I can do that.",
+                "nextPhraseID":"X"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"requiescat_in_pace",
+                "value":150
+            }
+        ]
+    },
+    {
+        "id":"vilegard_grave_key_digging_needed",
+        "message":"Where do you think you're going? We have work to do over here!",
+        "switchToNPC":"anaeth"
+    },
+    {
+        "id":"anaeth_go_get_wrye",
+        "message":"What are you still doing here? I told you to go get Wrye.",
+        "replies":[
+            {
+                "text":"Oh, right. Sorry about that. I will go now.",
+                "nextPhraseID":"X"
+            }
+        ]
+    },
+    {
+        "id":"rincel_plot_hole_key_selector",
+        "replies":[
+            {
+                "nextPhraseID":"rincel_plot_hole_key_dont_walk_hole",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":150
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":160,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"rincel_plot_hole_key_dont_walk_ceremony_complete",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":160
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id":"rincel_plot_hole_key_dont_walk_hole",
+        "message":"Watch out! There's a coffin in there.",
+        "switchToNPC":"anaeth"
+    },
+    {
+        "id":"bring_wrye_to_cemetery_10",
+        "message":"[sob] Is it time? Is my son finally home?",
+        "replies":[
+            {
+                "text":"It is time. Please come to the graveyard.",
+                "nextPhraseID":"bring_wrye_to_cemetery_20"
+            }
+        ]
+    },
+    {
+        "id":"bring_wrye_to_cemetery_20",
+        "message":"Please, give me a minute or two to compose myself and I will meet you there.",
+        "replies":[
+            {
+                "text":"OK.",
+                "nextPhraseID":"X"
+            },
+            {
+                "text":"Don't worry, the Shadow will watch over you.",
+                "nextPhraseID":"X"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"requiescat_in_pace",
+                "value":160
+            },
+            {
+                "rewardType":"removeSpawnArea",
+                "rewardID":"jolnor",
+                "mapName":"vilegard_chapel"
+            },
+            {
+                "rewardType":"spawnAll",
+                "rewardID":"jolnor_spawn",
+                "mapName":"vilegard_gy_1"
+            }
+        ]
+    },
+    {
+        "id":"spawn_wrye_in_graveyard_selector",
+        "replies":[
+            {
+                "nextPhraseID":"spawn_wrye_in_graveyard",
+                "requires":[
+                    {
+                        "requireType":"questLatestProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":160
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id":"spawn_wrye_in_graveyard",
+        "rewards":[
+            {
+                "rewardType":"spawnAll",
+                "rewardID":"wrye_spawn",
+                "mapName":"vilegard_gy_1"
+            },
+            {
+                "rewardType":"removeSpawnArea",
+                "rewardID":"wrye",
+                "mapName":"vilegard_wrye"
+            }
+        ]
+    },
+    {
+        "id":"requiescat_reward_step_170_selector",
+        "replies":[
+            {
+                "nextPhraseID":"requiescat_reward_step_170",
+                "requires":[
+                    {
+                        "requireType":"questLatestProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":160
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id":"requiescat_reward_step_170",
+        "message":"The coffin has already been buried. Jolnor, Wrye and Anaeth are waiting there.",
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"requiescat_in_pace",
+                "value":170
+            }
+        ]
+    },
+    {
+        "id":"anaeth_talk_to_jolnor",
+        "message":"Go speak to Jolnor."
+    },
+    {
+        "id":"jolnor_ceremony_10",
+        "message":"We gather here to send off Rincel.",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"jolnor_ceremony_20"
+            }
+        ]
+    },
+    {
+        "id":"jolnor_ceremony_20",
+        "message":"[while pointing at you] Thanks to $playername, he has come home.",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"jolnor_ceremony_wrye_sobs"
+            }
+        ]
+    },
+    {
+        "id":"jolnor_ceremony_wrye_sobs",
+        "message":"[sobbing]",
+        "switchToNPC":"wrye",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"jolnor_ceremony_30"
+            }
+        ]
+    },
+    {
+        "id":"jolnor_ceremony_30",
+        "message":"'From the Shadow, we arrive.'",
+        "switchToNPC":"jolnor",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"jolnor_ceremony_40"
+            }
+        ]
+    },
+    {
+        "id":"jolnor_ceremony_40",
+        "message":"'Back to the Shadow we go.'",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"wrye_sob_thanks"
+            }
+        ]
+    },
+    {
+        "id":"wrye_sob_thanks",
+        "message":"[sobbing, softly] Thank you, $playername.",
+        "switchToNPC":"wrye",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"anaeth_good_work"
+            }
+        ]
+    },
+    {
+        "id":"anaeth_good_work",
+        "message":"Good work, kid.",
+        "switchToNPC":"anaeth",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"jolnor_ceremony_50"
+            }
+        ]
+    },
+    {
+        "id":"jolnor_ceremony_50",
+        "message":"Meet me back at the church, please. I have something for you.",
+        "switchToNPC":"jolnor",
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"requiescat_in_pace",
+                "value":180
+            },
+            {
+                "rewardType":"spawnAll",
+                "rewardID":"jolnor",
+                "mapName":"vilegard_chapel"
+            },
+            {
+                "rewardType":"removeSpawnArea",
+                "rewardID":"jolnor_spawn",
+                "mapName":"vilegard_gy_1"
+            }
+        ]
+    },
+    {
+        "id":"wrye_thanks_gy_10",
+        "message":"[sobbing, softly] Thank you, $playername.",
+        "replies":[
+            {
+                "text":"What are you going to do now?",
+                "nextPhraseID":"wrye_thanks_gy_20"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"requiescat_in_pace",
+                "value":190
+            }
+        ]
+    },
+    {
+        "id":"wrye_thanks_gy_20",
+        "message":"I'm just going to stay here a little bit longer. Maybe I'll get some flowers from Anaeth.",
+        "replies":[
+            {
+                "text":"Let the Shadow make you stronger.",
+                "nextPhraseID":"X"
+            },
+            {
+                "text":"Yes, because flowers always help.",
+                "nextPhraseID":"X"
+            }
+        ]
+    },
+    {
+        "id":"anaeth_can_pass_10",
+        "message":"You did good.",
+        "replies":[
+            {
+                "text":"Thank you. Now about...",
+                "nextPhraseID":"anaeth_can_pass_20"
+            }
+        ]
+    },
+    {
+        "id":"anaeth_can_pass_20",
+        "message":"Let me stop you there. You are now free to travel west if you so desire.",
+        "replies":[
+            {
+                "text":"But what will I encounter?",
+                "nextPhraseID":"anaeth_can_pass_30"
+            }
+        ]
+    },
+    {
+        "id":"anaeth_can_pass_30",
+        "message":"Shh...there's a grieving mother just steps away.",
+        "replies":[
+            {
+                "text":"Oh, right. Sorry.",
+                "nextPhraseID":"X"
+            }
+        ]
+    },
+    {
+        "id":"jolnor_post_ceremony_10",
+        "message":"Walk with the Shadow, my friend.",
+        "replies":[
+            {
+                "text":"I am here as you asked.",
+                "nextPhraseID":"jolnor_post_ceremony_20"
+            }
+        ]
+    },
+    {
+        "id":"jolnor_post_ceremony_20",
+        "message":"Thank you for bringing Rincel home. I know that whatever Wrye gave you would not cover what you did.",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"jolnor_post_ceremony_30"
+            }
+        ]
+    },
+    {
+        "id":"jolnor_post_ceremony_30",
+        "message":"Here are a thousand more gold pieces for your troubles, and here are fifty Nor gold coins. They may be of help to you when you reach Nor City.",
+        "replies":[
+            {
+                "text":"Thank you, but it was sad. I hope that my brother, Andor, does not meet the same fate.",
+                "nextPhraseID":"X"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"giveItem",
+                "rewardID":"gold",
+                "value":1000
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"requiescat_in_pace",
+                "value":200
+            },
+            {
+                "rewardType":"giveItem",
+                "rewardID":"nor_gold",
+                "value":50
+            }
+        ]
+    },
+    {
+        "id":"cow_moo",
+        "message":"[Moo]"
+    },
+    {
+        "id":"doghouse_key",
+        "message":"Why would you even entertain the idea of crawling into a doghouse?"
+    },
+    {
+        "id":"wrye_talk_to_jolnor",
+        "message":"[sob] Go speak to Jolnor."
+    },
+    {
+        "id":"vilegard_grave_key_selector",
+        "replies":[
+            {
+                "nextPhraseID":"vilegard_grave_key_yell_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":140
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"vilegard_grave_key_grab_arm_10"
+            }
+        ]
+    },
+    {
+        "id":"vilegard_grave_key_yell_10",
+        "message":"As you try to sneak through the gate, Anaeth yells out to you:",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"vilegard_grave_key_digging_needed"
+            }
+        ]
+    },
+    {
+        "id":"vilegard_grave_key_grab_arm_10",
+        "message":"As you try to sneak past the graveyard keeper, she grabs your arm...",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"anaeth_blocker_10"
+            }
+        ]
+    },
+    {
+        "id":"dbg_teleport_prj_sutdover_lake_ext_oluag",
+        "rewards":[
+            {
+                "rewardType":"mapchange",
+                "rewardID":"down",
+                "mapName":"wild14_clearing"
+            }
+        ]
+    },
+    {
+        "id":"dbg_teleport_prj_sutdover_lake_ext_fishermen",
+        "rewards":[
+            {
+                "rewardType":"mapchange",
+                "rewardID":"house",
+                "mapName":"sut_lk_ext_3"
+            }
+        ]
+    },
+    {
+        "id":"vilegard_gy_dynamic_Epihet_selector",
+        "replies":[
+            {
+                "nextPhraseID":"unzel_epihet_10",
+                "requires":[
+                    {
+                        "requireType":"killedMonster",
+                        "requireID":"unzel",
+                        "value":1
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"vilegard_gy_dynamic_default"
+            }
+        ]
+    },
+    {
+        "id":"unzel_epihet_10",
+        "message":"Unwilling to believe what you are seeing, you do a double-take.",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"unzel_epihet_20"
+            }
+        ]
+    },
+    {
+        "id":"unzel_epihet_20",
+        "message":"Here rests Unzel, faithful to the Shadow. The earth claimed what the Shadow did not.",
+        "replies":[
+            {
+                "text":"[talking to yourself] So it ends like this...I struck him down, and now he lies here. Someone cared enough to bury him.",
+                "nextPhraseID":"X"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"achievements",
+                "value":225
+            }
+        ]
+    },
+    {
+        "id":"vilegard_gy_dynamic_default",
+        "message":"Here lies a place kept for one who walks with the Shadow."
+    },
+    {
+        "id":"beagle_baying",
+        "message":"A-rooooo!",
+        "replies":[
+            {
+                "text":"[Reach down for an ear scratch.]",
+                "nextPhraseID":"beagle_stretches_up"
+            }
+        ]
+    },
+    {
+        "id":"sleeping",
+        "message":"[Zzzz]"
+    },
+    {
+        "id":"zephyr_bed_key_selector",
+        "replies":[
+            {
+                "nextPhraseID":"zephyr_healthy",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":140
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"zephyr_sick_10"
+            }
+        ]
+    },
+    {
+        "id":"zephyr_healthy",
+        "message":"A healthier Zephyr sees you approaching and slides her upper body up onto her pillow.",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"zephyr_healthy_selector"
+            }
+        ]
+    },
+    {
+        "id":"zephyr_sick_10",
+        "message":"A young girl rests in the bed, her skin pale and her breathing shallow. She stirs as you approach, opening her eyes.",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"zephyr_sick_20"
+            }
+        ]
+    },
+    {
+        "id":"zephyr_sick_20",
+        "message":"Hello?",
+        "switchToNPC":"zephyr_hidden",
+        "replies":[
+            {
+                "text":"Hello there. I am $playername.",
+                "nextPhraseID":"zephyr_sick_30"
+            }
+        ]
+    },
+    {
+        "id":"zephyr_sick_30",
+        "message":"You look familiar. Where did you say you were from?",
+        "replies":[
+            {
+                "text":"I didn't.",
+                "nextPhraseID":"zephyr_sick_40"
+            }
+        ]
+    },
+    {
+        "id":"zephyr_sick_40",
+        "message":"Seriously, where are you from?",
+        "replies":[
+            {
+                "text":"A small farming village called Crossglen.",
+                "nextPhraseID":"zephyr_sick_50"
+            }
+        ]
+    },
+    {
+        "id":"zephyr_sick_50",
+        "message":"REALLY! Do you know Andor?",
+        "replies":[
+            {
+                "text":"Yes, actually...",
+                "nextPhraseID":"zephyr_sick_60"
+            }
+        ]
+    },
+    {
+        "id":"zephyr_sick_60",
+        "message":"Don't excite my daughter, kid! She needs to rest!",
+        "switchToNPC":"gillbert"
+    },
+    {
+        "id":"gillbert_selector",
+        "replies":[
+            {
+                "nextPhraseID":"gillbert_default",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":10,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"gillbert_30",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":10
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":20,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"gillbert_no_med_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":20
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":140,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"gillbert_physique_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":140
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"nondisplay_sutdover_lake",
+                        "value":25,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"gillbert_fishing_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":140
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id":"gillbert_default",
+        "message":"Buzz off, kid!",
+        "replies":[
+            {
+                "text":"But Mabyn instructed me to come talk to you? I want to help.",
+                "nextPhraseID":"gillbert_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":5
+                    }
+                ]
+            },
+            {
+                "text":"Don't be so rude, old man. You don't even know me.",
+                "nextPhraseID":"gillbert_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":5,
+                        "negate":true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id":"gillbert_10",
+        "message":"Sorry, kid. I have been on edge for quite some time.",
+        "replies":[
+            {
+                "text":"Yes, I can see that. Care to tell me what worries you?",
+                "nextPhraseID":"gillbert_20",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"vilegard",
+                        "value":30,
+                        "negate":false
+                    }
+                ]
+            },
+            {
+                "text":"Yes, I can see that. Care to tell me what worries you?",
+                "nextPhraseID":"gillbert_no_trust",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"vilegard",
+                        "value":30,
+                        "negate":true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id":"gillbert_20",
+        "message":"If it were someone else, I would not tell them, but I can trust you. Jolnor has told us about you.",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"gillbert_30"
+            }
+        ]
+    },
+    {
+        "id":"gillbert_30",
+        "message":"My beloved daughter, the apple of my eye, is sick! She is plagued by this mysterious illness which I can't make sense of. Not even Jolnor has any idea about what this disease is.",
+        "replies":[
+            {
+                "text":"Not even Jolnor? That sounds serious. I know some other Shadow priests; I can ask them to help cure your daughter's illness.",
+                "nextPhraseID":"gillbert_40"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"something_fishy_in_the_medicine",
+                "value":10
+            }
+        ]
+    },
+    {
+        "id":"gillbert_40",
+        "message":"Really? Oh, Shadow bless you, kid! Please, please, help my daughter get well!",
+        "replies":[
+            {
+                "text":"No problem. But first, can you tell me about the illness? What signs does it show?",
+                "nextPhraseID":"gillbert_50"
+            }
+        ]
+    },
+    {
+        "id":"gillbert_50",
+        "message":"My daughter Zephyr was born with a weak physique and she often has fits of weakness, but recently her skin turned a pale grey. We thought it was another episode of weakness, but this time her skin began to crack. Now those cracks have spread into small patches across her body.",
+        "replies":[
+            {
+                "text":"That sounds awful!",
+                "nextPhraseID":"gillbert_60"
+            }
+        ]
+    },
+    {
+        "id":"gillbert_60",
+        "message":"Yes, it is! This is all I can tell you, kid! Please help my daughter!",
+        "replies":[
+            {
+                "text":"Okay. I will make haste and go talk to Jolnor, then I will go talk to the priests I know.",
+                "nextPhraseID":"gillbert_70"
+            }
+        ]
+    },
+    {
+        "id":"gillbert_70",
+        "message":"Shadow bless you, kid!",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"X"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"something_fishy_in_the_medicine",
+                "value":20
+            }
+        ]
+    },
+    {
+        "id":"mabyn_selector",
+        "switchToNPC":"mabyn",
+        "replies":[
+            {
+                "nextPhraseID":"mabyn_intro_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":5,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"mabyn_andor_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":20
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":140,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"mabyn_post_quest_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":140
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"mabyn_default"
+            }
+        ]
+    },
+    {
+        "id":"mabyn_intro_10",
+        "message":"Hello, child. Who may you be?",
+        "replies":[
+            {
+                "text":"I am $playername and I am trying to find my brother Andor.",
+                "nextPhraseID":"mabyn_intro_20"
+            }
+        ]
+    },
+    {
+        "id":"mabyn_intro_20",
+        "message":"She does not reply. Her gaze is unfocused and her brows are furrowed; she looks worried.",
+        "switchToNPC":"none",
+        "replies":[
+            {
+                "text":"Hello?",
+                "nextPhraseID":"mabyn_intro_30"
+            }
+        ]
+    },
+    {
+        "id":"mabyn_intro_30",
+        "message":"Oh. Sorry child, I am worried for my daughter.",
+        "switchToNPC":"mabyn",
+        "replies":[
+            {
+                "text":"Could you tell me what happened? Maybe I could help her?",
+                "nextPhraseID":"mabyn_intro_40"
+            }
+        ]
+    },
+    {
+        "id":"mabyn_intro_40",
+        "message":"Thank you, child. You can talk to my husband. He is upstairs.",
+        "replies":[
+            {
+                "text":"Sure.",
+                "nextPhraseID":"X"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"something_fishy_in_the_medicine",
+                "value":5
+            }
+        ]
+    },
+    {
+        "id":"mabyn_andor_10",
+        "message":"Thank you, child. You are not only helping my daughter, you are finally bringing some measure of peace to a worried mother.",
+        "replies":[
+            {
+                "text":"I can understand. My father is worried for my brother as well.",
+                "nextPhraseID":"mabyn_andor_20"
+            },
+            {
+                "text":"I am looking for some aged fish oil jelly for Zephyr's medicine. Gillbert told me you could give me some.",
+                "nextPhraseID":"mabyn_fish_oil_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":90
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":100,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"What's the story with all of those beagles outside?",
+                "nextPhraseID":"mabyn_default"
+            }
+        ]
+    },
+    {
+        "id":"mabyn_andor_20",
+        "message":"Oh, what happened to your brother?",
+        "replies":[
+            {
+                "text":"He is missing and I am trying to find him. Have you seen someone who looks like me, but older? His name is Andor.",
+                "nextPhraseID":"mabyn_andor_30"
+            }
+        ]
+    },
+    {
+        "id":"mabyn_andor_30",
+        "message":"No, I haven't seen anyone like that around here. But if I see him I will tell him to go home. Fear not, he shall be found. My instinct as a mother says so.",
+        "replies":[
+            {
+                "text":"Thank you.",
+                "nextPhraseID":"X"
+            }
+        ]
+    },
+    {
+        "id":"mabyn_post_quest_10",
+        "message":"Hello, child. Thank you for helping our daughter. Now, what can I do for you?",
+        "replies":[
+            {
+                "text":"Can you sell me some fish?",
+                "nextPhraseID":"mabyn_post_quest_20"
+            },
+            {
+                "text":"Nothing, just passing through. Take care.",
+                "nextPhraseID":"X"
+            },
+            {
+                "text":"What's the deal with all of those beagles outside?",
+                "nextPhraseID":"mabyn_default"
+            }
+        ]
+    },
+    {
+        "id":"mabyn_post_quest_20",
+        "message":"Yes. I can sell you fish, raw and cooked, and other fish products.",
+        "replies":[
+            {
+                "text":"What about cooking some of my fish? I can't keep risking getting food poisoning when I eat them raw.",
+                "nextPhraseID":"mabyn_cook_judge_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"nondisplay_sutdover_lake",
+                        "value":30,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"What about cooking some of my fish? I can't keep risking getting food poisoning when I eat them raw.",
+                "nextPhraseID":"mabyn_cook_which_fish",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"nondisplay_sutdover_lake",
+                        "value":30
+                    }
+                ]
+            },
+            {
+                "text":"Great!",
+                "nextPhraseID":"S"
+            }
+        ]
+    },
+    {
+        "id":"gillbert_no_trust",
+        "message":"None of us know you, so you are not trustworthy. Go talk to Jolnor in the Vilegard church if you want to help us."
+    },
+    {
+        "id":"jolnor_fishy_10",
+        "message":"Not much, my friend. I tried my best, but I am not able to make any sense of it. The pale skin makes it look like a bout of weakness but the cracked skin says otherwise!",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"jolnor_fishy_20"
+            }
+        ]
+    },
+    {
+        "id":"jolnor_fishy_20",
+        "message":"I searched the medical texts, but even they didn't help identify the illness!",
+        "replies":[
+            {
+                "text":"I see. I will go ask Thoronir in Fallhaven.",
+                "nextPhraseID":"jolnor_fishy_30"
+            }
+        ]
+    },
+    {
+        "id":"jolnor_fishy_30",
+        "message":"Yes! Among us priests, Thoronir is well known for his medical skills. He may know the origin of this disease. You should ask him.",
+        "replies":[
+            {
+                "text":"Thank you for your help. Shadow be with you.",
+                "nextPhraseID":"X"
+            },
+            {
+                "text":"Thanks...for nothing...I guess.",
+                "nextPhraseID":"X"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"something_fishy_in_the_medicine",
+                "value":30
+            }
+        ]
+    },
+    {
+        "id":"thoronir_fishy_10",
+        "message":"Tell me, what illness plagues her?",
+        "replies":[
+            {
+                "text":"I do not know. All I can tell you is that her skin has turned dry, hard and a pale grey in color and...",
+                "nextPhraseID":"thoronir_fishy_20"
+            }
+        ]
+    },
+    {
+        "id":"thoronir_fishy_20",
+        "message":"Wait! Is it wrinkled or cracked!?",
+        "replies":[
+            {
+                "text":"There are patches of cracked skin.",
+                "nextPhraseID":"thoronir_fishy_30"
+            }
+        ]
+    },
+    {
+        "id":"thoronir_fishy_30",
+        "message":"[whispering to himself] Dried...hard...pale grey...cracked...but how can it be? No! It can't be! But if it is...",
+        "replies":[
+            {
+                "text":"[coughs softly] Ahem!",
+                "nextPhraseID":"thoronir_fishy_40"
+            }
+        ]
+    },
+    {
+        "id":"thoronir_fishy_40",
+        "message":"My friend, I cannot help you myself, but rest assured. Go to the potion maker here in town. He will tell you everything. Tell him I sent you.",
+        "replies":[
+            {
+                "text":"Wait! What is going on?",
+                "nextPhraseID":"thoronir_fishy_50"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"something_fishy_in_the_medicine",
+                "value":40
+            }
+        ]
+    },
+    {
+        "id":"thoronir_fishy_50",
+        "message":"Hurry, child. Go talk to him. He will tell you all you want to know."
+    },
+    {
+        "id":"fishy_med_10",
+        "message":"Hmm...that is not something one hears often. Tell me, what happened to the child?",
+        "replies":[
+            {
+                "text":"Her skin dried, hardened and turned a shade of pale grey. It also...",
+                "nextPhraseID":"fishy_med_20"
+            }
+        ]
+    },
+    {
+        "id":"fishy_med_20",
+        "message":"Developed cracks? Like cracked glass?",
+        "replies":[
+            {
+                "text":"How did you know that?",
+                "nextPhraseID":"fishy_med_30"
+            }
+        ]
+    },
+    {
+        "id":"fishy_med_30",
+        "message":"An educated guess, kid. The signs you named could fit many ailments, but Thoronir tends most of them. That leaves only a few, so I made my guess, and it seems I was right. It is bonemeal poisoning. No wonder he sent you to me.",
+        "replies":[
+            {
+                "text":"What is bonemeal poisoning?",
+                "nextPhraseID":"fishy_med_40"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"something_fishy_in_the_medicine",
+                "value":50
+            }
+        ]
+    },
+    {
+        "id":"fishy_med_40",
+        "message":"It is what happens if you drink too many bonemeal potions, too fast.",
+        "replies":[
+            {
+                "text":"Bonemeal is supposed to be good for you. It is cheap, potent and near-instant in its healing effects.",
+                "nextPhraseID":"fishy_med_50"
+            }
+        ]
+    },
+    {
+        "id":"fishy_med_50",
+        "message":"Bonemeal may be potent in effect, but it is also a tiny bit poisonous. Drink a few bottles and nothing will happen, but if you have too many over a period of time, the toxins accumulate and may turn your skin hard like bone. Then it cracks. Once all skin cracks, the insides turn into bone, and you will die.",
+        "replies":[
+            {
+                "text":"That's horrible! Can the child be saved?",
+                "nextPhraseID":"fishy_med_60"
+            }
+        ]
+    },
+    {
+        "id":"fishy_med_60",
+        "message":"Fear not, child, her skin only has small patches of cracks; she can easily be cured. Though you will need to find a few ingredients for me.",
+        "replies":[
+            {
+                "text":"Sure! What ingredients do you need?",
+                "nextPhraseID":"fishy_med_70"
+            }
+        ]
+    },
+    {
+        "id":"fishy_med_70",
+        "message":"First of all, bring me a bottle of Shadowwater.",
+        "replies":[
+            {
+                "text":"What is Shadowwater?",
+                "nextPhraseID":"fishy_med_80"
+            }
+        ]
+    },
+    {
+        "id":"fishy_med_80",
+        "message":"Shadowwater is water blessed by Shadow priests. It is used in rituals, blessings and as a base ingredient when making certain potions.",
+        "replies":[
+            {
+                "text":"Then where can I find it?",
+                "nextPhraseID":"fishy_med_90"
+            }
+        ]
+    },
+    {
+        "id":"fishy_med_90",
+        "message":"You can get it from the Priests of Shadow, though don't ask Thoronir. He recently got some bones from somewhere and has probably exhausted his supply.",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"fishy_med_100"
+            }
+        ]
+    },
+    {
+        "id":"fishy_med_100",
+        "message":"The nearest place to Fallhaven where you can find the Shadowwater is Vilegard. You can try your luck there but be careful. The people of Vilegard do not trust outsiders easily.",
+        "replies":[
+            {
+                "text":"That is no problem to me, I will be back with the Shadowwater soon.",
+                "nextPhraseID":"X"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"something_fishy_in_the_medicine",
+                "value":60
+            }
+        ]
+    },
+    {
+        "id":"fishy_med_no_water",
+        "message":"Did you get it?",
+        "replies":[
+            {
+                "text":"No, but I will get it soon and return.",
+                "nextPhraseID":"X",
+                "requires":[
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"aged_fish_jelly",
+                        "value":1,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"No, but I got some potent aged fish oil jelly instead.",
+                "nextPhraseID":"fishy_med_jelly_10",
+                "requires":[
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"aged_fish_jelly",
+                        "value":1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id":"jolnor_fishy_water_10",
+        "message":"Sorry, my friend, but I do not have any left. Recently my friend Thoronir borrowed it. It will take a few days before I get any.",
+        "replies":[
+            {
+                "text":"Can you tell me where I can find some?",
+                "nextPhraseID":"jolnor_fishy_water_20"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"something_fishy_in_the_medicine",
+                "value":70
+            }
+        ]
+    },
+    {
+        "id":"jolnor_fishy_water_20",
+        "message":"You can ask priests in other locations. But what do you need it for?",
+        "replies":[
+            {
+                "text":"Zephyr suffers from bonemeal poisoning. The potion merchant of Fallhaven told me to get Shadowwater to make a cure for her.",
+                "nextPhraseID":"jolnor_fishy_water_30"
+            }
+        ]
+    },
+    {
+        "id":"jolnor_fishy_water_30",
+        "message":"What! So the disease little Zephyr has is actually bonemeal poisoning! There are rumors that in the past, some priests once suggested that excessive consumption of bonemeal can be fatal but it was never confirmed publicly! No wonder I couldn't find anything about this disease!",
+        "replies":[
+            {
+                "text":"Yeah. Anyway, I will find another way to help her.",
+                "nextPhraseID":"jolnor_fishy_water_40"
+            }
+        ]
+    },
+    {
+        "id":"jolnor_fishy_water_40",
+        "message":"Wait, my friend! I remembered something from the books I read in Nor City. I remember that when Shadowwater is not available, some other materials can be used as a substitute. For this particular medicine, you can use aged fish oil jelly. When aged for a few decades it has excellent healing effects on skin and is useful for making medicine. You can use it in the medicine for the child!",
+        "replies":[
+            {
+                "text":"Fish oil jelly!? I think I know where to look for it! Gillbert and Mabyn are fisherfolk; they may have some! Thank you.",
+                "nextPhraseID":"X"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"something_fishy_in_the_medicine",
+                "value":80
+            }
+        ]
+    },
+    {
+        "id":"gillbert_no_med_10",
+        "message":"Did you find the medicine, kid?",
+        "replies":[
+            {
+                "text":"No, but I'm working really hard to find it.",
+                "nextPhraseID":"gillbert_no_med_20",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":80,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"No, but I found out what the disease is.",
+                "nextPhraseID":"gillbert_bonemeal_20",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":80
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":90,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"I wanted to ask you if you have some aged fish oil jelly. I need it to make medicine for your daughter.",
+                "nextPhraseID":"gillbert_bonemeal_70",
+                "requires":[
+                    {
+                        "requireType":"questLatestProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":90
+                    }
+                ]
+            },
+            {
+                "text":"Your wife just gave me the aged fish oil jelly. It's time to head back to Fallhaven to ask the potion merchant to make the cure.",
+                "nextPhraseID":"X",
+                "requires":[
+                    {
+                        "requireType":"questLatestProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":100
+                    }
+                ]
+            },
+            {
+                "text":"I'm working on it.",
+                "nextPhraseID":"X",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":110
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":130,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"Yes, but I forgot to bring it with me. I'm so dumb.",
+                "nextPhraseID":"X",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":130
+                    },
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"purifying_ointment",
+                        "value":1,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"Yes. Here it is. You have to apply the ointment once all over the skin and once more over the cracked patches of skin, and repeat this twice a day for three days.",
+                "nextPhraseID":"gillbert_med_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":130
+                    },
+                    {
+                        "requireType":"inventoryRemove",
+                        "requireID":"purifying_ointment",
+                        "value":1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id":"gillbert_no_med_20",
+        "message":"Use your head, kid, not just your back."
+    },
+    {
+        "id":"gillbert_bonemeal_20",
+        "message":"Really! Tell me, what is this illness that troubles my daughter?",
+        "replies":[
+            {
+                "text":"It is bonemeal poisoning.",
+                "nextPhraseID":"gillbert_bonemeal_30"
+            }
+        ]
+    },
+    {
+        "id":"gillbert_bonemeal_30",
+        "message":"Ridiculous! Bonemeal is not poisonous! It is the Shadow's blessing for true believers! It only heals, there is no way it caused this!",
+        "replies":[
+            {
+                "text":"I tell the truth. I spoke to Jolnor about it and he agreed. It is just that this disease is not well known, but I assure you it is true.",
+                "nextPhraseID":"gillbert_bonemeal_40"
+            }
+        ]
+    },
+    {
+        "id":"gillbert_bonemeal_40",
+        "message":"Whaaa-",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"gillbert_bonemeal_50"
+            }
+        ]
+    },
+    {
+        "id":"gillbert_bonemeal_50",
+        "message":"Sigh... If Jolnor agrees, then maybe it is true. I will believe you, kid.",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"gillbert_bonemeal_60"
+            }
+        ]
+    },
+    {
+        "id":"gillbert_bonemeal_60",
+        "message":"What have I done! To cure my daughter's weak body I gave her bonemeal potions to drink. I thought doing that would help her! I should not have done that! It's all my fault!",
+        "replies":[
+            {
+                "text":"I wanted to ask you if you have some aged fish oil jelly. I need it to make medicine for your daughter.",
+                "nextPhraseID":"gillbert_bonemeal_70"
+            }
+        ]
+    },
+    {
+        "id":"gillbert_bonemeal_70",
+        "message":"There should be some stored. Our family often leaves fish oil to age. There may even be some left by my great-grandfather.",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"gillbert_bonemeal_80"
+            }
+        ]
+    },
+    {
+        "id":"gillbert_bonemeal_80",
+        "message":"Go ask Mabyn for it. She will give you some.",
+        "replies":[
+            {
+                "text":"Thank you. I will go ask her.",
+                "nextPhraseID":"X"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"something_fishy_in_the_medicine",
+                "value":90
+            }
+        ]
+    },
+    {
+        "id":"mabyn_default",
+        "message":"Don't worry about our beagles. They want to be your friend."
+    },
+    {
+        "id":"mabyn_fish_oil_10",
+        "message":"Yes, child, there should be some down in the cellar. Wait, I will go get it.",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"mabyn_fish_oil_20"
+            }
+        ]
+    },
+    {
+        "id":"mabyn_fish_oil_20",
+        "message":"She goes downstairs and comes back a few minutes later.",
+        "switchToNPC":"none",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"mabyn_fish_oil_30"
+            }
+        ]
+    },
+    {
+        "id":"mabyn_fish_oil_30",
+        "message":"Here. This was the oldest one I could find. I hope it helps.",
+        "switchToNPC":"mabyn",
+        "replies":[
+            {
+                "text":"Thank you and I will try to get the medicine back as soon as possible.",
+                "nextPhraseID":"X"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"giveItem",
+                "rewardID":"aged_fish_jelly",
+                "value":1
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"something_fishy_in_the_medicine",
+                "value":100
+            }
+        ]
+    },
+    {
+        "id":"fishy_med_jelly_10",
+        "message":"Yes! It is real and it smells decades old! I can smell it; the medicinal effect is really strong!",
+        "replies":[
+            {
+                "text":"Will it work?",
+                "nextPhraseID":"fishy_med_jelly_20"
+            }
+        ]
+    },
+    {
+        "id":"fishy_med_jelly_20",
+        "message":"It absolutely will! Aged fish oil jelly is already an excellent substitute, but this one is even better! It can be used to make excellent medicine, much better than one made with Shadowwater.",
+        "replies":[
+            {
+                "text":"Great. Here, take it. So, what is the second ingredient I need to find?",
+                "nextPhraseID":"fishy_med_jelly_30",
+                "requires":[
+                    {
+                        "requireType":"inventoryRemove",
+                        "requireID":"aged_fish_jelly",
+                        "value":1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id":"fishy_med_jelly_30",
+        "message":"Yes! The second ingredient. I will need you to get me the scales of the ancient stone worms whose carapaces are as smooth and hard as rocks. Three of those scales will do.",
+        "replies":[
+            {
+                "text":"Where can I find them?",
+                "nextPhraseID":"fishy_med_jelly_40"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"something_fishy_in_the_medicine",
+                "value":110
+            }
+        ]
+    },
+    {
+        "id":"fishy_med_jelly_40",
+        "message":"They live in cracks in rocks and in rocky caves. You can find those southwest of Gison's house near the northern shore of Lake Sutdover.",
+        "replies":[
+            {
+                "text":"I have those scales.",
+                "nextPhraseID":"fishy_med_has_three_lithic_scales",
+                "requires":[
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"lithic_scale",
+                        "value":3
+                    }
+                ]
+            },
+            {
+                "text":"Okay. I will be back with those scales.",
+                "nextPhraseID":"X",
+                "requires":[
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"lithic_scale",
+                        "value":3,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"Who is Gison? Where is Lake Sutdover?",
+                "nextPhraseID":"fishy_med_jelly_50",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"gison_soup",
+                        "value":20,
+                        "negate":true
+                    }
+                ]
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"something_fishy_in_the_medicine",
+                "value":115
+            }
+        ]
+    },
+    {
+        "id":"fishy_med_jelly_50",
+        "message":"Oh, child, you need to see more of Dhayavar!"
+    },
+    {
+        "id":"fishy_med_has_three_lithic_scales",
+        "message":"Perfect. Now I can make the medicine.",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"fishy_med_scales_20"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"something_fishy_in_the_medicine",
+                "value":120
+            }
+        ]
+    },
+    {
+        "id":"fishy_med_scales_20",
+        "message":"He grinds the scales, adds the jelly, mixes in other herbs and more.",
+        "switchToNPC":"none",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"fishy_med_scales_30"
+            }
+        ]
+    },
+    {
+        "id":"fishy_med_scales_30",
+        "message":"It is ready. This ointment is what you need. To use it you need to apply it once all over the skin and one more time on the cracked patches of skin. Repeat this twice a day for three days and the skin will heal.",
+        "switchToNPC":"potion_merchant",
+        "replies":[
+            {
+                "text":"Just three days?",
+                "nextPhraseID":"fishy_med_scales_40"
+            }
+        ]
+    },
+    {
+        "id":"fishy_med_scales_40",
+        "message":"Yes. It is all because the fish oil jelly was well aged, otherwise it would take two weeks to heal.",
+        "replies":[
+            {
+                "text":"Okay. Thank you for your help.",
+                "nextPhraseID":"fishy_med_scales_50"
+            }
+        ]
+    },
+    {
+        "id":"fishy_med_scales_50",
+        "message":"Hold on, kid. That will cost you one hundred gold.",
+        "replies":[
+            {
+                "text":"Here, take the gold.",
+                "nextPhraseID":"fishy_med_scales_60",
+                "requires":[
+                    {
+                        "requireType":"inventoryRemove",
+                        "requireID":"gold",
+                        "value":100
+                    }
+                ]
+            },
+            {
+                "text":"I don't have that much gold on me right now.",
+                "nextPhraseID":"fishy_med_scales_no_gold",
+                "requires":[
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"gold",
+                        "value":100,
+                        "negate":true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id":"fishy_med_scales_60",
+        "message":"Nice doing business with you, kid. Now, if you have nothing else for me to do, then go. I have a successful business to run.",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"X"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"giveItem",
+                "rewardID":"purifying_ointment",
+                "value":1
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"something_fishy_in_the_medicine",
+                "value":130
+            }
+        ]
+    },
+    {
+        "id":"fishy_med_scales_no_gold",
+        "message":"Come back when you have the gold, kid. I am not running a charity here."
+    },
+    {
+        "id":"gillbert_med_10",
+        "message":"Thank you, kid! May the Shadow bless you in your future adventures and, of course, I will reward you for all your work. Here, take this hat of mine.",
+        "replies":[
+            {
+                "text":"You are welcome and thank you for the hat. I'm sure it will look good on my head.",
+                "nextPhraseID":"gillbert_physique_10"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"something_fishy_in_the_medicine",
+                "value":140
+            },
+            {
+                "rewardType":"giveItem",
+                "rewardID":"fisherman_hat",
+                "value":1
+            }
+        ]
+    },
+    {
+        "id":"gillbert_physique_10",
+        "message":"Thank you for your help, kid. Now there is only one thing which troubles me.",
+        "replies":[
+            {
+                "text":"What?",
+                "nextPhraseID":"gillbert_physique_20"
+            }
+        ]
+    },
+    {
+        "id":"gillbert_physique_20",
+        "message":"How do I cure my daughter's weak physique? I think I need a new medicine for that.",
+        "replies":[
+            {
+                "text":"Well, I don't think you need medicine for that. I can tell you about my family's tried and tested method of making children stronger!",
+                "nextPhraseID":"gillbert_physique_30"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"nondisplay_sutdover_lake",
+                "value":20
+            }
+        ]
+    },
+    {
+        "id":"gillbert_physique_30",
+        "message":"Really, kid? Tell me!",
+        "replies":[
+            {
+                "text":"The method is: Eat well, work hard and sleep well.",
+                "nextPhraseID":"gillbert_physique_40"
+            }
+        ]
+    },
+    {
+        "id":"gillbert_physique_40",
+        "message":"Just that!?",
+        "replies":[
+            {
+                "text":"Yes! I eat well and work hard and when it comes to sleeping, I go to bed early and wake up early.",
+                "nextPhraseID":"gillbert_physique_50"
+            }
+        ]
+    },
+    {
+        "id":"gillbert_physique_50",
+        "message":"Are you sure that works?",
+        "replies":[
+            {
+                "text":"Yes! Look at my muscular arms, do I not look strong?",
+                "nextPhraseID":"gillbert_physique_60"
+            }
+        ]
+    },
+    {
+        "id":"gillbert_physique_60",
+        "message":"Well, not many muscles on your arms but you do look fit. So, I guess I will use this method for Zephyr. Not like I have enough money left to splurge on medicine anymore. Those bonemeal potions cost me a pretty penny.",
+        "replies":[
+            {
+                "text":"Don't use bonemeal potions. Get regular healing potions instead. They may be more expensive but don't have side effects, plus the Feygard guards won't arrest you for bonemeal possession.",
+                "nextPhraseID":"gillbert_physique_70"
+            }
+        ]
+    },
+    {
+        "id":"gillbert_physique_70",
+        "message":"Okay, kid. I'll go and catch some fish. Mabyn smokes the best fish around, so stop by and try some.",
+        "replies":[
+            {
+                "text":"I will. Shadow be with you.",
+                "nextPhraseID":"gillbert_physique_80"
+            },
+            {
+                "text":"I will. Thanks.",
+                "nextPhraseID":"X"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"nondisplay_sutdover_lake",
+                "value":25
+            },
+            {
+                "rewardType":"removeSpawnArea",
+                "rewardID":"gillbert_spawn",
+                "mapName":"sut_lk_house_2f"
+            },
+            {
+                "rewardType":"spawnAll",
+                "rewardID":"gillbert_spawn",
+                "mapName":"sut_lk_ne_4"
+            }
+        ]
+    },
+    {
+        "id":"gillbert_physique_80",
+        "message":"Shadow be with you."
+    },
+    {
+        "id":"gillbert_fishing_10",
+        "message":"Good day, kid. The weather holds, and the fish are running.",
+        "replies":[
+            {
+                "text":"Have you seen my brother Andor? He looks similar to me.",
+                "nextPhraseID":"gillbert_fishing_andor_10"
+            },
+            {
+                "text":"Are you fine with talking loudly? Won't that scare the fish away?",
+                "nextPhraseID":"gillbert_fishing_noise_10"
+            },
+            {
+                "text":"The fish look delicious. Can I buy some fish to eat?",
+                "nextPhraseID":"gillbert_fishing_buy_10"
+            },
+            {
+                "text":"Okay. Have a good day.",
+                "nextPhraseID":"gillbert_fishing_bye_10"
+            }
+        ]
+    },
+    {
+        "id":"gillbert_fishing_andor_10",
+        "message":"No, kid. You are the only one whom I've seen on this side of the lake in months.",
+        "replies":[
+            {
+                "text":"Okay. Can we talk about something else?",
+                "nextPhraseID":"gillbert_fishing_10"
+            }
+        ]
+    },
+    {
+        "id":"gillbert_fishing_noise_10",
+        "message":"It's fine. There are plenty of fish on this side of the lake, one will surely take the bait.",
+        "replies":[
+            {
+                "text":"Oh. Interesting. Can we talk about something else?",
+                "nextPhraseID":"gillbert_fishing_10"
+            }
+        ]
+    },
+    {
+        "id":"gillbert_fishing_buy_10",
+        "message":"You can ask my wife Mabyn. She can sell you some.",
+        "replies":[
+            {
+                "text":"Okay. I will ask her. Can we talk about something else?",
+                "nextPhraseID":"gillbert_fishing_10"
+            }
+        ]
+    },
+    {
+        "id":"gillbert_fishing_bye_10",
+        "message":"A good day to you too, kid."
+    },
+    {
+        "id":"zephyr_healthier_10",
+        "message":"Hello, $playername.",
+        "replies":[
+            {
+                "text":"Hello, Zephyr.",
+                "nextPhraseID":"zephyr_healthier_20"
+            }
+        ]
+    },
+    {
+        "id":"zephyr_healthier_20",
+        "message":"You told me you were from Crossglen, do you know Andor?",
+        "replies":[
+            {
+                "text":"He is my elder brother.",
+                "nextPhraseID":"zephyr_healthier_30"
+            }
+        ]
+    },
+    {
+        "id":"zephyr_healthier_30",
+        "message":"No wonder you look similar! Andor is my friend.",
+        "replies":[
+            {
+                "text":"Andor is your friend?",
+                "nextPhraseID":"zephyr_healthier_40"
+            }
+        ]
+    },
+    {
+        "id":"zephyr_healthier_40",
+        "message":"Yes! I met Andor one day when I was playing outside. We played together that day and since then whenever Andor is around these parts he drops by to visit me.",
+        "replies":[
+            {
+                "text":"Have you met Andor recently?",
+                "nextPhraseID":"zephyr_healthier_50"
+            }
+        ]
+    },
+    {
+        "id":"zephyr_healthier_50",
+        "message":"No, he hasn't visited me for a long time! Can you believe it? He has not shown his face for months!",
+        "replies":[
+            {
+                "text":"Yeah, he has been missing for some time. My father sent me to find him.",
+                "nextPhraseID":"zephyr_healthier_60"
+            }
+        ]
+    },
+    {
+        "id":"zephyr_healthier_60",
+        "message":"Wait! You have a father!?",
+        "replies":[
+            {
+                "text":"Yes, I do.",
+                "nextPhraseID":"zephyr_healthier_70"
+            }
+        ]
+    },
+    {
+        "id":"zephyr_healthier_70",
+        "message":"Andor never told me that!",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"zephyr_healthier_75"
+            }
+        ]
+    },
+    {
+        "id":"zephyr_healthier_80",
+        "message":"And he never said anything about you!",
+        "switchToNPC":"zephyr_hidden",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"zephyr_healthier_85"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"andor",
+                "value":150
+            }
+        ]
+    },
+    {
+        "id":"zephyr_healthier_90",
+        "message":"WAIT! Where are you going?!",
+        "switchToNPC":"zephyr_hidden",
+        "replies":[
+            {
+                "text":"Aah...I forgot! I have to go wash my cat.",
+                "nextPhraseID":"zephyr_healthier_100"
+            }
+        ]
+    },
+    {
+        "id":"zephyr_healthier_100",
+        "message":"Why? We have a lot to talk about regarding Andor.",
+        "switchToNPC":"zephyr_hidden",
+        "replies":[
+            {
+                "text":"Okay. We will talk later. Bye.",
+                "nextPhraseID":"zephyr_healthier_110"
+            }
+        ]
+    },
+    {
+        "id":"zephyr_healthier_110",
+        "message":"NOOO! You haven't told me anything about Andor!",
+        "switchToNPC":"zephyr_hidden"
+    },
+    {
+        "id":"zephyr_healthier_75",
+        "message":"As her voice gets louder with anger, you try backing off...",
+        "switchToNPC":"none",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"zephyr_healthier_80"
+            }
+        ]
+    },
+    {
+        "id":"zephyr_healthier_85",
+        "message":"You try to quietly move away.",
+        "switchToNPC":"none",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"zephyr_healthier_90"
+            }
+        ]
+    },
+    {
+        "id":"zephyr_healthy_default_10",
+        "message":"Oh, $playername, you're back?",
+        "replies":[
+            {
+                "text":"Yeah, I need to...",
+                "nextPhraseID":"zephyr_healthy_default_20"
+            }
+        ]
+    },
+    {
+        "id":"mabyn_cook_judge_10",
+        "message":"Raw fish!? You have been eating raw fish!?",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"mabyn_cook_judge_20"
+            }
+        ]
+    },
+    {
+        "id":"mabyn_cook_judge_20",
+        "message":"Child, do you know what such food does to the body? Raw fish breeds foul sickness. You could have made yourself very ill.",
+        "replies":[
+            {
+                "text":"I know, I know...",
+                "nextPhraseID":"mabyn_cook_judge_30"
+            }
+        ]
+    },
+    {
+        "id":"mabyn_cook_judge_30",
+        "message":"And now you come to me asking me to cook whatever it is you have been hauling around in that pack of yours? Shadow only knows how long that fish has been sitting in there.",
+        "replies":[
+            {
+                "text":"[possible lie] It has not been that long...",
+                "nextPhraseID":"mabyn_cook_judge_40"
+            },
+            {
+                "text":"True that.",
+                "nextPhraseID":"mabyn_cook_judge_40"
+            }
+        ]
+    },
+    {
+        "id":"mabyn_cook_judge_40",
+        "message":"No. Absolutely not. I will not put mystery fish of unknown age into my oven. I have a reputation to uphold.",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"mabyn_cook_judge_50"
+            }
+        ]
+    },
+    {
+        "id":"mabyn_cook_judge_50",
+        "message":"However, I do sell smoked fish. Gillbert catches them fresh from the lake and I smoke them myself. If you want cooked fish then you buy mine. I can offer you smoked lakefish or smoked whitefish. Which will it be?",
+        "replies":[
+            {
+                "text":"Can I see what I am buying first?",
+                "nextPhraseID":"S"
+            },
+            {
+                "text":"I will take the smoked lakefish.",
+                "nextPhraseID":"mabyn_buy_lakefish"
+            },
+            {
+                "text":"I will take the smoked whitefish.",
+                "nextPhraseID":"mabyn_buy_whitefish"
+            },
+            {
+                "text":"Maybe another time.",
+                "nextPhraseID":"X"
+            }
+        ]
+    },
+    {
+        "id":"mabyn_cook_which_fish",
+        "message":"Smoked lakefish or smoked whitefish. Which will it be?",
+        "replies":[
+            {
+                "text":"Can I see what I am buying first?",
+                "nextPhraseID":"S"
+            },
+            {
+                "text":"I will take the smoked lakefish.",
+                "nextPhraseID":"mabyn_buy_lakefish"
+            },
+            {
+                "text":"I will take the smoked whitefish.",
+                "nextPhraseID":"mabyn_buy_whitefish"
+            },
+            {
+                "text":"Maybe another time.",
+                "nextPhraseID":"X"
+            }
+        ]
+    },
+    {
+        "id":"mabyn_buy_lakefish",
+        "message":"Smoked lakefish it is. How many would you like? They are 128 gold each.",
+        "replies":[
+            {
+                "text":"Just one, please.",
+                "nextPhraseID":"mabyn_buy_lakefish_done_1",
+                "requires":[
+                    {
+                        "requireType":"inventoryRemove",
+                        "requireID":"gold",
+                        "value":128
+                    }
+                ]
+            },
+            {
+                "text":"I will take five.",
+                "nextPhraseID":"mabyn_buy_lakefish_done_5",
+                "requires":[
+                    {
+                        "requireType":"inventoryRemove",
+                        "requireID":"gold",
+                        "value":640
+                    }
+                ]
+            },
+            {
+                "text":"Give me ten.",
+                "nextPhraseID":"mabyn_buy_lakefish_done_10",
+                "requires":[
+                    {
+                        "requireType":"inventoryRemove",
+                        "requireID":"gold",
+                        "value":1280
+                    }
+                ]
+            },
+            {
+                "text":"Actually, I changed my mind.",
+                "nextPhraseID":"mabyn_cook_which_fish"
+            }
+        ]
+    },
+    {
+        "id":"mabyn_buy_lakefish_done_1",
+        "message":"There you go. Fresh from Lake Sutdover, smoked by my own hand. Enjoy.",
+        "rewards":[
+            {
+                "rewardType":"giveItem",
+                "rewardID":"smoked_fish2",
+                "value":1
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"nondisplay_sutdover_lake",
+                "value":30
+            }
+        ]
+    },
+    {
+        "id":"mabyn_buy_lakefish_done_5",
+        "message":"There you go. Five, fresh from Lake Sutdover, smoked by my own hand. Enjoy.",
+        "rewards":[
+            {
+                "rewardType":"giveItem",
+                "rewardID":"smoked_fish2",
+                "value":5
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"nondisplay_sutdover_lake",
+                "value":30
+            }
+        ]
+    },
+    {
+        "id":"mabyn_buy_lakefish_done_10",
+        "message":"Ten! My, you are hungry. Fresh from Lake Sutdover, smoked by my own hand. Enjoy.",
+        "rewards":[
+            {
+                "rewardType":"giveItem",
+                "rewardID":"smoked_fish2",
+                "value":10
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"nondisplay_sutdover_lake",
+                "value":30
+            }
+        ]
+    },
+    {
+        "id":"mabyn_buy_whitefish",
+        "message":"Smoked whitefish it is. How many would you like? They are 130 gold each.",
+        "replies":[
+            {
+                "text":"Just one, please.",
+                "nextPhraseID":"mabyn_buy_whitefish_done_1",
+                "requires":[
+                    {
+                        "requireType":"inventoryRemove",
+                        "requireID":"gold",
+                        "value":130
+                    }
+                ]
+            },
+            {
+                "text":"I will take five.",
+                "nextPhraseID":"mabyn_buy_whitefish_done_5",
+                "requires":[
+                    {
+                        "requireType":"inventoryRemove",
+                        "requireID":"gold",
+                        "value":650
+                    }
+                ]
+            },
+            {
+                "text":"Give me ten.",
+                "nextPhraseID":"mabyn_buy_whitefish_done_10",
+                "requires":[
+                    {
+                        "requireType":"inventoryRemove",
+                        "requireID":"gold",
+                        "value":1300
+                    }
+                ]
+            },
+            {
+                "text":"Actually, I changed my mind.",
+                "nextPhraseID":"mabyn_cook_which_fish"
+            }
+        ]
+    },
+    {
+        "id":"mabyn_buy_whitefish_done_1",
+        "message":"There you go. Sutdover whitefish, smoked to perfection. You will not find better.",
+        "rewards":[
+            {
+                "rewardType":"giveItem",
+                "rewardID":"smoked_fish1",
+                "value":1
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"nondisplay_sutdover_lake",
+                "value":30
+            }
+        ]
+    },
+    {
+        "id":"mabyn_buy_whitefish_done_5",
+        "message":"There you go. Five Sutdover whitefish, smoked to perfection. You will not find better.",
+        "rewards":[
+            {
+                "rewardType":"giveItem",
+                "rewardID":"smoked_fish1",
+                "value":5
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"nondisplay_sutdover_lake",
+                "value":30
+            }
+        ]
+    },
+    {
+        "id":"mabyn_buy_whitefish_done_10",
+        "message":"Ten! My, you are hungry. Sutdover whitefish, smoked to perfection. You will not find better.",
+        "rewards":[
+            {
+                "rewardType":"giveItem",
+                "rewardID":"smoked_fish1",
+                "value":10
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"nondisplay_sutdover_lake",
+                "value":30
+            }
+        ]
+    },
+    {
+        "id":"beagle_stretches_up",
+        "message":"The beagle stretches up onto its hind legs, placing its front feet on you. You are not expecting this, and the dog manages to knock you over.",
+        "switchToNPC":"none",
+        "replies":[
+            {
+                "text":"Well, that is a very excited dog!",
+                "nextPhraseID":"X"
+            }
+        ]
+    },
+    {
+        "id":"lysa_epithet_key",
+        "message":"Here lies Lysa, beloved of Erttu. She walked in Shadow, and did not fear it.",
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"nondisplay_sutdover_lake",
+                "value":35
+            }
+        ]
+    },
+    {
+        "id":"lysa_10",
+        "message":"Aye. That would be her. She rests there now.",
+        "replies":[
+            {
+                "text":"Your wife?",
+                "nextPhraseID":"lysa_20"
+            }
+        ]
+    },
+    {
+        "id":"lysa_20",
+        "message":"Aye. She had more faith than most. Even at the end.",
+        "replies":[
+            {
+                "text":"Walk with the Shadow and you will be guided to better things.",
+                "nextPhraseID":"X"
+            },
+            {
+                "text":"I'm sorry to hear of your loss."
+            }
+        ]
+    },
+    {
+        "id":"oryndra_epithet_key",
+        "message":"Here lies Oryndra, a faithful soul, returned to the earth with honor."
+    },
+    {
+        "id":"harkina_epithet_key",
+        "message":"Here lies Harkina, buried deep, yet listening still."
+    },
+    {
+        "id":"drovyn_epithet_key",
+        "message":"Drovyn, a farmer who asked for little and gave much."
+    },
+    {
+        "id":"vornsoman_epithet_key",
+        "message":"Here lies Vornsoman, against his wishes."
+    },
+    {
+        "id":"brynnith_epithet_key",
+        "message":"Here lies Brynnith. Finally, her complaining has stopped."
+    },
+    {
+        "id":"azoharis_epithet_key",
+        "message":"Here lies Azoharis. Lived simply. Died quietly."
+    },
+    {
+        "id":"ceraon_epithet_key",
+        "message":"\"Told you I was sick.\""
+    },
+    {
+        "id":"zephyr_healthy_default_20",
+        "message":"I'm sorry. I think I scared you the last time you visited me.",
+        "replies":[
+            {
+                "text":"I should be the one apologizing. I should not have run away.",
+                "nextPhraseID":"zephyr_healthy_default_30"
+            }
+        ]
+    },
+    {
+        "id":"zephyr_healthy_default_30",
+        "message":"Really. Then I forgive you in exchange for answering my questions.",
+        "replies":[
+            {
+                "text":"Hold on, I...",
+                "nextPhraseID":"zephyr_healthy_default_40"
+            }
+        ]
+    },
+    {
+        "id":"zephyr_healthy_default_40",
+        "message":"No! You will not run away this time and you will speak only the truth while answering my questions.",
+        "replies":[
+            {
+                "text":"Sigh...okay, I promise, I will talk.",
+                "nextPhraseID":"zephyr_healthy_default_50"
+            }
+        ]
+    },
+    {
+        "id":"zephyr_healthy_default_50",
+        "message":"Wonderful! I have the questions ready! Tell me, what does Andor like to do?",
+        "replies":[
+            {
+                "text":"Listen! I am hoping that you know where he is. I don't have time for a hundred questions.",
+                "nextPhraseID":"zephyr_healthy_default_60"
+            }
+        ]
+    },
+    {
+        "id":"zephyr_healthy_default_60",
+        "message":"I told you already, he has not come to visit in quite some time now.",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"zephyr_healthy_default_100"
+            }
+        ]
+    },
+    {
+        "id":"zephyr_healthy_default_100",
+        "message":"Okay, next question...",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"zephyr_healthy_default_110"
+            }
+        ]
+    },
+    {
+        "id":"zephyr_healthy_default_110",
+        "message":"Zephyr keeps asking and you keep answering. You are tired but since you promised, you have to talk. Fortunately, after what feels like hours, Zephyr is satisfied.",
+        "switchToNPC":"none",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"zephyr_healthy_default_120"
+            }
+        ]
+    },
+    {
+        "id":"zephyr_healthy_default_120",
+        "message":"Thank you for answering my questions. Don't forget to visit me whenever you are free.",
+        "switchToNPC":"zephyr_hidden",
+        "replies":[
+            {
+                "text":"Yes, I will. [You are not sure if you should, but instinct tells you not to say so.]",
+                "nextPhraseID":"zephyr_healthy_default_130"
+            }
+        ]
+    },
+    {
+        "id":"zephyr_healthy_default_130",
+        "message":"Bye, $playername.",
+        "replies":[
+            {
+                "text":"Bye, see you later [never].",
+                "nextPhraseID":"X"
+            }
+        ]
+    },
+    {
+        "id":"quasi_cannot_leave_selector",
+        "replies":[
+            {
+                "nextPhraseID":"quasi_sell_shovel_10",
+                "requires":[
+                    {
+                        "requireType":"inventoryRemove",
+                        "requireID":"gold",
+                        "value":200
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"quasi_sell_shovel_no_gold",
+                "requires":[
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"gold",
+                        "value":200,
+                        "negate":true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id":"zephyr_healthy_selector",
+        "switchToNPC":"zephyr_hidden",
+        "replies":[
+            {
+                "nextPhraseID":"zephyr_healthier_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"andor",
+                        "value":150,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"zephyr_healthy_default_10"
+            }
+        ]
+    },
+    {
+        "id":"anaeth_no_body_10",
+        "message":"Don't let poor Wrye wait too long! Bring Rincel's body back here.",
+        "replies":[
+            {
+                "text":"Oh, right.",
+                "nextPhraseID":"X"
+            }
+        ]
+    },
+    {
+        "id":"rincel_plot_hole_key_dont_walk_ceremony_complete",
+        "message":"Don't even think about walking over that plot! It's disrespectful.",
+        "switchToNPC":"anaeth"
+    },
+    {
+        "id":"vilegard_villager_friend_1f",
+        "message":"Your brother? No, I haven't seen anyone that looks like you. But then again, I never take much notice of outsiders...but speaking of folk not seen in a while...",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"vilegard_villager_friend_2f"
+            }
+        ]
+    },
+    {
+        "id":"vilegard_villager_friend_2f",
+        "message":"Has anyone checked on that family by the lake lately? I have not seen them around in a while. I hope they are alright, you know, with all those monsters lurking around.",
+        "replies":[
+            {
+                "text":"I have no idea what you are talking about.",
+                "nextPhraseID":"vilegard_villager_friend_3f"
+            }
+        ]
+    },
+    {
+        "id":"vilegard_villager_friend_3f",
+        "message":"Oh, sorry. I forgot I was talking to a child. Children know almost nothing of importance.",
+        "replies":[
+            {
+                "text":"I'm not a child anymore!",
+                "nextPhraseID":"X"
+            }
+        ]
+    }
+]
