@@ -1,10 +1,12 @@
 package com.gpl.rpg.AndorsTrail.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -41,6 +43,11 @@ public final class WorldMapController {
 	private static final int WORLDMAP_SCREENSHOT_TILESIZE = 8;
 	public static final int WORLDMAP_DISPLAY_TILESIZE = WORLDMAP_SCREENSHOT_TILESIZE;
 
+	// Increment when the HTML written by getWorldMapSegmentAsHtml changes, so that cached world map files
+	// are regenerated. Changes to R.string.worldmap_template are detected automatically, see getWorldMapHtmlVersion.
+	private static final int WORLDMAP_HTML_FORMAT_VERSION = 2;
+	private static String worldMapHtmlVersion;
+
 	public static void updateWorldMap(Context context, final WorldContext world, final Resources res) {
 		updateWorldMap(context, world, world.model.currentMaps.map, world.model.currentMaps.tileMap, world.model.currentMaps.tiles, res);
 	}
@@ -54,7 +61,7 @@ public final class WorldMapController {
 		final String worldMapSegmentName = world.maps.getWorldMapSegmentNameForMap(map.name);
 		if (worldMapSegmentName == null) return;
 
-		if (!shouldUpdateWorldMap(context, map, worldMapSegmentName, world.maps.worldMapRequiresUpdate)) return;
+		if (!shouldUpdateWorldMap(context, res, map, worldMapSegmentName, world.maps.worldMapRequiresUpdate)) return;
 
 		(new AsyncTask<Void, Void, Void>() {
 			@Override
@@ -75,14 +82,14 @@ public final class WorldMapController {
 		}).execute();
 	}
 
-	private static boolean shouldUpdateWorldMap(Context context, PredefinedMap map, String worldMapSegmentName, boolean forceUpdate) {
+	private static boolean shouldUpdateWorldMap(Context context, Resources res, PredefinedMap map, String worldMapSegmentName, boolean forceUpdate) {
 		if (forceUpdate) return true;
 		if (!map.visited) return true;
 		File file = getFileForMap(context, map, false);
 		if (!file.exists()) return true;
 
 		file = getCombinedWorldMapFile(context, worldMapSegmentName);
-		if (!file.exists()) return true;
+		if (!isWorldMapHtmlCurrent(file, getWorldMapHtmlVersion(res))) return true;
 
 		return false;
 	}
@@ -212,7 +219,7 @@ public final class WorldMapController {
 
 			Size size = getMapSize(segmentMap, world);
 			mapsAsHtml
-				.append("<img src=\"")
+				.append("<img data-src=\"")
 				.append(f.getName())
 				.append("\" id=\"")
 				.append(segmentMap.mapName)
@@ -224,7 +231,7 @@ public final class WorldMapController {
 				.append((segmentMap.worldPosition.x - offsetWorldmapTo.x) * WorldMapController.WORLDMAP_DISPLAY_TILESIZE)
 				.append("px; top:")
 				.append((segmentMap.worldPosition.y - offsetWorldmapTo.y) * WorldMapController.WORLDMAP_DISPLAY_TILESIZE)
-				.append("px;\" />");
+				.append("px;\" decoding=\"async\" />");
 			if (AndorsTrailApplication.DEVELOPMENT_DEBUGMESSAGES) mapsAsHtml.append('\n');
 
 			bottomRight.x = Math.max(bottomRight.x, segmentMap.worldPosition.x + size.width);
@@ -296,11 +303,57 @@ public final class WorldMapController {
 	}
 
 	public static void updateWorldMapSegment(Context context, Resources res, WorldContext world, String segmentName) throws IOException {
-		String mapAsHtml = getWorldMapSegmentAsHtml(context, res, world, segmentName);
+		String mapAsHtml = getWorldMapHtmlVersionMarker(getWorldMapHtmlVersion(res)) + "\n" + getWorldMapSegmentAsHtml(context, res, world, segmentName);
 		File outputFile = getCombinedWorldMapFile(context, segmentName);
 		PrintWriter pw = new PrintWriter(outputFile);
 		pw.write(mapAsHtml);
 		pw.close();
+	}
+
+	// Identifies the format of the generated world map files. It includes a hash of the template, so that
+	// files generated from an older template are regenerated, instead of being displayed with an outdated script.
+	private static synchronized String getWorldMapHtmlVersion(Resources res) {
+		if (worldMapHtmlVersion == null) {
+			int templateHash = res.getString(R.string.worldmap_template).hashCode();
+			worldMapHtmlVersion = WORLDMAP_HTML_FORMAT_VERSION + "-" + Integer.toHexString(templateHash);
+		}
+		return worldMapHtmlVersion;
+	}
+
+	static String getWorldMapHtmlVersionMarker(String version) {
+		return "<!-- worldmap-format-version:" + version + " -->";
+	}
+
+	static boolean isWorldMapHtmlCurrent(File file, String version) {
+		String marker = getWorldMapHtmlVersionMarker(version);
+		return marker.equals(readStartOfFile(file, marker.length()));
+	}
+
+	private static boolean isWorldMapPopulationCurrent(File idFile, String version) {
+		return version.equals(readStartOfFile(idFile, version.length() + 1));
+	}
+
+	private static void writeWorldMapPopulationVersion(File idFile, String version) throws IOException {
+		try (FileOutputStream fos = new FileOutputStream(idFile)) {
+			fos.write(version.getBytes("UTF-8"));
+		}
+	}
+
+	// Returns at most maxLength bytes from the start of the file, or null if the file cannot be read.
+	private static String readStartOfFile(File file, int maxLength) {
+		if (!file.isFile()) return null;
+		try (FileInputStream fis = new FileInputStream(file)) {
+			byte[] buffer = new byte[maxLength];
+			int length = 0;
+			while (length < maxLength) {
+				int bytesRead = fis.read(buffer, length, maxLength - length);
+				if (bytesRead < 0) break;
+				length += bytesRead;
+			}
+			return new String(buffer, 0, length, "UTF-8");
+		} catch (IOException e) {
+			return null;
+		}
 	}
 
 	public static boolean displayWorldMap(Context context, WorldContext world) {
@@ -320,28 +373,45 @@ public final class WorldMapController {
 	public static void populateWorldMap(Context context, WorldContext world, Resources res) throws IOException {
 		ensureWorldmapDirectoryExists(context);
 		File dir = getWorldmapDirectory(context);
+		String htmlVersion = getWorldMapHtmlVersion(res);
 
 		File idFile = new File(dir, world.model.player.id);
-		if (idFile.exists()) return;
-		idFile.createNewFile();
+		if (isWorldMapPopulationCurrent(idFile, htmlVersion)) return;
 
-		for (PredefinedMap map : world.maps.getAllMaps()) {
-			if (!map.visited) continue;
+		try {
+			// Each segment is regenerated at most once, after all its missing map images have been rendered.
+			Set<String> segmentsRequiringUpdate = new HashSet<String>();
+			Set<String> segmentsChecked = new HashSet<String>();
 
-			String worldMapSegmentName = world.maps.getWorldMapSegmentNameForMap(map.name);
-			if (worldMapSegmentName == null) continue;
+			for (PredefinedMap map : world.maps.getAllMaps()) {
+				if (!map.visited) continue;
 
-			boolean mapFileExists = fileForMapExists(context, map);
-			File worldMapFile = getCombinedWorldMapFile(context, worldMapSegmentName);
-			if (mapFileExists && worldMapFile.exists()) continue;
+				String worldMapSegmentName = world.maps.getWorldMapSegmentNameForMap(map.name);
+				if (worldMapSegmentName == null) continue;
 
-			LayeredTileMap mapTiles = TMXMapTranslator.readLayeredTileMap(res, world.tileManager.tileCache, map);
-			mapTiles.changeColorFilter(map.currentColorFilter);
-			TileCollection cachedTiles = world.tileManager.loadTilesFor(map, mapTiles, world, res);
+				if (!fileForMapExists(context, map)) {
+					LayeredTileMap mapTiles = TMXMapTranslator.readLayeredTileMap(res, world.tileManager.tileCache, map);
+					mapTiles.changeColorFilter(map.currentColorFilter);
+					TileCollection cachedTiles = world.tileManager.loadTilesFor(map, mapTiles, world, res);
 
-			MapRenderer renderer = new MapRenderer(world, map, mapTiles, cachedTiles);
-			updateCachedBitmap(context, map, renderer);
-			updateWorldMapSegment(context, res, world, worldMapSegmentName);
+					MapRenderer renderer = new MapRenderer(world, map, mapTiles, cachedTiles);
+					updateCachedBitmap(context, map, renderer);
+					segmentsRequiringUpdate.add(worldMapSegmentName);
+				} else if (segmentsChecked.add(worldMapSegmentName)) {
+					File worldMapFile = getCombinedWorldMapFile(context, worldMapSegmentName);
+					if (!isWorldMapHtmlCurrent(worldMapFile, htmlVersion)) segmentsRequiringUpdate.add(worldMapSegmentName);
+				}
+			}
+
+			for (String segmentName : segmentsRequiringUpdate) {
+				updateWorldMapSegment(context, res, world, segmentName);
+			}
+
+			// Marked only after everything has been generated, so that a failure above is retried on the next load.
+			writeWorldMapPopulationVersion(idFile, htmlVersion);
+		} catch (IOException | RuntimeException e) {
+			// The world map files are a cache: the savegame still loads, and the next load tries again.
+			L.log("WorldMapController: Could not populate the world map: " + e);
 		}
 	}
 }

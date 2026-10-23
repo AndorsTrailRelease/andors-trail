@@ -48,6 +48,8 @@ public final class TranslationLoader {
 			//L.log(translations.size() + " : " + s + " -> " + t);
 			if (t.startsWith("[REVIEW]")) {
 				t = t.substring(8);
+			} else if (t.startsWith("[AI]")) {
+				t = t.substring(4);
 			} else if (t.startsWith("[OUTDATED]")) {
 				t = s;
 			}

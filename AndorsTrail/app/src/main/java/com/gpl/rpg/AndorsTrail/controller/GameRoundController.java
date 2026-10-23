@@ -165,8 +165,7 @@ public final class GameRoundController implements TimedMessageTask.Callback {
 	}
 
 	/**
-	 * Clears the activity-hidden pause and restores combat state if the player
-	 * is returning to an in-progress combat session.
+	 * Clears the activity-hidden pause
 	 */
 	public void onMainActivityResumed() {
 		releasePause(PauseReason.ACTIVITY_HIDDEN);
@@ -197,7 +196,7 @@ public final class GameRoundController implements TimedMessageTask.Callback {
 	/**
 	 * Returns whether the supplied pause reason is currently active.
 	 */
-	private boolean isPausedFor(PauseReason reason) {
+	public boolean isPausedFor(PauseReason reason) {
 		return activePauses.contains(reason);
 	}
 

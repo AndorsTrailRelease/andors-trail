@@ -11,6 +11,7 @@ import com.gpl.rpg.AndorsTrail.context.ControllerContext;
 import com.gpl.rpg.AndorsTrail.context.WorldContext;
 import com.gpl.rpg.AndorsTrail.controller.Constants;
 import com.gpl.rpg.AndorsTrail.controller.ConversationController;
+import com.gpl.rpg.AndorsTrail.model.GameStatistics;
 import com.gpl.rpg.AndorsTrail.model.item.ItemType;
 import com.gpl.rpg.AndorsTrail.model.map.MapObject;
 import com.gpl.rpg.AndorsTrail.model.map.PredefinedMap;
@@ -142,6 +143,12 @@ public final class DebugInterface {
 					@Override
 					public void onClick(View arg0) {
 						world.model.worldData.tickWorldTime(10);
+					}
+				})
+				,new DebugButton("cht", new OnClickListener() {
+					@Override
+					public void onClick(View arg0) {
+						showToast(mainActivity, "CHEAT=" + world.model.statistics.getIsAlteredSavegame() , Toast.LENGTH_SHORT);
 					}
 				})
 				,new DebugButton("fct", new OnClickListener() {

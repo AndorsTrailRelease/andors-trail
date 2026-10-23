@@ -15,6 +15,18 @@ Please read [here](https://andorstrail.com/viewtopic.php?f=6&t=4560) for details
 ### Andor's Trail Content Studio
 A Win/Mac/Linux content creator/editor available [here](https://andorstrail.com/viewtopic.php?f=6&t=4806).
 
+## Building
+
+The Gradle daemon uses JDK 21 from any vendor. Gradle can use an installed JDK 21
+or automatically download one using the Foojay toolchain resolver.
+
+To build a debug APK:
+
+```sh
+cd AndorsTrail
+./gradlew assembleDebug
+```
+
 ## APK Downloads
 
 Latest version of APK available from:
@@ -44,8 +56,10 @@ Latest version of APK available from:
 * **Draze**
 * **Antison** **\***
 * **OMGeeky** **\***
+* **Guru Meditation No. 42** **\***
 
-   (**\*** Currently active on team)
+
+   ( **\*** Currently active on team)
 
 
 
@@ -64,4 +78,3 @@ The graphics licenses and contributions can be found [here](/gfxcontrib.md).
 Here is our slightly out of date [Wiki](https://andorstrail.gitbook.io/docs).
 ## Acknowledgments
 Additional shout-outs.
-
