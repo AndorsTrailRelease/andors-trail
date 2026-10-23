@@ -56,6 +56,7 @@ public final class Constants {
 	public static final String PLACEHOLDER_NEXTPHRASEID = "$nextPhraseID";
 	public static final String CHEAT_DETECTION_FOLDER = "dEAGyGE3YojqXjI3x4x7";
 	public static final String PASSIVE_ACHIEVEMENT_CHECK_PHRASE = "passive_achievement_check";
+	public static final String REQUIREMENT_CHEAT_DETECT_PHRASE = "requirement_cheat_detected";
 
 	public static final String FACTION_SCORE_CALC_REGISTER1_NAME = "reg1";
 	public static final String FACTION_SCORE_CALC_REGISTER2_NAME = "reg2";

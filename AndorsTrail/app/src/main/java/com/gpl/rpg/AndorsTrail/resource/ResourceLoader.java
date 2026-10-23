@@ -369,6 +369,7 @@ public final class ResourceLoader {
 		loader.prepareTileset(R.drawable.monsters_newb_1, "monsters_newb_1", new Size(40, 34), sz1x1, mTileSize);
 		loader.prepareTileset(R.drawable.monsters_newb_2, "monsters_newb_2", new Size(8, 2), sz1x2, mTileSize);
 		loader.prepareTileset(R.drawable.monsters_newb_3, "monsters_newb_3", new Size(10, 10), sz2x2, mTileSize);
+		loader.prepareTileset(R.drawable.monsters_newb_1_edit, "monsters_newb_1_edit", new Size(20, 20), sz1x1, mTileSize);
 		loader.prepareTileset(R.drawable.monsters_newb_3_edit, "monsters_newb_3_edit", new Size(10, 10), sz2x2, mTileSize);
 		loader.prepareTileset(R.drawable.monsters_newb_4, "monsters_newb_4", new Size(4, 1), sz2x1, mTileSize);
 		loader.prepareTileset(R.drawable.monsters_nut, "monsters_nut", sz16x8, sz1x1, mTileSize);
@@ -439,6 +440,7 @@ public final class ResourceLoader {
 		loader.prepareTileset(R.drawable.map_fence_2, "map_fence_2", mapTileSize, sz1x1, mTileSize);
 		loader.prepareTileset(R.drawable.map_fence_3, "map_fence_3", mapTileSize, sz1x1, mTileSize);
 		loader.prepareTileset(R.drawable.map_fence_4, "map_fence_4", mapTileSize, sz1x1, mTileSize);
+		loader.prepareTileset(R.drawable.map_feygard_1, "map_feygard_1", mapTileSize, sz1x1, mTileSize);
 		loader.prepareTileset(R.drawable.map_ground_1, "map_ground_1", mapTileSize, sz1x1, mTileSize);
 		loader.prepareTileset(R.drawable.map_ground_2, "map_ground_2", mapTileSize, sz1x1, mTileSize);
 		loader.prepareTileset(R.drawable.map_ground_3, "map_ground_3", mapTileSize, sz1x1, mTileSize);
