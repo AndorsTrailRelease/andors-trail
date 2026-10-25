@@ -1,18 +1,24 @@
 package com.gpl.rpg.AndorsTrail;
 
 import java.lang.ref.WeakReference;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
 
 import com.gpl.rpg.AndorsTrail.context.ControllerContext;
 import com.gpl.rpg.AndorsTrail.context.WorldContext;
 import com.gpl.rpg.AndorsTrail.model.ModelContainer;
 import com.gpl.rpg.AndorsTrail.resource.ResourceLoader;
 import com.gpl.rpg.AndorsTrail.savegames.Savegames;
+import com.gpl.rpg.AndorsTrail.util.L;
 
 public final class WorldSetup {
+	private static final ExecutorService executor = Executors.newSingleThreadExecutor();
+	private static final Handler mainHandler = new Handler(Looper.getMainLooper());
 
 	private final WorldContext world;
 	private final ControllerContext controllers;
@@ -30,12 +36,11 @@ public final class WorldSetup {
 	public int newHeroIcon;
 	public int newHeroStartLives;
 	public boolean newHeroUnlimitedSaves;
-	private Savegames.LoadSavegameResult loadResult;
 
 	public WorldSetup(WorldContext world, ControllerContext controllers, Context androidContext) {
 		this.world = world;
 		this.controllers = controllers;
-		this.androidContext = new WeakReference<Context>(androidContext);
+		this.androidContext = new WeakReference<>(androidContext);
 	}
 
 	public void setOnResourcesLoadedListener(OnResourcesLoadedListener listener) {
@@ -45,7 +50,7 @@ public final class WorldSetup {
 				if (listener != null) listener.onResourcesLoaded();
 				return;
 			}
-			onResourcesLoadedListener = new WeakReference<WorldSetup.OnResourcesLoadedListener>(listener);
+			onResourcesLoadedListener = new WeakReference<>(listener);
 		}
 	}
 
@@ -57,37 +62,47 @@ public final class WorldSetup {
 			isInitializingResources = true;
 		}
 
-		//Load resources essential to the app synchroneously
-		ResourceLoader.loadResourcesSync(world, r);
+		//Load resources essential to the app synchronously
+		try {
+			ResourceLoader.loadResourcesSync(world, r);
+		} catch (RuntimeException e) {
+			synchronized (this) {
+				isInitializingResources = false;
+			}
+			L.log("Error loading sync resources: " + e);
+			throw e;
+		}
 		
-		//And the rest asynchroneously
-		(new AsyncTask<Void, Void, Void>() {
-			@Override
-			protected Void doInBackground(Void... arg0) {
+		// And the rest asynchronously.
+		executor.execute(() -> {
+			boolean loadSucceeded = false;
+			try {
 				ResourceLoader.loadResourcesAsync(world, r);
-				return null;
+				loadSucceeded = true;
+			} catch (RuntimeException e) {
+				L.log("Error loading async resources: " + e);
+			} finally {
+				final boolean finalLoadSucceeded = loadSucceeded;
+				mainHandler.post(() -> {
+					OnResourcesLoadedListener listener;
+					synchronized (this) {
+						if (finalLoadSucceeded) {
+							isResourcesInitialized = true;
+						}
+						isInitializingResources = false;
+						if (!finalLoadSucceeded || onResourcesLoadedListener == null) return;
+						listener = onResourcesLoadedListener.get();
+						onResourcesLoadedListener = null;
+					}
+					if (listener != null) listener.onResourcesLoaded();
+				});
 			}
-
-			@Override
-			protected void onPostExecute(Void result) {
-				super.onPostExecute(result);
-				synchronized (WorldSetup.this) {
-					isResourcesInitialized = true;
-					isInitializingResources = false;
-
-					if (onResourcesLoadedListener == null) return;
-					WorldSetup.OnResourcesLoadedListener listener = onResourcesLoadedListener.get();
-					onResourcesLoadedListener = null;
-					if (listener == null) return;
-					listener.onResourcesLoaded();
-				}
-			}
-		}).execute();
+		});
 	}
 
 	public void startCharacterSetup(final OnSceneLoadedListener listener) {
 		synchronized (WorldSetup.this) {
-			this.onSceneLoadedListener = new WeakReference<OnSceneLoadedListener>(listener);
+			this.onSceneLoadedListener = new WeakReference<>(listener);
 		}
 		startSceneLoader();
 	}
@@ -98,68 +113,73 @@ public final class WorldSetup {
 		}
 	}
 
-	private final Object onlyOneThreadAtATimeMayLoadSavegames = new Object();
 	private void startSceneLoader() {
 		isSceneReady = false;
 		final Object thisLoaderId = new Object();
-		synchronized (WorldSetup.this) {
+		synchronized (this) {
 			sceneLoaderId = thisLoaderId;
 		}
+		final Object loadGameLock = new Object();
 
-		(new AsyncTask<Void, Void, Void>() {
-			@Override
-			protected Void doInBackground(Void... arg0) {
-				synchronized (onlyOneThreadAtATimeMayLoadSavegames) {
+		executor.execute(() -> {
+			final Savegames.LoadSavegameResult result;
+			synchronized (loadGameLock) {
+				Savegames.LoadSavegameResult localResult;
+				try {
 					if (world.model != null) world.resetForNewGame();
 					if (createNewCharacter) {
-						createNewWorld();
-						loadResult = Savegames.LoadSavegameResult.success;
+						localResult = createNewWorld();
 					} else {
-						loadResult = continueWorld();
+						localResult = continueWorld();
 					}
+				} catch (RuntimeException e) {
+					L.log("Error loading world: " + e);
+					localResult = Savegames.LoadSavegameResult.unknownError;
+				} finally {
 					createNewCharacter = false;
 				}
-				return null;
+				if (localResult == null) localResult = Savegames.LoadSavegameResult.unknownError;
+				result = localResult;
 			}
-
-			@Override
-			protected void onPostExecute(Void result) {
-				super.onPostExecute(result);
-				synchronized (WorldSetup.this) {
+			mainHandler.post(() -> {
+				OnSceneLoadedListener listener;
+				synchronized (this) {
 					if (sceneLoaderId != thisLoaderId) return; // Some other thread has started after we started.
 					isSceneReady = true;
 
 					if (onSceneLoadedListener == null) return;
-					OnSceneLoadedListener o = onSceneLoadedListener.get();
+					listener = onSceneLoadedListener.get();
 					onSceneLoadedListener = null;
-					if (o == null) return;
-
-					if (loadResult == Savegames.LoadSavegameResult.success) {
-						o.onSceneLoaded();
-					} else {
-						o.onSceneLoadFailed(loadResult);
-					}
 				}
-			}
-		}).execute();
+				if (listener == null) return;
+
+				if (result == Savegames.LoadSavegameResult.success) {
+					listener.onSceneLoaded();
+				} else {
+					listener.onSceneLoadFailed(result);
+				}
+			});
+		});
 	}
 
 	private Savegames.LoadSavegameResult continueWorld() {
 		Context ctx = androidContext.get();
+		if (ctx == null) return Savegames.LoadSavegameResult.unknownError;
 		return Savegames.loadWorld(world, controllers, ctx, loadFromSlot);
 	}
 
-	private void createNewWorld() {
+	private Savegames.LoadSavegameResult createNewWorld() {
 		Context ctx = androidContext.get();
+		if (ctx == null) return Savegames.LoadSavegameResult.unknownError;
 		world.model = new ModelContainer(newHeroStartLives, newHeroUnlimitedSaves);
 		world.model.player.initializeNewPlayer(world.dropLists, newHeroName, newHeroIcon);
 
 		controllers.mapController.lotsOfTimePassed();
 		controllers.movementController.respawnPlayer(ctx.getResources());
+		return Savegames.LoadSavegameResult.success;
 	}
 
-
-	public static interface OnSceneLoadedListener {
+	public interface OnSceneLoadedListener {
 		void onSceneLoaded();
 		void onSceneLoadFailed(Savegames.LoadSavegameResult loadResult);
 	}
