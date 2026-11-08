@@ -6176,16 +6176,6 @@
                 ]
             },
             {
-                "nextPhraseID":"scylla_2_50",
-                "requires":[
-                    {
-                        "requireType":"questProgress",
-                        "requireID":"lake_map",
-                        "value":62
-                    }
-                ]
-            },
-            {
                 "nextPhraseID":"scylla_2_30",
                 "requires":[
                     {
@@ -6202,6 +6192,16 @@
                         "requireType":"killedMonster",
                         "requireID":"scylla_b2",
                         "value":1
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"scylla_2_50",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"lake_map",
+                        "value":62
                     }
                 ]
             },
@@ -6334,53 +6334,41 @@
     },
     {
         "id":"scylla_2_30",
-        "message":"You have managed to defeat another one of Scylla's monstrous heads.",
-        "switchToNPC":"none",
         "replies":[
             {
-                "nextPhraseID":"scylla_2_34"
+                "nextPhraseID":"scylla_2_32"
             }
         ],
         "rewards":[
             {
-                "rewardType":"spawnAll",
-                "rewardID":"scylla1c",
+                "rewardType":"removeSpawnArea",
+                "rewardID":"scylla1b",
                 "mapName":"mountainlake32"
             },
             {
-                "rewardType":"spawnAll",
-                "rewardID":"scylla2c",
+                "rewardType":"removeSpawnArea",
+                "rewardID":"scylla2b",
                 "mapName":"mountainlake32"
             },
             {
-                "rewardType":"spawnAll",
-                "rewardID":"scylla3c",
+                "rewardType":"removeSpawnArea",
+                "rewardID":"scylla3b",
                 "mapName":"mountainlake32"
             },
             {
-                "rewardType":"spawnAll",
-                "rewardID":"scylla4c",
+                "rewardType":"removeSpawnArea",
+                "rewardID":"scylla4b",
                 "mapName":"mountainlake32"
             },
             {
-                "rewardType":"spawnAll",
-                "rewardID":"scylla5c",
+                "rewardType":"removeSpawnArea",
+                "rewardID":"scylla5b",
                 "mapName":"mountainlake32"
             },
             {
-                "rewardType":"spawnAll",
-                "rewardID":"scylla6c",
+                "rewardType":"removeSpawnArea",
+                "rewardID":"scylla6b",
                 "mapName":"mountainlake32"
-            },
-            {
-                "rewardType":"questProgress",
-                "rewardID":"lake_map",
-                "value":66
-            },
-            {
-                "rewardType":"actorCondition",
-                "rewardID":"scylla",
-                "value":5
             }
         ]
     },
@@ -6631,6 +6619,68 @@
                 "rewardType":"questProgress",
                 "rewardID":"ll2_nd",
                 "value":21
+            }
+        ]
+    },
+    {
+        "id":"scylla_2_32",
+        "message":"You have managed to defeat another one of Scylla's monstrous heads.",
+        "switchToNPC":"none",
+        "replies":[
+            {
+                "nextPhraseID":"scylla_2_34"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"spawnAll",
+                "rewardID":"scylla1c",
+                "mapName":"mountainlake32"
+            },
+            {
+                "rewardType":"spawnAll",
+                "rewardID":"scylla2c",
+                "mapName":"mountainlake32"
+            },
+            {
+                "rewardType":"spawnAll",
+                "rewardID":"scylla3c",
+                "mapName":"mountainlake32"
+            },
+            {
+                "rewardType":"spawnAll",
+                "rewardID":"scylla4c",
+                "mapName":"mountainlake32"
+            },
+            {
+                "rewardType":"spawnAll",
+                "rewardID":"scylla5c",
+                "mapName":"mountainlake32"
+            },
+            {
+                "rewardType":"spawnAll",
+                "rewardID":"scylla6c",
+                "mapName":"mountainlake32"
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"lake_map",
+                "value":64
+            },
+            {
+                "rewardType":"actorCondition",
+                "rewardID":"scylla",
+                "value":5
+            }
+        ]
+    },
+    {
+        "id":"scylla_2_60",
+        "rewards":[
+            {
+                "rewardType":"actorCondition",
+                "rewardID":"scylla",
+                "value":5
             }
         ]
     }

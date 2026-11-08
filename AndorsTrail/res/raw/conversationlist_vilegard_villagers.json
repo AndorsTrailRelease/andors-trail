@@ -170,7 +170,14 @@
         "replies":[
             {
                 "text":"Thank you. Have you seen my brother Andor around here?",
-                "nextPhraseID":"vilegard_villager_friend_1"
+                "nextPhraseID":"vilegard_villager_friend_1",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":20
+                    }
+                ]
             },
             {
                 "text":"Thank you. Have you seen my brother Andor around here?",
