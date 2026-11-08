@@ -3,6 +3,38 @@
         "id":"jolnor_select_1",
         "replies":[
             {
+                "nextPhraseID":"jolnor_ceremony_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":170
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":180,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"jolnor_post_ceremony_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":180
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":200,
+                        "negate":true
+                    }
+                ]
+            },
+            {
                 "nextPhraseID":"jolnor_default_3",
                 "requires":[
                     {
@@ -68,7 +100,7 @@
     },
     {
         "id":"jolnor_default_3",
-        "message":"Walk with the Shadow my friend.",
+        "message":"Walk with the Shadow, my friend.",
         "replies":[
             {
                 "text":"Can you tell me again what this place is?",
@@ -147,6 +179,57 @@
                     {
                         "requireType":"hasActorCondition",
                         "requireID":"shadowsleep",
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"What can you tell me about the illness of Gillbert's daughter, Zephyr?",
+                "nextPhraseID":"jolnor_fishy_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":20
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":30,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"I need Shadowwater.",
+                "nextPhraseID":"jolnor_fishy_water_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":60
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":70,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"I need some Shadowwater.",
+                "nextPhraseID":"jolnor_fishy_water_20",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":70
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":80,
                         "negate":true
                     }
                 ]

@@ -27,6 +27,17 @@
             {
                 "text":"What can you tell me about Vilegard?",
                 "nextPhraseID":"erttu_vilegard_1"
+            },
+            {
+                "text":"I passed by a grave. Lysa. It named you.",
+                "nextPhraseID":"lysa_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"nondisplay_sutdover_lake",
+                        "value":35
+                    }
+                ]
             }
         ]
     },

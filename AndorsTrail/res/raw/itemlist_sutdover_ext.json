@@ -1,0 +1,244 @@
+[
+    {
+        "id":"rincel_coffin",
+        "iconID":"items_misc_2:129",
+        "name":"Rincel's coffin",
+        "displaytype":"quest",
+        "category":"other"
+    },
+    {
+        "id":"quasi_shovel",
+        "iconID":"items_misc_5:25",
+        "name":"Quasi's shovel",
+        "displaytype":"quest",
+        "hasManualPrice":1,
+        "baseMarketCost":0,
+        "category":"pole",
+        "description":"A master's tool of choice.",
+        "equipEffect":{
+            "increaseAttackDamage":{
+                "min":2,
+                "max":4
+            },
+            "increaseAttackCost":7,
+            "increaseAttackChance":13,
+            "increaseCriticalSkill":10,
+            "setCriticalMultiplier":1.25,
+            "setNonWeaponDamageModifier":148
+        },
+        "hitEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"fatigue2",
+                    "magnitude":1,
+                    "duration":1,
+                    "chance":"10"
+                }
+            ]
+        },
+        "killEffect":{
+            
+        }
+    },
+    {
+        "id":"fisherman_hat",
+        "iconID":"items_misc_2:130",
+        "name":"Fisherman's hat",
+        "displaytype":"rare",
+        "category":"hd_cloth",
+        "description":"The water may be cool, but the sun sure is hot. Never go fishing without it.",
+        "equipEffect":{
+            "increaseAttackDamage":{
+                "min":0,
+                "max":1
+            },
+            "increaseMaxHP":5,
+            "increaseAttackChance":2,
+            "increaseBlockChance":4
+        }
+    },
+    {
+        "id":"aged_fish_jelly",
+        "iconID":"items_japozero:311",
+        "name":"Aged fish oil jelly",
+        "displaytype":"quest",
+        "category":"animal",
+        "description":"A translucent, amber-hued jelly aged from fermented fish, its surface trembling with a faint oily sheen."
+    },
+    {
+        "id":"purifying_ointment",
+        "iconID":"items_japozero:453",
+        "name":"Purifying ointment",
+        "displaytype":"quest",
+        "category":"other",
+        "description":"A faintly glowing balm of moonpetals and sacred herbs that seeps into the skin like cool light."
+    },
+    {
+        "id":"smoked_fish1",
+        "iconID":"items_omi2:23",
+        "name":"Smoked whitefish",
+        "displaytype":"rare",
+        "hasManualPrice":1,
+        "baseMarketCost":130,
+        "category":"food",
+        "description":"Mabyn's finest smoked fin.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":5,
+                    "duration":7,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"smoked_fish2",
+        "iconID":"items_newb:787",
+        "name":"Smoked lakefish",
+        "displaytype":"rare",
+        "hasManualPrice":1,
+        "baseMarketCost":128,
+        "category":"food",
+        "description":"Caught from Lake Sutdover and smoked to perfection by Mabyn.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":4,
+                    "duration":8,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"raw_lakefish",
+        "iconID":"items_newb:786",
+        "name":"Raw lakefish",
+        "displaytype":"rare",
+        "hasManualPrice":1,
+        "baseMarketCost":38,
+        "category":"food",
+        "description":"Gillbert's catch of the day.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":3,
+                    "duration":5,
+                    "chance":"100"
+                },
+                {
+                    "condition":"foodp",
+                    "magnitude":3,
+                    "duration":7,
+                    "chance":"8"
+                }
+            ]
+        }
+    },
+    {
+        "id":"raw_whitefish",
+        "iconID":"items_japozero:521",
+        "name":"Raw whitefish",
+        "displaytype":"rare",
+        "hasManualPrice":1,
+        "baseMarketCost":38,
+        "category":"food",
+        "description":"A meaty fish only found in Lake Sutdover.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":3,
+                    "duration":4,
+                    "chance":"100"
+                },
+                {
+                    "condition":"foodp",
+                    "magnitude":3,
+                    "duration":7,
+                    "chance":"10"
+                }
+            ]
+        }
+    },
+    {
+        "id":"smoked_eel",
+        "iconID":"items_newb:777",
+        "name":"Smoked eel",
+        "displaytype":"rare",
+        "hasManualPrice":1,
+        "baseMarketCost":150,
+        "category":"food",
+        "description":"Mabyn's best attempt to make Gillbert's latest bottom-of-the-net catch palatable.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":4,
+                    "duration":6,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"salted_whitefish",
+        "iconID":"items_japozero:522",
+        "name":"Salted whitefish",
+        "displaytype":"rare",
+        "hasManualPrice":1,
+        "baseMarketCost":172,
+        "category":"food",
+        "description":"A salt-cured whitefish, dry and stiff from long keeping.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":4,
+                    "duration":8,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"lamp_oil",
+        "iconID":"items_consumables:70",
+        "name":"Lamp oil",
+        "displaytype":"rare",
+        "hasManualPrice":1,
+        "baseMarketCost":49,
+        "category":"other",
+        "description":"A murky, yellowed oil rendered from fish fat, with a greasy sheen and a faint residue."
+    },
+    {
+        "id":"raw_eel",
+        "iconID":"items_newb:776",
+        "name":"Raw eel",
+        "displaytype":"rare",
+        "hasManualPrice":1,
+        "baseMarketCost":23,
+        "category":"food",
+        "description":"Gillbert's bottom-of-the-net catch.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":3,
+                    "duration":4,
+                    "chance":"100"
+                },
+                {
+                    "condition":"foodp",
+                    "magnitude":3,
+                    "duration":5,
+                    "chance":"10"
+                }
+            ]
+        }
+    }
+]

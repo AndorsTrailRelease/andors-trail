@@ -379,8 +379,15 @@
         "message":"Yes, I'm longing for it just like how I'm longing for my son. But now I can mourn as I play his favorite song until I die.",
         "replies":[
             {
-                "text":"My sincere condolence for the loss of your beloved son.",
-                "nextPhraseID":"X"
+                "text":"My sincere condolences for the loss of your beloved son.",
+                "nextPhraseID":"wrye_requiescat_return_son_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"wrye",
+                        "value":90
+                    }
+                ]
             }
         ],
         "rewards":[
