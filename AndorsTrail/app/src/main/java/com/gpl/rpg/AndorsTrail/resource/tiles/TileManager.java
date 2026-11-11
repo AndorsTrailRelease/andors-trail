@@ -3,6 +3,8 @@ package com.gpl.rpg.AndorsTrail.resource.tiles;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -14,7 +16,6 @@ import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.os.AsyncTask;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -38,6 +39,7 @@ import com.gpl.rpg.AndorsTrail.util.L;
 import com.gpl.rpg.AndorsTrail.util.ThemeHelper;
 
 public final class TileManager {
+	private static final ExecutorService executor = Executors.newSingleThreadExecutor();
 	
 	public static final int BEGIN_ID = 1;
 	
@@ -385,35 +387,31 @@ public final class TileManager {
 		dest.addAll(cachedTileIDs);
 	}
 	public void cacheAdjacentMaps(final Resources res, final WorldContext world, final PredefinedMap nextMap) {
-		(new AsyncTask<Void, Void, Void>() {
-			@Override
-			protected Void doInBackground(Void... arg0) {
-				adjacentMapTiles = null;
+		executor.execute(() -> {
+			adjacentMapTiles = null;
 
-				HashSet<String> adjacentMapNames = new HashSet<String>();
-				for (MapObject o : nextMap.eventObjects) {
-					if (o.type != MapObject.MapObjectType.newmap) continue;
-					if (o.map == null) continue;
-					adjacentMapNames.add(o.map);
-				}
-
-				HashSet<Integer> tileIDs = new HashSet<Integer>();
-				for (String mapName : adjacentMapNames) {
-					if(AndorsTrailApplication.DEVELOPMENT_DEBUGMESSAGES){
-						L.log("addTileIDsFor " + mapName);
-					}
-					addTileIDsFor(tileIDs, mapName, res, world);
-				}
-
-				long freeMemRequired = tileSize * tileSize * tileIDs.size() * 4 /*RGBA_8888*/ * 2 /*Require twice the needed size, to leave room for others*/;
-				Runtime r = Runtime.getRuntime();
-				
-				if (r.maxMemory() - r.totalMemory() > freeMemRequired) {
-					adjacentMapTiles = tileCache.loadTilesFor(tileIDs, res);
-				}
-				return null;
+			HashSet<String> adjacentMapNames = new HashSet<String>();
+			for (MapObject o : nextMap.eventObjects) {
+				if (o.type != MapObject.MapObjectType.newmap) continue;
+				if (o.map == null) continue;
+				adjacentMapNames.add(o.map);
 			}
-		}).execute();
+
+			HashSet<Integer> tileIDs = new HashSet<Integer>();
+			for (String mapName : adjacentMapNames) {
+				if(AndorsTrailApplication.DEVELOPMENT_DEBUGMESSAGES){
+					L.log("addTileIDsFor " + mapName);
+				}
+				addTileIDsFor(tileIDs, mapName, res, world);
+			}
+
+			long freeMemRequired = tileSize * tileSize * tileIDs.size() * 4 /*RGBA_8888*/ * 2 /*Require twice the needed size, to leave room for others*/;
+			Runtime r = Runtime.getRuntime();
+			
+			if (r.maxMemory() - r.totalMemory() > freeMemRequired) {
+				adjacentMapTiles = tileCache.loadTilesFor(tileIDs, res);
+			}
+		});
 	}
 	
 	private static class TextDrawable extends Drawable {
