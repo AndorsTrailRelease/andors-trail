@@ -3,6 +3,85 @@
         "id":"wrye_select_1",
         "replies":[
             {
+                "nextPhraseID":"wrye_thanks_gy_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":180
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"wrye_talk_to_jolnor",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":170
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":180,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"bring_wrye_to_cemetery_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":150
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":160,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"wrye_return_son_default",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":20
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":160,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "nextPhraseID":"wrye_requiescat_return_son_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brv_wh_delivery_nondisplay",
+                        "value":80
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"wrye",
+                        "value":90
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":20,
+                        "negate":true
+                    }
+                ]
+            },
+            {
                 "nextPhraseID":"wrye_return_2",
                 "requires":[
                     {
@@ -374,7 +453,7 @@
     },
     {
         "id":"wrye_story_11",
-        "message":"*sob* Shadow help me.",
+        "message":"[sob] Shadow help me.",
         "replies":[
             {
                 "text":"What can I do to help?",

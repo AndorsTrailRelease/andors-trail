@@ -265,6 +265,23 @@
                         "negate":true
                     }
                 ]
+            },
+            {
+                "text":"I need you to treat an ailing girl.",
+                "nextPhraseID":"thoronir_fishy_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":30
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"something_fishy_in_the_medicine",
+                        "value":40,
+                        "negate":true
+                    }
+                ]
             }
         ]
     },

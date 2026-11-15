@@ -96,6 +96,17 @@
             {
                 "text":"What have you got for sale?",
                 "nextPhraseID":"S"
+            },
+            {
+                "text":"Anaeth sent me here to purchase a coffin.",
+                "nextPhraseID":"jakrar_coffin_10",
+                "requires":[
+                    {
+                        "requireType":"questLatestProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":80
+                    }
+                ]
             }
         ]
     },
@@ -360,7 +371,7 @@
     },
     {
         "id":"fallhaven_lumberjack_15",
-        "message":"Hello again my friend.",
+        "message":"Hello again, my friend.",
         "replies":[
             {
                 "text":"I cannot thank you enough for cutting away those trees! Finally I've got a shortcut!",
@@ -395,6 +406,17 @@
                         "requireID":"tunlon_fence",
                         "value":20,
                         "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"I need you to build a coffin.",
+                "nextPhraseID":"jakrar_coffin_10",
+                "requires":[
+                    {
+                        "requireType":"questLatestProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":80
                     }
                 ]
             }

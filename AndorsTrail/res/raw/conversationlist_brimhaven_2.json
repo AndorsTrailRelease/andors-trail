@@ -1554,6 +1554,23 @@
                 "nextPhraseID":"quasi_1"
             },
             {
+                "text":"The guard said you are forbidden from leaving this basement.",
+                "nextPhraseID":"quasi_cannot_leave_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":60
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":70,
+                        "negate":true
+                    }
+                ]
+            },
+            {
                 "text":"I think I'll leave now.",
                 "nextPhraseID":"X"
             }
@@ -1578,11 +1595,22 @@
     },
     {
         "id":"quasi_2",
-        "message":"But Zorvan only lets me put dead people in the holes. ",
+        "message":"But Zorvan only lets me put dead people in the holes.",
         "replies":[
             {
                 "text":"You find that surprising?",
                 "nextPhraseID":"quasi_3"
+            },
+            {
+                "text":"Well, you will be happy to know that I have the perfect job for you.",
+                "nextPhraseID":"quasi_rincel_10",
+                "requires":[
+                    {
+                        "requireType":"questLatestProgress",
+                        "requireID":"requiescat_in_pace",
+                        "value":40
+                    }
+                ]
             },
             {
                 "text":"Time to leave!",
