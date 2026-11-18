@@ -20,6 +20,7 @@ import com.gpl.rpg.AndorsTrail.model.map.PredefinedMap;
 import com.gpl.rpg.AndorsTrail.model.map.TMXMapTranslator;
 import com.gpl.rpg.AndorsTrail.resource.tiles.TileCollection;
 import com.gpl.rpg.AndorsTrail.util.Coord;
+import com.gpl.rpg.AndorsTrail.util.CoordRect;
 import com.gpl.rpg.AndorsTrail.util.L;
 import com.gpl.rpg.AndorsTrail.util.TimedMessageTask;
 
@@ -321,11 +322,23 @@ public final class MovementController implements TimedMessageTask.Callback {
 	public void moveBlockedActors(PredefinedMap map, LayeredTileMap tileMap) {
 		final ModelContainer model = world.model;
 
-		// If the player somehow spawned on an unwalkable tile, we move the player to the first mapchange area.
+		// If the player somehow spawned on an unwalkable tile, move to the nearest walkable tile.
 		// This could happen if we change some tile to non-walkable in a future version.
 		if (!tileMap.isWalkable(model.player.position)) {
-			Coord p = getFirstMapChangeAreaPosition(map);
-			if (p != null) model.player.position.set(p);
+			CoordRect arrivalArea = null;
+			for (MapObject o : map.eventObjects) {
+				if (o.isActive && o.type == MapObject.MapObjectType.newmap && o.position.contains(model.player.position)) {
+					arrivalArea = o.position;
+					break;
+				}
+			}
+			Coord p = findNearestWalkablePosition(tileMap.currentLayout.isWalkable, model.player.position, arrivalArea);
+			if (p != null) {
+				model.player.position.set(p);
+				model.player.lastPosition.set(p);
+			} else {
+				L.error("Cannot find a walkable position for player on map " + map.name);
+			}
 		}
 
 		// If any monsters somehow spawned on an unwalkable tile, we move the monster to a new position on the spawnarea
@@ -351,6 +364,44 @@ public final class MovementController implements TimedMessageTask.Callback {
 			else if (tileMap.isWalkable(new Coord(p.x-1, p.y  ))) bag.position.set(p.x-1, p.y  );
 			else if (tileMap.isWalkable(new Coord(p.x  , p.y-1))) bag.position.set(p.x  , p.y-1);
 		}
+	}
+
+	static Coord findNearestWalkablePosition(boolean[][] walkable, Coord origin) {
+		return findNearestWalkablePositionInArea(walkable, origin, 0, 0, walkable.length,
+				walkable.length == 0 ? 0 : walkable[0].length);
+	}
+
+	static Coord findNearestWalkablePosition(boolean[][] walkable, Coord origin, CoordRect preferredArea) {
+		if (preferredArea != null) {
+			Coord nearestInPreferredArea = findNearestWalkablePositionInArea(
+					walkable, origin,
+					Math.max(0, preferredArea.topLeft.x),
+					Math.max(0, preferredArea.topLeft.y),
+					Math.min(walkable.length, preferredArea.topLeft.x + preferredArea.size.width),
+					Math.min(walkable.length == 0 ? 0 : walkable[0].length,
+							preferredArea.topLeft.y + preferredArea.size.height));
+			if (nearestInPreferredArea != null) return nearestInPreferredArea;
+		}
+		return findNearestWalkablePosition(walkable, origin);
+	}
+
+	private static Coord findNearestWalkablePositionInArea(
+			boolean[][] walkable, Coord origin, int minX, int minY, int maxX, int maxY) {
+		if (walkable.length == 0 || walkable[0].length == 0) return null;
+
+		Coord nearest = null;
+		long nearestDistance = Long.MAX_VALUE;
+		for (int y = minY; y < maxY; y++) {
+			for (int x = minX; x < maxX; x++) {
+				if (!walkable[x][y]) continue;
+				long distance = Math.abs((long)x - origin.x) + Math.abs((long)y - origin.y);
+				if (distance < nearestDistance) {
+					nearest = new Coord(x, y);
+					nearestDistance = distance;
+				}
+			}
+		}
+		return nearest;
 	}
 
 	private static Coord getFirstMapChangeAreaPosition(PredefinedMap map) {
