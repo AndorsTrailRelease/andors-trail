@@ -20,6 +20,7 @@ import com.gpl.rpg.AndorsTrail.model.map.PredefinedMap;
 import com.gpl.rpg.AndorsTrail.model.map.TMXMapTranslator;
 import com.gpl.rpg.AndorsTrail.resource.tiles.TileCollection;
 import com.gpl.rpg.AndorsTrail.util.Coord;
+import com.gpl.rpg.AndorsTrail.util.CoordRect;
 import com.gpl.rpg.AndorsTrail.util.L;
 import com.gpl.rpg.AndorsTrail.util.TimedMessageTask;
 
@@ -321,11 +322,24 @@ public final class MovementController implements TimedMessageTask.Callback {
 	public void moveBlockedActors(PredefinedMap map, LayeredTileMap tileMap) {
 		final ModelContainer model = world.model;
 
-		// If the player somehow spawned on an unwalkable tile, we move the player to the first mapchange area.
-		// This could happen if we change some tile to non-walkable in a future version.
-		if (!tileMap.isWalkable(model.player.position)) {
-			Coord p = getFirstMapChangeAreaPosition(map);
-			if (p != null) model.player.position.set(p);
+		// If the player somehow spawned on an invalid or occupied tile, move to the nearest free tile.
+		// This can happen when map data changes or a placement overlaps a spawned actor.
+		if (!tileMap.isWalkable(model.player.position) || map.getMonsterAt(model.player.position) != null) {
+			CoordRect arrivalArea = null;
+			for (MapObject o : map.eventObjects) {
+				if (o.isActive && o.type == MapObject.MapObjectType.newmap && o.position.contains(model.player.position)) {
+					arrivalArea = o.position;
+					break;
+				}
+			}
+			Coord p = findNearestWalkableUnoccupiedPosition(
+					map, tileMap, model.player.position, arrivalArea);
+			if (p != null) {
+				model.player.position.set(p);
+				model.player.lastPosition.set(p);
+			} else {
+				L.error("Cannot find a walkable unoccupied position for player on map " + map.name);
+			}
 		}
 
 		// If any monsters somehow spawned on an unwalkable tile, we move the monster to a new position on the spawnarea
@@ -351,6 +365,45 @@ public final class MovementController implements TimedMessageTask.Callback {
 			else if (tileMap.isWalkable(new Coord(p.x-1, p.y  ))) bag.position.set(p.x-1, p.y  );
 			else if (tileMap.isWalkable(new Coord(p.x  , p.y-1))) bag.position.set(p.x  , p.y-1);
 		}
+	}
+
+	static Coord findNearestWalkableUnoccupiedPosition(
+			PredefinedMap map, LayeredTileMap tileMap, Coord origin) {
+		return findNearestWalkableUnoccupiedPositionInArea(
+				map, tileMap, origin, 0, 0, map.size.width, map.size.height);
+	}
+
+	static Coord findNearestWalkableUnoccupiedPosition(
+			PredefinedMap map, LayeredTileMap tileMap, Coord origin, CoordRect preferredArea) {
+		if (preferredArea != null) {
+			Coord nearestInPreferredArea = findNearestWalkableUnoccupiedPositionInArea(
+					map, tileMap, origin,
+					Math.max(0, preferredArea.topLeft.x),
+					Math.max(0, preferredArea.topLeft.y),
+					Math.min(map.size.width, preferredArea.topLeft.x + preferredArea.size.width),
+					Math.min(map.size.height,
+							preferredArea.topLeft.y + preferredArea.size.height));
+			if (nearestInPreferredArea != null) return nearestInPreferredArea;
+		}
+		return findNearestWalkableUnoccupiedPosition(map, tileMap, origin);
+	}
+
+	private static Coord findNearestWalkableUnoccupiedPositionInArea(
+			PredefinedMap map, LayeredTileMap tileMap, Coord origin,
+			int minX, int minY, int maxX, int maxY) {
+		Coord nearest = null;
+		long nearestDistance = Long.MAX_VALUE;
+		for (int y = minY; y < maxY; y++) {
+			for (int x = minX; x < maxX; x++) {
+				if (!tileMap.isWalkable(x, y) || map.getMonsterAt(x, y) != null) continue;
+				long distance = Math.abs((long)x - origin.x) + Math.abs((long)y - origin.y);
+				if (distance < nearestDistance) {
+					nearest = new Coord(x, y);
+					nearestDistance = distance;
+				}
+			}
+		}
+		return nearest;
 	}
 
 	private static Coord getFirstMapChangeAreaPosition(PredefinedMap map) {
