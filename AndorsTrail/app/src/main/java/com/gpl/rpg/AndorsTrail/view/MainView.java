@@ -163,7 +163,7 @@ public final class MainView extends SurfaceView
 				,getHeight() / scaledTileSize
 			);
 		
-		if (sh.getSurfaceFrame().right != surfaceSize.width || sh.getSurfaceFrame().bottom != surfaceSize.height) {
+		if (w != surfaceSize.width || h != surfaceSize.height) {
 			// The buffer still has the size of the view. Anything drawn now would be laid out for the
 			// scaled buffer size and be shown for a frame in a corner of the screen. setFixedSize makes
 			// the SurfaceView call surfaceChanged again with the new size, so draw only then.
