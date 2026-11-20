@@ -1,29 +1,29 @@
 package com.gpl.rpg.AndorsTrail.util;
 
 import android.os.Handler;
-import android.os.Message;
+import android.os.Looper;
 
-public final class TimedMessageTask extends Handler {
+public final class TimedMessageTask {
 	private final long interval;
 	private final boolean requireIntervalBeforeFirstTick;
 	private final Callback callback;
 	private long nextTickTime;
 	private boolean hasQueuedTick = false;
 	private boolean isAlive = false;
+	private final Handler handler;
 
 	public TimedMessageTask(Callback callback, long interval, boolean requireIntervalBeforeFirstTick) {
 		this.interval = interval;
 		this.requireIntervalBeforeFirstTick = requireIntervalBeforeFirstTick;
 		this.callback = callback;
 		this.nextTickTime = System.currentTimeMillis() + interval;
-	}
-
-	@Override
-	public void handleMessage(Message msg) {
-		if (!isAlive) return;
-		if (!hasQueuedTick) return;
-		hasQueuedTick = false;
-		tick();
+		this.handler = new Handler(Looper.getMainLooper(), (msg) -> {
+			if (!isAlive) return true;
+			if (!hasQueuedTick) return true;
+			hasQueuedTick = false;
+			tick();
+			return true;
+		});
 	}
 
 	private void tick() {
@@ -33,8 +33,8 @@ public final class TimedMessageTask extends Handler {
 	}
 
 	private void sleep(long delayMillis) {
-		this.removeMessages(0);
-		sendMessageDelayed(obtainMessage(0), delayMillis);
+		handler.removeMessages(0);
+		handler.sendMessageDelayed(handler.obtainMessage(0), delayMillis);
 	}
 
 	private boolean hasElapsedIntervalTime() {
@@ -50,9 +50,8 @@ public final class TimedMessageTask extends Handler {
 	private boolean shouldCauseTickOnStart() {
 		if (requireIntervalBeforeFirstTick) return false;
 		if (hasQueuedTick) return false;
-		if (!hasElapsedIntervalTime()) return false;
-		return true;
-	}
+        return hasElapsedIntervalTime();
+    }
 
 	public void start() {
 		isAlive = true;
@@ -63,9 +62,10 @@ public final class TimedMessageTask extends Handler {
 	public void stop() {
 		hasQueuedTick = false;
 		isAlive = false;
+		handler.removeMessages(0);
 	}
 
 	public interface Callback {
-		public boolean onTick(TimedMessageTask task);
+		boolean onTick(TimedMessageTask task);
 	}
 }
