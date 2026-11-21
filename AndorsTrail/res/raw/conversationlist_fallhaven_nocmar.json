@@ -212,17 +212,33 @@
         "replies":[
             {
                 "text":"Yes, at last I found it.",
-                "nextPhraseID":"nocmar_unrefined_stone_10",
+                "nextPhraseID":"nocmar_complete",
                 "requires":[
                     {
-                        "requireType":"inventoryKeep",
-                        "requireID":"heartstone_unrefined",
+                        "requireType":"inventoryRemove",
+                        "requireID":"heartstone",
+                        "value":1
+                    }
+                ]
+            },
+            {
+                "text":"Yes. I manged to purchase one.",
+                "nextPhraseID":"nocmar_fake_0",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"nor_city_road_nondisplay",
+                        "value":30
+                    },
+                    {
+                        "requireType":"inventoryRemove",
+                        "requireID":"heartstone1",
                         "value":1
                     },
                     {
-                        "requireType":"inventoryKeep",
-                        "requireID":"heartstone",
-                        "value":1,
+                        "requireType":"questProgress",
+                        "requireID":"nocmar",
+                        "value":40,
                         "negate":true
                     }
                 ]
@@ -234,50 +250,6 @@
             {
                 "text":"No, not yet.",
                 "nextPhraseID":"nocmar_continue_2"
-            },
-            {
-                "text":"Actually, I found two. [extend your hands, one stone in each]",
-                "nextPhraseID":"nocmar_two_stones_10",
-                "requires":[
-                    {
-                        "requireType":"inventoryKeep",
-                        "requireID":"heartstone_unrefined",
-                        "value":1
-                    },
-                    {
-                        "requireType":"inventoryKeep",
-                        "requireID":"heartstone",
-                        "value":1
-                    }
-                ]
-            },
-            {
-                "text":"Yes, at last I found it.",
-                "nextPhraseID":"nocmar_complete",
-                "requires":[
-                    {
-                        "requireType":"inventoryRemove",
-                        "requireID":"heartstone",
-                        "value":1
-                    },
-                    {
-                        "requireType":"inventoryKeep",
-                        "requireID":"heartstone_unrefined",
-                        "value":1,
-                        "negate":true
-                    }
-                ]
-            },
-            {
-                "text":"[while shaking your head] It's in your hand.",
-                "nextPhraseID":"nocmar_complete_2",
-                "requires":[
-                    {
-                        "requireType":"questProgress",
-                        "requireID":"undertell_hidden",
-                        "value":10
-                    }
-                ]
             }
         ]
     },

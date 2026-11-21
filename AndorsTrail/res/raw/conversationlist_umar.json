@@ -544,6 +544,28 @@
             {
                 "text":"Nice to meet you. Goodbye.",
                 "nextPhraseID":"X"
+            },
+            {
+                "text":"I was cheated by Dirhan, a member of this guild. He sold me a fake heartstone. I want my gold back.",
+                "nextPhraseID":"umar_return_cheated",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"Thieves02",
+                        "value":2
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"nocmar",
+                        "value":40
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"nor_city_road_nondisplay",
+                        "value":60,
+                        "negate":true
+                    }
+                ]
             }
         ]
     },

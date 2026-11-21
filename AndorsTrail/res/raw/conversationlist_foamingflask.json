@@ -4,6 +4,23 @@
         "message":"Hello. Do you want something from the kitchen?",
         "replies":[
             {
+                "text":"What did you say about the men in black robes?",
+                "nextPhraseID":"ff_cook_piwh_recap",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"ravine_quest",
+                        "value":110
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"ravine_quest",
+                        "value":120,
+                        "negate":true
+                    }
+                ]
+            },
+            {
                 "text":"Sure, let me see what food you have to sell.",
                 "nextPhraseID":"ff_cook_3"
             },
@@ -14,6 +31,23 @@
             {
                 "text":"That smells wonderful. What are you cooking?",
                 "nextPhraseID":"ff_cook_2"
+            },
+            {
+                "text":"Do you know a man named Piwh?",
+                "nextPhraseID":"ff_cook_piwh_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"ravine_quest",
+                        "value":100
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"ravine_quest",
+                        "value":110,
+                        "negate":true
+                    }
+                ]
             }
         ]
     },

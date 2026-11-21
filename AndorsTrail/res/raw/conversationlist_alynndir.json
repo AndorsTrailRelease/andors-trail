@@ -4,6 +4,40 @@
         "message":"Hello there. Welcome to my cabin.",
         "replies":[
             {
+                "text":"Have you seen two men in black robes?",
+                "nextPhraseID":"alynndir_piwh_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"ravine_quest",
+                        "value":120
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"ravine_quest",
+                        "value":130,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"Tell me again what you saw on the road.",
+                "nextPhraseID":"alynndir_piwh_recap",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"ravine_quest",
+                        "value":130
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"ravine_quest",
+                        "value":140,
+                        "negate":true
+                    }
+                ]
+            },
+            {
                 "text":"What do you do around here?",
                 "nextPhraseID":"alynndir_2"
             },

@@ -52,6 +52,40 @@
         "message":"Hello again my Shadow friend. How may I help you?",
         "replies":[
             {
+                "text":"I'm looking for a man named Piwh.",
+                "nextPhraseID":"ailshara_piwh_10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"ravine_quest",
+                        "value":110
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"ravine_quest",
+                        "value":120,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"Tell me again what you heard about Piwh.",
+                "nextPhraseID":"ailshara_piwh_recap",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"ravine_quest",
+                        "value":120
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"ravine_quest",
+                        "value":130,
+                        "negate":true
+                    }
+                ]
+            },
+            {
                 "text":"Let me see what you have to trade.",
                 "nextPhraseID":"S"
             }
@@ -62,6 +96,68 @@
         "message":"Sigh, it's you. What do you want?",
         "replies":[
             {
+                "text":"I'm looking for a man named Piwh.",
+                "nextPhraseID":"ailshara_piwh_paid_resume",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"ravine_quest",
+                        "value":110
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"ravine_quest",
+                        "value":120,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"nor_city_road_nondisplay",
+                        "value":320
+                    }
+                ]
+            },
+            {
+                "text":"I'm looking for a man named Piwh.",
+                "nextPhraseID":"ailshara_piwh_price",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"ravine_quest",
+                        "value":110
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"ravine_quest",
+                        "value":120,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"nor_city_road_nondisplay",
+                        "value":320,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"Tell me again what you heard about Piwh.",
+                "nextPhraseID":"ailshara_piwh_recap",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"ravine_quest",
+                        "value":120
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"ravine_quest",
+                        "value":130,
+                        "negate":true
+                    }
+                ]
+            },
+            {
                 "text":"Let me see what you have to trade.",
                 "nextPhraseID":"S"
             }
@@ -71,6 +167,23 @@
         "id":"ailshara_1",
         "message":"Psst, hey. Interested in doing some trading? I am always looking for acquiring ... well, items of others...",
         "replies":[
+            {
+                "text":"I'm looking for a man named Piwh.",
+                "nextPhraseID":"ailshara_piwh_refuse",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"ravine_quest",
+                        "value":110
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"ravine_quest",
+                        "value":120,
+                        "negate":true
+                    }
+                ]
+            },
             {
                 "text":"Sure, let me see what you have.",
                 "nextPhraseID":"S"

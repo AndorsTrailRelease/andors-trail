@@ -1,0 +1,326 @@
+[
+    {
+        "id":"nor_city_road_nondisplay",
+        "name":"nor_city_road_nondisplay",
+        "showInLog":1,
+        "stages":[
+            {
+                "progress":10,
+                "logText":"Notice bones are children"
+            },
+            {
+                "progress":15,
+                "logText":"Sargeant says they searched the basement but didn't find diary"
+            },
+            {
+                "progress":20,
+                "logText":"Drunken Duck bed"
+            },
+            {
+                "progress":30,
+                "logText":"Got ripped off."
+            },
+            {
+                "progress":40,
+                "logText":"Dirhan gone"
+            },
+            {
+                "progress":50,
+                "logText":"Told Balon investigation is solved."
+            },
+            {
+                "progress":60,
+                "logText":"Complained to Umar"
+            },
+            {
+                "progress":70,
+                "logText":"Caladrius spawned"
+            },
+            {
+                "progress":71,
+                "logText":"On nor_city_road9a"
+            },
+            {
+                "progress":72,
+                "logText":"Interacted with Caladrius"
+            },
+            {
+                "progress":75,
+                "logText":"Attacked Caladrius"
+            },
+            {
+                "progress":80,
+                "logText":"triggered Celynn script"
+            },
+            {
+                "progress":90,
+                "logText":"Said you would help Celynn"
+            },
+            {
+                "progress":295,
+                "logText":"Met Ceckapus"
+            },
+            {
+                "progress":300,
+                "logText":"300 = PC is on the ravine ladder on platform 1."
+            },
+            {
+                "progress":301,
+                "logText":"301 = PC is on the ravine ladder headed down on platform 1."
+            },
+            {
+                "progress":302,
+                "logText":"302 = PC is on the ravine ladder on platform 2."
+            },
+            {
+                "progress":303,
+                "logText":"303 = PC is on the ravine ladder headed down on platform 2."
+            },
+            {
+                "progress":305,
+                "logText":"305 = PC has discovered Alduan's house."
+            },
+            {
+                "progress":310,
+                "logText":"310 = PC handed the clock to Graball (ravine_quest 70 or 72). Gates Ysolmere, Piwh and everything after."
+            },
+            {
+                "progress":320,
+                "logText":"320 = PC sided with Feygard in Feygard errands and paid Ailshara 5000 gold for news of Piwh (ravine_quest)."
+            },
+            {
+                "progress":330,
+                "logText":"330 = PC handed the bird note to Graball (ravine_quest). Lets graball_selector resume the decoding at graball_note_20 if the player quits before stage 160."
+            },
+            {
+                "progress":340,
+                "logText":"340 = Bad Foundations: cabin stairs boarded (removed with removeQuestProgress when the lockdown ends)"
+            },
+            {
+                "progress":350,
+                "logText":"350 = Bad Foundations: Graball asked what to do with the painting"
+            },
+            {
+                "progress":360,
+                "logText":"Bad Foundations: the ravine hole has been filled in"
+            }
+        ]
+    },
+    {
+        "id":"essence_child",
+        "name":"Essence of a child",
+        "showInLog":1,
+        "stages":[
+            {
+                "progress":10,
+                "logText":"The Duleian road is closed. The guard at the checkpoint told me there is an ongoing investigation, but would not say more. He suggested I talk to the sergeant at the camp back up the road a little."
+            },
+            {
+                "progress":15,
+                "logText":"I spoke to a guard at a camp by the side of the Duleian road. He told me the road is closed because of an ongoing investigation, but would not say more. He suggested I speak to the sergeant at the camp."
+            },
+            {
+                "progress":16,
+                "logText":"I spoke to the sergeant at a camp by the side of the Duleian road. He told me the road is closed because of an ongoing investigation, but would not say more. I need to prove that I can help them."
+            },
+            {
+                "progress":20,
+                "logText":"I spoke to the sergeant at a camp by the side of the Duleian road. He told me the road is closed because of an ongoing investigation into missing childen. I persuaded him that I can help, so he gave me a pass to get through the road block."
+            },
+            {
+                "progress":25,
+                "logText":"The sergeant told me that there have been an unusually large number of children disappearing around here, but that have not found much to indicate why. They haven't tried very hard though."
+            },
+            {
+                "progress":30,
+                "logText":"I showed the guard at the road block my pass from the sergeant, and I can now go through."
+            },
+            {
+                "progress":40,
+                "logText":"I have found a child's toy in an old tomb. The toy does not look very old. Maybe this is a clue."
+            },
+            {
+                "progress":50,
+                "logText":"I took one of the small bones from the tomb as evidence."
+            },
+            {
+                "progress":60,
+                "logText":"I found a child's diary in the basement of the old women's shack. I should ask them about where this came from."
+            },
+            {
+                "progress":70,
+                "logText":"I asked the old women about the diary. They told me they found it in the woods months ago. They brought it back in case the owner came looking for it, but so far nobody has asked for it."
+            },
+            {
+                "progress":80,
+                "logText":"I showed the evidence I had found to the sargeant at the camp. He said it is not enough for them to act on, so I should continue investigating. I should ask around in Sullengard."
+            },
+            {
+                "progress":90,
+                "logText":"I showed the diary I found to Celynn. It is her daughter's diary. She only went missing two days ago, so the old women lied to me!"
+            },
+            {
+                "progress":200,
+                "logText":"End 1",
+                "rewardExperience":10,
+                "finishesQuest":1
+            },
+            {
+                "progress":210,
+                "logText":"End 2",
+                "rewardExperience":10,
+                "finishesQuest":1
+            },
+            {
+                "progress":220,
+                "logText":"End 3",
+                "rewardExperience":10,
+                "finishesQuest":1
+            }
+        ]
+    },
+    {
+        "id":"ravine_quest",
+        "name":"Bad Foundations",
+        "showInLog":1,
+        "stages":[
+            {
+                "progress":5,
+                "logText":"On the northeast side of the Sullengard Ravine, I met a man from Nor City named Bramver. He suggested that if I was feeling adventurous, I should make my way down inside the ravine and take a look inside that old crate."
+            },
+            {
+                "progress":10,
+                "logText":"I fell through the ground while exploring the Sullengard Ravine."
+            },
+            {
+                "progress":20,
+                "logText":"I landed in an underground room, and a stranger was shocked to see me. I was taken to their leader."
+            },
+            {
+                "progress":30,
+                "logText":"Graball, leader of this hidden Thieves' Guild base, demanded to know how I got in and who else knows about the hole. He wants me to find out whether Bramver, who watches the ravine every day, has seen anything.",
+                "rewardExperience":800
+            },
+            {
+                "progress":40,
+                "logText":"Bramver says he has seen nothing but birds. I should tell Graball, but the cabin door locked behind me, so the only way back in is the hole.",
+                "rewardExperience":800
+            },
+            {
+                "progress":50,
+                "logText":"Graball doesn't trust me to keep quiet about this place. He wants me to take a clock from Alduan's house, and says a spare key should be near the door."
+            },
+            {
+                "progress":55,
+                "logText":"I found Alduan's spare key under his apple crate."
+            },
+            {
+                "progress":60,
+                "logText":"I took the clock from Alduan's house. I need to bring it to Graball, and that means the hole again."
+            },
+            {
+                "progress":65,
+                "logText":"I slid Alduan's key back under his crate. With the door locked and the key where he left it, he may never work out how his clock went missing."
+            },
+            {
+                "progress":70,
+                "logText":"Graball took the clock and gave me a key to the cabin.",
+                "rewardExperience":1200
+            },
+            {
+                "progress":72,
+                "logText":"Graball took the clock and gave me a key to the cabin. He was impressed that I put Alduan's key back, because a robbery nobody can explain is one nobody investigates.",
+                "rewardExperience":1615
+            },
+            {
+                "progress":75,
+                "logText":"A thief named Quill burst in. Piwh, Graball's catchpole, had collapsed at the cabin door, burning up and barely breathing. He has been carried down to the dorm, and Graball told me to go there and help Ysolmere, the healer looking after him."
+            },
+            {
+                "progress":80,
+                "logText":"Piwh has been poisoned. Ysolmere needs ingredients to keep him alive, including Orchard apples from Deebo, who only trades with people he trusts."
+            },
+            {
+                "progress":90,
+                "logText":"I gave Ysolmere everything she asked for. She was able to make a curement and indicated that Piwh will survive. She told me to go speak with Graball.",
+                "rewardExperience":3200
+            },
+            {
+                "progress":100,
+                "logText":"Graball wants to know who hurt Piwh, and told me to start at the Foaming Flask."
+            },
+            {
+                "progress":110,
+                "logText":"The cook saw two men in black robes follow Piwh toward Crossroads Guardhouse.",
+                "rewardExperience":800
+            },
+            {
+                "progress":115,
+                "logText":"Ailshara at the Crossroads Guardhouse may know something about Piwh, but because I sided with Feygard, she won't tell me unless I pay her {5000} gold."
+            },
+            {
+                "progress":120,
+                "logText":"Ailshara saw Piwh meet the two men, and overheard one word: Alynndir. She has heard of someone by that name who lives along the Duleian Road, east of the Foaming Flask Tavern.",
+                "rewardExperience":1200
+            },
+            {
+                "progress":130,
+                "logText":"Alynndir saw the men chase someone east along the Duleian Road.",
+                "rewardExperience":800
+            },
+            {
+                "progress":140,
+                "logText":"I caught the robed men east of Alynndir's cabin, and they sent hired thugs on me.",
+                "rewardExperience":1600
+            },
+            {
+                "progress":145,
+                "logText":"I let the robed men go. As they left, the leader dropped a strange note about birds. Graball should see it.",
+                "rewardExperience":2400
+            },
+            {
+                "progress":150,
+                "logText":"I recovered a strange note about birds from the robed men. Graball should see it.",
+                "rewardExperience":800
+            },
+            {
+                "progress":160,
+                "logText":"Graball decoded the note. The birds are people, and Bramver has been watching the cabin all along. He knows about the hole. Bramver is gone.",
+                "rewardExperience":1600
+            },
+            {
+                "progress":170,
+                "logText":"The ground around the hole has been disturbed. The robed men are in the base.",
+                "rewardExperience":800
+            },
+            {
+                "progress":180,
+                "logText":"I fought my way to the vault. The robed men came for one painting.",
+                "rewardExperience":4800
+            },
+            {
+                "progress":185,
+                "logText":"Piwh woke. The robed men had offered him a fortune for the painting of the island. It came in with a household Graball's crew had emptied, and nobody here knows what the island is.",
+                "rewardExperience":1600
+            },
+            {
+                "progress":191,
+                "logText":"I burned the painting.",
+                "rewardExperience":9500,
+                "finishesQuest":1
+            },
+            {
+                "progress":192,
+                "logText":"Graball sold the painting.",
+                "rewardExperience":7500,
+                "finishesQuest":1
+            },
+            {
+                "progress":193,
+                "logText":"I let the last robed man leave with the painting. Graball will not forgive this.",
+                "rewardExperience":9000,
+                "finishesQuest":1
+            }
+        ]
+    }
+]
