@@ -182,13 +182,19 @@
   <image source="../drawable/map_window_2.png" width="512" height="256"/>
  </tileset>
  <layer name="Ground" width="20" height="6">
-  <data encoding="base64" compression="zlib">eJw7x8TAcI5M/ACKiVWHT/1DIP4ExWfxmAVSt5CLgaGFC7f680D8GYhZmCH4Ph6zPkPNW8yFUI/NvIucCPwRyU6Yn2BmgeQXQd0HU49uL7p5IAwzD+anz2hq9jBBMK5wQVYLAjBxAOw8X24=</data>
+  <data encoding="base64" compression="zlib">
+   eJw7x8TAcI5M/ACKiVWHT/1DIP4ExWfxmAVSt5CLgaGFC7f680D8GYhZmCH4Ph6zPkPNW8yFUI/NvIucCPwRyU6Yn2BmgeQXQd0HU49uL7p5IAwzD+anz2hq9jBBMK5wQVYLAjBxAOw8X24=
+  </data>
  </layer>
  <layer name="Objects" width="20" height="6">
-  <data encoding="base64" compression="zlib">eJzjkWJg4AViHjT6tSADw1sgBgF0OUI0CIiJMWAAfOqxqXssiapmlQCEzmFiYOAWwm82OmAShsjB5H8KIuRqgOb1MEHYlkwQNXxA/E8SQoMAKzN2s0FhhCwOUscItGsO0Bx5oBt3M2F3Hys/A8NdSYi7mIF63kDN8WdCmA0y6yWOOOBE8j9I72NgeLMLocbfQ6D5AEb/GiI=</data>
+  <data encoding="base64" compression="zlib">
+   eJzjkWJg4AViHjT6tSADw1sgBgF0OUI0CIiJMWAAfOqxqXssiapmlQCEzmFiYOAWwm82OmAShsjB5H8KIuRqgOb1MEHYlkwQNXxA/E8SQoMAKzN2s0FhhCwOUscItGsO0Bx5oBt3M2F3Hys/A8NdSYi7mIF63kDN8WdCmA0y6yWOOOBE8j9I72NgeLMLocbfQ6D5AEb/GiI=
+  </data>
  </layer>
  <layer name="Above" width="20" height="6">
-  <data encoding="base64" compression="zlib">eJz7K8mAE/wByv2VxKRxqbuMpOa1IG5zsZmNSw0++cdiuM36LEbYvTB16OahA5BabHJ/0MwGmYXspk943IDudhC4CKR7mVDVgMzYzYSpH13vXiQ1IPUwOQAzBDi3</data>
+  <data encoding="base64" compression="zlib">
+   eJz7K8mAE/wByv2VxKRxqbuMpOa1IG5zsZmNSw0++cdiuM36LEbYvTB16OahA5BabHJ/0MwGmYXspk943IDudhC4CKR7mVDVgMzYzYSpH13vXiQ1IPUwOQAzBDi3
+  </data>
  </layer>
  <layer name="Top" width="20" height="6">
   <data encoding="base64" compression="zlib">
@@ -208,7 +214,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="Spawn">
+ <objectgroup name="Spawn" visible="0">
   <object name="goblin2" type="spawn" x="96" y="32" width="64" height="32">
    <properties>
     <property name="spawngroup" value="brightport_troll"/>
@@ -220,6 +226,6 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="Keys"/>
- <objectgroup name="Replace"/>
+ <objectgroup name="Keys" visible="0"/>
+ <objectgroup name="Replace" visible="0"/>
 </map>

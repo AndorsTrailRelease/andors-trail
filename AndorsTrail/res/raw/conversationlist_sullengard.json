@@ -4604,29 +4604,152 @@
     },
     {
         "id":"crossglen_valentina_andor_20",
-        "message":"I see my child. I can also see that your confidence and skills have grown tremendously, but tell me, with all this adventuring, have you been to Brightport yet?",
+        "message":"I see, my child. I can also see that your confidence and skills have grown tremendously, but tell me, with all this adventuring, have you been to Brightport yet?",
         "replies":[
             {
                 "text":"[While holding back a smirk, you lie] Yes, why?",
-                "nextPhraseID":"crossglen_valentina_andor_25"
+                "nextPhraseID":"crossglen_valentina_andor_25",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":35,
+                        "negate":true
+                    }
+                ]
             },
             {
                 "text":"No. Should I have?",
-                "nextPhraseID":"crossglen_valentina_andor_30"
+                "nextPhraseID":"crossglen_valentina_andor_30",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":35,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"Yes, I have. It was much closer along the way than Sullengard was.",
+                "nextPhraseID":"crossglen_valentina_andor_25",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":35
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"Stanwickquest",
+                        "value":20,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"Yes, I have. I've even found Stanwick, but right now something has happened to him and he can't tell me about Andor until it's over.",
+                "nextPhraseID":"poisonland_valentina",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"Stanwickquest",
+                        "value":20
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"Stanwickquest",
+                        "value":110,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"I have found Stanwick and spoken to him about Andor. He speculates that he's gone to Nor City, and he's given me his father's insignia ring to help navigate the city.",
+                "nextPhraseID":"crossglen_valentina_andor_55",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"Stanwickquest",
+                        "value":110
+                    }
+                ]
             }
         ]
     },
     {
         "id":"crossglen_valentina_andor_21",
-        "message":"I see my child. Tell me, with your limited adventuring, have you made it to Brightport yet?",
+        "message":"I see, my child. Tell me, with your limited adventuring, have you made it to Brightport yet?",
         "replies":[
             {
                 "text":"No. Should I have?",
-                "nextPhraseID":"crossglen_valentina_andor_30"
+                "nextPhraseID":"crossglen_valentina_andor_30",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":35,
+                        "negate":true
+                    }
+                ]
             },
             {
                 "text":"[While holding back a smirk, you lie] Yes, why?",
-                "nextPhraseID":"crossglen_valentina_andor_25"
+                "nextPhraseID":"crossglen_valentina_andor_25",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":35,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"Yes, I have. It was much closer along the way than Sullengard was.",
+                "nextPhraseID":"crossglen_valentina_andor_25",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":35
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"Stanwickquest",
+                        "value":20,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"Yes, I have. I've even found Stanwick, but right now something has happened to him and he can't tell me about Andor until it's over.",
+                "nextPhraseID":"poisonland_valentina",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"Stanwickquest",
+                        "value":20
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"Stanwickquest",
+                        "value":110,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"I have found Stanwick and spoken to him about Andor. He speculates that he's gone to Nor City, and gave me this insignia of his father's to help me navigate the city.",
+                "nextPhraseID":"crossglen_valentina_andor_55",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"Stanwickquest",
+                        "value":110,
+                        "negate":false
+                    }
+                ]
             }
         ]
     },
@@ -4708,7 +4831,15 @@
         "replies":[
             {
                 "text":"N",
-                "nextPhraseID":"crossglen_valentina_andor_50"
+                "nextPhraseID":"crossglen_valentina_andor_50",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"Stanwickquest",
+                        "value":110,
+                        "negate":true
+                    }
+                ]
             }
         ]
     },

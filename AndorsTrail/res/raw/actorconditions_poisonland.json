@@ -1,0 +1,66 @@
+[
+    {
+        "id":"poisonland_happy",
+        "iconID":"actorconditions_1:64",
+        "name":"Happy",
+        "description":"You feel nice and in a good mood.",
+        "category":"mental",
+        "isPositive":1,
+        "isStacking":1,
+        "abilityEffect":{
+            "increaseAttackChance":25,
+            "increaseAttackDamage":{
+                "min":1,
+                "max":3
+            },
+            "increaseBlockChance":0
+        }
+    },
+    {
+        "id":"poisonland_depressed",
+        "iconID":"actorconditions_1:65",
+        "name":"Depressed",
+        "description":"Your mood is down. You feel terrible.",
+        "category":"mental",
+        "isStacking":1,
+        "abilityEffect":{
+            "increaseAttackChance":-25,
+            "increaseAttackDamage":{
+                "min":-1,
+                "max":-3
+            }
+        }
+    },
+    {
+        "id":"poisonland_amoeba",
+        "iconID":"actorconditions_1:57",
+        "name":"Amoebiasis",
+        "description":"A rot spread by the spores of the poisonous amoeba.",
+        "category":"blood",
+        "isStacking":1,
+        "roundEffect":{
+            "increaseCurrentHP":{
+                "min":-1,
+                "max":-5
+            }
+        },
+        "abilityEffect":{
+            "increaseAttackChance":-15,
+            "increaseBlockChance":-5,
+            "increaseDamageResistance":-3
+        }
+    },
+    {
+        "id":"poisonland_chain",
+        "iconID":"actorconditions_1:34",
+        "name":"Enchained",
+        "description":"The chains weigh heavily.",
+        "category":"physical",
+        "isStacking":1,
+        "abilityEffect":{
+            "increaseAttackChance":-30,
+            "increaseAttackCost":1,
+            "increaseBlockChance":-15
+        }
+    }
+]

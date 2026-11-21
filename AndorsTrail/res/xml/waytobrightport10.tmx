@@ -232,11 +232,16 @@
     <property name="when" value="enter"/>
    </properties>
   </object>
+  <object name="chk_wild_berry" type="script" x="416" y="224" width="64" height="32">
+   <properties>
+    <property name="when" value="enter"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup name="Spawn" visible="0">
   <object name="brightport_squirrel1" type="spawn" x="512" y="96" width="288" height="128">
    <properties>
-    <property name="spawngroup" value="brightport_squirrel"/>
+    <property name="spawngroup" value="brightport_squirrel2"/>
    </properties>
   </object>
   <object name="brightport_squirrel" type="spawn" x="64" y="64" width="416" height="128">
@@ -245,7 +250,7 @@
     <property name="spawngroup" value="brightport_squirrel"/>
    </properties>
   </object>
-  <object name="elderdeer" type="spawn" x="416" y="96" width="160" height="96">
+  <object name="elderdeer" type="spawn" x="448" y="64" width="160" height="96">
    <properties>
     <property name="quantity" value="2"/>
     <property name="spawngroup" value="brightport_elderdeer"/>
@@ -253,12 +258,19 @@
   </object>
   <object name="elderdeer2" type="spawn" x="160" y="128" width="160" height="96">
    <properties>
-    <property name="spawngroup" value="brightport_elderdeer"/>
+    <property name="spawngroup" value="brightport_fawn"/>
    </properties>
   </object>
   <object name="goblin" type="spawn" x="96" y="160" width="32" height="32">
    <properties>
     <property name="spawngroup" value="brightport_goblin2"/>
+   </properties>
+  </object>
+  <object name="wild_berry1" type="spawn" x="608" y="128" width="224" height="128">
+   <properties>
+    <property name="active" value="false"/>
+    <property name="quantity" value="2"/>
+    <property name="spawngroup" value="wild_berry3"/>
    </properties>
   </object>
  </objectgroup>
@@ -273,5 +285,5 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="Replace"/>
+ <objectgroup name="Replace" visible="0"/>
 </map>

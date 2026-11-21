@@ -14,6 +14,58 @@
             {
                 "text":"That smells wonderful. What are you cooking?",
                 "nextPhraseID":"ff_cook_2"
+            },
+            {
+                "text":"Is there any chance you could cook me this egg soup? I have the recipe here.",
+                "nextPhraseID":"poisonland_foaming",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":15
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":45,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":55,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":60,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"What's up with the egg soup?",
+                "nextPhraseID":"poisonland_foaming_selector",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":45
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":55,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":60,
+                        "negate":true
+                    }
+                ]
             }
         ]
     },
@@ -28,6 +80,13 @@
             {
                 "text":"Yuck, that sounds awful. Can you really eat those things? I'm grossed out, goodbye.",
                 "nextPhraseID":"X"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"poisonland_nondisplay",
+                "value":106
             }
         ]
     },

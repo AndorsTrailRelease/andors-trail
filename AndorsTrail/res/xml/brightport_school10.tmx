@@ -209,7 +209,7 @@
    eJy7KMbAcHEQYVwAlxpC4sQActQS456RZi5MLzZxAON9ToI=
   </data>
  </layer>
- <objectgroup name="Mapevents">
+ <objectgroup name="Mapevents" visible="0">
   <object name="entrance" type="mapchange" x="160" y="416" width="32" height="32">
    <properties>
     <property name="map" value="brightport_school1"/>
@@ -229,32 +229,42 @@
   </object>
   <object name="brightport_lecture_regnal" type="script" x="224" y="384" width="96" height="32">
    <properties>
-    <property name="when" value="step"/>
+    <property name="when" value="round"/>
+   </properties>
+  </object>
+  <object name="brightport_lecture_aurelia" type="script" x="224" y="256" width="32" height="32">
+   <properties>
+    <property name="when" value="round"/>
+   </properties>
+  </object>
+  <object name="brightport_lecture_eiden" type="script" x="64" y="320" width="64" height="32">
+   <properties>
+    <property name="when" value="round"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="Spawn">
+ <objectgroup name="Spawn" visible="0">
   <object name="brightportnpc5" type="spawn" x="128" y="96" width="96" height="32">
    <properties>
     <property name="spawngroup" value="brightportnpc5"/>
    </properties>
   </object>
-  <object name="brightportstudent8" type="spawn" x="96" y="256" width="32" height="32">
+  <object name="brightportstudent8" type="spawn" x="256" y="256" width="32" height="32">
    <properties>
     <property name="spawngroup" value="brightportstudent8"/>
    </properties>
   </object>
-  <object name="brightportstudent5" type="spawn" x="32" y="256" width="32" height="32">
+  <object name="brightportstudent5" type="spawn" x="32" y="384" width="32" height="32">
    <properties>
     <property name="spawngroup" value="brightportstudent5"/>
    </properties>
   </object>
-  <object name="brightportstudent1" type="spawn" x="256" y="256" width="32" height="32">
+  <object name="brightportstudent1" type="spawn" x="96" y="256" width="32" height="32">
    <properties>
     <property name="spawngroup" value="brightportstudent1"/>
    </properties>
   </object>
-  <object name="brightportstudent6" type="spawn" x="32" y="320" width="32" height="32">
+  <object name="brightportstudent6" type="spawn" x="64" y="320" width="32" height="32">
    <properties>
     <property name="spawngroup" value="brightportstudent6"/>
    </properties>
@@ -279,7 +289,27 @@
     <property name="spawngroup" value="brightportstudent2"/>
    </properties>
   </object>
+  <object name="brightportstudent14" type="spawn" x="64" y="256" width="32" height="32">
+   <properties>
+    <property name="spawngroup" value="brightportstudent14"/>
+   </properties>
+  </object>
+  <object name="brightportstudent13" type="spawn" x="32" y="256" width="32" height="32">
+   <properties>
+    <property name="spawngroup" value="brightportstudent13"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup name="Keys"/>
- <objectgroup name="Replace"/>
+ <objectgroup name="Keys" visible="0">
+  <object name="Object" type="key" x="288" y="128" width="32" height="32">
+   <properties>
+    <property name="phrase" value="brightport_null"/>
+    <property name="requireId" value="poisonland_nondisplay"/>
+    <property name="requireNegation" value="true"/>
+    <property name="requireType" value="questProgress"/>
+    <property name="requireValue" value="27"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="Replace" visible="0"/>
 </map>

@@ -864,6 +864,29 @@
             {
                 "text":"I wanted to ask you about something.",
                 "nextPhraseID":"gison_talk_3"
+            },
+            {
+                "text":"Is there any chance you could cook me this egg soup? I have the recipe here.",
+                "nextPhraseID":"poisonland_gison",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":15
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":55,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":60,
+                        "negate":true
+                    }
+                ]
             }
         ]
     },
@@ -1424,10 +1447,6 @@
                 ]
             },
             {
-                "text":"OK. Bye.",
-                "nextPhraseID":"X"
-            },
-            {
                 "text":"While exploring the Sullengard forest, I stumbled across this giant mushroom and was wondering if you knew what it was.",
                 "nextPhraseID":"nimael_pm_0",
                 "requires":[
@@ -1465,6 +1484,33 @@
                         "negate":true
                     }
                 ]
+            },
+            {
+                "text":"Is there any chance you could cook me this egg soup? I have the recipe here.",
+                "nextPhraseID":"poisonland_nimael",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":15
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":55,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":60,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"OK. Bye.",
+                "nextPhraseID":"X"
             }
         ]
     },
@@ -1689,6 +1735,29 @@
             {
                 "text":"Cooked meat? Who cooks your meat?",
                 "nextPhraseID":"gael_cook"
+            },
+            {
+                "text":"Is there any chance you could cook me this egg soup? I have the recipe here.",
+                "nextPhraseID":"poisonland_gael",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":15
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":55,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":60,
+                        "negate":true
+                    }
+                ]
             }
         ]
     },

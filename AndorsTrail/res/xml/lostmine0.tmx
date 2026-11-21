@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="12">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="14">
  <properties>
   <property name="outdoors" value="1"/>
  </properties>
@@ -262,9 +262,23 @@
     <property name="spawngroup" value="mazarth1"/>
    </properties>
   </object>
+  <object id="10" name="hardshell_beetle1" type="spawn" x="96" y="320" width="448" height="288">
+   <properties>
+    <property name="active" value="false"/>
+    <property name="quantity" value="4"/>
+    <property name="spawngroup" value="hardshell_beetle"/>
+   </properties>
+  </object>
+  <object id="11" name="hardshell_beetle2" type="spawn" x="96" y="96" width="288" height="96">
+   <properties>
+    <property name="active" value="false"/>
+    <property name="quantity" value="2"/>
+    <property name="spawngroup" value="hardshell_beetle"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="8" name="Keys" visible="0">
-  <object id="10" name="charwood2:15" type="key" x="224" y="224" width="96" height="32">
+  <object id="12" name="charwood2:15" type="key" x="224" y="224" width="96" height="32">
    <properties>
     <property name="phrase" value="sign_lostmine0"/>
     <property name="requireId" value="charwood2"/>
@@ -274,7 +288,7 @@
   </object>
  </objectgroup>
  <objectgroup id="9" name="Replace" visible="0">
-  <object id="11" name="charwood2:15" type="replace" x="256" y="192" width="32" height="64">
+  <object id="13" name="charwood2:15" type="replace" x="256" y="192" width="32" height="64">
    <properties>
     <property name="above" value="Above_opened"/>
    </properties>

@@ -27,15 +27,31 @@
     },
     {
         "id":"dbg_prj",
-        "message":"***  sutdoverlakeext  ***",
+        "message":"***  poisonland  ***",
         "replies":[
             {
-                "text":"Oluag",
-                "nextPhraseID":"dbg_teleport_prj_sutdover_lake_ext_oluag"
+                "text":"Heiter",
+                "nextPhraseID":"dbg_teleport_prj_heiter"
             },
             {
-                "text":"Fisherman family",
-                "nextPhraseID":"dbg_teleport_prj_sutdover_lake_ext_fishermen"
+                "text":"Charwood cave entry 1",
+                "nextPhraseID":"dbg_teleport_prj_charwood_cave_1"
+            },
+            {
+                "text":"Charwood cave entry 2",
+                "nextPhraseID":"dbg_teleport_prj_charwood_cave_2"
+            },
+            {
+                "text":"Charwood settlement",
+                "nextPhraseID":"dbg_teleport_prj_charwood_settlement"
+            },
+            {
+                "text":"Maevalia",
+                "nextPhraseID":"dbg_teleport_prj_charwood_maevalia"
+            },
+            {
+                "text":"Poisonland cave",
+                "nextPhraseID":"dbg_teleport_prj_charwood_poisonland_cave"
             },
             {
                 "text":"Back",
@@ -1993,6 +2009,66 @@
             {
                 "text":"Back",
                 "nextPhraseID":"dbg"
+            }
+        ]
+    },
+    {
+        "id":"dbg_teleport_prj_heiter",
+        "rewards":[
+            {
+                "rewardType":"mapchange",
+                "rewardID":"north",
+                "mapName":"waterway_forest2"
+            }
+        ]
+    },
+    {
+        "id":"dbg_teleport_prj_charwood_cave_1",
+        "rewards":[
+            {
+                "rewardType":"mapchange",
+                "rewardID":"south",
+                "mapName":"charwood_east4"
+            }
+        ]
+    },
+    {
+        "id":"dbg_teleport_prj_charwood_cave_2",
+        "rewards":[
+            {
+                "rewardType":"mapchange",
+                "rewardID":"cave",
+                "mapName":"charwood_east1"
+            }
+        ]
+    },
+    {
+        "id":"dbg_teleport_prj_charwood_settlement",
+        "rewards":[
+            {
+                "rewardType":"mapchange",
+                "rewardID":"minerhouse4",
+                "mapName":"waytolostmine3"
+            }
+        ]
+    },
+    {
+        "id":"dbg_teleport_prj_charwood_maevalia",
+        "rewards":[
+            {
+                "rewardType":"mapchange",
+                "rewardID":"tradehouse0",
+                "mapName":"waytominingtown2"
+            }
+        ]
+    },
+    {
+        "id":"dbg_teleport_prj_charwood_poisonland_cave",
+        "rewards":[
+            {
+                "rewardType":"mapchange",
+                "rewardID":"south",
+                "mapName":"poisonland4"
             }
         ]
     }

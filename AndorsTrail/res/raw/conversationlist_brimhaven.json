@@ -8266,12 +8266,27 @@
         "switchToNPC":"brv_playing_child1",
         "replies":[
             {
-                "text":"I am sorry.",
-                "nextPhraseID":"X"
+                "text":"Why did you move to play here?",
+                "nextPhraseID":"poisonland_bagame_selector_exit",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":2
+                    }
+                ]
             },
             {
                 "text":"What are you playing?",
-                "nextPhraseID":"brv_playing_children_10"
+                "nextPhraseID":"brv_playing_children_10_selector",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":2,
+                        "negate":true
+                    }
+                ]
             }
         ]
     },

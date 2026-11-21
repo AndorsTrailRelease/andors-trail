@@ -48,6 +48,35 @@
                         "value":4850
                     }
                 ]
+            },
+            {
+                "text":"Is there any chance you could cook me this egg soup? I have the recipe here.",
+                "nextPhraseID":"poisonland_bela",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":15
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":31,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":55,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":60,
+                        "negate":true
+                    }
+                ]
             }
         ]
     },

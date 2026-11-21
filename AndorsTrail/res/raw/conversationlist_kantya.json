@@ -144,7 +144,7 @@
     },
     {
         "id":"kantya12",
-        "message":"I wasn't there myself, but I heard from some of the miners. As they broke through, there was a rush of air and a clattering noise, almost like claws, coming from the dark hole beneath.",
+        "message":"I wasn't there myself, but I heard from some of the miners. As they broke through, there was a rush of hot air and a clattering noise, almost like claws, coming from the dark hole beneath.",
         "replies":[
             {
                 "text":"N",
@@ -248,7 +248,26 @@
         "replies":[
             {
                 "text":"Is there anything I can do?",
-                "nextPhraseID":"kantya23"
+                "nextPhraseID":"kantya23",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"charwood2",
+                        "value":50,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"It's regrettable, but we have to look towards the future.",
+                "nextPhraseID":"X",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"charwood2",
+                        "value":50
+                    }
+                ]
             }
         ]
     },

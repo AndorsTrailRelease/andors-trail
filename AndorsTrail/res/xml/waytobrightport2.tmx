@@ -182,25 +182,41 @@
   <image source="../drawable/map_window_2.png" width="512" height="256"/>
  </tileset>
  <layer name="Ground" width="24" height="8">
-  <data encoding="base64" compression="zlib">eJw7x8TAcA6KzwPxZyC+yImJPwLF7wPxAzR8DgvGJf8Qh9nIdnxCw+h2PkSTJ8btyJiFGRWj2wkyA1ke2XxCZhNjJ7rcOSR/kWs+PnwOyV+0Mh8Z80hhV0du+KGnK2S5PUwQDJOH8UkxHwDEMZtV</data>
+  <data encoding="base64" compression="zlib">
+   eJw7x8TAcA6KzwPxZyC+yImJPwLF7wPxAzR8DgvGJf8Qh9nIdnxCw+h2PkSTJ8btyJiFGRWj2wkyA1ke2XxCZhNjJ7rcOSR/kWs+PnwOyV+0Mh8Z80hhV0du+KGnK2S5PUwQDJOH8UkxHwDEMZtV
+  </data>
  </layer>
  <layer name="Objects" width="24" height="8">
-  <data encoding="base64" compression="zlib">eJxtUksKwjAQjQn101ZpIhTqEQRdduElPJhHcOkxxKO4UBdaFBEFkSLiDMmQifbBkEySeW8+SUdC9MEQc2PXd2HXDPwr7JUSAVIX89T2nvyL9nsC7vlZpEK/Bxqt4b/GQgpRSu+/tGgE8uC7g8u5C3wP2FdgtQ7zRQ3iXMqQp/zxf2ul3O+5rXOV2bOb9r2qWC+4JkekQl7qI2Lr4gdgn8LrdoyPx7dYY2ZCHlorNoO2e7OB2tbYo9zPi2vUDXMjHF1uJ9b/jOVDMdj/2Fgtzp0Yqz0GOzOd2PULkbh6UIPOSGfPeooz2snmXGdsfpgD/gH8M/QHOO8EeKfGzvELj1k3tA==</data>
+  <data encoding="base64" compression="zlib">
+   eJxtUksKwjAQjQ3V2lZpIhTqEQRdduElPJhHcOkxxKO40ApaFBEFkS7EGZIhE+2DIZkk8958ko6FGIAhFtqsFaxHsAzsVgghpfCQ2piXMvfkX5XbE3DPz0Lp+33Q6Iz+NZaBEGXg/LcSrUAefFcVxo+A7wn7GqxRfr6oQZyrwOcpf/zfWin3R27qXGfm7G41sFc16wXX5Ailz0t9ROxs/BDsUzjdnnbx+Days+E8tNZsBl37Zgu1bbBHuZsX12ha5kY42dzOrP8Zy4disP+xNlqcO9FGewJ2YTqx7RcisfWgBp2RzoH1FGe0D9pznbP5YQ74B/DP0B/gvFPgnWkzxy/83DiK
+  </data>
  </layer>
  <layer name="Above" width="24" height="8">
-  <data encoding="base64" compression="zlib">eJz7K8nA8AeI/wIxCDwWg2IhBoYnQgwUA5i5l5HM/wTENyURapDtJwaAzMCm97MYqhw6uInkV3x2gsyAySOrQRYn1s3Y1IP8j00vyPx7OMKF1DCCAeTw38uE25x9TJj23MSiDl3sEprf9jLhdstnAnGDz/3o8bwbi1+w+Q09/NFpAJj1UIQ=</data>
+  <data encoding="base64" compression="zlib">
+   eJz7K8nA8AeI/wIxCDwWg/CpBWDmXkYy/xMQ30SyA9l+YgDIDGx6P4uhyqGDm0h+xWcnLAz+oqlBFifWzdjUg/yPTS/I/Hs4woXUMIIB5PDfy4TbnH1MmPbcxKIOXewSmt/2MuF2y2cCcYPP/ejxvBuLX7D5DT380WkAW3tOtQ==
+  </data>
  </layer>
  <layer name="Top" width="24" height="8">
-  <data encoding="base64" compression="zlib">eJxjYMAO/krikBgFFIM/o2E7aAAA13YCLA==</data>
+  <data encoding="base64" compression="zlib">
+   eJxjYMAEj8UYGP5KYpEYBVQBf0bDdtAAAK8ZAyU=
+  </data>
  </layer>
  <layer name="Walkable" width="24" height="8" visible="0">
-  <data encoding="base64" compression="zlib">eJy7KMbAcBELhgFsctTCyICW5tPa7aTaQ6pafACf2cTag66HFECuX2Hi2MwjxXxS0hc2MwEIWoAj</data>
+  <data encoding="base64" compression="zlib">
+   eJy7KMbAcBEHBgFcctTAyICW5tPa7aTaQ6pafACf2cTag66HFECuX2Hi2MwjxXxS0hc2MwGnuoEK
+  </data>
  </layer>
  <objectgroup name="Mapevents" visible="0">
   <object name="east" type="mapchange" x="736" y="128" width="32" height="96">
    <properties>
     <property name="map" value="waytobrightport10"/>
     <property name="place" value="west"/>
+   </properties>
+  </object>
+  <object name="north" type="mapchange" x="224" y="0" width="32" height="32">
+   <properties>
+    <property name="map" value="charwood_east0"/>
+    <property name="place" value="south"/>
    </properties>
   </object>
  </objectgroup>
@@ -216,17 +232,14 @@
     <property name="spawngroup" value="brightport_goblin"/>
    </properties>
   </object>
- </objectgroup>
- <objectgroup name="Keys">
-  <object name="landslide" type="key" x="192" y="0" width="64" height="32">
+  <object name="mazarth" type="spawn" x="224" y="64" width="384" height="160">
    <properties>
-    <property name="phrase" value="brightport_landslide"/>
-    <property name="requireId" value="andor"/>
-    <property name="requireNegation" value="true"/>
-    <property name="requireType" value="questProgress"/>
-    <property name="requireValue" value="1"/>
+    <property name="active" value="false"/>
+    <property name="quantity" value="3"/>
+    <property name="spawngroup" value="poisonland_frenziedmazarth"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="Replace"/>
+ <objectgroup name="Keys" visible="0"/>
+ <objectgroup name="Replace" visible="0"/>
 </map>

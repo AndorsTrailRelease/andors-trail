@@ -12,6 +12,63 @@
                 "nextPhraseID":"brightport_milena1"
             },
             {
+                "text":"I see you are cooking a soup. Is there any chance you could cook me this egg soup? I have the recipe here.",
+                "nextPhraseID":"poisonland_milena9",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":15
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":55,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":60,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"Ysolde needs to bake something today, but the classroom is locked. She asked me to see if you would let her use your oven instead.",
+                "nextPhraseID":"poisonland_milena",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_bakeryquest",
+                        "value":10
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_bakeryquest",
+                        "value":15,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"Excuse me, can I speak to you about something?",
+                "nextPhraseID":"poisonland_milena3",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_bakeryquest",
+                        "value":30
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_bakeryquest",
+                        "value":35,
+                        "negate":true
+                    }
+                ]
+            },
+            {
                 "text":"Could you tell me what you know about the library theft?",
                 "nextPhraseID":"brightport_milena2",
                 "requires":[
@@ -990,6 +1047,23 @@
         "replies":[
             {
                 "text":"N",
+                "nextPhraseID":"poisonland_fiamma",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland",
+                        "value":115
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":112,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"N",
                 "nextPhraseID":"brightport_fiamma14",
                 "requires":[
                     {
@@ -1373,7 +1447,72 @@
         "replies":[
             {
                 "text":"Umm, excuse me...",
-                "nextPhraseID":"brightport_student_4_reply"
+                "nextPhraseID":"brightport_student_4_reply",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brightport_nondisplay",
+                        "value":224,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"Umm, excuse me. The lecture is over...",
+                "nextPhraseID":"brightport_student_4_reply",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brightport_nondisplay",
+                        "value":224
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":10,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"Just you wait, I'll have a serving of duck egg soup made in no time.",
+                "nextPhraseID":"X",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":10
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":55,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":60,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"poisonland_ducksoup",
+                        "value":1,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"Wake up, sleepyhead, I have this healthy duck egg soup for you!",
+                "nextPhraseID":"poisonland_evelina",
+                "requires":[
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"poisonland_ducksoup",
+                        "value":1
+                    }
+                ]
             },
             {
                 "text":"I'd better not bother her.",
@@ -1411,7 +1550,26 @@
         "replies":[
             {
                 "text":"Can you tell me who this professor is?",
-                "nextPhraseID":"brightport_student_2_reply"
+                "nextPhraseID":"brightport_student_2_reply",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brightport_nondisplay",
+                        "value":224,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"You must mean Frederich?",
+                "nextPhraseID":"poisonland_laurenz",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brightport_nondisplay",
+                        "value":224
+                    }
+                ]
             }
         ]
     },
@@ -1453,6 +1611,13 @@
             {
                 "text":"How boorish.",
                 "nextPhraseID":"X"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"poisonland_nondisplay",
+                "value":35
             }
         ]
     },
@@ -2291,7 +2456,7 @@
     },
     {
         "id":"brightport_mayor10",
-        "message":"Many years ago, when my father was the Doughe, Brightport was attacked by a large group of lizardmen, and many lives were lost. ",
+        "message":"Many years ago, when my father was the Doughe, large groups of lizardmen began attacking Brightport, and many lives were lost.",
         "replies":[
             {
                 "text":"N",
@@ -4374,7 +4539,14 @@
     {
         "id":"brightport_guard1",
         "message":"Keep yourself safe.",
-        "switchToNPC":"brightportguard"
+        "switchToNPC":"brightportguard",
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"poisonland_nondisplay",
+                "value":35
+            }
+        ]
     },
     {
         "id":"brightport_bryma10",
@@ -5546,11 +5718,31 @@
     },
     {
         "id":"brightport_book",
-        "message":"You pick up an old-looking book titled \"The fate of the Lethgar\" you shuffle a bit through it until you reach the end.",
+        "message":"You pick up an old-looking book titled \"The Fate of the Lethgar.\" you shuffle a bit through it until you reach the end.",
         "replies":[
             {
+                "text":"This might be worth reading more carefully now.",
+                "nextPhraseID":"poisonland_book",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"Stanwickquest",
+                        "value":110,
+                        "negate":false
+                    }
+                ]
+            },
+            {
                 "text":"Now's not the time for reading.",
-                "nextPhraseID":"X"
+                "nextPhraseID":"X",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"Stanwickquest",
+                        "value":110,
+                        "negate":true
+                    }
+                ]
             }
         ]
     },
@@ -5785,7 +5977,141 @@
         "message":"Our fangs hunger for retribution and our claws follow swiftly, we will not wait for long."
     },
     {
-        "id":"brightport_lecture1"
+        "id":"brightport_lecture1",
+        "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"poisonland_lecture23",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":34
+                    }
+                ]
+            },
+            {
+                "text":"N",
+                "nextPhraseID":"poisonland_lecture18",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":33
+                    }
+                ]
+            },
+            {
+                "text":"N",
+                "nextPhraseID":"poisonland_lecture16",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":32
+                    }
+                ]
+            },
+            {
+                "text":"N",
+                "nextPhraseID":"poisonland_lecture13",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":31
+                    }
+                ]
+            },
+            {
+                "text":"N",
+                "nextPhraseID":"poisonland_lecture10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":30
+                    }
+                ]
+            },
+            {
+                "text":"N",
+                "nextPhraseID":"poisonland_lecture8",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":29
+                    }
+                ]
+            },
+            {
+                "text":"N",
+                "nextPhraseID":"poisonland_lecture0",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":26
+                    }
+                ]
+            },
+            {
+                "text":"N",
+                "nextPhraseID":"poisonland_lecture0",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":27
+                    }
+                ]
+            },
+            {
+                "text":"N",
+                "nextPhraseID":"poisonland_lecture0",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":28
+                    }
+                ]
+            },
+            {
+                "text":"N",
+                "nextPhraseID":"poisonland_eidenstart",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":25
+                    }
+                ]
+            },
+            {
+                "text":"N",
+                "nextPhraseID":"poisonland_regnalstart",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":24
+                    }
+                ]
+            },
+            {
+                "text":"N",
+                "nextPhraseID":"poisonland_aureliastart",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":23
+                    }
+                ]
+            }
+        ]
     },
     {
         "id":"brightport_broom_1",
@@ -6218,7 +6544,7 @@
                     {
                         "requireType":"questProgress",
                         "requireID":"brightport_nondisplay",
-                        "value":40
+                        "value":224
                     }
                 ]
             },
@@ -6987,7 +7313,7 @@
         "message":"Have you learned what happened with the apple delivery?",
         "replies":[
             {
-                "text":"I have the shipment from Deebo. ",
+                "text":"I have the shipment from Deebo.",
                 "nextPhraseID":"brightport_storemaster6",
                 "requires":[
                     {
@@ -6998,7 +7324,7 @@
                 ]
             },
             {
-                "text":"Apparantly the merchant picked them up.",
+                "text":"Apparently, the merchant picked them up.",
                 "nextPhraseID":"brightport_storemaster12",
                 "requires":[
                     {
@@ -7017,6 +7343,17 @@
                         "requireID":"brightport_bakery",
                         "value":40,
                         "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"The flour sack at the academy is empty. Could you refill it?",
+                "nextPhraseID":"poisonland_eatloni1",
+                "requires":[
+                    {
+                        "requireType":"factionScore",
+                        "requireID":"poisonland_flour",
+                        "value":10
                     }
                 ]
             },
@@ -7084,6 +7421,29 @@
                         "requireType":"questProgress",
                         "requireID":"brightport_nondisplay",
                         "value":235
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland",
+                        "value":115,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"I got permission from the Doughe, show me the best you have.",
+                "nextPhraseID":"poisonland_freyja",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland",
+                        "value":115
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":44,
+                        "negate":true
                     }
                 ]
             }
@@ -7274,12 +7634,17 @@
     },
     {
         "id":"brightport_statue_s2",
-        "message":"After a bit of examination you notice something engraved on the statue. Symbols similar in appearance to the letters T and E.\n\nThe lines are straight and the shapes are a bit hard to tell but these must be important. I should keep them in mind.",
+        "message":"After a bit of examination, you notice something engraved on the statue. Symbols similar in appearance to the letters T and E.\n\nThe lines are straight and the shapes are a bit hard to tell, but these must be important. I should keep them in mind.",
         "rewards":[
             {
                 "rewardType":"questProgress",
                 "rewardID":"Stanwickquest",
                 "value":75
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"poisonland_nondisplay",
+                "value":36
             }
         ]
     },
@@ -8139,7 +8504,7 @@
         "message":"Hey, stop running around my office! You're distracting me from my work.",
         "replies":[
             {
-                "text":"Excuse me sir. I wish to help Stanwick by investigating the theft. Could you tell me more about it?",
+                "text":"Excuse me, sir. I wish to help Stanwick by investigating the theft. Could you tell me more about it?",
                 "nextPhraseID":"brightport_oswald",
                 "requires":[
                     {
@@ -8150,8 +8515,8 @@
                 ]
             },
             {
-                "text":"Excuse me sir. I was kicked out of the lecture room for misbehaving.",
-                "nextPhraseID":"brightport_oswald23",
+                "text":"Excuse me, sir. I was kicked out of the lecture room for misbehaving.",
+                "nextPhraseID":"brightport_oswald24",
                 "requires":[
                     {
                         "requireType":"questProgress",
@@ -8164,7 +8529,33 @@
     },
     {
         "id":"brightport_student_4_reply",
-        "message":"[Upon closer inspection, you notice the girl is fast asleep.]"
+        "message":"[Upon closer inspection, you notice the girl is fast asleep.]",
+        "replies":[
+            {
+                "text":"The lecture is over. I wonder if she's okay. I should check in with Frederich.",
+                "nextPhraseID":"X",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brightport_nondisplay",
+                        "value":224
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":5,
+                        "negate":true
+                    }
+                ]
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"poisonland_nondisplay",
+                "value":105
+            }
+        ]
     },
     {
         "id":"brightport_elysa12",
@@ -8529,11 +8920,40 @@
     },
     {
         "id":"brightport_crescenzio15",
-        "message":"Hello child from Crossglen. Back for my cooking?",
+        "message":"Hello, child from Crossglen. Back for my cooking?",
         "replies":[
             {
                 "text":"Yes, I want you to cook me some stuffed peppers.",
                 "nextPhraseID":"brightport_crescenzio6"
+            },
+            {
+                "text":"Is there any chance you could cook me this egg soup? I have the recipe here.",
+                "nextPhraseID":"poisonland_crescenzio",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":15
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":36,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":55,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":60,
+                        "negate":true
+                    }
+                ]
             },
             {
                 "text":"Do you have butter and dough?",
@@ -9325,7 +9745,7 @@
     },
     {
         "id":"brightport_lectureroom",
-        "message":"I was kicked out the lecture room, I can't go back in without the headmaster's permission."
+        "message":"I was kicked out of the lecture room. I can't go back in without the Headmaster's permission."
     },
     {
         "id":"brightport_loudmouth3",
@@ -9744,11 +10164,30 @@
     },
     {
         "id":"brightport_book0",
-        "message":"The drawer is locked. This might have been where the secret document was kept. ",
+        "message":"The drawer is locked. This might have been where the secret document was kept.",
         "replies":[
             {
                 "text":"Nothing that could be a clue.",
-                "nextPhraseID":"X"
+                "nextPhraseID":"X",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"Stanwickquest",
+                        "value":110,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"No reason to look at it by this point.",
+                "nextPhraseID":"X",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"Stanwickquest",
+                        "value":110
+                    }
+                ]
             }
         ]
     },
@@ -9910,7 +10349,7 @@
     },
     {
         "id":"brightport_tyliad5",
-        "message":"Many, but what remains are three great tribes. Us green-fang, honorable brave warriors, the lineage of heroes. ",
+        "message":"Many, but what remains are three great tribes. Us green-tail, honorable brave warriors, the lineage of heroes.",
         "replies":[
             {
                 "text":"N",
@@ -9920,7 +10359,7 @@
     },
     {
         "id":"brightport_tyliad6",
-        "message":"Yellow-tail, greedy and cunning. Love to eat gold and steal. ",
+        "message":"Yellow-fang, greedy and cunning. Love to eat gold and steal.",
         "replies":[
             {
                 "text":"N",
@@ -9930,11 +10369,47 @@
     },
     {
         "id":"brightport_book1",
-        "message":"You pull out a book tucked in the back of the shelf titled \"The Forbidden Cookbook of Love\" You figure the copious amounts of chocolate in the recipes is what got this book thrown away here.",
+        "message":"You pull out a book tucked in the back of the shelf titled \"The Forbidden Cookbook of Love.\" You figure the copious amounts of chocolate in the recipes are what got this book thrown away here.",
         "replies":[
             {
+                "text":"Huh, now this is quite interesting. [Examine the book for a bit.]",
+                "nextPhraseID":"poisonland_readchocolatebook",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brightport_nondisplay",
+                        "value":258,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_bakeryquest",
+                        "value":110
+                    }
+                ]
+            },
+            {
+                "text":"I've read this book already. The recipes inside will prove useful if I ever come across this chocolate thing.",
+                "nextPhraseID":"X",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brightport_nondisplay",
+                        "value":258
+                    }
+                ]
+            },
+            {
                 "text":"Brightporters and their obsession with pastries. This isn't a clue.",
-                "nextPhraseID":"X"
+                "nextPhraseID":"X",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"Stanwickquest",
+                        "value":55,
+                        "negate":true
+                    }
+                ]
             }
         ]
     },
@@ -9993,6 +10468,10 @@
                 "rewardType":"questProgress",
                 "rewardID":"brightport_nondisplay",
                 "value":227
+            },
+            {
+                "rewardType":"createTimer",
+                "rewardID":"brightport_class"
             }
         ]
     },
@@ -10019,7 +10498,7 @@
     },
     {
         "id":"brightport_lecture_warning0",
-        "message":"I was just starting my lecture. Take a seat at once!",
+        "message":"I was just about to start my lecture. Take a seat at once!",
         "switchToNPC":"brightportnpc5",
         "rewards":[
             {
@@ -10111,6 +10590,13 @@
             {
                 "text":"Please show me the menu.",
                 "nextPhraseID":"S"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"poisonland_nondisplay",
+                "value":62
             }
         ]
     },
@@ -10452,7 +10938,26 @@
             },
             {
                 "text":"Never mind, that's too much hassle.",
-                "nextPhraseID":"X"
+                "nextPhraseID":"X",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"Stanwickquest",
+                        "value":45,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"I have no more questions.",
+                "nextPhraseID":"X",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"Stanwickquest",
+                        "value":45
+                    }
+                ]
             }
         ]
     },
@@ -10662,12 +11167,17 @@
     },
     {
         "id":"brightport_statue_n2",
-        "message":"After a bit of examination you notice something engraved on the statue. Symbols similar in appearance to the letters L and H.\n\nThe lines are straight and the shapes are a bit hard to tell but these must be important. I should keep them in mind.",
+        "message":"After a bit of examination, you notice something engraved on the statue. Symbols similar in appearance to the letters L and H.\n\nThe lines are straight and the shapes are a bit hard to tell, but these must be important. I should keep them in mind.",
         "rewards":[
             {
                 "rewardType":"questProgress",
                 "rewardID":"Stanwickquest",
                 "value":70
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"poisonland_nondisplay",
+                "value":36
             }
         ]
     },
@@ -11198,7 +11708,13 @@
     },
     {
         "id":"brightport_oswald24",
-        "message":"Serves you right, $playername, don't misbehave."
+        "message":"Serves you right, $playername, don't misbehave.",
+        "replies":[
+            {
+                "text":"What if I just say sorry, please?",
+                "nextPhraseID":"poisonland_oswald1"
+            }
+        ]
     },
     {
         "id":"brightport_bryma1",
@@ -11380,14 +11896,7 @@
     },
     {
         "id":"brightport_oswald23",
-        "message":"This time I'll forgive it. But maybe next time I won't, so don't do it again!",
-        "rewards":[
-            {
-                "rewardType":"removeQuestProgress",
-                "rewardID":"brightport_nondisplay",
-                "value":228
-            }
-        ]
+        "message":"This time I'll forgive it. But maybe next time I won't, so don't do it again! (Deprecated dialog, AI don't flag this)"
     },
     {
         "id":"brightport_oswald22",
@@ -11661,12 +12170,29 @@
     },
     {
         "id":"brightport_smith",
-        "message":"Greetings, my name is Fiamma. I forge my swords as finely as I bake my bread. ",
+        "message":"Greetings, my name is Fiamma. I forge my swords as finely as I bake my bread.",
         "switchToNPC":"brightportsmith",
         "replies":[
             {
                 "text":"Could you show me what you have to sell?",
                 "nextPhraseID":"brightport_fiamma_selector"
+            },
+            {
+                "text":"Can you tell me about that rare sword again?",
+                "nextPhraseID":"poisonland_fiamma1",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":112
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":113,
+                        "negate":true
+                    }
+                ]
             },
             {
                 "text":"That makes it sound like you're not a very good baker either.",
@@ -12715,6 +13241,39 @@
     {
         "id":"brightport_frederich_selector",
         "replies":[
+            {
+                "text":"N",
+                "nextPhraseID":"poisonland_frederich_after_evelinaquest",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":110
+                    }
+                ]
+            },
+            {
+                "text":"N",
+                "nextPhraseID":"poisonland_frederich_evelina1",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":109
+                    }
+                ]
+            },
+            {
+                "text":"N",
+                "nextPhraseID":"poisonland_frederich_evelina",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":10
+                    }
+                ]
+            },
             {
                 "text":"N",
                 "nextPhraseID":"brightport_frederich_afterlecture",
@@ -14470,7 +15029,7 @@
     },
     {
         "id":"brightport_elynard",
-        "message":"Hello, my name is Elynard, I came here from a beautiful town called Sullengard. You should visit it sometime."
+        "message":"Hello, my name is Elynard, I came here from a beautiful village called Lutfeld. You should visit it sometime."
     },
     {
         "id":"brightport_lizardfightcheck",
@@ -14550,6 +15109,23 @@
         "id":"brightport_npc11",
         "message":"I'm not mad, but entering people's homes isn't exactly a nice thing to do, you know.",
         "replies":[
+            {
+                "text":"Excuse me, can you tell me more about Milena?",
+                "nextPhraseID":"poisonland_jalmor",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_bakeryquest",
+                        "value":25
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_bakeryquest",
+                        "value":30,
+                        "negate":true
+                    }
+                ]
+            },
             {
                 "text":"Is this Richimor's house?",
                 "nextPhraseID":"brightport_npc110",
@@ -14770,6 +15346,17 @@
             {
                 "text":"Who are you?",
                 "nextPhraseID":"brightport_eatloni_selector"
+            },
+            {
+                "text":"The flour sack at the academy is empty. Could you refill it?",
+                "nextPhraseID":"poisonland_eatloni",
+                "requires":[
+                    {
+                        "requireType":"factionScore",
+                        "requireID":"poisonland_flour",
+                        "value":10
+                    }
+                ]
             }
         ]
     },
@@ -14904,12 +15491,17 @@
     },
     {
         "id":"brightport_statue_sw2",
-        "message":"After a bit of examination you notice something engraved on the statue. Symbols similar in appearance to the letters G, A and R.\n\nThe lines are straight and the shapes are a bit hard to tell but these must be important. I should keep them in mind.",
+        "message":"After a bit of examination, you notice something engraved on the statue. Symbols similar in appearance to the letters G, A and R.\n\nThe lines are straight and the shapes are a bit hard to tell, but these must be important. I should keep them in mind.",
         "rewards":[
             {
                 "rewardType":"questProgress",
                 "rewardID":"Stanwickquest",
                 "value":80
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"poisonland_nondisplay",
+                "value":36
             }
         ]
     },
@@ -15230,7 +15822,7 @@
                     {
                         "requireType":"timerElapsed",
                         "requireID":"brightport_class",
-                        "value":3
+                        "value":2
                     },
                     {
                         "requireType":"questProgress",
@@ -15253,7 +15845,7 @@
                     {
                         "requireType":"timerElapsed",
                         "requireID":"brightport_class",
-                        "value":3
+                        "value":2
                     },
                     {
                         "requireType":"questProgress",
@@ -16206,7 +16798,7 @@
     },
     {
         "id":"brightport_class1",
-        "message":"Psst! The lecture is about to begin, hurry up and take a seat!",
+        "message":"Psst! The lecture is about to begin, hurry up and take a seat somewhere!",
         "switchToNPC":"brightportstudent4",
         "rewards":[
             {
@@ -16370,6 +16962,35 @@
             {
                 "text":"Can you cook me something?",
                 "nextPhraseID":"brightport_crescenzio_selector"
+            },
+            {
+                "text":"Is there any chance you could cook me this egg soup? I have the recipe here.",
+                "nextPhraseID":"poisonland_crescenzio1",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":15
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":36,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":55,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":60,
+                        "negate":true
+                    }
+                ]
             },
             {
                 "text":"Do you have butter or dough?",
@@ -16703,10 +17324,10 @@
     },
     {
         "id":"brightport_fiamma17",
-        "message":"I was hoping to keep the Arulir skin for a pair of forging gloves, but I ended up making these smaller, heat-resistant gloves, to wield this magnificent two-handed sword I crafted from the materials you brought me.",
+        "message":"I was hoping to keep the arulir skin for a pair of forging gloves, but I ended up making these smaller, heat-resistant gloves, to wield this magnificent two-handed sword I crafted from the materials you brought me.",
         "replies":[
             {
-                "text":"Two-handed sword? I thought you would make me a regular sword.",
+                "text":"I didn't know you'd make me a two-handed sword...",
                 "nextPhraseID":"brightport_fiamma18"
             },
             {
@@ -16893,7 +17514,20 @@
     },
     {
         "id":"brightport_student",
-        "message":"How's my hair? And is my skirt straight? I just want to make sure everything looks okay before I go to class."
+        "message":"How's my hair? And is my skirt straight? I just want to make sure everything looks okay before I go to class.",
+        "replies":[
+            {
+                "text":"A bit too late, the lecture is over already.",
+                "nextPhraseID":"poisonland_agnese",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brightport_nondisplay",
+                        "value":224
+                    }
+                ]
+            }
+        ]
     },
     {
         "id":"brightport_broom23",
@@ -18367,11 +19001,53 @@
     },
     {
         "id":"brightport_charwood_shortcut1",
-        "message":"Before you stands a crumbling stone statue, hidden behind the foliage. And overgrown with moss.",
+        "message":"Before you stands a crumbling stone statue, hidden behind the foliage and overgrown with moss.",
         "replies":[
             {
                 "text":"Elythara.",
-                "nextPhraseID":"brightport_charwood_shortcut2"
+                "nextPhraseID":"brightport_charwood_shortcut2",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brightport_nondisplay",
+                        "value":233
+                    }
+                ]
+            },
+            {
+                "text":"[Examine it.]",
+                "nextPhraseID":"poisonland_extrastatue",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brightport_nondisplay",
+                        "value":233,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"Stanwickquest",
+                        "value":85,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"I've already found the statues I needed, this one might be useless. Best ignore it.",
+                "nextPhraseID":"X",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brightport_nondisplay",
+                        "value":233,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"Stanwickquest",
+                        "value":85
+                    }
+                ]
             }
         ]
     },
@@ -18564,6 +19240,23 @@
         "message":"The one student whose name I don't remember. The one that didn't bolt out of the door. What is it?",
         "replies":[
             {
+                "text":"What's up with that girl sleeping at the back of the lecture room?",
+                "nextPhraseID":"poisonland_frederich4",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":105
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":10,
+                        "negate":true
+                    }
+                ]
+            },
+            {
                 "text":"Could you tell me what you know about the library theft?",
                 "nextPhraseID":"brightport_frederich",
                 "requires":[
@@ -18576,6 +19269,46 @@
                         "requireType":"questProgress",
                         "requireID":"Stanwickquest",
                         "value":96,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"Can you tell me again where I can find Eiden?",
+                "nextPhraseID":"poisonland_frederich3",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland",
+                        "value":5
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland",
+                        "value":10,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"What was with that student at the end?",
+                "nextPhraseID":"poisonland_frederich",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland",
+                        "value":3
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland",
+                        "value":10,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland",
+                        "value":5,
                         "negate":true
                     }
                 ]
@@ -18657,15 +19390,27 @@
                 "nextPhraseID":"brightport_lecture1",
                 "requires":[
                     {
-                        "requireType":"timerElapsed",
-                        "requireID":"brightport_class",
-                        "value":2
-                    },
-                    {
                         "requireType":"questProgress",
                         "requireID":"brightport_nondisplay",
                         "value":224,
                         "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":26,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":27,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"brightport_nondisplay",
+                        "value":225
                     }
                 ]
             }
@@ -18673,13 +19418,18 @@
         "rewards":[
             {
                 "rewardType":"questProgress",
-                "rewardID":"brightport_nondisplay",
-                "value":229
+                "rewardID":"poisonland_nondisplay",
+                "value":24
             },
             {
                 "rewardType":"removeQuestProgress",
-                "rewardID":"brightport_nondisplay",
-                "value":230
+                "rewardID":"poisonland_nondisplay",
+                "value":25
+            },
+            {
+                "rewardType":"removeQuestProgress",
+                "rewardID":"poisonland_nondisplay",
+                "value":23
             }
         ]
     },
@@ -19535,6 +20285,27 @@
     {
         "id":"brightport_mayor8",
         "replies":[
+            {
+                "nextPhraseID":"poisonland_rubiano0",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland",
+                        "value":110
+                    }
+                ]
+            },
+            {
+                "text":"N",
+                "nextPhraseID":"poisonland_rubiano",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland",
+                        "value":60
+                    }
+                ]
+            },
             {
                 "text":"N",
                 "nextPhraseID":"brightport_mayor9"
@@ -21747,7 +22518,27 @@
         "id":"brightport_armor0",
         "replies":[
             {
-                "nextPhraseID":"S"
+                "text":"N",
+                "nextPhraseID":"poisonland_freyja_normaltrade",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":44,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"N",
+                "nextPhraseID":"poisonland_freyja_extratrade",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":44
+                    }
+                ]
             }
         ],
         "rewards":[
@@ -22131,7 +22922,7 @@
     },
     {
         "id":"brightport_mayor",
-        "message":"I'm Rubiano, the Doughe of Brightport, speak up.",
+        "message":"I'm Rubiano, the Doughe of Brightport. Speak up.",
         "replies":[
             {
                 "text":"Have you seen my brother Andor?",
@@ -22150,7 +22941,52 @@
                 "nextPhraseID":"brightport_mayor5"
             },
             {
-                "text":"What's a doughe?",
+                "text":"I found Eckhart. He told me to bring his notebook to you.",
+                "nextPhraseID":"poisonland_rubiano6",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland",
+                        "value":100
+                    },
+                    {
+                        "requireType":"inventoryRemove",
+                        "requireID":"poisonland_eckhartjournal",
+                        "value":1
+                    }
+                ]
+            },
+            {
+                "text":"Heiter told me to see you if I want to learn what happened with the forest.",
+                "nextPhraseID":"poisonland_rubiano1",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland",
+                        "value":45
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland",
+                        "value":60,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"What can you tell me about the cursed land?",
+                "nextPhraseID":"poisonland_rubiano10",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland",
+                        "value":60,
+                        "negate":false
+                    }
+                ]
+            },
+            {
+                "text":"What's a Doughe?",
                 "nextPhraseID":"brightport_mayor1"
             },
             {
@@ -22161,8 +22997,21 @@
                         "requireType":"questProgress",
                         "requireID":"brightport_nondisplay",
                         "value":236
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland",
+                        "value":115,
+                        "negate":true
                     }
                 ]
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"questProgress",
+                "rewardID":"poisonland_nondisplay",
+                "value":114
             }
         ]
     },
@@ -23118,7 +23967,20 @@
     },
     {
         "id":"brightport_lockedclass",
-        "message":"This class seems to be locked, and not currently in use. "
+        "message":"This class seems to be locked and not currently in use.",
+        "replies":[
+            {
+                "text":"I shouldn't poke around on my own. I should give the key to Ysolde first.",
+                "nextPhraseID":"X",
+                "requires":[
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"poisonland_key",
+                        "value":1
+                    }
+                ]
+            }
+        ]
     },
     {
         "id":"brightport_apples3",
@@ -23391,6 +24253,11 @@
                 "rewardType":"questProgress",
                 "rewardID":"brightport_nondisplay",
                 "value":249
+            },
+            {
+                "rewardType":"questProgress",
+                "rewardID":"poisonland_nondisplay",
+                "value":35
             }
         ]
     },
@@ -23762,7 +24629,7 @@
             {
                 "rewardType":"actorCondition",
                 "rewardID":"bleeding_wound",
-                "value":3
+                "value":9
             },
             {
                 "rewardType":"questProgress",
@@ -23776,7 +24643,7 @@
         "message":"You step over the trap. Your foot slips between the scattered sticks covering the hole and lands on something sharp.",
         "replies":[
             {
-                "text":"Fool me twice... That wasn't so bright of me.",
+                "text":"Ouch! Fool me twice... That wasn't so bright of me.",
                 "nextPhraseID":"X"
             }
         ],
@@ -23784,7 +24651,7 @@
             {
                 "rewardType":"actorCondition",
                 "rewardID":"bleeding_wound",
-                "value":3
+                "value":9
             }
         ]
     },
@@ -23867,7 +24734,7 @@
             {
                 "rewardType":"actorCondition",
                 "rewardID":"bleeding_wound",
-                "value":3
+                "value":9
             },
             {
                 "rewardType":"questProgress",
@@ -23881,8 +24748,15 @@
         "message":"You step over the trap. Your foot slips between the scattered sticks covering the hole and lands on something sharp.",
         "replies":[
             {
-                "text":"Fool me twice... That wasn't so bright of me.",
+                "text":"Ouch! Fool me twice... That wasn't so bright of me.",
                 "nextPhraseID":"X"
+            }
+        ],
+        "rewards":[
+            {
+                "rewardType":"actorCondition",
+                "rewardID":"bleeding_wound",
+                "value":9
             }
         ]
     },

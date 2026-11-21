@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="29" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="11">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="29" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="13">
  <tileset firstgid="1" name="map_bed_1" tilewidth="32" tileheight="32" tilecount="160" columns="16">
   <image source="../drawable/map_bed_1.png" width="512" height="320"/>
  </tileset>
@@ -183,6 +183,9 @@
  <tileset firstgid="7609" name="map_tree_3" tilewidth="32" tileheight="32" tilecount="544" columns="32">
   <image source="../drawable/map_tree_3.png" width="1024" height="544"/>
  </tileset>
+ <tileset firstgid="8153" name="map_sign_ladder_1" tilewidth="32" tileheight="32" tilecount="128" columns="16">
+  <image source="../drawable/map_sign_ladder_1.png" width="512" height="256"/>
+ </tileset>
  <layer id="1" name="Base" width="29" height="15">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUjIJRQGtwkXOgXTC8AQAykgDb
@@ -194,19 +197,21 @@
   </data>
  </layer>
  <layer id="3" name="Objects" width="29" height="15">
-  <data encoding="base64" compression="zlib">eJyFVFFOAkEMnUAEI/ix+4GBhHgCTRA4lVxE5CJ6BeM1NOqnCQtq/DGRhPhh685j3pZufMlkd7bdvr62M6sshM9++MPlIISZrG1W7rvyfjwo3+GzEttjL+zwNAzheZjs6yz9x7YtfT/NQ+jkKZ6ikOdhHvbQjt/Auc6q9oL2ylMYOzihY2vsyIG1Ii7rtBhJXlfiP5d1EXO8kffbGON6UI3ZytP+rlF+u5fnJks1YJ3wXZKtY+rDPrZXHBN8yANAz6xOrZHmv4jxliZH6J1GTYo2xVXfb1lf/aTzNXKgP3W1VfvI6Gw5czGLvKy76/gpN+r2JpwPtF5qchjnVb3gAdATO0vKs6Fv3qxBt846zwtDudHTujjNpv/fmGpQV+tJ9MH8MnQmUE8+F+DT54HDjVkCwIk7wANm5sPML/J+d3Qrt9o7jobd2XHmgGuIO0T5+D5hrfNG4mNAz6Rmpv5bXi+5FlwH9sXMtcy9ae0A7L2TfX2KwplhLwdA+zs1ZxzQGh7l+/6I48U7E/9zp0+eb+WMGzv2P8L3C+Mhf9w=</data>
+  <data encoding="base64" compression="zlib">
+   eJyFVFFKAzEQHVrciq0fm49KF0pPoFDbnkovYvUiegXxGor6KWxbK/4IFhc/nGHzmtnZBB+ETTKz8+ZNJlnnRJ8joi1/LwqiSx4VzwUDnh8X9Vx8BGu2PQ1pj+cx0cs42Dd5+E/bKrU/cUR9F+JhH/waPe8Hzk3etK/UWnhWxo7Y0FEZu81Bx9U6Laac1xX7L3mc+xxveX7nY1wXzZiZC+v7Tr33wN9dXvMD4IRvqWyomdVW5u2z0jHBhzwAnJnVKTWS/G98vNLkCL0Lr0nQU3HF95vH1yjofPMcOJ9UbcU+NToz1/ZDn2jdg4ifcKNu78z5qMZrIoeZa+oFD4Azsb0kPDu1F+s16D50zX7REG6caSpOtxv/b6ZqkKr13PugfzWkJ1BPfS/AJ9+DCDd6CQAn3oAYpGeqCdGH6V/kvY3oFm6x9yMa9ncn0ge6hnhDhE+/J1rrshP4NKBnnuip/4Z9Z3QtdA42Z/Rcpt5NjdKsYR+e1N+fRI01RywHQM53Ye44IDU8cm1/xInFO2X/s8g5xXwbd9zYsf5lvj+s0YKD
+  </data>
  </layer>
  <layer id="4" name="Above" width="29" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYKANuCeJKfYHKPYXivGBP0SoQQeVUgwMVVLY+dVSmGaSYgcxapHVILOxhQM2gE8dyP01Upji7kKYbsAFdjMxMOxlgrA/i2HXTy6IkULYD/P3d0FUNTC7KQGzgfbMkcLvT2QA8ycxYCbQ3FlYwng1UGwNCXY+FiPdbhBAT78gcI/INAuzE0bjSks7ZRkYdskSdgsue9iQ0ssnNDtBAJsfiAXo9uFyAyhcYXYT6x9yAcwNn0iMS1LMJkcdsWUKsnqYOeSWe7CyAlc5h85HLrNg4vew2I/NXbjciy4Gi38YHwABUW73
+   eJytVMsNwjAMtXrgDodKjdR5GAIW4bMInw1gAUCskgsblAMXKpEIPclN7TYJPKlq7Lz62Ylroi7eFVHrnoUhWhrKhq36PsRuhT2Jl4KVy3VtZHtj+jFTNGK4nMPX0jlIGOL5/LfCXcxn/Rw03Aqie/FdP0v5+1ygT3jdr2mXA+1fcHA6RzNcJwfqjMHOxd0LZ3xyvnOC5qNM1/YI+9fDRvYsNPHWeulSE13r8Vw0nQnrlybQ9JBqiEWop+XgzxXasfVoGPuvsd8k3uU/tId4sTOF8xEnd+5hVmhzLrT5zILfCvpSXlq+oQ/3D/sDpll0OA==
   </data>
  </layer>
  <layer id="5" name="Walkable" width="29" height="15" visible="0">
   <data encoding="base64" compression="zlib">
-   eJxjYGBguCjGAAYgGsZG5yOLIwOYGmz60OWwqaUmwGYusXaS4y5C4UVsuJDrHmz2wdjY1GFzDyX24zODFL+SA3D5m9r2EjKHEjuJSQPUtpOQ/cSkWVLSEinpiFC6Jca9pAB620esm2hZPlISF+TYRWo4ElKLr8wFANW3fIc=
+   eJy9lFEKACEIROcU3f9Ke6P9igVxdNRaIYqYfBpTAPCseADfbMPq7J7NYbWevhveWTVvh836Zlx2L916PN5eezqvngk/ylHptROs79PcLM+EqXjgNDPjK56teKni48y3Sr2V+JunnL/1Vio+YX1PmOo9Ztroz30Bw3CHWw==
   </data>
  </layer>
- <objectgroup id="6" name="Mapevents">
+ <objectgroup id="6" name="Mapevents" visible="0">
   <object id="1" name="east" type="mapchange" x="896" y="320" width="32" height="160">
    <properties>
     <property name="map" value="brightport4"/>
@@ -236,34 +241,50 @@
     <property name="when" value="enter"/>
    </properties>
   </object>
+  <object id="6" name="west" type="mapchange" x="0" y="128" width="32" height="160">
+   <properties>
+    <property name="map" value="brightportwild23"/>
+    <property name="place" value="east"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="7" name="Spawn" visible="0">
-  <object id="6" name="virilefawn" type="spawn" x="608" y="64" width="256" height="128">
+  <object id="7" name="virilefawn" type="spawn" x="608" y="64" width="256" height="128">
    <properties>
     <property name="spawngroup" value="brightport_fawn"/>
    </properties>
   </object>
-  <object id="7" name="fawn1" type="spawn" x="320" y="64" width="256" height="160">
+  <object id="8" name="tree" type="spawn" x="320" y="64" width="256" height="160">
    <properties>
-    <property name="spawngroup" value="irdegh_spawn"/>
+    <property name="spawngroup" value="poisonland_tree2"/>
    </properties>
   </object>
-  <object id="8" name="fawn2" type="spawn" x="544" y="256" width="256" height="160">
+  <object id="9" name="erumen" type="spawn" x="544" y="256" width="256" height="160">
    <properties>
     <property name="spawngroup" value="erumen_2"/>
    </properties>
   </object>
-  <object id="9" name="fawn" type="spawn" x="160" y="384" width="256" height="64">
+  <object id="10" name="fawn" type="spawn" x="160" y="384" width="256" height="64">
    <properties>
     <property name="spawngroup" value="brightport_sickfawn"/>
    </properties>
   </object>
-  <object id="10" name="squirmer" type="spawn" x="64" y="32" width="96" height="352">
+  <object id="11" name="squirmer" type="spawn" x="64" y="32" width="96" height="352">
    <properties>
     <property name="spawngroup" value="brightport_squirrel"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="8" name="Keys" visible="0"/>
- <objectgroup id="9" name="Replace"/>
+ <objectgroup id="8" name="Keys" visible="0">
+  <object id="12" name="welcome" type="key" x="864" y="288" width="32" height="32">
+   <properties>
+    <property name="phrase" value="brightport_welcome"/>
+    <property name="requireId" value="andor"/>
+    <property name="requireNegation" value="true"/>
+    <property name="requireType" value="questProgress"/>
+    <property name="requireValue" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="9" name="Replace" visible="0"/>
 </map>

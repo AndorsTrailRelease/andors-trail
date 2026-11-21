@@ -168,7 +168,7 @@
         "name":"Hortensia",
         "iconID":"monsters_ld_edit:3",
         "unique":1,
-        "phraseID":"brightport_hortensia"
+        "phraseID":"poisonland_hortensia_selector2"
     },
     {
         "id":"brightportguardcrate1",
@@ -209,7 +209,7 @@
         "id":"brightportstudent",
         "name":"Agnese",
         "iconID":"monsters_ld1:150",
-        "phraseID":"brightport_student"
+        "phraseID":"poisonland_agnese0"
     },
     {
         "id":"brightportthieves2",
@@ -220,7 +220,7 @@
     },
     {
         "id":"brightport_tree",
-        "name":" Moonwalker tree stump",
+        "name":"Moonwalker tree stump",
         "iconID":"monsters_johny:7",
         "maxHP":100,
         "maxAP":8,
@@ -231,6 +231,7 @@
             "min":3,
             "max":12
         },
+        "droplistID":"poisonland_tree",
         "attackCost":6,
         "attackChance":90,
         "blockChance":80,
@@ -296,7 +297,8 @@
         "id":"brightportnpc11",
         "name":"Jalmor",
         "iconID":"monsters_ld1:84",
-        "phraseID":"brightport_npc11"
+        "phraseID":"poisonland_jalmor_selector",
+        "droplistID":"poisonland_jalmor"
     },
     {
         "id":"brightportnpc10",
@@ -561,6 +563,16 @@
         "attackChance":100,
         "blockChance":50,
         "damageResistance":6,
+        "hitEffect":{
+            "conditionsTarget":[
+                {
+                    "condition":"poisonland_amoeba",
+                    "magnitude":1,
+                    "duration":3,
+                    "chance":"15"
+                }
+            ]
+        },
         "hitReceivedEffect":{
             "conditionsTarget":[
                 {
@@ -653,14 +665,15 @@
     },
     {
         "id":"brightportinn",
-        "name":"Elvira",
+        "name":"Elinalise",
         "iconID":"monsters_ld1:220",
         "phraseID":"brightport_inn"
     },
     {
         "id":"brightportstudent8",
         "name":"Aurelia",
-        "iconID":"monsters_ld1:225"
+        "iconID":"monsters_ld1:225",
+        "phraseID":"poisonland_aurelia_selector"
     },
     {
         "id":"brightport_newcommander",
@@ -672,7 +685,7 @@
         "id":"brightportstudent9",
         "name":"Evelina",
         "iconID":"monsters_ld1:178",
-        "phraseID":"brightport_student_4"
+        "phraseID":"poisonland_evelina_Selector"
     },
     {
         "id":"brightportguard2",
@@ -691,41 +704,47 @@
     {
         "id":"brightportstudent4",
         "name":"Regnal",
-        "iconID":"monsters_ld1:80"
+        "iconID":"monsters_ld1:80",
+        "horizontalFlipChance":100,
+        "phraseID":"poisonland_regnal_selector"
     },
     {
         "id":"brightportstudent5",
-        "name":"Brightport student",
+        "name":"Cedric",
         "iconID":"monsters_ld1:87",
-        "unique":1
+        "unique":1,
+        "phraseID":"poisonland_cedric"
     },
     {
         "id":"brightportstudent6",
-        "name":"Cedric",
-        "iconID":"monsters_ld1:6"
+        "name":"Eiden",
+        "iconID":"monsters_ld1:6",
+        "phraseID":"poisonland_eiden_selector"
     },
     {
         "id":"brightport_goblin2",
         "name":"Charwood hobgoblin",
         "iconID":"monsters_newb_1:92",
-        "maxHP":310,
+        "maxHP":150,
         "maxAP":12,
+        "moveCost":5,
         "monsterClass":"humanoid",
         "movementAggressionType":"none",
         "attackDamage":{
-            "min":13,
-            "max":22
+            "min":9,
+            "max":11
         },
         "droplistID":"charwdg",
-        "attackCost":8,
-        "attackChance":220,
-        "blockChance":120,
-        "damageResistance":5
+        "attackCost":6,
+        "attackChance":180,
+        "blockChance":184,
+        "damageResistance":9
     },
     {
         "id":"brightportstudent7",
         "name":"Dietrich",
-        "iconID":"monsters_ld1:86"
+        "iconID":"monsters_ld_edit:67",
+        "phraseID":"poisonland_dietrich"
     },
     {
         "id":"brightport_gunfrykstill",
@@ -783,12 +802,15 @@
     {
         "id":"brightportstudent1",
         "name":"Thaddeus",
-        "iconID":"monsters_ld1:19"
+        "iconID":"monsters_ld1:19",
+        "phraseID":"poisonland_thaddeus"
     },
     {
         "id":"brightportstudent2",
         "name":"Ysolde",
-        "iconID":"monsters_ld1:145"
+        "iconID":"monsters_ld1:145",
+        "horizontalFlipChance":100,
+        "phraseID":"poisonland_ysolde_selector"
     },
     {
         "id":"brightport_snake",
@@ -918,22 +940,22 @@
         "id":"brightport_goblin",
         "name":"Charwood goblin hogrider",
         "iconID":"monsters_newb_1:48",
-        "maxHP":280,
+        "maxHP":150,
         "maxAP":12,
-        "moveCost":3,
+        "moveCost":4,
         "monsterClass":"animal",
         "movementAggressionType":"protectSpawn",
         "attackDamage":{
-            "min":15,
-            "max":27
+            "min":7,
+            "max":13
         },
         "droplistID":"charwdg",
         "attackCost":6,
-        "attackChance":200,
-        "criticalSkill":5,
-        "criticalMultiplier":1.0,
-        "blockChance":110,
-        "damageResistance":4
+        "attackChance":186,
+        "criticalSkill":15,
+        "criticalMultiplier":2.0,
+        "blockChance":183,
+        "damageResistance":8
     },
     {
         "id":"brightportsmith",
@@ -1170,7 +1192,7 @@
         "id":"brightport_mayor",
         "name":"Rubiano",
         "iconID":"monsters_ld1:77",
-        "phraseID":"brightport_mayor"
+        "phraseID":"poisonland_mayor_selector"
     },
     {
         "id":"brightport_cat2",

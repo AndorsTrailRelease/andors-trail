@@ -1,0 +1,1460 @@
+[
+    {
+        "id":"brightport_shield",
+        "iconID":"items_tometik3:18",
+        "name":"Legion shield",
+        "displaytype":"ordinary",
+        "category":"shld_mtl_li",
+        "description":"A standard-issue shield for all Feygard garrisons across Aewatha.",
+        "equipEffect":{
+            "increaseBlockChance":11,
+            "increaseDamageResistance":1
+        }
+    },
+    {
+        "id":"brightport_feygardarmor",
+        "iconID":"items_tometik3:13",
+        "name":"Legion breastplate",
+        "displaytype":"ordinary",
+        "category":"plmail",
+        "description":"A standard-issue armor for all Feygard garrisons across Aewatha.",
+        "equipEffect":{
+            "increaseUseItemCost":1,
+            "increaseAttackChance":-5,
+            "increaseBlockChance":20,
+            "increaseDamageResistance":1
+        }
+    },
+    {
+        "id":"brightport_shield2",
+        "iconID":"items_reterski_1:28",
+        "name":"Remgardian steel shield",
+        "displaytype":"ordinary",
+        "category":"shld_mtl_hv",
+        "description":"Forged out of expensive Remgard steel. Well-designed, but the wielder needs a strong arm.",
+        "equipEffect":{
+            "increaseAttackChance":-8,
+            "increaseBlockChance":17,
+            "increaseDamageResistance":1
+        }
+    },
+    {
+        "id":"brightport_lamellar",
+        "iconID":"items_armours_3:18",
+        "name":"Lamellar armor",
+        "displaytype":"ordinary",
+        "category":"spmail",
+        "description":"Sturdy armor made out of several segments.",
+        "equipEffect":{
+            "increaseAttackDamage":{
+                "min":1,
+                "max":3
+            },
+            "increaseAttackChance":-4,
+            "increaseBlockChance":13,
+            "increaseDamageResistance":1
+        }
+    },
+    {
+        "id":"poisonland_eckhartjournal",
+        "iconID":"items_misc_2:110",
+        "name":"Eckhart's notebook",
+        "displaytype":"quest",
+        "category":"other",
+        "description":"Various theories, descriptions, and observations made by Eckhart regarding the poisoned land. \"It seems to me that the most likely theory is a curse from the battle. I've seen land cursed and roamed by undead before, but never to such an extent. However, no undead have risen in the aftermath of the battle, nor have I seen any during my exploration...\" \"...After this rumble, I had no choice but to delve deeper in to find a way out. I thought the monsters from the Doughe's story could not possibly be true, but one stood there guarding what seemed like an exit to me. That's not something a summoner, or even a dozen of them, could create. Not such a horribly deformed creature at that. It must be the result of some other magic.\" Further texts involve meaningless scribbles and counting down the time until rations ran out."
+    },
+    {
+        "id":"poisonland_key",
+        "iconID":"items_misc:21",
+        "name":"Baking room key",
+        "displaytype":"quest",
+        "category":"other",
+        "description":"A key to the combined baking and astronomy classroom."
+    },
+    {
+        "id":"poisonland_chocolate",
+        "iconID":"items_misc_6:34",
+        "name":"Chocolate",
+        "displaytype":"rare",
+        "hasManualPrice":1,
+        "baseMarketCost":232,
+        "category":"food",
+        "description":"An exotic ingredient from the east. Can be eaten raw.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":2,
+                    "duration":6,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_charred1",
+        "iconID":"items_johny_baking:12",
+        "name":"Charred roll",
+        "displaytype":"ordinary",
+        "category":"other",
+        "description":"A dark reminder: 'Maybe next time, pay more attention?'"
+    },
+    {
+        "id":"poisonland_charred2",
+        "iconID":"items_johny_baking:25",
+        "name":"Charred tart",
+        "displaytype":"ordinary",
+        "category":"other",
+        "description":"A dark reminder: 'Maybe next time, pay more attention?'"
+    },
+    {
+        "id":"poisonland_charred3",
+        "iconID":"items_johny_baking:38",
+        "name":"Charred pie",
+        "category":"other",
+        "description":"A dark reminder: 'Maybe next time, pay more attention?'"
+    },
+    {
+        "id":"poisonland_chocolate1",
+        "iconID":"items_johny_baking:48",
+        "name":"Undercooked chocolate roll",
+        "displaytype":"ordinary",
+        "category":"food",
+        "description":"Raw outside, raw inside. A shame about the wasted chocolate.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":4,
+                    "duration":4,
+                    "chance":"100"
+                },
+                {
+                    "condition":"foodp",
+                    "magnitude":5,
+                    "duration":4,
+                    "chance":"15"
+                },
+                {
+                    "condition":"sweet_tooth",
+                    "magnitude":1,
+                    "duration":4,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_chocolate2",
+        "iconID":"items_johny_baking:49",
+        "name":"Undercooked chocolate tart",
+        "category":"food",
+        "description":"Raw outside, raw inside. A shame about the wasted chocolate.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":5,
+                    "duration":4,
+                    "chance":"100"
+                },
+                {
+                    "condition":"foodp",
+                    "magnitude":6,
+                    "duration":4,
+                    "chance":"15"
+                },
+                {
+                    "condition":"sweet_tooth",
+                    "magnitude":1,
+                    "duration":4,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_chocolate3",
+        "iconID":"items_johny_baking:50",
+        "name":"Undercooked chocolate pie",
+        "category":"food",
+        "description":"Raw outside, raw inside. A shame about the wasted chocolate.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":6,
+                    "duration":4,
+                    "chance":"100"
+                },
+                {
+                    "condition":"foodp",
+                    "magnitude":7,
+                    "duration":4,
+                    "chance":"15"
+                },
+                {
+                    "condition":"sweet_tooth",
+                    "magnitude":1,
+                    "duration":4,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_chocolate4",
+        "iconID":"items_johny_baking:10",
+        "name":"Baked chocolate roll",
+        "category":"food",
+        "description":"A properly baked chocolate pastry. The effort was worth it.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":6,
+                    "duration":6,
+                    "chance":"100"
+                },
+                {
+                    "condition":"sweet_tooth",
+                    "magnitude":1,
+                    "duration":6,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_chocolate5",
+        "iconID":"items_johny_baking:23",
+        "name":"Baked chocolate tart",
+        "category":"food",
+        "description":"A properly baked chocolate pastry. The effort was worth it.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":10,
+                    "duration":8,
+                    "chance":"100"
+                },
+                {
+                    "condition":"sweet_tooth",
+                    "magnitude":1,
+                    "duration":8,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_chocolate6",
+        "iconID":"items_johny_baking:36",
+        "name":"Baked chocolate pie",
+        "category":"food",
+        "description":"A properly baked chocolate pastry. The effort was worth it.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":12,
+                    "duration":8,
+                    "chance":"100"
+                },
+                {
+                    "condition":"sweet_tooth",
+                    "magnitude":1,
+                    "duration":8,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_chocolate7",
+        "iconID":"items_johny_baking:11",
+        "name":"Well-baked chocolate roll",
+        "displaytype":"rare",
+        "category":"food",
+        "description":"A well-baked pastry. Each bite reveals why an obsession with chocolate exists.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":6,
+                    "duration":8,
+                    "chance":"100"
+                },
+                {
+                    "condition":"sweet_tooth",
+                    "magnitude":1,
+                    "duration":8,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_chocolate8",
+        "iconID":"items_johny_baking:24",
+        "name":"Well-baked chocolate tart",
+        "displaytype":"rare",
+        "category":"food",
+        "description":"A well-baked pastry. Each bite reveals why an obsession with chocolate exists.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":10,
+                    "duration":10,
+                    "chance":"100"
+                },
+                {
+                    "condition":"sweet_tooth",
+                    "magnitude":1,
+                    "duration":10,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_chocolate9",
+        "iconID":"items_johny_baking:37",
+        "name":"Well-baked chocolate pie",
+        "displaytype":"rare",
+        "category":"food",
+        "description":"A well-baked pastry. Each bite reveals why an obsession with chocolate exists.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":12,
+                    "duration":10,
+                    "chance":"100"
+                },
+                {
+                    "condition":"sweet_tooth",
+                    "magnitude":1,
+                    "duration":10,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_lowbake1",
+        "iconID":"items_johny_baking:39",
+        "name":"Undercooked plain roll",
+        "category":"food",
+        "description":"The worst of the worst. It seems the dough never baked at all.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":1,
+                    "duration":4,
+                    "chance":"100"
+                },
+                {
+                    "condition":"foodp",
+                    "magnitude":2,
+                    "duration":4,
+                    "chance":"15"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_lowbake2",
+        "iconID":"items_johny_baking:42",
+        "name":"Undercooked fine roll",
+        "category":"food",
+        "description":"It seems the dough never baked at all.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":2,
+                    "duration":4,
+                    "chance":"100"
+                },
+                {
+                    "condition":"foodp",
+                    "magnitude":3,
+                    "duration":4,
+                    "chance":"15"
+                },
+                {
+                    "condition":"sweet_tooth",
+                    "magnitude":1,
+                    "duration":4,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_lowbake3",
+        "iconID":"items_johny_baking:45",
+        "name":"Undercooked sweet roll",
+        "category":"food",
+        "description":"A waste of fine ingredients. It seems the dough never baked at all.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":3,
+                    "duration":4,
+                    "chance":"100"
+                },
+                {
+                    "condition":"foodp",
+                    "magnitude":4,
+                    "duration":4,
+                    "chance":"15"
+                },
+                {
+                    "condition":"sweet_tooth",
+                    "magnitude":1,
+                    "duration":4,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_midbake1",
+        "iconID":"items_johny_baking:1",
+        "name":"Baked plain roll",
+        "category":"food",
+        "description":"A properly baked pastry, but the taste leaves a lot to be desired.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":3,
+                    "duration":6,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_midbake2",
+        "iconID":"items_johny_baking:4",
+        "name":"Baked fine roll",
+        "category":"food",
+        "description":"A baked pastry, something you would feel good sharing with others.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":4,
+                    "duration":6,
+                    "chance":"100"
+                },
+                {
+                    "condition":"sweet_tooth",
+                    "magnitude":1,
+                    "duration":6,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_midbake3",
+        "iconID":"items_johny_baking:7",
+        "name":"Baked sweet roll",
+        "category":"food",
+        "description":"A baked pastry. The taste is exciting.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":5,
+                    "duration":6,
+                    "chance":"100"
+                },
+                {
+                    "condition":"sweet_tooth",
+                    "magnitude":1,
+                    "duration":6,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_highbake1",
+        "iconID":"items_johny_baking:2",
+        "name":"Well-baked plain roll",
+        "category":"food",
+        "description":"A well-baked but simple pastry.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":3,
+                    "duration":8,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_highbake2",
+        "iconID":"items_johny_baking:5",
+        "name":"Well-baked fine roll",
+        "category":"food",
+        "description":"A well-baked pastry, something you would visit a bakery for.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":4,
+                    "duration":8,
+                    "chance":"100"
+                },
+                {
+                    "condition":"sweet_tooth",
+                    "magnitude":1,
+                    "duration":8,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_highbake3",
+        "iconID":"items_johny_baking:8",
+        "name":"Well-baked sweet roll",
+        "displaytype":"rare",
+        "category":"food",
+        "description":"A well-baked pastry. The taste is a skillful blend of texture and flavor.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":5,
+                    "duration":8,
+                    "chance":"100"
+                },
+                {
+                    "condition":"sweet_tooth",
+                    "magnitude":1,
+                    "duration":8,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_lowbake4",
+        "iconID":"items_johny_baking:40",
+        "name":"Undercooked plain tart",
+        "category":"food",
+        "description":"The worst of the worst. It seems the dough never baked at all.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":2,
+                    "duration":4,
+                    "chance":"100"
+                },
+                {
+                    "condition":"foodp",
+                    "magnitude":3,
+                    "duration":4,
+                    "chance":"15"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_lowbake5",
+        "iconID":"items_johny_baking:43",
+        "name":"Undercooked fine tart",
+        "category":"food",
+        "description":"It seems the dough never baked at all.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":3,
+                    "duration":4,
+                    "chance":"100"
+                },
+                {
+                    "condition":"foodp",
+                    "magnitude":4,
+                    "duration":4,
+                    "chance":"15"
+                },
+                {
+                    "condition":"sweet_tooth",
+                    "magnitude":1,
+                    "duration":4,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_lowbake6",
+        "iconID":"items_johny_baking:46",
+        "name":"Undercooked sweet tart",
+        "category":"food",
+        "description":"A waste of fine ingredients. It seems the dough never baked at all.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":4,
+                    "duration":4,
+                    "chance":"100"
+                },
+                {
+                    "condition":"foodp",
+                    "magnitude":5,
+                    "duration":4,
+                    "chance":"15"
+                },
+                {
+                    "condition":"sweet_tooth",
+                    "magnitude":1,
+                    "duration":4,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_midbake4",
+        "iconID":"items_johny_baking:14",
+        "name":"Baked plain tart",
+        "category":"food",
+        "description":"A properly baked pastry, but the taste leaves a lot to be desired.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":5,
+                    "duration":8,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_midbake5",
+        "iconID":"items_johny_baking:17",
+        "name":"Baked fine tart",
+        "category":"food",
+        "description":"A properly baked pastry, something you would feel good sharing with others.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":6,
+                    "duration":8,
+                    "chance":"100"
+                },
+                {
+                    "condition":"sweet_tooth",
+                    "magnitude":1,
+                    "duration":8,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_midbake6",
+        "iconID":"items_johny_baking:20",
+        "name":"Baked sweet tart",
+        "category":"food",
+        "description":"A baked pastry. The taste is exciting.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":7,
+                    "duration":8,
+                    "chance":"100"
+                },
+                {
+                    "condition":"sweet_tooth",
+                    "magnitude":1,
+                    "duration":8,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_highbake4",
+        "iconID":"items_johny_baking:15",
+        "name":"Well-baked plain tart",
+        "category":"food",
+        "description":"A well-baked but simple pastry.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":5,
+                    "duration":10,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_highbake5",
+        "iconID":"items_johny_baking:18",
+        "name":"Well-baked fine tart",
+        "category":"food",
+        "description":"A well-baked pastry, something you would visit a bakery for.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":6,
+                    "duration":10,
+                    "chance":"100"
+                },
+                {
+                    "condition":"sweet_tooth",
+                    "magnitude":1,
+                    "duration":10,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_highbake6",
+        "iconID":"items_johny_baking:21",
+        "name":"Well-baked sweet tart",
+        "displaytype":"rare",
+        "category":"food",
+        "description":"A well-baked pastry. The taste is a skillful blend of texture and flavor.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":7,
+                    "duration":10,
+                    "chance":"100"
+                },
+                {
+                    "condition":"sweet_tooth",
+                    "magnitude":1,
+                    "duration":10,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_lowbake7",
+        "iconID":"items_johny_baking:41",
+        "name":"Undercooked plain pie",
+        "category":"food",
+        "description":"The worst of the worst. It seems the dough never baked at all.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":2,
+                    "duration":4,
+                    "chance":"100"
+                },
+                {
+                    "condition":"foodp",
+                    "magnitude":3,
+                    "duration":4,
+                    "chance":"15"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_lowbake8",
+        "iconID":"items_johny_baking:44",
+        "name":"Undercooked fine pie",
+        "category":"food",
+        "description":"It seems the dough never baked at all.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":4,
+                    "duration":4,
+                    "chance":"100"
+                },
+                {
+                    "condition":"foodp",
+                    "magnitude":5,
+                    "duration":4,
+                    "chance":"15"
+                },
+                {
+                    "condition":"sweet_tooth",
+                    "magnitude":1,
+                    "duration":4,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_lowbake9",
+        "iconID":"items_johny_baking:47",
+        "name":"Undercooked sweet pie",
+        "category":"food",
+        "description":"A waste of fine ingredients. It seems the dough never baked at all.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":6,
+                    "duration":4,
+                    "chance":"100"
+                },
+                {
+                    "condition":"foodp",
+                    "magnitude":7,
+                    "duration":4,
+                    "chance":"15"
+                },
+                {
+                    "condition":"sweet_tooth",
+                    "magnitude":1,
+                    "duration":4,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_midbake7",
+        "iconID":"items_johny_baking:27",
+        "name":"Baked plain pie",
+        "category":"food",
+        "description":"A properly baked pastry, but the taste leaves a lot to be desired.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":6,
+                    "duration":8,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_midbake8",
+        "iconID":"items_johny_baking:30",
+        "name":"Baked fine pie",
+        "category":"food",
+        "description":"A properly baked pastry, something you would feel good sharing with others.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":8,
+                    "duration":8,
+                    "chance":"100"
+                },
+                {
+                    "condition":"sweet_tooth",
+                    "magnitude":1,
+                    "duration":8,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_midbake9",
+        "iconID":"items_johny_baking:33",
+        "name":"Baked sweet pie",
+        "displaytype":"ordinary",
+        "category":"food",
+        "description":"A baked pastry. The taste is exciting.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":10,
+                    "duration":8,
+                    "chance":"100"
+                },
+                {
+                    "condition":"sweet_tooth",
+                    "magnitude":1,
+                    "duration":8,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_highbake7",
+        "iconID":"items_johny_baking:28",
+        "name":"Well-baked plain pie",
+        "category":"food",
+        "description":"A well-baked but simple pastry.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":6,
+                    "duration":10,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_highbake8",
+        "iconID":"items_johny_baking:31",
+        "name":"Well-baked fine pie",
+        "category":"food",
+        "description":"A well-baked pastry, something a bakery would be famous for.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":8,
+                    "duration":10,
+                    "chance":"100"
+                },
+                {
+                    "condition":"sweet_tooth",
+                    "magnitude":1,
+                    "duration":10,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_highbake9",
+        "iconID":"items_johny_baking:34",
+        "name":"Well-baked sweet pie",
+        "displaytype":"rare",
+        "category":"food",
+        "description":"A well-baked pastry. The taste is a skillful blend of texture and flavor.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":10,
+                    "duration":10,
+                    "chance":"100"
+                },
+                {
+                    "condition":"sweet_tooth",
+                    "magnitude":1,
+                    "duration":10,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_crystalberry1",
+        "iconID":"items_newb:817",
+        "name":"Crystal berries",
+        "displaytype":"ordinary",
+        "category":"food",
+        "description":"Crystal berries, harvested in the wild.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":3,
+                    "duration":5,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_crystalberry2",
+        "iconID":"items_newb:817",
+        "name":"Especially sweet crystal berry",
+        "displaytype":"ordinary",
+        "category":"food",
+        "description":"A well-ripened crystal berry.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":7,
+                    "duration":7,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_rawroll1",
+        "iconID":"items_johny_baking:0",
+        "name":"Unbaked rolls",
+        "category":"food",
+        "description":"A raw pastry, filled with simple ingredients.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":1,
+                    "duration":4,
+                    "chance":"100"
+                },
+                {
+                    "condition":"foodp",
+                    "magnitude":2,
+                    "duration":4,
+                    "chance":"35"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_rawroll2",
+        "iconID":"items_johny_baking:3",
+        "name":"Unbaked rolls",
+        "category":"food",
+        "description":"A raw pastry, filled with quality ingredients.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":2,
+                    "duration":4,
+                    "chance":"100"
+                },
+                {
+                    "condition":"foodp",
+                    "magnitude":3,
+                    "duration":4,
+                    "chance":"35"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_rawroll3",
+        "iconID":"items_johny_baking:6",
+        "name":"Unbaked rolls",
+        "category":"food",
+        "description":"A raw pastry, filled with the finest ingredients.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":3,
+                    "duration":4,
+                    "chance":"100"
+                },
+                {
+                    "condition":"foodp",
+                    "magnitude":4,
+                    "duration":4,
+                    "chance":"35"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_rawtart1",
+        "iconID":"items_johny_baking:13",
+        "name":"Unbaked tart",
+        "category":"food",
+        "description":"A raw pastry, filled with simple ingredients.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":2,
+                    "duration":4,
+                    "chance":"100"
+                },
+                {
+                    "condition":"foodp",
+                    "magnitude":3,
+                    "duration":4,
+                    "chance":"35"
+                }
+            ]
+        }
+    },
+    {
+        "id":"Poisonland_rawtart2",
+        "iconID":"items_johny_baking:16",
+        "name":"Unbaked tart",
+        "category":"food",
+        "description":"A raw pastry, filled with quality ingredients.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":3,
+                    "duration":4,
+                    "chance":"100"
+                },
+                {
+                    "condition":"foodp",
+                    "magnitude":4,
+                    "duration":4,
+                    "chance":"35"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_rawtart3",
+        "iconID":"items_johny_baking:19",
+        "name":"Unbaked tart",
+        "displaytype":"ordinary",
+        "category":"food",
+        "description":"A raw pastry, filled with the finest ingredients.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":4,
+                    "duration":4,
+                    "chance":"100"
+                },
+                {
+                    "condition":"foodp",
+                    "magnitude":5,
+                    "duration":4,
+                    "chance":"35"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_rawpie1",
+        "iconID":"items_johny_baking:26",
+        "name":"Unbaked pie",
+        "category":"food",
+        "description":"A raw pastry, filled with simple ingredients.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":2,
+                    "duration":4,
+                    "chance":"100"
+                },
+                {
+                    "condition":"foodp",
+                    "magnitude":3,
+                    "duration":4,
+                    "chance":"35"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_rawpie2",
+        "iconID":"items_johny_baking:29",
+        "name":"Unbaked pie",
+        "category":"food",
+        "description":"A raw pastry, filled with quality ingredients.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":4,
+                    "duration":4,
+                    "chance":"100"
+                },
+                {
+                    "condition":"foodp",
+                    "magnitude":5,
+                    "duration":4,
+                    "chance":"35"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_rawpie3",
+        "iconID":"items_johny_baking:32",
+        "name":"Unbaked pie",
+        "category":"food",
+        "description":"A raw pastry, filled with the finest ingredients.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":6,
+                    "duration":4,
+                    "chance":"100"
+                },
+                {
+                    "condition":"foodp",
+                    "magnitude":7,
+                    "duration":4,
+                    "chance":"35"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_rawchocolate",
+        "iconID":"items_johny_baking:9",
+        "name":"Unbaked chocolate rolls",
+        "displaytype":"ordinary",
+        "category":"food",
+        "description":"A raw pastry, filled with exotic chocolate.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":4,
+                    "duration":4,
+                    "chance":"100"
+                },
+                {
+                    "condition":"foodp",
+                    "magnitude":5,
+                    "duration":4,
+                    "chance":"35"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_rawchocolate2",
+        "iconID":"items_johny_baking:22",
+        "name":"Unbaked chocolate tart",
+        "displaytype":"ordinary",
+        "category":"food",
+        "description":"A raw pastry, filled with exotic chocolate.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":5,
+                    "duration":4,
+                    "chance":"100"
+                },
+                {
+                    "condition":"foodp",
+                    "magnitude":6,
+                    "duration":4,
+                    "chance":"35"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_rawchocolate3",
+        "iconID":"items_johny_baking:35",
+        "name":"Unbaked chocolate pie",
+        "category":"food",
+        "description":"A raw pastry, filled with exotic chocolate.",
+        "useEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"food",
+                    "magnitude":6,
+                    "duration":4,
+                    "chance":"100"
+                },
+                {
+                    "condition":"foodp",
+                    "magnitude":7,
+                    "duration":4,
+                    "chance":"35"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_firewood",
+        "iconID":"items_japozero:577",
+        "name":"Firewood",
+        "displaytype":"ordinary",
+        "hasManualPrice":1,
+        "baseMarketCost":16,
+        "category":"other",
+        "description":"Wood meant for use as firewood."
+    },
+    {
+        "id":"poisonland_hay",
+        "iconID":"items_japozero:567",
+        "name":"Handful of hay",
+        "displaytype":"ordinary",
+        "hasManualPrice":1,
+        "baseMarketCost":15,
+        "category":"other",
+        "description":"A handful of hay, useful for starting a fire."
+    },
+    {
+        "id":"poisonland_flour",
+        "iconID":"items_japozero:591",
+        "name":"Flour",
+        "displaytype":"ordinary",
+        "category":"other",
+        "description":"Flour for use in baking, or other recipes."
+    },
+    {
+        "id":"poisonland_milk",
+        "iconID":"items_consumables:55",
+        "name":"Milk",
+        "displaytype":"quest",
+        "category":"other",
+        "description":"Milk given to me by Ysolde to prepare the dough."
+    },
+    {
+        "id":"poisonland_apple",
+        "iconID":"items_consumables:2",
+        "name":"Green apple",
+        "displaytype":"quest",
+        "category":"other",
+        "description":"Apple given to me by Ysolde as an ingredient for my own pastry."
+    },
+    {
+        "id":"poisonland_cloak",
+        "iconID":"items_tometik2:7",
+        "name":"Protective cloak",
+        "displaytype":"ordinary",
+        "hasManualPrice":1,
+        "baseMarketCost":4637,
+        "category":"bdy_clth",
+        "description":"A cloak made from enchanted silk. Protects against acids and other poisons.",
+        "hitEffect":{
+            "conditionsSource":[
+                {
+                    "condition":"slime",
+                    "magnitude":-99,
+                    "duration":999,
+                    "chance":"100"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_rawroll0",
+        "iconID":"items_johny_baking:0",
+        "name":"Unbaked rolls",
+        "displaytype":"quest",
+        "category":"other",
+        "description":"A raw pastry, filled with simple ingredients."
+    },
+    {
+        "id":"poisonland_dingus",
+        "iconID":"items_consumables:19",
+        "name":"Dingus",
+        "displaytype":"ordinary",
+        "hasManualPrice":1,
+        "baseMarketCost":0,
+        "category":"other",
+        "description":"A dingus shroom, Dark's favorite."
+    },
+    {
+        "id":"poisonland_key1",
+        "iconID":"items_japozero:392",
+        "name":"Charwood vault key",
+        "displaytype":"ordinary",
+        "hasManualPrice":1,
+        "baseMarketCost":1,
+        "category":"other",
+        "description":"A key taken from Dartax, the goblin leader."
+    },
+    {
+        "id":"poisonland_key2",
+        "iconID":"items_japozero:393",
+        "name":"Rusty key",
+        "displaytype":"ordinary",
+        "hasManualPrice":1,
+        "baseMarketCost":1,
+        "category":"other",
+        "description":"A rusty key found at the bottom of a bucket in Charwood."
+    },
+    {
+        "id":"poisonland_shackles",
+        "iconID":"items_newb:129",
+        "name":"Slave's shackles",
+        "displaytype":"ordinary",
+        "hasManualPrice":1,
+        "baseMarketCost":67,
+        "category":"weapon_blocking",
+        "description":"A pair of shackles and chains enchanted to burden anyone who touches them. If spun around an opponent, they will hardly be able to avoid attacks or remove them.",
+        "equipEffect":{
+            "increaseAttackDamage":{
+                "min":0,
+                "max":3
+            },
+            "increaseMoveCost":2,
+            "increaseUseItemCost":1,
+            "increaseAttackCost":1,
+            "increaseBlockChance":-10,
+            "increaseDamageResistance":1,
+            "setNonWeaponDamageModifier":98
+        },
+        "hitEffect":{
+            "conditionsTarget":[
+                {
+                    "condition":"poisonland_chain",
+                    "magnitude":1,
+                    "duration":1,
+                    "chance":"80"
+                },
+                {
+                    "condition":"poisonland_chain",
+                    "magnitude":2,
+                    "duration":1,
+                    "chance":"15"
+                }
+            ]
+        }
+    },
+    {
+        "id":"poisonland_iron",
+        "iconID":"items_misc:9",
+        "name":"Iron bar",
+        "displaytype":"ordinary",
+        "hasManualPrice":1,
+        "baseMarketCost":128,
+        "category":"other",
+        "description":"A small bar made of iron."
+    },
+    {
+        "id":"poisonland_oakburn",
+        "iconID":"items_jewelry:13",
+        "name":"Oakburn insignia",
+        "displaytype":"rare",
+        "category":"neck",
+        "description":"A symbol of Charwood's founding. This insignia pairs its shape with the famed trees the settlement takes its name from, forming Oakburn's heraldry."
+    },
+    {
+        "id":"poisonland_ducksoup",
+        "iconID":"items_tometik1:8",
+        "name":"Duck egg soup",
+        "displaytype":"quest",
+        "category":"flask",
+        "description":"Emanates a strong smell of eggs."
+    },
+    {
+        "id":"poisonland_herb",
+        "iconID":"items_japozero:554",
+        "name":"Herb bundle",
+        "displaytype":"quest",
+        "category":"other",
+        "description":"Used as a substitute for certain spices."
+    }
+]

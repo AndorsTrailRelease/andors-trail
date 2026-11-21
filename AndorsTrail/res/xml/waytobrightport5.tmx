@@ -195,7 +195,7 @@
  </layer>
  <layer id="3" name="Above" width="24" height="19">
   <data encoding="base64" compression="zlib">
-   eJy1VcsNwjAMjTpEpUaqGI05+CwCGyAmAIkpOOXSCxvAtZWokay67rMbFXiXtPWL34vjpF0VPmj7savskcHvCcQImxjCNuIYQc5LSptwK8Z8ywfHCI9yqqPzWn7PQu9U4JjOb+lZnFeJa8F4ZuT3POj5GklpI77MR3wr53rla1m6nC+BXvKeNXJ67lKHcK2nenL+oecfo+8feWqM80J1kfymGvpzbk1IF60P6VqQNWBIT62xDsvrPcO79E1au97zPo7P+9z9sBTeXuVC94qn861/dPchLc/br2uI9uaf+6S/LdGa+2fJZ4+re5XHNxezrUQ=
+   eJy1VcsNwjAMjToEUiNVjMYcfBaBDRATgMQUnHLphQ3g2krESBau++xGBd4laf3i9+I4bV+HN7o89rU9Mvg5gRhhHUPYRBwjyHVJaROu1ZBv+eAY4bkY6+i8lt+T0DtWOHZX+S09i0NzVAvGQ+XTekhTcvR6jaS0EV/mI76Vc7X0tSxdzpdAL3lzjZKeOzchXJqxnly/z/xD9P0jT61xX6gukt/Wn/6c2hPSRftDuhZkDRjSU2fsw/J6K/AufZPWNnvexeF9n/o+zIV3VqXQveLpfOsfffuQluft1zVEZ/PPc9Lv5mhN/bPk3OPqXuXxBZBCrYQ=
   </data>
  </layer>
  <layer id="4" name="Walkable" width="24" height="19" visible="0">
@@ -230,37 +230,37 @@
   </object>
  </objectgroup>
  <objectgroup id="6" name="Spawn" visible="0">
-  <object id="5" name="viriledeer1" type="spawn" x="64" y="160" width="224" height="160">
+  <object id="5" name="fawn" type="spawn" x="64" y="160" width="224" height="160">
    <properties>
     <property name="quantity" value="2"/>
-    <property name="spawngroup" value="brightport_deer"/>
+    <property name="spawngroup" value="brightport_sickfawn"/>
    </properties>
   </object>
-  <object id="6" name="viriledeer" type="spawn" x="64" y="384" width="128" height="160">
+  <object id="6" name="sickfawn1" type="spawn" x="64" y="384" width="128" height="160">
    <properties>
     <property name="quantity" value="2"/>
-    <property name="spawngroup" value="brightport_deer"/>
+    <property name="spawngroup" value="brightport_fawn"/>
    </properties>
   </object>
-  <object id="7" name="viriledeer3" type="spawn" x="256" y="352" width="288" height="224">
+  <object id="7" name="sickfawn3" type="spawn" x="256" y="352" width="288" height="224">
    <properties>
     <property name="quantity" value="2"/>
-    <property name="spawngroup" value="brightport_deer"/>
+    <property name="spawngroup" value="brightport_sickfawn"/>
    </properties>
   </object>
-  <object id="8" name="deer" type="spawn" x="576" y="448" width="128" height="128">
+  <object id="8" name="fawn1" type="spawn" x="576" y="448" width="128" height="128">
    <properties>
-    <property name="spawngroup" value="brightport_sickdeer"/>
+    <property name="spawngroup" value="brightport_sickfawn"/>
    </properties>
   </object>
-  <object id="9" name="viriledeer2" type="spawn" x="384" y="192" width="32" height="32">
+  <object id="9" name="sickfawn2" type="spawn" x="384" y="192" width="32" height="32">
    <properties>
-    <property name="spawngroup" value="brightport_deer"/>
+    <property name="spawngroup" value="brightport_fawn"/>
    </properties>
   </object>
-  <object id="10" name="brightport_deer" type="spawn" x="640" y="160" width="32" height="32">
+  <object id="10" name="fawn2" type="spawn" x="640" y="160" width="32" height="32">
    <properties>
-    <property name="spawngroup" value="brightport_deer"/>
+    <property name="spawngroup" value="brightport_fawn"/>
    </properties>
   </object>
   <object id="11" name="squirmer" type="spawn" x="288" y="160" width="416" height="128">
@@ -276,6 +276,6 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="7" name="Keys"/>
- <objectgroup id="8" name="Replace"/>
+ <objectgroup id="7" name="Keys" visible="0"/>
+ <objectgroup id="8" name="Replace" visible="0"/>
 </map>

@@ -189,7 +189,7 @@
  </tileset>
  <layer name="Ground" width="19" height="9">
   <data encoding="base64" compression="zlib">
-   eJwT4mJgEKISfiVLHQwy65csdTDIrHncDAzz8eAF3MSpAZm1D0jvx4MPcBOnBuZPYSrgX9Bw4+SiDgaZd1mMOhhkHrXMAgALEWsf
+   eJxjYGBgEOKiDn4lSx0MMuuXLHUwyKx53AwM8/HgBdzEqQGZtQ9I78eDD3ATpwbmT2Eq4F/QcOPkog4GmXdZjDoYZB61zAIAwDxrAw==
   </data>
  </layer>
  <layer name="Objects" width="19" height="9">
@@ -204,15 +204,15 @@
  </layer>
  <layer name="Top" width="19" height="9">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2BoAAACrAAB
+   eJwT4mIYBaNgSAAATXIAHQ==
   </data>
  </layer>
- <layer name="Walkable" width="19" height="9">
+ <layer name="Walkable" width="19" height="9" visible="0">
   <data encoding="base64" compression="zlib">
-   eJy7KMbAcHGQYxCgRJwagJpmoZuHzf3o4rjEBjpu6IkBDs1ymg==
+   eJxjYGBguCg2uDEDDjcSK04NQE2z0M3D5n50cVxiAx039MQApYJxsw==
   </data>
  </layer>
- <objectgroup name="Mapevents">
+ <objectgroup name="Mapevents" visible="0">
   <object name="west" type="mapchange" x="0" y="96" width="32" height="64">
    <properties>
     <property name="map" value="brightport_school"/>
@@ -231,37 +231,40 @@
     <property name="place" value="entrance"/>
    </properties>
   </object>
-  <object name="hallway" type="mapchange" x="96" y="96" width="32" height="32"/>
-  <object name="Object" type="key" x="96" y="32" width="32" height="32">
+  <object name="hallway" type="mapchange" x="96" y="128" width="32" height="32"/>
+  <object name="lecture" type="key" x="96" y="64" width="32" height="32">
    <properties>
     <property name="phrase" value="brightport_lectureroom"/>
     <property name="requireId" value="brightport_nondisplay"/>
-    <property name="requireNegation" value="false"/>
+    <property name="requireNegation" value="true"/>
     <property name="requireType" value="questProgress"/>
     <property name="requireValue" value="228"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="Spawn"/>
- <objectgroup name="Keys">
-  <object name="classlocked" type="key" x="288" y="64" width="32" height="32">
+ <objectgroup name="Spawn" visible="0">
+  <object name="brightportnpc5" type="spawn" x="0" y="0" width="32" height="32">
    <properties>
-    <property name="phrase" value="brightport_lockedclass"/>
-    <property name="requireId" value="andor"/>
-    <property name="requireNegation" value="true"/>
-    <property name="requireType" value="questProgress"/>
-    <property name="requireValue" value="1"/>
-   </properties>
-  </object>
-  <object name="classused" type="key" x="96" y="64" width="32" height="32">
-   <properties>
-    <property name="phrase" value="brightport_lectureroomlocked"/>
-    <property name="requireId" value="andor"/>
-    <property name="requireNegation" value="true"/>
-    <property name="requireType" value="questProgress"/>
-    <property name="requireValue" value="1"/>
+    <property name="spawngroup" value="brightportnpc5"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="Replace"/>
+ <objectgroup name="Keys" visible="0">
+  <object name="classlocked" type="key" x="288" y="64" width="32" height="32">
+   <properties>
+    <property name="phrase" value="brightport_lockedclass"/>
+    <property name="requireId" value="poisonland_nondisplay"/>
+    <property name="requireNegation" value="false"/>
+    <property name="requireType" value="questProgress"/>
+    <property name="requireValue" value="43"/>
+   </properties>
+  </object>
+  <object name="class2" type="mapchange" x="288" y="64" width="32" height="32">
+   <properties>
+    <property name="map" value="brighport_school_bakery"/>
+    <property name="place" value="entrance"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup name="Replace" visible="0"/>
 </map>

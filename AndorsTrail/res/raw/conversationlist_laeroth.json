@@ -10749,11 +10749,18 @@
     },
     {
         "id":"poisoned_ground",
-        "rewards":[
+        "replies":[
             {
-                "rewardType":"actorCondition",
-                "rewardID":"environmental_poisoning",
-                "value":1
+                "text":"N",
+                "nextPhraseID":"poisoned_ground1",
+                "requires":[
+                    {
+                        "requireType":"wear",
+                        "requireID":"poisonland_cloak",
+                        "value":1,
+                        "negate":true
+                    }
+                ]
             }
         ]
     },
@@ -13101,25 +13108,53 @@
     },
     {
         "id":"waterway_forest_isolated_man",
-        "message":"What were you doing in my house!",
+        "message":"What are you doing in my house?",
         "replies":[
             {
-                "text":"I've come a long distance in the persuit of my brother Andor. So I peeked inside to see if he was in there.",
-                "nextPhraseID":"waterway_forest_isolated_man_5"
+                "text":"I've come a long distance in pursuit of my brother Andor. So I peeked inside to see if he was in here.",
+                "nextPhraseID":"waterway_forest_isolated_man_5",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"andor_ending",
+                        "value":900,
+                        "negate":true
+                    }
+                ]
             },
             {
-                "text":"I am looking for someone that could explain why that land over there [pointing west] is poisoned.",
-                "nextPhraseID":"waterway_forest_isolated_man_5"
+                "text":"I am looking for someone that could explain why that land nearby is strange.",
+                "nextPhraseID":"waterway_forest_isolated_man_5",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland",
+                        "value":25,
+                        "negate":true
+                    }
+                ]
             },
             {
                 "text":"I was looking for help in getting into that cave just west of here.",
-                "nextPhraseID":"waterway_forest_isolated_man_5",
+                "nextPhraseID":"poisonland_isolatedman0",
                 "requires":[
                     {
                         "requireType":"questProgress",
                         "requireID":"nondisplay",
                         "value":46,
                         "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"I heard about the Battle of Brightport in a lecture at the academy, but your nephew Eiden said the details we were told were wrong. He directed me here to hear the real story from you.",
+                "nextPhraseID":"poisonland_isolatedman",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland",
+                        "value":25,
+                        "negate":false
                     }
                 ]
             }
@@ -13158,21 +13193,17 @@
     },
     {
         "id":"waterway_forest_isolated_man_5",
-        "message":"Do you really think that I believe that? Who are you?! What do you really want?!",
+        "message":"Do you really think that I believe that? Who are you, what do you really want?!",
         "replies":[
             {
-                "text":"I don't care what you don't believe because that's the truth.",
-                "nextPhraseID":"waterway_forest_isolated_man_dog"
-            },
-            {
-                "text":"Can you just answer my question now or I will go back in your house?",
+                "text":"Can you just answer my question?",
                 "nextPhraseID":"waterway_forest_isolated_man_dog"
             }
         ]
     },
     {
         "id":"waterway_forest_isolated_man_dog",
-        "message":"Well, with that attitude, you better get out of here now before I unleash my hounds on you.",
+        "message":"You better get out of here now before I unleash my hounds on you!",
         "replies":[
             {
                 "text":"OK, calm down. I'm leaving.",

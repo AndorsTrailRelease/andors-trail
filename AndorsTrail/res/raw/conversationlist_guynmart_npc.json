@@ -2799,7 +2799,38 @@
     },
     {
         "id":"guynmart_nuik_20",
-        "message":"Hello $playername! It's a lovely day, isn't it?"
+        "message":"Hello $playername! It's a lovely day, isn't it?",
+        "replies":[
+            {
+                "text":"Indeed it is. I have this recipe here, which requires such and such spices. Is there a chance you have some herbs to replace them?",
+                "nextPhraseID":"poisonland_nuik",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":30
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":33,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":55,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":60,
+                        "negate":true
+                    }
+                ]
+            }
+        ]
     },
     {
         "id":"guynmart_nuik_30",
@@ -3883,6 +3914,59 @@
         "id":"guynmart_cook_10",
         "replies":[
             {
+                "text":"N",
+                "nextPhraseID":"poisonland_hofala4",
+                "requires":[
+                    {
+                        "requireType":"timerElapsed",
+                        "requireID":"poisonland_hofala",
+                        "value":4
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":55,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":60,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"N",
+                "nextPhraseID":"poisonland_hofala3",
+                "requires":[
+                    {
+                        "requireType":"timerElapsed",
+                        "requireID":"poisonland_hofala",
+                        "value":4,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_nondisplay",
+                        "value":111
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":55,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":60,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"N",
                 "nextPhraseID":"guynmart_cook_14",
                 "requires":[
                     {
@@ -3893,6 +3977,7 @@
                 ]
             },
             {
+                "text":"N",
                 "nextPhraseID":"guynmart_cook_100",
                 "requires":[
                     {
@@ -3903,6 +3988,7 @@
                 ]
             },
             {
+                "text":"N",
                 "nextPhraseID":"guynmart_cook_22",
                 "requires":[
                     {
@@ -3919,6 +4005,7 @@
                 ]
             },
             {
+                "text":"N",
                 "nextPhraseID":"guynmart_cook_20"
             }
         ]
@@ -3952,6 +4039,80 @@
             {
                 "text":"Could I buy some provisions?",
                 "nextPhraseID":"S"
+            },
+            {
+                "text":"Is there any chance you could cook me this egg soup? I have the recipe here.",
+                "nextPhraseID":"poisonland_hofala1",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":15
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":30,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":55,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":60,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"I have the duck eggs and the bundle of herbs for the egg soup here.",
+                "nextPhraseID":"poisonland_hofala2",
+                "requires":[
+                    {
+                        "requireType":"inventoryRemove",
+                        "requireID":"poisonland_herb",
+                        "value":1
+                    },
+                    {
+                        "requireType":"inventoryRemove",
+                        "requireID":"eggs_duck",
+                        "value":2
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":55,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":60,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"I have the bundle of herbs for the egg soup here.",
+                "nextPhraseID":"poisonland_hofala5",
+                "requires":[
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"poisonland_herb",
+                        "value":1
+                    },
+                    {
+                        "requireType":"inventoryKeep",
+                        "requireID":"eggs_duck",
+                        "value":2,
+                        "negate":true
+                    }
+                ]
             }
         ]
     },
@@ -4002,6 +4163,36 @@
             {
                 "text":"Can I buy some provisions?",
                 "nextPhraseID":"guynmart_cook_50"
+            },
+            {
+                "text":"Is there any chance you could cook me this egg soup? I have the recipe here.",
+                "nextPhraseID":"poisonland_hofala",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":15,
+                        "negate":false
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":34,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":55,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":60,
+                        "negate":true
+                    }
+                ]
             }
         ]
     },

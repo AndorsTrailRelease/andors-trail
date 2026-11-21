@@ -3,6 +3,16 @@
         "id":"maevalia",
         "replies":[
             {
+                "nextPhraseID":"poisonland_maevalia5",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_goblinquest",
+                        "value":100
+                    }
+                ]
+            },
+            {
                 "nextPhraseID":"maevalia_q1",
                 "requires":[
                     {
@@ -106,11 +116,22 @@
     },
     {
         "id":"maevalia_q1",
-        "message":"Thank you for all your help!",
+        "message":"Thank you for your help, $playername. Sigh... What will we do now?",
         "replies":[
             {
                 "text":"Can I rest here?",
                 "nextPhraseID":"maevalia_d2"
+            },
+            {
+                "text":"I bring good news. The goblins are out of Charwood.",
+                "nextPhraseID":"poisonland_maevalia1",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_goblinquest",
+                        "value":53
+                    }
+                ]
             }
         ]
     },
@@ -226,7 +247,7 @@
     },
     {
         "id":"maevalia2",
-        "message":"For your sake, I urge you to leave. While we need all the help we can get, we can't take responsibility for the dangers that has befell our mining town of Charwood.",
+        "message":"For your sake, I urge you to leave. While we need all the help we can get, we can't take responsibility for the dangers that have befallen our settlement of Charwood.",
         "replies":[
             {
                 "text":"What has happened here?",
@@ -266,7 +287,7 @@
     },
     {
         "id":"maevalia6",
-        "message":"They ransacked our whole mining camp. Even burnt down the wooden carving that Morenavia had created last year.",
+        "message":"They ransacked our whole settlement. Even burnt down the wooden carving that Morenavia had created last year.",
         "replies":[
             {
                 "text":"What did you do?",
@@ -286,7 +307,7 @@
     },
     {
         "id":"maevalia8",
-        "message":"We ran down the mountain, leaving behind our mining settlement of Charwood. Some of us made it here to our former cabin.",
+        "message":"We ran down the hills, leaving behind our homes in Charwood. Some of us made it here to our hunting lodge.",
         "replies":[
             {
                 "text":"N",
@@ -306,7 +327,7 @@
     },
     {
         "id":"maevalia10",
-        "message":"Our mining town up in the Charwood hills is completely overrun, however. All our belongings are back there.",
+        "message":"Our settlement up in the Charwood hills is completely overrun, however. All our belongings are back there.",
         "replies":[
             {
                 "text":"N",
@@ -316,7 +337,7 @@
     },
     {
         "id":"maevalia11",
-        "message":"There are also several of us that haven't made it down the hill. Many of our friends and relatives from the mining town have not been accounted for yet.",
+        "message":"There are also several of us that haven't made it down the hill. Many of our friends and relatives from the settlement have not been accounted for yet.",
         "replies":[
             {
                 "text":"What do you think has happened to them?",
@@ -480,7 +501,7 @@
     },
     {
         "id":"maevalia21",
-        "message":"I honestly don't know. We've sent out runners to try to find help. So far, none have returned with help.",
+        "message":"I honestly don't know. We've sent out our hunters to try to find help. So far, none have returned with help.",
         "replies":[
             {
                 "text":"Maybe I can help?",
@@ -536,7 +557,7 @@
     },
     {
         "id":"maevalia26",
-        "message":"Head up to our mining town of Charwood heights, and look for the missing people.",
+        "message":"Head up to our settlement of Charwood in the heights of the hills, and look for the missing people.",
         "replies":[
             {
                 "text":"N",
@@ -556,7 +577,7 @@
     },
     {
         "id":"maevalia28",
-        "message":"Thank you. The path up to Charwood heights is just east of here.",
+        "message":"Thank you. The path up to Charwood is just east of here.",
         "rewards":[
             {
                 "rewardType":"questProgress",
@@ -743,7 +764,7 @@
     },
     {
         "id":"maevalia_r10",
-        "message":"Good. We are truly grateful for the help that you have provided to us from the Charwood heights.",
+        "message":"Good. We are truly grateful for the help that you have provided regarding our settlement of Charwood.",
         "replies":[
             {
                 "text":"N",
@@ -764,11 +785,11 @@
     },
     {
         "id":"maevalia_d3",
-        "message":"I have my guesses. Go talk to Kantya about it. I hear she has the full story, and some interesting theories."
+        "message":"I have my guesses. Go talk to Kantya about it. I hear he has the full story, and some interesting theories."
     },
     {
         "id":"maevalia_d4",
-        "message":"Good. Did she tell you about that marking on the ground? I saw it myself. Nothing like I've ever seen before.",
+        "message":"Good. Did he tell you about that marking on the ground? I saw it myself. Nothing like I've ever seen before.",
         "replies":[
             {
                 "text":"N",
@@ -778,14 +799,14 @@
     },
     {
         "id":"maevalia_d5",
-        "message":"I wonder what is down there, in the deeper parts of the mine. I bet that whatever is controlling those monsters is still down there.",
+        "message":"I wonder what is down there, in the deeper parts of the mine. I bet that whatever released those monsters is still down there.",
         "replies":[
             {
                 "text":"I can go look down there if you want.",
                 "nextPhraseID":"maevalia_d7"
             },
             {
-                "text":"This all sounds too dangerous for me. I better not get involved.",
+                "text":"This all sounds too dangerous for me. I'd better not get involved.",
                 "nextPhraseID":"maevalia_d6"
             }
         ]
@@ -885,7 +906,7 @@
     },
     {
         "id":"maevalia_h7",
-        "message":"Not only did you manage to find our missing people, but you also freed us from the creature that caused all this trouble.",
+        "message":"You manage to find our missing people, and freed us from the creature that caused all this trouble.",
         "replies":[
             {
                 "text":"N",
@@ -895,7 +916,7 @@
     },
     {
         "id":"maevalia_h8",
-        "message":"We are forever in your debt. What can we do to ever repay you?",
+        "message":"Though our settlement lies in ruins, we are forever in your debt. Is there anything we can do to help you in return?",
         "replies":[
             {
                 "text":"I'm just happy to help.",
@@ -913,7 +934,7 @@
     },
     {
         "id":"maevalia_h9",
-        "message":"You are truly our hero. Thank you yet again.",
+        "message":"Thank you, $playername. We won't forget this.",
         "rewards":[
             {
                 "rewardType":"questProgress",

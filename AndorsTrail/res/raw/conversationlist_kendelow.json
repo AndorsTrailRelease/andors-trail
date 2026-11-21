@@ -3,6 +3,58 @@
         "id":"kendelow",
         "replies":[
             {
+                "text":"N",
+                "nextPhraseID":"poisonland_kendelow4",
+                "requires":[
+                    {
+                        "requireType":"timerElapsed",
+                        "requireID":"poisonland_kendelow",
+                        "value":4
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":40
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":55,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":60,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"N",
+                "nextPhraseID":"poisonland_kendelow3",
+                "requires":[
+                    {
+                        "requireType":"timerElapsed",
+                        "requireID":"poisonland_kendelow",
+                        "value":4,
+                        "negate":true
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":40
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":55,
+                        "negate":true
+                    }
+                ]
+            },
+            {
+                "text":"N",
                 "nextPhraseID":"kendelow_1",
                 "requires":[
                     {
@@ -13,6 +65,7 @@
                 ]
             },
             {
+                "text":"N",
                 "nextPhraseID":"kendelow_2"
             }
         ]
@@ -54,8 +107,25 @@
                 "nextPhraseID":"kendelow_room_1"
             },
             {
-                "text":"Actually, I am wondering if it would be possible if I could cook some meat in your kitchen?",
+                "text":"Actually, I am wondering if it would be possible to cook some meat in your kitchen?",
                 "nextPhraseID":"kendelow_meat"
+            },
+            {
+                "text":"Is there any chance you could cook me this egg soup? I have the recipe here.",
+                "nextPhraseID":"poisonland_kendelow",
+                "requires":[
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":15
+                    },
+                    {
+                        "requireType":"questProgress",
+                        "requireID":"poisonland_egg",
+                        "value":40,
+                        "negate":true
+                    }
+                ]
             }
         ]
     },
