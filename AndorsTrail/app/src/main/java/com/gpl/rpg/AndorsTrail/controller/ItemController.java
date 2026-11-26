@@ -19,6 +19,7 @@ import com.gpl.rpg.AndorsTrail.model.ModelContainer;
 import com.gpl.rpg.AndorsTrail.model.ability.SkillCollection;
 import com.gpl.rpg.AndorsTrail.model.ability.traits.AbilityModifierTraits;
 import com.gpl.rpg.AndorsTrail.model.actor.Player;
+import com.gpl.rpg.AndorsTrail.model.item.DropList;
 import com.gpl.rpg.AndorsTrail.model.item.Inventory;
 import com.gpl.rpg.AndorsTrail.model.item.ItemContainer;
 import com.gpl.rpg.AndorsTrail.model.item.ItemContainer.ItemEntry;
@@ -356,6 +357,14 @@ public final class ItemController {
 	public static int getBuyingPrice(Player player, ItemType itemType) {
 		return itemType.baseMarketCost + itemType.baseMarketCost * getMarketPriceFactor(player) / 100;
 	}
+	public static int getBuyingPrice(Player player, ItemType itemType, DropList shopDropList) {
+		int buyingPrice = getBuyingPrice(player, itemType);
+		Integer markupPercent = shopDropList == null ? null : shopDropList.getMarketCostMarkupPercent(itemType.id);
+		if (markupPercent == null || markupPercent == 0 || buyingPrice <= 0) return buyingPrice;
+
+		long markedUpPrice = (long) buyingPrice * (100L + markupPercent) / 100L;
+		return markedUpPrice > Integer.MAX_VALUE ? Integer.MAX_VALUE : (int) markedUpPrice;
+	}
 	public static List<Integer> getEquipmentPresetsBrokenByRemoving(Player player, String itemTypeID, int quantity) {
 		List<Integer> result = new ArrayList<Integer>();
 		int remaining = player.inventory.getItemQuantity(itemTypeID) - quantity;
@@ -404,9 +413,11 @@ public final class ItemController {
 		merchant.addItem(itemType, quantity);
 		return true;
 	}
-	public static boolean buy(ModelContainer model, Player player, ItemType itemType, ItemContainer merchant, int quantity) {
-		int price = getBuyingPrice(player, itemType) * quantity;
-		if (!canAfford(player, price)) return false;
+	public static boolean buy(ModelContainer model, Player player, ItemType itemType, ItemContainer merchant, DropList shopDropList, int quantity) {
+		if (quantity <= 0) return false;
+		long totalPrice = (long) getBuyingPrice(player, itemType, shopDropList) * quantity;
+		if (totalPrice > player.inventory.gold || totalPrice > Integer.MAX_VALUE) return false;
+		int price = (int) totalPrice;
 		if (!merchant.removeItem(itemType.id, quantity)) return false;
 		player.inventory.gold -= price;
 		player.inventory.addItem(itemType, quantity);

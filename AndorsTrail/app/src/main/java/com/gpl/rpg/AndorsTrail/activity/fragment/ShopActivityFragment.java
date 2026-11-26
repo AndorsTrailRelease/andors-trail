@@ -20,6 +20,7 @@ import com.gpl.rpg.AndorsTrail.R;
 import com.gpl.rpg.AndorsTrail.context.WorldContext;
 import com.gpl.rpg.AndorsTrail.model.actor.Monster;
 import com.gpl.rpg.AndorsTrail.model.actor.Player;
+import com.gpl.rpg.AndorsTrail.model.item.DropList;
 import com.gpl.rpg.AndorsTrail.model.item.ItemContainer;
 import com.gpl.rpg.AndorsTrail.resource.tiles.TileCollection;
 import com.gpl.rpg.AndorsTrail.view.ShopItemContainerAdapter;
@@ -35,6 +36,7 @@ public abstract class ShopActivityFragment extends Fragment implements OnContain
 	protected Player player;
 
 	protected ItemContainer shopInventory;
+	protected DropList shopDropList;
 	private TextView shop_gc;
 	private ShopItemContainerAdapter listAdapter;
 	private Button shoplist_sort;
@@ -65,12 +67,13 @@ public abstract class ShopActivityFragment extends Fragment implements OnContain
 		shoplist.setItemsCanFocus(true);
 
 		shopInventory = npc.getShopItems(player);
+		shopDropList = npc.getDropList();
 
 		HashSet<Integer> iconIDs = world.tileManager.getTileIDsFor(shopInventory);
 		iconIDs.addAll(world.tileManager.getTileIDsFor(player.inventory));
 		TileCollection tiles = world.tileManager.loadTilesFor(iconIDs, res);
 		final boolean isSelling = isSellingInterface();
-		listAdapter = new ShopItemContainerAdapter(getActivity(), tiles, world.tileManager, player, isSelling ? player.inventory : shopInventory, this, isSelling);
+		listAdapter = new ShopItemContainerAdapter(getActivity(), tiles, world.tileManager, player, isSelling ? player.inventory : shopInventory, this, isSelling, shopDropList);
 		shoplist.setAdapter(listAdapter);
 		setupSelectionFocusBehavior(shoplist);
 

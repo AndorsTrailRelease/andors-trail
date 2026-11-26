@@ -53,6 +53,7 @@ public final class JsonFieldNames {
 		public static final String itemID = "itemID";
 		public static final String quantity = "quantity";
 		public static final String chance = "chance";
+		public static final String marketCostMarkupPercent = "marketCostMarkupPercent";
 	}
 
 	public static final class Range {

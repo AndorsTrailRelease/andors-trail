@@ -1082,6 +1082,9 @@ Droplists, like all JSON-based content, is best created and edited using ATCS, b
   - "**chance**" with a numerical value (can be decimal). It defines the percentage of chance that this item will be dropped in this droplist. Use "100" for a sure drop, "50" for 50% chance, "0.1" for extraordinary items, and "0.01" for legendary items. Instead of percent values you may also use fractions like "1/3". 
   - "**quantity**" with an object value, as defined in the **min-max values** definition below. The quantity actually dropped will be picked at random within this range each time this droplist is dropped.
 
+- A **dropped item** ***may*** also have the following optional field defined:
+  - "**marketCostMarkupPercent**" with a non-negative integer value. This increases the normal calculated shop buying price by the given percentage when the droplist is used as a shop's stock; ordinary loot ignores it. The percentage is applied after the player's Barter skill adjustment, fractional gold is rounded down, and the selling price is unchanged. For example, 10 means a 10% increase. When an entry uses an item filter, the markup applies to every item in that filter. If multiple matching entries specify a markup, the first configured markup is used, so keep their values consistent.
+
 
 - **Min-max values** ***must*** have the following fields defined:
   - "**min**" with a numerical value. That's the lowest possible value.
@@ -1118,6 +1121,7 @@ Droplists, like all JSON-based content, is best created and edited using ATCS, b
         },
         {
             "itemID":"health_minor",
+            "marketCostMarkupPercent":10,
             "chance":"100",
             "quantity":{
                 "min":2,
