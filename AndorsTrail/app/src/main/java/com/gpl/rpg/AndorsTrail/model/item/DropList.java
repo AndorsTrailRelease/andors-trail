@@ -21,6 +21,21 @@ public final class DropList {
 		this.itemFilterCollection = itemFilterCollection;
 	}
 
+	public Integer getMarketCostMarkupPercent(String itemTypeID) {
+		for (DropItem item : items) {
+			if (item.marketCostMarkupPercent == null) continue;
+			if (item.itemTypeID.equals(itemTypeID)) return item.marketCostMarkupPercent;
+			if (!ItemTypeCollection.isItemFilter(item.itemTypeID)) continue;
+
+			ItemFilter filter = itemFilterCollection.getItemFilter(item.itemTypeID);
+			if (filter == null) continue;
+			for (ItemType filteredItem : filter.getItemTypes()) {
+				if (filteredItem.id.equals(itemTypeID)) return item.marketCostMarkupPercent;
+			}
+		}
+		return null;
+	}
+
 	public void createRandomLoot(Loot loot, Player player) {
 		for (DropItem item : items) {
 
@@ -30,6 +45,7 @@ public final class DropList {
 						itemFilter.getRandomItem().id
 						, item.chance
 						, item.quantity
+						, item.marketCostMarkupPercent
 				);
 			}
 
@@ -56,10 +72,12 @@ public final class DropList {
 		public final String itemTypeID;
 		public final ConstRange chance;
 		public final ConstRange quantity;
-		public DropItem(String itemTypeID, ConstRange chance, ConstRange quantity) {
+		public final Integer marketCostMarkupPercent;
+		public DropItem(String itemTypeID, ConstRange chance, ConstRange quantity, Integer marketCostMarkupPercent) {
 			this.itemTypeID = itemTypeID;
 			this.chance = chance;
 			this.quantity = quantity;
+			this.marketCostMarkupPercent = marketCostMarkupPercent;
 		}
 	}
 }

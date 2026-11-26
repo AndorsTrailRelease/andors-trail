@@ -453,8 +453,10 @@ public final class Dialogs {
 		context.startActivity(intent);
 	}
 
-	public static Intent getIntentForBulkBuyingInterface(final Context ctx, String itemTypeID, int totalAvailableAmount) {
-		return getIntentForBulkSelectionInterface(ctx, itemTypeID, totalAvailableAmount, BulkSelectionInterface.BulkInterfaceType.buy);
+	public static Intent getIntentForBulkBuyingInterface(final Context ctx, String itemTypeID, int totalAvailableAmount, int pricePerUnit) {
+		Intent intent = getIntentForBulkSelectionInterface(ctx, itemTypeID, totalAvailableAmount, BulkSelectionInterface.BulkInterfaceType.buy);
+		intent.putExtra("pricePerUnit", pricePerUnit);
+		return intent;
 	}
 
 	public static Intent getIntentForBulkSellingInterface(final Context ctx, String itemTypeID, int totalAvailableAmount) {

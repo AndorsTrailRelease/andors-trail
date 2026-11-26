@@ -23,7 +23,7 @@ public final class ShopActivity_Buy extends ShopActivityFragment {
 
 	@Override
 	public void onItemInfoClicked(int position, ItemType itemType) {
-		int price = ItemController.getBuyingPrice(player, itemType);
+		int price = ItemController.getBuyingPrice(player, itemType, shopDropList);
 		boolean enableButton = (price > 0 && ItemController.canAfford(player, price));
 		String text = getResources().getString(R.string.shop_buyitem, price);
 		Intent intent = Dialogs.getIntentForItemInfo(getActivity(), itemType.id, ItemInfoActivity.ItemInfoAction.buy, text, enableButton, null);
@@ -49,12 +49,13 @@ public final class ShopActivity_Buy extends ShopActivityFragment {
 	}
 
 	private void showBuyingInterface(ItemType itemType) {
-		Intent intent = Dialogs.getIntentForBulkBuyingInterface(getActivity(), itemType.id, shopInventory.getItemQuantity(itemType.id));
+		int price = ItemController.getBuyingPrice(player, itemType, shopDropList);
+		Intent intent = Dialogs.getIntentForBulkBuyingInterface(getActivity(), itemType.id, shopInventory.getItemQuantity(itemType.id), price);
 		startActivityForResult(intent, INTENTREQUEST_BULKSELECT);
 	}
 
 	private void buy(ItemType itemType, int quantity) {
-		if (!ItemController.buy(world.model, player, itemType, shopInventory, quantity)) return;
+		if (!ItemController.buy(world.model, player, itemType, shopInventory, shopDropList, quantity)) return;
 		final String msg = getResources().getString(R.string.shop_item_bought, itemType.getName(player));
 		displayStoreAction(msg);
 	}

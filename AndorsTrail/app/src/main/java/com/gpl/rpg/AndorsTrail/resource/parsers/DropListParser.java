@@ -26,10 +26,20 @@ public final class DropListParser extends JsonCollectionParserFor<DropList> {
 		this.dropItemParser = new JsonArrayParserFor<DropItem>(DropItem.class) {
 			@Override
 			protected DropItem parseObject(JSONObject o) throws JSONException {
+				final Integer marketCostMarkupPercent;
+				if (o.has(JsonFieldNames.DropItem.marketCostMarkupPercent)) {
+					marketCostMarkupPercent = o.getInt(JsonFieldNames.DropItem.marketCostMarkupPercent);
+					if (marketCostMarkupPercent < 0) {
+						throw new JSONException(JsonFieldNames.DropItem.marketCostMarkupPercent + " must not be negative");
+					}
+				} else {
+					marketCostMarkupPercent = null;
+				}
 				return new DropItem(
 						o.getString(JsonFieldNames.DropItem.itemID)
 						,ResourceParserUtils.parseChance(o.getString(JsonFieldNames.DropItem.chance))
 						,ResourceParserUtils.parseQuantity(o.getJSONObject(JsonFieldNames.DropItem.quantity))
+						,marketCostMarkupPercent
 				);
 			}
 		};

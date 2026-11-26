@@ -9,11 +9,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Collections;
+import java.util.Comparator;
+
 import com.gpl.rpg.AndorsTrail.R;
 import com.gpl.rpg.AndorsTrail.controller.ItemController;
 import com.gpl.rpg.AndorsTrail.model.actor.Player;
 import com.gpl.rpg.AndorsTrail.model.item.ItemContainer;
 import com.gpl.rpg.AndorsTrail.model.item.ItemContainer.ItemEntry;
+import com.gpl.rpg.AndorsTrail.model.item.DropList;
 import com.gpl.rpg.AndorsTrail.model.item.ItemType;
 import com.gpl.rpg.AndorsTrail.resource.tiles.TileCollection;
 import com.gpl.rpg.AndorsTrail.resource.tiles.TileManager;
@@ -25,14 +29,16 @@ public final class ShopItemContainerAdapter extends ArrayAdapter<ItemEntry> {
 	private final boolean isSelling;
 	private final Resources r;
 	private final Player player;
+	private final DropList shopDropList;
 
-	public ShopItemContainerAdapter(Context context, TileCollection tileCollection, TileManager tileManager, Player player, ItemContainer items, OnContainerItemClickedListener clickListener, boolean isSelling) {
+	public ShopItemContainerAdapter(Context context, TileCollection tileCollection, TileManager tileManager, Player player, ItemContainer items, OnContainerItemClickedListener clickListener, boolean isSelling, DropList shopDropList) {
 		super(context, 0, items.items);
 		this.tileManager = tileManager;
 		this.tileCollection = tileCollection;
 		this.player = player;
 		this.clickListener = clickListener;
 		this.isSelling = isSelling;
+		this.shopDropList = shopDropList;
 		this.r = context.getResources();
 	}
 
@@ -59,7 +65,7 @@ public final class ShopItemContainerAdapter extends ArrayAdapter<ItemEntry> {
 			enabled = ItemController.maySellItem(player, itemType);
 			shop_button.setText(r.getString(R.string.shop_sellitem, ItemController.getSellingPrice(player, itemType)));
 		} else {
-			int price = ItemController.getBuyingPrice(player, itemType);
+			int price = ItemController.getBuyingPrice(player, itemType, shopDropList);
 			enabled = price > 0 && ItemController.canAfford(player, price);
 			shop_button.setText(r.getString(R.string.shop_buyitem, price));
 		}
@@ -89,6 +95,19 @@ public final class ShopItemContainerAdapter extends ArrayAdapter<ItemEntry> {
 	}
 
 	public void reloadShownSort(int selection, ItemContainer container, Player p){
-		ItemContainerAdapter.reloadShownSort(selection, container, player);
+		if (selection == 2 && !isSelling) {
+			Collections.sort(container.items, new Comparator<ItemEntry>() {
+				@Override
+				public int compare(ItemEntry item1, ItemEntry item2) {
+					int price1 = ItemController.getBuyingPrice(player, item1.itemType, shopDropList);
+					int price2 = ItemController.getBuyingPrice(player, item2.itemType, shopDropList);
+					if (price1 < price2) return 1;
+					if (price1 > price2) return -1;
+					return item1.itemType.getName(player).compareTo(item2.itemType.getName(player));
+				}
+			});
+		} else {
+			ItemContainerAdapter.reloadShownSort(selection, container, player);
+		}
 	}
 }

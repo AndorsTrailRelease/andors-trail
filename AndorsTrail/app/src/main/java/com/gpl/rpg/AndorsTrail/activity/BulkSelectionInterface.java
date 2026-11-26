@@ -117,7 +117,7 @@ public final class BulkSelectionInterface extends AndorsTrailBaseActivity implem
 
 		int actionTextResourceID = 0;
 		if (interfaceType == BulkInterfaceType.buy) {
-			pricePerUnit = ItemController.getBuyingPrice(world.model.player, itemType);
+			pricePerUnit = params.getInt("pricePerUnit");
 			actionTextResourceID = R.string.shop_buy;
 		} else if (interfaceType == BulkInterfaceType.sell) {
 			pricePerUnit = ItemController.getSellingPrice(world.model.player, itemType);
@@ -288,7 +288,7 @@ public final class BulkSelectionInterface extends AndorsTrailBaseActivity implem
 		if (amount > totalAvailableAmount) return false;
 
 		if (interfaceType == BulkInterfaceType.buy) {
-			if (amount * pricePerUnit > world.model.player.getGold()) return false;
+			if ((long) amount * pricePerUnit > world.model.player.getGold()) return false;
 		}
 
 		return true;
@@ -309,9 +309,9 @@ public final class BulkSelectionInterface extends AndorsTrailBaseActivity implem
 
 		// display buying/selling information if not dropping
 		if (interfaceType == BulkInterfaceType.buy) {
-			bulkselection_summary_totalgold.setText(getResources().getString(R.string.bulkselection_totalcost_buy, newAmount * pricePerUnit));
+			bulkselection_summary_totalgold.setText(getResources().getString(R.string.bulkselection_totalcost_buy, (long) newAmount * pricePerUnit));
 		} else if (interfaceType == BulkInterfaceType.sell) {
-			bulkselection_summary_totalgold.setText(getResources().getString(R.string.bulkselection_totalcost_sell, newAmount * pricePerUnit));
+			bulkselection_summary_totalgold.setText(getResources().getString(R.string.bulkselection_totalcost_sell, (long) newAmount * pricePerUnit));
 		}
 
 		okButton.setEnabled(canSelectFinalizeButton());
