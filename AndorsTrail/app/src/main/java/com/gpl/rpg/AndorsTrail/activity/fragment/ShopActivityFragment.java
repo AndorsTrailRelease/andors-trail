@@ -74,6 +74,7 @@ public abstract class ShopActivityFragment extends Fragment implements OnContain
 		TileCollection tiles = world.tileManager.loadTilesFor(iconIDs, res);
 		final boolean isSelling = isSellingInterface();
 		listAdapter = new ShopItemContainerAdapter(getActivity(), tiles, world.tileManager, player, isSelling ? player.inventory : shopInventory, this, isSelling, shopDropList);
+		listAdapter.reloadShownSort(world.model.uiSelections.selectedShopSort, isSelling ? player.inventory : shopInventory, player);
 		shoplist.setAdapter(listAdapter);
 		setupSelectionFocusBehavior(shoplist);
 
